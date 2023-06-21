@@ -7,7 +7,6 @@ session = HTMLSession()
 def get_page(city, type, beds, page):
   
     url = f'https://www.torontorentals.com/{city}/{type}?beds={beds}%20&p={page}'
-    # https://www.torontorentals.com/toronto/condos?beds=1%20&p=2
     
     result = requests.get(url)
     
