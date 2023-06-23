@@ -2,7 +2,7 @@ import os
 import praw
 from dotenv import load_dotenv
 from datetime import datetime, timezone
-from src.dataclasses import SubmissionsData
+from src.classes import SubmissionsData
 
 load_dotenv()
 
@@ -19,19 +19,8 @@ reddit = praw.Reddit(
     password=os.environ.get("REDDIT_PASSWORD"),
 )
 
-subreddits = [
-    "lontonontario",
-    "waterloo+Kitchener",
-    # "toronto",
-    # "mississauga",
-    # "calgary",
-    # "Hamiltonontario",
-    # "asdffsdaasdf",
-    # "asdffsdaasdf",
-    # "asdffsdaasdf",
-]
 
-subreddits = {
+subreddit_names = {
     "London": "lontonontario",
     "Kitcher / Waterloo": "waterloo+Kitchener",
     # "Toronto": "toronto",
@@ -43,13 +32,19 @@ subreddits = {
     # "asdffsdaasdf",
 }
 
-for subreddit in subreddits:
-    subreddit
+for sub_name, keyword in subreddit_names.items():
+    sub_name
+    keyword
+    subreddit = reddit.subreddit(keyword)
     latest_submissions = subreddit.top(limit=5, time_filter="week")
     for submission in latest_submissions:
-        submission.title
         date_utc = datetime.fromtimestamp(submission.created_utc, timezone.utc)
-        submission.upvote_ratio
+
+        sub_data.date.append(date_utc)
+        sub_data.subreddit.append(sub_name)
+        sub_data.title.append(submission.title)
+        sub_data.upvote_ratio.append(submission.upvote_ratio)
+
         for comment in submission.comments:
             comment.body
             if len(comment.replies) > 0:
