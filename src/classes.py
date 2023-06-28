@@ -40,12 +40,17 @@ class SubmissionsData:
 class CommentsData:
     """Dataclass to hold Reddit comments data for each subreddit
     Args:
-        submission_id (list[str])
+        submission_id (list[str]): Id of the parent submission.
         reply_id (list[str]): Id of the parent comment if applicable.
-        comment (list[str]): Comment of the submission.
         date (list[datetime.date]): Creation date of the submission in UTC.
+        comment (list[str]): Comment of the submission.
+        is_distinguished (list[str])
+        is_author (list[str])
     """
 
     submission_id: list[str] = field(default_factory=list)
     reply_id: list[str] = field(default_factory=list)
+    date: list[datetime] = field(default_factory=list)
     comment: list[str] = field(default_factory=list)
+    is_distinguished: list[bool] = field(default_factory=list)
+    is_author: list[bool] = field(default_factory=list)

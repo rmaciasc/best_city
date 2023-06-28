@@ -8,7 +8,7 @@ from dataclasses import asdict
 from src.classes import JobsData
 
 state = {
-    "keywords": ["Data", "Python"],
+    "search_keywords": ["Data", "Python"],
     "cities": ["London", "Kitchener", "Toronto", "Ottawa"],
 }
 
@@ -41,7 +41,7 @@ def get_job_soup(keywords: str, city: str) -> BeautifulSoup | None:
 def retrieve_jobs():
     jobs = JobsData(date=[], keyword=[], city=[], jobs_qty=[])
 
-    for keywords in state["keywords"]:
+    for keywords in state["search_keywords"]:
         for city in state["cities"]:
             logger.info(f"Retrieving jobs for the keywords {keywords.upper()} in {city.upper()}")
             soup = get_job_soup(keywords, city)
