@@ -1,7 +1,7 @@
 import requests
 import polars as pl
 from time import sleep
-from datetime import datetime
+from datetime import datetime, timezone
 from src.utils.logs import logger
 from bs4 import BeautifulSoup
 from dataclasses import asdict
@@ -39,7 +39,7 @@ def get_job_soup(keywords: str, city: str) -> BeautifulSoup | None:
 
 
 def retrieve_jobs():
-    jobs = JobsData(date=[], keyword=[], city=[], jobs_qty=[])
+    jobs = JobsData()
 
     for keywords in state["search_keywords"]:
         for city in state["cities"]:
@@ -48,7 +48,7 @@ def retrieve_jobs():
             res = soup.select("div #job-list")
             count_jobs_found = res[0]["aria-label"].split(" ")[0]
 
-            jobs.date.append(datetime.now().date())
+            jobs.date_utc.append(datetime.now(timezone.utc).date())
             jobs.city.append(city)
             jobs.keyword.append(keywords)
             jobs.jobs_qty.append(count_jobs_found)
@@ -59,9 +59,9 @@ def retrieve_jobs():
 
 def convert_jobs_to_df(jobs):
     df = pl.DataFrame(asdict(jobs))
-    assert df.columns == ["date", "keyword", "city", "jobs_qty"]
+    assert df.columns == ["date_utc", "keyword", "city", "jobs_qty"]
     df = df.with_columns(
-        pl.col("date").cast(pl.Date),
+        pl.col("date_utc").cast(pl.Date),
         pl.col("city").cast(pl.Utf8),
         pl.col("keyword").cast(pl.Utf8),
         pl.col("jobs_qty").str.replace(",", "").cast(pl.Int64),
