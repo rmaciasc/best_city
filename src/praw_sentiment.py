@@ -4,6 +4,7 @@ import sys
 import polars as pl
 from dotenv import load_dotenv
 from datetime import datetime, timezone
+from typing import Literal
 from src.classes import SubmissionsData, CommentsData
 from dataclasses import asdict
 
@@ -84,36 +85,39 @@ def convert_comments_to_df(comment_data):
     return df
 
 
-for sub_name, keyword in subreddit_names.items():
-    subreddit = reddit.subreddit(keyword)
-    latest_submissions = subreddit.top(limit=7, time_filter="day")
+def get_reddit_submissions_with_comments(number_of_submissions: int, period: Literal["day", "month"]):
+    for sub_name, keyword in subreddit_names.items():
+        subreddit = reddit.subreddit(keyword)
+        latest_submissions = subreddit.top(limit=number_of_submissions, time_filter=period)
 
-    try:
-        next(latest_submissions)
-    except Exception as e:
-        print(f"Subreddit not found {sub_name}: {e}")
-        sys.exit(0)
+        try:
+            next(latest_submissions)
+        except Exception as e:
+            print(f"Subreddit not found {sub_name}: {e}")
+            sys.exit(0)
 
-    for submission in latest_submissions:
-        date_utc = datetime.fromtimestamp(submission.created_utc, timezone.utc)
+        for submission in latest_submissions:
+            date_utc = datetime.fromtimestamp(submission.created_utc, timezone.utc)
 
-        submission_data.submission_id.append(submission.id)
-        submission_data.date_utc.append(date_utc)
-        submission_data.subreddit.append(sub_name)
-        submission_data.title.append(submission.title)
-        submission_data.upvote_ratio.append(submission.upvote_ratio)
+            submission_data.submission_id.append(submission.id)
+            submission_data.date_utc.append(date_utc)
+            submission_data.subreddit.append(sub_name)
+            submission_data.title.append(submission.title)
+            submission_data.upvote_ratio.append(submission.upvote_ratio)
 
-        if submission.num_comments > 0:
-            for comment in submission.comments:
-                save_comment(submission, comment)
+            if submission.num_comments > 0:
+                for comment in submission.comments:
+                    save_comment(submission, comment)
 
-                if len(comment.replies) > 0:
-                    for reply in comment.replies:
-                        save_comment(submission, reply, reply.id)
+                    if len(comment.replies) > 0:
+                        for reply in comment.replies:
+                            save_comment(submission, reply, reply.id)
+
+    submissions_df = convert_submissions_to_df(submission_data)
+    comments_df = convert_comments_to_df(comment_data)
+
+    return submissions_df, comments_df
 
 
-submission_df = convert_submissions_to_df(submission_data)
-comment_df = convert_comments_to_df(comment_data)
-
-submission_df.write_parquet(f"./local_storage/submissions_{datetime.now().date()}.parquet")
-comment_df.write_parquet(f"./local_storage/comments_{datetime.now().date()}.parquet")
+if __name__ == "__main__":
+    get_reddit_submissions_with_comments()
