@@ -13,14 +13,27 @@ state = {
 }
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.49",
+    "authority": "d3fw5vlhllyvee.cloudfront.net",
+    "accept": "*/*",
+    "accept-language": "en-US,en;q=0.9",
+    "cache-control": "no-cache",
+    "origin": "https://www.workopolis.com",
+    "pragma": "no-cache",
+    "referer": "https://www.workopolis.com/",
+    "sec-ch-ua": '"Not.A/Brand";v="8", "Chromium";v="114", "Microsoft Edge";v="114"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "cross-site",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.82",
 }
 
 BASE_URL = "https://www.workopolis.com/jobsearch/find-jobs?ak=[[KEYWORD]]&l=[[CITY]]"
 
 
 def get_job_soup(keywords: str, city: str) -> BeautifulSoup | None:
-    url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace("CITY", city)
+    url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace("[[CITY]]", city)
 
     result = requests.get(url, headers=HEADERS)
 

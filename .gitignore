@@ -4,3 +4,6 @@ __py*
 .env
 *.log
 local_storage
+.vscode
+__pycache__
+logs

@@ -5,6 +5,7 @@ import polars as pl
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 from typing import Literal
+from praw.models import MoreComments
 from src.classes import SubmissionsData, CommentsData
 from dataclasses import asdict
 
@@ -43,7 +44,7 @@ def save_comment(submission, comment, parent_id=None):
     else:
         comment_data.reply_id.append("")
 
-    if comment.distinguished:
+    if isinstance(comment, MoreComments) and comment.distinguished:
         comment_data.is_moderator.append(True)
     else:
         comment_data.is_moderator.append(False)
@@ -87,6 +88,7 @@ def convert_comments_to_df(comment_data):
 
 def get_reddit_submissions_with_comments(number_of_submissions: int, period: Literal["day", "month"]):
     for sub_name, keyword in subreddit_names.items():
+        print(f"Gathering data from: {sub_name}")
         subreddit = reddit.subreddit(keyword)
         latest_submissions = subreddit.top(limit=number_of_submissions, time_filter=period)
 
