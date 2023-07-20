@@ -6,6 +6,16 @@ from src.utils.logs import logger
 from bs4 import BeautifulSoup
 from dataclasses import asdict
 from src.classes import JobsData
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--no-sandbox")
+
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
 state = {
     "search_keywords": ["Data", "Python"],
@@ -57,7 +67,9 @@ def retrieve_jobs():
     for keywords in state["search_keywords"]:
         for city in state["cities"]:
             logger.info(f"Retrieving jobs for the keywords {keywords.upper()} in {city.upper()}")
-            soup = get_job_soup(keywords, city)
+            url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace("[[CITY]]", city)
+            driver.get(url)
+            soup = BeautifulSoup(driver.page_source, "html.parser")
             res = soup.select("div #job-list")
             count_jobs_found = res[0]["aria-label"].split(" ")[0]
 

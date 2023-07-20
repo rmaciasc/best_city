@@ -3,7 +3,8 @@ services:
   python:
     container_name: python_scraper
     build: ./containers/python
-    volumes: 
+    volumes:
       - .:/opt/application
     working_dir: /opt/application
-    command: sh -c "python main.py"
+    tty: true
+    # command: sh -c "python main.py"
