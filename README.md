@@ -1,3 +1,3 @@
 ## TO DO
 
-[ ] Use Selenium instead to run the job scraper.
+[ x ] Use Selenium instead to run the job scraper.
