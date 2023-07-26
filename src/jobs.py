@@ -1,41 +1,22 @@
-import requests
 import polars as pl
 from time import sleep
-from datetime import datetime, timezone
-from src.utils.logs import logger
 from bs4 import BeautifulSoup
 from dataclasses import asdict
+from selenium import webdriver
 from src.classes import JobsData
+from src.utils.logs import logger
+from datetime import datetime, timezone
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+
 
 state = {
     "search_keywords": ["Data", "Python"],
     "cities": ["London", "Kitchener", "Toronto", "Ottawa"],
 }
 
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.49",
-}
-
 BASE_URL = "https://www.workopolis.com/jobsearch/find-jobs?ak=[[KEYWORD]]&l=[[CITY]]"
-
-
-def get_job_soup(keywords: str, city: str) -> BeautifulSoup | None:
-    url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace("CITY", city)
-
-    result = requests.get(url, headers=HEADERS)
-
-    # check HTTP response status codes to find if HTTP request has been successfully completed
-    if result.status_code >= 100 and result.status_code <= 199:
-        logger.error("Informational response")
-    if result.status_code >= 200 and result.status_code <= 299:
-        logger.debug("Successful response")
-        return BeautifulSoup(result.content, "lxml")
-    if result.status_code >= 300 and result.status_code <= 399:
-        logger.warning("Redirect")
-    if result.status_code >= 400 and result.status_code <= 499:
-        logger.error("Client error")
-    if result.status_code >= 500 and result.status_code <= 599:
-        logger.error("Server error")
 
 
 def retrieve_jobs():
@@ -44,7 +25,9 @@ def retrieve_jobs():
     for keywords in state["search_keywords"]:
         for city in state["cities"]:
             logger.info(f"Retrieving jobs for the keywords {keywords.upper()} in {city.upper()}")
-            soup = get_job_soup(keywords, city)
+            url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace("[[CITY]]", city)
+            driver.get(url)
+            soup = BeautifulSoup(driver.page_source, "html.parser")
             res = soup.select("div #job-list")
             count_jobs_found = res[0]["aria-label"].split(" ")[0]
 
@@ -81,8 +64,17 @@ def test_jobs_df(df: pl.DataFrame):
     assert df.select(pl.col(pl.Utf8) == " ").sum().sum(axis=1)[0] == 0, "Blank str found in Dataframe"
 
 
+def get_chromedriver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument("--no-sandbox")
+
+    return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+
+
 if __name__ == "__main__":
     logger.info("Getting number of jobs...")
+    driver = get_chromedriver()
     jobs = retrieve_jobs()
     df = convert_jobs_to_df(jobs)
     test_jobs_df(df)
