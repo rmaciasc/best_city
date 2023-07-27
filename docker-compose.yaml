@@ -7,4 +7,4 @@ services:
       - .:/opt/application
     working_dir: /opt/application
     tty: true
-    # command: sh -c "python main.py"
+    command: sh -c "python main.py"
