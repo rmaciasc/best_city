@@ -1,10 +1,10 @@
 version: '3.9'
 services:
   python:
-    container_name: python_scraper
-    build: ./containers/python
-    volumes:
-      - .:/opt/application
-    working_dir: /opt/application
+    image: raulscontainerreg.azurecr.io/best-city-python:latest
+    container_name: python-scraper
+    build:
+      context: ./
+      dockerfile: ./containers/python/Dockerfile
+    working_dir: /opt/app
     tty: true
-    command: sh -c "python main.py"

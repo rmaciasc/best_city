@@ -1,6 +1,5 @@
 import io
 import os
-import polars as pl
 from typing import Literal
 from polars import DataFrame
 from dotenv import load_dotenv
@@ -11,19 +10,6 @@ load_dotenv()
 
 storage_url = os.environ["AZURE_STORAGE_BLOB_URL"]
 credential = DefaultAzureCredential()
-
-df = pl.DataFrame(
-    {
-        "nrs": [1, 2, 3, None, 5],
-        "names": ["foo", "ham", "spam", "egg", None],
-        "groups": ["A", "A", "B", "C", "B"],
-    }
-)
-print(df)
-
-file_name = "test/test"
-container_name = "best-city"
-mode = "csv"
 
 
 def upload_df(df: DataFrame, file_name: str, container_name: str, mode: Literal["csv", "parquet"]) -> None:

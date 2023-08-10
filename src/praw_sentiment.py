@@ -5,7 +5,6 @@ import polars as pl
 from dotenv import load_dotenv
 from datetime import datetime, timezone
 from typing import Literal
-from praw.models import MoreComments
 from src.classes import SubmissionsData, CommentsData
 from dataclasses import asdict
 
@@ -39,22 +38,22 @@ subreddit_names = {
 
 
 def save_comment(submission, comment, parent_id=None):
-    if parent_id:
-        comment_data.reply_id.append(parent_id)
-    else:
-        comment_data.reply_id.append("")
-
-    if isinstance(comment, MoreComments) and comment.distinguished:
-        comment_data.is_moderator.append(True)
-    else:
-        comment_data.is_moderator.append(False)
-
-    comment_date_utc = datetime.fromtimestamp(comment.created_utc, timezone.utc)
-
-    comment_data.submission_id.append(submission.id)
-    comment_data.date_utc.append(comment_date_utc)
-    comment_data.comment.append(comment.body)
-    comment_data.is_author.append(comment.is_submitter)
+    try:
+        if comment.distinguished:
+            comment_data.is_moderator.append(True)
+        else:
+            comment_data.is_moderator.append(False)
+        comment_date_utc = datetime.fromtimestamp(comment.created_utc, timezone.utc)
+        comment_data.submission_id.append(submission.id)
+        comment_data.date_utc.append(comment_date_utc)
+        comment_data.comment.append(comment.body)
+        comment_data.is_author.append(comment.is_submitter)
+        if parent_id:
+            comment_data.reply_id.append(parent_id)
+        else:
+            comment_data.reply_id.append("")
+    except Exception as e:
+        print("Comment exception found: ", e)
 
 
 def convert_submissions_to_df(submission_data):

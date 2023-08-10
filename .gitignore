@@ -2,7 +2,7 @@ venv
 __py*
 .py*
 .env
-*.log
+logs/*
 local_storage
 .vscode
 __pycache__

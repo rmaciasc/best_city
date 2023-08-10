@@ -13,7 +13,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 
 state = {
     "search_keywords": ["Data", "Python"],
-    "cities": ["London", "Kitchener", "Toronto", "Ottawa"],
+    "cities": ["London", "Kitchener", "Toronto", "Ottawa", "Calgary"],
 }
 
 BASE_URL = "https://www.workopolis.com/jobsearch/find-jobs?ak=[[KEYWORD]]&l=[[CITY]]"
