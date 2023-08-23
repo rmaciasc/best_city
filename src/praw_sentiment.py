@@ -10,7 +10,7 @@ from dataclasses import asdict
 
 load_dotenv()
 
-# TODO Add logger and change prints for logs
+# TODO Add logger and change prints for logs. Make sure that the logs persist on azure file share with a volume.
 # Add tests
 
 submission_data = SubmissionsData()
