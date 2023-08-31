@@ -1,6 +1,8 @@
+import os
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
+os.makedirs("./logs", exist_ok=True)
 
 handler = TimedRotatingFileHandler(
     filename="./logs/logs.log", when="D", interval=1, backupCount=15, encoding="utf-8", delay=False

@@ -8,3 +8,4 @@ local_storage
 __pycache__
 .devcontainer
 *.log
+containers/airflow-docker/logs
