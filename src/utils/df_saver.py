@@ -1,24 +1,56 @@
 import io
 import os
+import psycopg2
 from typing import Literal
 from polars import DataFrame
+from datetime import datetime
 from dotenv import load_dotenv
+from dataclasses import dataclass
 from azure.storage.blob import ContainerClient
 from azure.identity import DefaultAzureCredential
 
 load_dotenv()
-
-storage_url = os.environ["AZURE_STORAGE_BLOB_URL"]
-credential = DefaultAzureCredential()
+# TODO: Refactor for dependency injection
 
 
-def upload_df(df: DataFrame, file_name: str, container_name: str, mode: Literal["csv", "parquet"]) -> None:
-    b_buf = io.BytesIO()
-    if mode == "parquet":
-        df.write_parquet(b_buf)
-    if mode == "csv":
-        df.write_csv(b_buf)
-    b_buf.seek(0)
+@dataclass
+class azure_storage:
+    mode: Literal["csv", "parquet"] = "parquet"
 
-    container_client = ContainerClient(account_url=storage_url, container_name=container_name, credential=credential)
-    container_client.upload_blob(f"{file_name}.{mode}", b_buf, overwrite=True)
+    def save_df(self, df: DataFrame, table_name: str) -> None:
+        azure_storage_url: str = os.environ["AZURE_STORAGE_BLOB_URL"]
+        azure_credential = DefaultAzureCredential()
+        container_name: str = "best-city"
+
+        b_buf = io.BytesIO()
+
+        if self.mode == "parquet":
+            df.write_parquet(b_buf)
+        if self.mode == "csv":
+            df.write_csv(b_buf)
+        b_buf.seek(0)
+
+        container_client = ContainerClient(
+            account_url=azure_storage_url, container_name=container_name, credential=azure_credential
+        )
+        container_client.upload_blob(
+            f"{table_name}/{table_name}_{datetime.now().date()}.{self.mode}", b_buf, overwrite=True
+        )
+
+
+@dataclass
+class postgres_db:
+    def save_df(self, df: DataFrame, table_name: str) -> None:
+        conn_uri: str = os.environ["POSTGRES_CONN_URI"]
+        csv_file = io.BytesIO()
+        df.write_csv(csv_file)
+        csv_file.seek(0)
+
+        conn = psycopg2.connect(conn_uri)
+        cursor = conn.cursor()
+        cursor.copy_expert(sql=f"COPY raw.{table_name} FROM stdin WITH CSV HEADER", file=csv_file)
+
+        conn.commit()
+
+        cursor.close()
+        conn.close()

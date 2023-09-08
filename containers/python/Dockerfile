@@ -12,7 +12,8 @@ RUN wget --no-verbose -O /tmp/chrome.deb https://dl.google.com/linux/chrome/deb/
 # Install requirements
 COPY ./containers/python/requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
-# RUN mkdir /opt/app
+# Keep webdriver-manager updated
+RUN pip install webdriver-manager --upgrade
 COPY ./ opt/app
 WORKDIR /opt/app
 CMD [ "python", "main.py" ]

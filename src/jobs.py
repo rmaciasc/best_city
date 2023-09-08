@@ -21,6 +21,7 @@ BASE_URL = "https://www.workopolis.com/jobsearch/find-jobs?ak=[[KEYWORD]]&l=[[CI
 
 def retrieve_jobs():
     jobs = JobsData()
+    driver = get_chromedriver()
 
     for keywords in state["search_keywords"]:
         for city in state["cities"]:
@@ -73,8 +74,6 @@ def get_chromedriver():
 
 
 if __name__ == "__main__":
-    logger.info("Getting number of jobs...")
-    driver = get_chromedriver()
     jobs = retrieve_jobs()
     df = convert_jobs_to_df(jobs)
     test_jobs_df(df)
