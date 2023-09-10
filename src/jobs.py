@@ -58,7 +58,7 @@ def test_jobs_df(df: pl.DataFrame):
     assert isinstance(df, pl.DataFrame)
     assert df.is_empty() is False, "Dataframe is empty."
     ## Check for nulls
-    assert df.select([pl.any(pl.all().is_null())]).sum()[0, 0] == 0, "NULL values found in Dataframe."
+    assert df.select([pl.all().is_null().sum()]).sum(axis=1)[0] == 0, "NULL values found in Dataframe."
     ## Check for empty str
     assert df.select(pl.col(pl.Utf8) == "").sum().sum(axis=1)[0] == 0, "Empty str found in Dataframe."
     ## Check for str with spaces

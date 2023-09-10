@@ -40,8 +40,10 @@ class SubmissionsData:
 class CommentsData:
     """Dataclass to hold Reddit comments data for each subreddit
     Args:
-        submission_id (list[str]): Id of the parent submission.
-        reply_id (list[str]): Id of the parent comment if applicable.
+        submission_id (list[str]): Id of the submission.
+        comment_id (list[str]): Id of the comment.
+        comment_tier (list[str]): Indicates the hierarchy of the comment.
+        parent_id (list[str]): Id of the parent comment if applicable.
         date_utc (list[datetime.date]): Creation date of the submission in UTC.
         comment (list[str]): Comment of the submission.
         is_moderator (list[str])
@@ -49,7 +51,9 @@ class CommentsData:
     """
 
     submission_id: list[str] = field(default_factory=list)
-    reply_id: list[str] = field(default_factory=list)
+    comment_id: list[str] = field(default_factory=list)
+    comment_tier: list[str] = field(default_factory=list)
+    parent_id: list[str] = field(default_factory=list)
     date_utc: list[datetime] = field(default_factory=list)
     comment: list[str] = field(default_factory=list)
     is_moderator: list[bool] = field(default_factory=list)

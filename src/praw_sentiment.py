@@ -37,7 +37,7 @@ subreddit_names = {
 }
 
 
-def save_comment(submission, comment, parent_id=None):
+def save_comment(submission, comment, parent_id: bool = False):
     try:
         if comment.distinguished:
             comment_data.is_moderator.append(True)
@@ -45,13 +45,18 @@ def save_comment(submission, comment, parent_id=None):
             comment_data.is_moderator.append(False)
         comment_date_utc = datetime.fromtimestamp(comment.created_utc, timezone.utc)
         comment_data.submission_id.append(submission.id)
+        comment_data.comment_id.append(comment.id)
         comment_data.date_utc.append(comment_date_utc)
         comment_data.comment.append(comment.body)
         comment_data.is_author.append(comment.is_submitter)
         if parent_id:
-            comment_data.reply_id.append(parent_id)
+            tier, parent_id = comment.parent_id.split("_")
+
+            comment_data.parent_id.append(parent_id)
+            comment_data.comment_tier.append(tier)
         else:
-            comment_data.reply_id.append("")
+            comment_data.parent_id.append("")
+            comment_data.comment_tier.append("")
     except Exception as e:
         print("Comment exception found: ", e)
 
@@ -72,10 +77,21 @@ def convert_submissions_to_df(submission_data):
 
 def convert_comments_to_df(comment_data):
     df = pl.DataFrame(asdict(comment_data))
-    assert df.columns == ["submission_id", "reply_id", "date_utc", "comment", "is_moderator", "is_author"]
+    assert df.columns == [
+        "submission_id",
+        "comment_id",
+        "comment_tier",
+        "parent_id",
+        "date_utc",
+        "comment",
+        "is_moderator",
+        "is_author",
+    ]
     df = df.with_columns(
         pl.col("submission_id").cast(pl.Utf8),
-        pl.col("reply_id").cast(pl.Utf8),
+        pl.col("comment_id").cast(pl.Utf8),
+        pl.col("comment_tier").cast(pl.Utf8),
+        pl.col("parent_id").cast(pl.Utf8),
         pl.col("date_utc").cast(pl.Date),
         pl.col("comment").cast(pl.Utf8),
         pl.col("is_moderator").cast(pl.Boolean),
@@ -112,7 +128,7 @@ def get_reddit_submissions_with_comments(number_of_submissions: int, period: Lit
 
                     if len(comment.replies) > 0:
                         for reply in comment.replies:
-                            save_comment(submission, reply, reply.id)
+                            save_comment(submission, reply, True)
 
     submissions_df = convert_submissions_to_df(submission_data)
     comments_df = convert_comments_to_df(comment_data)

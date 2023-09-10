@@ -7,7 +7,7 @@ from src.praw_sentiment import get_reddit_submissions_with_comments
 
 def main():
     weekday = datetime.now().weekday()
-    storage = azure_storage()
+    storage = postgres_db()
 
     logger.info("Getting submissions with comments...")
     submissions_df, comments_df = get_reddit_submissions_with_comments(7, "day")
