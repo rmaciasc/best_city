@@ -48,7 +48,8 @@ class postgres_db:
 
         conn = psycopg2.connect(conn_uri)
         cursor = conn.cursor()
-        cursor.copy_expert(sql=f"COPY raw.{table_name} FROM stdin WITH CSV HEADER", file=csv_file)
+        query = f"COPY raw.{table_name} FROM stdin WITH CSV HEADER ON CONFLICT (submission_id) DO NOTHING"
+        cursor.copy_expert(sql=query, file=csv_file)
 
         conn.commit()
 

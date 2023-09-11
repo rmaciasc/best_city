@@ -1,0 +1,17 @@
+sudo apt update
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev \
+libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl
+curl https://pyenv.run | bash
+pyenv install -v 3.10.6
+pyenv global 3.10.6
+git clone https://github.com/rmaciasc/best_city.git
+cd best_city
+python -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r containers/python/requirements.txt
+
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.deb
+rm ./google-chrome-stable_current_amd64.deb
