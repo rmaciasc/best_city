@@ -47,11 +47,19 @@ class postgres_db:
         csv_file.seek(0)
 
         conn = psycopg2.connect(conn_uri)
-        cursor = conn.cursor()
-        query = f"COPY raw.{table_name} FROM stdin WITH CSV HEADER ON CONFLICT (submission_id) DO NOTHING"
-        cursor.copy_expert(sql=query, file=csv_file)
+        with conn.cursor() as cur:
+            cur.execute(f"""CREATE TEMP TABLE temp_{table_name} (LIKE raw.{table_name}) ON COMMIT DROP""")
+            query = f"""COPY temp_{table_name} FROM stdin WITH CSV HEADER;"""
+            cur.copy_expert(sql=query, file=csv_file)
 
-        conn.commit()
+            cur.execute(
+                f"""
+            INSERT INTO raw.{table_name}({', '.join(df.columns)})
+            SELECT * FROM temp_{table_name}
+            ON CONFLICT ({table_name[:-1]}_id) DO NOTHING
+            """
+            )
+            cur.execute(f"DROP TABLE IF EXISTS temp_{table_name}")
+            conn.commit()
 
-        cursor.close()
         conn.close()
