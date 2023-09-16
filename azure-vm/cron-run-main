@@ -1,0 +1,3 @@
+cd /home/azureuser/best_city
+source venv/bin/activate
+python main.py
