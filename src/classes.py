@@ -48,6 +48,7 @@ class CommentsData:
         comment (list[str]): Comment of the submission.
         is_moderator (list[str])
         is_author (list[str])
+        score (list[str]): Number of upvotes for the comment
     """
 
     submission_id: list[str] = field(default_factory=list)
@@ -58,3 +59,4 @@ class CommentsData:
     comment: list[str] = field(default_factory=list)
     is_moderator: list[bool] = field(default_factory=list)
     is_author: list[bool] = field(default_factory=list)
+    score: list[int] = field(default_factory=list)

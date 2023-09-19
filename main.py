@@ -2,7 +2,7 @@ from src.utils.df_saver import postgres_db, azure_storage
 from datetime import datetime
 from src.utils.logs import logger
 from src.jobs import retrieve_jobs, convert_jobs_to_df, test_jobs_df
-from src.praw_sentiment import get_reddit_submissions_with_comments
+from src.praw_extract import get_reddit_submissions_with_comments
 
 
 def main():

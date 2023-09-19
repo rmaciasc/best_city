@@ -10,7 +10,6 @@ from azure.storage.blob import ContainerClient
 from azure.identity import DefaultAzureCredential
 
 load_dotenv()
-# TODO: Refactor for dependency injection
 
 
 @dataclass

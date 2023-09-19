@@ -49,6 +49,7 @@ def save_comment(submission, comment, parent_id: bool = False):
         comment_data.date_utc.append(comment_date_utc)
         comment_data.comment.append(comment.body)
         comment_data.is_author.append(comment.is_submitter)
+        comment_data.score.append(comment.score)
         if parent_id:
             tier, parent_id = comment.parent_id.split("_")
 
@@ -86,6 +87,7 @@ def convert_comments_to_df(comment_data):
         "comment",
         "is_moderator",
         "is_author",
+        "score",
     ]
     df = df.with_columns(
         pl.col("submission_id").cast(pl.Utf8),
@@ -96,6 +98,7 @@ def convert_comments_to_df(comment_data):
         pl.col("comment").cast(pl.Utf8),
         pl.col("is_moderator").cast(pl.Boolean),
         pl.col("is_author").cast(pl.Boolean),
+        pl.col("score").cast(pl.Int64),
     )
 
     return df
