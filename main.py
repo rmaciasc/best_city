@@ -12,8 +12,8 @@ def main():
     logger.info("Getting submissions with comments...")
     submissions_df, comments_df = get_reddit_submissions_with_comments(7, "day")
     logger.info("Uploading submissions with comments...")
-    storage.save_df(submissions_df, "submissions")
-    storage.save_df(comments_df, "comments")
+    storage.save_df(submissions_df, "raw", "submissions")
+    storage.save_df(comments_df, "raw", "comments")
     logger.info("Submissions with comments are successfully saved...")
 
     if weekday == 6:
@@ -22,7 +22,7 @@ def main():
         jobs_df = convert_jobs_to_df(jobs)
         test_jobs_df(jobs_df)
 
-        storage.save_df(jobs_df, "jobs")
+        storage.save_df(jobs_df, "raw", "jobs")
 
 
 if __name__ == "__main__":

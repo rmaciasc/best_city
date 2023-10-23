@@ -25,3 +25,6 @@ selenium==4.10.0
 webdriver-manager
 azure-storage-blob==12.17.0
 azure-identity==1.13.0
+spacy==2.3.9
+transformers==4.34.0
+torch==2.1.0
