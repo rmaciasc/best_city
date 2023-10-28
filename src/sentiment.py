@@ -1,15 +1,15 @@
 import os
 import psycopg2
 import numpy as np
-from typing import Literal
 import polars as pl
 from tqdm import tqdm
+from typing import Literal
 from dotenv import load_dotenv
 from scipy.special import softmax
-from src.bad_words_detector import detect_bad_words
-from transformers import AutoTokenizer, PreTrainedTokenizer, PreTrainedTokenizerFast, RobertaForSequenceClassification
 from src.utils.df_saver import postgres_db
 from profanity_filter import ProfanityFilter
+from src.bad_words_detector import detect_bad_words
+from transformers import AutoTokenizer, PreTrainedTokenizer, PreTrainedTokenizerFast, RobertaForSequenceClassification
 
 pf = ProfanityFilter()
 storage = postgres_db()
@@ -77,6 +77,9 @@ def w_pbar(pbar, func):
 
 
 def add_sentiment(df: pl.DataFrame, tbl_name: Literal["comment", "submission"]):
+    if df_sub.is_empty():
+        print(f"{tbl_name.capitalize()} dataframe is empty, skiping...")
+        return df
     pbar = tqdm(total=len(df), desc="Adding sentiment column", colour="green")
     tbl_name = "title" if tbl_name == "submission" else tbl_name
     ## Add sentiment
@@ -113,14 +116,12 @@ model, tokenizer = load_model()
 tokenizer.model_max_length = 512
 df_comm, df_sub = read_from_database()
 
-df_sub_test = add_sentiment(df_sub, "submission")
+df_sub = add_sentiment(df_sub, "submission")
 
 df_comm = remove_moderators_comments_df(df_comm)
-df_comm = add_sentiment(df_comm)
+df_comm = add_sentiment(df_comm, "comment")
 
 df_comm = add_bad_words(df_comm)
-df_comm.select(pl.col("bad_words")).unique()
-df_comm.write_csv("./comments_staging.csv")
-df = pl.read_csv("./comments_staging.csv")
-storage.save_df(df, "staging", "comments")
-storage.save_df(df_sub_test, "staging", "submissions")
+
+storage.save_df(df_sub, "staging", "submissions")
+storage.save_df(df_comm, "staging", "comments")
