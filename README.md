@@ -23,6 +23,6 @@ This project is developed to be run either using:
 ### Current state
 
 - [x] ETL
-- [ ] NLP
+- [x] NLP
 - [ ] Data Visualization
 
