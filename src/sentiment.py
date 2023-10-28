@@ -6,14 +6,9 @@ from tqdm import tqdm
 from typing import Literal
 from dotenv import load_dotenv
 from scipy.special import softmax
-from src.utils.df_saver import postgres_db
 from profanity_filter import ProfanityFilter
 from src.bad_words_detector import detect_bad_words
 from transformers import AutoTokenizer, PreTrainedTokenizer, PreTrainedTokenizerFast, RobertaForSequenceClassification
-
-pf = ProfanityFilter()
-storage = postgres_db()
-
 
 load_dotenv()
 
@@ -41,7 +36,6 @@ def load_model():
     tokenizer = AutoTokenizer.from_pretrained(pretrained)
 
     model = RobertaForSequenceClassification.from_pretrained(pretrained)
-    # model = AutoModelForSequenceClassification.from_pretrained(pretrained)
     return model, tokenizer
 
 
@@ -76,8 +70,8 @@ def w_pbar(pbar, func):
     return foo
 
 
-def add_sentiment(df: pl.DataFrame, tbl_name: Literal["comment", "submission"]):
-    if df_sub.is_empty():
+def add_sentiment(df: pl.DataFrame, tbl_name: Literal["comment", "submission"], model, tokenizer):
+    if df.is_empty():
         print(f"{tbl_name.capitalize()} dataframe is empty, skiping...")
         return df
     pbar = tqdm(total=len(df), desc="Adding sentiment column", colour="green")
@@ -100,6 +94,7 @@ def add_bad_words(df: pl.DataFrame):
 
 
 def detect_bad_words(text: str):
+    pf = ProfanityFilter()
     censored_txt = set(pf.censor(text).split())
     text = set(text.split())
     return " ".join(list(text - censored_txt))
@@ -110,18 +105,3 @@ def remove_moderators_comments_df(df):
     df = df.filter(pl.col("is_moderator") != True)
     df = df.drop("is_moderator")
     return df
-
-
-model, tokenizer = load_model()
-tokenizer.model_max_length = 512
-df_comm, df_sub = read_from_database()
-
-df_sub = add_sentiment(df_sub, "submission")
-
-df_comm = remove_moderators_comments_df(df_comm)
-df_comm = add_sentiment(df_comm, "comment")
-
-df_comm = add_bad_words(df_comm)
-
-storage.save_df(df_sub, "staging", "submissions")
-storage.save_df(df_comm, "staging", "comments")
