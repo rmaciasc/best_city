@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r /requirements.txt
 RUN pip install webdriver-manager --upgrade
 COPY ./ opt/app
 WORKDIR /opt/app
-CMD [ "python", "main.py" ]
+ENTRYPOINT ./containers/python/docker-entrypoint.sh
