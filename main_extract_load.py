@@ -22,7 +22,7 @@ def main():
         jobs_df = convert_jobs_to_df(jobs)
         test_jobs_df(jobs_df)
 
-        storage.save_df(jobs_df, "raw", "jobs")
+        storage.save_df(jobs_df, "raw", "jobs", constrains=False)
 
 
 if __name__ == "__main__":
