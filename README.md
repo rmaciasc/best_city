@@ -5,10 +5,7 @@ I've been working on this fun end-to-end side project in my free time, where I'm
 **The locals**:
 
 * How friendly they are
-* What they're into
-* Making sure there's no racism, homophobia, classism, misogyny, or any other exclusionary stuff going on
-* Their political views
-* And even how often they drop bad words in everyday conversation
+* How often they drop bad words in everyday conversation
 
 **Jobs**:
 
@@ -24,5 +21,6 @@ This project is developed to be run either using:
 
 - [x] ETL
 - [x] NLP
-- [ ] Data Visualization
+- [x] Data Visualization
+- [ ] Dockerize everything
 
