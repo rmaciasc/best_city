@@ -3,12 +3,18 @@ import psycopg2
 import numpy as np
 import polars as pl
 from tqdm import tqdm
+from typing import Union
 from typing import Literal
 from dotenv import load_dotenv
 from scipy.special import softmax
 from profanity_filter import ProfanityFilter
 from src.bad_words_detector import detect_bad_words
-from transformers import AutoTokenizer, PreTrainedTokenizer, PreTrainedTokenizerFast, RobertaForSequenceClassification
+from transformers import (
+    AutoTokenizer,
+    PreTrainedTokenizer,
+    PreTrainedTokenizerFast,
+    RobertaForSequenceClassification,
+)
 
 load_dotenv()
 
@@ -55,7 +61,7 @@ def get_sentiment(text, model, tokenizer) -> np.ndarray:
 def get_weighted_sentiment_score(
     text: str,
     model: RobertaForSequenceClassification,
-    tokenizer: (PreTrainedTokenizer | PreTrainedTokenizerFast),
+    tokenizer: Union[PreTrainedTokenizer, PreTrainedTokenizerFast],
     weights=[-1, 0, 1],
 ) -> np.float64:
     scores: np.ndarray = get_sentiment(text, model, tokenizer)
@@ -70,7 +76,12 @@ def w_pbar(pbar, func):
     return foo
 
 
-def add_sentiment(df: pl.DataFrame, tbl_name: Literal["comment", "submission"], model, tokenizer):
+def add_sentiment(
+    df: pl.DataFrame,
+    tbl_name: Literal["comment", "submission"],
+    model: RobertaForSequenceClassification,
+    tokenizer: Union[PreTrainedTokenizer, PreTrainedTokenizerFast],
+):
     if df.is_empty():
         print(f"{tbl_name.capitalize()} dataframe is empty, skiping...")
         return df
@@ -79,7 +90,9 @@ def add_sentiment(df: pl.DataFrame, tbl_name: Literal["comment", "submission"], 
     ## Add sentiment
     df = df.with_columns(
         pl.col(tbl_name)
-        .map_elements(w_pbar(pbar, lambda x: get_weighted_sentiment_score(x, model, tokenizer)))
+        .map_elements(
+            w_pbar(pbar, lambda x: get_weighted_sentiment_score(x, model, tokenizer))
+        )
         .alias(f"{tbl_name}_sentiment")
     )
     pbar.close()
@@ -88,7 +101,11 @@ def add_sentiment(df: pl.DataFrame, tbl_name: Literal["comment", "submission"], 
 
 def add_bad_words(df: pl.DataFrame):
     pbar = tqdm(total=len(df), desc="Adding bad words column", colour="green")
-    df = df.with_columns(bad_words=pl.col("comment").map_elements(w_pbar(pbar, lambda x: detect_bad_words(x))))
+    df = df.with_columns(
+        bad_words=pl.col("comment").map_elements(
+            w_pbar(pbar, lambda x: detect_bad_words(x))
+        )
+    )
     pbar.close()
     return df
 

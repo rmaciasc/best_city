@@ -1,5 +1,4 @@
-FROM python:3.11.4-bookworm
-
+FROM python:3.9.18-bookworm
 # Use specific chrome version as sometimes the webdriver is not available for the latest stable
 ARG CHROME_VERSION="114.0.5735.198-1"
 # Updating apt to see and install Google Chrome
@@ -14,6 +13,7 @@ COPY ./containers/python/requirements.txt /
 RUN pip install --no-cache-dir -r /requirements.txt
 # Keep webdriver-manager updated
 RUN pip install webdriver-manager --upgrade
+RUN python3 -m spacy download en
 COPY ./ opt/app
 WORKDIR /opt/app
 ENTRYPOINT ./containers/python/docker-entrypoint.sh

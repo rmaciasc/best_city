@@ -1,10 +1,18 @@
 version: '3.9'
 services:
-  python:
-    image: raulscontainerreg.azurecr.io/best-city-python:latest
-    container_name: python-scraper
-    build:
-      context: ./
-      dockerfile: ./containers/python/Dockerfile
-    working_dir: /opt/app
-    tty: true
+  # python:
+  #   image: raulscontainerreg.azurecr.io/best-city-python:latest
+  #   container_name: python-sentiment-etl
+  #   build:
+  #     context: ./
+  #     dockerfile: ./containers/python/Dockerfile
+  #   working_dir: /opt/app
+  #   tty: true
+  db:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: demo
+      POSTGRES_DB: metabaseappdb
+    ports:
+      - 5432:5432

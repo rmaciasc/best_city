@@ -2,7 +2,7 @@ from datetime import datetime
 from dataclasses import dataclass, field
 
 
-@dataclass(slots=True)
+@dataclass()
 class JobsData:
     """Dataclass to hold jobs data
     Args:
@@ -18,7 +18,7 @@ class JobsData:
     jobs_qty: list[str] = field(default_factory=list)
 
 
-@dataclass(slots=True)
+@dataclass()
 class SubmissionsData:
     """Dataclass to hold Reddit submissions data
     Args:
@@ -36,7 +36,7 @@ class SubmissionsData:
     upvote_ratio: list[float] = field(default_factory=list)
 
 
-@dataclass(slots=True)
+@dataclass()
 class CommentsData:
     """Dataclass to hold Reddit comments data for each subreddit
     Args:

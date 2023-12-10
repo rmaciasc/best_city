@@ -23,4 +23,4 @@ This project is developed to be run either using:
 - [x] NLP
 - [x] Data Visualization
 - [ ] Dockerize everything
-
+- [ ] Use multiprocessing
