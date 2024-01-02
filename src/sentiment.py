@@ -7,7 +7,6 @@ from typing import Union
 from typing import Literal
 from dotenv import load_dotenv
 from scipy.special import softmax
-from profanity_filter import ProfanityFilter
 from src.bad_words_detector import detect_bad_words
 from transformers import (
     AutoTokenizer,
@@ -108,13 +107,6 @@ def add_bad_words(df: pl.DataFrame):
     )
     pbar.close()
     return df
-
-
-def detect_bad_words(text: str):
-    pf = ProfanityFilter()
-    censored_txt = set(pf.censor(text).split())
-    text = set(text.split())
-    return " ".join(list(text - censored_txt))
 
 
 def remove_moderators_comments_df(df):

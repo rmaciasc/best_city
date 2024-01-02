@@ -3,10 +3,10 @@ azure-core==1.29.1
 azure-identity==1.13.0
 azure-storage-blob==12.17.0
 beautifulsoup4==4.11.2
+better-profanity==0.7.0
 polars==0.19.2
 praw==7.7.0
 prawcore==2.3.0
-profanity-filter==1.3.3
 psycopg2-binary==2.9.7
 pytest==7.2.2
 python-dotenv==1.0.0
@@ -17,4 +17,5 @@ tokenizers==0.14.1
 torch==2.1.0
 tqdm==4.66.1
 transformers==4.34.0
+spacy==2.3.9
 webdriver-manager==4.0.1

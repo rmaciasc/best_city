@@ -11,3 +11,5 @@ __pycache__
 containers/airflow-docker/logs
 db_password.txt
 db_user.txt
+.env_demo
+.vscode/
