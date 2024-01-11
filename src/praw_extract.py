@@ -2,11 +2,11 @@ import os
 import praw
 import sys
 import polars as pl
-from dotenv import load_dotenv
-from datetime import datetime, timezone
 from typing import Literal
-from src.classes import SubmissionsData, CommentsData
+from dotenv import load_dotenv
 from dataclasses import asdict
+from datetime import datetime, timezone
+from src.classes import SubmissionsData, CommentsData
 
 load_dotenv()
 
@@ -59,12 +59,22 @@ def save_comment(submission, comment, parent_id: bool = False):
             comment_data.parent_id.append("")
             comment_data.comment_tier.append("")
     except Exception as e:
-        print("Comment exception found: ", e)
+        print(
+            "Comment exception found: ",
+            e,
+            f"skipping comment id {comment.id} from submission {submission.id}...",
+        )
 
 
 def convert_submissions_to_df(submission_data):
     df = pl.DataFrame(asdict(submission_data))
-    assert df.columns == ["submission_id", "subreddit", "date_utc", "title", "upvote_ratio"]
+    assert df.columns == [
+        "submission_id",
+        "subreddit",
+        "date_utc",
+        "title",
+        "upvote_ratio",
+    ]
     df = df.with_columns(
         pl.col("submission_id").cast(pl.Utf8),
         pl.col("subreddit").cast(pl.Utf8),
@@ -104,11 +114,15 @@ def convert_comments_to_df(comment_data):
     return df
 
 
-def get_reddit_submissions_with_comments(number_of_submissions: int, period: Literal["day", "month"]):
+def get_reddit_submissions_with_comments(
+    number_of_submissions: int, period: Literal["day", "month"]
+):
     for sub_name, keyword in subreddit_names.items():
         print(f"Gathering data from: {sub_name}")
         subreddit = reddit.subreddit(keyword)
-        latest_submissions = subreddit.top(limit=number_of_submissions, time_filter=period)
+        latest_submissions = subreddit.top(
+            limit=number_of_submissions, time_filter=period
+        )
 
         try:
             next(latest_submissions)
@@ -129,9 +143,11 @@ def get_reddit_submissions_with_comments(number_of_submissions: int, period: Lit
                 for comment in submission.comments:
                     save_comment(submission, comment)
 
-                    if len(comment.replies) > 0:
+                    try:
                         for reply in comment.replies:
                             save_comment(submission, reply, True)
+                    except Exception as e:
+                        print(f"Comment {comment.id} from {submission} has no replies.")
 
     submissions_df = convert_submissions_to_df(submission_data)
     comments_df = convert_comments_to_df(comment_data)
