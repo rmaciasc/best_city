@@ -1,0 +1,10814 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.4
+-- Dumped by pg_dump version 16.0
+
+-- Started on 2024-01-17 21:13:48
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 5 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 329 (class 1259 OID 27896)
+-- Name: action; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.action (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    type text NOT NULL,
+    model_id integer NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    parameters text,
+    parameter_mappings text,
+    visualization_settings text,
+    public_uuid character(36),
+    made_public_by_id integer,
+    creator_id integer,
+    archived boolean DEFAULT false NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 4930 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: TABLE action; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.action IS 'An action is something you can do, such as run a readwrite query';
+
+
+--
+-- TOC entry 4931 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.created_at IS 'The timestamp of when the action was created';
+
+
+--
+-- TOC entry 4932 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.updated_at IS 'The timestamp of when the action was updated';
+
+
+--
+-- TOC entry 4933 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.type IS 'Type of action';
+
+
+--
+-- TOC entry 4934 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.model_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.model_id IS 'The associated model';
+
+
+--
+-- TOC entry 4935 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.name IS 'The name of the action';
+
+
+--
+-- TOC entry 4936 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.description IS 'The description of the action';
+
+
+--
+-- TOC entry 4937 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.parameters; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.parameters IS 'The saved parameters for this action';
+
+
+--
+-- TOC entry 4938 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.parameter_mappings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.parameter_mappings IS 'The saved parameter mappings for this action';
+
+
+--
+-- TOC entry 4939 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.visualization_settings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.visualization_settings IS 'The UI visualization_settings for this action';
+
+
+--
+-- TOC entry 4940 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.public_uuid; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.public_uuid IS 'Unique UUID used to in publically-accessible links to this Action.';
+
+
+--
+-- TOC entry 4941 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.made_public_by_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.made_public_by_id IS 'The ID of the User who first publically shared this Action.';
+
+
+--
+-- TOC entry 4942 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.creator_id IS 'The user who created the action';
+
+
+--
+-- TOC entry 4943 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.archived; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.archived IS 'Whether or not the action has been archived';
+
+
+--
+-- TOC entry 4944 (class 0 OID 0)
+-- Dependencies: 329
+-- Name: COLUMN action.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.action.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 328 (class 1259 OID 27895)
+-- Name: action_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.action ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.action_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 239 (class 1259 OID 26650)
+-- Name: activity; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.activity (
+    id integer NOT NULL,
+    topic character varying(32) NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    user_id integer,
+    model character varying(16),
+    model_id integer,
+    database_id integer,
+    table_id integer,
+    custom_id character varying(48),
+    details text NOT NULL
+);
+
+
+--
+-- TOC entry 238 (class 1259 OID 26649)
+-- Name: activity_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.activity ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.activity_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 323 (class 1259 OID 27806)
+-- Name: application_permissions_revision; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.application_permissions_revision (
+    id integer NOT NULL,
+    before text NOT NULL,
+    after text NOT NULL,
+    user_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    remark text
+);
+
+
+--
+-- TOC entry 4945 (class 0 OID 0)
+-- Dependencies: 323
+-- Name: TABLE application_permissions_revision; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.application_permissions_revision IS 'Used to keep track of changes made to general permissions.';
+
+
+--
+-- TOC entry 4946 (class 0 OID 0)
+-- Dependencies: 323
+-- Name: COLUMN application_permissions_revision.before; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.application_permissions_revision.before IS 'Serialized JSON of the permission graph before the changes.';
+
+
+--
+-- TOC entry 4947 (class 0 OID 0)
+-- Dependencies: 323
+-- Name: COLUMN application_permissions_revision.after; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.application_permissions_revision.after IS 'Serialized JSON of the changes in permission graph.';
+
+
+--
+-- TOC entry 4948 (class 0 OID 0)
+-- Dependencies: 323
+-- Name: COLUMN application_permissions_revision.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.application_permissions_revision.user_id IS 'The ID of the admin who made this set of changes.';
+
+
+--
+-- TOC entry 4949 (class 0 OID 0)
+-- Dependencies: 323
+-- Name: COLUMN application_permissions_revision.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.application_permissions_revision.created_at IS 'The timestamp of when these changes were made.';
+
+
+--
+-- TOC entry 4950 (class 0 OID 0)
+-- Dependencies: 323
+-- Name: COLUMN application_permissions_revision.remark; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.application_permissions_revision.remark IS 'Optional remarks explaining why these changes were made.';
+
+
+--
+-- TOC entry 322 (class 1259 OID 27805)
+-- Name: application_permissions_revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.application_permissions_revision ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.application_permissions_revision_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 325 (class 1259 OID 27821)
+-- Name: bookmark_ordering; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.bookmark_ordering (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    type character varying(255) NOT NULL,
+    item_id integer NOT NULL,
+    ordering integer NOT NULL
+);
+
+
+--
+-- TOC entry 4951 (class 0 OID 0)
+-- Dependencies: 325
+-- Name: TABLE bookmark_ordering; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.bookmark_ordering IS 'Table holding ordering information for various bookmark tables';
+
+
+--
+-- TOC entry 4952 (class 0 OID 0)
+-- Dependencies: 325
+-- Name: COLUMN bookmark_ordering.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.bookmark_ordering.user_id IS 'ID of the User who ordered bookmarks';
+
+
+--
+-- TOC entry 4953 (class 0 OID 0)
+-- Dependencies: 325
+-- Name: COLUMN bookmark_ordering.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.bookmark_ordering.type IS 'type of the Bookmark';
+
+
+--
+-- TOC entry 4954 (class 0 OID 0)
+-- Dependencies: 325
+-- Name: COLUMN bookmark_ordering.item_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.bookmark_ordering.item_id IS 'id of the item being bookmarked (Card, Collection, Dashboard, ...) no FK, so may no longer exist';
+
+
+--
+-- TOC entry 4955 (class 0 OID 0)
+-- Dependencies: 325
+-- Name: COLUMN bookmark_ordering.ordering; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.bookmark_ordering.ordering IS 'order of bookmark for user';
+
+
+--
+-- TOC entry 324 (class 1259 OID 27820)
+-- Name: bookmark_ordering_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.bookmark_ordering ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.bookmark_ordering_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 319 (class 1259 OID 27764)
+-- Name: card_bookmark; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.card_bookmark (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    card_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 4956 (class 0 OID 0)
+-- Dependencies: 319
+-- Name: TABLE card_bookmark; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.card_bookmark IS 'Table holding bookmarks on cards';
+
+
+--
+-- TOC entry 4957 (class 0 OID 0)
+-- Dependencies: 319
+-- Name: COLUMN card_bookmark.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.card_bookmark.user_id IS 'ID of the User who bookmarked the Card';
+
+
+--
+-- TOC entry 4958 (class 0 OID 0)
+-- Dependencies: 319
+-- Name: COLUMN card_bookmark.card_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.card_bookmark.card_id IS 'ID of the Card bookmarked by the user';
+
+
+--
+-- TOC entry 4959 (class 0 OID 0)
+-- Dependencies: 319
+-- Name: COLUMN card_bookmark.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.card_bookmark.created_at IS 'The timestamp of when the bookmark was created';
+
+
+--
+-- TOC entry 318 (class 1259 OID 27763)
+-- Name: card_bookmark_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.card_bookmark ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.card_bookmark_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 262 (class 1259 OID 26838)
+-- Name: card_label; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.card_label (
+    id integer NOT NULL,
+    card_id integer NOT NULL,
+    label_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 261 (class 1259 OID 26837)
+-- Name: card_label_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.card_label ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.card_label_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 274 (class 1259 OID 27004)
+-- Name: collection; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.collection (
+    id integer NOT NULL,
+    name text NOT NULL,
+    description text,
+    color character(7) NOT NULL,
+    archived boolean DEFAULT false NOT NULL,
+    location character varying(254) DEFAULT '/'::character varying NOT NULL,
+    personal_owner_id integer,
+    slug character varying(254) NOT NULL,
+    namespace character varying(254),
+    authority_level character varying(255),
+    entity_id character(21),
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    type character varying(256)
+);
+
+
+--
+-- TOC entry 4960 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: TABLE collection; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.collection IS 'Collections are an optional way to organize Cards and handle permissions for them.';
+
+
+--
+-- TOC entry 4961 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.name IS 'The user-facing name of this Collection.';
+
+
+--
+-- TOC entry 4962 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.description IS 'Optional description for this Collection.';
+
+
+--
+-- TOC entry 4963 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.color; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.color IS 'Seven-character hex color for this Collection, including the preceding hash sign.';
+
+
+--
+-- TOC entry 4964 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.archived; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.archived IS 'Whether this Collection has been archived and should be hidden from users.';
+
+
+--
+-- TOC entry 4965 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.location; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.location IS 'Directory-structure path of ancestor Collections. e.g. "/1/2/" means our Parent is Collection 2, and their parent is Collection 1.';
+
+
+--
+-- TOC entry 4966 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.personal_owner_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.personal_owner_id IS 'If set, this Collection is a personal Collection, for exclusive use of the User with this ID.';
+
+
+--
+-- TOC entry 4967 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.slug; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.slug IS 'Sluggified version of the Collection name. Used only for display purposes in URL; not unique or indexed.';
+
+
+--
+-- TOC entry 4968 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.namespace; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.namespace IS 'The namespace (hierachy) this Collection belongs to. NULL means the Collection is in the default namespace.';
+
+
+--
+-- TOC entry 4969 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.authority_level; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.authority_level IS 'Nullable column to incidate collection''s authority level. Initially values are "official" and nil.';
+
+
+--
+-- TOC entry 4970 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 4971 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.created_at IS 'Timestamp of when this Collection was created.';
+
+
+--
+-- TOC entry 4972 (class 0 OID 0)
+-- Dependencies: 274
+-- Name: COLUMN collection.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection.type IS 'This is used to differentiate instance-analytics collections from all other collections.';
+
+
+--
+-- TOC entry 321 (class 1259 OID 27785)
+-- Name: collection_bookmark; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.collection_bookmark (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    collection_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 4973 (class 0 OID 0)
+-- Dependencies: 321
+-- Name: TABLE collection_bookmark; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.collection_bookmark IS 'Table holding bookmarks on collections';
+
+
+--
+-- TOC entry 4974 (class 0 OID 0)
+-- Dependencies: 321
+-- Name: COLUMN collection_bookmark.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_bookmark.user_id IS 'ID of the User who bookmarked the Collection';
+
+
+--
+-- TOC entry 4975 (class 0 OID 0)
+-- Dependencies: 321
+-- Name: COLUMN collection_bookmark.collection_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_bookmark.collection_id IS 'ID of the Card bookmarked by the user';
+
+
+--
+-- TOC entry 4976 (class 0 OID 0)
+-- Dependencies: 321
+-- Name: COLUMN collection_bookmark.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_bookmark.created_at IS 'The timestamp of when the bookmark was created';
+
+
+--
+-- TOC entry 320 (class 1259 OID 27784)
+-- Name: collection_bookmark_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.collection_bookmark ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.collection_bookmark_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 273 (class 1259 OID 27003)
+-- Name: collection_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.collection ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.collection_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 276 (class 1259 OID 27022)
+-- Name: collection_permission_graph_revision; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.collection_permission_graph_revision (
+    id integer NOT NULL,
+    before text NOT NULL,
+    after text NOT NULL,
+    user_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    remark text
+);
+
+
+--
+-- TOC entry 4977 (class 0 OID 0)
+-- Dependencies: 276
+-- Name: TABLE collection_permission_graph_revision; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.collection_permission_graph_revision IS 'Used to keep track of changes made to collections.';
+
+
+--
+-- TOC entry 4978 (class 0 OID 0)
+-- Dependencies: 276
+-- Name: COLUMN collection_permission_graph_revision.before; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_permission_graph_revision.before IS 'Serialized JSON of the collections graph before the changes.';
+
+
+--
+-- TOC entry 4979 (class 0 OID 0)
+-- Dependencies: 276
+-- Name: COLUMN collection_permission_graph_revision.after; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_permission_graph_revision.after IS 'Serialized JSON of the collections graph after the changes.';
+
+
+--
+-- TOC entry 4980 (class 0 OID 0)
+-- Dependencies: 276
+-- Name: COLUMN collection_permission_graph_revision.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_permission_graph_revision.user_id IS 'The ID of the admin who made this set of changes.';
+
+
+--
+-- TOC entry 4981 (class 0 OID 0)
+-- Dependencies: 276
+-- Name: COLUMN collection_permission_graph_revision.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_permission_graph_revision.created_at IS 'The timestamp of when these changes were made.';
+
+
+--
+-- TOC entry 4982 (class 0 OID 0)
+-- Dependencies: 276
+-- Name: COLUMN collection_permission_graph_revision.remark; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.collection_permission_graph_revision.remark IS 'Optional remarks explaining why these changes were made.';
+
+
+--
+-- TOC entry 275 (class 1259 OID 27021)
+-- Name: collection_permission_graph_revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.collection_permission_graph_revision ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.collection_permission_graph_revision_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 286 (class 1259 OID 27126)
+-- Name: computation_job; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.computation_job (
+    id integer NOT NULL,
+    creator_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    type character varying(254) NOT NULL,
+    status character varying(254) NOT NULL,
+    context text,
+    ended_at timestamp without time zone
+);
+
+
+--
+-- TOC entry 4983 (class 0 OID 0)
+-- Dependencies: 286
+-- Name: TABLE computation_job; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.computation_job IS 'Stores submitted async computation jobs.';
+
+
+--
+-- TOC entry 285 (class 1259 OID 27125)
+-- Name: computation_job_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.computation_job ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.computation_job_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 288 (class 1259 OID 27139)
+-- Name: computation_job_result; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.computation_job_result (
+    id integer NOT NULL,
+    job_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    permanence character varying(254) NOT NULL,
+    payload text NOT NULL
+);
+
+
+--
+-- TOC entry 4984 (class 0 OID 0)
+-- Dependencies: 288
+-- Name: TABLE computation_job_result; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.computation_job_result IS 'Stores results of async computation jobs.';
+
+
+--
+-- TOC entry 287 (class 1259 OID 27138)
+-- Name: computation_job_result_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.computation_job_result ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.computation_job_result_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 341 (class 1259 OID 28148)
+-- Name: connection_impersonations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.connection_impersonations (
+    id integer NOT NULL,
+    db_id integer NOT NULL,
+    group_id integer NOT NULL,
+    attribute text
+);
+
+
+--
+-- TOC entry 4985 (class 0 OID 0)
+-- Dependencies: 341
+-- Name: TABLE connection_impersonations; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.connection_impersonations IS 'Table for holding connection impersonation policies';
+
+
+--
+-- TOC entry 4986 (class 0 OID 0)
+-- Dependencies: 341
+-- Name: COLUMN connection_impersonations.db_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.connection_impersonations.db_id IS 'ID of the database this connection impersonation policy affects';
+
+
+--
+-- TOC entry 4987 (class 0 OID 0)
+-- Dependencies: 341
+-- Name: COLUMN connection_impersonations.group_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.connection_impersonations.group_id IS 'ID of the permissions group this connection impersonation policy affects';
+
+
+--
+-- TOC entry 4988 (class 0 OID 0)
+-- Dependencies: 341
+-- Name: COLUMN connection_impersonations.attribute; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.connection_impersonations.attribute IS 'User attribute associated with the database role to use for this connection impersonation policy';
+
+
+--
+-- TOC entry 340 (class 1259 OID 28147)
+-- Name: connection_impersonations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.connection_impersonations ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.connection_impersonations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 234 (class 1259 OID 26602)
+-- Name: core_session; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.core_session (
+    id character varying(254) NOT NULL,
+    user_id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    anti_csrf_token text
+);
+
+
+--
+-- TOC entry 4989 (class 0 OID 0)
+-- Dependencies: 234
+-- Name: COLUMN core_session.anti_csrf_token; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_session.anti_csrf_token IS 'Anti-CSRF token for full-app embed sessions.';
+
+
+--
+-- TOC entry 217 (class 1259 OID 26250)
+-- Name: core_user; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.core_user (
+    id integer NOT NULL,
+    email character varying(254) NOT NULL,
+    first_name character varying(254),
+    last_name character varying(254),
+    password character varying(254),
+    password_salt character varying(254) DEFAULT 'default'::character varying,
+    date_joined timestamp with time zone NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean DEFAULT false NOT NULL,
+    is_active boolean DEFAULT true NOT NULL,
+    reset_token character varying(254),
+    reset_triggered bigint,
+    is_qbnewb boolean DEFAULT true NOT NULL,
+    login_attributes text,
+    updated_at timestamp without time zone,
+    sso_source character varying(254),
+    locale character varying(5),
+    is_datasetnewb boolean DEFAULT true NOT NULL,
+    settings text
+);
+
+
+--
+-- TOC entry 4990 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: COLUMN core_user.login_attributes; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_user.login_attributes IS 'JSON serialized map with attributes used for row level permissions';
+
+
+--
+-- TOC entry 4991 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: COLUMN core_user.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_user.updated_at IS 'When was this User last updated?';
+
+
+--
+-- TOC entry 4992 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: COLUMN core_user.sso_source; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_user.sso_source IS 'String to indicate the SSO backend the user is from';
+
+
+--
+-- TOC entry 4993 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: COLUMN core_user.locale; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_user.locale IS 'Preferred ISO locale (language/country) code, e.g "en" or "en-US", for this User. Overrides site default.';
+
+
+--
+-- TOC entry 4994 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: COLUMN core_user.is_datasetnewb; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_user.is_datasetnewb IS 'Boolean flag to indicate if the dataset info modal has been dismissed.';
+
+
+--
+-- TOC entry 4995 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: COLUMN core_user.settings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.core_user.settings IS 'Serialized JSON containing User-local Settings for this User';
+
+
+--
+-- TOC entry 216 (class 1259 OID 26249)
+-- Name: core_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.core_user ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.core_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 317 (class 1259 OID 27743)
+-- Name: dashboard_bookmark; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dashboard_bookmark (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    dashboard_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 4996 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: TABLE dashboard_bookmark; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.dashboard_bookmark IS 'Table holding bookmarks on dashboards';
+
+
+--
+-- TOC entry 4997 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN dashboard_bookmark.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_bookmark.user_id IS 'ID of the User who bookmarked the Dashboard';
+
+
+--
+-- TOC entry 4998 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN dashboard_bookmark.dashboard_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_bookmark.dashboard_id IS 'ID of the Dashboard bookmarked by the user';
+
+
+--
+-- TOC entry 4999 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN dashboard_bookmark.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_bookmark.created_at IS 'The timestamp of when the bookmark was created';
+
+
+--
+-- TOC entry 316 (class 1259 OID 27742)
+-- Name: dashboard_bookmark_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.dashboard_bookmark ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.dashboard_bookmark_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 282 (class 1259 OID 27080)
+-- Name: dashboard_favorite; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dashboard_favorite (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    dashboard_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 5000 (class 0 OID 0)
+-- Dependencies: 282
+-- Name: TABLE dashboard_favorite; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.dashboard_favorite IS 'Presence of a row here indicates a given User has favorited a given Dashboard.';
+
+
+--
+-- TOC entry 5001 (class 0 OID 0)
+-- Dependencies: 282
+-- Name: COLUMN dashboard_favorite.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_favorite.user_id IS 'ID of the User who favorited the Dashboard.';
+
+
+--
+-- TOC entry 5002 (class 0 OID 0)
+-- Dependencies: 282
+-- Name: COLUMN dashboard_favorite.dashboard_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_favorite.dashboard_id IS 'ID of the Dashboard favorited by the User.';
+
+
+--
+-- TOC entry 281 (class 1259 OID 27079)
+-- Name: dashboard_favorite_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.dashboard_favorite ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.dashboard_favorite_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 336 (class 1259 OID 28090)
+-- Name: dashboard_tab; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dashboard_tab (
+    id integer NOT NULL,
+    dashboard_id integer NOT NULL,
+    name text NOT NULL,
+    "position" integer NOT NULL,
+    entity_id character(21) NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 5003 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: TABLE dashboard_tab; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.dashboard_tab IS 'Join table connecting dashboard to dashboardcards';
+
+
+--
+-- TOC entry 5004 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: COLUMN dashboard_tab.dashboard_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_tab.dashboard_id IS 'The dashboard that a tab is on';
+
+
+--
+-- TOC entry 5005 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: COLUMN dashboard_tab.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_tab.name IS 'Displayed name of the tab';
+
+
+--
+-- TOC entry 5006 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: COLUMN dashboard_tab."position"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_tab."position" IS 'Position of the tab with respect to others tabs in dashboard';
+
+
+--
+-- TOC entry 5007 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: COLUMN dashboard_tab.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_tab.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 5008 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: COLUMN dashboard_tab.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_tab.created_at IS 'The timestamp at which the tab was created';
+
+
+--
+-- TOC entry 5009 (class 0 OID 0)
+-- Dependencies: 336
+-- Name: COLUMN dashboard_tab.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dashboard_tab.updated_at IS 'The timestamp at which the tab was last updated';
+
+
+--
+-- TOC entry 335 (class 1259 OID 28089)
+-- Name: dashboard_tab_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.dashboard_tab ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.dashboard_tab_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 258 (class 1259 OID 26808)
+-- Name: dashboardcard_series; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dashboardcard_series (
+    id integer NOT NULL,
+    dashboardcard_id integer NOT NULL,
+    card_id integer NOT NULL,
+    "position" integer NOT NULL
+);
+
+
+--
+-- TOC entry 257 (class 1259 OID 26807)
+-- Name: dashboardcard_series_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.dashboardcard_series ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.dashboardcard_series_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 242 (class 1259 OID 26680)
+-- Name: data_migrations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.data_migrations (
+    id character varying(254) NOT NULL,
+    "timestamp" timestamp without time zone NOT NULL
+);
+
+
+--
+-- TOC entry 214 (class 1259 OID 26229)
+-- Name: databasechangelog; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.databasechangelog (
+    id character varying(255) NOT NULL,
+    author character varying(255) NOT NULL,
+    filename character varying(255) NOT NULL,
+    dateexecuted timestamp without time zone NOT NULL,
+    orderexecuted integer NOT NULL,
+    exectype character varying(10) NOT NULL,
+    md5sum character varying(35),
+    description character varying(255),
+    comments character varying(255),
+    tag character varying(255),
+    liquibase character varying(20),
+    contexts character varying(255),
+    labels character varying(255),
+    deployment_id character varying(10)
+);
+
+
+--
+-- TOC entry 215 (class 1259 OID 26234)
+-- Name: databasechangeloglock; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.databasechangeloglock (
+    id integer NOT NULL,
+    locked boolean NOT NULL,
+    lockgranted timestamp without time zone,
+    lockedby character varying(255)
+);
+
+
+--
+-- TOC entry 254 (class 1259 OID 26776)
+-- Name: dependency; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dependency (
+    id integer NOT NULL,
+    model character varying(32) NOT NULL,
+    model_id integer NOT NULL,
+    dependent_on_model character varying(32) NOT NULL,
+    dependent_on_id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL
+);
+
+
+--
+-- TOC entry 253 (class 1259 OID 26775)
+-- Name: dependency_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.dependency ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.dependency_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 284 (class 1259 OID 27101)
+-- Name: dimension; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.dimension (
+    id integer NOT NULL,
+    field_id integer NOT NULL,
+    name character varying(254) NOT NULL,
+    type character varying(254) NOT NULL,
+    human_readable_field_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5010 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: TABLE dimension; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.dimension IS 'Stores references to alternate views of existing fields, such as remapping an integer to a description, like an enum';
+
+
+--
+-- TOC entry 5011 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.field_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.field_id IS 'ID of the field this dimension row applies to';
+
+
+--
+-- TOC entry 5012 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.name IS 'Short description used as the display name of this new column';
+
+
+--
+-- TOC entry 5013 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.type IS 'Either internal for a user defined remapping or external for a foreign key based remapping';
+
+
+--
+-- TOC entry 5014 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.human_readable_field_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.human_readable_field_id IS 'Only used with external type remappings. Indicates which field on the FK related table to use for display';
+
+
+--
+-- TOC entry 5015 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.created_at IS 'The timestamp of when the dimension was created.';
+
+
+--
+-- TOC entry 5016 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.updated_at IS 'The timestamp of when these dimension was last updated.';
+
+
+--
+-- TOC entry 5017 (class 0 OID 0)
+-- Dependencies: 284
+-- Name: COLUMN dimension.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.dimension.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 283 (class 1259 OID 27100)
+-- Name: dimension_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.dimension ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.dimension_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 290 (class 1259 OID 27156)
+-- Name: sandboxes; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.sandboxes (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    table_id integer NOT NULL,
+    card_id integer,
+    attribute_remappings text,
+    permission_id integer
+);
+
+
+--
+-- TOC entry 5018 (class 0 OID 0)
+-- Dependencies: 290
+-- Name: TABLE sandboxes; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.sandboxes IS 'Records that a given Card (Question) should automatically replace a given Table as query source for a given a Perms Group.';
+
+
+--
+-- TOC entry 5019 (class 0 OID 0)
+-- Dependencies: 290
+-- Name: COLUMN sandboxes.group_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sandboxes.group_id IS 'ID of the Permissions Group this policy affects.';
+
+
+--
+-- TOC entry 5020 (class 0 OID 0)
+-- Dependencies: 290
+-- Name: COLUMN sandboxes.table_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sandboxes.table_id IS 'ID of the Table that should get automatically replaced as query source for the Permissions Group.';
+
+
+--
+-- TOC entry 5021 (class 0 OID 0)
+-- Dependencies: 290
+-- Name: COLUMN sandboxes.card_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sandboxes.card_id IS 'ID of the Card (Question) to be used to replace the Table.';
+
+
+--
+-- TOC entry 5022 (class 0 OID 0)
+-- Dependencies: 290
+-- Name: COLUMN sandboxes.attribute_remappings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sandboxes.attribute_remappings IS 'JSON-encoded map of user attribute identifier to the param name used in the Card.';
+
+
+--
+-- TOC entry 5023 (class 0 OID 0)
+-- Dependencies: 290
+-- Name: COLUMN sandboxes.permission_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.sandboxes.permission_id IS 'The ID of the corresponding permissions path for this sandbox';
+
+
+--
+-- TOC entry 289 (class 1259 OID 27155)
+-- Name: group_table_access_policy_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.sandboxes ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.group_table_access_policy_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 331 (class 1259 OID 27921)
+-- Name: http_action; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.http_action (
+    action_id integer NOT NULL,
+    template text NOT NULL,
+    response_handle text,
+    error_handle text
+);
+
+
+--
+-- TOC entry 5024 (class 0 OID 0)
+-- Dependencies: 331
+-- Name: TABLE http_action; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.http_action IS 'An http api call type of action';
+
+
+--
+-- TOC entry 5025 (class 0 OID 0)
+-- Dependencies: 331
+-- Name: COLUMN http_action.action_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.http_action.action_id IS 'The related action';
+
+
+--
+-- TOC entry 5026 (class 0 OID 0)
+-- Dependencies: 331
+-- Name: COLUMN http_action.template; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.http_action.template IS 'A template that defines method,url,body,headers required to make an api call';
+
+
+--
+-- TOC entry 5027 (class 0 OID 0)
+-- Dependencies: 331
+-- Name: COLUMN http_action.response_handle; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.http_action.response_handle IS 'A program to take an api response and transform to an appropriate response for emitters';
+
+
+--
+-- TOC entry 5028 (class 0 OID 0)
+-- Dependencies: 331
+-- Name: COLUMN http_action.error_handle; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.http_action.error_handle IS 'A program to take an api response to determine if an error occurred';
+
+
+--
+-- TOC entry 332 (class 1259 OID 28007)
+-- Name: implicit_action; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.implicit_action (
+    action_id integer NOT NULL,
+    kind text NOT NULL
+);
+
+
+--
+-- TOC entry 5029 (class 0 OID 0)
+-- Dependencies: 332
+-- Name: TABLE implicit_action; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.implicit_action IS 'An action with dynamic parameters based on the underlying model';
+
+
+--
+-- TOC entry 5030 (class 0 OID 0)
+-- Dependencies: 332
+-- Name: COLUMN implicit_action.action_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.implicit_action.action_id IS 'The associated action';
+
+
+--
+-- TOC entry 5031 (class 0 OID 0)
+-- Dependencies: 332
+-- Name: COLUMN implicit_action.kind; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.implicit_action.kind IS 'The kind of implicit action create/update/delete';
+
+
+--
+-- TOC entry 260 (class 1259 OID 26827)
+-- Name: label; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.label (
+    id integer NOT NULL,
+    name character varying(254) NOT NULL,
+    slug character varying(254) NOT NULL,
+    icon character varying(128)
+);
+
+
+--
+-- TOC entry 259 (class 1259 OID 26826)
+-- Name: label_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.label ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.label_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 307 (class 1259 OID 27636)
+-- Name: login_history; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.login_history (
+    id integer NOT NULL,
+    "timestamp" timestamp with time zone DEFAULT now() NOT NULL,
+    user_id integer NOT NULL,
+    session_id character varying(254),
+    device_id character(36) NOT NULL,
+    device_description text NOT NULL,
+    ip_address text NOT NULL
+);
+
+
+--
+-- TOC entry 5032 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: TABLE login_history; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.login_history IS 'Keeps track of various logins for different users and additional info such as location and device';
+
+
+--
+-- TOC entry 5033 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: COLUMN login_history."timestamp"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.login_history."timestamp" IS 'When this login occurred.';
+
+
+--
+-- TOC entry 5034 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: COLUMN login_history.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.login_history.user_id IS 'ID of the User that logged in.';
+
+
+--
+-- TOC entry 5035 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: COLUMN login_history.session_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.login_history.session_id IS 'ID of the Session created by this login if one is currently active. NULL if Session is no longer active.';
+
+
+--
+-- TOC entry 5036 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: COLUMN login_history.device_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.login_history.device_id IS 'Cookie-based unique identifier for the device/browser the user logged in from.';
+
+
+--
+-- TOC entry 5037 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: COLUMN login_history.device_description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.login_history.device_description IS 'Description of the device that login happened from, for example a user-agent string, but this might be something different if we support alternative auth mechanisms in the future.';
+
+
+--
+-- TOC entry 5038 (class 0 OID 0)
+-- Dependencies: 307
+-- Name: COLUMN login_history.ip_address; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.login_history.ip_address IS 'IP address of the device that login happened from, so we can geocode it and determine approximate location.';
+
+
+--
+-- TOC entry 306 (class 1259 OID 27635)
+-- Name: login_history_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.login_history ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.login_history_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 219 (class 1259 OID 26293)
+-- Name: metabase_database; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.metabase_database (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    details text NOT NULL,
+    engine character varying(254) NOT NULL,
+    is_sample boolean DEFAULT false NOT NULL,
+    is_full_sync boolean DEFAULT true NOT NULL,
+    points_of_interest text,
+    caveats text,
+    metadata_sync_schedule character varying(254) DEFAULT '0 50 * * * ? *'::character varying NOT NULL,
+    cache_field_values_schedule character varying(254) DEFAULT '0 50 0 * * ? *'::character varying NOT NULL,
+    timezone character varying(254),
+    is_on_demand boolean DEFAULT false NOT NULL,
+    options text,
+    auto_run_queries boolean DEFAULT true NOT NULL,
+    refingerprint boolean,
+    cache_ttl integer,
+    initial_sync_status character varying(32) DEFAULT 'complete'::character varying NOT NULL,
+    creator_id integer,
+    settings text,
+    dbms_version text,
+    is_audit boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- TOC entry 5039 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.metadata_sync_schedule; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.metadata_sync_schedule IS 'The cron schedule string for when this database should undergo the metadata sync process (and analysis for new fields).';
+
+
+--
+-- TOC entry 5040 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.cache_field_values_schedule; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.cache_field_values_schedule IS 'The cron schedule string for when FieldValues for eligible Fields should be updated.';
+
+
+--
+-- TOC entry 5041 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.timezone; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.timezone IS 'Timezone identifier for the database, set by the sync process';
+
+
+--
+-- TOC entry 5042 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.is_on_demand; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.is_on_demand IS 'Whether we should do On-Demand caching of FieldValues for this DB. This means FieldValues are updated when their Field is used in a Dashboard or Card param.';
+
+
+--
+-- TOC entry 5043 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.options; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.options IS 'Serialized JSON containing various options like QB behavior.';
+
+
+--
+-- TOC entry 5044 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.auto_run_queries; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.auto_run_queries IS 'Whether to automatically run queries when doing simple filtering and summarizing in the Query Builder.';
+
+
+--
+-- TOC entry 5045 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.refingerprint; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.refingerprint IS 'Whether or not to enable periodic refingerprinting for this Database.';
+
+
+--
+-- TOC entry 5046 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.cache_ttl; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.cache_ttl IS 'Granular cache TTL for specific database.';
+
+
+--
+-- TOC entry 5047 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.initial_sync_status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.initial_sync_status IS 'String indicating whether a database has completed its initial sync and is ready to use';
+
+
+--
+-- TOC entry 5048 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.creator_id IS 'ID of the admin who added the database';
+
+
+--
+-- TOC entry 5049 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.settings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.settings IS 'Serialized JSON containing Database-local Settings for this Database';
+
+
+--
+-- TOC entry 5050 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.dbms_version; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.dbms_version IS 'A JSON object describing the flavor and version of the DBMS.';
+
+
+--
+-- TOC entry 5051 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: COLUMN metabase_database.is_audit; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_database.is_audit IS 'Only the app db, visible to admins via auditing should have this set true.';
+
+
+--
+-- TOC entry 218 (class 1259 OID 26292)
+-- Name: metabase_database_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.metabase_database ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.metabase_database_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 223 (class 1259 OID 26321)
+-- Name: metabase_field; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.metabase_field (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    name character varying(254) NOT NULL,
+    base_type character varying(255) NOT NULL,
+    semantic_type character varying(255),
+    active boolean DEFAULT true NOT NULL,
+    description text,
+    preview_display boolean DEFAULT true NOT NULL,
+    "position" integer DEFAULT 0 NOT NULL,
+    table_id integer NOT NULL,
+    parent_id integer,
+    display_name character varying(254),
+    visibility_type character varying(32) DEFAULT 'normal'::character varying NOT NULL,
+    fk_target_field_id integer,
+    last_analyzed timestamp with time zone,
+    points_of_interest text,
+    caveats text,
+    fingerprint text,
+    fingerprint_version integer DEFAULT 0 NOT NULL,
+    database_type text NOT NULL,
+    has_field_values text,
+    settings text,
+    database_position integer DEFAULT 0 NOT NULL,
+    custom_position integer DEFAULT 0 NOT NULL,
+    effective_type character varying(255),
+    coercion_strategy character varying(255),
+    nfc_path character varying(254),
+    database_required boolean DEFAULT false NOT NULL,
+    json_unfolding boolean DEFAULT false NOT NULL,
+    database_is_auto_increment boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- TOC entry 5052 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.fingerprint; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.fingerprint IS 'Serialized JSON containing non-identifying information about this Field, such as min, max, and percent JSON. Used for classification.';
+
+
+--
+-- TOC entry 5053 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.fingerprint_version; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.fingerprint_version IS 'The version of the fingerprint for this Field. Used so we can keep track of which Fields need to be analyzed again when new things are added to fingerprints.';
+
+
+--
+-- TOC entry 5054 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.database_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.database_type IS 'The actual type of this column in the database. e.g. VARCHAR or TEXT.';
+
+
+--
+-- TOC entry 5055 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.has_field_values; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.has_field_values IS 'Whether we have FieldValues ("list"), should ad-hoc search ("search"), disable entirely ("none"), or infer dynamically (null)"';
+
+
+--
+-- TOC entry 5056 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.settings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.settings IS 'Serialized JSON FE-specific settings like formatting, etc. Scope of what is stored here may increase in future.';
+
+
+--
+-- TOC entry 5057 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.effective_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.effective_type IS 'The effective type of the field after any coercions.';
+
+
+--
+-- TOC entry 5058 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.coercion_strategy; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.coercion_strategy IS 'A strategy to coerce the base_type into the effective_type.';
+
+
+--
+-- TOC entry 5059 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.nfc_path; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.nfc_path IS 'Nested field column paths, flattened';
+
+
+--
+-- TOC entry 5060 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.database_required; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.database_required IS 'Indicates this field is required by the database for new records. Usually not null and without a default.';
+
+
+--
+-- TOC entry 5061 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.json_unfolding; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.json_unfolding IS 'Enable/disable JSON unfolding for a field';
+
+
+--
+-- TOC entry 5062 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: COLUMN metabase_field.database_is_auto_increment; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_field.database_is_auto_increment IS 'Indicates this field is auto incremented';
+
+
+--
+-- TOC entry 222 (class 1259 OID 26320)
+-- Name: metabase_field_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.metabase_field ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.metabase_field_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 225 (class 1259 OID 26353)
+-- Name: metabase_fieldvalues; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.metabase_fieldvalues (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    "values" text,
+    human_readable_values text,
+    field_id integer NOT NULL,
+    has_more_values boolean DEFAULT false,
+    type character varying(32) DEFAULT 'full'::character varying NOT NULL,
+    hash_key text,
+    last_used_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 5063 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN metabase_fieldvalues.has_more_values; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_fieldvalues.has_more_values IS 'true if the stored values list is a subset of all possible values';
+
+
+--
+-- TOC entry 5064 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN metabase_fieldvalues.type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_fieldvalues.type IS 'Type of FieldValues';
+
+
+--
+-- TOC entry 5065 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN metabase_fieldvalues.hash_key; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_fieldvalues.hash_key IS 'Hash key for a cached fieldvalues';
+
+
+--
+-- TOC entry 5066 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: COLUMN metabase_fieldvalues.last_used_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_fieldvalues.last_used_at IS 'Timestamp of when these FieldValues were last used.';
+
+
+--
+-- TOC entry 224 (class 1259 OID 26352)
+-- Name: metabase_fieldvalues_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.metabase_fieldvalues ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.metabase_fieldvalues_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 221 (class 1259 OID 26307)
+-- Name: metabase_table; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.metabase_table (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    name character varying(256) NOT NULL,
+    description text,
+    entity_type character varying(254),
+    active boolean NOT NULL,
+    db_id integer NOT NULL,
+    display_name character varying(256),
+    visibility_type character varying(254),
+    schema character varying(254),
+    points_of_interest text,
+    caveats text,
+    show_in_getting_started boolean DEFAULT false NOT NULL,
+    field_order character varying(254) DEFAULT 'database'::character varying NOT NULL,
+    initial_sync_status character varying(32) DEFAULT 'complete'::character varying NOT NULL,
+    is_upload boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- TOC entry 5067 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN metabase_table.initial_sync_status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_table.initial_sync_status IS 'String indicating whether a table has completed its initial sync and is ready to use';
+
+
+--
+-- TOC entry 5068 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN metabase_table.is_upload; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metabase_table.is_upload IS 'Was the table created from user-uploaded (i.e., from a CSV) data?';
+
+
+--
+-- TOC entry 220 (class 1259 OID 26306)
+-- Name: metabase_table_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.metabase_table ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.metabase_table_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 256 (class 1259 OID 26786)
+-- Name: metric; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.metric (
+    id integer NOT NULL,
+    table_id integer NOT NULL,
+    creator_id integer NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    archived boolean DEFAULT false NOT NULL,
+    definition text NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    points_of_interest text,
+    caveats text,
+    how_is_this_calculated text,
+    show_in_getting_started boolean DEFAULT false NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5069 (class 0 OID 0)
+-- Dependencies: 256
+-- Name: COLUMN metric.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.metric.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 255 (class 1259 OID 26785)
+-- Name: metric_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.metric ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.metric_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 264 (class 1259 OID 26909)
+-- Name: metric_important_field; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.metric_important_field (
+    id integer NOT NULL,
+    metric_id integer NOT NULL,
+    field_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 263 (class 1259 OID 26908)
+-- Name: metric_important_field_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.metric_important_field ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.metric_important_field_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 338 (class 1259 OID 28116)
+-- Name: model_index; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.model_index (
+    id integer NOT NULL,
+    model_id integer,
+    pk_ref text NOT NULL,
+    value_ref text NOT NULL,
+    schedule text NOT NULL,
+    state text NOT NULL,
+    indexed_at timestamp with time zone,
+    error text,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    creator_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 5070 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: TABLE model_index; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.model_index IS 'Used to keep track of which models have indexed columns.';
+
+
+--
+-- TOC entry 5071 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.model_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.model_id IS 'The ID of the indexed model.';
+
+
+--
+-- TOC entry 5072 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.pk_ref; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.pk_ref IS 'Serialized JSON of the primary key field ref.';
+
+
+--
+-- TOC entry 5073 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.value_ref; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.value_ref IS 'Serialized JSON of the label field ref.';
+
+
+--
+-- TOC entry 5074 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.schedule; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.schedule IS 'The cron schedule for when value syncing should happen.';
+
+
+--
+-- TOC entry 5075 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.state; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.state IS 'The status of the index: initializing, indexed, error, overflow.';
+
+
+--
+-- TOC entry 5076 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.indexed_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.indexed_at IS 'When the status changed';
+
+
+--
+-- TOC entry 5077 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.error; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.error IS 'The error message if the status is error.';
+
+
+--
+-- TOC entry 5078 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.created_at IS 'The timestamp of when these changes were made.';
+
+
+--
+-- TOC entry 5079 (class 0 OID 0)
+-- Dependencies: 338
+-- Name: COLUMN model_index.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index.creator_id IS 'ID of the user who created the event';
+
+
+--
+-- TOC entry 337 (class 1259 OID 28115)
+-- Name: model_index_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.model_index ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.model_index_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 339 (class 1259 OID 28129)
+-- Name: model_index_value; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.model_index_value (
+    model_index_id integer,
+    model_pk integer NOT NULL,
+    name text NOT NULL
+);
+
+
+--
+-- TOC entry 5080 (class 0 OID 0)
+-- Dependencies: 339
+-- Name: TABLE model_index_value; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.model_index_value IS 'Used to keep track of the values indexed in a model';
+
+
+--
+-- TOC entry 5081 (class 0 OID 0)
+-- Dependencies: 339
+-- Name: COLUMN model_index_value.model_index_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index_value.model_index_id IS 'The ID of the indexed model.';
+
+
+--
+-- TOC entry 5082 (class 0 OID 0)
+-- Dependencies: 339
+-- Name: COLUMN model_index_value.model_pk; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index_value.model_pk IS 'The primary key of the indexed value';
+
+
+--
+-- TOC entry 5083 (class 0 OID 0)
+-- Dependencies: 339
+-- Name: COLUMN model_index_value.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.model_index_value.name IS 'The label to display identifying the indexed value.';
+
+
+--
+-- TOC entry 309 (class 1259 OID 27660)
+-- Name: moderation_review; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.moderation_review (
+    id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    status character varying(255),
+    text text,
+    moderated_item_id integer NOT NULL,
+    moderated_item_type character varying(255) NOT NULL,
+    moderator_id integer NOT NULL,
+    most_recent boolean NOT NULL
+);
+
+
+--
+-- TOC entry 5084 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: TABLE moderation_review; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.moderation_review IS 'Reviews (from moderators) for a given question/dashboard (BUCM)';
+
+
+--
+-- TOC entry 5085 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.updated_at IS 'most recent modification time';
+
+
+--
+-- TOC entry 5086 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.created_at IS 'creation time';
+
+
+--
+-- TOC entry 5087 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.status; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.status IS 'verified, misleading, confusing, not_misleading, pending';
+
+
+--
+-- TOC entry 5088 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.text; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.text IS 'Explanation of the review';
+
+
+--
+-- TOC entry 5089 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.moderated_item_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.moderated_item_id IS 'either a document or question ID; the item that needs review';
+
+
+--
+-- TOC entry 5090 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.moderated_item_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.moderated_item_type IS 'whether it''s a question or dashboard';
+
+
+--
+-- TOC entry 5091 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.moderator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.moderator_id IS 'ID of the user who did the review';
+
+
+--
+-- TOC entry 5092 (class 0 OID 0)
+-- Dependencies: 309
+-- Name: COLUMN moderation_review.most_recent; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.moderation_review.most_recent IS 'tag for most recent review';
+
+
+--
+-- TOC entry 308 (class 1259 OID 27659)
+-- Name: moderation_review_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.moderation_review ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.moderation_review_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 305 (class 1259 OID 27353)
+-- Name: native_query_snippet; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.native_query_snippet (
+    id integer NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    content text NOT NULL,
+    creator_id integer NOT NULL,
+    archived boolean DEFAULT false NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    collection_id integer,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5093 (class 0 OID 0)
+-- Dependencies: 305
+-- Name: TABLE native_query_snippet; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.native_query_snippet IS 'Query snippets (raw text) to be substituted in native queries';
+
+
+--
+-- TOC entry 5094 (class 0 OID 0)
+-- Dependencies: 305
+-- Name: COLUMN native_query_snippet.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.native_query_snippet.name IS 'Name of the query snippet';
+
+
+--
+-- TOC entry 5095 (class 0 OID 0)
+-- Dependencies: 305
+-- Name: COLUMN native_query_snippet.content; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.native_query_snippet.content IS 'Raw query snippet';
+
+
+--
+-- TOC entry 5096 (class 0 OID 0)
+-- Dependencies: 305
+-- Name: COLUMN native_query_snippet.collection_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.native_query_snippet.collection_id IS 'ID of the Snippet Folder (Collection) this Snippet is in, if any';
+
+
+--
+-- TOC entry 5097 (class 0 OID 0)
+-- Dependencies: 305
+-- Name: COLUMN native_query_snippet.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.native_query_snippet.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 304 (class 1259 OID 27352)
+-- Name: native_query_snippet_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.native_query_snippet ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.native_query_snippet_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 334 (class 1259 OID 28033)
+-- Name: parameter_card; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.parameter_card (
+    id integer NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    card_id integer NOT NULL,
+    parameterized_object_type character varying(32) NOT NULL,
+    parameterized_object_id integer NOT NULL,
+    parameter_id character varying(36) NOT NULL
+);
+
+
+--
+-- TOC entry 5098 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: TABLE parameter_card; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.parameter_card IS 'Join table connecting cards to entities (dashboards, other cards, etc.) that use the values generated by the card for filter values';
+
+
+--
+-- TOC entry 5099 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN parameter_card.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.parameter_card.updated_at IS 'most recent modification time';
+
+
+--
+-- TOC entry 5100 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN parameter_card.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.parameter_card.created_at IS 'creation time';
+
+
+--
+-- TOC entry 5101 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN parameter_card.card_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.parameter_card.card_id IS 'ID of the card generating the values';
+
+
+--
+-- TOC entry 5102 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN parameter_card.parameterized_object_type; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.parameter_card.parameterized_object_type IS 'Type of the entity consuming the values (dashboard, card, etc.)';
+
+
+--
+-- TOC entry 5103 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN parameter_card.parameterized_object_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.parameter_card.parameterized_object_id IS 'ID of the entity consuming the values';
+
+
+--
+-- TOC entry 5104 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN parameter_card.parameter_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.parameter_card.parameter_id IS 'The parameter ID';
+
+
+--
+-- TOC entry 333 (class 1259 OID 28032)
+-- Name: parameter_card_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.parameter_card ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.parameter_card_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 270 (class 1259 OID 26960)
+-- Name: permissions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.permissions (
+    id integer NOT NULL,
+    object character varying(254) NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 266 (class 1259 OID 26930)
+-- Name: permissions_group; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.permissions_group (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL
+);
+
+
+--
+-- TOC entry 265 (class 1259 OID 26929)
+-- Name: permissions_group_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.permissions_group ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.permissions_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 268 (class 1259 OID 26939)
+-- Name: permissions_group_membership; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.permissions_group_membership (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL,
+    is_group_manager boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- TOC entry 5105 (class 0 OID 0)
+-- Dependencies: 268
+-- Name: COLUMN permissions_group_membership.is_group_manager; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.permissions_group_membership.is_group_manager IS 'Boolean flag to indicate whether user is a group''s manager.';
+
+
+--
+-- TOC entry 267 (class 1259 OID 26938)
+-- Name: permissions_group_membership_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.permissions_group_membership ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.permissions_group_membership_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 269 (class 1259 OID 26959)
+-- Name: permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.permissions ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 272 (class 1259 OID 26989)
+-- Name: permissions_revision; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.permissions_revision (
+    id integer NOT NULL,
+    before text NOT NULL,
+    after text NOT NULL,
+    user_id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    remark text
+);
+
+
+--
+-- TOC entry 5106 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: TABLE permissions_revision; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.permissions_revision IS 'Used to keep track of changes made to permissions.';
+
+
+--
+-- TOC entry 5107 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: COLUMN permissions_revision.before; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.permissions_revision.before IS 'Serialized JSON of the permissions before the changes.';
+
+
+--
+-- TOC entry 5108 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: COLUMN permissions_revision.after; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.permissions_revision.after IS 'Serialized JSON of the permissions after the changes.';
+
+
+--
+-- TOC entry 5109 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: COLUMN permissions_revision.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.permissions_revision.user_id IS 'The ID of the admin who made this set of changes.';
+
+
+--
+-- TOC entry 5110 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: COLUMN permissions_revision.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.permissions_revision.created_at IS 'The timestamp of when these changes were made.';
+
+
+--
+-- TOC entry 5111 (class 0 OID 0)
+-- Dependencies: 272
+-- Name: COLUMN permissions_revision.remark; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.permissions_revision.remark IS 'Optional remarks explaining why these changes were made.';
+
+
+--
+-- TOC entry 271 (class 1259 OID 26988)
+-- Name: permissions_revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.permissions_revision ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.permissions_revision_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 327 (class 1259 OID 27841)
+-- Name: persisted_info; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.persisted_info (
+    id integer NOT NULL,
+    database_id integer NOT NULL,
+    card_id integer NOT NULL,
+    question_slug text NOT NULL,
+    table_name text NOT NULL,
+    definition text,
+    query_hash text,
+    active boolean DEFAULT false NOT NULL,
+    state text NOT NULL,
+    refresh_begin timestamp with time zone NOT NULL,
+    refresh_end timestamp with time zone,
+    state_change_at timestamp with time zone,
+    error text,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    creator_id integer
+);
+
+
+--
+-- TOC entry 5112 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: TABLE persisted_info; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.persisted_info IS 'Table holding information about persisted models';
+
+
+--
+-- TOC entry 5113 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.database_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.database_id IS 'ID of the database associated to the persisted card';
+
+
+--
+-- TOC entry 5114 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.card_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.card_id IS 'ID of the Card model persisted';
+
+
+--
+-- TOC entry 5115 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.question_slug; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.question_slug IS 'Slug of the card which will form the persisted table name';
+
+
+--
+-- TOC entry 5116 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.table_name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.table_name IS 'Name of the table persisted';
+
+
+--
+-- TOC entry 5117 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.definition; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.definition IS 'JSON object that captures the state of the table when we persisted';
+
+
+--
+-- TOC entry 5118 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.query_hash; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.query_hash IS 'Hash of the query persisted';
+
+
+--
+-- TOC entry 5119 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.active; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.active IS 'Indicating whether the persisted table is active and can be swapped';
+
+
+--
+-- TOC entry 5120 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.state; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.state IS 'Persisted table state (creating, persisted, refreshing, deleted)';
+
+
+--
+-- TOC entry 5121 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.refresh_begin; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.refresh_begin IS 'The timestamp of when the most recent refresh was started';
+
+
+--
+-- TOC entry 5122 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.refresh_end; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.refresh_end IS 'The timestamp of when the most recent refresh ended';
+
+
+--
+-- TOC entry 5123 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.state_change_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.state_change_at IS 'The timestamp of when the most recent state changed';
+
+
+--
+-- TOC entry 5124 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.error; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.error IS 'Error message from persisting if applicable';
+
+
+--
+-- TOC entry 5125 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.created_at IS 'The timestamp of when the model was first persisted';
+
+
+--
+-- TOC entry 5126 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN persisted_info.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.persisted_info.creator_id IS 'The person who persisted a model';
+
+
+--
+-- TOC entry 326 (class 1259 OID 27840)
+-- Name: persisted_info_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.persisted_info ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.persisted_info_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 244 (class 1259 OID 26687)
+-- Name: pulse; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pulse (
+    id integer NOT NULL,
+    creator_id integer NOT NULL,
+    name character varying(254),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    skip_if_empty boolean DEFAULT false NOT NULL,
+    alert_condition character varying(254),
+    alert_first_only boolean,
+    alert_above_goal boolean,
+    collection_id integer,
+    collection_position smallint,
+    archived boolean DEFAULT false,
+    dashboard_id integer,
+    parameters text NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5127 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.skip_if_empty; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.skip_if_empty IS 'Skip a scheduled Pulse if none of its questions have any results';
+
+
+--
+-- TOC entry 5128 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.alert_condition; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.alert_condition IS 'Condition (i.e. "rows" or "goal") used as a guard for alerts';
+
+
+--
+-- TOC entry 5129 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.alert_first_only; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.alert_first_only IS 'True if the alert should be disabled after the first notification';
+
+
+--
+-- TOC entry 5130 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.alert_above_goal; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.alert_above_goal IS 'For a goal condition, alert when above the goal';
+
+
+--
+-- TOC entry 5131 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.collection_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.collection_id IS 'Options ID of Collection this Pulse belongs to.';
+
+
+--
+-- TOC entry 5132 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.collection_position; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.collection_position IS 'Optional pinned position for this item in its Collection. NULL means item is not pinned.';
+
+
+--
+-- TOC entry 5133 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.archived; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.archived IS 'Has this pulse been archived?';
+
+
+--
+-- TOC entry 5134 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.dashboard_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.dashboard_id IS 'ID of the Dashboard if this Pulse is a Dashboard Subscription.';
+
+
+--
+-- TOC entry 5135 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.parameters; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.parameters IS 'Let dashboard subscriptions have their own filters';
+
+
+--
+-- TOC entry 5136 (class 0 OID 0)
+-- Dependencies: 244
+-- Name: COLUMN pulse.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 246 (class 1259 OID 26699)
+-- Name: pulse_card; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pulse_card (
+    id integer NOT NULL,
+    pulse_id integer NOT NULL,
+    card_id integer NOT NULL,
+    "position" integer NOT NULL,
+    include_csv boolean DEFAULT false NOT NULL,
+    include_xls boolean DEFAULT false NOT NULL,
+    dashboard_card_id integer,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5137 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: COLUMN pulse_card.include_csv; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse_card.include_csv IS 'True if a CSV of the data should be included for this pulse card';
+
+
+--
+-- TOC entry 5138 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: COLUMN pulse_card.include_xls; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse_card.include_xls IS 'True if a XLS of the data should be included for this pulse card';
+
+
+--
+-- TOC entry 5139 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: COLUMN pulse_card.dashboard_card_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse_card.dashboard_card_id IS 'If this Pulse is a Dashboard subscription, the ID of the DashboardCard that corresponds to this PulseCard.';
+
+
+--
+-- TOC entry 5140 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: COLUMN pulse_card.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse_card.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 245 (class 1259 OID 26698)
+-- Name: pulse_card_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.pulse_card ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.pulse_card_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 248 (class 1259 OID 26717)
+-- Name: pulse_channel; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pulse_channel (
+    id integer NOT NULL,
+    pulse_id integer NOT NULL,
+    channel_type character varying(32) NOT NULL,
+    details text NOT NULL,
+    schedule_type character varying(32) NOT NULL,
+    schedule_hour integer,
+    schedule_day character varying(64),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    schedule_frame character varying(32),
+    enabled boolean DEFAULT true NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5141 (class 0 OID 0)
+-- Dependencies: 248
+-- Name: COLUMN pulse_channel.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.pulse_channel.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 247 (class 1259 OID 26716)
+-- Name: pulse_channel_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.pulse_channel ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.pulse_channel_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 250 (class 1259 OID 26732)
+-- Name: pulse_channel_recipient; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.pulse_channel_recipient (
+    id integer NOT NULL,
+    pulse_channel_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 249 (class 1259 OID 26731)
+-- Name: pulse_channel_recipient_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.pulse_channel_recipient ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.pulse_channel_recipient_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 243 (class 1259 OID 26686)
+-- Name: pulse_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.pulse ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.pulse_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 296 (class 1259 OID 27265)
+-- Name: qrtz_blob_triggers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_blob_triggers (
+    sched_name character varying(120) NOT NULL,
+    trigger_name character varying(200) NOT NULL,
+    trigger_group character varying(200) NOT NULL,
+    blob_data bytea
+);
+
+
+--
+-- TOC entry 5142 (class 0 OID 0)
+-- Dependencies: 296
+-- Name: TABLE qrtz_blob_triggers; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_blob_triggers IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 297 (class 1259 OID 27277)
+-- Name: qrtz_calendars; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_calendars (
+    sched_name character varying(120) NOT NULL,
+    calendar_name character varying(200) NOT NULL,
+    calendar bytea NOT NULL
+);
+
+
+--
+-- TOC entry 5143 (class 0 OID 0)
+-- Dependencies: 297
+-- Name: TABLE qrtz_calendars; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_calendars IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 294 (class 1259 OID 27241)
+-- Name: qrtz_cron_triggers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_cron_triggers (
+    sched_name character varying(120) NOT NULL,
+    trigger_name character varying(200) NOT NULL,
+    trigger_group character varying(200) NOT NULL,
+    cron_expression character varying(120) NOT NULL,
+    time_zone_id character varying(80)
+);
+
+
+--
+-- TOC entry 5144 (class 0 OID 0)
+-- Dependencies: 294
+-- Name: TABLE qrtz_cron_triggers; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_cron_triggers IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 299 (class 1259 OID 27289)
+-- Name: qrtz_fired_triggers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_fired_triggers (
+    sched_name character varying(120) NOT NULL,
+    entry_id character varying(95) NOT NULL,
+    trigger_name character varying(200) NOT NULL,
+    trigger_group character varying(200) NOT NULL,
+    instance_name character varying(200) NOT NULL,
+    fired_time bigint NOT NULL,
+    sched_time bigint,
+    priority integer NOT NULL,
+    state character varying(16) NOT NULL,
+    job_name character varying(200),
+    job_group character varying(200),
+    is_nonconcurrent boolean,
+    requests_recovery boolean
+);
+
+
+--
+-- TOC entry 5145 (class 0 OID 0)
+-- Dependencies: 299
+-- Name: TABLE qrtz_fired_triggers; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_fired_triggers IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 291 (class 1259 OID 27210)
+-- Name: qrtz_job_details; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_job_details (
+    sched_name character varying(120) NOT NULL,
+    job_name character varying(200) NOT NULL,
+    job_group character varying(200) NOT NULL,
+    description character varying(250),
+    job_class_name character varying(250) NOT NULL,
+    is_durable boolean NOT NULL,
+    is_nonconcurrent boolean NOT NULL,
+    is_update_data boolean NOT NULL,
+    requests_recovery boolean NOT NULL,
+    job_data bytea
+);
+
+
+--
+-- TOC entry 5146 (class 0 OID 0)
+-- Dependencies: 291
+-- Name: TABLE qrtz_job_details; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_job_details IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 301 (class 1259 OID 27301)
+-- Name: qrtz_locks; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_locks (
+    sched_name character varying(120) NOT NULL,
+    lock_name character varying(40) NOT NULL
+);
+
+
+--
+-- TOC entry 5147 (class 0 OID 0)
+-- Dependencies: 301
+-- Name: TABLE qrtz_locks; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_locks IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 298 (class 1259 OID 27284)
+-- Name: qrtz_paused_trigger_grps; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_paused_trigger_grps (
+    sched_name character varying(120) NOT NULL,
+    trigger_group character varying(200) NOT NULL
+);
+
+
+--
+-- TOC entry 5148 (class 0 OID 0)
+-- Dependencies: 298
+-- Name: TABLE qrtz_paused_trigger_grps; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_paused_trigger_grps IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 300 (class 1259 OID 27296)
+-- Name: qrtz_scheduler_state; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_scheduler_state (
+    sched_name character varying(120) NOT NULL,
+    instance_name character varying(200) NOT NULL,
+    last_checkin_time bigint NOT NULL,
+    checkin_interval bigint NOT NULL
+);
+
+
+--
+-- TOC entry 5149 (class 0 OID 0)
+-- Dependencies: 300
+-- Name: TABLE qrtz_scheduler_state; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_scheduler_state IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 293 (class 1259 OID 27229)
+-- Name: qrtz_simple_triggers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_simple_triggers (
+    sched_name character varying(120) NOT NULL,
+    trigger_name character varying(200) NOT NULL,
+    trigger_group character varying(200) NOT NULL,
+    repeat_count bigint NOT NULL,
+    repeat_interval bigint NOT NULL,
+    times_triggered bigint NOT NULL
+);
+
+
+--
+-- TOC entry 5150 (class 0 OID 0)
+-- Dependencies: 293
+-- Name: TABLE qrtz_simple_triggers; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_simple_triggers IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 295 (class 1259 OID 27253)
+-- Name: qrtz_simprop_triggers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_simprop_triggers (
+    sched_name character varying(120) NOT NULL,
+    trigger_name character varying(200) NOT NULL,
+    trigger_group character varying(200) NOT NULL,
+    str_prop_1 character varying(512),
+    str_prop_2 character varying(512),
+    str_prop_3 character varying(512),
+    int_prop_1 integer,
+    int_prop_2 integer,
+    long_prop_1 bigint,
+    long_prop_2 bigint,
+    dec_prop_1 numeric(13,4),
+    dec_prop_2 numeric(13,4),
+    bool_prop_1 boolean,
+    bool_prop_2 boolean
+);
+
+
+--
+-- TOC entry 5151 (class 0 OID 0)
+-- Dependencies: 295
+-- Name: TABLE qrtz_simprop_triggers; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_simprop_triggers IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 292 (class 1259 OID 27217)
+-- Name: qrtz_triggers; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.qrtz_triggers (
+    sched_name character varying(120) NOT NULL,
+    trigger_name character varying(200) NOT NULL,
+    trigger_group character varying(200) NOT NULL,
+    job_name character varying(200) NOT NULL,
+    job_group character varying(200) NOT NULL,
+    description character varying(250),
+    next_fire_time bigint,
+    prev_fire_time bigint,
+    priority integer,
+    trigger_state character varying(16) NOT NULL,
+    trigger_type character varying(8) NOT NULL,
+    start_time bigint NOT NULL,
+    end_time bigint,
+    calendar_name character varying(200),
+    misfire_instr smallint,
+    job_data bytea
+);
+
+
+--
+-- TOC entry 5152 (class 0 OID 0)
+-- Dependencies: 292
+-- Name: TABLE qrtz_triggers; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.qrtz_triggers IS 'Used for Quartz scheduler.';
+
+
+--
+-- TOC entry 280 (class 1259 OID 27070)
+-- Name: query; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.query (
+    query_hash bytea NOT NULL,
+    average_execution_time integer NOT NULL,
+    query text
+);
+
+
+--
+-- TOC entry 5153 (class 0 OID 0)
+-- Dependencies: 280
+-- Name: TABLE query; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.query IS 'Information (such as average execution time) for different queries that have been previously ran.';
+
+
+--
+-- TOC entry 5154 (class 0 OID 0)
+-- Dependencies: 280
+-- Name: COLUMN query.query_hash; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query.query_hash IS 'The hash of the query dictionary. (This is a 256-bit SHA3 hash of the query dict.)';
+
+
+--
+-- TOC entry 5155 (class 0 OID 0)
+-- Dependencies: 280
+-- Name: COLUMN query.average_execution_time; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query.average_execution_time IS 'Average execution time for the query, round to nearest number of milliseconds. This is updated as a rolling average.';
+
+
+--
+-- TOC entry 5156 (class 0 OID 0)
+-- Dependencies: 280
+-- Name: COLUMN query.query; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query.query IS 'The actual "query dictionary" for this query.';
+
+
+--
+-- TOC entry 330 (class 1259 OID 27905)
+-- Name: query_action; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.query_action (
+    action_id integer NOT NULL,
+    database_id integer NOT NULL,
+    dataset_query text NOT NULL
+);
+
+
+--
+-- TOC entry 5157 (class 0 OID 0)
+-- Dependencies: 330
+-- Name: TABLE query_action; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.query_action IS 'A readwrite query type of action';
+
+
+--
+-- TOC entry 5158 (class 0 OID 0)
+-- Dependencies: 330
+-- Name: COLUMN query_action.action_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_action.action_id IS 'The related action';
+
+
+--
+-- TOC entry 5159 (class 0 OID 0)
+-- Dependencies: 330
+-- Name: COLUMN query_action.database_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_action.database_id IS 'The associated database';
+
+
+--
+-- TOC entry 5160 (class 0 OID 0)
+-- Dependencies: 330
+-- Name: COLUMN query_action.dataset_query; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_action.dataset_query IS 'The MBQL writeback query';
+
+
+--
+-- TOC entry 279 (class 1259 OID 27062)
+-- Name: query_cache; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.query_cache (
+    query_hash bytea NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    results bytea NOT NULL
+);
+
+
+--
+-- TOC entry 5161 (class 0 OID 0)
+-- Dependencies: 279
+-- Name: TABLE query_cache; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.query_cache IS 'Cached results of queries are stored here when using the DB-based query cache.';
+
+
+--
+-- TOC entry 5162 (class 0 OID 0)
+-- Dependencies: 279
+-- Name: COLUMN query_cache.query_hash; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_cache.query_hash IS 'The hash of the query dictionary. (This is a 256-bit SHA3 hash of the query dict).';
+
+
+--
+-- TOC entry 5163 (class 0 OID 0)
+-- Dependencies: 279
+-- Name: COLUMN query_cache.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_cache.updated_at IS 'The timestamp of when these query results were last refreshed.';
+
+
+--
+-- TOC entry 5164 (class 0 OID 0)
+-- Dependencies: 279
+-- Name: COLUMN query_cache.results; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_cache.results IS 'Cached, compressed results of running the query with the given hash.';
+
+
+--
+-- TOC entry 278 (class 1259 OID 27053)
+-- Name: query_execution; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.query_execution (
+    id integer NOT NULL,
+    hash bytea NOT NULL,
+    started_at timestamp with time zone NOT NULL,
+    running_time integer NOT NULL,
+    result_rows integer NOT NULL,
+    native boolean NOT NULL,
+    context character varying(32),
+    error text,
+    executor_id integer,
+    card_id integer,
+    dashboard_id integer,
+    pulse_id integer,
+    database_id integer,
+    cache_hit boolean
+);
+
+
+--
+-- TOC entry 5165 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: TABLE query_execution; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.query_execution IS 'A log of executed queries, used for calculating historic execution times, auditing, and other purposes.';
+
+
+--
+-- TOC entry 5166 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.hash; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.hash IS 'The hash of the query dictionary. This is a 256-bit SHA3 hash of the query.';
+
+
+--
+-- TOC entry 5167 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.started_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.started_at IS 'Timestamp of when this query started running.';
+
+
+--
+-- TOC entry 5168 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.running_time; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.running_time IS 'The time, in milliseconds, this query took to complete.';
+
+
+--
+-- TOC entry 5169 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.result_rows; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.result_rows IS 'Number of rows in the query results.';
+
+
+--
+-- TOC entry 5170 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.native; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.native IS 'Whether the query was a native query, as opposed to an MBQL one (e.g., created with the GUI).';
+
+
+--
+-- TOC entry 5171 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.context; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.context IS 'Short string specifying how this query was executed, e.g. in a Dashboard or Pulse.';
+
+
+--
+-- TOC entry 5172 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.error; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.error IS 'Error message returned by failed query, if any.';
+
+
+--
+-- TOC entry 5173 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.executor_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.executor_id IS 'The ID of the User who triggered this query execution, if any.';
+
+
+--
+-- TOC entry 5174 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.card_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.card_id IS 'The ID of the Card (Question) associated with this query execution, if any.';
+
+
+--
+-- TOC entry 5175 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.dashboard_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.dashboard_id IS 'The ID of the Dashboard associated with this query execution, if any.';
+
+
+--
+-- TOC entry 5176 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.pulse_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.pulse_id IS 'The ID of the Pulse associated with this query execution, if any.';
+
+
+--
+-- TOC entry 5177 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.database_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.database_id IS 'ID of the database this query was ran against.';
+
+
+--
+-- TOC entry 5178 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: COLUMN query_execution.cache_hit; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.cache_hit IS 'Cache hit on query execution';
+
+
+--
+-- TOC entry 277 (class 1259 OID 27052)
+-- Name: query_execution_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.query_execution ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.query_execution_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 227 (class 1259 OID 26423)
+-- Name: report_card; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.report_card (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    display character varying(254) NOT NULL,
+    dataset_query text NOT NULL,
+    visualization_settings text NOT NULL,
+    creator_id integer NOT NULL,
+    database_id integer NOT NULL,
+    table_id integer,
+    query_type character varying(16),
+    archived boolean DEFAULT false NOT NULL,
+    collection_id integer,
+    public_uuid character(36),
+    made_public_by_id integer,
+    enable_embedding boolean DEFAULT false NOT NULL,
+    embedding_params text,
+    cache_ttl integer,
+    result_metadata text,
+    collection_position smallint,
+    dataset boolean DEFAULT false NOT NULL,
+    entity_id character(21),
+    parameters text,
+    parameter_mappings text,
+    collection_preview boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- TOC entry 5179 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.collection_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.collection_id IS 'Optional ID of Collection this Card belongs to.';
+
+
+--
+-- TOC entry 5180 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.public_uuid; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.public_uuid IS 'Unique UUID used to in publically-accessible links to this Card.';
+
+
+--
+-- TOC entry 5181 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.made_public_by_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.made_public_by_id IS 'The ID of the User who first publically shared this Card.';
+
+
+--
+-- TOC entry 5182 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.enable_embedding; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.enable_embedding IS 'Is this Card allowed to be embedded in different websites (using a signed JWT)?';
+
+
+--
+-- TOC entry 5183 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.embedding_params; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.embedding_params IS 'Serialized JSON containing information about required parameters that must be supplied when embedding this Card.';
+
+
+--
+-- TOC entry 5184 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.cache_ttl; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.cache_ttl IS 'The maximum time, in seconds, to return cached results for this Card rather than running a new query.';
+
+
+--
+-- TOC entry 5185 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.result_metadata; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.result_metadata IS 'Serialized JSON containing metadata about the result columns from running the query.';
+
+
+--
+-- TOC entry 5186 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.collection_position; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.collection_position IS 'Optional pinned position for this item in its Collection. NULL means item is not pinned.';
+
+
+--
+-- TOC entry 5187 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.dataset; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.dataset IS 'Indicate whether question is a dataset';
+
+
+--
+-- TOC entry 5188 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 5189 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.parameters; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.parameters IS 'List of parameter associated to a card';
+
+
+--
+-- TOC entry 5190 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.parameter_mappings; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.parameter_mappings IS 'List of parameter associated to a card';
+
+
+--
+-- TOC entry 5191 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: COLUMN report_card.collection_preview; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.collection_preview IS 'Indicating whether the card should be visualized in the collection preview';
+
+
+--
+-- TOC entry 226 (class 1259 OID 26422)
+-- Name: report_card_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.report_card ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.report_card_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 229 (class 1259 OID 26443)
+-- Name: report_cardfavorite; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.report_cardfavorite (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    card_id integer NOT NULL,
+    owner_id integer NOT NULL
+);
+
+
+--
+-- TOC entry 228 (class 1259 OID 26442)
+-- Name: report_cardfavorite_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.report_cardfavorite ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.report_cardfavorite_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 231 (class 1259 OID 26463)
+-- Name: report_dashboard; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.report_dashboard (
+    id integer NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    creator_id integer NOT NULL,
+    parameters text NOT NULL,
+    points_of_interest text,
+    caveats text,
+    show_in_getting_started boolean DEFAULT false NOT NULL,
+    public_uuid character(36),
+    made_public_by_id integer,
+    enable_embedding boolean DEFAULT false NOT NULL,
+    embedding_params text,
+    archived boolean DEFAULT false NOT NULL,
+    "position" integer,
+    collection_id integer,
+    collection_position smallint,
+    cache_ttl integer,
+    entity_id character(21),
+    auto_apply_filters boolean DEFAULT true NOT NULL
+);
+
+
+--
+-- TOC entry 5192 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.public_uuid; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.public_uuid IS 'Unique UUID used to in publically-accessible links to this Dashboard.';
+
+
+--
+-- TOC entry 5193 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.made_public_by_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.made_public_by_id IS 'The ID of the User who first publically shared this Dashboard.';
+
+
+--
+-- TOC entry 5194 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.enable_embedding; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.enable_embedding IS 'Is this Dashboard allowed to be embedded in different websites (using a signed JWT)?';
+
+
+--
+-- TOC entry 5195 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.embedding_params; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.embedding_params IS 'Serialized JSON containing information about required parameters that must be supplied when embedding this Dashboard.';
+
+
+--
+-- TOC entry 5196 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.archived; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.archived IS 'Is this Dashboard archived (effectively treated as deleted?)';
+
+
+--
+-- TOC entry 5197 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard."position"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard."position" IS 'The position this Dashboard should appear in the Dashboards list, lower-numbered positions appearing before higher numbered ones.';
+
+
+--
+-- TOC entry 5198 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.collection_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.collection_id IS 'Optional ID of Collection this Dashboard belongs to.';
+
+
+--
+-- TOC entry 5199 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.collection_position; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.collection_position IS 'Optional pinned position for this item in its Collection. NULL means item is not pinned.';
+
+
+--
+-- TOC entry 5200 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.cache_ttl; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.cache_ttl IS 'Granular cache TTL for specific dashboard.';
+
+
+--
+-- TOC entry 5201 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 5202 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: COLUMN report_dashboard.auto_apply_filters; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboard.auto_apply_filters IS 'Whether or not to auto-apply filters on a dashboard';
+
+
+--
+-- TOC entry 230 (class 1259 OID 26462)
+-- Name: report_dashboard_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.report_dashboard ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.report_dashboard_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 233 (class 1259 OID 26483)
+-- Name: report_dashboardcard; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.report_dashboardcard (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    size_x integer NOT NULL,
+    size_y integer NOT NULL,
+    "row" integer NOT NULL,
+    col integer NOT NULL,
+    card_id integer,
+    dashboard_id integer NOT NULL,
+    parameter_mappings text NOT NULL,
+    visualization_settings text NOT NULL,
+    entity_id character(21),
+    action_id integer,
+    dashboard_tab_id integer
+);
+
+
+--
+-- TOC entry 5203 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: COLUMN report_dashboardcard.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboardcard.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 5204 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: COLUMN report_dashboardcard.action_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboardcard.action_id IS 'The related action';
+
+
+--
+-- TOC entry 5205 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: COLUMN report_dashboardcard.dashboard_tab_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_dashboardcard.dashboard_tab_id IS 'The referenced tab id that dashcard is on, it''s nullable for dashboard with no tab';
+
+
+--
+-- TOC entry 232 (class 1259 OID 26482)
+-- Name: report_dashboardcard_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.report_dashboardcard ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.report_dashboardcard_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 237 (class 1259 OID 26625)
+-- Name: revision; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.revision (
+    id integer NOT NULL,
+    model character varying(16) NOT NULL,
+    model_id integer NOT NULL,
+    user_id integer NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    object text NOT NULL,
+    is_reversion boolean DEFAULT false NOT NULL,
+    is_creation boolean DEFAULT false NOT NULL,
+    message text
+);
+
+
+--
+-- TOC entry 236 (class 1259 OID 26624)
+-- Name: revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.revision ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.revision_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 311 (class 1259 OID 27670)
+-- Name: secret; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.secret (
+    id integer NOT NULL,
+    version integer DEFAULT 1 NOT NULL,
+    creator_id integer,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone,
+    name character varying(254) NOT NULL,
+    kind character varying(254) NOT NULL,
+    source character varying(254),
+    value bytea NOT NULL
+);
+
+
+--
+-- TOC entry 5206 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: TABLE secret; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.secret IS 'Storage for managed secrets (passwords, binary data, etc.)';
+
+
+--
+-- TOC entry 5207 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.id IS 'Part of composite primary key for secret; this is the uniquely generted ID column';
+
+
+--
+-- TOC entry 5208 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.version; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.version IS 'Part of composite primary key for secret; this is the version column';
+
+
+--
+-- TOC entry 5209 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.creator_id IS 'User ID who created this secret instance';
+
+
+--
+-- TOC entry 5210 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.created_at IS 'Timestamp for when this secret instance was created';
+
+
+--
+-- TOC entry 5211 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.updated_at IS 'Timestamp for when this secret record was updated. Only relevant when non-value field changes since a value change will result in a new version being inserted.';
+
+
+--
+-- TOC entry 5212 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.name IS 'The name of this secret record.';
+
+
+--
+-- TOC entry 5213 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.kind; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.kind IS 'The kind of secret this record represents; the value is interpreted as a Clojure keyword with a hierarchy. Ex: ''bytes'' means generic binary data, ''jks-keystore'' extends ''bytes'' but has a specific meaning.';
+
+
+--
+-- TOC entry 5214 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.source; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.source IS 'The source of secret record, which controls how Metabase interprets the value (ex: ''file-path'' means the ''simple_value'' is not the real value, but a pointer to a file that contains the value).';
+
+
+--
+-- TOC entry 5215 (class 0 OID 0)
+-- Dependencies: 311
+-- Name: COLUMN secret.value; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.secret.value IS 'The base64 encoded binary value of this secret record. If encryption is enabled, this will be the output of the encryption procedure on the plaintext. If not, it will be the base64 encoded plaintext.';
+
+
+--
+-- TOC entry 310 (class 1259 OID 27669)
+-- Name: secret_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.secret ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.secret_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 252 (class 1259 OID 26748)
+-- Name: segment; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.segment (
+    id integer NOT NULL,
+    table_id integer NOT NULL,
+    creator_id integer NOT NULL,
+    name character varying(254) NOT NULL,
+    description text,
+    archived boolean DEFAULT false NOT NULL,
+    definition text NOT NULL,
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    points_of_interest text,
+    caveats text,
+    show_in_getting_started boolean DEFAULT false NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5216 (class 0 OID 0)
+-- Dependencies: 252
+-- Name: COLUMN segment.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.segment.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 251 (class 1259 OID 26747)
+-- Name: segment_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.segment ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.segment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 235 (class 1259 OID 26612)
+-- Name: setting; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.setting (
+    key character varying(254) NOT NULL,
+    value text NOT NULL
+);
+
+
+--
+-- TOC entry 303 (class 1259 OID 27327)
+-- Name: task_history; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.task_history (
+    id integer NOT NULL,
+    task character varying(254) NOT NULL,
+    db_id integer,
+    started_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    ended_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    duration integer NOT NULL,
+    task_details text
+);
+
+
+--
+-- TOC entry 5217 (class 0 OID 0)
+-- Dependencies: 303
+-- Name: TABLE task_history; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.task_history IS 'Timing and metadata info about background/quartz processes';
+
+
+--
+-- TOC entry 5218 (class 0 OID 0)
+-- Dependencies: 303
+-- Name: COLUMN task_history.task; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.task_history.task IS 'Name of the task';
+
+
+--
+-- TOC entry 5219 (class 0 OID 0)
+-- Dependencies: 303
+-- Name: COLUMN task_history.task_details; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.task_history.task_details IS 'JSON string with additional info on the task';
+
+
+--
+-- TOC entry 302 (class 1259 OID 27326)
+-- Name: task_history_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.task_history ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.task_history_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 313 (class 1259 OID 27698)
+-- Name: timeline; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.timeline (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description character varying(255),
+    icon character varying(128) NOT NULL,
+    collection_id integer,
+    archived boolean DEFAULT false NOT NULL,
+    creator_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    "default" boolean DEFAULT false NOT NULL,
+    entity_id character(21)
+);
+
+
+--
+-- TOC entry 5220 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: TABLE timeline; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.timeline IS 'Timeline table to organize events';
+
+
+--
+-- TOC entry 5221 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.name IS 'Name of the timeline';
+
+
+--
+-- TOC entry 5222 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.description IS 'Optional description of the timeline';
+
+
+--
+-- TOC entry 5223 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.icon; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.icon IS 'the icon to use when displaying the event';
+
+
+--
+-- TOC entry 5224 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.collection_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.collection_id IS 'ID of the collection containing the timeline';
+
+
+--
+-- TOC entry 5225 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.archived; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.archived IS 'Whether or not the timeline has been archived';
+
+
+--
+-- TOC entry 5226 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.creator_id IS 'ID of the user who created the timeline';
+
+
+--
+-- TOC entry 5227 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.created_at IS 'The timestamp of when the timeline was created';
+
+
+--
+-- TOC entry 5228 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.updated_at IS 'The timestamp of when the timeline was updated';
+
+
+--
+-- TOC entry 5229 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline."default"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline."default" IS 'Boolean value indicating if the timeline is the default one for the containing Collection';
+
+
+--
+-- TOC entry 5230 (class 0 OID 0)
+-- Dependencies: 313
+-- Name: COLUMN timeline.entity_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline.entity_id IS 'Random NanoID tag for unique identity.';
+
+
+--
+-- TOC entry 315 (class 1259 OID 27719)
+-- Name: timeline_event; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.timeline_event (
+    id integer NOT NULL,
+    timeline_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    description character varying(255),
+    "timestamp" timestamp with time zone NOT NULL,
+    time_matters boolean NOT NULL,
+    timezone character varying(255) NOT NULL,
+    icon character varying(128) NOT NULL,
+    archived boolean DEFAULT false NOT NULL,
+    creator_id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- TOC entry 5231 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: TABLE timeline_event; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.timeline_event IS 'Events table';
+
+
+--
+-- TOC entry 5232 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.timeline_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.timeline_id IS 'ID of the timeline containing the event';
+
+
+--
+-- TOC entry 5233 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.name; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.name IS 'Name of the event';
+
+
+--
+-- TOC entry 5234 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.description; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.description IS 'Optional markdown description of the event';
+
+
+--
+-- TOC entry 5235 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event."timestamp"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event."timestamp" IS 'When the event happened';
+
+
+--
+-- TOC entry 5236 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.time_matters; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.time_matters IS 'Indicate whether the time component matters or if the timestamp should just serve to indicate the day of the event without any time associated to it.';
+
+
+--
+-- TOC entry 5237 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.timezone; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.timezone IS 'Timezone to display the underlying UTC timestamp in for the client';
+
+
+--
+-- TOC entry 5238 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.icon; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.icon IS 'the icon to use when displaying the event';
+
+
+--
+-- TOC entry 5239 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.archived; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.archived IS 'Whether or not the event has been archived';
+
+
+--
+-- TOC entry 5240 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.creator_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.creator_id IS 'ID of the user who created the event';
+
+
+--
+-- TOC entry 5241 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.created_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.created_at IS 'The timestamp of when the event was created';
+
+
+--
+-- TOC entry 5242 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN timeline_event.updated_at; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.timeline_event.updated_at IS 'The timestamp of when the event was modified';
+
+
+--
+-- TOC entry 314 (class 1259 OID 27718)
+-- Name: timeline_event_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.timeline_event ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.timeline_event_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 312 (class 1259 OID 27697)
+-- Name: timeline_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.timeline ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.timeline_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 241 (class 1259 OID 26666)
+-- Name: view_log; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.view_log (
+    id integer NOT NULL,
+    user_id integer,
+    model character varying(16) NOT NULL,
+    model_id integer NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    metadata text
+);
+
+
+--
+-- TOC entry 5243 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: COLUMN view_log.metadata; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.view_log.metadata IS 'Serialized JSON corresponding to metadata for view.';
+
+
+--
+-- TOC entry 240 (class 1259 OID 26665)
+-- Name: view_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.view_log ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.view_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 4912 (class 0 OID 27896)
+-- Dependencies: 329
+-- Data for Name: action; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.action (id, created_at, updated_at, type, model_id, name, description, parameters, parameter_mappings, visualization_settings, public_uuid, made_public_by_id, creator_id, archived, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4822 (class 0 OID 26650)
+-- Dependencies: 239
+-- Data for Name: activity; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.activity (id, topic, "timestamp", user_id, model, model_id, database_id, table_id, custom_id, details) FROM stdin;
+1	install	2023-11-17 02:55:30.237258+00	\N	install	\N	\N	\N	\N	{}
+2	user-joined	2023-11-17 03:15:37.483072+00	1	user	1	\N	\N	\N	{}
+3	card-create	2023-11-17 03:22:03.854916+00	1	card	1	2	\N	\N	{"name":"main","description":"base table to work on visualizations"}
+4	dashboard-create	2023-11-17 03:22:18.927124+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City"}
+5	dashboard-add-cards	2023-11-17 03:23:33.233873+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"name":"main","description":"base table to work on visualizations","id":1,"card_id":1}]}
+6	card-create	2023-11-17 03:26:09.253515+00	1	card	2	2	9	\N	{"name":"Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending","description":null}
+7	dashboard-add-cards	2023-11-17 03:26:19.570583+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"name":"Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending","description":null,"id":2,"card_id":2}]}
+8	dashboard-remove-cards	2023-11-17 03:33:15.119154+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"name":"main","description":"base table to work on visualizations","id":1,"card_id":1}]}
+9	card-update	2023-11-19 02:45:58.383257+00	1	card	1	2	\N	\N	{"name":"main","description":"base table to work on visualizations"}
+10	card-create	2023-11-19 02:56:41.953458+00	1	card	3	2	11	\N	{"name":"Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending","description":null}
+11	dashboard-add-cards	2023-11-19 02:56:53.17017+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"name":"Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending","description":null,"id":3,"card_id":3}]}
+12	card-create	2023-11-20 00:25:54.78645+00	1	card	4	2	11	\N	{"name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","description":null}
+13	dashboard-add-cards	2023-11-20 00:26:17.988109+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","description":null,"id":4,"card_id":4}]}
+14	card-update	2023-11-20 03:19:36.981836+00	1	card	4	2	11	\N	{"name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","description":null}
+15	dashboard-add-cards	2023-11-20 03:24:07.503302+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"id":5,"card_id":null}]}
+16	card-create	2023-12-03 01:28:04.436266+00	1	card	5	2	10	\N	{"name":"Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month","description":null}
+17	dashboard-add-cards	2023-12-03 01:32:07.388761+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"name":"Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month","description":null,"id":6,"card_id":5}]}
+18	dashboard-add-cards	2023-12-03 01:33:52.262706+00	1	dashboard	1	\N	\N	\N	{"description":null,"name":"Best City","dashcards":[{"id":7,"card_id":null}]}
+19	card-create	2023-12-03 01:52:18.366266+00	1	card	6	2	11	\N	{"name":"Sentiment Map","description":null}
+\.
+
+
+--
+-- TOC entry 4906 (class 0 OID 27806)
+-- Dependencies: 323
+-- Data for Name: application_permissions_revision; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.application_permissions_revision (id, before, after, user_id, created_at, remark) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4908 (class 0 OID 27821)
+-- Dependencies: 325
+-- Data for Name: bookmark_ordering; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.bookmark_ordering (id, user_id, type, item_id, ordering) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4902 (class 0 OID 27764)
+-- Dependencies: 319
+-- Data for Name: card_bookmark; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.card_bookmark (id, user_id, card_id, created_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4845 (class 0 OID 26838)
+-- Dependencies: 262
+-- Data for Name: card_label; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.card_label (id, card_id, label_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4857 (class 0 OID 27004)
+-- Dependencies: 274
+-- Data for Name: collection; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.collection (id, name, description, color, archived, location, personal_owner_id, slug, namespace, authority_level, entity_id, created_at, type) FROM stdin;
+1	Raul Macias's Personal Collection	\N	#31698A	f	/	1	raul_macias_s_personal_collection	\N	\N	oSvJh9TKJkYJtY7IecuzE	2023-11-17 03:15:43.650105+00	\N
+2	John Doe's Personal Collection	\N	#31698A	f	/	2	john_doe_s_personal_collection	\N	\N	honvsU9mjBzZBOERB4RoU	2023-12-03 02:26:51.697639+00	\N
+\.
+
+
+--
+-- TOC entry 4904 (class 0 OID 27785)
+-- Dependencies: 321
+-- Data for Name: collection_bookmark; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.collection_bookmark (id, user_id, collection_id, created_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4859 (class 0 OID 27022)
+-- Dependencies: 276
+-- Data for Name: collection_permission_graph_revision; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.collection_permission_graph_revision (id, before, after, user_id, created_at, remark) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4869 (class 0 OID 27126)
+-- Dependencies: 286
+-- Data for Name: computation_job; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.computation_job (id, creator_id, created_at, updated_at, type, status, context, ended_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4871 (class 0 OID 27139)
+-- Dependencies: 288
+-- Data for Name: computation_job_result; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.computation_job_result (id, job_id, created_at, updated_at, permanence, payload) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4924 (class 0 OID 28148)
+-- Dependencies: 341
+-- Data for Name: connection_impersonations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.connection_impersonations (id, db_id, group_id, attribute) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4817 (class 0 OID 26602)
+-- Dependencies: 234
+-- Data for Name: core_session; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.core_session (id, user_id, created_at, anti_csrf_token) FROM stdin;
+8b5d1223-95f6-454f-9a19-d0b11aecd382	1	2023-12-03 02:28:09.244931+00	\N
+\.
+
+
+--
+-- TOC entry 4800 (class 0 OID 26250)
+-- Dependencies: 217
+-- Data for Name: core_user; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.core_user (id, email, first_name, last_name, password, password_salt, date_joined, last_login, is_superuser, is_active, reset_token, reset_triggered, is_qbnewb, login_attributes, updated_at, sso_source, locale, is_datasetnewb, settings) FROM stdin;
+1	rulomacraf_06@hotmail.com	Raul	Macias	$2a$10$sOxIMLSQIBINtvccJr6mi.Bqm3IdCEeF0IQ9n2W7Be27kAcrAsOCu	74d68a8a-b6b4-4d64-af59-13beda9453ea	2023-11-17 03:15:33.172664+00	2023-12-03 02:28:09.516958+00	t	t	\N	\N	f	\N	2023-12-03 02:37:20.949254	\N	\N	t	{"last-acknowledged-version":"v0.47.7","most-recently-viewed-dashboard":"{\\"id\\":1,\\"timestamp\\":\\"2023-12-03T02:37:19.616098Z\\"}","user-recent-views":"[{\\"model\\":\\"dashboard\\",\\"model_id\\":1},{\\"model\\":\\"card\\",\\"model_id\\":6},{\\"model\\":\\"table\\",\\"model_id\\":11},{\\"model\\":\\"card\\",\\"model_id\\":3},{\\"model\\":\\"card\\",\\"model_id\\":5},{\\"model\\":\\"table\\",\\"model_id\\":10},{\\"model\\":\\"table\\",\\"model_id\\":13},{\\"model\\":\\"card\\",\\"model_id\\":4},{\\"model\\":\\"card\\",\\"model_id\\":2},{\\"model\\":\\"table\\",\\"model_id\\":9}]","dismissed-custom-dashboard-toast":"true"}
+2	john.doe@metabase.com	John	Doe	$2a$10$vqbtYraL1GOnZu0bQ53xsuIuS42qs2Tm5Po8ISrmIEITV1hp5sHsa	c46fc1ac-d8cb-4ad5-99dc-17b8e77603ab	2023-12-03 02:26:50.389084+00	\N	t	t	$2a$10$szr/9xfhs1MhYudvHyiqgekY6aL6GDHtuI0OzFNHrMd96FoxgB0Ne	1701570409842	t	\N	2023-12-03 02:26:50.389084	\N	\N	t	{"last-acknowledged-version":"v0.47.7"}
+\.
+
+
+--
+-- TOC entry 4900 (class 0 OID 27743)
+-- Dependencies: 317
+-- Data for Name: dashboard_bookmark; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.dashboard_bookmark (id, user_id, dashboard_id, created_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4865 (class 0 OID 27080)
+-- Dependencies: 282
+-- Data for Name: dashboard_favorite; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.dashboard_favorite (id, user_id, dashboard_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4919 (class 0 OID 28090)
+-- Dependencies: 336
+-- Data for Name: dashboard_tab; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.dashboard_tab (id, dashboard_id, name, "position", entity_id, created_at, updated_at) FROM stdin;
+1	1	Overview	0	YPVfoANfuSZcTGOlR_S9Y	2023-11-19 02:47:14.974094+00	2023-11-20 00:30:54.882453+00
+3	1	Jobs	1	n0ugmaew6x8x1wHZHs-sJ	2023-11-20 03:24:06.956221+00	2023-11-20 03:24:06.956221+00
+\.
+
+
+--
+-- TOC entry 4841 (class 0 OID 26808)
+-- Dependencies: 258
+-- Data for Name: dashboardcard_series; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.dashboardcard_series (id, dashboardcard_id, card_id, "position") FROM stdin;
+\.
+
+
+--
+-- TOC entry 4825 (class 0 OID 26680)
+-- Dependencies: 242
+-- Data for Name: data_migrations; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.data_migrations (id, "timestamp") FROM stdin;
+migrate-click-through	2023-11-17 02:55:29.091244
+migrate-remove-admin-from-group-mapping-if-needed	2023-11-17 02:55:29.492853
+\.
+
+
+--
+-- TOC entry 4797 (class 0 OID 26229)
+-- Dependencies: 214
+-- Data for Name: databasechangelog; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.databasechangelog (id, author, filename, dateexecuted, orderexecuted, exectype, md5sum, description, comments, tag, liquibase, contexts, labels, deployment_id) FROM stdin;
+2	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:31.556497	2	EXECUTED	8:ca241a2c777802abaedd43d8944927f3	createTable tableName=core_session		\N	4.11.0	\N	\N	0189608756
+19	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:34.982369	18	EXECUTED	8:269b129dbfc39a6f9e0d3bc61c3c3b70	addColumn tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
+34	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:38.773736	33	EXECUTED	8:52b082600b05bbbc46bfe837d1f37a82	addColumn tableName=pulse_channel		\N	4.11.0	\N	\N	0189608756
+115	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.145811	111	MARK_RAN	8:55c10c2ff7e967e3ea1fdffc5aeed93a	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+122	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.815637	118	MARK_RAN	8:929b3c551a8f631cdce2511612d82d62	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+124	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.001368	120	MARK_RAN	8:ce2322ca187dfac51be8f12f6a132818	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+125	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.095137	121	MARK_RAN	8:dd948ac004ceb9d0a300a8e06806945f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+126	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.195271	122	MARK_RAN	8:3d34c0d4e5dbb32b432b83d5322e2aa3	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+127	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.289253	123	MARK_RAN	8:18314b269fe11898a433ca9048400975	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+129	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.475613	125	MARK_RAN	8:f890168c47cc2113a8af77ed3875c4b3	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+130	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.575332	126	MARK_RAN	8:ecdcf1fd66b3477e5b6882c3286b2fd8	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+131	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.669344	127	MARK_RAN	8:453af2935194978c65b19eae445d85c9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+132	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.763776	128	MARK_RAN	8:d2c37bc80b42a15b65f148bcb1daa86e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+133	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.869763	129	MARK_RAN	8:5b9b539d146fbdb762577dc98e7f3430	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+134	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.964188	130	MARK_RAN	8:4d0f688a168db3e357a808263b6ad355	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+135	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.059409	131	MARK_RAN	8:2ca54b0828c6aca615fb42064f1ec728	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+136	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.153978	132	MARK_RAN	8:7115eebbcf664509b9fc0c39cb6f29e9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+137	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.251421	133	MARK_RAN	8:da754ac6e51313a32de6f6389b29e1ca	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+138	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.348684	134	MARK_RAN	8:bfb201761052189e96538f0de3ac76cf	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+139	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.451856	135	MARK_RAN	8:fdad4ec86aefb0cdf850b1929b618508	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+140	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.545714	136	MARK_RAN	8:a0cfe6468160bba8c9d602da736c41fb	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+141	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.639473	137	MARK_RAN	8:b6b7faa02cba069e1ed13e365f59cb6b	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+142	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.740312	138	MARK_RAN	8:0c291eb50cc0f1fef3d55cfe6b62bedb	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+143	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.835515	139	MARK_RAN	8:3d9a5cb41f77a33e834d0562fdddeab6	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+144	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.929599	140	MARK_RAN	8:1d5b7f79f97906105e90d330a17c4062	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+146	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.11429	142	MARK_RAN	8:8c0c1861582d15fe7859358f5d553c91	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+147	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.219429	143	MARK_RAN	8:5ccf590332ea0744414e40a990a43275	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+148	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.311897	144	MARK_RAN	8:12b42e87d40cd7b6399c1fb0c6704fa7	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+149	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.403366	145	MARK_RAN	8:dd45bfc4af5e05701a064a5f2a046d7f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+150	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.495885	146	MARK_RAN	8:48beda94aeaa494f798c38a66b90fb2a	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+151	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.589726	147	MARK_RAN	8:bb752a7d09d437c7ac294d5ab2600079	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+154	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.871756	150	MARK_RAN	8:7a1df4f7a679f47459ea1a1c0991cfba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+157	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.15877	153	MARK_RAN	8:0197c46bf8536a75dbf7e9aee731f3b2	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+158	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.260231	154	MARK_RAN	8:2ebdd5a179ce2487b2e23b6be74a407c	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+159	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.354857	155	MARK_RAN	8:c62719dad239c51f045315273b56e2a9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+160	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.449889	156	MARK_RAN	8:1441c71af662abb809cba3b3b360ce81	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+75	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:51.581426	73	EXECUTED	8:6072cabfe8188872d8e3da9a675f88c1	addColumn tableName=report_card	Added 0.28.2	\N	4.11.0	\N	\N	0189608756
+73	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:51.199948	71	EXECUTED	8:3c0f03d18ff78a0bcc9915e1d9c518d6	addColumn tableName=metabase_database	Added 0.29.0	\N	4.11.0	\N	\N	0189608756
+162	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.729861	157	EXECUTED	8:c37f015ad11d77d66e09925eed605cdf	dropTable tableName=query_queryexecution	Added 0.23.0 as a data migration; converted to Liquibase migration in 0.35.0	\N	4.11.0	\N	\N	0189608756
+163	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.889898	158	EXECUTED	8:9ef66a82624d70738fc89807a2398ed1	dropColumn columnName=read_permissions, tableName=report_card	Added 0.35.0	\N	4.11.0	\N	\N	0189608756
+109	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.571965	105	MARK_RAN	8:a5f4ea412eb1d5c1bc824046ad11692f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+164	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:06.072159	159	EXECUTED	8:f19470701bbb33f19f91b1199a915881	addColumn tableName=core_user	Added 0.35.0	\N	4.11.0	\N	\N	0189608756
+66	senior	migrations/000_migrations.yaml	2023-11-17 02:53:49.49361	64	EXECUTED	8:e77d66af8e3b83d46c5a0064a75a1aac	sql; sql	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+165	sb	migrations/000_migrations.yaml	2023-11-17 02:54:06.326215	160	EXECUTED	8:b3ae2b90db5c4264ea2ac50d304d6ad4	addColumn tableName=metabase_field; addColumn tableName=metabase_field; addColumn tableName=metabase_table; sql	Added field_order to Table and database_position to Field	\N	4.11.0	\N	\N	0189608756
+166	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:06.528399	161	EXECUTED	8:92dafa5c15c46e2af8380304449c7dfa	modifyDataType columnName=updated_at, tableName=metabase_fieldvalues; modifyDataType columnName=updated_at, tableName=query_cache	Added 0.36.0/1.35.4	\N	4.11.0	\N	\N	0189608756
+167	walterl, camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:06.876148	162	EXECUTED	8:4ed8c3a2d7d00700cc564095ddbb290f	sql; createTable tableName=native_query_snippet; createIndex indexName=idx_snippet_name, tableName=native_query_snippet	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+169	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.213431	164	EXECUTED	8:2b97e6eaa7854e179abb9f3749f73b18	dropColumn columnName=rows, tableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+170	sb	migrations/000_migrations.yaml	2023-11-17 02:54:07.371174	165	EXECUTED	8:dbd6ee52b0f9195e449a6d744606b599	dropColumn columnName=fields_hash, tableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+171	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.642108	166	EXECUTED	8:e08e8d6d9ea7073cd823e6ff75fc2b67	addColumn tableName=native_query_snippet; createIndex indexName=idx_snippet_collection_id, tableName=native_query_snippet	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+172	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.832206	167	EXECUTED	8:212f4010b504e358853fd017032f844f	addColumn tableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+174	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.154961	169	EXECUTED	8:66f31503ba532702e54ea531af668531	addForeignKeyConstraint baseTableName=activity, constraintName=fk_activity_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+175	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.314311	170	EXECUTED	8:c3ceddfca8827d73474cd9a70ea01d1c	dropForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+176	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.464593	171	EXECUTED	8:89c918faa84b7f3f5fa291d4da74414c	addForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+177	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.619983	172	EXECUTED	8:d45f2198befc83de1f1f963c750607af	dropForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_label_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+178	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.77864	173	EXECUTED	8:63d396999449da2d42b3d3e22f3454fa	addForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_label_id, referencedTableName=label	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+179	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.934722	174	EXECUTED	8:2a0a7956402ef074e5d54c73ac2d5405	dropForeignKeyConstraint baseTableName=collection, constraintName=fk_collection_personal_owner_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+180	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.092488	175	EXECUTED	8:b02225e5940a2bcca3d550f24f80123e	addForeignKeyConstraint baseTableName=collection, constraintName=fk_collection_personal_owner_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+93	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:58.042842	91	EXECUTED	8:93b0d408a3970e30d7184ed1166b5476	addColumn tableName=query	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+181	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.25042	176	EXECUTED	8:16923f06b2bbb60c6ac78a0c4b7e4d4f	dropForeignKeyConstraint baseTableName=collection_revision, constraintName=fk_collection_revision_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+182	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.402379	177	EXECUTED	8:d59d864c038c530a49056704c93f231d	addForeignKeyConstraint baseTableName=collection_revision, constraintName=fk_collection_revision_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+183	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.560581	178	EXECUTED	8:c5ed9a4f44ee92af620a47c80e010a6b	dropForeignKeyConstraint baseTableName=computation_job, constraintName=fk_computation_job_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+184	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.717986	179	EXECUTED	8:70317e2bdaac90b9ddc33b1b93ada479	addForeignKeyConstraint baseTableName=computation_job, constraintName=fk_computation_job_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+185	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.874411	180	EXECUTED	8:12e7457ec2d2b1a99a3fadfc64d7b7f9	dropForeignKeyConstraint baseTableName=computation_job_result, constraintName=fk_computation_result_ref_job_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+186	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.056531	181	EXECUTED	8:526987d0f6b2f01d7bfc9e3179721be6	addForeignKeyConstraint baseTableName=computation_job_result, constraintName=fk_computation_result_ref_job_id, referencedTableName=computation_job	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+188	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.371259	183	EXECUTED	8:4dc500830cd4c5715ca8b0956e37b3d5	addForeignKeyConstraint baseTableName=core_session, constraintName=fk_session_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+189	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.538143	184	EXECUTED	8:e07396e0ee587dcf321d21cffa9eec29	dropForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+190	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.698629	185	EXECUTED	8:eded791094a16bf398896c790645c411	addForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+4	cammsaul	migrations/000_migrations.yaml	2023-11-17 02:53:31.734426	3	EXECUTED	8:a8e7822a91ea122212d376f5c2d4158f	createTable tableName=setting		\N	4.11.0	\N	\N	0189608756
+191	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.850176	186	EXECUTED	8:bb5b9a3d64b2e44318e159e7f1fecde2	dropForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_dashboardcard_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+192	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.014191	187	EXECUTED	8:7d96911036dec2fee64fe8ae57c131b3	addForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_dashboardcard_id, referencedTableName=report_dashboardcard	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+78	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:52.346598	76	EXECUTED	8:8ea54a54fa04fe657b0b8072125981af	createTable tableName=group_table_access_policy; createIndex indexName=idx_gtap_table_id_group_id, tableName=group_table_access_policy; addUniqueConstraint constraintName=unique_gtap_table_id_group_id, tableName=group_table_access_policy	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+195	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.486387	190	EXECUTED	8:1d720af9f917007024c91d40410bc91d	dropForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_parent_ref_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+196	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.636348	191	EXECUTED	8:c52f5dbf742feef12a3803bda92a425b	addForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_parent_ref_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+197	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.798211	192	EXECUTED	8:9c1c950b709050abe91cea17fd5970cc	dropForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+198	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.962741	193	EXECUTED	8:e24198ff4825a41d17ceaebd71692103	addForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+199	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.128561	194	EXECUTED	8:146efae3f2938538961835fe07433ee1	dropForeignKeyConstraint baseTableName=metabase_fieldvalues, constraintName=fk_fieldvalues_ref_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+200	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.302662	195	EXECUTED	8:f5e7e79cb81b8d2245663c482746c853	addForeignKeyConstraint baseTableName=metabase_fieldvalues, constraintName=fk_fieldvalues_ref_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+201	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.46245	196	EXECUTED	8:2d79321a27fde6cb3c4fabdb86dc60ec	dropForeignKeyConstraint baseTableName=metabase_table, constraintName=fk_table_ref_database_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+202	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.626348	197	EXECUTED	8:d0cefed061c4abbf2b0a0fd2a66817cb	addForeignKeyConstraint baseTableName=metabase_table, constraintName=fk_table_ref_database_id, referencedTableName=metabase_database	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+203	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.78267	198	EXECUTED	8:28b4ec07bfbf4b86532fe9357effdb8b	dropForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+204	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.960999	199	EXECUTED	8:7195937fd2144533edfa2302ba2ae653	addForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+205	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.1211	200	EXECUTED	8:4b2d5f1458641dd1b9dbc5f41600be8e	dropForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+116	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.249204	112	MARK_RAN	8:dbf7c3a1d8b1eb77b7f5888126b13c2e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+206	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.289355	201	EXECUTED	8:959ef448c23aaf3acf5b69f297fe4b2f	addForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+207	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.446872	202	EXECUTED	8:18135d674f2fe502313adb0475f5f139	dropForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metabase_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+208	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.606737	203	EXECUTED	8:4c86c17a00a81dfdf35a181e3dd3b08f	addForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metabase_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+209	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.76595	204	EXECUTED	8:1b9c3544bf89093fc9e4f7f191fdc6df	dropForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metric_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+210	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.935015	205	EXECUTED	8:842d166cdf7b0a29c88efdaf95c9d0bf	addForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metric_id, referencedTableName=metric	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+211	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.09885	206	EXECUTED	8:91c64815a1aefb07dd124d493bfeeea9	dropForeignKeyConstraint baseTableName=native_query_snippet, constraintName=fk_snippet_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+212	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.257036	207	EXECUTED	8:b25064ee26b71f61906a833bc22ebbc2	addForeignKeyConstraint baseTableName=native_query_snippet, constraintName=fk_snippet_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+213	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.421079	208	EXECUTED	8:60a7d628e4f68ee4c85f5f298b1d9865	dropForeignKeyConstraint baseTableName=permissions, constraintName=fk_permissions_group_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+214	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.588579	209	EXECUTED	8:1c3c480313967a2d9f324a094ba25f4d	addForeignKeyConstraint baseTableName=permissions, constraintName=fk_permissions_group_id, referencedTableName=permissions_group	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+152	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.685437	148	MARK_RAN	8:4bcbc472f2d6ae3a5e7eca425940e52b	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+215	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.753059	210	EXECUTED	8:5d2c67ccead52970e9d85beb7eda48b9	dropForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_group_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+216	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.915438	211	EXECUTED	8:35fcd5d48600e887188eb1b990e6cc35	addForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_group_id, referencedTableName=permissions_group	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+8	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:32.782095	7	EXECUTED	8:960ec59bbcb4c9f3fa8362eca9af4075	addColumn tableName=metabase_table; addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+46	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:43.519259	45	EXECUTED	8:131df3cdd9a8c67b32c5988a3fb7fe3d	addNotNullConstraint columnName=row, tableName=report_dashboardcard; addNotNullConstraint columnName=col, tableName=report_dashboardcard; addDefaultValue columnName=row, tableName=report_dashboardcard; addDefaultValue columnName=col, tableName=rep...		\N	4.11.0	\N	\N	0189608756
+123	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.909254	119	MARK_RAN	8:35e5baddf78df5829fe6889d216436e5	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+155	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.976109	151	MARK_RAN	8:3c78b79c784e3a3ce09a77db1b1d0374	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+218	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.241188	213	EXECUTED	8:dc04b7eb04cd870c53102cb37fd75a5f	addForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_membership_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+219	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.410761	214	EXECUTED	8:02c690f34fe8803e42441f5037d33017	dropForeignKeyConstraint baseTableName=permissions_revision, constraintName=fk_permissions_revision_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+222	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.913529	217	EXECUTED	8:c5f22e925be3a8fd0e4f47a491f599ee	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+223	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.085166	218	EXECUTED	8:de743e384ff90a6a31a3caebe0abb775	dropForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+224	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.27555	219	EXECUTED	8:b8fdf9c14d7ea3131a0a6b1f1036f91a	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+225	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.444689	220	EXECUTED	8:495a4e12cf75cac5ff54738772e6a998	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+226	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.608858	221	EXECUTED	8:cf383d74bc407065c78c060203ba4560	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+227	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.77138	222	EXECUTED	8:e23eaf74ab7edacfb34bd5caf05cf66f	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+228	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.95022	223	EXECUTED	8:d458ddb160f61e93bb69738f262de2b4	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_id, referencedTableName=pulse	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+229	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.13063	224	EXECUTED	8:1cb939d172989cb1629e9a3da768596d	dropForeignKeyConstraint baseTableName=pulse_channel, constraintName=fk_pulse_channel_ref_pulse_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+230	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.295913	225	EXECUTED	8:62baea3334ac5f21feac84497f6bf643	addForeignKeyConstraint baseTableName=pulse_channel, constraintName=fk_pulse_channel_ref_pulse_id, referencedTableName=pulse	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+231	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.462854	226	EXECUTED	8:d096a9ce70fc0b7dfbc67ee1be4c3e31	dropForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_pulse_channel_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+232	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.630904	227	EXECUTED	8:be2457ae1e386c9d5ec5bfa4ae681fd6	addForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_pulse_channel_id, referencedTableName=pulse_channel	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+233	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.805705	228	EXECUTED	8:d5c018882af16093de446e025e2599b7	dropForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+234	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.988867	229	EXECUTED	8:edb6ced6c353064c46fa00b54e187aef	addForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+235	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.136652	230	EXECUTED	8:550c64e41e55233d52ac3ef24d664be1	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+236	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.297193	231	EXECUTED	8:04300b298b663fc2a2f3a324d1051c3c	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+237	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.477479	232	EXECUTED	8:227a9133cdff9f1b60d8af53688ab12e	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_made_public_by_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+238	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.64679	233	EXECUTED	8:7000766ddca2c914ac517611e7d86549	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_made_public_by_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+239	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.815427	234	EXECUTED	8:672f4972653f70464982008a7abea3e1	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+240	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.99082	235	EXECUTED	8:165b07c8ceb004097c83ee1b689164e4	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+241	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.16643	236	EXECUTED	8:b0a9e3d801e64e0a66c3190e458c01ae	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_database_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+242	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.339944	237	EXECUTED	8:bf10f944715f87c3ad0dd7472d84df62	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_database_id, referencedTableName=metabase_database	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+243	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.514973	238	EXECUTED	8:cba5d2bfb36e13c60d82cc6cca659b61	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+47	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:44.045277	46	EXECUTED	8:717ed16b2f279bd4fdf5c4aa2b5f5857	createTable tableName=collection; createIndex indexName=idx_collection_slug, tableName=collection; addColumn tableName=report_card; createIndex indexName=idx_card_collection_id, tableName=report_card		\N	4.11.0	\N	\N	0189608756
+79	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:52.744728	77	EXECUTED	8:37825e0d48bd4ed5cf1a068de30edc60	addColumn tableName=report_dashboard; createIndex indexName=idx_dashboard_collection_id, tableName=report_dashboard; addColumn tableName=pulse; createIndex indexName=idx_pulse_collection_id, tableName=pulse	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+246	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.01678	241	EXECUTED	8:e5db34b9db22254f7445fd65ecf45356	addForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+247	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.200028	242	EXECUTED	8:76de7337a12a5ef42dcbb9274bd2d70f	dropForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+248	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.355443	243	EXECUTED	8:0640fb00a090cbe5dc545afbe0d25811	addForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+249	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.508635	244	EXECUTED	8:16ef5909a72ac4779427e432b3b3ce18	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+250	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.667435	245	EXECUTED	8:2e80ebe19816b7bde99050638772cf99	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+251	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.822943	246	EXECUTED	8:c12aa099f293b1e3d71da5e3edb3c45a	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_made_public_by_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+252	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.973659	247	EXECUTED	8:26b16d4d0cf7a77c1d687f49b029f421	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_made_public_by_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+253	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.120029	248	EXECUTED	8:bbf118edaa88a8ad486ec0d6965504b6	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+254	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.277381	249	EXECUTED	8:7fc35d78c63f41eb4dbd23cfd1505f0b	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+255	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.447568	250	EXECUTED	8:f6564a7516ace55104a3173eebf4c629	dropForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+256	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.605189	251	EXECUTED	8:61db9be3b4dd7ed1e9d01a7254e87544	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+257	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.769805	252	EXECUTED	8:c8b51dc7ba4da9f7995a0b0c17fadad2	dropForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_dashboard_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+258	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.925875	253	EXECUTED	8:58974c6ad8aee63f09e6e48b1a78c267	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+259	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.090472	254	EXECUTED	8:be4a52feb3b12e655c0bbd34477749b0	dropForeignKeyConstraint baseTableName=revision, constraintName=fk_revision_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+260	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.24317	255	EXECUTED	8:4b370f9c9073a6f8f585aab713c57f47	addForeignKeyConstraint baseTableName=revision, constraintName=fk_revision_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+261	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.40136	256	EXECUTED	8:173fe552fdf72fdb4efbc01a6ac4f7ad	dropForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+262	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.558005	257	EXECUTED	8:50927b8b1d1809f32c11d2e649dbcb94	addForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+263	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.722748	258	EXECUTED	8:0b10c8664506917cc50359e9634c121c	dropForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+264	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.888333	259	EXECUTED	8:b132aedf6fbdcc5d956a2d3a154cc035	addForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+265	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:23.051209	260	EXECUTED	8:2e339ecb05463b3765f9bb266bd28297	dropForeignKeyConstraint baseTableName=view_log, constraintName=fk_view_log_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+266	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:23.209729	261	EXECUTED	8:31506e118764f5e520f755f26c696bb8	addForeignKeyConstraint baseTableName=view_log, constraintName=fk_view_log_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+268	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.381857	262	EXECUTED	8:4ccc4d50f9b233bc6515780d9cae360b	createIndex indexName=idx_lower_email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+271	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.891829	264	MARK_RAN	8:ce8ddb253a303d4f8924ff5a187080c0	modifyDataType columnName=email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+272	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.989164	265	MARK_RAN	8:54ad09ee0c67d58e78ccafe9b1499379	modifyDataType columnName=email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+273	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:24.167737	266	EXECUTED	8:5348576bb9852f6f947e1aa39cd1626f	addDefaultValue columnName=is_superuser, tableName=core_user	Added 0.37.1	\N	4.11.0	\N	\N	0189608756
+274	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:24.325675	267	EXECUTED	8:11a8a84b9ba7634aeda625ff3f487d22	addDefaultValue columnName=is_active, tableName=core_user	Added 0.37.1	\N	4.11.0	\N	\N	0189608756
+80	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:52.989201	78	EXECUTED	8:199d0ce28955117819ca15bcc29323e5	addColumn tableName=collection; createIndex indexName=idx_collection_location, tableName=collection		\N	4.11.0	\N	\N	0189608756
+81	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:53.297241	79	EXECUTED	8:3a6dc22403660529194d004ca7f7ad39	addColumn tableName=report_dashboard; addColumn tableName=report_card; addColumn tableName=pulse	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+275	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:24.512899	268	EXECUTED	8:447d9e294f59dd1058940defec7e0f40	addColumn tableName=metabase_database	Added 0.38.0 refingerprint to Database	\N	4.11.0	\N	\N	0189608756
+277	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:24.895051	270	EXECUTED	8:367180f0820b72ad2c60212e67ae53e7	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_card_id	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+278	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:25.067065	271	EXECUTED	8:fc4fb1c1e3344374edd7b9f1f0d34c89	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_card_id, referencedTableName=report_dashboardcard	Added 0.38.0 - Dashboard subscrptions	\N	4.11.0	\N	\N	0189608756
+280	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.423705	273	EXECUTED	8:ae966ee1e40f20ea438daba954a8c2a6	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+283	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.915187	276	EXECUTED	8:2220e1b1cdb57212820b96fa3107f7c3	sql; sql; sql	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+284	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.100638	277	EXECUTED	8:c7dc9a60bcaf9b2ffcbaabd650c959b2	addColumn tableName=metabase_field	Added 0.39 - Semantic type system - add effective type	\N	4.11.0	\N	\N	0189608756
+285	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.297514	278	EXECUTED	8:cf7d6f5135fa3397a7dc67509d1c286e	addColumn tableName=metabase_field	Added 0.39 - Semantic type system - add coercion column	\N	4.11.0	\N	\N	0189608756
+286	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.449697	279	EXECUTED	8:bce9ab328411f05d8c52d64bff5bded0	sql	Added 0.39 - Semantic type system - set effective_type default	\N	4.11.0	\N	\N	0189608756
+288	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.797272	281	EXECUTED	8:943c6dd0c9339729fefcee9207227849	sql	Added 0.39 - Semantic type system - migrate unix timestamps	\N	4.11.0	\N	\N	0189608756
+289	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.961565	282	EXECUTED	8:9f7f2e9bbf3236f204c644dc8ea7abef	sql	Added 0.39 - Semantic type system - migrate unix timestamps (corrects typo- seconds was migrated correctly, not millis and micros)	\N	4.11.0	\N	\N	0189608756
+290	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:27.1197	283	EXECUTED	8:98ea7254bc843302db4afe493c4c75e6	sql	Added 0.39 - Semantic type system - Clobber semantic_type where there was a coercion	\N	4.11.0	\N	\N	0189608756
+292	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:27.707999	285	EXECUTED	8:e4ac005f4d4e73d5e1176bcbde510d6e	createIndex indexName=idx_user_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+293	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:27.865156	286	EXECUTED	8:7ba1bd887f8ae11a186b0e3fe69ab3e0	addForeignKeyConstraint baseTableName=login_history, constraintName=fk_login_history_session_id, referencedTableName=core_session	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+294	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.033743	287	EXECUTED	8:88d7a9c88866af42b9f0e7c1df9c2fd0	createIndex indexName=idx_session_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+5	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:31.896301	4	EXECUTED	8:4f8653d16f4b102b3dff647277b6b988	addColumn tableName=core_organization		\N	4.11.0	\N	\N	0189608756
+295	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.198555	288	EXECUTED	8:501e85a50912649416ec22b2871af087	createIndex indexName=idx_timestamp, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+296	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.365975	289	EXECUTED	8:f9eb8b15c2c889334f3848a6bb4ebdb4	createIndex indexName=idx_user_id_device_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+297	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.526824	290	EXECUTED	8:06c180e4c8361f7550f6f4deaf9fc855	createIndex indexName=idx_user_id_timestamp, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+299	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:28.901453	292	EXECUTED	8:ee3a96e30b07f37240a933e2f0710082	addNotNullConstraint columnName=parameters, tableName=pulse	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+300	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:29.069389	293	EXECUTED	8:8b142aea1e3697d8630a4620ae763c4d	renameTable newTableName=collection_permission_graph_revision, oldTableName=collection_revision	Added 0.40.0	\N	4.11.0	\N	\N	0189608756
+301	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:29.232233	294	EXECUTED	8:aaf1a546a6f5932a157d016f72c02f8a	sql	Added 0.40.0 renaming collection_revision to collection_permission_graph_revision	\N	4.11.0	\N	\N	0189608756
+303	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:29.698237	295	EXECUTED	8:506e174d6656b09ddedf19e97c0d3c3d	createTable tableName=moderation_review	Added 0.40.0	\N	4.11.0	\N	\N	0189608756
+304	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:29.862438	296	EXECUTED	8:35960cd7ee3081be719bfb5267ae1a83	sql	Added 0.40.0 (replaces a data migration dating back to 0.20.0)	\N	4.11.0	\N	\N	0189608756
+305	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:30.019773	297	EXECUTED	8:0a0c65f58b80bf74c149a3854cbeeae4	sql	Added 0.40.0 (replaces a data migration dating back to 0.20.0)	\N	4.11.0	\N	\N	0189608756
+308	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:30.207484	298	EXECUTED	8:4a52c3a0391a0313a062b60a52c0d7de	addColumn tableName=query_execution	Added 0.40.0 Track cache hits in query_execution table	\N	4.11.0	\N	\N	0189608756
+309	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:30.399521	299	EXECUTED	8:26cc1f3ba949d8ce0d56350caacffbd8	addColumn tableName=collection	Added 0.40.0 - Add type to collections	\N	4.11.0	\N	\N	0189608756
+311	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:30.564223	300	EXECUTED	8:33f9d29d709afd0c02bd47367c7d9181	sql; sql; sql	Added 0.40.0 Migrate friendly field names, not noop	\N	4.11.0	\N	\N	0189608756
+312	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:30.723262	301	EXECUTED	8:77ef89ba2e7bc19231d9364492091764	sql; sql; sql	Added 0.41.0 Backfill collection_id for dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+282	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.739189	275	EXECUTED	8:d4b8566ee11d9f8a3d6c8c9539f6526d	sql; sql; sql	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+314	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:31.417678	303	EXECUTED	8:c9ad2637412d91b26b616a4df4190704	addColumn tableName=metabase_database	Added 0.41.0 Fine grained caching controls	\N	4.11.0	\N	\N	0189608756
+315	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:31.600006	304	EXECUTED	8:5b186b8ab743cde5a7f4bf5eadcd520c	addColumn tableName=report_dashboard	Added 0.41.0 Fine grained caching controls, pt 2	\N	4.11.0	\N	\N	0189608756
+316	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:31.803671	305	EXECUTED	8:1b7c340684b27af9179613bc351e444f	addColumn tableName=view_log	Added 0.41.0 Fine grained caching controls, pt 3	\N	4.11.0	\N	\N	0189608756
+269	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.539408	263	EXECUTED	8:215609ca9dce2181687b4fa65e7351ba	sql	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+381	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:31.963588	306	EXECUTED	8:048be5b22042724ab3db240e14e43886	createIndex indexName=idx_query_execution_card_id, tableName=query_execution	Added 0.41.2 Add index to QueryExecution card_id to fix performance issues (#18759)	\N	4.11.0	\N	\N	0189608756
+382	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.149723	307	EXECUTED	8:e8c01b2cf428b1e8968393cf31afb188	createIndex indexName=idx_moderation_review_item_type_item_id, tableName=moderation_review	Added 0.41.2 Add index to ModerationReview moderated_item_type + moderated_item_id to fix performance issues (#18759)	\N	4.11.0	\N	\N	0189608756
+v42.00-001	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.707784	310	EXECUTED	8:9952153cbff16147bcb47b4a26e02089	sql; sql; sql	Added 0.42.0 Attempt to add Card.database_id (by parsing query) to rows that are missing it (#5999)	\N	4.11.0	\N	\N	0189608756
+v42.00-002	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.927139	311	EXECUTED	8:81e0ab53dd2e20cde32e7449155551c2	addNotNullConstraint columnName=database_id, tableName=report_card	Added 0.42.0 Added constraint we should have had all along (#5999)	\N	4.11.0	\N	\N	0189608756
+10	cammsaul	migrations/000_migrations.yaml	2023-11-17 02:53:33.148574	9	EXECUTED	8:57254d016f3508890638df4528e9755c	createTable tableName=revision; createIndex indexName=idx_revision_model_model_id, tableName=revision		\N	4.11.0	\N	\N	0189608756
+v42.00-003	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:33.171254	312	EXECUTED	8:4a2036164dac96df6066a0d633fab7b5	addColumn tableName=report_card	Added 0.42.0 Initial support for datasets based on questions	\N	4.11.0	\N	\N	0189608756
+v42.00-004	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.335713	313	EXECUTED	8:d9a1dbf5cdc249516796fd9ed81305a4	modifyDataType columnName=details, tableName=activity	Added 0.42.0 - modify type of activity.details from text to text	\N	4.11.0	\N	\N	0189608756
+v42.00-005	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.402061	314	MARK_RAN	8:136b2b7ee7dd813b8d3a3154d1bea708	modifyDataType columnName=description, tableName=collection	Added 0.42.0 - modify type of collection.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-006	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.501848	315	MARK_RAN	8:5fe4654ed7abd89f71eb9372ac208da3	modifyDataType columnName=name, tableName=collection	Added 0.42.0 - modify type of collection.name from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-007	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.597763	316	MARK_RAN	8:592bfa5fba147bd0ba28c267c796a65d	modifyDataType columnName=context, tableName=computation_job	Added 0.42.0 - modify type of computation_job.context from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-008	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.691846	317	MARK_RAN	8:ea964b569fd70a9f937967179ad96e96	modifyDataType columnName=payload, tableName=computation_job_result	Added 0.42.0 - modify type of computation_job_result.payload from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-009	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.790298	318	MARK_RAN	8:faa3d926a4c1ea101a87f80469e4c3b5	modifyDataType columnName=anti_csrf_token, tableName=core_session	Added 0.42.0 - modify type of core_session.anti_csrf_token from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-010	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.907702	319	MARK_RAN	8:1538ae25e827ae059a7cc4b7cf225258	modifyDataType columnName=login_attributes, tableName=core_user	Added 0.42.0 - modify type of core_user.login_attributes from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-011	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.021661	320	MARK_RAN	8:5a13403a42ddb4948873a5f115bb949e	modifyDataType columnName=attribute_remappings, tableName=group_table_access_policy	Added 0.42.0 - modify type of group_table_access_policy.attribute_remappings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-012	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.123662	321	MARK_RAN	8:0f7f6537b8a60d83024bcfeff9c5c9d6	modifyDataType columnName=device_description, tableName=login_history	Added 0.42.0 - modify type of login_history.device_description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-013	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.221805	322	MARK_RAN	8:0ee5d0c8b49419900a86acce11698b9f	modifyDataType columnName=ip_address, tableName=login_history	Added 0.42.0 - modify type of login_history.ip_address from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-014	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.314296	323	MARK_RAN	8:49dfb6668ca9c8d1cabf8c9656e7ba5b	modifyDataType columnName=caveats, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-015	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.410055	324	MARK_RAN	8:90a5ba43867c1a0772641ce942de8fe6	modifyDataType columnName=description, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-016	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.502177	325	MARK_RAN	8:09ea3ac9939b25db92cc5d4053e6fd4a	modifyDataType columnName=details, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-017	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.603709	326	MARK_RAN	8:14bf9629c1e94583b8240298df8fa6e7	modifyDataType columnName=options, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.options from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-018	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.704003	327	MARK_RAN	8:00408a84f8098e850a465a2c98e6aff5	modifyDataType columnName=points_of_interest, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-019	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.809715	328	MARK_RAN	8:afa168a1d459106a0ec607f76d15a0aa	modifyDataType columnName=caveats, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-020	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.904011	329	MARK_RAN	8:a3dd42bbe25c415ce21e4c180dc1c1d7	modifyDataType columnName=database_type, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.database_type from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+32	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:38.1618	31	EXECUTED	8:28afcfc9b7f1bd1b08caa9d527355c48	createTable tableName=label; createIndex indexName=idx_label_slug, tableName=label; createTable tableName=card_label; addUniqueConstraint constraintName=unique_card_label_card_id_label_id, tableName=card_label; createIndex indexName=idx_card_label...		\N	4.11.0	\N	\N	0189608756
+276	robroland	migrations/000_migrations.yaml	2023-11-17 02:54:24.739062	269	EXECUTED	8:ae43765761ef0f32c8a6f1fb88ead0ca	addColumn tableName=pulse_card	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+v42.00-022	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.091291	331	MARK_RAN	8:60241b3d3d5f05f238adecfdca69b3b2	modifyDataType columnName=fingerprint, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.fingerprint from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-023	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.181808	332	MARK_RAN	8:fc6f2fc275a8f025c150215beb9aa776	modifyDataType columnName=has_field_values, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.has_field_values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-024	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.27373	333	MARK_RAN	8:5f7b73eb4774392a1239d7725bad052b	modifyDataType columnName=points_of_interest, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-025	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.368875	334	MARK_RAN	8:5ac77fe617f8f4481e8de7da9015c64f	modifyDataType columnName=settings, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-026	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.471638	335	MARK_RAN	8:fa7d6c62a44d0c1425fe9e9c43d9d359	modifyDataType columnName=human_readable_values, tableName=metabase_fieldvalues	Added 0.42.0 - modify type of metabase_fieldvalues.human_readable_values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-027	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.566897	336	MARK_RAN	8:dd1d2de653ed0fb632760c99987ad312	modifyDataType columnName=values, tableName=metabase_fieldvalues	Added 0.42.0 - modify type of metabase_fieldvalues.values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v43.00-008	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.086764	388	EXECUTED	8:86b57754999f0ec4b331f4f3ac98a2e0	sql; sql; sql	Added 0.43.0. Migrate legacy '-site-url' Setting to 'site-url'. Trim trailing slashes.	\N	4.11.0	\N	\N	0189608756
+v42.00-028	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.659911	337	MARK_RAN	8:12a413714ca4b88f6a502d624b8b6895	modifyDataType columnName=caveats, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-029	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.756857	338	MARK_RAN	8:96ae84ed0739fc71247112c488963883	modifyDataType columnName=description, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+281	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:25.577617	274	EXECUTED	8:3039286581c58eee7cca9c25fdf6d792	renameColumn newColumnName=semantic_type, oldColumnName=special_type, tableName=metabase_field	Added 0.39 - Semantic type system - rename special_type	\N	4.11.0	\N	\N	0189608756
+v42.00-030	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.854858	339	MARK_RAN	8:59e52a188f1d131bb62161ee3ab8f0b0	modifyDataType columnName=points_of_interest, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-031	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.950471	340	MARK_RAN	8:7d7a5bc0d758e61a5d48b9d0f46cdf9a	modifyDataType columnName=caveats, tableName=metric	Added 0.42.0 - modify type of metric.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-032	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.044411	341	MARK_RAN	8:7d8e0965438cd14097b835a598bcfdf7	modifyDataType columnName=definition, tableName=metric	Added 0.42.0 - modify type of metric.definition from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-033	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.138232	342	MARK_RAN	8:ecfed282a484cb27d2ac0122a9861d9c	modifyDataType columnName=description, tableName=metric	Added 0.42.0 - modify type of metric.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-034	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.235942	343	MARK_RAN	8:016c2de3176fa0b3c2d0238923e74e2e	modifyDataType columnName=how_is_this_calculated, tableName=metric	Added 0.42.0 - modify type of metric.how_is_this_calculated from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-035	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.33725	344	MARK_RAN	8:c8e3cf661d802b8772fefb28d54cc4d2	modifyDataType columnName=points_of_interest, tableName=metric	Added 0.42.0 - modify type of metric.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-036	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.435749	345	MARK_RAN	8:18880508f09bb76535dffb5226055256	modifyDataType columnName=text, tableName=moderation_review	Added 0.42.0 - modify type of moderation_review.text from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-037	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.534589	346	MARK_RAN	8:75b3734278af63ba604e709f3452330e	modifyDataType columnName=content, tableName=native_query_snippet	Added 0.42.0 - modify type of native_query_snippet.content from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-038	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.629803	347	MARK_RAN	8:50c5ebd57728d39a79c5de02b78d446f	modifyDataType columnName=description, tableName=native_query_snippet	Added 0.42.0 - modify type of native_query_snippet.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-039	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.732384	348	MARK_RAN	8:1126511637c1da363e26a8abfe0cd9a9	modifyDataType columnName=parameters, tableName=pulse	Added 0.42.0 - modify type of pulse.parameters from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-040	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.832099	349	MARK_RAN	8:ffcc4cd6e10c850dd78016c75947943f	modifyDataType columnName=details, tableName=pulse_channel	Added 0.42.0 - modify type of pulse_channel.details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-041	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.924357	350	MARK_RAN	8:aeffafbd763b7b2b20246dc780e352e2	modifyDataType columnName=query, tableName=query	Added 0.42.0 - modify type of query.query from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+83	senior	migrations/000_migrations.yaml	2023-11-17 02:53:53.676487	81	EXECUTED	8:ccd897d737737c05248293c7d56efe96	dropNotNullConstraint columnName=card_id, tableName=group_table_access_policy	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+48	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:44.400627	47	EXECUTED	8:b3b418a4bbcf558e40f5d32effd2c7da	createTable tableName=collection_revision		\N	4.11.0	\N	\N	0189608756
+49	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:45.01382	48	EXECUTED	8:a9a777c7ecd1c6a338126b800a8b46e8	addColumn tableName=report_card; addColumn tableName=report_card; createIndex indexName=idx_card_public_uuid, tableName=report_card; addColumn tableName=report_dashboard; addColumn tableName=report_dashboard; createIndex indexName=idx_dashboard_pu...		\N	4.11.0	\N	\N	0189608756
+v42.00-042	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.018831	351	MARK_RAN	8:337f1a807936a453d20339d05ef6505e	modifyDataType columnName=error, tableName=query_execution	Added 0.42.0 - modify type of query_execution.error from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-043	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.112549	352	MARK_RAN	8:d6d5d5f81726012b2c72e59d60a9894e	modifyDataType columnName=dataset_query, tableName=report_card	Added 0.42.0 - modify type of report_card.dataset_query from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-044	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.205995	353	MARK_RAN	8:63f3133301c1baca7b13a6266cf11e8d	modifyDataType columnName=description, tableName=report_card	Added 0.42.0 - modify type of report_card.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-045	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.300938	354	MARK_RAN	8:b3c0fc88880ccd64a880d439f7668307	modifyDataType columnName=embedding_params, tableName=report_card	Added 0.42.0 - modify type of report_card.embedding_params from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-046	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.392328	355	MARK_RAN	8:4b4c50c0dbc197c5a15f21d46cae81a9	modifyDataType columnName=result_metadata, tableName=report_card	Added 0.42.0 - modify type of report_card.result_metadata from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-047	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.489191	356	MARK_RAN	8:35f9bd24b4a500f748168d03273d91bf	modifyDataType columnName=visualization_settings, tableName=report_card	Added 0.42.0 - modify type of report_card.visualization_settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-048	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.598365	357	MARK_RAN	8:783ce0d26e51ba9244c5a25d0e8bfc1f	modifyDataType columnName=caveats, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-049	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.702299	358	MARK_RAN	8:de19cbe028a00c5831d676a0e9bb9453	modifyDataType columnName=description, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-050	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.794263	359	MARK_RAN	8:7f8278a770d9514f2d4518497bdd53d5	modifyDataType columnName=embedding_params, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.embedding_params from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-051	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.886503	360	MARK_RAN	8:e3727da5c8fd5077ba3c541d05e9d329	modifyDataType columnName=parameters, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.parameters from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-052	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.977017	361	MARK_RAN	8:bee03ae62b47cd8c7c7e78ef225be531	modifyDataType columnName=points_of_interest, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-053	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.072994	362	MARK_RAN	8:bf16b19d46ed69eb51663bbbec93d0a6	modifyDataType columnName=parameter_mappings, tableName=report_dashboardcard	Added 0.42.0 - modify type of report_dashboardcard.parameter_mappings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-054	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.166018	363	MARK_RAN	8:3088bdaabb4e1e04951ee3ab22487867	modifyDataType columnName=visualization_settings, tableName=report_dashboardcard	Added 0.42.0 - modify type of report_dashboardcard.visualization_settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-055	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.260847	364	MARK_RAN	8:d6753fc353f44b790b9e750952a869f9	modifyDataType columnName=message, tableName=revision	Added 0.42.0 - modify type of revision.message from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-056	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.44768	365	EXECUTED	8:6f1e02c9122309b99ac4329631724805	modifyDataType columnName=object, tableName=revision	Added 0.42.0 - modify type of revision.object from text to text	\N	4.11.0	\N	\N	0189608756
+v42.00-057	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.509685	366	MARK_RAN	8:21a0331ed3ba2796081a6ce6d5850ed8	modifyDataType columnName=caveats, tableName=segment	Added 0.42.0 - modify type of segment.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-058	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.604417	367	MARK_RAN	8:123b3de75914cd8415b20dbc964ac655	modifyDataType columnName=definition, tableName=segment	Added 0.42.0 - modify type of segment.definition from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-059	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.696354	368	MARK_RAN	8:edbe944897f5694257f7edc661b7067c	modifyDataType columnName=description, tableName=segment	Added 0.42.0 - modify type of segment.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-060	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.792257	369	MARK_RAN	8:30b35e6afdbc2cdf9588fdf40d9bc1b5	modifyDataType columnName=points_of_interest, tableName=segment	Added 0.42.0 - modify type of segment.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-061	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.892455	370	MARK_RAN	8:ae76887a049949a201f45132bb7cc23c	modifyDataType columnName=value, tableName=setting	Added 0.42.0 - modify type of setting.value from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-062	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.984386	371	MARK_RAN	8:b986105790c336d4f9e6c1a8755f23ca	modifyDataType columnName=task_details, tableName=task_history	Added 0.42.0 - modify type of task_history.task_details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+84	senior	migrations/000_migrations.yaml	2023-11-17 02:53:54.015351	82	EXECUTED	8:58afc10c3e283a8050ea471aac447a97	renameColumn newColumnName=archived, oldColumnName=is_active, tableName=metric; addDefaultValue columnName=archived, tableName=metric; renameColumn newColumnName=archived, oldColumnName=is_active, tableName=segment; addDefaultValue columnName=arch...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+16	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.418173	15	EXECUTED	8:ecc7f02641a589e6d35f88587ac6e02b	dropNotNullConstraint columnName=last_login, tableName=core_user		\N	4.11.0	\N	\N	0189608756
+v42.00-063	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:39.079976	372	MARK_RAN	8:69c5877d81b6cd3974530db1127f90b4	modifyDataType columnName=metadata, tableName=view_log	Added 0.42.0 - modify type of view_log.metadata from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-064	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:39.172499	373	MARK_RAN	8:9169e238663c5d036bd83428d2fa8e4b	modifyDataType columnName=results, tableName=query_cache	Added 0.42.0 - fix type of query_cache.results on upgrade (in case changeSet 97 was run before #16095)	\N	4.11.0	\N	\N	0189608756
+v42.00-065	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:39.392262	374	EXECUTED	8:5befdc16aff1cda15744a577889f242a	addColumn tableName=core_user	Added 0.42.0 - Another modal dismissed state on user. Retaining the same suffix and boolean style to ease an eventual migration.	\N	4.11.0	\N	\N	0189608756
+v42.00-066	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:39.582373	375	EXECUTED	8:b43c6357a5dacd4f7eb3b49c7372b908	addColumn tableName=metabase_database	Added 0.42.0 - new columns for initial DB sync progress UX. Indicates whether a database has succesfully synced at least one time.	\N	4.11.0	\N	\N	0189608756
+v42.00-067	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:39.780772	376	EXECUTED	8:cc9373fbb8ae35f5599105b1612f762c	addColumn tableName=metabase_table	Added 0.42.0 - new columns for initial DB sync progress UX. Indicates whether a table has succesfully synced at least one time.	\N	4.11.0	\N	\N	0189608756
+v42.00-068	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:39.981902	377	EXECUTED	8:5f3144422c5fa86d1344f6fe0cf2049f	addColumn tableName=metabase_database	Added 0.42.0 - new columns for initial DB sync progress UX. Records the ID of the admin who added a database. May be null for the sample dataset, or for databases added prior to 0.42.0.	\N	4.11.0	\N	\N	0189608756
+v42.00-069	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:40.138976	378	EXECUTED	8:1497ad69b4a6855a232a4ea121687ba2	addForeignKeyConstraint baseTableName=metabase_database, constraintName=fk_database_creator_id, referencedTableName=core_user	Added 0.42.0 - adds FK constraint for creator_id column, containing the ID of the admin who added a database.	\N	4.11.0	\N	\N	0189608756
+v42.00-070	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:40.405068	379	EXECUTED	8:82016397101b9d4444381f63d584fa7a	addColumn tableName=metabase_database	Added 0.42.0 - add Database.settings column to implement Database-local Settings	\N	4.11.0	\N	\N	0189608756
+v43.00-003	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.148729	383	EXECUTED	8:d220feb098ef8e5c6bd44e94166a92d9	sql	Added 0.43.0. Create magic 'Administrators' Permissions Group if it does not already exist.	\N	4.11.0	\N	\N	0189608756
+v43.00-004	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.308955	384	EXECUTED	8:1c28c6de37700b0ae5f679b86d335764	sql	Added 0.43.0. Add existing Users to 'All Users' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
+v43.00-005	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.471395	385	EXECUTED	8:17c0d62516f4af2090010ff9f0f1bf1c	sql	Added 0.43.0. Add existing Users with 'is_superuser' flag to 'Administrators' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
+v43.00-006	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.628874	386	EXECUTED	8:e83e560209f8aa4e57e10a6745715483	sql	Added 0.43.0. Create root '/' permissions entry for the 'Administrators' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
+v43.00-007	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.858769	387	EXECUTED	8:134265766925f53d8da208089e4e1082	sql	Added 0.43.0. Grant permissions for existing Databases to 'All Users' permissions group.	\N	4.11.0	\N	\N	0189608756
+v43.00-009	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.258776	389	EXECUTED	8:9dffa1da7ad8f84a12794bc7c96c15e7	sql; sql; sql	Added 0.43.0. Make sure 'site-url' Setting includes protocol.	\N	4.11.0	\N	\N	0189608756
+v43.00-010	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.500714	390	EXECUTED	8:5eedafb824c5e636c7ff14fc7922ca4a	sql; sql; sql	Added 0.43.0. Migrates value of legacy enable-advanced-humanization Setting to humanization-strategy Setting added in 0.28.0.	\N	4.11.0	\N	\N	0189608756
+v43.00-011	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.690687	391	EXECUTED	8:2c62d31bec1c6281d02ec41444c5932e	sql; sql; sql	Added 0.43.0. Remove legacy enable-advanced-humanization Setting.	\N	4.11.0	\N	\N	0189608756
+v43.00-012	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.926449	392	EXECUTED	8:a59acc0e562305bbef5721982deb2028	sql	Added 0.43.0. Set Field.has_field_values to 'list' if semantic_type derives from :type/Category.	\N	4.11.0	\N	\N	0189608756
+v43.00-014	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.108274	393	MARK_RAN	8:bf03710cb176dd7c720a3e2e47ae7782	sql	Added 0.43.0. Add 'Migrated Dashboards' Collection if needed and there are any Dashboards not in a Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-015	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.324395	394	MARK_RAN	8:f615da33f8be6bd251faac925bfc9bbd	sql	Added 0.43.0. Add 'Migrated Pulses' Collection if needed and there are any Pulses not in a Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-016	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.544975	395	MARK_RAN	8:d31ad47d1aa56ddee95c15726b6810d8	sql	Added 0.43.0. Add 'Migrated Questions' Collection if needed and there are any Cards not in a Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-017	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.798583	396	EXECUTED	8:969b947a5066941617a9add82975de9a	sql	Added 0.43.0. Move Dashboards not in a Collection to 'Migrated Dashboards'.	\N	4.11.0	\N	\N	0189608756
+v43.00-018	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:44.014696	397	EXECUTED	8:b105395ddb21d04c12756e8924ccba83	sql	Added 0.43.0. Move Pulses not in a Collection to 'Migrated Pulses'.	\N	4.11.0	\N	\N	0189608756
+v43.00-019	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:44.230815	398	EXECUTED	8:6b2e7344dbf0f3be8ec39b4efdb7a4d5	sql	Added 0.43.0. Move Cards not in a Collection to 'Migrated Questions'.	\N	4.11.0	\N	\N	0189608756
+11	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:33.306169	10	EXECUTED	8:ca6561cab1eedbcf4dcb6d6e22cd46c6	sql		\N	4.11.0	\N	\N	0189608756
+v43.00-020	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:44.457196	399	EXECUTED	8:e3399a0ef504c5f5140e9e866a2e49fd	sql	Added 0.43.0. Grant the 'All Users' Permissions Group readwrite perms for the Root Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-021	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:44.910791	400	EXECUTED	8:6b432682f811c4099b7018083dfab7a2	createTable tableName=timeline	Added 0.43.0 - Timeline table for Events	\N	4.11.0	\N	\N	0189608756
+v43.00-022	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:45.451396	401	EXECUTED	8:d4a7fd96d5f8299825fbed4a3e001d33	createTable tableName=timeline_event	Added 0.43.0 - Events table	\N	4.11.0	\N	\N	0189608756
+v43.00-023	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:45.616649	402	EXECUTED	8:68ea023407382a8f54dc282f601ac6cb	createIndex indexName=idx_timeline_collection_id, tableName=timeline	Added 0.43.0 - Index on timeline collection_id	\N	4.11.0	\N	\N	0189608756
+v43.00-024	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:45.777908	403	EXECUTED	8:0056b773435253b7e8e40d5261897823	createIndex indexName=idx_timeline_event_timeline_id, tableName=timeline_event	Added 0.43.0 - Index on timeline_event timeline_id	\N	4.11.0	\N	\N	0189608756
+v43.00-025	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:45.940893	404	EXECUTED	8:8839ff170d1faac11237f79ce729d637	createIndex indexName=idx_timeline_event_timeline_id_timestamp, tableName=timeline_event	Added 0.43.0 - Index on timeline timestamp	\N	4.11.0	\N	\N	0189608756
+v43.00-026	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:46.125953	405	EXECUTED	8:a04fac9421e10f1901979560afee3b7c	addColumn tableName=core_user	Added 0.43.0 - adds User.settings column to implement User-local Settings	\N	4.11.0	\N	\N	0189608756
+v43.00-027	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:46.285447	406	EXECUTED	8:141420f027b84d0d08e944ffc0d005df	dropNotNullConstraint columnName=password, tableName=core_user	Added 0.43.0. Drop NOT NULL constraint for core_user.password	\N	4.11.0	\N	\N	0189608756
+v43.00-028	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:46.4411	407	EXECUTED	8:c86e72e67598f29e10de00fe346095b3	dropNotNullConstraint columnName=password_salt, tableName=core_user	Added 0.43.0. Drop NOT NULL constraint for core_user.password_salt	\N	4.11.0	\N	\N	0189608756
+v43.00-029	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:46.591019	408	EXECUTED	8:4d5632ee6fae1f8d0d5e6068700ccb2e	sql	Added 0.43.0. Clear local password for Users using LDAP auth.	\N	4.11.0	\N	\N	0189608756
+v43.00-030	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:46.883437	409	EXECUTED	8:3b73196410d9a3716f705cdc96a0b98b	createTable tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table	\N	4.11.0	\N	\N	0189608756
+v43.00-031	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.047625	410	EXECUTED	8:1081aff22c7fef2be2c63cdec33aad06	addUniqueConstraint constraintName=unique_dashboard_bookmark_user_id_dashboard_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
+v43.00-032	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.21523	411	EXECUTED	8:573e98bd0b8392f3c207ae49b1eb20ce	createIndex indexName=idx_dashboard_bookmark_user_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
+v43.00-033	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.376537	412	EXECUTED	8:d9471b53e0666a6d3fc99e3c768ccafa	createIndex indexName=idx_dashboard_bookmark_dashboard_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table index on dashboard_id	\N	4.11.0	\N	\N	0189608756
+v43.00-035	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.83348	414	EXECUTED	8:9cce81eb78b0c25d01a23d2f74377eda	addUniqueConstraint constraintName=unique_card_bookmark_user_id_card_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
+v43.00-036	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.001045	415	EXECUTED	8:a107c119de1ee902e9526a0413158093	createIndex indexName=idx_card_bookmark_user_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
+v43.00-037	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.175829	416	EXECUTED	8:80b451e8506f3d3092347cb3f9a96c0c	createIndex indexName=idx_card_bookmark_card_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table index on card_id	\N	4.11.0	\N	\N	0189608756
+v43.00-038	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.471304	417	EXECUTED	8:12e445545dfcf946fd2f04b3f33e8bb7	createTable tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table	\N	4.11.0	\N	\N	0189608756
+v43.00-039	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.639371	418	EXECUTED	8:88c30bdf22c1bcae694850d81a65b175	addUniqueConstraint constraintName=unique_collection_bookmark_user_id_collection_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
+v43.00-040	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.796888	419	EXECUTED	8:455175f303c3f64cb9588aca5c6641e0	createIndex indexName=idx_collection_bookmark_user_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
+v43.00-041	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.96599	420	EXECUTED	8:b3a84ea8c47896be2931fb73e07459ce	createIndex indexName=idx_collection_bookmark_collection_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table index on collection_id	\N	4.11.0	\N	\N	0189608756
+v43.00-042	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:49.135474	421	EXECUTED	8:e0b982be997b8e591172f4a7c9dab869	sql	Added 0.43.0. Grant download permissions for existing Databases to 'All Users' permissions group	\N	4.11.0	\N	\N	0189608756
+v43.00-043	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:49.316038	422	EXECUTED	8:2b0195448dad18ba671d64a0c35ceb79	addColumn tableName=metabase_field	Added 0.43.0 - Nested field columns in fields	\N	4.11.0	\N	\N	0189608756
+v43.00-044	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:49.483537	423	EXECUTED	8:537bbbdc3a39703e704e80d757d8cead	sql	Added 0.43.0 - Removes MetaBot permissions group	\N	4.11.0	\N	\N	0189608756
+v43.00-046	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:49.834202	424	EXECUTED	8:de349aff4c691f7abd7417421ed4e54e	createTable tableName=general_permissions_revision	Added 0.43.0 - create General Permission Revision table	\N	4.11.0	\N	\N	0189608756
+v43.00-047	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:50.013414	425	EXECUTED	8:35c7324ab207528726cc332a5b433a58	sql	Added 0.43.0. Grant the 'All Users' Group permissions to create/edit subscriptions and alerts	\N	4.11.0	\N	\N	0189608756
+v43.00-049	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:50.179907	426	EXECUTED	8:3223a3f02b151cdca259da680de7f848	modifyDataType columnName=timestamp, tableName=view_log	Added 0.43.0 - Unify datatype with query_execution.started_at so comparable (see 168).	\N	4.11.0	\N	\N	0189608756
+v42.00-071	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:40.563186	380	EXECUTED	8:315c004fe2776340730f660504260575	sql	Added 0.42.0 - migrates the Sample Dataset to the name "Sample Database"	\N	4.11.0	\N	\N	0189608756
+v43.00-050	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:50.369334	427	EXECUTED	8:d4bc347f147647b361bbe3740d035413	addColumn tableName=permissions_group_membership	Added 0.43.0. Add permissions_group_membership.is_group_manager	\N	4.11.0	\N	\N	0189608756
+v43.00-051	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:50.558879	428	EXECUTED	8:cd0b3deabba3be0abcabd7b8f7fe03c8	addColumn tableName=timeline	Added 0.43.0 - default boolean on timelines to indicate default timeline for a collection	\N	4.11.0	\N	\N	0189608756
+v43.00-053	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:51.064263	430	EXECUTED	8:9660924a1b14881a4d5d11e535c6d838	addUniqueConstraint constraintName=unique_bookmark_user_id_type_item_id, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+v43.00-054	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:51.253031	431	EXECUTED	8:b353fff839dde25895deba810f64c704	addUniqueConstraint constraintName=unique_bookmark_user_id_ordering, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+v43.00-055	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:51.424285	432	EXECUTED	8:bd8dd0c8f4391a2ed375f369971b4023	createIndex indexName=idx_bookmark_ordering_user_id, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+v43.00-056	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:51.58027	433	EXECUTED	8:c418d33e471acbbcd9f86e57b1df4468	renameTable newTableName=application_permissions_revision, oldTableName=general_permissions_revision	Added 0.43.0 - Rename general permission revision table It's safe to rename this table without breaking downgrades compatibility because this table was also added in 0.43.0.	\N	4.11.0	\N	\N	0189608756
+v43.00-057	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:51.749466	434	EXECUTED	8:a96791b95827101abd2cb77361c847ce	sql	Added 0.43.0 - Rename general_permissions_revision_id_seq	\N	4.11.0	\N	\N	0189608756
+v43.00-058	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:51.909153	435	EXECUTED	8:bbef3f445957c95a3d42b74b7c8b1fa3	sql	Added 0.43.0 - Rename general permissios to application permissions	\N	4.11.0	\N	\N	0189608756
+v43.00-059	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:52.107257	436	EXECUTED	8:57fb18b8a2b231c107b4d138521166dd	addNotNullConstraint columnName=icon, tableName=timeline	Added 0.43.0 - disallow nil timeline icons	\N	4.11.0	\N	\N	0189608756
+v43.00-060	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:52.298173	437	EXECUTED	8:25978d2800f7e2dd6e8f4ad61027dfa3	addNotNullConstraint columnName=icon, tableName=timeline_event	Added 0.43.0 - disallow nil timeline event icons	\N	4.11.0	\N	\N	0189608756
+v44.00-002	braden	migrations/000_migrations.yaml	2023-11-17 02:54:53.505615	441	EXECUTED	8:6dc28d92f89811023b6bcd9d77395634	addColumn tableName=metric	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-003	braden	migrations/000_migrations.yaml	2023-11-17 02:54:53.746041	442	EXECUTED	8:9bd778cae47bb09833a901fdcf76fee8	addColumn tableName=segment	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-004	braden	migrations/000_migrations.yaml	2023-11-17 02:54:53.988132	443	EXECUTED	8:4d9ac5fd2c5dbbb6768bb920bd2890cb	addColumn tableName=collection	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-005	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.217431	444	EXECUTED	8:8a3712f3787b8c58c3c6f307d5b641c5	addColumn tableName=report_dashboard	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-006	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.449588	445	EXECUTED	8:9d9eee07c7b8a7a3c87f6f98e4856b13	addColumn tableName=dimension	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-007	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.677413	446	EXECUTED	8:007f472f4397fba9deb7731ddd4a2a9e	addColumn tableName=pulse	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-008	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.931337	447	EXECUTED	8:ea3332f011482a9a9e709f922830ba95	addColumn tableName=report_card	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-009	braden	migrations/000_migrations.yaml	2023-11-17 02:54:55.154212	448	EXECUTED	8:ef0054e0f1d1ac22ff1c81cf01519d0b	addColumn tableName=native_query_snippet	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-010	braden	migrations/000_migrations.yaml	2023-11-17 02:54:55.38844	449	EXECUTED	8:0e58282581d53882d032811c4ea52c8d	addColumn tableName=timeline	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-011	braden	migrations/000_migrations.yaml	2023-11-17 02:54:55.615532	450	EXECUTED	8:6a606a9c9351749947263fea4255dc1e	addColumn tableName=report_dashboardcard	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-023	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:55.80161	451	EXECUTED	8:493153694fde9482c906922a6c63bf88	addColumn tableName=report_card	Added 0.44.0 - Add parameters to report_card	\N	4.11.0	\N	\N	0189608756
+v44.00-025	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:56.017261	452	EXECUTED	8:653792e7485e6c6d9063cdd085d8584c	addColumn tableName=report_card	Added 0.44.0 - Add parameter_mappings to report_card	\N	4.11.0	\N	\N	0189608756
+v44.00-027	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:56.175345	453	EXECUTED	8:4fb924ff28472bf113fd4abf5ec8cf1b	dropNotNullConstraint columnName=first_name, tableName=core_user	Added 0.44.0. Drop NOT NULL constraint for core_user.first_name	\N	4.11.0	\N	\N	0189608756
+v44.00-028	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:56.331455	454	EXECUTED	8:8c5c6b0342b7970e15fb93ed618a44c3	dropNotNullConstraint columnName=last_name, tableName=core_user	Added 0.44.0. Drop NOT NULL constraint for core_user.last_name	\N	4.11.0	\N	\N	0189608756
+v44.00-029	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:56.519898	455	EXECUTED	8:3380ac2de7c5c6a0b313c81c8a438f28	addColumn tableName=metabase_fieldvalues	Added 0.44.0 - Add has_more_values to metabase_fieldvalues	\N	4.11.0	\N	\N	0189608756
+v44.00-030	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:56.707299	456	EXECUTED	8:757a6d90116ca360a4d70bf9f910af1d	addColumn tableName=metabase_field	Added 0.44.0 - Add database_required to metabase_field	\N	4.11.0	\N	\N	0189608756
+v44.00-033	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:56.923194	457	EXECUTED	8:2407250e09ed3bd6e36f0fa340b206ac	sql	Added 0.43.0. Grant the 'All Users' Permissions Group readwrite perms for the Root Snippets Collection.	\N	4.11.0	\N	\N	0189608756
+50	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:45.39251	49	EXECUTED	8:98a6ab6428ea7a589507464e34ade58a	addColumn tableName=report_card; addColumn tableName=report_card; addColumn tableName=report_dashboard; addColumn tableName=report_dashboard		\N	4.11.0	\N	\N	0189608756
+v44.00-035	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:57.117513	458	EXECUTED	8:38dcbf6c407d7a19591ea6c7baa287e3	addColumn tableName=metabase_fieldvalues	Added 0.44.0. Add type to fieldvalues	\N	4.11.0	\N	\N	0189608756
+12	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:33.588343	11	EXECUTED	8:1cc6a5e29970d1ae5008ccd842b0b06a	addColumn tableName=report_card; addColumn tableName=report_card; addColumn tableName=report_card		\N	4.11.0	\N	\N	0189608756
+v44.00-037	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:57.313366	459	EXECUTED	8:6bb5be3d1c58c69d0dc42a38fa150d57	addColumn tableName=metabase_fieldvalues	Added 0.44.0. Add type to fieldvalues	\N	4.11.0	\N	\N	0189608756
+v44.00-038	metamben	migrations/000_migrations.yaml	2023-11-17 02:54:57.501898	460	EXECUTED	8:327897734fed2d9f16707cd16c0395f3	addColumn tableName=report_card	Added 0.44.0 - Add collection_preview to report_card	\N	4.11.0	\N	\N	0189608756
+v44.00-039	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:57.68364	461	EXECUTED	8:381712e81a39de0ddec9107419c1450a	addColumn tableName=native_query_snippet	Added 0.44.0 - Add template_tags to native_query_snippet	\N	4.11.0	\N	\N	0189608756
+v44.00-041	braden	migrations/000_migrations.yaml	2023-11-17 02:54:57.903808	462	EXECUTED	8:7fba8d5b9bfe7136d1a78c8d8d8fc402	addColumn tableName=pulse_card	Added 0.44.0 - add entity_id column to PulseCard, PulseChannel	\N	4.11.0	\N	\N	0189608756
+v44.00-042	braden	migrations/000_migrations.yaml	2023-11-17 02:54:58.125763	463	EXECUTED	8:ca3a5364fcac3da951d35f25d660144f	addColumn tableName=pulse_channel	Added 0.44.0 - add entity_id column to PulseCard, PulseChannel	\N	4.11.0	\N	\N	0189608756
+v45.00-001	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:58.639445	465	EXECUTED	8:da99b71a4ac7eb662f6a95e69585935e	createTable tableName=action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-002	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:58.951817	466	EXECUTED	8:6da7a6285edb138c404de0eeba209570	createTable tableName=query_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-011	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:59.463498	468	EXECUTED	8:dcf1cda9f20dca4b6ff8101b13b98c4a	addColumn tableName=report_card	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-012	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:59.94621	469	EXECUTED	8:aadf28229f585cff7c4b4c1918e558b2	createTable tableName=http_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-013	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:00.268078	470	EXECUTED	8:26dba276b14255d4346507a1a25d117b	addPrimaryKey constraintName=pk_http_action, tableName=http_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-022	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:00.811731	471	EXECUTED	8:d46fa24e4d75a11b2e92aecbf39c6ee1	createTable tableName=app	Added 0.45.0 - add app container	\N	4.11.0	\N	\N	0189608756
+20	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:35.468149	19	EXECUTED	8:1b6c23d69b9330b56dcb4bb7188e8d5e	createTable tableName=pulse; createIndex indexName=idx_pulse_creator_id, tableName=pulse; createTable tableName=pulse_card; createIndex indexName=idx_pulse_card_pulse_id, tableName=pulse_card; createIndex indexName=idx_pulse_card_card_id, tableNam...		\N	4.11.0	\N	\N	0189608756
+v45.00-023	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:00.993897	472	EXECUTED	8:c6c1ff9ca3b62d4cda3a2d782dd86f2f	addForeignKeyConstraint baseTableName=app, constraintName=fk_app_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.45.0 - add app container	\N	4.11.0	\N	\N	0189608756
+v45.00-025	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:01.196059	473	EXECUTED	8:50a43cea3123ecdb602123825f5a7dbf	addColumn tableName=report_dashboard	Added 0.45.0 - mark app pages	\N	4.11.0	\N	\N	0189608756
+v45.00-026	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:01.392181	474	EXECUTED	8:ae77d4086998911877e3207fcf90c9c7	addColumn tableName=report_dashboardcard	Added 0.45.0 - apps add action_id to report_dashboardcard	\N	4.11.0	\N	\N	0189608756
+v45.00-027	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:01.54825	475	EXECUTED	8:40c3c8391c1416a3bce09ca3c7237173	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_report_dashboardcard_ref_action_id, referencedTableName=action	Added 0.45.0 - apps add fk for action_id to report_dashboardcard	\N	4.11.0	\N	\N	0189608756
+v45.00-028	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:01.710532	476	EXECUTED	8:f8f68f80627aeb2ef7f28f2af2b5a31b	renameColumn newColumnName=size_x, oldColumnName=sizeX, tableName=report_dashboardcard	Added 0.45.0 -- rename DashboardCard sizeX to size_x. See https://github.com/metabase/metabase/issues/16344	\N	4.11.0	\N	\N	0189608756
+v45.00-029	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:01.878163	477	EXECUTED	8:579957652133eab3ee023dd911162a1e	renameColumn newColumnName=size_y, oldColumnName=sizeY, tableName=report_dashboardcard	Added 0.45.0 -- rename DashboardCard size_y to size_y. See https://github.com/metabase/metabase/issues/16344	\N	4.11.0	\N	\N	0189608756
+v45.00-030	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.037801	478	EXECUTED	8:41eda097feb034c4d01b2dbda74753c8	addDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.45.0 -- add default value to DashboardCard size_x -- this was previously done by Toucan	\N	4.11.0	\N	\N	0189608756
+v45.00-031	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.202228	479	EXECUTED	8:6416e373e335dc1c12c7571af674dede	addDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.45.0 -- add default value to DashboardCard size_y -- this was previously done by Toucan	\N	4.11.0	\N	\N	0189608756
+v45.00-032	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.382002	480	EXECUTED	8:d97444fe24a2dca618a2804741335f6d	addDefaultValue columnName=created_at, tableName=report_dashboardcard	Added 0.45.0 -- add default value for DashboardCard created_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-033	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.456075	481	MARK_RAN	8:34df79fc79e086ab05bb2fd79bb4e322	sql	Added 0.45.0 -- add default value for DashboardCard created_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-034	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.676365	482	EXECUTED	8:ba0505a87ef876026759cdcb4e704f41	addDefaultValue columnName=updated_at, tableName=report_dashboardcard	Added 0.45.0 -- add default value for DashboardCard updated_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-035	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.752566	483	MARK_RAN	8:dcee49781d80d9c4be5ad9dd51975a07	sql	Added 0.45.0 -- add default value for DashboardCard updated_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-036	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:03.229677	484	EXECUTED	8:cd4009254bd2c56aaf281082038c1f0b	createTable tableName=model_action	Added 0.45.0 - add model action table	\N	4.11.0	\N	\N	0189608756
+v45.00-037	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:03.441846	485	EXECUTED	8:56f548cc84a53cc6d18302761ee71554	addUniqueConstraint constraintName=unique_model_action_card_id_slug, tableName=model_action	Added 0.45.0 - model action	\N	4.11.0	\N	\N	0189608756
+v45.00-038	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.601782	486	EXECUTED	8:c38ddc295206e807c7254581ed9566c3	addDefaultValue columnName=created_at, tableName=metabase_database	Added 0.45.0 -- add default value for Database created_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-039	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.663575	487	MARK_RAN	8:2c539d76d3aead7f7366b15333132b30	sql	Added 0.45.0 -- add default value for Database created_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-040	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.863616	488	EXECUTED	8:00ac7c24cfd3e7ea3a21f21f4e45dbcf	addDefaultValue columnName=updated_at, tableName=metabase_database	Added 0.45.0 -- add default value for Database updated_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-041	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.927462	489	MARK_RAN	8:82dc368fa3e0163a06929da6e9556fe2	sql	Added 0.45.0 -- add default value for Database updated_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-042	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.11182	490	EXECUTED	8:d04207471480e335f14094e9a7a5d293	sql	Added 0.45.0 -- add default value for Database with NULL details	\N	4.11.0	\N	\N	0189608756
+32	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:38.616441	32	EXECUTED	8:32fb3ffb1ac9b619248c3de8e3d09b4b	createTable tableName=raw_table; createIndex indexName=idx_rawtable_database_id, tableName=raw_table; addUniqueConstraint constraintName=uniq_raw_table_db_schema_name, tableName=raw_table; createTable tableName=raw_column; createIndex indexName=id...		\N	4.11.0	\N	\N	0189608756
+v45.00-043	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.267825	491	EXECUTED	8:1d07a5435e51abd0663458d907865a6b	addNotNullConstraint columnName=details, tableName=metabase_database	Added 0.45.0 -- make Database details NOT NULL	\N	4.11.0	\N	\N	0189608756
+v45.00-044	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:04.6397	492	EXECUTED	8:0b23976c5d2248d511ac31b244efef22	createTable tableName=app_permission_graph_revision	Added 0.45.0 -- create app permission graph revision table	\N	4.11.0	\N	\N	0189608756
+v45.00-049	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.987169	494	EXECUTED	8:df2097d176fad99c142c5dd75ce8a3db	sql; sql; sql	Added 0.45.0 -- set Collection.created_at to User.date_joined for Personal Collections	\N	4.11.0	\N	\N	0189608756
+v45.00-050	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:05.150258	495	EXECUTED	8:65ecfe481e7c0141bb82bb3401cfa94e	sql; sql; sql	Added 0.45.0 -- seed Collection.created_at with value of oldest item for non-Personal Collections	\N	4.11.0	\N	\N	0189608756
+v45.00-051	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.215872	496	MARK_RAN	8:2378c7031da6871dcf1c737bf323d211	modifyDataType columnName=after, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.after from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-052	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.315952	497	MARK_RAN	8:b7343eb9556c3e636b6f8dd70708c0b3	modifyDataType columnName=before, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.before from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-053	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.411904	498	MARK_RAN	8:fa552605d5a587c4fa74e0c6bd358097	modifyDataType columnName=remark, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.remark from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-054	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.519654	499	MARK_RAN	8:60862c4ecf505727e839ac5e94f95528	modifyDataType columnName=after, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.after from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-055	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.617606	500	MARK_RAN	8:717f0c266da5768098a2ead6168f3b18	modifyDataType columnName=before, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.before from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-056	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.709853	501	MARK_RAN	8:a1f364d45a922c90b4fac741a22e66b3	modifyDataType columnName=remark, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.remark from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v46.00-000	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.098681	503	EXECUTED	8:97251413292221e51490e990b6f683f2	createTable tableName=implicit_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-002	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.480403	505	EXECUTED	8:b2b112f0df413692631b75822f658de1	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-003	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.662396	506	EXECUTED	8:45b8358f31811335aaa93032726a042b	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-004	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.858011	507	EXECUTED	8:0ce8ff05beffc5c72e2348bcec581eee	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-005	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.038451	508	EXECUTED	8:84cf1fbf435c7c3f794c973de4d62fad	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-006	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.232178	509	EXECUTED	8:df43ef08b76c33c5626dbf9b226717b5	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-007	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.384217	510	EXECUTED	8:6830901cccc14ad22cdfd86bd3a2afe7	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id, referencedTableName=report_card	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-008	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.574177	511	EXECUTED	8:6e73a8683d1b757c5f9034513ec8a581	addColumn tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-009	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.769846	512	EXECUTED	8:2b4fd7cee77d5ed8de22fcc2fba158bc	addColumn tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-010	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.923884	513	EXECUTED	8:77ca03e5a0dbe370461295da1c77cf0f	addForeignKeyConstraint baseTableName=query_action, constraintName=fk_query_action_database_id, referencedTableName=metabase_database	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-012	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.270476	515	EXECUTED	8:7e4dffe8bbbb740207001ead696a8557	dropNotNullConstraint columnName=card_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+31	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.762132	30	EXECUTED	8:30a33a82bab0bcbb2ccb6738d48e1421	addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+v46.00-013	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.614158	516	EXECUTED	8:96dfaa20265be749af8590f75d465348	sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+51	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:46.010072	50	EXECUTED	8:43c90b5b9f6c14bfd0e41cc0b184617e	createTable tableName=query_execution; createIndex indexName=idx_query_execution_started_at, tableName=query_execution; createIndex indexName=idx_query_execution_query_hash_started_at, tableName=query_execution		\N	4.11.0	\N	\N	0189608756
+128	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.384315	124	MARK_RAN	8:44acbe257817286d88b7892e79363b66	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v46.00-014	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.769763	517	EXECUTED	8:585958ee7e90e23a9cc22ebf7e4228cb	dropForeignKeyConstraint baseTableName=query_action, constraintName=fk_query_action_ref_card_id	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+35	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:38.931963	34	EXECUTED	8:91b72167fca724e6b6a94b64f886cf09	modifyDataType columnName=value, tableName=setting		\N	4.11.0	\N	\N	0189608756
+v46.00-015	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.926613	518	EXECUTED	8:9b57260e146618caff3f468116031008	dropColumn columnName=card_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-016	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.118118	519	EXECUTED	8:cb79eef9f483e73b3d9b571f916b8598	sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-017	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.286762	520	EXECUTED	8:90525ade34e7bb883bf75cdf8a2b3340	dropColumn columnName=name, tableName=http_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-018	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.448469	521	EXECUTED	8:cf3c31a975dc86f1def6ee5d11f5f9dc	dropColumn columnName=description, tableName=http_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-019	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.614079	522	EXECUTED	8:a9f70163707cc7f798bdd0527a55854b	dropColumn columnName=is_write, tableName=report_card	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-020	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.772993	523	EXECUTED	8:2def45c139267d7424e1187764122669	addNotNullConstraint columnName=database_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-022	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.112341	525	EXECUTED	8:52c8107f4bcc6e9889b270e0a4954921	addNotNullConstraint columnName=dataset_query, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-011	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.112868	514	EXECUTED	8:3c76c705376a9d70c98d26529db60efc	sql; sql; sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-024	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.427552	527	EXECUTED	8:080ff435bae61f324535393d9e78de38	addNotNullConstraint columnName=name, tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-025	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.596724	528	EXECUTED	8:60016f3de98c7382602485f13bc4e04f	dropTable tableName=model_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-026	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:10.800081	529	EXECUTED	8:948b9653bfbadeb29c847ef41d053dba	addColumn tableName=metabase_database	Added 0.46.0 -- add field for tracking DBMS versions	\N	4.11.0	\N	\N	0189608756
+v46.00-027	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.992364	530	EXECUTED	8:5f7773b797a3c85a99cd35cb60cfd0b3	addColumn tableName=metabase_fieldvalues	Added 0.46.0 -- add last_used_at to FieldValues	\N	4.11.0	\N	\N	0189608756
+v46.00-028	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:11.370692	531	EXECUTED	8:33cc1a038e926acb7dfd7cf29b4fa545	createTable tableName=parameter_card	Added 0.46.0 -- Join table connecting cards to dashboards/cards's parameters that need custom filter values from the card	\N	4.11.0	\N	\N	0189608756
+v46.00-029	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:11.542107	532	EXECUTED	8:96336855a4180eaf51d7be4a97f3b1a4	dropUniqueConstraint constraintName=unique_dimension_field_id_name, tableName=dimension	Make Dimension <=> Field a 1t1 relationship. Drop unique constraint on field_id + name. (1/3)	\N	4.11.0	\N	\N	0189608756
+v46.00-030	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:11.698197	533	EXECUTED	8:e1f67579cb8dc1102445df299636cb7b	sql	Make Dimension <=> Field a 1t1 relationship. Delete duplicate entries. (2/3)	\N	4.11.0	\N	\N	0189608756
+v46.00-031	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:11.862255	534	EXECUTED	8:a9b4c86de880b2bc01e208d8d4d8cf64	addUniqueConstraint constraintName=unique_dimension_field_id, tableName=dimension	Make Dimension <=> Field a 1t1 relationship. Add unique constraint on field_id. (3/3)	\N	4.11.0	\N	\N	0189608756
+v46.00-032	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.028062	535	EXECUTED	8:2a7de9726282af199737a334395f1068	addUniqueConstraint constraintName=unique_parameterized_object_card_parameter, tableName=parameter_card	Added 0.46.0 -- Unique parameter_card	\N	4.11.0	\N	\N	0189608756
+v46.00-033	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.192295	536	EXECUTED	8:25bc5b1a806d4b352d43f5b16e7e6e20	createIndex indexName=idx_parameter_card_parameterized_object_id, tableName=parameter_card	Added 0.46.0 -- parameter_card index on connected object	\N	4.11.0	\N	\N	0189608756
+v46.00-034	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.350555	537	EXECUTED	8:5a6b5a2cf7160baec4f81f6675de898c	createIndex indexName=idx_parameter_card_card_id, tableName=parameter_card	Added 0.46.0 -- parameter_card index on connected card	\N	4.11.0	\N	\N	0189608756
+v46.00-035	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.510792	538	EXECUTED	8:0639e4c0939848b4377792290311f239	addForeignKeyConstraint baseTableName=parameter_card, constraintName=fk_parameter_card_ref_card_id, referencedTableName=report_card	Added 0.46.0 - parameter_card.card_id foreign key	\N	4.11.0	\N	\N	0189608756
+v46.00-036	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:12.682163	539	EXECUTED	8:39d440f29a481e9f0915532106079a1a	dropTable tableName=app_permission_graph_revision	App containers are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
+v46.00-037	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:12.841373	540	EXECUTED	8:dbbe898501c554e3ee74c6b9ef9c1575	dropColumn columnName=is_app_page, tableName=report_dashboard	App pages are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
+v46.00-039	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:13.230391	542	EXECUTED	8:7ed32de11fbe8565148d8491f908ad05	addColumn tableName=parameter_card	Added 0.46.0 - add entity_id to parameter_card	\N	4.11.0	\N	\N	0189608756
+85	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:54.537185	83	EXECUTED	8:624bb71d09dc2bef7c16c025f57edff0	addColumn tableName=collection; createIndex indexName=idx_collection_personal_owner_id, tableName=collection; addColumn tableName=collection; sql; addNotNullConstraint columnName=_slug, tableName=collection; dropColumn columnName=slug, tableName=c...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+88	senior	migrations/000_migrations.yaml	2023-11-17 02:53:55.077	86	EXECUTED	8:04ff5a0738473938fc31d68c1d9952e1	addColumn tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v46.00-040	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.388225	543	EXECUTED	8:7fec881cac598cce34b62c98fcf37563	addDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.46.0 -- Bump default dashcard size to 4x4	\N	4.11.0	\N	\N	0189608756
+v46.00-041	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.546086	544	EXECUTED	8:0214a8d0b94a9eb48aad75b1d50dd279	addDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.46.0 -- Bump default dashcard size to 4x4	\N	4.11.0	\N	\N	0189608756
+v46.00-042	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.706818	545	EXECUTED	8:7b91ad83569565517c43e9f7b9bfa29a	createIndex indexName=idx_query_execution_executor_id, tableName=query_execution	Added 0.46.0 -- index query_execution.executor_id	\N	4.11.0	\N	\N	0189608756
+36	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:39.243944	35	EXECUTED	8:252e08892449dceb16c3d91337bd9573	addColumn tableName=report_dashboard; addNotNullConstraint columnName=parameters, tableName=report_dashboard; addColumn tableName=report_dashboardcard; addNotNullConstraint columnName=parameter_mappings, tableName=report_dashboardcard		\N	4.11.0	\N	\N	0189608756
+v46.00-043	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.872428	546	EXECUTED	8:d9cab29076035068cfc49fb9570832af	createIndex indexName=idx_query_execution_context, tableName=query_execution	Added 0.46.0 -- index query_execution.context	\N	4.11.0	\N	\N	0189608756
+v46.00-045	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.09437	547	EXECUTED	8:7a9cabf1c693de8b0c9555f7deb072a4	addColumn tableName=action	Added 0.46.0 -- add public_uuid to action.	\N	4.11.0	\N	\N	0189608756
+v46.00-052	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.408179	549	EXECUTED	8:948c978fcb2d938d272a05b3e56808d1	dropDefaultValue columnName=col, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v46.00-053	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.562932	550	EXECUTED	8:04e092dbffdfda13f28b1e3ea38299a7	dropDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v46.00-001	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.289808	504	EXECUTED	8:4a90c7523749aa7e4e4d2ea9dd6db777	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-054	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.730176	551	EXECUTED	8:bc3abf9ab94199aeaebb2be28dea77aa	dropDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v46.00-055	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.922211	552	EXECUTED	8:48a516459b84a21e9edbdbfe1bffd671	addColumn tableName=action	Added 0.46.0 -- add made_public_by_id	\N	4.11.0	\N	\N	0189608756
+v46.00-056	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:15.090321	553	EXECUTED	8:af93ab591b44b5d81d8d8a496600c1bc	createIndex indexName=idx_action_public_uuid, tableName=action	Added 0.46.0 -- add public_uuid and made_public_by_id to action. public_uuid is indexed	\N	4.11.0	\N	\N	0189608756
+v46.00-057	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:15.266561	554	EXECUTED	8:aff3b0e15dcfc36a4fd97faade0751c0	modifyDataType columnName=parameter_id, tableName=parameter_card	Added 0.46.0 -- parameter_card.parameter_id long enough to hold a uuid	\N	4.11.0	\N	\N	0189608756
+v46.00-058	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:15.426701	555	EXECUTED	8:11440c629413c7231e7f156347353761	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_made_public_by_id, referencedTableName=core_user	Added 0.46.0 -- add FK constraint for action.made_public_by_id with core_user.id	\N	4.11.0	\N	\N	0189608756
+v46.00-060	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:15.784266	557	EXECUTED	8:fc1762a930726afb11131acf3a56312b	createIndex indexName=idx_action_creator_id, tableName=action	Added 0.46.0 -- action.creator_id index	\N	4.11.0	\N	\N	0189608756
+v46.00-061	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:15.95034	558	EXECUTED	8:d57393ae0e96a9b1a0bd7a66597cb485	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_creator_id, referencedTableName=core_user	Added 0.46.0 -- action.creator_id index	\N	4.11.0	\N	\N	0189608756
+v46.00-062	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:16.146754	559	EXECUTED	8:20efdbd79df3c76cbf77318d871a9836	addColumn tableName=action	Added 0.46.0 -- add actions.archived	\N	4.11.0	\N	\N	0189608756
+v46.00-064	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:16.32914	560	EXECUTED	8:0ac10ca0d82f1bbe39737eb0a8fdcd7d	renameTable newTableName=sandboxes, oldTableName=group_table_access_policy	Added 0.46.0 -- rename `group_table_access_policy` to `sandboxes`	\N	4.11.0	\N	\N	0189608756
+v46.00-065	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:16.519544	561	EXECUTED	8:5cbb335952dd1ab7a137d80d6c1ab82e	addColumn tableName=sandboxes	Added 0.46.0 -- add `permission_id` to `sandboxes`	\N	4.11.0	\N	\N	0189608756
+v46.00-070	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:16.762715	562	EXECUTED	8:d440a8d0aef0bbfdae24a9c70bd37605	addColumn tableName=action	Added 0.46.0 - add entity_id column to action	\N	4.11.0	\N	\N	0189608756
+v46.00-074	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:16.919883	563	EXECUTED	8:c1273a3003d82638a0a5413bf2aa6777	modifyDataType columnName=updated_at, tableName=report_card	Added 0.46.0 -- increase precision of updated_at of report_card	\N	4.11.0	\N	\N	0189608756
+v46.00-079	john-metabase	migrations/000_migrations.yaml	2023-11-17 02:55:17.090664	564	EXECUTED	8:de167f33d3f7670246623466487d2e67	sql	Added 0.46.0 -- migrates Databases using deprecated and removed presto driver to presto-jdbc	\N	4.11.0	\N	\N	0189608756
+v46.00-080	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:17.76677	565	EXECUTED	8:022a846feb10103f2e9fe4b58cb792d6	customChange	Migrate data permission paths from v1 to v2 (splitting them into separate data and query permissions)	\N	4.11.0	\N	\N	0189608756
+52	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:46.405774	51	EXECUTED	8:5af9ea2a96cd6e75a8ac1e6afde7126b	createTable tableName=query_cache; createIndex indexName=idx_query_cache_updated_at, tableName=query_cache; addColumn tableName=report_card		\N	4.11.0	\N	\N	0189608756
+v46.00-084	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:17.922981	566	EXECUTED	8:b4f465ca3be584028e077b907656b804	dropForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id	Added 0.46.0 - CASCADE delete for action.model_id	\N	4.11.0	\N	\N	0189608756
+v46.00-085	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:18.096831	567	EXECUTED	8:17fe48c56aa457a6a09775099d44d7a5	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id, referencedTableName=report_card	Added 0.46.0 - CASCADE delete for action.model_id	\N	4.11.0	\N	\N	0189608756
+54	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:46.857853	53	EXECUTED	8:e410005b585f5eeb5f202076ff9468f7	addColumn tableName=pulse		\N	4.11.0	\N	\N	0189608756
+87	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:54.889644	85	EXECUTED	8:0eccf19a93cb0ba4017aafd1d308c097	dropTable tableName=raw_column; dropTable tableName=raw_table	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v46.00-086	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:19.036606	568	EXECUTED	8:677e076d8741275d31a02e97531fd930	customChange	Added 0.46.0 - Delete the abandonment email task	\N	4.11.0	\N	\N	0189608756
+v46.00-088	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:19.194503	569	EXECUTED	8:ff9defc19920960db55ef71e4d32b4ea	sql	Added 0.46.5 -- backfill `permission_id` values in `sandboxes`. This is a fixed verison of v46.00-066 which has been removed, since it had a bug that blocked a customer from upgrading.	\N	4.11.0	\N	\N	0189608756
+v46.00-089	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:19.34508	570	EXECUTED	8:e0fbd2514cc960cc74106204ac65a3ea	sql	Added 0.46.5 -- remove orphaned entries in `sandboxes`	\N	4.11.0	\N	\N	0189608756
+v46.00-090	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:19.508901	571	EXECUTED	8:963c0cd3a7bd2858e4dbfd4d4aad95cb	addForeignKeyConstraint baseTableName=sandboxes, constraintName=fk_sandboxes_ref_permissions, referencedTableName=permissions	Add foreign key constraint on sandboxes.permission_id	\N	4.11.0	\N	\N	0189608756
+v47.00-002	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:19.85553	573	EXECUTED	8:963690f41f487b122464277c627823f6	addColumn tableName=metabase_field	Added 0.47.0 - Add json_unfolding column to metabase_field	\N	4.11.0	\N	\N	0189608756
+v47.00-003	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:20.007209	574	EXECUTED	8:97bccdf5e9bcdfacd1c315fa1342c167	sql	Added 0.47.0 - Populate metabase_field.json_unfolding based on base_type	\N	4.11.0	\N	\N	0189608756
+v47.00-004	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:20.194884	575	EXECUTED	8:58ad79be7de00e413da51fab3c8beea0	addColumn tableName=metabase_field	Added 0.47.0 - Add auto_incremented to metabase_field	\N	4.11.0	\N	\N	0189608756
+v47.00-005	winlost	migrations/000_migrations.yaml	2023-11-17 02:55:20.37578	576	EXECUTED	8:ccf53f27a551fd0799d0103bd65cca99	addColumn tableName=report_dashboard	Added 0.47.0 - Add auto_apply_filters to dashboard	\N	4.11.0	\N	\N	0189608756
+v47.00-006	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:20.757849	577	EXECUTED	8:b63ff10d3d121bed42eece1ae3dbb177	createTable tableName=dashboard_tab	Added 0.47.0 - Add dashboard_tab table	\N	4.11.0	\N	\N	0189608756
+v47.00-007	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:20.942908	578	EXECUTED	8:e9f7d6b18d65be6fde07c0b5471b8760	addColumn tableName=report_dashboardcard	Added 0.47.0 -- add report_dashboardcard.dashboard_tab_id	\N	4.11.0	\N	\N	0189608756
+v47.00-008	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:21.099702	579	EXECUTED	8:e37c88d202007bd3e6a72b6404d1b0e9	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_report_dashboardcard_ref_dashboard_tab_id, referencedTableName=dashboard_tab	Added 0.47.0 -- add report_dashboardcard.dashboard_tab_id fk constraint	\N	4.11.0	\N	\N	0189608756
+v47.00-009	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:21.25452	580	EXECUTED	8:398124b0dd4dd6e117cdc1378152469b	sql	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-012	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:21.742218	583	EXECUTED	8:bf19ef077bc6bc517c515dd78ca46e3b	dropColumn columnName=google_auth, tableName=core_user	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-001	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:19.668823	572	EXECUTED	8:14bf2732687c04256e9c036ba142aa93	sql	Added 0.47.0 -- set base-type to type/JSON for JSON database-types for postgres and mysql	\N	4.11.0	\N	\N	0189608756
+v47.00-013	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:21.902858	584	EXECUTED	8:044aec6d07049e3c5a45830797189ab0	sql	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-014	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:22.060699	585	EXECUTED	8:6a973f3198ad4596ecade95e61b35991	dropColumn columnName=ldap_auth, tableName=core_user	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-015	escherize	migrations/000_migrations.yaml	2023-11-17 02:55:22.250649	586	EXECUTED	8:d2d5eea99db75e656709006b3a7749f0	addColumn tableName=metabase_database	added 0.47.0 - Add is_audit to metabase_database	\N	4.11.0	\N	\N	0189608756
+v47.00-016	calherres	migrations/000_migrations.yaml	2023-11-17 02:55:22.475294	587	EXECUTED	8:62290f0389eb2a17170a9c0351ac8a85	customChange	Added 0.47.0 - Migrate the report_card.visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-019	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.237682	589	EXECUTED	8:7a5589d70c80b3ffc99a85722f440a91	createTable tableName=model_index_value	Indexed Entities values table	\N	4.11.0	\N	\N	0189608756
+v47.00-020	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.410215	590	EXECUTED	8:d32a4cf7b37f012a7db74628cdde48df	addUniqueConstraint constraintName=unique_model_index_value_model_index_id_model_pk, tableName=model_index_value	Add unique constraint on index_id and pk	\N	4.11.0	\N	\N	0189608756
+v47.00-023	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.56975	591	EXECUTED	8:5d9e81c3e950afad66cb5e9e823b1f03	createIndex indexName=idx_model_index_model_id, tableName=model_index	Added 0.47.0 -- model_index index	\N	4.11.0	\N	\N	0189608756
+v47.00-031	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:25.120843	599	EXECUTED	8:ad9bdb62df65cf26a5a9892a82779ea7	sql; sql	Added 0.47.0 - migrate dashboard grid size from 18 to 24	\N	4.11.0	\N	\N	0189608756
+v47.00-025	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.881054	593	EXECUTED	8:6889e314a2016c9bc017a358b81ed24e	addForeignKeyConstraint baseTableName=model_index_value, constraintName=fk_model_index_value_model_id, referencedTableName=model_index	Added 0.47.0 -- model_index_value foriegn key to model_index	\N	4.11.0	\N	\N	0189608756
+89	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:57.250715	87	EXECUTED	8:2ee410aba3f9bcd144ea362494a19a58	createTable tableName=qrtz_job_details; addPrimaryKey constraintName=pk_qrtz_job_details, tableName=qrtz_job_details; createTable tableName=qrtz_triggers; addPrimaryKey constraintName=pk_qrtz_triggers, tableName=qrtz_triggers; addForeignKeyConstra...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v47.00-027	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:24.392914	595	EXECUTED	8:c720f3de8feed35e592c0ca9b9975a18	customChange	Added 0.47.0 - Migrate field_ref in report_card.result_metadata from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-028	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:24.583361	596	EXECUTED	8:f38598170766acaaa8fd3b20ef683372	customChange	Added 0.47.0 - Add join-alias to the report_card.visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
+v47.00-029	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:24.743626	597	EXECUTED	8:c7625e5018087e915e547f9318b2b8f5	customChange	Added 0.47.0 - Stack cards vertically for dashboard with tabs on downgrade	\N	4.11.0	\N	\N	0189608756
+v47.00-030	escherize	migrations/000_migrations.yaml	2023-11-17 02:55:24.9408	598	EXECUTED	8:7919d959008457419a09fd3275d3ed00	addColumn tableName=collection	Added 0.47.0 - Type column for collections for instance-analytics	\N	4.11.0	\N	\N	0189608756
+v47.00-036	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.040839	604	EXECUTED	8:e815729b6ebfd4799743b249409558aa	addPrimaryKey constraintName=pk_implicit_action, tableName=implicit_action	Added 0.47.0 - Set primary key to action_id for implicit_action table	\N	4.11.0	\N	\N	0189608756
+v47.00-037	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.20753	605	EXECUTED	8:58c705a18bb3441e3ed5d1167ec64fcb	addForeignKeyConstraint baseTableName=implicit_action, constraintName=fk_implicit_action_action_id, referencedTableName=action	Added 0.47.0 - Add foreign key constraint on implicit_action.action_id	\N	4.11.0	\N	\N	0189608756
+13	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:33.859979	12	EXECUTED	8:8cb1df98d24b215132d5e0175bc7009f	createTable tableName=activity; createIndex indexName=idx_activity_timestamp, tableName=activity; createIndex indexName=idx_activity_user_id, tableName=activity; createIndex indexName=idx_activity_custom_id, tableName=activity		\N	4.11.0	\N	\N	0189608756
+37	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:39.537794	36	EXECUTED	8:07d959eff81777e5690e2920583cfe5f	addColumn tableName=query_queryexecution; addNotNullConstraint columnName=query_hash, tableName=query_queryexecution; createIndex indexName=idx_query_queryexecution_query_hash, tableName=query_queryexecution; createIndex indexName=idx_query_querye...		\N	4.11.0	\N	\N	0189608756
+v47.00-018	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:22.945862	588	EXECUTED	8:7bacd2f60393eebd3bebcfdb0e952ecd	createTable tableName=model_index	Indexed Entities information table	\N	4.11.0	\N	\N	0189608756
+14	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.106836	13	EXECUTED	8:22397aede818dcd23b443810127b665f	createTable tableName=view_log; createIndex indexName=idx_view_log_user_id, tableName=view_log; createIndex indexName=idx_view_log_timestamp, tableName=view_log		\N	4.11.0	\N	\N	0189608756
+15	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.264358	14	EXECUTED	8:505b91530103673a9be3382cd2db1070	addColumn tableName=revision		\N	4.11.0	\N	\N	0189608756
+v47.00-044	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.617172	607	EXECUTED	8:1828d1bd8e2da6eec14ca61e6c01a56f	customChange	Added 0.47.0 - Add join-alias to the report_dashboardcard.visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
+v47.00-045	calherres	migrations/000_migrations.yaml	2023-11-17 02:55:26.800859	608	EXECUTED	8:d7f479a389877010f5af9dc7ec859b51	customChange	Added 0.47.0 - Migrate dashboard revision dashboard cards' visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-046	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.989221	609	EXECUTED	8:1e43c8712a5b36809a3c3fa9933a523c	customChange	Added 0.47.0 - Add join-alias to dashboard revision dashboard cards' visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
+v47.00-050	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:27.171168	610	EXECUTED	8:a5d516f2b5ea92f401387646b49a9950	addColumn tableName=metabase_table	Added 0.47.0 - table.is_upload	\N	4.11.0	\N	\N	0189608756
+21	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:35.720021	20	EXECUTED	8:be31f33e7fa7961b902c3ee4a56e19a7	createTable tableName=segment; createIndex indexName=idx_segment_creator_id, tableName=segment; createIndex indexName=idx_segment_table_id, tableName=segment		\N	4.11.0	\N	\N	0189608756
+23	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.060456	22	EXECUTED	8:b6f054835db2b2688a1be1de3707f9a9	modifyDataType columnName=rows, tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
+24	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.3879	23	EXECUTED	8:60825b125b452747098b577310c142b1	createTable tableName=dependency; createIndex indexName=idx_dependency_model, tableName=dependency; createIndex indexName=idx_dependency_model_id, tableName=dependency; createIndex indexName=idx_dependency_dependent_on_model, tableName=dependency;...		\N	4.11.0	\N	\N	0189608756
+25	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.636554	24	EXECUTED	8:ea4cd56cdc21ddf73495101a2a1cb3d4	createTable tableName=metric; createIndex indexName=idx_metric_creator_id, tableName=metric; createIndex indexName=idx_metric_table_id, tableName=metric		\N	4.11.0	\N	\N	0189608756
+26	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.82593	25	EXECUTED	8:ddef40b95c55cf4ac0e6a5161911a4cb	addColumn tableName=metabase_database; sql		\N	4.11.0	\N	\N	0189608756
+27	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.068077	26	EXECUTED	8:4778d6724e114803d2d805f494008fb1	createTable tableName=dashboardcard_series; createIndex indexName=idx_dashboardcard_series_dashboardcard_id, tableName=dashboardcard_series; createIndex indexName=idx_dashboardcard_series_card_id, tableName=dashboardcard_series		\N	4.11.0	\N	\N	0189608756
+6	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:32.40009	5	EXECUTED	8:2d2f5d1756ecb81da7c09ccfb9b1565a	dropNotNullConstraint columnName=organization_id, tableName=metabase_database; dropForeignKeyConstraint baseTableName=metabase_database, constraintName=fk_database_ref_organization_id; dropNotNullConstraint columnName=organization_id, tableName=re...		\N	4.11.0	\N	\N	0189608756
+173	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.988354	168	EXECUTED	8:4d32b4b7be3f4801e51aeffa5dd47649	dropForeignKeyConstraint baseTableName=activity, constraintName=fk_activity_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v47.00-024	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.722918	592	EXECUTED	8:3079db8d91e54ff2b41050f7dab27936	addForeignKeyConstraint baseTableName=model_index, constraintName=fk_model_index_model_id, referencedTableName=report_card	Added 0.47.0 -- model_index foriegn key to report_card	\N	4.11.0	\N	\N	0189608756
+v47.00-026	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:24.178647	594	EXECUTED	8:acf279edf538ee29a4ea9103d809b3da	createTable tableName=connection_impersonations	Added 0.47.0 - New table for connection impersonation policies	\N	4.11.0	\N	\N	0189608756
+17	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.610079	16	EXECUTED	8:051c23cd15359364b9895c1569c319e7	addColumn tableName=metabase_database; sql		\N	4.11.0	\N	\N	0189608756
+18	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:34.812424	17	EXECUTED	8:62a0483dde183cfd18dd0a86e9354288	createTable tableName=data_migrations; createIndex indexName=idx_data_migrations_id, tableName=data_migrations		\N	4.11.0	\N	\N	0189608756
+71	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:50.730882	69	EXECUTED	8:755e5c3dd8a55793f29b2c95cb79c211	dropNotNullConstraint columnName=card_id, tableName=report_dashboardcard	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
+145	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.021865	141	MARK_RAN	8:b162dd48ef850ab4300e2d714eac504e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+55	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:47.35226	54	EXECUTED	8:088fee4d7555e104bc96fed923bce9aa	addColumn tableName=report_dashboard; addColumn tableName=report_dashboard; createTable tableName=dashboard_favorite; addUniqueConstraint constraintName=unique_dashboard_favorite_user_id_dashboard_id, tableName=dashboard_favorite; createIndex inde...		\N	4.11.0	\N	\N	0189608756
+57	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:47.689815	56	EXECUTED	8:aab81d477e2d19a9ab18c58b78c9af88	addColumn tableName=report_card	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
+187	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.219388	182	EXECUTED	8:3fbb75c0c491dc6628583184202b8f39	dropForeignKeyConstraint baseTableName=core_session, constraintName=fk_session_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+287	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.617069	280	EXECUTED	8:0679eedae767a8648383aac2f923e413	sql	Added 0.39 - Semantic type system - migrate ISO8601 strings	\N	4.11.0	\N	\N	0189608756
+38	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:40.50456	37	EXECUTED	8:c9251b99ab1122ef441117d5d9852d29	addColumn tableName=metabase_database; addColumn tableName=metabase_table; addColumn tableName=metabase_field; addColumn tableName=report_dashboard; addColumn tableName=metric; addColumn tableName=segment; addColumn tableName=metabase_database; ad...		\N	4.11.0	\N	\N	0189608756
+39	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:40.672063	38	EXECUTED	8:334adc22af5ded71ff27759b7a556951	addColumn tableName=core_user		\N	4.11.0	\N	\N	0189608756
+7	cammsaul	migrations/000_migrations.yaml	2023-11-17 02:53:32.592262	6	EXECUTED	8:4f23ddbddd447461588462fa8bb443dd	addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+9	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:32.935456	8	EXECUTED	8:d560283a190e3c60802eb04f5532a49d	addColumn tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
+40	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:41.451922	39	EXECUTED	8:69326196bb1696f76fbce059b6d7520e	createTable tableName=permissions_group; createIndex indexName=idx_permissions_group_name, tableName=permissions_group; createTable tableName=permissions_group_membership; addUniqueConstraint constraintName=unique_permissions_group_membership_user...		\N	4.11.0	\N	\N	0189608756
+v47.00-033	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:25.531015	601	EXECUTED	8:c4a38673bf2a702e807a2074c0d0b719	customChange	Added 0.47.0 - Migrate field refs in visualization_settings.column_settings keys from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-034	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:25.712781	602	EXECUTED	8:bb77d686c5c204e480a1da5fcfb518e2	customChange	Added 0.47.0 - Add join-alias to the visualization_settings.column_settings field refs in card revisions	\N	4.11.0	\N	\N	0189608756
+28	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.223989	27	EXECUTED	8:428e4eb05e4e29141735adf9ae141a0b	addColumn tableName=core_user		\N	4.11.0	\N	\N	0189608756
+29	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.389957	28	EXECUTED	8:8b02731cc34add3722c926dfd7376ae0	addColumn tableName=pulse_channel		\N	4.11.0	\N	\N	0189608756
+30	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.607944	29	EXECUTED	8:2c3a50cef177cb90d47a9973cd5934e5	addColumn tableName=metabase_field; addNotNullConstraint columnName=visibility_type, tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+56	wwwiiilll	migrations/000_migrations.yaml	2023-11-17 02:53:47.506271	55	EXECUTED	8:9f46051abaee599e2838733512a32ad0	addColumn tableName=core_user	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
+168	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.050783	163	EXECUTED	8:6d40bfa472bccd2d54284aeb89e1ec3c	modifyDataType columnName=started_at, tableName=query_execution	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+43	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:42.758523	42	EXECUTED	8:3cf48c3e52ea315379a8ed538c9f2624	createTable tableName=permissions_revision		\N	4.11.0	\N	\N	0189608756
+44	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:42.975072	43	EXECUTED	8:2e356e8a1049286f1c78324828ee7867	dropColumn columnName=public_perms, tableName=report_card; dropColumn columnName=public_perms, tableName=report_dashboard; dropColumn columnName=public_perms, tableName=pulse		\N	4.11.0	\N	\N	0189608756
+45	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:43.209945	44	EXECUTED	8:421edd38ee0cb0983162f57193f81b0b	addColumn tableName=report_dashboardcard; addNotNullConstraint columnName=visualization_settings, tableName=report_dashboardcard		\N	4.11.0	\N	\N	0189608756
+53	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:46.671992	52	EXECUTED	8:78d015c5090c57cd6972eb435601d3d0	createTable tableName=query		\N	4.11.0	\N	\N	0189608756
+104	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.143345	101	EXECUTED	8:21709f17e6d1b521d3d3b8cbb5445218	addColumn tableName=core_session	Added EE 1.1.6/CE 0.33.0	\N	4.11.0	\N	\N	0189608756
+217	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.074471	212	EXECUTED	8:da7460a35a724109ae9b5096cd18666b	dropForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_membership_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+244	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.680826	239	EXECUTED	8:4d40104eaa47d01981644462ef56f369	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v43.00-062	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:52.454331	438	EXECUTED	8:2c24e7af74d3053920fb809b29190303	modifyDataType columnName=timestamp, tableName=revision	Added 0.43.0 - Unify datatype with revision.timestamp for timezone info (see 17829).	\N	4.11.0	\N	\N	0189608756
+v45.00-003	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:59.216034	467	EXECUTED	8:512337d6d4af38016aa79585abbe03a1	addPrimaryKey constraintName=pk_query_action, tableName=query_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+90	senior	migrations/000_migrations.yaml	2023-11-17 02:53:57.489234	88	EXECUTED	8:8562a72a1190deadc5fa59a23a6396dc	addColumn tableName=core_user; sql; dropColumn columnName=saml_auth, tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+91	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:57.670953	89	EXECUTED	8:9b8831e1e409f08e874c4ece043d0340	dropColumn columnName=raw_table_id, tableName=metabase_table; dropColumn columnName=raw_column_id, tableName=metabase_field	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+92	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:57.859986	90	EXECUTED	8:1e5bc2d66778316ea640a561862c23b4	addColumn tableName=query_execution	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+v46.00-021	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.931132	524	EXECUTED	8:52c8107f4bcc6e9889b270e0a4954921	addNotNullConstraint columnName=dataset_query, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+58	senior	migrations/000_migrations.yaml	2023-11-17 02:53:48.163577	57	EXECUTED	8:9e6d48acacceb109e0bd27e4e44a8cb4	createTable tableName=dimension; addUniqueConstraint constraintName=unique_dimension_field_id_name, tableName=dimension; createIndex indexName=idx_dimension_field_id, tableName=dimension	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
+59	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:48.341883	58	EXECUTED	8:5b6ce52371e0e9eee88e6d766225a94b	addColumn tableName=metabase_field	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+60	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:48.585503	59	EXECUTED	8:2141162a1c99a5dd95e5a67c5595e6d7	addColumn tableName=metabase_database; addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+61	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:48.771573	60	EXECUTED	8:7dded6fd5bf74d79b9a0b62511981272	addColumn tableName=metabase_field	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+62	senior	migrations/000_migrations.yaml	2023-11-17 02:53:48.960333	61	EXECUTED	8:cb32e6eaa1a2140703def2730f81fef2	addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+63	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:49.150022	62	EXECUTED	8:226f73b9f6617495892d281b0f8303db	addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+64	senior	migrations/000_migrations.yaml	2023-11-17 02:53:49.299821	63	EXECUTED	8:4dcc8ffd836b56756f494d5dfce07b50	dropForeignKeyConstraint baseTableName=raw_table, constraintName=fk_rawtable_ref_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+67	attekei	migrations/000_migrations.yaml	2023-11-17 02:53:49.777602	65	EXECUTED	8:a03608d97e19b8a716989e918efad0a6	createTable tableName=computation_job; createTable tableName=computation_job_result	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
+68	sbelak	migrations/000_migrations.yaml	2023-11-17 02:53:49.975715	66	EXECUTED	8:b4ac06d133dfbdc6567d992c7e18c6ec	addColumn tableName=computation_job; addColumn tableName=computation_job	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
+69	senior	migrations/000_migrations.yaml	2023-11-17 02:53:50.321697	67	EXECUTED	8:eadbe00e97eb53df4b3df60462f593f6	addColumn tableName=pulse; addColumn tableName=pulse; addColumn tableName=pulse; dropNotNullConstraint columnName=name, tableName=pulse	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
+70	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:50.573322	68	EXECUTED	8:4e4eff7abb983b1127a32ba8107e7fb8	addColumn tableName=metabase_field; addNotNullConstraint columnName=database_type, tableName=metabase_field	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
+72	senior	migrations/000_migrations.yaml	2023-11-17 02:53:51.000564	70	EXECUTED	8:4dc6debdf779ab9273cf2158a84bb154	addColumn tableName=pulse_card; addColumn tableName=pulse_card	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
+v47.00-010	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:21.425306	581	EXECUTED	8:3c4f9fc116fbced18c50952def65b3e0	modifyDataType columnName=name, tableName=metabase_table	Added 0.47.0 - Make metabase_table.name long enough for H2 names	\N	4.11.0	\N	\N	0189608756
+v47.00-051	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.337852	611	EXECUTED	8:83a8b7ad58b2deb0732e671db51fa608	dropForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_db_id	Added 0.47.0 - Drop foreign key constraint on connection_impersonations.db_id	\N	4.11.0	\N	\N	0189608756
+74	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:51.386389	72	EXECUTED	8:16726d6560851325930c25caf3c8ab96	addColumn tableName=metabase_field	Added 0.29.0	\N	4.11.0	\N	\N	0189608756
+76	senior	migrations/000_migrations.yaml	2023-11-17 02:53:51.767211	74	EXECUTED	8:9b7190c9171ccca72617d508875c3c82	addColumn tableName=metabase_table	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+41	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:41.730606	40	EXECUTED	8:fae0855adf2f702f1133e32fc98d02a5	dropColumn columnName=field_type, tableName=metabase_field; addDefaultValue columnName=active, tableName=metabase_field; addDefaultValue columnName=preview_display, tableName=metabase_field; addDefaultValue columnName=position, tableName=metabase_...		\N	4.11.0	\N	\N	0189608756
+42	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:42.399429	41	EXECUTED	8:e32b3a1624fa289a6ee1f3f0a2dac1f6	dropForeignKeyConstraint baseTableName=query_queryexecution, constraintName=fk_queryexecution_ref_query_id; dropColumn columnName=query_id, tableName=query_queryexecution; dropColumn columnName=is_staff, tableName=core_user; dropColumn columnName=...		\N	4.11.0	\N	\N	0189608756
+v47.00-032	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:25.342925	600	EXECUTED	8:98d2edfc9caa3a03d307aa965a3b51c9	customChange	Added 0.47.0 - migrate dashboard grid size from 18 to 24 for revisions	\N	4.11.0	\N	\N	0189608756
+94	senior	migrations/000_migrations.yaml	2023-11-17 02:53:58.389124	92	EXECUTED	8:a2a1eedf1e8f8756856c9d49c7684bfe	createTable tableName=task_history; createIndex indexName=idx_task_history_end_time, tableName=task_history; createIndex indexName=idx_task_history_db_id, tableName=task_history	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+95	senior	migrations/000_migrations.yaml	2023-11-17 02:53:58.617146	93	EXECUTED	8:e7cd8168533c58c865dacf320e819218	addUniqueConstraint constraintName=idx_databasechangelog_id_author_filename, tableName=databasechangelog	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+96	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:58.804503	94	EXECUTED	8:5cb2f36edcca9c6e14c5e109d6aeb68b	addColumn tableName=metabase_field	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+97	senior	migrations/000_migrations.yaml	2023-11-17 02:53:58.867244	95	MARK_RAN	8:9169e238663c5d036bd83428d2fa8e4b	modifyDataType columnName=results, tableName=query_cache	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+98	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.160505	96	EXECUTED	8:f036d20a4dc86fb60ffb64ea838ed6b9	addUniqueConstraint constraintName=idx_uniq_table_db_id_schema_name, tableName=metabase_table; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+99	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.427634	97	EXECUTED	8:274bb516dd95b76c954b26084eed1dfe	addUniqueConstraint constraintName=idx_uniq_field_table_id_parent_id_name, tableName=metabase_field; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+100	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.582736	98	EXECUTED	8:28b6b684c539d4668110b920985ee363	sql; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+101	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.745203	99	EXECUTED	8:58eabb08a175fafe8985208545374675	createIndex indexName=idx_field_parent_id, tableName=metabase_field	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+103	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.943338	100	EXECUTED	8:fda3670fd16a40fd9d0f89a003098d54	addColumn tableName=metabase_database	Added 0.32.10	\N	4.11.0	\N	\N	0189608756
+106	sb	migrations/000_migrations.yaml	2023-11-17 02:54:00.309825	102	EXECUTED	8:a3dd42bbe25c415ce21e4c180dc1c1d7	modifyDataType columnName=database_type, tableName=metabase_field	Added 0.33.5	\N	4.11.0	\N	\N	0189608756
+107	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.387207	103	MARK_RAN	8:605c2b4d212315c83727aa3d914cf57f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+108	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.477566	104	MARK_RAN	8:d11419da9384fd27d7b1670707ac864c	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+110	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.664634	106	MARK_RAN	8:82343097044b9652f73f3d3a2ddd04fe	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+111	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.768996	107	MARK_RAN	8:528de1245ba3aa106871d3e5b3eee0ba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+112	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.858903	108	MARK_RAN	8:010a3931299429d1adfa91941c806ea4	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+113	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.954399	109	MARK_RAN	8:8f8e0836064bdea82487ecf64a129767	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+114	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.046002	110	MARK_RAN	8:7a0bcb25ece6d9a311d6c6be7ed89bb7	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+117	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.341275	113	MARK_RAN	8:f2d7f9fb1b6713bc5362fe40bfe3f91f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+119	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.533521	115	MARK_RAN	8:195cf171ac1d5531e455baf44d9d6561	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+120	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.625209	116	MARK_RAN	8:61f53fac337020aec71868656a719bba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+121	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.719307	117	MARK_RAN	8:1baa145d2ffe1e18d097a63a95476c5f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+193	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.171068	188	EXECUTED	8:db171179fe094db9fee7e2e7df60fa4e	dropForeignKeyConstraint baseTableName=group_table_access_policy, constraintName=fk_gtap_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+221	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.744076	216	EXECUTED	8:54a4c0d8a4eda80dc81fb549a629d075	dropForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+383	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.313505	308	EXECUTED	8:eacd3281e0397c61047e4a69e725a5ec	createIndex indexName=idx_query_execution_card_id_started_at, tableName=query_execution	Added 0.41.3 -- Add index to QueryExecution card_id + started_at to fix performance issue	\N	4.11.0	\N	\N	0189608756
+v42.00-021	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.999704	330	MARK_RAN	8:041c129167b10c951f337dba672020d6	modifyDataType columnName=description, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v43.00-001	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:40.715578	381	EXECUTED	8:200f0cc5989f637c12a497a5cad56a58	sql	Added 0.43.0 - migrates any Database using the old bigquery driver to bigquery-cloud-sdk instead	\N	4.11.0	\N	\N	0189608756
+v44.00-001	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:53.276113	440	EXECUTED	8:ca1fe70c2560c013653bbc00b58e2964	dropNotNullConstraint columnName=creator_id, tableName=persisted_info	Added 0.44.0 - Remove not null constraint from persisted_info.creator_id	\N	4.11.0	\N	\N	0189608756
+v45.00-057	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.805972	502	MARK_RAN	8:650a5b435f8195765a2ab1e3e4bc7b14	modifyDataType columnName=value, tableName=secret	Added 0.45.0 - modify type of secret.value from blob to longblob on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v46.00-023	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.268074	526	EXECUTED	8:33c91db1b039855af8bf1dc8315bd5d2	addNotNullConstraint columnName=model_id, tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-038	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:13.002294	541	EXECUTED	8:220a27bae93423a2c9a76f611f10b87b	dropTable tableName=app	App containers are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
+82	senior	migrations/000_migrations.yaml	2023-11-17 02:53:53.513246	80	EXECUTED	8:ac4b94df8c648f88cfff661284d6392d	addColumn tableName=core_user; sql	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+118	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.433296	114	MARK_RAN	8:17f4410e30a0c7e84a36517ebf4dab64	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+77	senior	migrations/000_migrations.yaml	2023-11-17 02:53:51.956134	75	EXECUTED	8:07f0a6cd8dbbd9b89be0bd7378f7bdc8	addColumn tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+86	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:54.698596	84	EXECUTED	8:50c75bb29f479e0b3fb782d89f7d6717	sql	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+156	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.067858	152	MARK_RAN	8:51859ee6cca4aca9d141a3350eb5d6b1	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+153	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.778007	149	MARK_RAN	8:adce2cca96fe0531b00f9bed6bed8352	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+245	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.83724	240	EXECUTED	8:a8f9206dadfe23662d547035f71e3846	dropForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+279	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.26196	272	EXECUTED	8:63dfccd51b62b939da71fe4435f58679	addColumn tableName=pulse	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+313	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:31.229587	302	EXECUTED	8:d5f248d823d81bee7d63c8b796e5851f	createTable tableName=secret	Added 0.42.0 - Secret domain object.	\N	4.11.0	\N	\N	0189608756
+298	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:28.7092	291	EXECUTED	8:3c73f77d8d939d14320964a35aeaad5e	addColumn tableName=pulse	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+v43.00-002	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:40.93447	382	EXECUTED	8:f964db8e5d278f825b9eb6414195d54d	sql	Added 0.43.0. Create magic 'All Users' Permissions Group if it does not already exist.	\N	4.11.0	\N	\N	0189608756
+v44.00-044	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:58.286466	464	EXECUTED	8:601311f94a0587a67013e27d793d2cc2	dropColumn columnName=template_tags, tableName=native_query_snippet	Added 0.44.0 - drop native_query_snippet.template_tags added in v44.00-039	\N	4.11.0	\N	\N	0189608756
+v45.00-048	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.827693	493	EXECUTED	8:0aca8f157f163e62805b7202f8aa202f	addColumn tableName=collection	Added 0.45.0 -- add created_at to Collection	\N	4.11.0	\N	\N	0189608756
+v46.00-051	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.255077	548	EXECUTED	8:74e83fc2ee7c1a06a94f07830f361773	dropDefaultValue columnName=row, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v47.00-043	calherres	migrations/000_migrations.yaml	2023-11-17 02:55:26.430866	606	EXECUTED	8:5e030b73be03e7cd8b19a5a46f9b2a4c	customChange	Added 0.47.0 - Migrate report_dashboardcard.visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
+22	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:35.87619	21	EXECUTED	8:80bc8a62a90791a79adedcf1ac3c6f08	addColumn tableName=revision		\N	4.11.0	\N	\N	0189608756
+v43.00-052	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:50.873042	429	EXECUTED	8:b3963d6c168f5c30f1288c222b8e0e83	createTable tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+194	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.330123	189	EXECUTED	8:fccb724d7ae7606e2e7638de1791392a	addForeignKeyConstraint baseTableName=group_table_access_policy, constraintName=fk_gtap_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+220	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.583627	215	EXECUTED	8:8b8447405d7b2b52358c9676d64b7651	addForeignKeyConstraint baseTableName=permissions_revision, constraintName=fk_permissions_revision_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v42.00-000	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.550903	309	EXECUTED	8:5500782a64248810f4a5ca1dc9a6144d	dropColumn columnName=entity_name, tableName=metabase_table	Added 0.42.0 Remove unused column (#5240)	\N	4.11.0	\N	\N	0189608756
+v43.00-034	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.667929	413	EXECUTED	8:1db8bd1c85b5337a1560c0da7fb8e062	createTable tableName=card_bookmark	Added 0.43.0 - Card bookmarks table	\N	4.11.0	\N	\N	0189608756
+v44.00-000	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:53.117589	439	EXECUTED	8:05de4b32e627b65202e15435c344e135	createTable tableName=persisted_info	Added 0.44.0 - Persisted Info for models	\N	4.11.0	\N	\N	0189608756
+v46.00-059	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:15.612793	556	EXECUTED	8:6ddec7d622e9200e36bd5e2e2e0a48c2	addColumn tableName=action	Added 0.46.0 -- add actions.creator_id	\N	4.11.0	\N	\N	0189608756
+v47.00-011	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:21.578589	582	EXECUTED	8:148b982debddfa511cb45b87179b8c46	modifyDataType columnName=display_name, tableName=metabase_table	Added 0.47.0 - Make metabase_table.display_name long enough for H2 names	\N	4.11.0	\N	\N	0189608756
+v47.00-052	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.489439	612	EXECUTED	8:d170bef8f707027360cf08fb55e91452	dropForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_group_id	Added 0.47.0 - Drop foreign key constraint on connection_impersonations.group_id	\N	4.11.0	\N	\N	0189608756
+v47.00-053	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.667258	613	EXECUTED	8:3b52631c2c82b88043b840391c7d9ef0	createIndex indexName=idx_conn_impersonations_db_id, tableName=connection_impersonations	Added 0.47.0 -- connection_impersonations index for db_id column	\N	4.11.0	\N	\N	0189608756
+v47.00-054	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.847576	614	EXECUTED	8:5404d7e3781f0dfcc984676ea434c842	createIndex indexName=idx_conn_impersonations_group_id, tableName=connection_impersonations	Added 0.47.0 -- connection_impersonations index for group_id column	\N	4.11.0	\N	\N	0189608756
+v47.00-055	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:28.069053	615	EXECUTED	8:295c4477995058b93eba2857090eb6f6	addUniqueConstraint constraintName=conn_impersonation_unique_group_id_db_id, tableName=connection_impersonations	Added 0.47.0 - unique constraint for connection impersonations	\N	4.11.0	\N	\N	0189608756
+1	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:31.355957	1	EXECUTED	8:70d9a1021171b879cc55058f4d094a9c	createTable tableName=core_organization; createTable tableName=core_user; createTable tableName=core_userorgperm; addUniqueConstraint constraintName=idx_unique_user_id_organization_id, tableName=core_userorgperm; createIndex indexName=idx_userorgp...		\N	4.11.0	\N	\N	0189608756
+291	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:27.523456	284	EXECUTED	8:f1b9110e87c7cb627c29fe6fb243b675	createTable tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+v47.00-035	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:25.875281	603	EXECUTED	8:aeafa7ff310f799eb3fb2e14640a9e06	dropForeignKeyConstraint baseTableName=implicit_action, constraintName=fk_implicit_action_action_id	Added 0.47.0 - Drop foreign key constraint on implicit_action.action_id	\N	4.11.0	\N	\N	0189608756
+v47.00-056	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:28.26511	616	EXECUTED	8:bd965141f770a65982ecebab51a565e9	addForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_db_id, referencedTableName=metabase_database	Added 0.47.0 - re-add foreign key constraint on connection_impersonations.db_id	\N	4.11.0	\N	\N	0189608756
+v47.00-057	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:28.421386	617	EXECUTED	8:fe79acdba9db58709b6fffbb7aac2844	addForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_group_id, referencedTableName=permissions_group	Added 0.47.0 - re-add foreign key constraint on connection_impersonations.group_id	\N	4.11.0	\N	\N	0189608756
+v47.00-058	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:28.639533	618	EXECUTED	8:05731b3e62deb09c64b60bc10031d206	dropColumn columnName=entity_id, tableName=parameter_card	Drop parameter_card.entity_id	\N	4.11.0	\N	\N	0189608756
+\.
+
+
+--
+-- TOC entry 4798 (class 0 OID 26234)
+-- Dependencies: 215
+-- Data for Name: databasechangeloglock; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.databasechangeloglock (id, locked, lockgranted, lockedby) FROM stdin;
+1	f	\N	\N
+\.
+
+
+--
+-- TOC entry 4837 (class 0 OID 26776)
+-- Dependencies: 254
+-- Data for Name: dependency; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.dependency (id, model, model_id, dependent_on_model, dependent_on_id, created_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4867 (class 0 OID 27101)
+-- Dependencies: 284
+-- Data for Name: dimension; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.dimension (id, field_id, name, type, human_readable_field_id, created_at, updated_at, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4914 (class 0 OID 27921)
+-- Dependencies: 331
+-- Data for Name: http_action; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.http_action (action_id, template, response_handle, error_handle) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4915 (class 0 OID 28007)
+-- Dependencies: 332
+-- Data for Name: implicit_action; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.implicit_action (action_id, kind) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4843 (class 0 OID 26827)
+-- Dependencies: 260
+-- Data for Name: label; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.label (id, name, slug, icon) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4890 (class 0 OID 27636)
+-- Dependencies: 307
+-- Data for Name: login_history; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.login_history (id, "timestamp", user_id, session_id, device_id, device_description, ip_address) FROM stdin;
+3	2023-12-02 23:40:30.981206+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+1	2023-11-19 02:45:07.077928+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+2	2023-11-19 23:31:10.388163+00	1	\N	a7e71c75-e7c3-428d-84d1-41197617394d	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+4	2023-12-02 23:40:47.419721+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+5	2023-12-03 02:27:40.322174+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+6	2023-12-03 02:28:09.435236+00	1	8b5d1223-95f6-454f-9a19-d0b11aecd382	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+\.
+
+
+--
+-- TOC entry 4802 (class 0 OID 26293)
+-- Dependencies: 219
+-- Data for Name: metabase_database; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.metabase_database (id, created_at, updated_at, name, description, details, engine, is_sample, is_full_sync, points_of_interest, caveats, metadata_sync_schedule, cache_field_values_schedule, timezone, is_on_demand, options, auto_run_queries, refingerprint, cache_ttl, initial_sync_status, creator_id, settings, dbms_version, is_audit) FROM stdin;
+2	2023-11-17 03:15:33.172664+00	2023-12-02 23:41:02.8308+00	Azure	\N	{"ssl-use-client-auth":false,"ssl":true,"password":"prince13:D","port":5432,"advanced-options":false,"schema-filters-type":"all","dbname":"best_city","host":"best-city-postgres.postgres.database.azure.com","tunnel-enabled":false,"user":"user_raul","ssl-mode":"require"}	postgres	f	t	\N	\N	0 41 * * * ? *	0 0 9 * * ? *	UTC	f	\N	t	\N	\N	complete	1	\N	{"flavor":"PostgreSQL","version":"15.4","semantic-version":[15,4]}	f
+1	2023-11-17 02:55:30.303819+00	2023-12-03 01:50:13.339377+00	Sample Database	Some example data for you to play around with as you embark on your Metabase journey.	{"db":"file:/plugins/sample-database.db;USER=GUEST;PASSWORD=guest"}	h2	t	t	You can find all sorts of different joinable tables ranging from products to people to reviews here.	You probably don't want to use this for your business-critical analyses, but hey, it's your world, we're just living in it.	0 39 * * * ? *	0 0 12 * * ? *	UTC	f	\N	t	\N	\N	complete	\N	\N	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}	f
+\.
+
+
+--
+-- TOC entry 4806 (class 0 OID 26321)
+-- Dependencies: 223
+-- Data for Name: metabase_field; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.metabase_field (id, created_at, updated_at, name, base_type, semantic_type, active, description, preview_display, "position", table_id, parent_id, display_name, visibility_type, fk_target_field_id, last_analyzed, points_of_interest, caveats, fingerprint, fingerprint_version, database_type, has_field_values, settings, database_position, custom_position, effective_type, coercion_strategy, nfc_path, database_required, json_unfolding, database_is_auto_increment) FROM stdin;
+7	2023-11-17 02:55:35.114026+00	2023-11-17 02:55:35.114026+00	ID	type/BigInteger	type/PK	t	\N	t	0	7	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	t	f	f
+77	2023-11-17 03:15:43.302453+00	2023-11-17 03:15:43.302453+00	comment_id	type/Text	type/PK	t	\N	t	1	12	\N	Comment ID	normal	\N	\N	\N	\N	\N	0	varchar	\N	\N	1	0	type/Text	\N	\N	t	f	f
+37	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:05.787709+00	ID	type/BigInteger	type/PK	t	This is a unique ID for the product. It is also called the “Invoice number” or “Confirmation number” in customer facing emails and screens.	t	0	2	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	f	f	t
+46	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:09.107585+00	ID	type/BigInteger	type/PK	t	A unique identifier given to each user.	t	0	5	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	f	f	t
+20	2023-11-17 02:55:35.636423+00	2023-11-17 02:55:35.636423+00	ID	type/BigInteger	type/PK	t	\N	t	0	3	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	t	f	f
+84	2023-11-17 03:15:44.4759+00	2023-11-17 03:16:09.292287+00	city	type/Text	type/City	t	\N	t	2	10	\N	City	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}	5	varchar	auto-list	\N	2	0	type/Text	\N	\N	t	f	f
+83	2023-11-17 03:15:44.4759+00	2023-11-17 03:16:09.292287+00	date_utc	type/Date	\N	t	\N	t	0	10	\N	Date Utc	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":1,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-10","latest":"2023-09-10"}}}	5	date	\N	\N	0	0	type/Date	\N	\N	t	f	f
+24	2023-11-17 02:55:36.167575+00	2023-11-17 02:55:36.167575+00	ID	type/BigInteger	type/PK	t	\N	t	0	4	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	t	f	f
+81	2023-11-17 03:15:44.4759+00	2023-11-17 03:16:09.292287+00	jobs_qty	type/Integer	type/Category	t	\N	t	3	10	\N	Jobs Qty	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":10,"nil%":0.0},"type":{"type/Number":{"min":27.0,"q1":95.0,"q3":335.0,"max":1829.0,"sd":696.7647139936598,"avg":485.8}}}	5	int4	auto-list	\N	3	0	type/Integer	\N	\N	t	f	f
+82	2023-11-17 03:15:44.4759+00	2023-11-17 03:16:09.292287+00	keyword	type/Text	type/Category	t	\N	t	1	10	\N	Keyword	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.0}}}	5	varchar	auto-list	\N	1	0	type/Text	\N	\N	t	f	f
+74	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	comment	type/Text	type/Comment	t	\N	t	5	12	\N	Comment	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":9727,"nil%":0.0},"type":{"type/Text":{"percent-json":2.0E-4,"percent-url":0.0025,"percent-email":0.0,"percent-state":0.0,"average-length":165.0417}}}	5	varchar	\N	\N	5	0	type/Text	\N	\N	t	f	f
+78	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	comment_tier	type/Text	type/Comment	t	\N	t	2	12	\N	Comment Tier	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.8292}}}	5	varchar	auto-list	\N	2	0	type/Text	\N	\N	t	f	f
+31	2023-11-17 02:55:36.639349+00	2023-11-17 02:55:36.639349+00	ID	type/BigInteger	type/PK	t	\N	t	0	6	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	t	f	f
+75	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	date_utc	type/Date	\N	t	\N	t	4	12	\N	Date Utc	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":23,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-18","latest":"2023-11-13"}}}	5	date	\N	\N	4	0	type/Date	\N	\N	t	f	f
+35	2023-11-17 02:55:36.639349+00	2023-11-17 02:56:14.390791+00	EXPECTED_INVOICE	type/Boolean	type/Category	t	\N	t	3	6	\N	Expected Invoice	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	BOOLEAN	auto-list	\N	3	0	type/Boolean	\N	\N	f	f	f
+33	2023-11-17 02:55:36.639349+00	2023-11-17 02:56:14.390791+00	DATE_RECEIVED	type/DateTime	\N	t	\N	t	5	6	\N	Date Received	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":714,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2020-09-30T00:00:00Z","latest":"2027-05-02T00:00:00Z"}}}	5	TIMESTAMP	\N	\N	5	0	type/DateTime	\N	\N	f	f	f
+5	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	ACTIVE_SUBSCRIPTION	type/Boolean	type/Category	t	\N	t	11	7	\N	Active Subscription	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	BOOLEAN	auto-list	\N	11	0	type/Boolean	\N	\N	f	f	f
+86	2023-11-17 03:15:45.641783+00	2023-11-17 03:15:45.641783+00	submission_id	type/Text	type/PK	t	\N	t	0	14	\N	Submission ID	normal	\N	\N	\N	\N	\N	0	varchar	\N	\N	0	0	type/Text	\N	\N	t	f	f
+105	2023-11-17 03:15:49.220457+00	2023-11-17 03:15:49.220457+00	submission_id	type/Text	type/PK	t	\N	t	0	9	\N	Submission ID	normal	\N	\N	\N	\N	\N	0	varchar	\N	\N	0	0	type/Text	\N	\N	t	f	f
+89	2023-11-17 03:15:45.641783+00	2023-11-17 03:16:09.292287+00	date_utc	type/Date	\N	t	\N	t	2	14	\N	Date Utc	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":59,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-18","latest":"2023-11-16"}}}	5	date	\N	\N	2	0	type/Date	\N	\N	t	f	f
+87	2023-11-17 03:15:45.641783+00	2023-11-17 03:16:09.292287+00	subreddit	type/Text	type/Category	t	\N	t	1	14	\N	Subreddit	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}}	5	varchar	auto-list	\N	1	0	type/Text	\N	\N	t	f	f
+85	2023-11-17 03:15:45.641783+00	2023-11-17 03:16:09.292287+00	title	type/Text	type/Title	t	\N	t	3	14	\N	Title	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2550,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":58.122512680452594}}}	5	varchar	\N	\N	3	0	type/Text	\N	\N	t	f	f
+88	2023-11-17 03:15:45.641783+00	2023-11-17 03:16:09.292287+00	upvote_ratio	type/Decimal	\N	t	\N	t	4	14	\N	Upvote Ratio	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":0.7027910281113732,"q3":1.0,"max":1.0,"sd":0.06538419961696748,"avg":0.9957081545064378}}}	5	numeric	\N	\N	4	0	type/Decimal	\N	\N	t	f	f
+108	2023-11-17 03:15:49.220457+00	2023-11-17 03:16:09.292287+00	date_utc	type/Date	\N	t	\N	t	2	9	\N	Date Utc	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":59,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-18","latest":"2023-11-16"}}}	5	date	\N	\N	2	0	type/Date	\N	\N	t	f	f
+106	2023-11-17 03:15:49.220457+00	2023-11-17 03:16:09.292287+00	subreddit	type/Text	type/Category	t	\N	t	1	9	\N	Subreddit	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}}	5	varchar	auto-list	\N	1	0	type/Text	\N	\N	t	f	f
+104	2023-11-17 03:15:49.220457+00	2023-11-17 03:16:09.292287+00	title	type/Text	type/Title	t	\N	t	3	9	\N	Title	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2550,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":58.122512680452594}}}	5	varchar	\N	\N	3	0	type/Text	\N	\N	t	f	f
+50	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:08.149827+00	LONGITUDE	type/Float	type/Longitude	t	This is the longitude of the user on sign-up. It might be updated in the future to the last seen location.	t	6	5	\N	Longitude	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2491,"nil%":0.0},"type":{"type/Number":{"min":-166.5425726,"q1":-101.58350792373135,"q3":-84.65289348288829,"max":-67.96735199999999,"sd":15.399698968175663,"avg":-95.18741780363999}}}	5	DOUBLE PRECISION	\N	\N	6	0	type/Float	\N	\N	f	f	f
+62	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:10.447942+00	ID	type/BigInteger	type/PK	t	The numerical product number. Only used internally. All external communication should use the title or EAN.	t	0	1	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	f	f	t
+68	2023-11-17 02:55:38.912067+00	2023-12-03 01:50:11.981417+00	ID	type/BigInteger	type/PK	t	A unique internal identifier for the review. Should not be used externally.	t	0	8	\N	ID	normal	\N	\N	\N	\N	\N	0	BIGINT	\N	\N	0	0	type/BigInteger	\N	\N	f	f	t
+97	2023-11-17 03:15:47.091736+00	2023-11-17 03:15:47.091736+00	comment_id	type/Text	type/PK	t	\N	t	1	11	\N	Comment ID	normal	\N	\N	\N	\N	\N	0	varchar	\N	\N	1	0	type/Text	\N	\N	t	f	f
+100	2023-11-17 03:15:48.09531+00	2023-11-17 03:15:48.09531+00	jobs_qty	type/Integer	\N	t	\N	t	3	13	\N	Jobs Qty	normal	\N	\N	\N	\N	\N	0	int4	\N	\N	3	0	type/Integer	\N	\N	t	f	f
+101	2023-11-17 03:15:48.09531+00	2023-11-17 03:15:48.09531+00	keyword	type/Text	\N	t	\N	t	1	13	\N	Keyword	normal	\N	\N	\N	\N	\N	0	varchar	\N	\N	1	0	type/Text	\N	\N	t	f	f
+102	2023-11-17 03:15:48.09531+00	2023-11-17 03:15:48.09531+00	date_utc	type/Date	\N	t	\N	t	0	13	\N	Date Utc	normal	\N	\N	\N	\N	\N	0	date	\N	\N	0	0	type/Date	\N	\N	t	f	f
+103	2023-11-17 03:15:48.09531+00	2023-11-17 03:15:48.09531+00	city	type/Text	\N	t	\N	t	2	13	\N	City	normal	\N	\N	\N	\N	\N	0	varchar	\N	\N	2	0	type/Text	\N	\N	t	f	f
+39	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:06.165391+00	QUANTITY	type/Integer	type/Quantity	t	Number of products bought.	t	8	2	\N	Quantity	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":62,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":1.755882607764982,"q3":4.882654507928044,"max":100.0,"sd":4.214258386403798,"avg":3.7015}}}	5	INTEGER	auto-list	\N	8	0	type/Integer	\N	\N	f	f	f
+51	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:07.299847+00	EMAIL	type/Text	type/Email	t	The contact email for the account.	t	2	5	\N	Email	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2500,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":1.0,"percent-state":0.0,"average-length":24.1824}}}	5	CHARACTER VARYING	\N	\N	2	0	type/Text	\N	\N	f	f	f
+21	2023-11-17 02:55:35.636423+00	2023-11-17 02:56:14.390791+00	ACCOUNT_ID	type/BigInteger	type/FK	t	\N	t	1	3	\N	Account ID	normal	7	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":589,"nil%":0.0}}	5	BIGINT	\N	\N	1	0	type/BigInteger	\N	\N	f	f	f
+34	2023-11-17 02:55:36.639349+00	2023-11-17 02:56:14.390791+00	PAYMENT	type/Float	\N	t	\N	t	2	6	\N	Payment	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":707,"nil%":0.0},"type":{"type/Number":{"min":13.7,"q1":233.1870107122195,"q3":400.5965814842149,"max":33714.6,"sd":763.7961603932441,"avg":519.4153400000004}}}	5	DOUBLE PRECISION	\N	\N	2	0	type/Float	\N	\N	f	f	f
+47	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:07.716189+00	NAME	type/Text	type/Name	t	The name of the user who owns an account	t	4	5	\N	Name	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2499,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":13.532}}}	5	CHARACTER VARYING	\N	\N	4	0	type/Text	\N	\N	f	f	f
+49	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:08.74+00	BIRTH_DATE	type/Date	\N	t	The date of birth of the user	t	9	5	\N	Birth Date	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2308,"nil%":0.0},"type":{"type/DateTime":{"earliest":"1958-04-26","latest":"2000-04-03"}}}	5	DATE	\N	\N	9	0	type/Date	\N	\N	f	f	f
+109	2023-11-17 03:15:49.220457+00	2023-11-17 03:16:09.292287+00	title_sentiment	type/Decimal	\N	t	\N	t	5	9	\N	Title Sentiment	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":3,"nil%":0.0},"type":{"type/Number":{"min":-1.0,"q1":-0.538509970167061,"q3":0.3018506409627725,"max":1.0,"sd":0.5156777587543876,"avg":-0.12446351931330472}}}	5	numeric	\N	\N	5	0	type/Decimal	\N	\N	t	f	f
+107	2023-11-17 03:15:49.220457+00	2023-11-17 03:16:09.292287+00	upvote_ratio	type/Decimal	\N	t	\N	t	4	9	\N	Upvote Ratio	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":0.7027910281113732,"q3":1.0,"max":1.0,"sd":0.06538419961696748,"avg":0.9957081545064378}}}	5	numeric	\N	\N	4	0	type/Decimal	\N	\N	t	f	f
+96	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	bad_words	type/Text	\N	t	\N	t	9	11	\N	Bad Words	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":229,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.4859}}}	5	varchar	auto-list	\N	9	0	type/Text	\N	\N	f	f	f
+92	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	comment	type/Text	type/Comment	t	\N	t	5	11	\N	Comment	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":9822,"nil%":0.0},"type":{"type/Text":{"percent-json":4.0E-4,"percent-url":0.0016,"percent-email":0.0,"percent-state":0.0,"average-length":159.9392}}}	5	varchar	\N	\N	5	0	type/Text	\N	\N	t	f	f
+93	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	date_utc	type/Date	\N	t	\N	t	4	11	\N	Date Utc	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":34,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-20","latest":"2023-11-09"}}}	5	date	\N	\N	4	0	type/Date	\N	\N	t	f	f
+94	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	comment_sentiment	type/Decimal	\N	t	\N	t	8	11	\N	Comment Sentiment	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":9519,"nil%":0.0},"type":{"type/Number":{"min":-0.98045,"q1":-0.6766383845279546,"q3":0.15401997527762878,"max":0.99219,"sd":0.5829829440055161,"avg":-0.172097766}}}	5	numeric	\N	\N	8	0	type/Decimal	\N	\N	t	f	f
+98	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	comment_tier	type/Text	type/Comment	t	\N	t	2	11	\N	Comment Tier	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.8162}}}	5	varchar	auto-list	\N	2	0	type/Text	\N	\N	t	f	f
+95	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	is_author	type/Boolean	type/Category	t	\N	t	6	11	\N	Is Author	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	bool	auto-list	\N	6	0	type/Boolean	\N	\N	t	f	f
+90	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	parent_id	type/Text	\N	t	\N	t	3	11	\N	Parent ID	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2276,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":2.8567}}}	5	varchar	\N	\N	3	0	type/Text	\N	\N	t	f	f
+91	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	score	type/Float	type/Score	t	\N	t	7	11	\N	Score	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":282,"nil%":0.0},"type":{"type/Number":{"min":-220.0,"q1":0.16888235012138164,"q3":8.283042890024708,"max":985.0,"sd":33.348468647889774,"avg":10.580899999999998}}}	5	float8	\N	\N	7	0	type/Float	\N	\N	t	f	f
+99	2023-11-17 03:15:47.091736+00	2023-11-17 03:16:09.292287+00	submission_id	type/Text	type/FK	t	\N	t	0	11	\N	Submission ID	normal	105	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":477,"nil%":0.0}}	5	varchar	\N	\N	0	0	type/Text	\N	\N	t	f	f
+80	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	is_author	type/Boolean	type/Category	t	\N	t	7	12	\N	Is Author	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	bool	auto-list	\N	7	0	type/Boolean	\N	\N	t	f	f
+76	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	is_moderator	type/Boolean	type/Category	t	\N	t	6	12	\N	Is Moderator	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	bool	auto-list	\N	6	0	type/Boolean	\N	\N	t	f	f
+72	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	parent_id	type/Text	\N	t	\N	t	3	12	\N	Parent ID	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":2266,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":2.9022}}}	5	varchar	\N	\N	3	0	type/Text	\N	\N	t	f	f
+73	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	score	type/Integer	type/Score	t	\N	t	8	12	\N	Score	normal	\N	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":276,"nil%":0.0},"type":{"type/Number":{"min":-150.0,"q1":-0.0016089005892148123,"q3":7.594632180265531,"max":612.0,"sd":30.58906610717099,"avg":9.7389}}}	5	int4	auto-list	\N	8	0	type/Integer	\N	\N	t	f	f
+79	2023-11-17 03:15:43.302453+00	2023-11-17 03:16:09.292287+00	submission_id	type/Text	type/FK	t	\N	t	0	12	\N	Submission ID	normal	86	2023-11-17 03:16:09.292287+00	\N	\N	{"global":{"distinct-count":410,"nil%":0.0}}	5	varchar	\N	\N	0	0	type/Text	\N	\N	t	f	f
+67	2023-11-17 02:55:38.912067+00	2023-12-03 01:50:12.900264+00	BODY	type/Text	type/Description	t	The review the user left. Limited to 2000 characters.	t	4	8	\N	Body	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1112,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":177.41996402877697}}}	5	CHARACTER VARYING	\N	\N	4	0	type/Text	\N	\N	f	f	f
+10	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	LAST_NAME	type/Text	type/Name	t	\N	t	3	7	\N	Last Name	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":473,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":6.536673346693386}}}	5	CHARACTER VARYING	auto-list	\N	3	0	type/Text	\N	\N	f	f	f
+6	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	LATITUDE	type/Float	type/Latitude	t	\N	t	13	7	\N	Latitude	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2472,"nil%":4.008016032064128E-4},"type":{"type/Number":{"min":-48.75,"q1":19.430679334308675,"q3":47.24585743676113,"max":69.23111,"sd":23.492041679980137,"avg":31.35760681046913}}}	5	DOUBLE PRECISION	\N	\N	13	0	type/Float	\N	\N	f	f	f
+40	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:04.846651+00	PRODUCT_ID	type/Integer	type/FK	t	The product ID. This is an internal identifier for the product, NOT the SKU.	t	2	2	\N	Product ID	normal	62	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":200,"nil%":0.0}}	5	INTEGER	\N	\N	2	0	type/Integer	\N	\N	f	f	f
+42	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:05.608635+00	TOTAL	type/Float	\N	t	The total billed amount.	t	5	2	\N	Total	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":4426,"nil%":0.0},"type":{"type/Number":{"min":8.93914247937167,"q1":51.34535490743823,"q3":110.29428389265787,"max":159.34900526552292,"sd":34.26469575709948,"avg":80.35871658771228}}}	5	DOUBLE PRECISION	\N	\N	5	0	type/Float	\N	\N	f	f	f
+4	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	PLAN	type/Text	type/Category	t	\N	t	4	7	\N	Plan	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":3,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.1062124248497}}}	5	CHARACTER VARYING	auto-list	\N	4	0	type/Text	\N	\N	f	f	f
+8	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	LEGACY_PLAN	type/Boolean	type/Category	t	\N	t	12	7	\N	Legacy Plan	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	BOOLEAN	auto-list	\N	12	0	type/Boolean	\N	\N	f	f	f
+12	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	EMAIL	type/Text	type/Email	t	\N	t	1	7	\N	Email	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2494,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":1.0,"percent-state":0.0,"average-length":28.185971943887775}}}	5	CHARACTER VARYING	\N	\N	1	0	type/Text	\N	\N	f	f	f
+2	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	TRIAL_ENDS_AT	type/DateTime	\N	t	\N	t	8	7	\N	Trial Ends At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1712,"nil%":0.001202404809619238},"type":{"type/DateTime":{"earliest":"2020-09-30T12:00:00Z","latest":"2031-10-25T12:00:00Z"}}}	5	TIMESTAMP	\N	\N	8	0	type/DateTime	\N	\N	f	f	f
+14	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	TRIAL_CONVERTED	type/Boolean	type/Category	t	\N	t	10	7	\N	Trial Converted	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0}}	5	BOOLEAN	auto-list	\N	10	0	type/Boolean	\N	\N	f	f	f
+16	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	LONGITUDE	type/Float	type/Longitude	t	\N	t	14	7	\N	Longitude	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2484,"nil%":4.008016032064128E-4},"type":{"type/Number":{"min":-175.06667,"q1":-55.495929410727236,"q3":28.627359769389155,"max":176.21667,"sd":68.51011002740533,"avg":2.6042336031796345}}}	5	DOUBLE PRECISION	\N	\N	14	0	type/Float	\N	\N	f	f	f
+18	2023-11-17 02:55:35.636423+00	2023-11-17 02:56:14.390791+00	PAGE_URL	type/Text	type/URL	t	\N	t	4	3	\N	Page URL	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":6,"nil%":0.1302},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":22.2674}}}	5	CHARACTER VARYING	auto-list	\N	4	0	type/Text	\N	\N	f	f	f
+22	2023-11-17 02:55:35.636423+00	2023-11-17 02:56:14.390791+00	TIMESTAMP	type/DateTime	\N	t	\N	t	3	3	\N	Timestamp	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":8576,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2022-03-15T00:18:25Z","latest":"2022-04-11T20:24:02Z"}}}	5	TIMESTAMP	\N	\N	3	0	type/DateTime	\N	\N	f	f	f
+25	2023-11-17 02:55:36.167575+00	2023-11-17 02:56:14.390791+00	ACCOUNT_ID	type/BigInteger	type/FK	t	\N	t	1	4	\N	Account ID	normal	7	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":642,"nil%":0.0}}	5	BIGINT	\N	\N	1	0	type/BigInteger	\N	\N	f	f	f
+29	2023-11-17 02:55:36.167575+00	2023-11-17 02:56:14.390791+00	DATE_RECEIVED	type/DateTime	\N	t	\N	t	3	4	\N	Date Received	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":576,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2020-11-20T00:00:00Z","latest":"2031-12-01T00:00:00Z"}}}	5	TIMESTAMP	\N	\N	3	0	type/DateTime	\N	\N	f	f	f
+32	2023-11-17 02:55:36.639349+00	2023-11-17 02:56:14.390791+00	ACCOUNT_ID	type/BigInteger	type/FK	t	\N	t	1	6	\N	Account ID	normal	7	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1449,"nil%":0.0}}	5	BIGINT	\N	\N	1	0	type/BigInteger	\N	\N	f	f	f
+27	2023-11-17 02:55:36.167575+00	2023-11-17 02:56:29.059699+00	BODY	type/Text	\N	t	\N	f	6	4	\N	Body	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":642,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":438.15264797507785}}}	5	CHARACTER LARGE OBJECT	\N	\N	6	0	type/Text	\N	\N	f	f	f
+53	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:07.530664+00	PASSWORD	type/Text	\N	t	This is the salted password of the user. It should not be visible	t	3	5	\N	Password	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2500,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":36.0}}}	5	CHARACTER VARYING	\N	\N	3	0	type/Text	\N	\N	f	f	f
+54	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:12.727523+00	ZIP	type/Text	type/ZipCode	t	The postal code of the account’s billing address	t	10	5	\N	Zip	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2234,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.0}}}	5	CHARACTER	\N	\N	10	0	type/Text	\N	\N	f	f	f
+58	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:09.891979+00	CATEGORY	type/Text	type/Category	t	The type of product, valid values include: Doohicky, Gadget, Gizmo and Widget	t	3	1	\N	Category	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":4,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":6.375}}}	5	CHARACTER VARYING	auto-list	\N	3	0	type/Text	\N	\N	f	f	f
+64	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:10.082162+00	CREATED_AT	type/DateTime	type/CreationTimestamp	t	The date the product was added to our catalog.	t	7	1	\N	Created At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":200,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2022-04-26T19:29:55.147Z","latest":"2025-04-15T13:34:19.931Z"}}}	5	TIMESTAMP	\N	\N	7	0	type/DateTime	\N	\N	f	f	f
+61	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:10.846673+00	RATING	type/Float	type/Score	t	The average rating users have given the product. This ranges from 1 - 5	t	6	1	\N	Rating	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":23,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":3.5120465053408525,"q3":4.216124969497314,"max":5.0,"sd":1.3605488657451452,"avg":3.4715}}}	5	DOUBLE PRECISION	\N	\N	6	0	type/Float	\N	\N	f	f	f
+60	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:11.221514+00	VENDOR	type/Text	type/Company	t	The source of the product.	t	4	1	\N	Vendor	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":200,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":20.6}}}	5	CHARACTER VARYING	auto-list	\N	4	0	type/Text	\N	\N	f	f	f
+69	2023-11-17 02:55:38.912067+00	2023-12-03 01:50:11.807982+00	CREATED_AT	type/DateTime	type/CreationTimestamp	t	The day and time a review was written by a user.	t	5	8	\N	Created At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1112,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2022-06-03T00:37:05.818Z","latest":"2026-04-19T14:15:25.677Z"}}}	5	TIMESTAMP	\N	\N	5	0	type/DateTime	\N	\N	f	f	f
+66	2023-11-17 02:55:38.912067+00	2023-12-03 01:50:12.358011+00	RATING	type/Integer	type/Score	t	The rating (on a scale of 1-5) the user left.	t	3	8	\N	Rating	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Number":{"min":1.0,"q1":3.54744353181696,"q3":4.764807071650455,"max":5.0,"sd":1.0443899855660577,"avg":3.987410071942446}}}	5	SMALLINT	auto-list	\N	3	0	type/Integer	\N	\N	f	f	f
+70	2023-11-17 02:55:38.912067+00	2023-12-03 01:50:12.546691+00	REVIEWER	type/Text	\N	t	The user who left the review	t	2	8	\N	Reviewer	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1076,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.001798561151079137,"average-length":9.972122302158274}}}	5	CHARACTER VARYING	\N	\N	2	0	type/Text	\N	\N	f	f	f
+9	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	FIRST_NAME	type/Text	type/Name	t	\N	t	2	7	\N	First Name	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1687,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.001603206412825651,"average-length":5.997595190380761}}}	5	CHARACTER VARYING	\N	\N	2	0	type/Text	\N	\N	f	f	f
+11	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	SOURCE	type/Text	type/Source	t	\N	t	5	7	\N	Source	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":5,"nil%":0.3346693386773547},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":4.4705410821643286}}}	5	CHARACTER VARYING	auto-list	\N	5	0	type/Text	\N	\N	f	f	f
+1	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	SEATS	type/Integer	\N	t	\N	t	6	7	\N	Seats	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":102,"nil%":0.0},"type":{"type/Number":{"min":1.0,"q1":2.4309856865966593,"q3":10.553778422458695,"max":1325.0,"sd":51.198301031505444,"avg":16.21763527054108}}}	5	INTEGER	auto-list	\N	6	0	type/Integer	\N	\N	f	f	f
+3	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	CANCELED_AT	type/DateTime	type/CancelationTimestamp	t	\N	t	9	7	\N	Canceled At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2021,"nil%":0.1859719438877756},"type":{"type/DateTime":{"earliest":"2020-10-01T15:43:40Z","latest":"2032-06-03T14:01:15Z"}}}	5	TIMESTAMP	\N	\N	9	0	type/DateTime	\N	\N	f	f	f
+13	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	CREATED_AT	type/DateTime	type/CreationTimestamp	t	\N	t	7	7	\N	Created At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2495,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2020-09-15T16:11:50Z","latest":"2031-10-10T19:14:48Z"}}}	5	TIMESTAMP	\N	\N	7	0	type/DateTime	\N	\N	f	f	f
+15	2023-11-17 02:55:35.114026+00	2023-11-17 02:56:14.390791+00	COUNTRY	type/Text	type/Country	t	\N	t	15	7	\N	Country	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":134,"nil%":8.016032064128256E-4},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.1130260521042084,"average-length":1.9983967935871743}}}	5	CHARACTER	auto-list	\N	15	0	type/Text	\N	\N	f	f	f
+17	2023-11-17 02:55:35.636423+00	2023-11-17 02:56:14.390791+00	EVENT	type/Text	type/Category	t	\N	t	2	3	\N	Event	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":11.3906}}}	5	CHARACTER VARYING	auto-list	\N	2	0	type/Text	\N	\N	f	f	f
+19	2023-11-17 02:55:35.636423+00	2023-11-17 02:56:14.390791+00	BUTTON_LABEL	type/Text	type/Category	t	\N	t	5	3	\N	Button Label	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":6,"nil%":0.8698},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":1.0552}}}	5	CHARACTER VARYING	auto-list	\N	5	0	type/Text	\N	\N	f	f	f
+56	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:09.515958+00	CREATED_AT	type/DateTime	type/CreationTimestamp	t	The date the user record was created. Also referred to as the user’s "join date"	t	12	5	\N	Created At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2500,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2022-04-19T21:35:18.752Z","latest":"2025-04-19T14:06:27.3Z"}}}	5	TIMESTAMP	\N	\N	12	0	type/DateTime	\N	\N	f	f	f
+59	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:10.62797+00	PRICE	type/Float	\N	t	The list price of the product. Note that this is not always the price the product sold for due to discounts, promotions, etc.	t	5	1	\N	Price	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":170,"nil%":0.0},"type":{"type/Number":{"min":15.691943673970439,"q1":37.25154462926434,"q3":75.45898071609447,"max":98.81933684368194,"sd":21.711481557852057,"avg":55.74639966792074}}}	5	DOUBLE PRECISION	\N	\N	5	0	type/Float	\N	\N	f	f	f
+71	2023-11-17 02:55:38.912067+00	2023-12-03 01:50:12.17601+00	PRODUCT_ID	type/Integer	type/FK	t	The product the review was for	t	1	8	\N	Product ID	normal	62	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":176,"nil%":0.0}}	5	INTEGER	\N	\N	1	0	type/Integer	\N	\N	f	f	f
+38	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:05.324888+00	TAX	type/Float	\N	t	This is the amount of local and federal taxes that are collected on the purchase. Note that other governmental fees on some products are not included here, but instead are accounted for in the subtotal.	t	4	2	\N	Tax	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":797,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":2.273340386603857,"q3":5.337275338216307,"max":11.12,"sd":2.3206651358900316,"avg":3.8722100000000004}}}	5	DOUBLE PRECISION	\N	\N	4	0	type/Float	\N	\N	f	f	f
+43	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:05.980548+00	USER_ID	type/Integer	type/FK	t	The id of the user who made this order. Note that in some cases where an order was created on behalf of a customer who phoned the order in, this might be the employee who handled the request.	t	1	2	\N	User ID	normal	46	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":929,"nil%":0.0}}	5	INTEGER	\N	\N	1	0	type/Integer	\N	\N	f	f	f
+36	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:06.353724+00	DISCOUNT	type/Float	type/Discount	t	Discount amount.	t	6	2	\N	Discount	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":701,"nil%":0.898},"type":{"type/Number":{"min":0.17088996672584322,"q1":2.9786226681458743,"q3":7.338187788658235,"max":61.69684269960571,"sd":3.053663125001991,"avg":5.161255547580326}}}	5	DOUBLE PRECISION	\N	\N	6	0	type/Float	\N	\N	f	f	f
+52	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:07.025193+00	ADDRESS	type/Text	\N	t	The street address of the account’s billing address	t	1	5	\N	Address	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2490,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":20.85}}}	5	CHARACTER VARYING	\N	\N	1	0	type/Text	\N	\N	f	f	f
+55	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:07.966145+00	CITY	type/Text	type/City	t	The city of the account’s billing address	t	5	5	\N	City	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":1966,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.002,"average-length":8.284}}}	5	CHARACTER VARYING	\N	\N	5	0	type/Text	\N	\N	f	f	f
+48	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:08.343204+00	STATE	type/Text	type/State	t	The state or province of the account’s billing address	t	7	5	\N	State	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":49,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":1.0,"average-length":2.0}}}	5	CHARACTER	auto-list	\N	7	0	type/Text	\N	\N	f	f	f
+45	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:08.540703+00	SOURCE	type/Text	type/Source	t	The channel through which we acquired this user. Valid values include: Affiliate, Facebook, Google, Organic and Twitter	t	8	5	\N	Source	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.4084}}}	5	CHARACTER VARYING	auto-list	\N	8	0	type/Text	\N	\N	f	f	f
+23	2023-11-17 02:55:36.167575+00	2023-11-17 02:56:14.390791+00	RATING	type/Integer	type/Score	t	\N	t	4	4	\N	Rating	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Number":{"min":1.0,"q1":2.7545289729206877,"q3":4.004191340512663,"max":5.0,"sd":0.8137255616667736,"avg":3.3629283489096573}}}	5	SMALLINT	auto-list	\N	4	0	type/Integer	\N	\N	f	f	f
+26	2023-11-17 02:55:36.167575+00	2023-11-17 02:56:14.390791+00	EMAIL	type/Text	type/Email	t	\N	t	2	4	\N	Email	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":642,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":1.0,"percent-state":0.0,"average-length":28.327102803738317}}}	5	CHARACTER VARYING	auto-list	\N	2	0	type/Text	\N	\N	f	f	f
+28	2023-11-17 02:55:36.167575+00	2023-11-17 02:56:14.390791+00	RATING_MAPPED	type/Text	type/Category	t	\N	t	5	4	\N	Rating Mapped	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":6.453271028037383}}}	5	CHARACTER VARYING	auto-list	\N	5	0	type/Text	\N	\N	f	f	f
+30	2023-11-17 02:55:36.639349+00	2023-11-17 02:56:14.390791+00	PLAN	type/Text	type/Category	t	\N	t	4	6	\N	Plan	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":3,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.2931}}}	5	CHARACTER VARYING	auto-list	\N	4	0	type/Text	\N	\N	f	f	f
+41	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:06.63406+00	CREATED_AT	type/DateTime	type/CreationTimestamp	t	The date and time an order was submitted.	t	7	2	\N	Created At	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":10001,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2022-04-30T18:56:13.352Z","latest":"2026-04-19T14:07:15.657Z"}}}	5	TIMESTAMP	\N	\N	7	0	type/DateTime	\N	\N	f	f	f
+57	2023-11-17 02:55:37.888067+00	2023-12-03 01:50:09.312167+00	LATITUDE	type/Float	type/Latitude	t	This is the latitude of the user on sign-up. It might be updated in the future to the last seen location.	t	11	5	\N	Latitude	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":2491,"nil%":0.0},"type":{"type/Number":{"min":25.775827,"q1":35.302705923023126,"q3":43.773802584662,"max":70.6355001,"sd":6.390832341883712,"avg":39.87934670484002}}}	5	DOUBLE PRECISION	\N	\N	11	0	type/Float	\N	\N	f	f	f
+63	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:10.263791+00	EAN	type/Text	\N	t	The international article number. A 13 digit number uniquely identifying the product.	t	1	1	\N	Ean	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":200,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":13.0}}}	5	CHARACTER	auto-list	\N	1	0	type/Text	\N	\N	f	f	f
+65	2023-11-17 02:55:38.439641+00	2023-12-03 01:50:11.034469+00	TITLE	type/Text	type/Title	t	The name of the product as it should be displayed to customers.	t	2	1	\N	Title	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":199,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":21.495}}}	5	CHARACTER VARYING	auto-list	\N	2	0	type/Text	\N	\N	f	f	f
+44	2023-11-17 02:55:37.206208+00	2023-12-03 01:50:05.12116+00	SUBTOTAL	type/Float	\N	t	The raw, pre-tax cost of the order. Note that this might be different in the future from the product price due to promotions, credits, etc.	t	3	2	\N	Subtotal	normal	\N	2023-11-17 02:56:14.390791+00	\N	\N	{"global":{"distinct-count":340,"nil%":0.0},"type":{"type/Number":{"min":15.691943673970439,"q1":49.74894519060184,"q3":105.42965746993103,"max":148.22900526552291,"sd":32.53705013056317,"avg":77.01295465356547}}}	5	DOUBLE PRECISION	\N	\N	3	0	type/Float	\N	\N	f	f	f
+\.
+
+
+--
+-- TOC entry 4808 (class 0 OID 26353)
+-- Dependencies: 225
+-- Data for Name: metabase_fieldvalues; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.metabase_fieldvalues (id, created_at, updated_at, "values", human_readable_values, field_id, has_more_values, type, hash_key, last_used_at) FROM stdin;
+1	2023-11-17 02:56:24.010533+00	2023-11-17 02:56:24.010533+00	[false,true]	\N	5	f	full	\N	2023-11-17 02:56:24.010533+00
+2	2023-11-17 02:56:24.450009+00	2023-11-17 02:56:24.450009+00	["Abbott","Abernathy","Abshire","Adams","Altenwerth","Anderson","Ankunding","Armstrong","Auer","Aufderhar","Bahringer","Bailey","Balistreri","Barrows","Bartell","Bartoletti","Barton","Batz","Bauch","Baumbach","Bayer","Beahan","Beatty","Bechtelar","Becker","Bednar","Beer","Beier","Berge","Bergnaum","Bergstrom","Bernhard","Bernier","Bins","Blanda","Blick","Block","Bode","Boehm","Bogan","Bogisich","Borer","Bosco","Botsford","Boyer","Boyle","Bradtke","Brakus","Braun","Breitenberg","Brekke","Brown","Bruen","Buckridge","Carroll","Carter","Cartwright","Casper","Cassin","Champlin","Christiansen","Cole","Collier","Collins","Conn","Connelly","Conroy","Considine","Corkery","Cormier","Corwin","Cremin","Crist","Crona","Cronin","Crooks","Cruickshank","Cummerata","Cummings","D'Amore","Dach","Daniel","Dare","Daugherty","Davis","Deckow","Denesik","Dibbert","Dickens","Dicki","Dickinson","Dietrich","Donnelly","Dooley","Douglas","Doyle","DuBuque","Durgan","Ebert","Effertz","Eichmann","Emard","Emmerich","Erdman","Ernser","Fadel","Fahey","Farrell","Fay","Feeney","Feest","Feil","Ferry","Fisher","Flatley","Frami","Franecki","Friesen","Fritsch","Funk","Gaylord","Gerhold","Gerlach","Gibson","Gislason","Gleason","Gleichner","Glover","Goldner","Goodwin","Gorczany","Gottlieb","Goyette","Grady","Graham","Grant","Green","Greenfelder","Greenholt","Grimes","Gulgowski","Gusikowski","Gutkowski","Gutmann","Haag","Hackett","Hagenes","Hahn","Haley","Halvorson","Hamill","Hammes","Hand","Hane","Hansen","Harber","Harris","Hartmann","Harvey","Hauck","Hayes","Heaney","Heathcote","Hegmann","Heidenreich","Heller","Herman","Hermann","Hermiston","Herzog","Hessel","Hettinger","Hickle","Hilll","Hills","Hilpert","Hintz","Hirthe","Hodkiewicz","Hoeger","Homenick","Hoppe","Howe","Howell","Hudson","Huel","Huels","Hyatt","Jacobi","Jacobs","Jacobson","Jakubowski","Jaskolski","Jast","Jenkins","Jerde","Jewess","Johns","Johnson","Johnston","Jones","Kassulke","Kautzer","Keebler","Keeling","Kemmer","Kerluke","Kertzmann","Kessler","Kiehn","Kihn","Kilback","King","Kirlin","Klein","Kling","Klocko","Koch","Koelpin","Koepp","Kohler","Konopelski","Koss","Kovacek","Kozey","Krajcik","Kreiger","Kris","Kshlerin","Kub","Kuhic","Kuhlman","Kuhn","Kulas","Kunde","Kunze","Kuphal","Kutch","Kuvalis","Labadie","Lakin","Lang","Langosh","Langworth","Larkin","Larson","Leannon","Lebsack","Ledner","Leffler","Legros","Lehner","Lemke","Lesch","Leuschke","Lind","Lindgren","Littel","Little","Lockman","Lowe","Lubowitz","Lueilwitz","Luettgen","Lynch","Macejkovic","Maggio","Mann","Mante","Marks","Marquardt","Marvin","Mayer","Mayert","McClure","McCullough","McDermott","McGlynn","McKenzie","McLaughlin","Medhurst","Mertz","Metz","Miller","Mills","Mitchell","Moen","Mohr","Monahan","Moore","Morar","Morissette","Mosciski","Mraz","Mueller","Muller","Murazik","Murphy","Murray","Nader","Nicolas","Nienow","Nikolaus","Nitzsche","Nolan","O'Connell","O'Conner","O'Hara","O'Keefe","O'Kon","O'Reilly","Oberbrunner","Okuneva","Olson","Ondricka","Orn","Ortiz","Osinski","Pacocha","Padberg","Pagac","Parisian","Parker","Paucek","Pfannerstill","Pfeffer","Pollich","Pouros","Powlowski","Predovic","Price","Prohaska","Prosacco","Purdy","Quigley","Quitzon","Rath","Ratke","Rau","Raynor","Reichel","Reichert","Reilly","Reinger","Rempel","Renner","Reynolds","Rice","Rippin","Ritchie","Robel","Roberts","Rodriguez","Rogahn","Rohan","Rolfson","Romaguera","Roob","Rosenbaum","Rowe","Ruecker","Runolfsdottir","Runolfsson","Runte","Russel","Rutherford","Ryan","Sanford","Satterfield","Sauer","Sawayn","Schaden","Schaefer","Schamberger","Schiller","Schimmel","Schinner","Schmeler","Schmidt","Schmitt","Schneider","Schoen","Schowalter","Schroeder","Schulist","Schultz","Schumm","Schuppe","Schuster","Senger","Shanahan","Shields","Simonis","Sipes","Skiles","Smith","Smitham","Spencer","Spinka","Sporer","Stamm","Stanton","Stark","Stehr","Steuber","Stiedemann","Stokes","Stoltenberg","Stracke","Streich","Stroman","Strosin","Swaniawski","Swift","Terry","Thiel","Thompson","Tillman","Torp","Torphy","Towne","Toy","Trantow","Tremblay","Treutel","Tromp","Turcotte","Turner","Ullrich","Upton","Vandervort","Veum","Volkman","Von","VonRueden","Waelchi","Walker","Walsh","Walter","Ward","Waters","Watsica","Weber","Wehner","Weimann","Weissnat","Welch","West","White","Wiegand","Wilderman","Wilkinson","Will","Williamson","Willms","Windler","Wintheiser","Wisoky","Wisozk","Witting","Wiza","Wolf","Wolff","Wuckert","Wunsch","Wyman","Yost","Yundt","Zboncak","Zemlak","Ziemann","Zieme","Zulauf"]	\N	10	f	full	\N	2023-11-17 02:56:24.450009+00
+3	2023-11-17 02:56:24.909153+00	2023-11-17 02:56:24.909153+00	["Basic","Business","Premium"]	\N	4	f	full	\N	2023-11-17 02:56:24.909153+00
+4	2023-11-17 02:56:25.330988+00	2023-11-17 02:56:25.330988+00	[false,true]	\N	8	f	full	\N	2023-11-17 02:56:25.330988+00
+5	2023-11-17 02:56:25.785438+00	2023-11-17 02:56:25.785438+00	[false,true]	\N	14	f	full	\N	2023-11-17 02:56:25.785438+00
+6	2023-11-17 02:56:26.253176+00	2023-11-17 02:56:26.253176+00	[null,"Facebook","Google","Invite","Twitter"]	\N	11	f	full	\N	2023-11-17 02:56:26.253176+00
+7	2023-11-17 02:56:26.643636+00	2023-11-17 02:56:26.643636+00	[1,3,5,8,10,12,14,16,19,21,23,25,27,30,32,34,36,38,41,43,45,47,49,52,54,56,58,60,63,65,67,69,71,74,76,78,80,82,85,87,89,91,93,96,98,102,104,107,109,111,113,115,120,122,124,129,131,133,135,137,140,142,148,155,162,168,173,175,177,179,186,188,190,197,201,203,208,210,219,223,236,252,254,261,267,269,274,289,331,335,351,390,393,401,423,426,450,503,522,639,668,1325]	\N	1	f	full	\N	2023-11-17 02:56:26.643636+00
+8	2023-11-17 02:56:27.105833+00	2023-11-17 02:56:27.105833+00	[null,"AE","AF","AG","AL","AM","AR","AT","AU","BA","BD","BE","BF","BG","BN","BO","BR","BT","BW","BY","CA","CD","CH","CI","CL","CM","CN","CO","CR","CU","CV","CY","CZ","DE","DK","DO","DZ","EE","EG","ES","ET","FI","FR","GB","GE","GM","GN","GR","GT","HN","HR","HT","HU","ID","IE","IL","IN","IQ","IR","IT","JM","JO","JP","KE","KH","KI","KM","KR","KZ","LA","LC","LK","LR","LS","LT","LU","LV","LY","MA","MD","MG","MK","ML","MM","MT","MU","MW","MX","MY","NE","NG","NI","NL","NO","NZ","PA","PE","PH","PK","PL","PT","PW","PY","RO","RS","RU","RW","SA","SE","SI","SK","SL","SM","SN","SO","SV","SY","SZ","TH","TJ","TN","TO","TR","TZ","UA","UG","US","UZ","VE","VN","YE","ZA","ZM","ZW"]	\N	15	f	full	\N	2023-11-17 02:56:27.105833+00
+9	2023-11-17 02:56:27.607044+00	2023-11-17 02:56:27.607044+00	[null,"www.piespace.example/help","www.piespace.example/home","www.piespace.example/invite","www.piespace.example/login","www.piespace.example/pies"]	\N	18	f	full	\N	2023-11-17 02:56:27.607044+00
+10	2023-11-17 02:56:28.030971+00	2023-11-17 02:56:28.030971+00	["Button Clicked","Page Viewed"]	\N	17	f	full	\N	2023-11-17 02:56:28.030971+00
+11	2023-11-17 02:56:28.421982+00	2023-11-17 02:56:28.421982+00	[null,"Checkout","Create Item","Invite","Signup","Subscribe"]	\N	19	f	full	\N	2023-11-17 02:56:28.421982+00
+12	2023-11-17 02:56:29.568362+00	2023-11-17 02:56:29.568362+00	[1,2,3,4,5]	\N	23	f	full	\N	2023-11-17 02:56:29.568362+00
+13	2023-11-17 02:56:30.017622+00	2023-11-17 02:56:30.017622+00	["abbott-berneice@hotmail.example","abdullah-kerluke@gmail.example","adan-weissnat@yahoo.example","aida.schneider@gmail.example","aidan-hagenes@hotmail.example","aidan.rodriguez@gmail.example","alaina-howell@gmail.example","alayna.halvorson@hotmail.example","alberto.gulgowski@gmail.example","alicia.schimmel@gmail.example","alisa-morissette@hotmail.example","alisa-schmitt@hotmail.example","altenwerth.onie@yahoo.example","alva.conroy@hotmail.example","alvena-legros@hotmail.example","alverta-rogahn@hotmail.example","alvina.mertz@gmail.example","alvis.emmerich@yahoo.example","alycia.collins@yahoo.example","alysson-cartwright@yahoo.example","anastacio.jaskolski@hotmail.example","anderson-eliza@hotmail.example","anderson.schinner@yahoo.example","andy-skiles@yahoo.example","angela-botsford@hotmail.example","anjali-parker@hotmail.example","ankunding-rudolph@hotmail.example","aracely.jenkins@gmail.example","arch-ryan@hotmail.example","archibald-lowe@hotmail.example","archibald-turner@hotmail.example","arne-o-hara@gmail.example","art-graham@yahoo.example","arvel-lakin@gmail.example","ashton-herman@hotmail.example","aubree-dibbert@hotmail.example","aubree-walter@hotmail.example","aufderhar-mya@hotmail.example","aufderhar.john@yahoo.example","aurore-yundt@yahoo.example","bahringer-laura@yahoo.example","bailey.kenna@yahoo.example","balistreri-oral@yahoo.example","balistreri-unique@gmail.example","bauch-wilford@gmail.example","bayer-mattie@hotmail.example","bayer.mark@hotmail.example","beatty-emmie@gmail.example","beatty.julio@gmail.example","beatty.mohammed@gmail.example","bechtelar.antone@gmail.example","beer.humberto@hotmail.example","berge-halie@hotmail.example","bergstrom-chelsie@yahoo.example","bernhard.kathleen@yahoo.example","bins-evans@hotmail.example","blair.heaney@gmail.example","blake-leffler@hotmail.example","blaze-daugherty@hotmail.example","blick-candelario@yahoo.example","block.emiliano@hotmail.example","bode-sydnie@gmail.example","bode.richmond@gmail.example","boehm-amanda@hotmail.example","bogan.rodger@gmail.example","bosco-zachariah@gmail.example","bosco.haylie@hotmail.example","botsford.okey@hotmail.example","boyer-bernhard@yahoo.example","boyle-christiana@gmail.example","brakus-kimberly@gmail.example","brakus.marlene@hotmail.example","brant.klein@yahoo.example","braun.madisyn@gmail.example","breanna.strosin@yahoo.example","breitenberg-louie@gmail.example","brekke.kirsten@yahoo.example","brennon-gerlach@hotmail.example","bret-quigley@gmail.example","brianne-jacobson@yahoo.example","brown-deontae@gmail.example","buddy-hills@gmail.example","caleigh-hodkiewicz@yahoo.example","camron-homenick@gmail.example","camryn-schmeler@hotmail.example","candida-turcotte@yahoo.example","carolanne-upton@gmail.example","carroll.chanel@yahoo.example","carroll.kohler@hotmail.example","carter-fern@hotmail.example","casey.robel@yahoo.example","casper-alfonzo@yahoo.example","cassin-cleta@hotmail.example","cassin.mario@hotmail.example","cayla.vonrueden@hotmail.example","cecilia.stark@hotmail.example","cedrick-kessler@gmail.example","champlin.jensen@yahoo.example","chanel.rippin@yahoo.example","charlene-bayer@hotmail.example","chet-blick@yahoo.example","christophe.wilderman@hotmail.example","ciara-larson@hotmail.example","ciara.green@yahoo.example","clark-luettgen@gmail.example","claudie-dare@yahoo.example","claudine.mccullough@yahoo.example","clay-pfannerstill@gmail.example","clemens.hansen@gmail.example","cole.christophe@yahoo.example","conn-gideon@yahoo.example","connell-o-henriette@yahoo.example","connell.lisette.o@yahoo.example","connelly-alice@gmail.example","connelly.bessie@hotmail.example","conner.windler@gmail.example","conroy-orlando@yahoo.example","conroy-yadira@gmail.example","corbin.mertz@hotmail.example","corbin.wiegand@yahoo.example","corkery.theresa@yahoo.example","cornelius-bogisich@hotmail.example","crawford.rath@gmail.example","cremin-jerome@hotmail.example","cremin.tyler@gmail.example","cronin-marley@yahoo.example","curtis.morar@hotmail.example","d-amore-geoffrey@yahoo.example","dagmar-sawayn@gmail.example","dana-orn@hotmail.example","dana.kozey@yahoo.example","darwin-abshire@yahoo.example","dawson-kuvalis@gmail.example","dax-bartell@hotmail.example","dayne.strosin@hotmail.example","deckow.alisha@hotmail.example","dell-schimmel@hotmail.example","demario-hand@yahoo.example","demetris.hauck@hotmail.example","dena-schiller@yahoo.example","denesik-delphia@hotmail.example","deron-cremin@gmail.example","destiny-murazik@hotmail.example","deven.brekke@gmail.example","domenico.bailey@yahoo.example","dominic.jacobi@yahoo.example","donavon.lowe@gmail.example","dooley-karen@gmail.example","douglas-prosacco@hotmail.example","douglas.anais@hotmail.example","durgan-emiliano@hotmail.example","earnestine-lockman@hotmail.example","easton-koch@gmail.example","effertz-elnora@yahoo.example","eileen-mayert@gmail.example","eldon.herman@yahoo.example","elisa-grady@yahoo.example","ellie-oberbrunner@yahoo.example","ellsworth.west@hotmail.example","elmo.schimmel@yahoo.example","elsa.klocko@gmail.example","elvera.lowe@yahoo.example","elwin.okuneva@gmail.example","emanuel-corwin@gmail.example","emard-janiya@gmail.example","emerson-o-keefe@gmail.example","emery.gerlach@hotmail.example","emmie-mertz@yahoo.example","enola.bayer@yahoo.example","erich.kris@gmail.example","ernestina-gerhold@gmail.example","ernser-ardella@gmail.example","esther-douglas@yahoo.example","estrella.goyette@hotmail.example","ethan.rutherford@gmail.example","eudora-renner@gmail.example","eugenia-stroman@yahoo.example","eula-connell-o@hotmail.example","eve.mante@yahoo.example","fadel-philip@hotmail.example","feest-angus@gmail.example","feil.sterling@gmail.example","felicity-greenfelder@hotmail.example","felipe-johnston@yahoo.example","ferry.enrico@hotmail.example","fisher-antwan@hotmail.example","florence.donnelly@gmail.example","foster-gusikowski@yahoo.example","foster-marks@yahoo.example","francisco-robel@hotmail.example","freddie.wisoky@gmail.example","fredrick-gulgowski@yahoo.example","fritz.dickens@hotmail.example","funk.nichole@yahoo.example","gabrielle-considine@yahoo.example","gabrielle-frami@gmail.example","gaetano-rogahn@hotmail.example","gaylord-granville@yahoo.example","gene-lueilwitz@gmail.example","gerhold.lempi@yahoo.example","germaine-brakus@yahoo.example","gibson.eveline@hotmail.example","gilberto-mueller@gmail.example","gino.johnston@yahoo.example","giovani-thompson@hotmail.example","giovani.lesch@hotmail.example","gislason-kaelyn@hotmail.example","giuseppe.morar@hotmail.example","gleichner-joshuah@gmail.example","glover-eryn@gmail.example","glover.kelsie@yahoo.example","goldner.ruthe@hotmail.example","gorczany-eulah@yahoo.example","gottlieb-ola@gmail.example","gottlieb-ruthe@yahoo.example","grady.raynor@hotmail.example","graham-liam@yahoo.example","greenfelder-hulda@gmail.example","greenfelder.wilbert@gmail.example","greg-purdy@gmail.example","gretchen.muller@hotmail.example","greyson.boyle@gmail.example","grimes-terrence@gmail.example","grimes.melisa@gmail.example","guido-mckenzie@yahoo.example","gulgowski.ubaldo@gmail.example","gutkowski-pattie@hotmail.example","gutmann-lura@hotmail.example","hagenes-rosie@hotmail.example","hahn.hugh@hotmail.example","halvorson.dale@gmail.example","hane.audie@gmail.example","hane.carter@gmail.example","hansen-karl@hotmail.example","hansen.alta@yahoo.example","hansen.anibal@yahoo.example","hansen.magnolia@gmail.example","harris-myrtice@gmail.example","harris.constantin@hotmail.example","harris.richard@yahoo.example","heath-dare@gmail.example","heathcote.jamar@gmail.example","heidenreich-patience@hotmail.example","heidenreich.pearlie@hotmail.example","heidi-glover@gmail.example","henry-rowe@yahoo.example","hermann-madelyn@hotmail.example","hermiston.gerald@yahoo.example","hertha.price@gmail.example","herzog-ophelia@hotmail.example","hessel.arnoldo@yahoo.example","hettinger-brendon@yahoo.example","hettinger.david@yahoo.example","hettinger.orval@hotmail.example","hettinger.shyanne@yahoo.example","hills-violet@hotmail.example","hilpert.gunnar@yahoo.example","hollis-hettinger@gmail.example","homenick-omari@hotmail.example","hoppe.kathryne@gmail.example","hoppe.lewis@gmail.example","howell-reba@gmail.example","howell.jacinthe@yahoo.example","hudson-audra@hotmail.example","hudson.larkin@hotmail.example","huels-earnest@hotmail.example","huels-gunnar@yahoo.example","hyatt.rowan@hotmail.example","jace-kihn@yahoo.example","jacey.schoen@hotmail.example","jacobs-oliver@yahoo.example","jacobs-ronny@hotmail.example","jacobson.stan@gmail.example","jairo-simonis@yahoo.example","jakob.hansen@gmail.example","jakubowski.nyasia@yahoo.example","jaleel.collins@gmail.example","jamel.stanton@yahoo.example","jannie-balistreri@yahoo.example","jasen.stanton@yahoo.example","jast.leann@yahoo.example","jayden.kris@hotmail.example","jazmin.brekke@gmail.example","jedediah-huels@hotmail.example","jeffry-schowalter@hotmail.example","jenkins-sandy@yahoo.example","jennifer-klocko@hotmail.example","jerrod-king@yahoo.example","jessika.funk@yahoo.example","jo-gusikowski@hotmail.example","joe.becker@yahoo.example","joelle-ullrich@gmail.example","johns-myrtle@yahoo.example","johnston.benny@gmail.example","jorge.bins@gmail.example","josh-schimmel@gmail.example","judd-hickle@gmail.example","kade-kub@hotmail.example","kaela-kunze@gmail.example","kariane.hintz@gmail.example","karine.mante@gmail.example","katharina-heathcote@yahoo.example","kavon-dach@gmail.example","kaya.schoen@yahoo.example","kayley.powlowski@hotmail.example","keefe-o-jonas@yahoo.example","keenan.ferry@hotmail.example","kellie.price@hotmail.example","kelsi.douglas@gmail.example","kemmer-gene@yahoo.example","kemmer-matt@yahoo.example","kemmer.bonnie@hotmail.example","kennedy-kunde@gmail.example","kerluke.jakob@gmail.example","kertzmann-coty@hotmail.example","keshaun-carroll@hotmail.example","khalid-pouros@yahoo.example","khalid.blanda@yahoo.example","kihn.alfred@yahoo.example","kilback-alisha@hotmail.example","kilback-carmelo@yahoo.example","kitty.hilll@gmail.example","koelpin-karelle@gmail.example","koepp-melyna@gmail.example","kohler.jermain@hotmail.example","konopelski.beaulah@hotmail.example","koss-ella@hotmail.example","koss.letha@hotmail.example","kovacek-dawson@hotmail.example","kristoffer.blanda@yahoo.example","krystel.boyle@yahoo.example","kshlerin-bernardo@gmail.example","kshlerin-stella@yahoo.example","kulas-armani@yahoo.example","kunze.eleanora@hotmail.example","kuphal.colton@gmail.example","kurtis.parker@gmail.example","kuvalis-cierra@yahoo.example","kuvalis-willis@yahoo.example","kyler-altenwerth@yahoo.example","kyler.abshire@yahoo.example","kyra-lynch@hotmail.example","lacey.dickinson@hotmail.example","langosh.cathrine@gmail.example","langworth-savion@gmail.example","larkin-lilliana@hotmail.example","larkin.cedrick@gmail.example","larson-adrianna@gmail.example","laurel.pfannerstill@gmail.example","laurie-sanford@hotmail.example","lavern.botsford@hotmail.example","lavern.boyle@hotmail.example","leannon-clay@gmail.example","lebsack-tristin@yahoo.example","ledner-nichole@yahoo.example","leila-considine@gmail.example","leta-heidenreich@yahoo.example","leuschke-estefania@yahoo.example","liam-schoen@hotmail.example","lillie.wilderman@hotmail.example","lind.annamae@gmail.example","linnea.dickens@gmail.example","littel.otto@hotmail.example","little-anika@hotmail.example","little.john@yahoo.example","lockman-janiya@hotmail.example","logan-weber@yahoo.example","lon-friesen@yahoo.example","lorna.greenholt@yahoo.example","lou.runte@gmail.example","lowell-daniel@gmail.example","loyal.wintheiser@yahoo.example","loyce-lemke@yahoo.example","lucas-beer@gmail.example","lucile-bednar@gmail.example","lueilwitz.osbaldo@yahoo.example","luna-nienow@gmail.example","lynch.tyson@gmail.example","lysanne-brekke@yahoo.example","mabel-grimes@hotmail.example","macejkovic-cyrus@gmail.example","macejkovic.andrew@hotmail.example","mackenzie-ullrich@yahoo.example","madge-friesen@gmail.example","madie.bayer@hotmail.example","maeve.hilpert@hotmail.example","maiya-beier@hotmail.example","malika-kuphal@hotmail.example","mante-dakota@yahoo.example","marcelle-rippin@gmail.example","marcelo-ferry@gmail.example","margarete.tillman@gmail.example","marley.gorczany@hotmail.example","marvin.kris@gmail.example","mathilde.quigley@gmail.example","maurine-considine@hotmail.example","maximillia.ebert@hotmail.example","maximillian-zboncak@hotmail.example","mayer.arne@hotmail.example","mayert.jessyca@gmail.example","mckenzie.eduardo@yahoo.example","mclaughlin.ezekiel@yahoo.example","meagan.cremin@yahoo.example","melba-witting@hotmail.example","melisa.hilpert@hotmail.example","melissa.cormier@hotmail.example","merle.blick@yahoo.example","merle.moen@yahoo.example","mertz.antoinette@hotmail.example","mertz.melissa@gmail.example","micaela.kerluke@gmail.example","milan-ritchie@gmail.example","miller-geovanni@hotmail.example","miller.morgan@gmail.example","mills-andy@hotmail.example","milton.schiller@hotmail.example","mina.reynolds@yahoo.example","miracle.erdman@gmail.example","misty-botsford@hotmail.example","mitchell-lacey@gmail.example","moen-evalyn@gmail.example","mohr.johnson@gmail.example","mollie.bogan@hotmail.example","monahan.loma@yahoo.example","monserrate-doyle@hotmail.example","morar-maddison@hotmail.example","morissette.jailyn@gmail.example","mraz-tomas@gmail.example","mraz.caitlyn@yahoo.example","muller-russell@yahoo.example","murazik-donny@hotmail.example","murray-idell@gmail.example","murray-zemlak@hotmail.example","murray.gleason@gmail.example","mya-gleason@yahoo.example","myles.deckow@gmail.example","myrtle.bahringer@hotmail.example","nader-arnaldo@hotmail.example","nader-ryley@hotmail.example","nayeli.becker@yahoo.example","nicolas.dameon@yahoo.example","nicolas.karen@hotmail.example","nikko.bartoletti@gmail.example","nikolas-hilpert@gmail.example","nikolaus-willie@yahoo.example","nils.gaylord@hotmail.example","nolan-amy@hotmail.example","nolan.samantha@hotmail.example","o-issac-kon@hotmail.example","o.janelle.hara@gmail.example","oceane.runte@yahoo.example","odell.stehr@hotmail.example","olaf.sipes@gmail.example","ollie.corkery@gmail.example","ondricka-lamont@hotmail.example","ondricka-madge@yahoo.example","ondricka.rollin@gmail.example","orie-sipes@yahoo.example","ortiz.harrison@gmail.example","orville-effertz@hotmail.example","oscar-olson@hotmail.example","osinski-joanne@gmail.example","pacocha-khalil@hotmail.example","padberg-albert@gmail.example","pagac-yessenia@yahoo.example","parker-lilliana@yahoo.example","pattie.senger@yahoo.example","paucek-larry@hotmail.example","petra.durgan@hotmail.example","peyton-barton@gmail.example","powlowski-mohammed@yahoo.example","price-rosalyn@yahoo.example","rau.arnaldo@hotmail.example","raynor.chasity@gmail.example","rebekah-dickinson@hotmail.example","rebekah.ledner@gmail.example","reichel-antwon@hotmail.example","reichel.gracie@gmail.example","reichert-evangeline@yahoo.example","reid-reilly@hotmail.example","reilly.o.franco@yahoo.example","rempel.brooke@gmail.example","rene.muller@gmail.example","reuben-koelpin@yahoo.example","rey-schumm@hotmail.example","reyna-greenholt@yahoo.example","reynolds-melisa@hotmail.example","richmond-adams@gmail.example","roberts-lilian@yahoo.example","rogahn-meta@hotmail.example","rolfson-ford@yahoo.example","rolfson.natalie@yahoo.example","romaguera-angeline@yahoo.example","roob-lila@gmail.example","rosalinda-stamm@gmail.example","rosella-bergstrom@gmail.example","rowe-celestine@gmail.example","ruecker-kathlyn@yahoo.example","ruecker-tad@yahoo.example","runolfsdottir-tyreek@gmail.example","runolfsdottir.augustine@gmail.example","runolfsson.davonte@gmail.example","rutherford-beau@yahoo.example","rylee-upton@yahoo.example","ryleigh-padberg@hotmail.example","sabrina-schmidt@hotmail.example","sabryna-schumm@gmail.example","sallie.wehner@yahoo.example","samir.hayes@yahoo.example","sanford.leilani@yahoo.example","satterfield-abbey@hotmail.example","satterfield.chris@hotmail.example","satterfield.creola@hotmail.example","sauer-franco@yahoo.example","schaden.johathan@hotmail.example","schamberger-zora@gmail.example","schiller.loyal@gmail.example","schinner.verna@yahoo.example","schmeler-lucinda@hotmail.example","schmeler-rita@yahoo.example","schmeler.annabelle@gmail.example","schoen.viola@hotmail.example","schuster.geovanny@yahoo.example","scottie.schmidt@hotmail.example","senger-kamron@hotmail.example","shanie.spinka@gmail.example","shanny-kuvalis@gmail.example","shirley-okuneva@yahoo.example","sidney-kling@gmail.example","skiles-devan@gmail.example","skye.heidenreich@gmail.example","smith-meaghan@yahoo.example","smith-price@yahoo.example","spencer.efrain@gmail.example","spinka-donato@yahoo.example","spinka-jessy@gmail.example","sporer-nyasia@hotmail.example","sporer.toby@yahoo.example","stamm.davin@yahoo.example","stanley.kuphal@gmail.example","stark.yasmin@gmail.example","stehr-freeman@hotmail.example","stehr.tyson@gmail.example","steuber-vernice@yahoo.example","steuber.dedrick@gmail.example","stewart.sawayn@gmail.example","stiedemann-gage@gmail.example","stiedemann.coby@gmail.example","stokes.cordelia@yahoo.example","stoltenberg-miguel@gmail.example","swaniawski-kaleb@gmail.example","swaniawski-luisa@hotmail.example","swift.pietro@hotmail.example","tavares.metz@yahoo.example","terry-gregorio@gmail.example","terry-william@yahoo.example","terry.darlene@gmail.example","terry.joe@gmail.example","theodore.mcglynn@hotmail.example","theresa.grant@yahoo.example","theresia-russel@gmail.example","thompson-fay@yahoo.example","thompson-hosea@hotmail.example","thurman-pouros@hotmail.example","toby.yundt@gmail.example","torp.magdalen@yahoo.example","trantow-daphnee@hotmail.example","tressie-smitham@yahoo.example","treutel-jessika@yahoo.example","treutel.jaquan@hotmail.example","tromp-demario@yahoo.example","tromp.emelia@hotmail.example","trudie-muller@gmail.example","trudie.koch@yahoo.example","turner.dahlia@yahoo.example","turner.kelley@hotmail.example","tyrel-beatty@yahoo.example","ullrich-ladarius@gmail.example","unique.jerde@yahoo.example","vanessa-jaskolski@gmail.example","vergie.borer@hotmail.example","veronica.weissnat@gmail.example","virginia-prohaska@yahoo.example","vonrueden-sheridan@hotmail.example","waelchi-filomena@yahoo.example","waelchi-jaqueline@hotmail.example","waelchi.iva@yahoo.example","walker-derrick@yahoo.example","walker-nicole@yahoo.example","walker-trace@gmail.example","walker.carter@yahoo.example","walter-melisa@gmail.example","walter.chris@yahoo.example","ward.anais@gmail.example","ward.mabel@gmail.example","warren.gulgowski@hotmail.example","watsica-olen@gmail.example","watsica.stanley@hotmail.example","weber-breana@hotmail.example","weber-gino@yahoo.example","weber-mohammad@yahoo.example","weimann.keyshawn@hotmail.example","weimann.maryam@gmail.example","weissnat-victoria@gmail.example","weissnat.elmore@gmail.example","weissnat.mathilde@hotmail.example","welch-lucinda@yahoo.example","wendell-becker@yahoo.example","west.laisha@yahoo.example","white.berneice@gmail.example","wiegand.guy@gmail.example","wilderman-nellie@hotmail.example","wilhelmine.erdman@gmail.example","wilkinson-penelope@gmail.example","wilkinson.edmund@hotmail.example","will.garrison@yahoo.example","willms-ardella@yahoo.example","willms-tressie@hotmail.example","willms.seth@gmail.example","willms.wilhelm@gmail.example","wilton-senger@yahoo.example","winfield.donnelly@hotmail.example","winona.cassin@yahoo.example","wintheiser-broderick@yahoo.example","wintheiser-celestino@gmail.example","wintheiser-murray@yahoo.example","wisoky-rebeka@hotmail.example","witting-cindy@yahoo.example","witting-maud@gmail.example","witting-raegan@gmail.example","wiza-andreanne@gmail.example","wiza.lisette@yahoo.example","wolf-jewell@yahoo.example","wuckert.iva@hotmail.example","wyman.hilma@gmail.example","yundt-haven@hotmail.example","yundt.merl@yahoo.example","zackery.bailey@gmail.example","zane.paucek@yahoo.example","zetta.nitzsche@gmail.example","ziemann-serena@gmail.example","zula.boehm@hotmail.example"]	\N	26	f	full	\N	2023-11-17 02:56:30.017622+00
+14	2023-11-17 02:56:30.445376+00	2023-11-17 02:56:30.445376+00	["Average","Below Average","Good","Great","Poor"]	\N	28	f	full	\N	2023-11-17 02:56:30.445376+00
+15	2023-11-17 02:56:30.918891+00	2023-11-17 02:56:30.918891+00	[false,true]	\N	35	f	full	\N	2023-11-17 02:56:30.918891+00
+16	2023-11-17 02:56:31.35747+00	2023-11-17 02:56:31.35747+00	["Basic","Business","Premium"]	\N	30	f	full	\N	2023-11-17 02:56:31.35747+00
+17	2023-11-17 02:56:31.83129+00	2023-11-17 02:56:31.83129+00	[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,63,65,67,68,69,70,71,72,73,75,78,82,83,88,100]	\N	39	f	full	\N	2023-11-17 02:56:31.83129+00
+18	2023-11-17 02:56:32.781204+00	2023-11-17 02:56:32.781204+00	["Affiliate","Facebook","Google","Organic","Twitter"]	\N	45	f	full	\N	2023-11-17 02:56:32.781204+00
+19	2023-11-17 02:56:33.163834+00	2023-11-17 02:56:33.163834+00	["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","IA","ID","IL","IN","KS","KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM","NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"]	\N	48	f	full	\N	2023-11-17 02:56:33.163834+00
+20	2023-11-17 02:56:33.675967+00	2023-11-17 02:56:33.675967+00	["Doohickey","Gadget","Gizmo","Widget"]	\N	58	f	full	\N	2023-11-17 02:56:33.675967+00
+21	2023-11-17 02:56:34.051116+00	2023-11-17 02:56:34.051116+00	["Alfreda Konopelski II Group","Alfredo Kuhlman Group","Americo Sipes and Sons","Annetta Wyman and Sons","Aufderhar-Boehm","Balistreri-Ankunding","Balistreri-Muller","Barrows-Johns","Batz-Schroeder","Baumbach-Hilpert","Bednar, Berge and Boyle","Berge, Mraz and Sawayn","Bernhard-Grady","Blake Greenfelder Group","Bosco-Breitenberg","Bradtke, Wilkinson and Reilly","Braeden Gislason and Sons","Brittany Mueller Inc","Cale Thompson V and Sons","Carmela Douglas Inc","Carol Marvin LLC","Casper-Schimmel","Cassin-Collins","Claude Thompson Group","Connelly-Mitchell","Connelly-Ritchie","Considine, Bogisich and Bauch","Considine, Lehner and Maggio","Considine, Schamberger and Schiller","Cremin-Williamson","Crona, Block and Homenick","Cruickshank-Abernathy","Daugherty-Dach","Delphia Bauch Inc","Demarcus Brakus Inc","Denesik-Ortiz","Devonte Gleichner Inc","Dominic Mann Group","Donnelly, Renner and Barton","Dooley-Cummings","Dora Fay and Sons","Dorothea Balistreri Inc","Emmerich-Nienow","Erika Volkman Group","Eugenia Kunze LLC","Fisher-Kemmer","Fisher-Purdy","Flatley-Kunde","Ford Runolfsson Group","Francis Wolff Group","Friesen-Anderson","Friesen-Langworth","Gail Bergstrom Inc","Gaylord-Lesch","Gibson, Turner and Douglas","Goyette-Smitham","Grady, Greenfelder and Welch","Gulgowski, Grimes and Mayer","Gutmann-Breitenberg","Hackett-Reynolds","Halle Kulas I LLC","Halvorson, Lockman and Ruecker","Hane, Hamill and Jerde","Hartmann, Mohr and Stiedemann","Hauck, Ernser and Barton","Heaney-Windler","Heathcote-Kirlin","Herman Flatley Group","Herman, Gleason and Renner","Hermiston, O'Hara and Wunsch","Herta Skiles and Sons","Hills, Fahey and Jones","Hilpert, Jacobs and Hauck","Hodkiewicz-Brekke","Howe, Kiehn and Price","Israel Spinka and Sons","Izabella Dach I and Sons","Jacobson-Daniel","Janick Harvey LLC","Jefferey Volkman LLC","Jerrell Gulgowski Inc","Jerrod McLaughlin LLC","Jones, Hayes and Kshlerin","Jordi Effertz LLC","Keely Stehr Group","Keshaun Mueller Group","Kiehn-Pacocha","Kiel Kassulke Group","Kirlin, Hermann and Stokes","Koch-Ruecker","Koepp, Ondricka and Larkin","Kuhlman-Kuphal","Kuhlman-McKenzie","Kuhn-O'Reilly","Kuphal, Brown and Koss","Kuphal, Friesen and Rowe","Kuphal, Schowalter and Bogan","Lakin-Stroman","Larson, Pfeffer and Klocko","Ledner-Satterfield","Ledner-Watsica","Legros, Lynch and Howell","Little-Pagac","Lon Wiegand DVM and Sons","Lorenza Mayer Inc","Maegan Casper Group","Marge Effertz Jr. Inc","Marquardt, Crooks and Abshire","Marvin, Turcotte and Wisozk","Mason Bashirian and Sons","Maxime Haley and Sons","Mayer, Kiehn and Turcotte","McClure-Lockman","McClure-Murphy","McDermott, Kiehn and Becker","McGlynn, Fay and Kertzmann","Medhurst-Reichert","Miles Ryan Group","Miss Annamae Kutch Group","Morar-Schamberger","Morissette, Bartoletti and Cummings","Morissette, Dare and Schimmel","Mr. Colton Mayer Group","Mr. Johanna Koepp and Sons","Mr. Tanya Stracke and Sons","Mrs. Eugenia Koelpin and Sons","Mueller, Mayert and Johnston","Mueller-Dare","Murray, Watsica and Wunsch","Myriam Macejkovic Inc","Nikolaus-Hudson","Noah Anderson and Sons","Nolan-Heller","Nolan-Wolff","Odessa Emmerich Inc","Okuneva, Kutch and Monahan","Ora Monahan and Sons","Oran D'Amore Inc","Orn, Hilpert and Pfannerstill","Pacocha-Volkman","Padberg, Senger and Williamson","Parker, O'Connell and Beahan","Pouros, Nitzsche and Mayer","Powlowski, Keebler and Quigley","Price Kuhic Inc","Price, Schultz and Daniel","Prohaska-Quigley","Quigley, Von and Will","Regan Bradtke and Sons","Reichert, Johnson and Roob","Reid Pfannerstill and Sons","Reynolds, Gleason and Brekke","Ritchie, Haley and Pacocha","Robyn Padberg Inc","Rodriguez-Kuhlman","Rosanna Murazik Inc","Roscoe Oberbrunner Group","Rowan Kautzer LLC","Ruecker, Carter and Ortiz","Ruecker-Jakubowski","Schamberger-Maggio","Schamberger-Wehner","Schiller, Bogisich and Lockman","Schinner, Schmitt and Crona","Schumm, Brown and Wehner","Schuster-Wyman","Senger, Mertz and Murray","Senger-Doyle","Senger-Stamm","Smitham, Dach and Bode","Spinka-Stokes","Stamm, Crist and Labadie","Stanton-Fritsch","Stark-Bayer","Stroman-Carroll","Swaniawski, Casper and Hilll","Theodora Terry and Sons","Theodore Hansen Inc","Thompson-Wolf","Tia Goyette Group","Toy, Deckow and Nitzsche","Trantow-Bartell","Turner, Kiehn and Schmitt","Una Fadel Group","Upton, Kovacek and Halvorson","Upton, Schoen and Streich","Ursula Collins LLC","Volkman, Greenfelder and Kiehn","Von-Gulgowski","Weimann-Cummings","West, Prohaska and Wunsch","Wilkinson, Donnelly and Gulgowski","Wilkinson-Gottlieb","Wisoky, Pagac and Heaney","Wiza, Abbott and Deckow","Wolf, Beahan and Thiel","Wolff, Ebert and Hansen","Wuckert, Murazik and Ernser","Zemlak, Botsford and Corkery","Zemlak-Wiegand"]	\N	60	f	full	\N	2023-11-17 02:56:34.051116+00
+22	2023-11-17 02:56:34.57851+00	2023-11-17 02:56:34.57851+00	["0001664425970","0006590063715","0010465925138","0038948983000","0095774502751","0096051986448","0157967025871","0212722801067","0225815844582","0236197465609","0255973714120","0272643267465","0335243754848","0399569209871","0498395047364","0698616313838","0743731223606","0832349515187","0848056924761","0899183128263","1018947080336","1078766578568","1087115303928","1144906750559","1157194463322","1272575087123","1404411876176","1408483808240","1464781960745","1468999794635","1484994799123","1538211018396","1559730016366","1576499102253","1613730311804","1613963249998","1726123595351","1770178011663","1790740189682","1807963902339","1838229841499","1878073010375","1909194306167","1943523619306","1960588072419","2084705637233","2091630691049","2117622168280","2125923238175","2293343551454","2315609605258","2339358820724","2434890445616","2448500145612","2484897511500","2516506541834","2529776156387","2543248750439","2562717359713","2646001599860","2703547723491","2820850288674","2890379323668","2952766751666","3084140869281","3301617687934","3307124431763","3576267834421","3621077291879","3642408008706","3661250556340","3685697688891","3691313722887","3769015137275","3772022926992","3806751355669","3828680930458","3987140172453","3988126680641","4009053735033","4093428378987","4134502155718","4168050315812","4198118078267","4201407654834","4284914664558","4307721071729","4312472827051","4347934129886","4406572671024","4504719641739","4516685534489","4561421124790","4665903801947","4686859196154","4709231420798","4733532233696","4734618834332","4760375596107","4785470010730","4819782507258","4863291591550","4886504321812","4893655420066","4945934419923","4963935336179","4966277046676","5010710584900","5050273180195","5065846711133","5099742600901","5176352942567","5272733645116","5291392809646","5408760500061","5433448189252","5499736705597","5522456328132","5528517133622","5592486096660","5626486088179","5738533322232","5778452195678","5856636800041","5881647583898","5935916054838","5955704607626","6009279470754","6154584840805","6190070243323","6201199361567","6248889948356","6316992933962","6372029072158","6403813628678","6409491343148","6424174443243","6575325360237","6588791601926","6704641545275","6858015278648","6875096496570","6906120611895","6966709160725","7059492880556","7067375149041","7080123588503","7153630876392","7167715379463","7177157744491","7217466997444","7317365230007","7345418848909","7384311074268","7485639601133","7494558044822","7532074237028","7570673549500","7595223735110","7663515285824","7667946672475","7668932199532","7760442733661","7813908779724","7854842811538","8002754191821","8163753213485","8207931408888","8222420544052","8245402607613","8271165200181","8296484749050","8368305700967","8469939413398","8590367775021","8687358946192","8703661046340","8725228831589","8769809778856","8825217022124","8833419218504","8844419430964","8909358907493","8933669659420","9031323475252","9095019841233","9131148018211","9182640035008","9216642429807","9347854191845","9458076657016","9482467478850","9522454376759","9633135585459","9644009305424","9687547218818","9753065345920","9786855487647","9802920493181","9978391194435"]	\N	63	f	full	\N	2023-11-17 02:56:34.57851+00
+23	2023-11-17 02:56:34.991701+00	2023-11-17 02:56:34.991701+00	["Aerodynamic Bronze Hat","Aerodynamic Concrete Bench","Aerodynamic Concrete Lamp","Aerodynamic Copper Knife","Aerodynamic Cotton Bottle","Aerodynamic Cotton Lamp","Aerodynamic Granite Bench","Aerodynamic Granite Bottle","Aerodynamic Leather Computer","Aerodynamic Leather Toucan","Aerodynamic Linen Coat","Aerodynamic Paper Coat","Aerodynamic Paper Computer","Aerodynamic Rubber Bench","Awesome Aluminum Keyboard","Awesome Aluminum Table","Awesome Bronze Plate","Awesome Concrete Shoes","Awesome Cotton Shoes","Awesome Granite Car","Awesome Iron Hat","Awesome Plastic Watch","Awesome Rubber Wallet","Awesome Silk Car","Awesome Steel Toucan","Awesome Wool Bench","Durable Aluminum Bag","Durable Copper Clock","Durable Cotton Bench","Durable Cotton Shirt","Durable Iron Knife","Durable Leather Wallet","Durable Marble Watch","Durable Rubber Computer","Durable Steel Toucan","Durable Wool Toucan","Enormous Aluminum Clock","Enormous Aluminum Shirt","Enormous Copper Shirt","Enormous Cotton Pants","Enormous Granite Bottle","Enormous Granite Wallet","Enormous Leather Wallet","Enormous Marble Gloves","Enormous Marble Shoes","Enormous Marble Wallet","Enormous Plastic Coat","Enormous Steel Watch","Enormous Wool Car","Ergonomic Aluminum Plate","Ergonomic Concrete Lamp","Ergonomic Cotton Bag","Ergonomic Granite Bottle","Ergonomic Iron Watch","Ergonomic Leather Pants","Ergonomic Linen Toucan","Ergonomic Marble Computer","Ergonomic Marble Hat","Ergonomic Paper Wallet","Ergonomic Plastic Bench","Ergonomic Rubber Bench","Ergonomic Silk Coat","Ergonomic Silk Keyboard","Ergonomic Silk Table","Ergonomic Wool Bag","Fantastic Aluminum Bottle","Fantastic Copper Hat","Fantastic Leather Watch","Fantastic Rubber Knife","Fantastic Silk Bottle","Fantastic Steel Knife","Fantastic Wool Shirt","Gorgeous Aluminum Plate","Gorgeous Bronze Hat","Gorgeous Concrete Chair","Gorgeous Concrete Shoes","Gorgeous Copper Knife","Gorgeous Linen Bottle","Gorgeous Linen Keyboard","Gorgeous Marble Computer","Gorgeous Marble Plate","Gorgeous Paper Bag","Gorgeous Wooden Car","Heavy-Duty Copper Gloves","Heavy-Duty Copper Toucan","Heavy-Duty Copper Watch","Heavy-Duty Cotton Bottle","Heavy-Duty Linen Gloves","Heavy-Duty Linen Toucan","Heavy-Duty Rubber Bottle","Heavy-Duty Rubber Gloves","Heavy-Duty Silk Car","Heavy-Duty Silk Chair","Heavy-Duty Steel Watch","Heavy-Duty Wooden Clock","Incredible Aluminum Knife","Incredible Bronze Pants","Incredible Bronze Wallet","Incredible Concrete Keyboard","Incredible Concrete Watch","Incredible Granite Toucan","Incredible Linen Knife","Incredible Plastic Chair","Incredible Plastic Watch","Incredible Silk Shoes","Intelligent Bronze Knife","Intelligent Granite Hat","Intelligent Iron Shirt","Intelligent Paper Car","Intelligent Paper Hat","Intelligent Steel Car","Intelligent Wooden Gloves","Lightweight Bronze Table","Lightweight Copper Wallet","Lightweight Granite Hat","Lightweight Leather Bench","Lightweight Leather Gloves","Lightweight Linen Bottle","Lightweight Linen Coat","Lightweight Linen Hat","Lightweight Marble Bag","Lightweight Paper Bottle","Lightweight Steel Knife","Lightweight Steel Watch","Lightweight Wool Bag","Lightweight Wool Computer","Lightweight Wool Plate","Mediocre Aluminum Lamp","Mediocre Aluminum Shirt","Mediocre Cotton Coat","Mediocre Cotton Toucan","Mediocre Leather Coat","Mediocre Leather Computer","Mediocre Marble Lamp","Mediocre Paper Car","Mediocre Plastic Clock","Mediocre Rubber Shoes","Mediocre Silk Bottle","Mediocre Wooden Bench","Mediocre Wooden Table","Mediocre Wool Toucan","Practical Aluminum Coat","Practical Aluminum Table","Practical Bronze Computer","Practical Bronze Watch","Practical Copper Car","Practical Granite Plate","Practical Paper Bag","Practical Plastic Keyboard","Practical Silk Bottle","Practical Silk Computer","Practical Steel Table","Practical Wool Hat","Rustic Concrete Bottle","Rustic Copper Hat","Rustic Copper Knife","Rustic Iron Bench","Rustic Iron Keyboard","Rustic Linen Keyboard","Rustic Marble Bottle","Rustic Paper Bench","Rustic Paper Car","Rustic Paper Wallet","Rustic Rubber Clock","Rustic Rubber Knife","Rustic Silk Knife","Rustic Silk Pants","Sleek Aluminum Clock","Sleek Aluminum Watch","Sleek Bronze Lamp","Sleek Copper Watch","Sleek Granite Pants","Sleek Leather Table","Sleek Leather Toucan","Sleek Marble Clock","Sleek Marble Table","Sleek Paper Toucan","Sleek Plastic Shoes","Sleek Steel Table","Sleek Wool Wallet","Sleek Wool Watch","Small Concrete Knife","Small Copper Clock","Small Copper Plate","Small Cotton Chair","Small Granite Gloves","Small Marble Hat","Small Marble Knife","Small Marble Shoes","Small Plastic Computer","Small Rubber Clock","Small Wool Wallet","Synergistic Copper Computer","Synergistic Granite Chair","Synergistic Leather Coat","Synergistic Marble Keyboard","Synergistic Rubber Shoes","Synergistic Steel Chair","Synergistic Wool Coat"]	\N	65	f	full	\N	2023-11-17 02:56:34.991701+00
+24	2023-11-17 02:56:35.534223+00	2023-11-17 02:56:35.534223+00	[1,2,3,4,5]	\N	66	f	full	\N	2023-11-17 02:56:35.534223+00
+25	2023-11-17 03:16:14.998268+00	2023-11-17 03:16:14.998268+00	["","t1"]	\N	78	f	full	\N	2023-11-17 03:16:14.998268+00
+26	2023-11-17 03:16:15.545222+00	2023-11-17 03:16:15.545222+00	[false,true]	\N	80	f	full	\N	2023-11-17 03:16:15.545222+00
+27	2023-11-17 03:16:16.058282+00	2023-11-17 03:16:16.058282+00	[false,true]	\N	76	f	full	\N	2023-11-17 03:16:16.058282+00
+28	2023-11-17 03:16:16.620047+00	2023-11-17 03:16:16.620047+00	[-256,-220,-150,-122,-121,-119,-107,-102,-95,-89,-88,-87,-85,-84,-83,-79,-78,-77,-76,-75,-74,-73,-72,-71,-70,-69,-68,-67,-66,-65,-64,-63,-62,-61,-60,-59,-57,-56,-55,-54,-53,-52,-51,-50,-49,-48,-47,-46,-45,-44,-43,-42,-41,-40,-39,-38,-37,-36,-35,-34,-33,-32,-31,-30,-29,-28,-27,-26,-25,-24,-23,-22,-21,-20,-19,-18,-17,-16,-15,-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,251,252,253,255,256,257,258,259,261,262,265,266,267,268,269,270,271,272,273,275,276,278,279,280,282,284,286,287,289,290,291,292,293,294,295,296,297,299,300,301,303,305,306,307,308,309,310,312,315,316,317,318,320,325,326,328,329,332,334,338,339,340,342,343,345,348,349,353,358,359,361,362,365,368,369,370,372,374,375,376,384,385,386,387,388,389,391,399,400,401,402,405,415,416,417,418,422,425,428,432,434,435,444,451,452,463,464,487,491,494,495,497,503,505,509,510,511,518,526,534,545,547,555,559,560,580,583,606,612,614,622,638,668,725,730,741,747,770,773,792,823,838,841,985]	\N	73	f	full	\N	2023-11-17 03:16:16.620047+00
+31	2023-11-17 03:16:18.336457+00	2023-12-03 01:27:05.934065+00	["Data","Python"]	\N	82	f	full	\N	2023-12-03 01:27:05.934065+00
+32	2023-11-17 03:16:18.973796+00	2023-11-17 03:16:18.973796+00	["Calgary","Hamilton","Kitcher / Waterloo","London","Mississauga","Ottawa","Toronto","Windsor"]	\N	87	f	full	\N	2023-11-17 03:16:18.973796+00
+35	2023-11-17 03:16:20.935876+00	2023-11-17 03:16:20.935876+00	[false,true]	\N	95	f	full	\N	2023-11-17 03:16:20.935876+00
+36	2023-11-17 03:16:21.821959+00	2023-11-17 03:25:11.335463+00	["Calgary","Hamilton","Kitcher / Waterloo","London","Mississauga","Ottawa","Toronto","Windsor"]	\N	106	f	full	\N	2023-11-17 03:25:11.335463+00
+34	2023-11-17 03:16:20.365802+00	2023-11-20 00:39:58.297163+00	["","t1"]	\N	98	f	full	\N	2023-11-20 00:39:58.297163+00
+33	2023-11-17 03:16:19.706222+00	2023-11-20 00:39:58.353258+00	["","Abso-fucking-lutely","ahole","ahole.","Ahole","\\"anti-gay\\"","anti-gay","anti-queer","ape-shit","arse","arsed","ass","ass,","ass!","ass!\\"","ass?","ass.","ass..","ass)","Ass","ASS","ass ASS","ass ass-whopping","ass bastards,","ass bitches","ass crap","ass. flipping","ass fuck","ass Fuck","ass fucking","ass fucking motherfucker’","asshole","“asshole”","asshole,","asshole!","asshole!”","asshole?","asshole.","asshole’","asshole”","asshole….","Asshole,","ASSHOLE!!!!","asshole asshole\\".","asshole, asshole.","asshole…but is…hell","asshole crap","asshole crap.","asshole damn","asshole. dick.","asshole fuck","asshole, fuck","asshole fucking","asshole. fucking","asshole shit bitch","asshole shitting fucking flipping shit asshole, ass","asshole shitty","asshole, shitty","asshole shitty Fuck…people","ass pissed","ass shit","ass shit.","ASS. shit","ass shit pisses","ass shit Shit","ass shit turd","ass shitty","ass. Shitty","ass-tastic","ass-to-ass","ass turd?","Ass turd","bastard","bastard....","bastards","bastards,","bastards!","bastards *fuck*","biatch? fucked","bitch","bitch,","bitch.","bitch\\"","Bitch","Bitch”","bitch damn","bitches","bitches?","bitches.","bitch Fuck","bitch, fucked","bitch”. fuck fucking","bitch Fucking","bitching","bitching.","bitching)","bitching…it’s","bitching screwed. damn","blame...fuck","blowjob...I","boobs","Boo-fucking-hoo.","Boohoo…shit","breasts","breasts,","breasts)","bullshit","(bullshit),","bullshit,","bullshit!","bullshit?","bullshit.","bullshit..","bullshit.*","bullshit\\".","Bullshit","BULLSHIT.","bullshit, bullshit.","bullshit fuck","bullshit Fuck","bullshit, Fuck","bullshit, Fucking","bullshit. fucking Fucking","bullshit piss","bullshit. pissed fuck","bullshit. pisses","bullshit. sex","bullshit shit","bullshit shit,","bullshit shit.","bullshit. shit","bullshit shits","butthole","cock","cock!","Cock","cocked","cock Fuck","cock. fucked","crap","crap;.","crap!","crap!!!","crap?","crap.","crap…","Crap!","CRAP","*CRAP*","crap asshole","crap, ass, shit","crap bitch.","crap fuck","crap hell","crapped","crapping poop","crap, poop","crap. sex,","crap shit","crap....you.......","cum,","cunt","cunt.","cunt....","cunt cunt,","‘cunt’ fuck","cunts","cunts.","cunts ass bitch","cunts poop fucks.","damn","\\"damn","\\"damn,","“damn","damn,","damn!","damn.","Damn","Damn,","Damn!","Damn.","Damn..","Damn…","DAMN","damn, bastard).","damn bullshit","damn. damn","damn Damn","damned","damned,","damned.","damn fuck","Damn fuck","Damn fuck!","DAMN fuck","damn fucked","damn fucked.","damn fucking","damn hell","Damn…I’d Crap,","damning","damning.","damn nasty","Damn, piss ass","damn pissed","Damn, sexy","damn shit","damn... shitty","damn XXX","dick","dick,","dick?","dick.","Dick","\\"Dick","Dick,","Dick damn","dick. dick","dick fucking","dick gay","dick hell","dick. Hell,","dick slap-ass shit","Dick Vagina","dyke","dyke.","enema","faggot gay.","fanny","fart","fart,","fart.","Fart","fart asshole","farted","farted.","farted...sorry","farting","farts","feces,","feces.","flipping","flipping,","flipping asshole","flipping hell","Foreskin","fuck","'fuck","\\"fuck","“fuck","fuck,","fuck!","fuck?","fuck???","fuck.","fuck..","fuck.”","fuck.*","fUCK","Fuck","\\"Fuck","“Fuck","“Fuck,","Fuck,","Fuck.","Fuck...","FUCK","“FUCK","**FUCK","fuck, ass","fuck), ass,","fuck, asshole","Fuck asshole","Fuck. asshole","fuck bitch","fuck breasts","fuck breasts fucked","fuck bullshit.","fuck, bullshit","fuck Bullshit.","Fuck bullshit-ism.","fuck. Bullshit. shit-show shit","fuck cocks","fuck crap. bullshit","fuck cunt","fucked","\\"*fucked","*fucked*","fucked,","fucked!","fucked?","fucked.","fucked. bullshit,","fucked dick","fucked fuckin","fucked, fucking","fucked. FUCKING fuck shit Fucking","fucked hell","fucked screw","fucked shit","fucker","fucker.","Fucker.","fuck \\"fags.\\" \\"gays\\"","fuck. fuck","fuck Fuck","Fuck fuck","Fuck Fuck.","Fuck, Fuck","fuck fucked","Fuck fuck “Fuck","fuck fucking","fuck Fucking","Fuck fucking","FUCK FUCKING","fuck fucks","Fuck fucks","Fuck gay","fuck? goddamned","fuck hell","fuck hell.","fuck. hell","Fuck hell","FUCK hell","fuckin","fuckin'","fuckin’","Fuckin","fuckin asshole.","fuckin fuck","fuckin Fuck!","Fuckin fucking","fucking",".......fucking","fucking.","Fucking","\\"Fucking","Fucking.","FUCKING","fucking ass","fucking ass.","Fucking ass","fucking ass fucked","fucking asshole","FUCKING ASSHOLE.","fucking asshole. ass","fucking ass shit","fucking bastards","fucking bitch","fucking bullshit","Fucking bullshit","fucking bullshit, fuck","fucking bullshit fucked shit shit.","fucking bullshit Nazi asshole.","fucking bullshit shit pissing","fucking damn","fucking Damn","fucking damned","fucking faggot’","fucking free-dumb-fucks","fucking fuck","fucking Fuck","fucking FUCK","Fucking fuck","Fucking Fuck","Fucking Fuck ass,","fucking fuck asshole. fuck? shit shit.","fucking Fuck bastards","fucking fuck cunt","fucking Fuck cunts","fucking Fuck damn","fucking fucked","fucking fucked,","fucking fucked bitch hell","fucking fucked hell","fucking Fuck fuck hell","fucking fuckin","fucking fuckin'","FUCKING fuckin","fucking Fucking","Fucking fucking","fucking Fucking bullshit.","fucking **fucking fuck shitty","FUCKING Fuck piss Gay","fucking fucks?","fucking fuck shit","fucking Fuck shit","fucking Fuck shitty dildo","fucking gay","Fucking gay fucking","fucking gay gay.","fucking hell","fucking hell,","Fucking hell.","fucking hell, hell.","fucking hell shit bitch, Fuck","fucking motherfucker","fucking nasty","fucking Nazi","Fucking pansy-ass","fucking pissed","fucking pissed shit FUCKING","fucking piss shit, fuck fuck. Fuck,","fucking poop poops, shit","fucking porn fuck","Fucking pussy pussies","fucking queer","fucking screwed","fucking shit","fucking shit.","fucking shit\\",","Fucking shit","Fucking shit.","fucking shit Fuck queer queer? \\"faggots\\"","fucking shit fucks","fucking shit. shit","fucking shitter.","fucking shitting","fucking shitty fuck. shit fucked","fucking shiz,","fucking this……….un…fucking…real.","fucking turd","fuckin knob.","fuckin pissed. pissed","fuckin shit.","fuckin’ shit hell","fuck knob","fuck nazi","Fuck-not-given","fuck-off.","Fuck piss","fuck pissed nasty shit","fucks","fucks,","fucks?","fucks.","fucks. damn shitty","Fuck sex","fucks fucked. fucker","fucks) fucks","\\"fuck shit","fuck shit","fuck shit.","fuck? shit","fuck. shit","'Fuck shit","Fuck shit","Fuck shit.","fuck shit shitting","fuck. shit shitting","fuck. shit shitty)","Fuck shitty","fuck shitty fucked","fucks Screw","fucks shit. fucking","fukkin","gay","\\"gay\\"","gay,","gay?","gay.","gay.\\"","gay\\"","gay\\".","gay).","gay….","Gay","gay/bi/genderqueer? gay/bi/genderqueer,","gay/bi/trans.","gay bullshit.","gayest","gay, Fuck sex gay","gay \\"gay","gay... gay","Gay gay","gay queer","gay. queer","Gay queer gay gay.","gay, queer, lesbian,","gays","gay sex.","gay.\\" sex. \\"sex","gays gay","gays gay/trans","gays hell","gay shit...even","gay shit, gay.","gay shit? gay.","gays lesbian","gays, queers asshole","gays shit,","GODDAMNED","God...damn Just...fuck hell.","grown-ass hell penises.","hell","(hell","hell,","hell!","hell?","hell.","hell\\"","hell\\".","hell)","hell…","Hell","Hell,","Hell.","HELL","HELL\\"","hell ape-shit","Hell bitch","hell.....brought","hell bullshit","hell bullshit?","hell damn","hell. fuck","hell Fuck","hell Fuck.","hell fucking","hell, fucking","hell. fucking","hell. Fucking","hell. fucking shit Fuck ass","hell gay","hell, hell","hell hell-portals","hell...I'd","hell nastier","hell? pissed","Hell, poop","hells","hell screwed ass","hell sex damn","hell shit","hell? shit","Hell shit","Hell shit.","hell shit? fucked","hell-storm guaran-fucking-tee","holy-shit-wtf-is-that-tick!","ignorant-ass","immediate-feedback-for-dangerous-shit","[iPoop](https://apps.apple.com/ca/app/ipoop-bathroom-poop-tracker/id723140052).","jerkoff","jizz, jizz","kick-ass","knob","knob,","knob.","knob? fuck?","knobs","knob screw","lame-ass","lesbian","Lesbian","lesbians","lesbians.","lesbian smut.","like…gay","long-ass","Masterbate","masturbate","masturbating","mofo","MOFO.","motherfucker","motherfucker?","motherfucker\\"","nastiest.","nasty","nasty.","Nasty","nasty shitty?","nazi","nazi,","nazi.","Nazi","“Nazi","Nazi?","Nazi??","Nazi.","nazi crap,","Nazi hell","Nazi-Muslim damn queer","nazi. Nazi","Nazi. Nazi","Nazi shit","Nazi, shit. Nazi","nazi shitter","needs...fuck shit","neo-Nazi.","Neo-Nazi","*orgasms*","penis","penis?","penis.","penis.\\"","penises","penises ass. fuck fucking","penis hell","piss","*piss","piss,","piss?","piss.","Piss","pissed","\\"pissed","pissed,","pissed!","pissed!!","pissed),","pissed ass Shit, fuck","pissed bitch","pissed bullshit","pissed bullshit gay","pissed dick","pissed hell","pissed shit","pissed shitty","pisses","piss fuck","piss, fuck,","piss Fuck","piss, hell","pissing","pissing fuck","pissing fucking","pissing screws","pissing shitting","piss nasty","piss pissed","piss. pissed","piss pissing","piss-poor","Piss-poor","piss shit","piss shit fuckin shits poop","poop","poop,","poop.","Poop","POOP","poop craps","poop cunts","poop hell","poop/pee","poop poop.","Poop! poop","poop poop/pee","poop, poops.","poops","poops.","poops).","poop...tossing","porn","porn.","porn sex","preteen","public-transit-hell","pulled-out-my-ass","pussies,","Pussy","queer","\\"queer","queer,","queer.","Queer","queer Damn","queer-friendly","queer gay lesbian","queer, gay*, queer","queer…my hell faggot queer Fuck","queers","queer shit","queers queer","rally/shitty","rectum rectums","retard","retard.","retarded.","retards","Road](https://www.cbc.ca/news/canada/ottawa/harry-dick-road-name-sign-change-bonnechere-1.6981502). Dick pissed.","same-sex","schmuck fucked","screw","screw,","Screw","\\"Screw","screwed","screwed.","screwed fuck","screwed fucked","screwed hell","screwed screw","screwed shit","screwed-up","screw fuck","\\"Screw hell","screwing","screwing Hell","screws","screws.","sex","\\"sex","sex,","sex.","sex.\\"","*Sex","sex 2021](https://www.thestar.com/news/gta/toronto-cop-guilty-of-on-duty-sex-assault-against-student-who-called-to-report-threats/article_b4434ce5-d1ef-535e-9731-4b0cede3d330.html)","sex-affirming gay","sex ass","sex ass-hats gay lesbian","sex-change","sex-ed","sex-ed!....","sex fuck","sex fucked","sex gay","sex gay,”","sex gay sex,","sex/gender sex/gender.","sexier","sex Sex","Sex sex","sex sex, sex.","sex/wealth/age/IQ","sexy","“sexy","“sexy”","sexy,","Sexy","Sexy, Sex. sexy,","sexy whore Damn","shat","shit","“shit","(shit)","shit,","shit!","shit!\\"","shit?","shit.","shit..","shit...","shit...\\".","shit.”","shit\\"","shit)","shit).","shit…..💩","Shit","Shit,","Shit!","Shit!!!","Shit.","Shit...","SHIT","SHIT.","shit. AHOLE.","shit ass.","shit. ass","SHIT-ASS","shit. ass. ass","shit ass fuck","shit asshole","shit, asshole!","shit. asshole","shit. asshole,","Shit-birds","shit bitch","shit. bitch","shit bitch fuck","shit, bitching","Shit-box","shit bullshit","shit. bullshit","shit-canned","shit. crap!! fuck","shit damn","shit, damn","shit. damn","shit. Damn,","shit damned","shit damn fucking","shit damn shitting","shit, flipping","shit fuck","shit \\"fuck","shit “fuck","shit fuck.","shit, fuck","shit? fuck,","shit. fuck","shit Fuck","shit (Fuck","shit Fuck.","shit. Fuck","shit fucked","shit. fucked","shit fucker","shit fuck fuck,","shit. Fuck fuck","shit fuck fucked shitty","shit fuck fucking","shit \\"Fuck fucking","shit fuckin","shit! Fuckin","shit fucking","shit. fucking","shit Fucking","shit fucks!","shit. fucks","shit fuck shitty.","shit. Fuck shitty","shit? goddamned","shit hell","shit. hell","shit Hell","shit Hell,","Shit hell","shit lesbians sexy","shit pissed","shit pisses","shit pissing","shit poop","shit pussy","shit queer","shits","shits.","shit sex","shit shit.","shit, shit","shit! shit","shit? shit","shit. shit","shit Shit","shit. Shit","Shit shit","SHIT SHIT!!!!!","shit, shit damn","shit. shit, Fuck","shit shitty","shit shitty.","shit shitty fucking","shit shitty fuckin hell","shit shitty Nazi","shit-show","shit-show.","shits shit fucked","shit-talking","shitter","shitter,","shitter.","shitting","shitting hell shit","shit-ton","shitty","'shitty","(shitty)","shitty,","shitty?!","shitty.","shitty)","Shitty","shitty bitch dick","shitty Bullshit.","shitty crap","shitty flipping","shitty fuck","shitty Fuck","Shitty fuck bitch, fuckin hell","shitty fucked","shitty fucking","shitty fucking fucked","shitty hell","Shitty hell","shitty shit","shitty shit,","shitty shits","shitty) shitty","shit…who","shity","smart-ass","smut gay gay/bi gays.","super-pissed?","super-pissed? pissed pissed,","testicle","testicle.","testicles. penis,","@$$.....the","tit.","tit Fuck","tits","tits.","tits.\\"","trans/queer.","turd","turd!!","turd?","turd.","turd...","Turd","turd damn","TURD POOP","turds","turds,","turds poop shit","turds shitting","turd. turd,","ugly-ass","vagina penis","vaginas.","Wendy's/gay","whole-ass","whore","whore\\"","whores","xxx","xxx,","xxx\\".","Xxx","XXX","XXX."]	\N	96	f	full	\N	2023-11-20 00:39:58.353258+00
+29	2023-11-17 03:16:17.258081+00	2023-12-03 01:27:06.003871+00	["Calgary","Kitchener","London","Ottawa","Toronto"]	\N	84	f	full	\N	2023-12-03 01:27:06.003871+00
+30	2023-11-17 03:16:17.788398+00	2023-12-03 01:27:06.236401+00	[27,28,40,42,95,109,121,132,142,157,182,196,231,270,276,335,1721,1761,1829,1880]	\N	81	f	full	\N	2023-12-03 01:27:06.236401+00
+\.
+
+
+--
+-- TOC entry 4804 (class 0 OID 26307)
+-- Dependencies: 221
+-- Data for Name: metabase_table; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.metabase_table (id, created_at, updated_at, name, description, entity_type, active, db_id, display_name, visibility_type, schema, points_of_interest, caveats, show_in_getting_started, field_order, initial_sync_status, is_upload) FROM stdin;
+2	2023-11-17 02:55:32.183829+00	2023-12-03 01:50:14.427522+00	ORDERS	Confirmed Sample Company orders for a product, from a user.	entity/TransactionTable	t	1	Orders	\N	PUBLIC	Is it? You tell us!	You can join this on the Products and Orders table using the ID fields. Discount is left null if not applicable.	f	database	complete	f
+5	2023-11-17 02:55:32.764126+00	2023-12-03 01:50:14.602832+00	PEOPLE	Information on the user accounts registered with Sample Company.	entity/UserTable	t	1	People	\N	PUBLIC	Is it? You tell us!	Note that employees and customer support staff will have accounts.	f	database	complete	f
+8	2023-11-17 02:55:33.33948+00	2023-12-03 01:50:14.777832+00	REVIEWS	Reviews that Sample Company customers have left on our products.	entity/GenericTable	t	1	Reviews	\N	PUBLIC	Is it? You tell us!	These reviews aren't tied to orders so it is possible people have reviewed products they did not purchase from us.	f	database	complete	f
+3	2023-11-17 02:55:32.374322+00	2023-12-03 01:50:16.411996+00	ANALYTIC_EVENTS	Piespace does some anonymous analytics tracking on how users interact with their platform. They’ve only had time to implement a few events, but you know how it is. Pies come first.	entity/EventTable	t	1	Analytic Events	\N	PUBLIC	Is it? We’ll let you be the judge of that.	Piespace has cracked time travel, so keep in mind that some events may have already happened in the future.	f	database	complete	f
+4	2023-11-17 02:55:32.568363+00	2023-12-03 01:50:16.963846+00	FEEDBACK	With each order of pies sent out, Piespace includes a place for customers to submit feedback and review their order.	entity/GenericTable	t	1	Feedback	\N	PUBLIC	Is it? We’ll let you be the judge of that.	Not every account feels inclined to submit feedback. That’s cool. There’s still quite a few responses here.	f	database	complete	f
+6	2023-11-17 02:55:32.956509+00	2023-12-03 01:50:15.683692+00	INVOICES	Confirmed payments from Piespace’s customers. Most accounts pay for their pie subscription on a monthly basis.	entity/GenericTable	t	1	Invoices	\N	PUBLIC	Is it? We’ll let you be the judge of that.	You can group by “Account ID” to see all the payments from an account and unveil information like total amount paid to date.	f	database	complete	f
+7	2023-11-17 02:55:33.146543+00	2023-12-03 01:50:15.868562+00	ACCOUNTS	Information on customer accounts registered with Piespace. Each account represents a new organization signing up for on-demand pies.	entity/UserTable	t	1	Accounts	\N	PUBLIC	Is it? We’ll let you be the judge of that.	Piespace’s business operates with a two week trial period. If you see that “Canceled At” is null then that account is still happily paying for their pies.	f	database	complete	f
+12	2023-11-17 03:15:39.954978+00	2023-11-17 03:16:07.953068+00	comments	\N	entity/GenericTable	t	2	Comments	\N	raw	\N	\N	f	database	complete	f
+10	2023-11-17 03:15:39.579581+00	2023-11-17 03:16:08.127188+00	jobs	\N	entity/GenericTable	t	2	Jobs	\N	raw	\N	\N	f	database	complete	f
+14	2023-11-17 03:15:40.347028+00	2023-11-17 03:16:08.281451+00	submissions	\N	entity/GenericTable	t	2	Submissions	\N	raw	\N	\N	f	database	complete	f
+11	2023-11-17 03:15:39.767966+00	2023-11-17 03:16:08.441672+00	comments	\N	entity/GenericTable	t	2	Comments	\N	staging	\N	\N	f	database	complete	f
+13	2023-11-17 03:15:40.143802+00	2023-11-17 03:16:08.59416+00	jobs	\N	entity/GenericTable	t	2	Jobs	\N	staging	\N	\N	f	database	complete	f
+9	2023-11-17 03:15:39.388278+00	2023-11-17 03:16:08.750749+00	submissions	\N	entity/GenericTable	t	2	Submissions	\N	staging	\N	\N	f	database	complete	f
+1	2023-11-17 02:55:31.929991+00	2023-12-03 01:50:14.252238+00	PRODUCTS	Includes a catalog of all the products ever sold by the famed Sample Company.	entity/ProductTable	t	1	Products	\N	PUBLIC	Is it? You tell us!	The rating column is an integer from 1-5 where 1 is dreadful and 5 is the best thing ever.	f	database	complete	f
+\.
+
+
+--
+-- TOC entry 4839 (class 0 OID 26786)
+-- Dependencies: 256
+-- Data for Name: metric; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.metric (id, table_id, creator_id, name, description, archived, definition, created_at, updated_at, points_of_interest, caveats, how_is_this_calculated, show_in_getting_started, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4847 (class 0 OID 26909)
+-- Dependencies: 264
+-- Data for Name: metric_important_field; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.metric_important_field (id, metric_id, field_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4921 (class 0 OID 28116)
+-- Dependencies: 338
+-- Data for Name: model_index; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.model_index (id, model_id, pk_ref, value_ref, schedule, state, indexed_at, error, created_at, creator_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4922 (class 0 OID 28129)
+-- Dependencies: 339
+-- Data for Name: model_index_value; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.model_index_value (model_index_id, model_pk, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4892 (class 0 OID 27660)
+-- Dependencies: 309
+-- Data for Name: moderation_review; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.moderation_review (id, updated_at, created_at, status, text, moderated_item_id, moderated_item_type, moderator_id, most_recent) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4888 (class 0 OID 27353)
+-- Dependencies: 305
+-- Data for Name: native_query_snippet; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.native_query_snippet (id, name, description, content, creator_id, archived, created_at, updated_at, collection_id, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4917 (class 0 OID 28033)
+-- Dependencies: 334
+-- Data for Name: parameter_card; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.parameter_card (id, updated_at, created_at, card_id, parameterized_object_type, parameterized_object_id, parameter_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4853 (class 0 OID 26960)
+-- Dependencies: 270
+-- Data for Name: permissions; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.permissions (id, object, group_id) FROM stdin;
+1	/	2
+2	/collection/root/	1
+3	/application/subscription/	1
+4	/collection/namespace/snippets/root/	1
+7	/db/1/	1
+8	/download/db/1/	1
+9	/download/db/1/native/	1
+12	/db/2/	1
+13	/download/db/2/	1
+14	/download/db/2/native/	1
+\.
+
+
+--
+-- TOC entry 4849 (class 0 OID 26930)
+-- Dependencies: 266
+-- Data for Name: permissions_group; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.permissions_group (id, name) FROM stdin;
+1	All Users
+2	Administrators
+\.
+
+
+--
+-- TOC entry 4851 (class 0 OID 26939)
+-- Dependencies: 268
+-- Data for Name: permissions_group_membership; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.permissions_group_membership (id, user_id, group_id, is_group_manager) FROM stdin;
+1	1	1	f
+2	1	2	f
+3	2	1	f
+4	2	2	f
+\.
+
+
+--
+-- TOC entry 4855 (class 0 OID 26989)
+-- Dependencies: 272
+-- Data for Name: permissions_revision; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.permissions_revision (id, before, after, user_id, created_at, remark) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4910 (class 0 OID 27841)
+-- Dependencies: 327
+-- Data for Name: persisted_info; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.persisted_info (id, database_id, card_id, question_slug, table_name, definition, query_hash, active, state, refresh_begin, refresh_end, state_change_at, error, created_at, creator_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4827 (class 0 OID 26687)
+-- Dependencies: 244
+-- Data for Name: pulse; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.pulse (id, creator_id, name, created_at, updated_at, skip_if_empty, alert_condition, alert_first_only, alert_above_goal, collection_id, collection_position, archived, dashboard_id, parameters, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4829 (class 0 OID 26699)
+-- Dependencies: 246
+-- Data for Name: pulse_card; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.pulse_card (id, pulse_id, card_id, "position", include_csv, include_xls, dashboard_card_id, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4831 (class 0 OID 26717)
+-- Dependencies: 248
+-- Data for Name: pulse_channel; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.pulse_channel (id, pulse_id, channel_type, details, schedule_type, schedule_hour, schedule_day, created_at, updated_at, schedule_frame, enabled, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4833 (class 0 OID 26732)
+-- Dependencies: 250
+-- Data for Name: pulse_channel_recipient; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.pulse_channel_recipient (id, pulse_channel_id, user_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4879 (class 0 OID 27265)
+-- Dependencies: 296
+-- Data for Name: qrtz_blob_triggers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_blob_triggers (sched_name, trigger_name, trigger_group, blob_data) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4880 (class 0 OID 27277)
+-- Dependencies: 297
+-- Data for Name: qrtz_calendars; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_calendars (sched_name, calendar_name, calendar) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4877 (class 0 OID 27241)
+-- Dependencies: 294
+-- Data for Name: qrtz_cron_triggers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_cron_triggers (sched_name, trigger_name, trigger_group, cron_expression, time_zone_id) FROM stdin;
+MetabaseScheduler	metabase.task.send-pulses.trigger	DEFAULT	0 0 * * * ? *	GMT
+MetabaseScheduler	metabase.task.follow-up-emails.trigger	DEFAULT	0 0 12 * * ? *	GMT
+MetabaseScheduler	metabase.task.task-history-cleanup.trigger	DEFAULT	0 0 0 * * ? *	GMT
+MetabaseScheduler	metabase.task.truncate-audit-log.trigger	DEFAULT	0 0 */12 * * ? *	GMT
+MetabaseScheduler	metabase.task.sync-and-analyze.trigger.1	DEFAULT	0 39 * * * ? *	GMT
+MetabaseScheduler	metabase.task.sync-and-analyze.trigger.2	DEFAULT	0 41 * * * ? *	GMT
+MetabaseScheduler	metabase.task.upgrade-checks.trigger	DEFAULT	0 15 6,18 * * ? *	GMT
+MetabaseScheduler	metabase.task.anonymous-stats.trigger	DEFAULT	0 19 0 * * ? *	GMT
+MetabaseScheduler	metabase.task.refresh-channel-cache.trigger	DEFAULT	0 57 0/4 1/1 * ? *	GMT
+MetabaseScheduler	metabase.task.update-field-values.trigger.2	DEFAULT	0 0 9 * * ? *	GMT
+MetabaseScheduler	metabase.task.update-field-values.trigger.1	DEFAULT	0 0 12 * * ? *	GMT
+\.
+
+
+--
+-- TOC entry 4882 (class 0 OID 27289)
+-- Dependencies: 299
+-- Data for Name: qrtz_fired_triggers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_fired_triggers (sched_name, entry_id, trigger_name, trigger_group, instance_name, fired_time, sched_time, priority, state, job_name, job_group, is_nonconcurrent, requests_recovery) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4874 (class 0 OID 27210)
+-- Dependencies: 291
+-- Data for Name: qrtz_job_details; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_job_details (sched_name, job_name, job_group, description, job_class_name, is_durable, is_nonconcurrent, is_update_data, requests_recovery, job_data) FROM stdin;
+MetabaseScheduler	metabase.task.upgrade-checks.job	DEFAULT	\N	metabase.task.upgrade_checks.CheckForNewVersions	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.anonymous-stats.job	DEFAULT	\N	metabase.task.send_anonymous_stats.SendAnonymousUsageStats	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.refresh-channel-cache.job	DEFAULT	\N	metabase.task.refresh_slack_channel_user_cache.RefreshCache	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.send-pulses.job	DEFAULT	\N	metabase.task.send_pulses.SendPulses	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.follow-up-emails.job	DEFAULT	\N	metabase.task.follow_up_emails.FollowUpEmail	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.task-history-cleanup.job	DEFAULT	\N	metabase.task.task_history_cleanup.TaskHistoryCleanup	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.truncate-audit-log.job	DEFAULT	\N	metabase.task.truncate_audit_log.TruncateAuditLog	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.IndexValues.job	DEFAULT	Indexed Value Refresh task	metabase.task.index_values.ModelIndexRefresh	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.sync-and-analyze.job	DEFAULT	sync-and-analyze for all databases	metabase.task.sync_databases.SyncAndAnalyzeDatabase	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.update-field-values.job	DEFAULT	update-field-values for all databases	metabase.task.sync_databases.UpdateFieldValues	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.PersistenceRefresh.job	DEFAULT	Persisted Model refresh task	metabase.task.persist_refresh.PersistenceRefresh	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.PersistencePrune.job	DEFAULT	Persisted Model prune task	metabase.task.persist_refresh.PersistencePrune	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+\.
+
+
+--
+-- TOC entry 4884 (class 0 OID 27301)
+-- Dependencies: 301
+-- Data for Name: qrtz_locks; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_locks (sched_name, lock_name) FROM stdin;
+MetabaseScheduler	STATE_ACCESS
+MetabaseScheduler	TRIGGER_ACCESS
+\.
+
+
+--
+-- TOC entry 4881 (class 0 OID 27284)
+-- Dependencies: 298
+-- Data for Name: qrtz_paused_trigger_grps; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_paused_trigger_grps (sched_name, trigger_group) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4883 (class 0 OID 27296)
+-- Dependencies: 300
+-- Data for Name: qrtz_scheduler_state; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_scheduler_state (sched_name, instance_name, last_checkin_time, checkin_interval) FROM stdin;
+MetabaseScheduler	metabase1701571024703	1701571092520	7500
+\.
+
+
+--
+-- TOC entry 4876 (class 0 OID 27229)
+-- Dependencies: 293
+-- Data for Name: qrtz_simple_triggers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_simple_triggers (sched_name, trigger_name, trigger_group, repeat_count, repeat_interval, times_triggered) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4878 (class 0 OID 27253)
+-- Dependencies: 295
+-- Data for Name: qrtz_simprop_triggers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_simprop_triggers (sched_name, trigger_name, trigger_group, str_prop_1, str_prop_2, str_prop_3, int_prop_1, int_prop_2, long_prop_1, long_prop_2, dec_prop_1, dec_prop_2, bool_prop_1, bool_prop_2) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4875 (class 0 OID 27217)
+-- Dependencies: 292
+-- Data for Name: qrtz_triggers; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.qrtz_triggers (sched_name, trigger_name, trigger_group, job_name, job_group, description, next_fire_time, prev_fire_time, priority, trigger_state, trigger_type, start_time, end_time, calendar_name, misfire_instr, job_data) FROM stdin;
+MetabaseScheduler	metabase.task.update-field-values.trigger.2	DEFAULT	metabase.task.update-field-values.job	DEFAULT	update-field-values Database 2	1701594000000	-1	5	WAITING	CRON	1700358014000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000027800
+MetabaseScheduler	metabase.task.update-field-values.trigger.1	DEFAULT	metabase.task.update-field-values.job	DEFAULT	update-field-values Database 1	1701604800000	-1	5	WAITING	CRON	1700189796000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000017800
+MetabaseScheduler	metabase.task.sync-and-analyze.trigger.1	DEFAULT	metabase.task.sync-and-analyze.job	DEFAULT	sync-and-analyze Database 1	1701571140000	1701567540000	5	WAITING	CRON	1700189796000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000017800
+MetabaseScheduler	metabase.task.sync-and-analyze.trigger.2	DEFAULT	metabase.task.sync-and-analyze.job	DEFAULT	sync-and-analyze Database 2	1701571260000	1701567660000	5	WAITING	CRON	1700358014000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000027800
+MetabaseScheduler	metabase.task.upgrade-checks.trigger	DEFAULT	metabase.task.upgrade-checks.job	DEFAULT	\N	1701584100000	-1	5	WAITING	CRON	1701571025000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.anonymous-stats.trigger	DEFAULT	metabase.task.anonymous-stats.job	DEFAULT	\N	1701649140000	-1	5	WAITING	CRON	1701571026000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.refresh-channel-cache.trigger	DEFAULT	metabase.task.refresh-channel-cache.job	DEFAULT	\N	1701579420000	-1	5	WAITING	CRON	1701571027000	0	\N	2	\\x
+MetabaseScheduler	metabase.task.send-pulses.trigger	DEFAULT	metabase.task.send-pulses.job	DEFAULT	\N	1701572400000	-1	5	WAITING	CRON	1701571028000	0	\N	1	\\x
+MetabaseScheduler	metabase.task.follow-up-emails.trigger	DEFAULT	metabase.task.follow-up-emails.job	DEFAULT	\N	1701604800000	-1	5	WAITING	CRON	1701571029000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.task-history-cleanup.trigger	DEFAULT	metabase.task.task-history-cleanup.job	DEFAULT	\N	1701648000000	-1	5	WAITING	CRON	1701571030000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.truncate-audit-log.trigger	DEFAULT	metabase.task.truncate-audit-log.job	DEFAULT	\N	1701604800000	-1	5	WAITING	CRON	1701571031000	0	\N	2	\\x
+\.
+
+
+--
+-- TOC entry 4863 (class 0 OID 27070)
+-- Dependencies: 280
+-- Data for Name: query; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.query (query_hash, average_execution_time, query) FROM stdin;
+\\x7cbe84d59a31cb2c9bd7cc44ce3a659287dd4f413355b28f2c22a1b086e5f297	1350	{"type":"native","native":{"query":"select * from staging.submissions","template-tags":{}},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x87f9b35546070bec3dc992bf20f2baefb6854acd88bd1e6d62650b5bdb777314	305	{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id\\nlimit 10","template-tags":{}},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x35ad2a3f8af60c53bf1a6310e5198913bbdec22e565b103255024e01b7f42a7a	1667	{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x502faebbc3dda77eaf14f23de581987316179aba4dee28b1657a93e7220a4d6d	761	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["count",null]],"breakout":[["field",105,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x89f5947ea3313eefbfd1c462677f1309481335eb54d1b00553cd6d0c4265fcc8	531	{"database":2,"type":"query","query":{"source-table":9,"breakout":[["field",105,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xbb370c59889198e0ffb178669e812cac17068b5fd1afc2283be516ee5ca235cd	764	{"database":2,"type":"query","query":{"source-table":9,"breakout":[["field",105,{"base-type":"type/Text"}]],"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xc94fa845168c771e8522a5f7ecc5d2cbe69f6c6e1fe5646d8ee4e9c09d5d1747	292	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x7734381cdc1e08105de1b8478987bf16ac792ee07fb7acdd89e1f75429c807a9	356	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x5cd8f54dd310aed5388163e778b9b1548395c6f2a0ae95980babe02e02b5fc80	365	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xf735edaa676af91450272e6a06af9e8b4416022f4cf5d93b8adb15718f145335	680	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/relative","value":"past1months","id":"1ea0d024","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x5b284f80070bc1fcb528c1570d6d5083128bcbf89ae9970c67de20c49e67ff27	1051	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",105,{"base-type":"type/Text","source-field":99}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xf32f08ba945682722af0bdc08ee2f10d76ba6ee085a609c0db2d190f1cb0d594	562	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	1951	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"native","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2,"async?":true,"cache-ttl":null}
+\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	1150	{"database":2,"query":{"source-table":9},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	647	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	1044	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	550	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	933	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"async?":true,"cache-ttl":null}
+\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	749	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	632	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xbfaefc42192e3dfa56db46b04801fc6a05ecae27bb1e4954e4baa6ce2c20edc5	163	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past30hours","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x020a565784d820307f8a04f2a331248aa21e14128d9e63fd9ee921f166335ac3	835	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1days","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x733fd252cdf09dc296d6e6308b034510a5e428fddeb87a8fecd12a96c6f28c1d	703	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past2days","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	735	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	641	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xbc0201f8360103149374b43d59f5c36e6aa8461907304d493f115a96832d7ba6	177	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past49hours","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xd2d1b83ca1f04601f8f2bba8e9266deda6f31410c61fa773fc378942d9760a5d	757	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past3days","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x7349c69966e1c33cacb9d23ead4221deca4d4b5f12d84bad7ce186f3c34a6f86	704	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1days","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	1085	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	765	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x90418f0bf08dbfb2ff42643a8d50f5dc9726891104d893f1f5823fa0fcec6224	259	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past30hours","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x063f91aec1e21a3df3d2d77f8016d1cc63d5819ce54f06f6308b1ced363b1669	263	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past49hours","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\xa2f6414584d56597330e6fdc9b948716d0ce98365bb1f5391167d301cdd8c223	623	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past3days","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x66f15c7ecd61f55d800d887e5eef2641b186c1d7b3a22edb2fb7a754448730aa	751	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past2days","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\xea8b6981c9c792688d76d616ba9f0090c6a4c9e03ceb4e0d28225ff122ad35e3	632	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x0a65c444c78157860d35cecbc1dfa6b092925f961370f193e4df6fa2368d9969	575	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x525587c0ad6e49ad9bb17a51b792542fd6e82145216a303e1677395e6fced27b	855	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x2609faf5e62c9a7921fb3f3141aace02d1e15ed43f9af9ce26c09005c0356418	861	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["desc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xbb94164b295634007be21439cc7286ec95654d812aafb6f34fd16b40410f1555	1075	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x3e4094d88da767dacf5d4b5207bfbb1620d1219e338f8ffe9cb80f2badad5ed7	1071	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["desc",["aggregation",0]],["asc",["field",106,{"base-type":"type/Text","source-field":99}]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x74aa5b35b92d00197cb3ae45858fbc8437fe55b543fa49dfa6aeb653c7b8acec	1084	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["asc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x8731a4588d8b2ba91337afcc5a6e71b58a754a86213f2b2bce91f85b568f78a3	1059	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	1053	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	1083	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"async?":true,"cache-ttl":null}
+\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	764	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"async?":true,"cache-ttl":null}
+\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	955	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	772	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xcb664257fb91837cbc4c4b8a3e11d21250cf5a04d5c949257a1336d0a133610c	563	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = '' THEN 'EMPTY'\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") end AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x9b4ccaf4f87ad5eb499605c034ce8809f2e7293ba5f752333aeff36801197762	806	{"database":2,"type":"query","query":{"filter":[">",["field","count",{"base-type":"type/Integer"}],5],"source-query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	1470	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"parameters":[{"type":"number/>=","value":[2],"id":"c690ce5","target":["dimension",["field",91,null]]}],"async?":true,"cache-ttl":null}
+\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	989	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x2ef42b077c056e5510617581412e30a501e1bc53431ce64a9d27ae5077c957a9	766	{"query":{"source-query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"filter":[">=",["field","count",{"base-type":"type/Integer"}],3]},"type":"query","database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	232	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = \\"\\" THEN \\"EMPTY\\"\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	1089	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",93,null]]},{"type":"number/>=","value":[2],"id":"c690ce5","target":["dimension",["field",91,null]]}],"async?":true,"cache-ttl":null}
+\\xee97310c569792adbb28280d6767b2ead4084bff111f9e2f030c9e8d7f82b49d	636	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = '' THEN 'EMPTY'\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") END AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xe1f09291618b058323dd9df7ac62f056286d49ab852952d9dcfc8ad24ca887ef	234	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = '' THEN \\"EMPTY\\"\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") END AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xb54c4ff8d11f70dbbfa9971ea077a3f05363c450586f32cdbd2960e19c9aa253	712	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = '' THEN 'EMPTY'\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") END AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x28eb73715575d3ca6f28fb5cc3c43b9196d36583d888e57bde7aaf0df6934e6b	662	{"database":2,"native":{"collection":"comments","template-tags":{},"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC"},"type":"native","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x7f0edaaa1a053c1a6e4051cab36fa5b6408cb0755d5b8ee64a777dec1eb29eec	1022	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",93,null]]},{"type":"string/starts-with","value":["\\" \\""],"id":"f1bf362d","options":{"case-sensitive":false},"target":["dimension",["field",96,null]]}],"async?":true,"cache-ttl":null}
+\\x854152be96f19657d7f2f3b60d4a0ea6fc955d3ec2acf5b3ce73fa1be1e6a83a	244	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = \\" \\" THEN \\"EMPTY\\"\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x73e84bbe9811d56bd276680a6fc722e9498e68c9f9356c6f4834d9c75a90ef05	217	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = '' THEN \\"EMPTY\\"\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x3e972a53120cb9d061952b23312d34fcad161c36aa4ff4ab874964cc48995ae3	590	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x35b68817467c6e11a756f72f6a38b43507bbfbbd96a9ee22da4377c608f3a3a0	277	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n--   \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xf815b417eace1fa4ba1900c7b426217732cb36c15a7cd93bd71c2713d1fe351c	243	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n--   \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xccaa9c662613d621491ed30989c5ff186b5ba4e6ff67d0f1aa6dc498f1277740	247	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\"\\n--   \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x65efbdbd40bd565fab27adb621edfeafae9712e3781135d6be2000fcb4a916f4	682	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	565	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"staging\\".\\"comments\\".\\"bad_words\\",\\n  \\"submissions__via__submission_id\\".\\"subreddit\\"\\nORDER BY\\n  \\"count\\" DESC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	585	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"staging\\".\\"comments\\".\\"bad_words\\",\\n  \\"submissions__via__submission_id\\".\\"subreddit\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	847	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x56964a3ab1541c80917a79a7938188966b382024e68e0ed99bcd50e1c3e92db5	888	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Turn all bad words to upper before aggregation.":["upper",["field",96,null]]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x7c9668363ad1e61a76255f86667c62f91e7dca55d6315bd08c03d8ea33389310	907	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["field",96,null]]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x01da739110fa3826c8d2555b6ffa7cd2b01cb0f5a89d0e7a7bf1f0b7ea13fdd8	700	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["upper",["field",96,null]],"/\\\\b(\\\\w+)\\\\b\\\\s*(?=.*\\\\1)/gm"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xe3d06b7c3548dae25d6447405334d49774b66c1f891f20bcf7dddec9bc60ca53	653	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["upper",["field",96,null]],"/\\\\b(\\\\w+)\\\\b\\\\s*(?=.*\\\\1)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x0c8b2a4625ef8878d6d46e18f9e249835e8b47bfef698693a7a645a50b40c3fd	752	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"/\\\\b(\\\\w+)\\\\b\\\\s*(?=.*\\\\1)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xcb5f7fd3ce21e693e4bc7871f16953e74d71671a06939148a2ed31ec0eac44ee	660	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\b(\\\\w+)\\\\b\\\\s*(?=.*\\\\1)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x75e81bdb4f24b7a3f4a0a819d6c3d44234dd448b959f56bf9a94b4c749eff8f4	676	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\b(\\\\w+)\\\\b(?=.*\\\\b\\\\1\\\\b)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x78f9d4dcd418808e2932e521794e5775b7d434268fe39a026803ffbdfd8cd060	733	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"^\\\\b(\\\\w+)\\\\b(?=.*\\\\b\\\\1\\\\b)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x8036b85e0aaea3bd4d0a1c5d7dfa22f7440c1f9995fb91908a7f1d71ca26aef0	671	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"/\\\\b\\\\w+\\\\b/gm"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xa1e186c21a5612844561451773104a7b6804b6d61fd9fa76ac27ce48deb06d0e	685	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\b\\\\w+\\\\b/gm"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xbd0af112c6888eedd6595104043d1d1dbde3bd244bae9268af4242f71aaf1181	791	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\w*"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xc2fec72d80dc889dc7b8303dc25e750b939ca2c74f82ccd5fd4b3604d4efb430	788	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*/gm"]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x2c26b34a091112bc2ddac01940bf1a9d05c9972dda315373be7a846304cd71c8	783	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*/g"]]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xaa6f346e6f21cd72d3ce78928b2e87e1c487b98d0b48a22c75b32e51eb61d171	8	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["replace",["field",96,null],["regex-match-first",["field",96,null],"[[:punct:]]+"],""]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xd1962bfdba1f7a89d6009a5da921878f93ee2a7815235e5ab71ebb019ec3069e	1024	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["replace",["field",96,null],".",""]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xd0f5e620587f6dc34ddf871577f5942aaf01f484800488cc7d2cdc27ad68f22e	1012	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x3ac55e9c0745bc1796cdb5a629aeed828c2fc80c9a17a763c014ba8ae5bcd6eb	825	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xd84326649d8a87f167f9fb2b77eb09d89d416f8cc16e553b5b3f716efdbde395	907	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"limit":10,"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x550ade057f8af70c20cc0511ad535d1ba113f5d08858f4bc85d5981d4d6223cb	691	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past12months","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	707	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xee2df50d2c582273cbc433fbd39d25c49c56738578d44dcbebf9c6455c164da8	713	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\b\\\\w+\\\\b"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x757f9fc0e563456bbbac68370b5bffd2d21eeb7bcdb938fb91828a186e7ede3f	661	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"(\\\\w+)(?=.+\\\\b\\\\1\\\\b)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x6e193788d9d33f5b90c76cf3f29cfb9ddba90017ca6f14b7eca336099b0babf9	787	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*"]]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x4136ed0d69e4e1c9e118089629d438be1aacccf2559995abd5cadb7d1f34882a	851	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*"]]},"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xa6d097f92866c59218fd38f414fd69db9eb007f3089333d591cf3ce5fceb4131	807	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*/gm"]]},"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x2e69be93a442fe05a0a7e614cbc8cf6243bb77b22b6489611ea28359fccd9498	770	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*/g"]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xbaf124c6b1f88db68c8d8c5e1e4ee90b76bdedaa09201843c99d593c5a0f5950	1056	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xf0abe70096de06d3319caebcdcc8e84cfd7f4efd6b91333ae19ec449e5c928b5	962	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	864	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\w+"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x50ae1ab620a44d02ccae34eab1ce65d48877256998591b2c94d0804cd133728a	676	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\b(\\\\w+)\\\\b(?=.+\\\\b\\\\1\\\\b)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x861d5e44937d1d41733a9c083989924fa553f8f231837db575bbe25e4260447f	848	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*"]]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xa4b5b96fe88f459cc1c283dd5cccadfd180c1b395dfd47e874115ef4afbb4862	796	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*"]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xd0bae741aa38b421763b905da18326844f8e6b361c5083f5f5bb118bd62857a2	812	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*\\\\gm"]]},"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x3c8947c41092bc3dc1a0cb952cc7af39e977490c1250b5b001d0130ba1260314	736	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*/gm"]]},"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xac8e5037ca1e05972a59041ce285c083859bdf336c815e2bd1f8bbeb463a80f6	802	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]]],"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*/g"]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x99984618035d55be51f7a46a4b23797736ff97543be700bb190dd564b1a50055	792	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"(\\\\w*)"]]},"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x28b7e7e43fdd091ffc139f7f3ecca3ed6a247e557849b9507bdb1363e25f8d63	821	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"(\\\\w*)"]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	812	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x3391173579f3b39377edcf7276bca62448db54abbf33efa91fe545fc52b95694	1539	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",93,null]]},{"type":"string/starts-with","value":["\\" \\""],"id":"f1bf362d","options":{"case-sensitive":false},"target":["dimension",["field",96,null]]}],"async?":true,"cache-ttl":null}
+\\x691bcc80e9159cde3c3e64f52afc4c4e287d55b552a2451c22ee88588dd0d913	1205	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\xbf1b98e73ba299cafb7c2d2ac5757fcc10dcc21e1f521ceb845cca478309bdde	853	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past12months","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x386557dd279bb3c85182cdc34e277ced3fd714b75045ba31802c5bb1b6bb13b9	1275	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"past12months","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	855	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	1338	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x5ed22ca3af1abd92f10eb8ff2202ab987c67b0d75535103d85426e3c58cc10e1	465	{"database":2,"type":"query","query":{"source-table":13,"aggregation":[["sum",["field",100,{"base-type":"type/Integer"}]]],"breakout":[["field",103,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x0d3092614680820ae540910f93fe2d9ceab3dc86175d72c2fcdd8d478df5f3c1	497	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["sum",["field",81,{"base-type":"type/Integer","binning":{"strategy":"default","lib/type":"metabase.lib.binning/binning"}}]]],"breakout":[["field",84,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x9462b571ab360177f5a54ed3291f5354fd7eb918d4385ce199614d3c77861a70	425	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["sum",["field",81,{"base-type":"type/Integer","binning":{"strategy":"default","lib/type":"metabase.lib.binning/binning"}}]]],"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x908de81cc816ebf3bd572497eaf952c55525fd3061b3dd2870f1c8ed2450fc0b	658	{"database":2,"type":"query","query":{"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x072dadc2d9883a2a6789e9b3bc13d0ceaa2d957a5e88f7fe1e18e7623350100f	318	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["count"]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	786	{"database":2,"type":"query","query":{"source-table":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	452	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["count",null]],"breakout":[["field",84,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x8302c073628fb8bad702e9c94663d96986f5f2c74ea84fa55d330a680bcae49f	541	{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	499	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["count"]],"breakout":[["field",82,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	437	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["count"]],"breakout":[["field",84,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	1729	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	1118	{"database":2,"type":"query","query":{"source-table":13},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	658	{"database":2,"type":"query","query":{"source-table":10,"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xe69c7b7108907fdd5e0d8fd2f15256c4c76459479350d05a49759b37c2b9f4eb	722	{"database":2,"type":"query","query":{"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"week",{"include-current":false}],"source-query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}],["field",83,{"base-type":"type/Date","temporal-unit":"day"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	451	{"database":2,"type":"query","query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	521	{"database":2,"type":"query","query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}],["field",83,{"base-type":"type/Date","temporal-unit":"day"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x1183fb8db9cb4f0247c44ffab453d516626d00a4f53801ec1d5524784610e6b0	613	{"database":2,"type":"query","query":{"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}],["field",83,{"base-type":"type/Date","temporal-unit":"day"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	996	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"async?":true,"cache-ttl":null}
+\\xdf0202efa5571abb4f2109dcc00a34f901d0720411f3faf6fa254718e29b5dea	792	{"database":2,"type":"query","query":{"source-query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"filter":["is-null",["field","avg",{"base-type":"type/Decimal"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\.
+
+
+--
+-- TOC entry 4913 (class 0 OID 27905)
+-- Dependencies: 330
+-- Data for Name: query_action; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.query_action (action_id, database_id, dataset_query) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4862 (class 0 OID 27062)
+-- Dependencies: 279
+-- Data for Name: query_cache; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.query_cache (query_hash, updated_at, results) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4861 (class 0 OID 27053)
+-- Dependencies: 278
+-- Data for Name: query_execution; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.query_execution (id, hash, started_at, running_time, result_rows, native, context, error, executor_id, card_id, dashboard_id, pulse_id, database_id, cache_hit) FROM stdin;
+1	\\x7cbe84d59a31cb2c9bd7cc44ce3a659287dd4f413355b28f2c22a1b086e5f297	2023-11-17 03:17:27.024862+00	1350	2000	t	ad-hoc	\N	1	\N	\N	\N	2	f
+2	\\x87f9b35546070bec3dc992bf20f2baefb6854acd88bd1e6d62650b5bdb777314	2023-11-17 03:19:00.372927+00	305	10	t	ad-hoc	\N	1	\N	\N	\N	2	f
+3	\\x35ad2a3f8af60c53bf1a6310e5198913bbdec22e565b103255024e01b7f42a7a	2023-11-17 03:21:23.967302+00	1667	2000	t	ad-hoc	\N	1	\N	\N	\N	2	f
+4	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-17 03:22:19.74368+00	1865	2000	t	question	\N	1	1	1	\N	2	f
+5	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-17 03:24:02.628386+00	1183	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
+6	\\x502faebbc3dda77eaf14f23de581987316179aba4dee28b1657a93e7220a4d6d	2023-11-17 03:24:12.927316+00	761	2563	f	ad-hoc	\N	1	\N	\N	\N	2	f
+7	\\x89f5947ea3313eefbfd1c462677f1309481335eb54d1b00553cd6d0c4265fcc8	2023-11-17 03:24:21.268358+00	531	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
+8	\\xbb370c59889198e0ffb178669e812cac17068b5fd1afc2283be516ee5ca235cd	2023-11-17 03:24:29.276864+00	764	2563	f	ad-hoc	\N	1	\N	\N	\N	2	f
+9	\\xc94fa845168c771e8522a5f7ecc5d2cbe69f6c6e1fe5646d8ee4e9c09d5d1747	2023-11-17 03:24:32.705507+00	292	1	f	ad-hoc	\N	1	\N	\N	\N	2	f
+10	\\x7734381cdc1e08105de1b8478987bf16ac792ee07fb7acdd89e1f75429c807a9	2023-11-17 03:24:36.027206+00	356	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+11	\\x5cd8f54dd310aed5388163e778b9b1548395c6f2a0ae95980babe02e02b5fc80	2023-11-17 03:25:59.165577+00	365	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+12	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-17 03:26:12.64844+00	743	8	f	question	\N	1	2	1	\N	2	f
+13	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-17 03:26:12.833777+00	2260	2000	t	dashboard	\N	1	1	1	\N	2	f
+14	\\xf735edaa676af91450272e6a06af9e8b4416022f4cf5d93b8adb15718f145335	2023-11-17 03:42:09.087202+00	680	8	f	dashboard	\N	1	2	1	\N	2	f
+15	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-17 03:42:52.159109+00	652	8	f	dashboard	\N	1	2	1	\N	2	f
+16	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-17 04:03:19.743323+00	972	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
+17	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:45:15.066047+00	998	8	f	dashboard	\N	1	2	1	\N	2	f
+18	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-19 02:45:24.761907+00	1264	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
+19	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-19 02:45:39.399586+00	2367	2000	t	question	\N	1	1	\N	\N	2	f
+20	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-19 02:46:17.068536+00	952	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
+21	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:46:40.925589+00	723	8	f	dashboard	\N	1	2	1	\N	2	f
+22	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:49:07.574946+00	817	8	f	dashboard	\N	1	2	1	\N	2	f
+23	\\x5b284f80070bc1fcb528c1570d6d5083128bcbf89ae9970c67de20c49e67ff27	2023-11-19 02:52:33.811109+00	1051	2545	f	ad-hoc	\N	1	\N	\N	\N	2	f
+24	\\xf32f08ba945682722af0bdc08ee2f10d76ba6ee085a609c0db2d190f1cb0d594	2023-11-19 02:53:38.95243+00	562	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+25	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-11-19 02:54:37.397172+00	522	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+26	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-19 02:56:45.345312+00	857	8	f	question	\N	1	3	1	\N	2	f
+27	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:56:45.503639+00	1164	8	f	dashboard	\N	1	2	1	\N	2	f
+28	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 02:58:04.842465+00	733	8	f	dashboard	\N	1	2	1	\N	2	f
+29	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 02:58:04.842494+00	927	8	f	dashboard	\N	1	3	1	\N	2	f
+30	\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	2023-11-19 02:58:14.492487+00	647	0	f	dashboard	\N	1	2	1	\N	2	f
+31	\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	2023-11-19 02:58:14.502256+00	749	0	f	dashboard	\N	1	3	1	\N	2	f
+32	\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	2023-11-19 02:58:18.662176+00	632	0	f	dashboard	\N	1	2	1	\N	2	f
+33	\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	2023-11-19 02:58:18.666178+00	735	0	f	dashboard	\N	1	3	1	\N	2	f
+34	\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	2023-11-19 02:58:20.966838+00	641	8	f	dashboard	\N	1	2	1	\N	2	f
+35	\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	2023-11-19 02:58:20.978277+00	765	8	f	dashboard	\N	1	3	1	\N	2	f
+36	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-11-19 02:58:24.525256+00	644	8	f	dashboard	\N	1	2	1	\N	2	f
+37	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-11-19 02:58:24.531275+00	837	8	f	dashboard	\N	1	3	1	\N	2	f
+38	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:58:58.463694+00	708	8	f	question	\N	1	2	\N	\N	2	f
+39	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 02:59:31.587099+00	649	8	f	dashboard	\N	1	2	1	\N	2	f
+40	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 02:59:31.580477+00	791	8	f	dashboard	\N	1	3	1	\N	2	f
+41	\\xbfaefc42192e3dfa56db46b04801fc6a05ecae27bb1e4954e4baa6ce2c20edc5	2023-11-19 02:59:55.336315+00	163	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	2	1	\N	2	\N
+42	\\x90418f0bf08dbfb2ff42643a8d50f5dc9726891104d893f1f5823fa0fcec6224	2023-11-19 02:59:55.348794+00	259	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	3	1	\N	2	\N
+43	\\xbc0201f8360103149374b43d59f5c36e6aa8461907304d493f115a96832d7ba6	2023-11-19 03:00:07.4658+00	177	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	2	1	\N	2	\N
+44	\\x063f91aec1e21a3df3d2d77f8016d1cc63d5819ce54f06f6308b1ced363b1669	2023-11-19 03:00:07.470891+00	263	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	3	1	\N	2	\N
+45	\\xa2f6414584d56597330e6fdc9b948716d0ce98365bb1f5391167d301cdd8c223	2023-11-19 03:00:27.969605+00	623	8	f	dashboard	\N	1	2	1	\N	2	f
+46	\\xd2d1b83ca1f04601f8f2bba8e9266deda6f31410c61fa773fc378942d9760a5d	2023-11-19 03:00:27.961748+00	757	8	f	dashboard	\N	1	3	1	\N	2	f
+47	\\x7349c69966e1c33cacb9d23ead4221deca4d4b5f12d84bad7ce186f3c34a6f86	2023-11-19 03:00:33.178035+00	704	2	f	dashboard	\N	1	2	1	\N	2	f
+48	\\x020a565784d820307f8a04f2a331248aa21e14128d9e63fd9ee921f166335ac3	2023-11-19 03:00:33.18081+00	835	2	f	dashboard	\N	1	3	1	\N	2	f
+49	\\x733fd252cdf09dc296d6e6308b034510a5e428fddeb87a8fecd12a96c6f28c1d	2023-11-19 03:00:39.875874+00	703	8	f	dashboard	\N	1	2	1	\N	2	f
+50	\\x66f15c7ecd61f55d800d887e5eef2641b186c1d7b3a22edb2fb7a754448730aa	2023-11-19 03:00:39.866415+00	751	8	f	dashboard	\N	1	3	1	\N	2	f
+51	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 23:31:17.679044+00	1654	8	f	dashboard	\N	1	3	1	\N	2	f
+52	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 23:31:17.612839+00	1736	8	f	dashboard	\N	1	2	1	\N	2	f
+53	\\xea8b6981c9c792688d76d616ba9f0090c6a4c9e03ceb4e0d28225ff122ad35e3	2023-11-19 23:55:44.755475+00	632	958	f	ad-hoc	\N	1	\N	\N	\N	2	f
+54	\\x0a65c444c78157860d35cecbc1dfa6b092925f961370f193e4df6fa2368d9969	2023-11-19 23:56:14.662463+00	575	958	f	ad-hoc	\N	1	\N	\N	\N	2	f
+55	\\x525587c0ad6e49ad9bb17a51b792542fd6e82145216a303e1677395e6fced27b	2023-11-19 23:56:47.640095+00	855	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
+56	\\x2609faf5e62c9a7921fb3f3141aace02d1e15ed43f9af9ce26c09005c0356418	2023-11-19 23:57:27.012394+00	861	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
+57	\\xbb94164b295634007be21439cc7286ec95654d812aafb6f34fd16b40410f1555	2023-11-19 23:57:59.789378+00	1075	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+58	\\x3e4094d88da767dacf5d4b5207bfbb1620d1219e338f8ffe9cb80f2badad5ed7	2023-11-20 00:16:11.934187+00	1071	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+59	\\x74aa5b35b92d00197cb3ae45858fbc8437fe55b543fa49dfa6aeb653c7b8acec	2023-11-20 00:16:30.190204+00	1084	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+60	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:16:43.851628+00	1070	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+61	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:18:07.276505+00	955	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+62	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:18:27.28272+00	995	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+63	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:18:45.355302+00	773	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
+64	\\x8731a4588d8b2ba91337afcc5a6e71b58a754a86213f2b2bce91f85b568f78a3	2023-11-20 00:19:02.957254+00	1059	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+65	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:19:36.302045+00	740	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
+66	\\x9b4ccaf4f87ad5eb499605c034ce8809f2e7293ba5f752333aeff36801197762	2023-11-20 00:20:07.610755+00	806	165	f	ad-hoc	\N	1	\N	\N	\N	2	f
+75	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:34:08.666594+00	667	8	f	dashboard	\N	1	2	1	\N	2	f
+85	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:42:22.951085+00	1222	8	f	dashboard	\N	1	3	1	\N	2	f
+90	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:43:31.740835+00	1125	1580	f	dashboard	\N	1	4	1	\N	2	f
+67	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:25:37.854587+00	791	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
+68	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:25:58.790344+00	1090	1580	f	question	\N	1	4	1	\N	2	f
+69	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:25:59.060153+00	1204	8	f	dashboard	\N	1	2	1	\N	2	f
+70	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:25:58.882245+00	1484	8	f	dashboard	\N	1	3	1	\N	2	f
+71	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:32:42.099822+00	1062	582	f	dashboard	\N	1	4	1	\N	2	f
+72	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:33:32.018971+00	720	8	f	dashboard	\N	1	2	1	\N	2	f
+73	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:33:32.051637+00	1229	8	f	dashboard	\N	1	3	1	\N	2	f
+74	\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	2023-11-20 00:33:32.057813+00	1523	962	f	dashboard	\N	1	4	1	\N	2	f
+76	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:34:08.660263+00	918	8	f	dashboard	\N	1	3	1	\N	2	f
+77	\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	2023-11-20 00:34:08.665782+00	996	962	f	dashboard	\N	1	4	1	\N	2	f
+78	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:35:21.518177+00	655	8	f	dashboard	\N	1	2	1	\N	2	f
+79	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:35:21.495168+00	827	8	f	dashboard	\N	1	3	1	\N	2	f
+80	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:35:21.55397+00	945	582	f	dashboard	\N	1	4	1	\N	2	f
+81	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:35:44.090595+00	991	937	f	dashboard	\N	1	4	1	\N	2	f
+82	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:39:53.576685+00	1050	1580	f	question	\N	1	4	\N	\N	2	f
+83	\\x2ef42b077c056e5510617581412e30a501e1bc53431ce64a9d27ae5077c957a9	2023-11-20 00:41:50.54584+00	766	293	f	ad-hoc	\N	1	\N	\N	\N	2	f
+84	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:42:22.9298+00	728	8	f	dashboard	\N	1	2	1	\N	2	f
+86	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:42:22.96899+00	1442	582	f	dashboard	\N	1	4	1	\N	2	f
+87	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:42:55.273886+00	974	937	f	dashboard	\N	1	4	1	\N	2	f
+88	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:43:31.722394+00	674	8	f	dashboard	\N	1	2	1	\N	2	f
+89	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:43:31.740929+00	908	8	f	dashboard	\N	1	3	1	\N	2	f
+91	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:47:32.482665+00	663	8	f	dashboard	\N	1	2	1	\N	2	f
+92	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:47:32.501441+00	824	8	f	dashboard	\N	1	3	1	\N	2	f
+93	\\x7f0edaaa1a053c1a6e4051cab36fa5b6408cb0755d5b8ee64a777dec1eb29eec	2023-11-20 00:47:32.507619+00	1022	0	f	dashboard	\N	1	4	1	\N	2	f
+94	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:47:44.142294+00	985	937	f	dashboard	\N	1	4	1	\N	2	f
+95	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:50:20.929991+00	1139	1580	f	question	\N	1	4	\N	\N	2	f
+96	\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	2023-11-20 01:01:41.772762+00	233	0	t	ad-hoc	ERROR: zero-length delimited identifier at or near """"\n  Position: 270	1	\N	\N	\N	2	\N
+97	\\x854152be96f19657d7f2f3b60d4a0ea6fc955d3ec2acf5b3ce73fa1be1e6a83a	2023-11-20 01:02:10.727477+00	244	0	t	ad-hoc	ERROR: syntax error at or near "AS"\n  Position: 334	1	\N	\N	\N	2	\N
+98	\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	2023-11-20 01:03:06.730168+00	218	0	t	ad-hoc	ERROR: zero-length delimited identifier at or near """"\n  Position: 270	1	\N	\N	\N	2	\N
+99	\\x73e84bbe9811d56bd276680a6fc722e9498e68c9f9356c6f4834d9c75a90ef05	2023-11-20 01:03:13.648713+00	217	0	t	ad-hoc	ERROR: syntax error at or near "AS"\n  Position: 333	1	\N	\N	\N	2	\N
+100	\\xe1f09291618b058323dd9df7ac62f056286d49ab852952d9dcfc8ad24ca887ef	2023-11-20 01:12:34.223903+00	234	0	t	ad-hoc	ERROR: column "EMPTY" does not exist\n  Position: 278	1	\N	\N	\N	2	\N
+101	\\xb54c4ff8d11f70dbbfa9971ea077a3f05363c450586f32cdbd2960e19c9aa253	2023-11-20 01:12:44.745631+00	712	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+102	\\xee97310c569792adbb28280d6767b2ead4084bff111f9e2f030c9e8d7f82b49d	2023-11-20 01:13:12.743821+00	636	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+103	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:13:25.761624+00	1027	1580	f	question	\N	1	4	\N	\N	2	f
+104	\\xcb664257fb91837cbc4c4b8a3e11d21250cf5a04d5c949257a1336d0a133610c	2023-11-20 01:13:53.461963+00	563	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+105	\\x28eb73715575d3ca6f28fb5cc3c43b9196d36583d888e57bde7aaf0df6934e6b	2023-11-20 01:14:12.929657+00	662	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+106	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:14:23.670817+00	1078	1580	f	question	\N	1	4	\N	\N	2	f
+107	\\x3e972a53120cb9d061952b23312d34fcad161c36aa4ff4ab874964cc48995ae3	2023-11-20 01:14:29.830214+00	590	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+108	\\x35b68817467c6e11a756f72f6a38b43507bbfbbd96a9ee22da4377c608f3a3a0	2023-11-20 01:17:08.618564+00	277	0	t	ad-hoc	ERROR: syntax error at or near "ORDER"\n  Position: 585	1	\N	\N	\N	2	\N
+109	\\xf815b417eace1fa4ba1900c7b426217732cb36c15a7cd93bd71c2713d1fe351c	2023-11-20 01:17:19.22478+00	243	0	t	ad-hoc	ERROR: syntax error at or near "ORDER"\n  Position: 585	1	\N	\N	\N	2	\N
+110	\\xccaa9c662613d621491ed30989c5ff186b5ba4e6ff67d0f1aa6dc498f1277740	2023-11-20 01:17:31.356043+00	247	0	t	ad-hoc	ERROR: column "comments.bad_words" must appear in the GROUP BY clause or be used in an aggregate function\n  Position: 225	1	\N	\N	\N	2	\N
+111	\\x65efbdbd40bd565fab27adb621edfeafae9712e3781135d6be2000fcb4a916f4	2023-11-20 01:18:01.717626+00	682	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+112	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:18:14.236259+00	586	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+113	\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	2023-11-20 01:18:27.579583+00	562	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+114	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:18:37.068525+00	569	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+115	\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	2023-11-20 01:38:30.243958+00	596	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+116	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:38:32.052516+00	597	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
+117	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:38:36.737643+00	1052	1580	f	question	\N	1	4	\N	\N	2	f
+118	\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	2023-11-20 01:39:33.709839+00	831	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+119	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:40:15.958361+00	1075	1580	f	question	\N	1	4	\N	\N	2	f
+120	\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	2023-11-20 01:40:16.595965+00	992	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+121	\\x56964a3ab1541c80917a79a7938188966b382024e68e0ed99bcd50e1c3e92db5	2023-11-20 01:44:30.142821+00	888	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
+122	\\x7c9668363ad1e61a76255f86667c62f91e7dca55d6315bd08c03d8ea33389310	2023-11-20 01:45:13.655446+00	907	1406	f	ad-hoc	\N	1	\N	\N	\N	2	f
+123	\\x01da739110fa3826c8d2555b6ffa7cd2b01cb0f5a89d0e7a7bf1f0b7ea13fdd8	2023-11-20 02:14:31.830152+00	700	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+124	\\xe3d06b7c3548dae25d6447405334d49774b66c1f891f20bcf7dddec9bc60ca53	2023-11-20 02:14:59.353878+00	653	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+125	\\x0c8b2a4625ef8878d6d46e18f9e249835e8b47bfef698693a7a645a50b40c3fd	2023-11-20 02:15:28.731609+00	752	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+126	\\xcb5f7fd3ce21e693e4bc7871f16953e74d71671a06939148a2ed31ec0eac44ee	2023-11-20 02:16:35.385952+00	660	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+127	\\x75e81bdb4f24b7a3f4a0a819d6c3d44234dd448b959f56bf9a94b4c749eff8f4	2023-11-20 02:26:09.472142+00	676	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+128	\\x78f9d4dcd418808e2932e521794e5775b7d434268fe39a026803ffbdfd8cd060	2023-11-20 02:26:26.150228+00	733	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+129	\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	2023-11-20 02:26:46.325122+00	874	561	f	ad-hoc	\N	1	\N	\N	\N	2	f
+130	\\x8036b85e0aaea3bd4d0a1c5d7dfa22f7440c1f9995fb91908a7f1d71ca26aef0	2023-11-20 02:27:35.484822+00	671	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+131	\\xa1e186c21a5612844561451773104a7b6804b6d61fd9fa76ac27ce48deb06d0e	2023-11-20 02:27:56.470071+00	685	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+132	\\xee2df50d2c582273cbc433fbd39d25c49c56738578d44dcbebf9c6455c164da8	2023-11-20 02:28:18.340556+00	713	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+133	\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	2023-11-20 02:28:39.640788+00	771	561	f	ad-hoc	\N	1	\N	\N	\N	2	f
+134	\\x50ae1ab620a44d02ccae34eab1ce65d48877256998591b2c94d0804cd133728a	2023-11-20 02:33:06.513363+00	676	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+138	\\x861d5e44937d1d41733a9c083989924fa553f8f231837db575bbe25e4260447f	2023-11-20 02:38:43.821583+00	848	439	f	ad-hoc	\N	1	\N	\N	\N	2	f
+140	\\xa4b5b96fe88f459cc1c283dd5cccadfd180c1b395dfd47e874115ef4afbb4862	2023-11-20 02:40:34.72925+00	796	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+141	\\xd0bae741aa38b421763b905da18326844f8e6b361c5083f5f5bb118bd62857a2	2023-11-20 02:43:28.231458+00	812	0	f	ad-hoc	ERROR: invalid regular expression: invalid escape \\ sequence	1	\N	\N	\N	2	\N
+144	\\x3c8947c41092bc3dc1a0cb952cc7af39e977490c1250b5b001d0130ba1260314	2023-11-20 02:44:19.792141+00	736	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+145	\\xac8e5037ca1e05972a59041ce285c083859bdf336c815e2bd1f8bbeb463a80f6	2023-11-20 02:44:31.744389+00	802	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+148	\\x99984618035d55be51f7a46a4b23797736ff97543be700bb190dd564b1a50055	2023-11-20 03:01:09.944027+00	792	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+149	\\x28b7e7e43fdd091ffc139f7f3ecca3ed6a247e557849b9507bdb1363e25f8d63	2023-11-20 03:01:17.872888+00	821	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+157	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 03:19:44.89352+00	783	8	f	dashboard	\N	1	2	1	\N	2	f
+159	\\x3391173579f3b39377edcf7276bca62448db54abbf33efa91fe545fc52b95694	2023-11-20 03:19:44.92317+00	1539	0	f	dashboard	\N	1	4	1	\N	2	f
+160	\\x691bcc80e9159cde3c3e64f52afc4c4e287d55b552a2451c22ee88588dd0d913	2023-11-20 03:19:54.820604+00	1205	675	f	dashboard	\N	1	4	1	\N	2	f
+162	\\xbf1b98e73ba299cafb7c2d2ac5757fcc10dcc21e1f521ceb845cca478309bdde	2023-11-20 03:21:03.778202+00	853	8	f	dashboard	\N	1	3	1	\N	2	f
+163	\\x386557dd279bb3c85182cdc34e277ced3fd714b75045ba31802c5bb1b6bb13b9	2023-11-20 03:21:03.784811+00	1275	849	f	dashboard	\N	1	4	1	\N	2	f
+168	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-11-20 03:22:08.052347+00	906	8	f	dashboard	\N	1	3	1	\N	2	f
+169	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-11-20 03:22:08.052449+00	1291	955	f	dashboard	\N	1	4	1	\N	2	f
+135	\\x757f9fc0e563456bbbac68370b5bffd2d21eeb7bcdb938fb91828a186e7ede3f	2023-11-20 02:34:34.022599+00	661	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
+137	\\x6e193788d9d33f5b90c76cf3f29cfb9ddba90017ca6f14b7eca336099b0babf9	2023-11-20 02:37:52.353494+00	787	446	f	ad-hoc	\N	1	\N	\N	\N	2	f
+139	\\x4136ed0d69e4e1c9e118089629d438be1aacccf2559995abd5cadb7d1f34882a	2023-11-20 02:40:17.100565+00	851	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+142	\\xa6d097f92866c59218fd38f414fd69db9eb007f3089333d591cf3ce5fceb4131	2023-11-20 02:43:49.956751+00	807	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+146	\\x2e69be93a442fe05a0a7e614cbc8cf6243bb77b22b6489611ea28359fccd9498	2023-11-20 02:44:37.472872+00	770	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+153	\\xbaf124c6b1f88db68c8d8c5e1e4ee90b76bdedaa09201843c99d593c5a0f5950	2023-11-20 03:18:02.879528+00	1056	1118	f	ad-hoc	\N	1	\N	\N	\N	2	f
+156	\\xf0abe70096de06d3319caebcdcc8e84cfd7f4efd6b91333ae19ec449e5c928b5	2023-11-20 03:18:44.655668+00	962	1118	f	ad-hoc	\N	1	\N	\N	\N	2	f
+167	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-11-20 03:22:08.052671+00	710	8	f	dashboard	\N	1	2	1	\N	2	f
+136	\\xbd0af112c6888eedd6595104043d1d1dbde3bd244bae9268af4242f71aaf1181	2023-11-20 02:37:24.586337+00	791	562	f	ad-hoc	\N	1	\N	\N	\N	2	f
+143	\\xc2fec72d80dc889dc7b8303dc25e750b939ca2c74f82ccd5fd4b3604d4efb430	2023-11-20 02:44:06.155577+00	788	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+147	\\x2c26b34a091112bc2ddac01940bf1a9d05c9972dda315373be7a846304cd71c8	2023-11-20 02:44:42.240037+00	783	12	f	ad-hoc	\N	1	\N	\N	\N	2	f
+150	\\xaa6f346e6f21cd72d3ce78928b2e87e1c487b98d0b48a22c75b32e51eb61d171	2023-11-20 03:15:33.142352+00	8	0	f	ad-hoc	Input to resolve-card-id-source-tables* does not match schema: \n\n\t [0;33m  [(named {:query {:expressions {"Bad Word" (named [nil nil (named (not (instance? java.lang.String a-clojure.lang.PersistentVector)) "match") nil] "Must be a valid instance of one of these clauses: :substring, :trim, :ltrim, :rtrim, :replace, :lower, :upper, :concat, :regex-match-first, :coalesce, :case")}}} arg0)] [0m \n\n	1	\N	\N	\N	2	\N
+151	\\xd1962bfdba1f7a89d6009a5da921878f93ee2a7815235e5ab71ebb019ec3069e	2023-11-20 03:16:24.507367+00	1024	1397	f	ad-hoc	\N	1	\N	\N	\N	2	f
+152	\\xd0f5e620587f6dc34ddf871577f5942aaf01f484800488cc7d2cdc27ad68f22e	2023-11-20 03:17:40.0299+00	1012	1279	f	ad-hoc	\N	1	\N	\N	\N	2	f
+154	\\x3ac55e9c0745bc1796cdb5a629aeed828c2fc80c9a17a763c014ba8ae5bcd6eb	2023-11-20 03:18:19.801114+00	825	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+155	\\xd84326649d8a87f167f9fb2b77eb09d89d416f8cc16e553b5b3f716efdbde395	2023-11-20 03:18:35.126151+00	907	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+158	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 03:19:44.915389+00	1291	8	f	dashboard	\N	1	3	1	\N	2	f
+161	\\x550ade057f8af70c20cc0511ad535d1ba113f5d08858f4bc85d5981d4d6223cb	2023-11-20 03:21:03.774878+00	691	8	f	dashboard	\N	1	2	1	\N	2	f
+164	\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	2023-11-20 03:21:16.995495+00	707	8	f	dashboard	\N	1	2	1	\N	2	f
+165	\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	2023-11-20 03:21:17.006343+00	855	8	f	dashboard	\N	1	3	1	\N	2	f
+166	\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	2023-11-20 03:21:17.017463+00	1338	1118	f	dashboard	\N	1	4	1	\N	2	f
+170	\\x5ed22ca3af1abd92f10eb8ff2202ab987c67b0d75535103d85426e3c58cc10e1	2023-11-20 03:25:41.27113+00	465	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+171	\\x0d3092614680820ae540910f93fe2d9ceab3dc86175d72c2fcdd8d478df5f3c1	2023-11-20 03:26:30.074602+00	497	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
+172	\\x9462b571ab360177f5a54ed3291f5354fd7eb918d4385ce199614d3c77861a70	2023-11-20 03:26:41.917187+00	425	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+173	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-02 23:07:39.023992+00	1412	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+174	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-02 23:07:47.038128+00	1111	8	f	dashboard	\N	1	2	1	\N	2	f
+175	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-02 23:07:47.148397+00	1177	8	f	dashboard	\N	1	3	1	\N	2	f
+176	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-02 23:07:47.19512+00	4088	1111	f	dashboard	\N	1	4	1	\N	2	f
+177	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-02 23:08:04.863373+00	592	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+178	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-02 23:08:29.335818+00	729	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+179	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:09:28.796437+00	1722	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+180	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:09:34.854861+00	882	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+181	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:09:40.825563+00	622	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+182	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:09:45.677076+00	764	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+183	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:10:47.218369+00	638	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+184	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:10:50.221188+00	652	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+185	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:21:44.599219+00	1230	8	f	dashboard	\N	1	2	1	\N	2	f
+186	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:21:44.599219+00	1304	0	f	dashboard	Closed	1	2	1	\N	2	\N
+187	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:21:44.591275+00	1379	0	f	dashboard	ERROR: canceling statement due to user request	1	3	1	\N	2	\N
+188	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:21:44.496693+00	2015	0	f	dashboard	\N	1	4	1	\N	2	f
+189	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:21:44.496693+00	2100	0	f	dashboard	Closed	1	4	1	\N	2	\N
+190	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:22:30.414001+00	1228	8	f	dashboard	\N	1	2	1	\N	2	f
+191	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:22:30.533983+00	1336	8	f	dashboard	\N	1	3	1	\N	2	f
+192	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:22:30.509622+00	1934	1111	f	dashboard	\N	1	4	1	\N	2	f
+193	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:23:20.134307+00	609	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+194	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:23.745124+00	589	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+195	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:25.756897+00	599	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+196	\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	2023-12-03 01:23:35.940848+00	453	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
+197	\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	2023-12-03 01:23:49.613419+00	432	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
+198	\\x072dadc2d9883a2a6789e9b3bc13d0ceaa2d957a5e88f7fe1e18e7623350100f	2023-12-03 01:23:51.512521+00	318	1	f	ad-hoc	\N	1	\N	\N	\N	2	f
+199	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:56.486594+00	1080	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+200	\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	2023-12-03 01:24:09.945409+00	445	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
+201	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:11.099084+00	502	2	f	ad-hoc	\N	1	\N	\N	\N	2	f
+202	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:15.012848+00	448	2	f	ad-hoc	\N	1	\N	\N	\N	2	f
+203	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:15.18456+00	514	2	f	ad-hoc	\N	1	\N	\N	\N	2	f
+204	\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	2023-12-03 01:24:17.772133+00	485	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
+205	\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	2023-12-03 01:24:45.540646+00	528	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+206	\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	2023-12-03 01:25:03.613951+00	452	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+207	\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	2023-12-03 01:25:41.673595+00	658	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+208	\\xe69c7b7108907fdd5e0d8fd2f15256c4c76459479350d05a49759b37c2b9f4eb	2023-12-03 01:26:26.891581+00	722	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+209	\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	2023-12-03 01:26:32.251363+00	440	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+210	\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	2023-12-03 01:26:36.451844+00	453	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
+211	\\x1183fb8db9cb4f0247c44ffab453d516626d00a4f53801ec1d5524784610e6b0	2023-12-03 01:26:57.989328+00	613	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+212	\\x908de81cc816ebf3bd572497eaf952c55525fd3061b3dd2870f1c8ed2450fc0b	2023-12-03 01:27:18.12274+00	658	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+213	\\x8302c073628fb8bad702e9c94663d96986f5f2c74ea84fa55d330a680bcae49f	2023-12-03 01:27:47.011034+00	541	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
+214	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:28:07.904902+00	787	8	f	dashboard	\N	1	2	1	\N	2	f
+215	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:28:07.704654+00	882	10	f	question	\N	1	5	1	\N	2	f
+216	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:28:07.896731+00	970	8	f	dashboard	\N	1	3	1	\N	2	f
+217	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:28:07.888505+00	1810	1111	f	dashboard	\N	1	4	1	\N	2	f
+218	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:28:11.626088+00	1461	1111	f	dashboard	\N	1	4	1	\N	2	f
+219	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:28:40.662028+00	893	10	f	question	\N	1	5	1	\N	2	f
+220	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:50:08.013697+00	2012	10	f	dashboard	\N	1	5	1	\N	2	f
+221	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:51:54.992551+00	1103	8	f	question	\N	1	3	\N	\N	2	f
+222	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:52:25.717091+00	1002	8	f	question	\N	1	6	\N	\N	2	f
+223	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-12-03 01:52:49.423061+00	691	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+224	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:56:28.136821+00	933	8	f	question	\N	1	6	\N	\N	2	f
+225	\\xdf0202efa5571abb4f2109dcc00a34f901d0720411f3faf6fa254718e29b5dea	2023-12-03 01:56:58.984319+00	792	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
+226	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-12-03 01:57:05.059907+00	649	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
+227	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 02:06:30.90622+00	1016	8	f	question	\N	1	6	\N	\N	2	f
+228	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 02:09:46.785002+00	903	8	f	question	\N	1	6	\N	\N	2	f
+229	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:40.425923+00	854	8	f	dashboard	\N	1	2	1	\N	2	f
+230	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:40.455483+00	1299	0	f	dashboard	ERROR: canceling statement due to user request	1	4	1	\N	2	\N
+231	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:40.57508+00	1221	0	f	dashboard	ERROR: canceling statement due to user request	1	3	1	\N	2	\N
+232	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:43.210469+00	873	8	f	dashboard	\N	1	2	1	\N	2	f
+233	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:43.165393+00	998	8	f	dashboard	\N	1	3	1	\N	2	f
+234	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:43.287593+00	1612	1111	f	dashboard	\N	1	4	1	\N	2	f
+235	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:52.245335+00	837	8	f	dashboard	\N	1	2	1	\N	2	f
+237	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:52.254959+00	1510	1111	f	dashboard	\N	1	4	1	\N	2	f
+236	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:52.255197+00	913	8	f	dashboard	\N	1	3	1	\N	2	f
+238	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:37:20.459764+00	1954	8	f	dashboard	\N	1	2	1	\N	2	f
+239	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:37:20.45962+00	1977	8	f	dashboard	\N	1	3	1	\N	2	f
+240	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:37:20.330096+00	2666	1111	f	dashboard	\N	1	4	1	\N	2	f
+\.
+
+
+--
+-- TOC entry 4810 (class 0 OID 26423)
+-- Dependencies: 227
+-- Data for Name: report_card; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.report_card (id, created_at, updated_at, name, description, display, dataset_query, visualization_settings, creator_id, database_id, table_id, query_type, archived, collection_id, public_uuid, made_public_by_id, enable_embedding, embedding_params, cache_ttl, result_metadata, collection_position, dataset, entity_id, parameters, parameter_mappings, collection_preview) FROM stdin;
+1	2023-11-17 03:22:03.573662+00	2023-11-19 02:45:57.968843+00	main	base table to work on visualizations	table	{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2}	{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"}	1	2	\N	native	t	\N	\N	\N	f	\N	\N	[{"display_name":"submission_id","field_ref":["field","submission_id",{"base-type":"type/Text"}],"name":"submission_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"subreddit","field_ref":["field","subreddit",{"base-type":"type/Text"}],"name":"subreddit","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.8135}}}},{"display_name":"date_utc","field_ref":["field","date_utc",{"base-type":"type/Date"}],"name":"date_utc","base_type":"type/Date","effective_type":"type/Date","semantic_type":null,"fingerprint":{"global":{"distinct-count":11,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-21T00:00:00Z","latest":"2023-10-24T00:00:00Z"}}}},{"display_name":"title","field_ref":["field","title",{"base-type":"type/Text"}],"name":"title","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Title","fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":75.567}}}},{"display_name":"upvote_ratio","field_ref":["field","upvote_ratio",{"base-type":"type/Decimal"}],"name":"upvote_ratio","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":0.7025804934004054,"q3":1.0,"max":1.0,"sd":0.06694767356299806,"avg":0.9955}}}},{"display_name":"title_sentiment","field_ref":["field","title_sentiment",{"base-type":"type/Decimal"}],"name":"title_sentiment","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":3,"nil%":0.0},"type":{"type/Number":{"min":-1.0,"q1":-0.857020004771601,"q3":0.12066515645625253,"max":1.0,"sd":0.5224092799021318,"avg":-0.365}}}},{"display_name":"submission_id","field_ref":["field","submission_id_2",{"base-type":"type/Text"}],"name":"submission_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"comment_id","field_ref":["field","comment_id",{"base-type":"type/Text"}],"name":"comment_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":2000,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"comment_tier","field_ref":["field","comment_tier",{"base-type":"type/Text"}],"name":"comment_tier","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.844}}}},{"display_name":"parent_id","field_ref":["field","parent_id",{"base-type":"type/Text"}],"name":"parent_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":463,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":2.954}}}},{"display_name":"date_utc","field_ref":["field","date_utc_2",{"base-type":"type/Date"}],"name":"date_utc","base_type":"type/Date","effective_type":"type/Date","semantic_type":null,"fingerprint":{"global":{"distinct-count":12,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-21T00:00:00Z","latest":"2023-10-24T00:00:00Z"}}}},{"display_name":"comment","field_ref":["field","comment",{"base-type":"type/Text"}],"name":"comment","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":1956,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":5.0E-4,"percent-email":0.0,"percent-state":0.0,"average-length":157.826}}}},{"display_name":"is_author","field_ref":["field","is_author",{"base-type":"type/Boolean"}],"name":"is_author","base_type":"type/Boolean","effective_type":"type/Boolean","semantic_type":null,"fingerprint":{"global":{"distinct-count":2,"nil%":0.0}}},{"display_name":"score","field_ref":["field","score",{"base-type":"type/Float"}],"name":"score","base_type":"type/Float","effective_type":"type/Float","semantic_type":"type/Score","fingerprint":{"global":{"distinct-count":163,"nil%":0.0},"type":{"type/Number":{"min":-150.0,"q1":0.7345698455330574,"q3":8.82587117294352,"max":451.0,"sd":31.225890688289386,"avg":10.6865}}}},{"display_name":"comment_sentiment","field_ref":["field","comment_sentiment",{"base-type":"type/Decimal"}],"name":"comment_sentiment","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":1949,"nil%":0.0},"type":{"type/Number":{"min":-0.97775,"q1":-0.7051203557156647,"q3":0.09460854498503803,"max":0.99084,"sd":0.5651486939353781,"avg":-0.20800162499999997}}}},{"display_name":"bad_words","field_ref":["field","bad_words",{"base-type":"type/Text"}],"name":"bad_words","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":71,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.4775}}}}]	\N	f	QomHh8IaGpnJkwS6Qks3u	[]	[]	t
+4	2023-11-20 00:25:54.340864+00	2023-12-03 02:37:23.835433+00	Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending	\N	table	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]}}	{"table.pivot_column":"subreddit","table.cell_column":"count","table.column_widths":[368]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Bad Word","field_ref":["expression","Bad Word"],"name":"Bad Word","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":653,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":10.323132313231323}}}},{"display_name":"Count","semantic_type":"type/Quantity","field_ref":["aggregation",0],"name":"count","base_type":"type/BigInteger","effective_type":"type/BigInteger","fingerprint":{"global":{"distinct-count":53,"nil%":0.0},"type":{"type/Number":{"min":1.0,"q1":1.0,"q3":2.1206319880780184,"max":204.0,"sd":15.771474211523326,"avg":4.623762376237623}}}}]	\N	f	FMneKC90khMN-hnbFe8CE	[]	[]	t
+2	2023-11-17 03:26:08.902336+00	2023-12-03 02:37:23.2605+00	Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending	\N	bar	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.dimensions":["subreddit"],"graph.metrics":["avg"]}	1	2	9	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text"}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Title Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.2949438202247191,"q1":-0.149668247187143,"q3":-0.0712388701878446,"max":-0.0221606648199446,"sd":0.08322173797965142,"avg":-0.12114018307792783}}}}]	\N	f	n9ucj3PY4-9YU2dtIQFoV	[]	[]	t
+5	2023-12-03 01:28:03.959044+00	2023-12-03 01:50:10.889891+00	Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month	\N	bar	{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}}}	{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]}	1	2	10	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/City","coercion_strategy":null,"name":"city","settings":null,"field_ref":["field",84,null],"effective_type":"type/Text","id":84,"visibility_type":"normal","display_name":"City","fingerprint":{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}},"base_type":"type/Text"},{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"keyword","settings":null,"field_ref":["field",82,null],"effective_type":"type/Text","id":82,"visibility_type":"normal","display_name":"Keyword","fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.0}}},"base_type":"type/Text"},{"display_name":"Sum of Jobs Qty","semantic_type":"type/Category","settings":null,"field_ref":["aggregation",0],"name":"sum","base_type":"type/BigInteger","effective_type":"type/BigInteger","fingerprint":{"global":{"distinct-count":10,"nil%":0.0},"type":{"type/Number":{"min":28.0,"q1":109.0,"q3":270.0,"max":1880.0,"sd":705.3804647139019,"avg":471.6}}}}]	\N	f	D5wGiURmv6yJ5FeHk5pcK	[]	[]	t
+6	2023-12-03 01:52:17.865819+00	2023-12-03 02:09:48.544823+00	Sentiment Map	\N	bar	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Comment Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.27423820023557127,"q1":-0.17325499937164487,"q3":-0.05323555302112361,"max":-0.023186875407697326,"sd":0.0840948249445815,"avg":-0.12268593748225998}}}}]	\N	f	8lwlA5BAOgcw86WOTweKj	[]	[]	t
+3	2023-11-19 02:56:41.465451+00	2023-12-03 02:37:23.274348+00	Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending	\N	bar	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Comment Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.27227045952314943,"q1":-0.1580758671865236,"q3":-0.046791775837063995,"max":-0.027429874093857307,"sd":0.08354917223248039,"avg":-0.11436211333763459}}}}]	\N	f	xXBeGY8q7pOY3XqtwlPcr	[]	[]	t
+\.
+
+
+--
+-- TOC entry 4812 (class 0 OID 26443)
+-- Dependencies: 229
+-- Data for Name: report_cardfavorite; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.report_cardfavorite (id, created_at, updated_at, card_id, owner_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4814 (class 0 OID 26463)
+-- Dependencies: 231
+-- Data for Name: report_dashboard; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.report_dashboard (id, created_at, updated_at, name, description, creator_id, parameters, points_of_interest, caveats, show_in_getting_started, public_uuid, made_public_by_id, enable_embedding, embedding_params, archived, "position", collection_id, collection_position, cache_ttl, entity_id, auto_apply_filters) FROM stdin;
+1	2023-11-17 03:22:18.722285+00	2023-12-03 01:33:52.762329+00	Best City	\N	1	[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}]	\N	\N	f	34fae620-eff6-4319-8cc9-2ce7342f5493	1	f	\N	f	\N	\N	\N	\N	pVbLGNtS7dW7mDLfboQSL	t
+\.
+
+
+--
+-- TOC entry 4816 (class 0 OID 26483)
+-- Dependencies: 233
+-- Data for Name: report_dashboardcard; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.report_dashboardcard (id, created_at, updated_at, size_x, size_y, "row", col, card_id, dashboard_id, parameter_mappings, visualization_settings, entity_id, action_id, dashboard_tab_id) FROM stdin;
+3	2023-11-19 02:56:52.616293+00	2023-11-19 02:58:03.181863+00	12	6	0	12	3	1	[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}]	{}	JnnwSg6N7c_2AUFnnH5gq	\N	1
+2	2023-11-17 03:26:19.020534+00	2023-11-19 02:59:30.357287+00	12	6	0	0	2	1	[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}]	{"graph.dimensions":["subreddit"],"graph.metrics":["avg"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false}	fCE4z5u9jbVOAadUR9SMY	\N	1
+4	2023-11-20 00:26:17.44801+00	2023-11-20 03:20:05.162097+00	24	9	6	0	4	1	[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}]	{}	nu8b2bOrxx0I3X_x9cY69	\N	1
+7	2023-12-03 01:33:51.432671+00	2023-12-03 01:33:51.432671+00	24	1	6	0	\N	1	[]	{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"}	UgT4JxsOY08x_Fg_sh2BY	\N	3
+5	2023-11-20 03:24:06.956221+00	2023-12-03 01:33:51.432671+00	5	1	7	0	\N	1	[]	{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}}	FSW_WWc28U-nHGiWIs19t	\N	3
+6	2023-12-03 01:32:06.739906+00	2023-12-03 01:33:51.432671+00	12	6	0	0	5	1	[]	{}	UfmYgg0MsOry8_8SJPye-	\N	3
+\.
+
+
+--
+-- TOC entry 4820 (class 0 OID 26625)
+-- Dependencies: 237
+-- Data for Name: revision; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.revision (id, model, model_id, user_id, "timestamp", object, is_reversion, is_creation, message) FROM stdin;
+1	Card	1	1	2023-11-17 03:22:04.041525+00	{"description":"base table to work on visualizations","archived":false,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"main","embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"},"parameters":[],"dataset":false}	f	t	\N
+4	Card	2	1	2023-11-17 03:26:09.247303+00	{"description":null,"archived":false,"collection_position":null,"table_id":9,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["subreddit"],"graph.metrics":["avg"]},"parameters":[],"dataset":false}	f	t	\N
+14	Card	1	1	2023-11-19 02:45:58.529816+00	{"description":"base table to work on visualizations","archived":true,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"main","embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"},"parameters":[],"dataset":false}	f	f	\N
+17	Card	3	1	2023-11-19 02:56:41.82563+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]},"parameters":[],"dataset":false}	f	t	\N
+25	Card	4	1	2023-11-20 00:25:54.69703+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"subreddit","table.cell_column":"count"},"parameters":[],"dataset":false}	f	t	\N
+44	Card	4	1	2023-11-20 03:19:36.842522+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]}},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"subreddit","table.cell_column":"count","table.column_widths":[368]},"parameters":[],"dataset":false}	f	f	\N
+50	Dashboard	1	1	2023-11-20 03:24:07.899082+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+61	Dashboard	1	1	2023-12-03 01:33:52.719606+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+52	Dashboard	1	1	2023-11-20 03:24:07.904915+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+49	Dashboard	1	1	2023-11-20 03:24:07.872252+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+56	Dashboard	1	1	2023-11-20 03:24:36.202249+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+48	Dashboard	1	1	2023-11-20 03:22:07.201276+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+51	Dashboard	1	1	2023-11-20 03:24:07.8997+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+53	Dashboard	1	1	2023-11-20 03:24:21.721632+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":8,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+54	Dashboard	1	1	2023-11-20 03:24:21.729758+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":8,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+55	Dashboard	1	1	2023-11-20 03:24:36.184263+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+57	Card	5	1	2023-12-03 01:28:04.329151+00	{"description":null,"archived":false,"collection_position":null,"table_id":10,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]},"parameters":[],"dataset":false}	f	t	\N
+58	Dashboard	1	1	2023-12-03 01:32:07.861604+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+59	Dashboard	1	1	2023-12-03 01:32:07.862623+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+60	Dashboard	1	1	2023-12-03 01:32:07.863129+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+62	Dashboard	1	1	2023-12-03 01:33:52.728727+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+63	Dashboard	1	1	2023-12-03 01:33:52.798884+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
+64	Card	6	1	2023-12-03 01:52:18.25577+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sentiment Map","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]},"parameters":[],"dataset":false}	f	t	\N
+\.
+
+
+--
+-- TOC entry 4873 (class 0 OID 27156)
+-- Dependencies: 290
+-- Data for Name: sandboxes; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.sandboxes (id, group_id, table_id, card_id, attribute_remappings, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4894 (class 0 OID 27670)
+-- Dependencies: 311
+-- Data for Name: secret; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.secret (id, version, creator_id, created_at, updated_at, name, kind, source, value) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4835 (class 0 OID 26748)
+-- Dependencies: 252
+-- Data for Name: segment; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.segment (id, table_id, creator_id, name, description, archived, definition, created_at, updated_at, points_of_interest, caveats, show_in_getting_started, entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4818 (class 0 OID 26612)
+-- Dependencies: 235
+-- Data for Name: setting; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.setting (key, value) FROM stdin;
+setup-token	d4634e9d-aa17-4d46-9c02-5d037e122b14
+redirect-all-requests-to-https	false
+site-url	http://localhost:3000
+analytics-uuid	0069cad2-f161-43f6-b737-063a603679d9
+instance-creation	2023-11-17T03:08:02.08744Z
+site-name	None
+admin-email	rulomacraf_06@hotmail.com
+site-locale	en
+anon-tracking-enabled	false
+site-uuid	c36c8375-e815-4746-ab69-e9a323497b4d
+enable-public-sharing	true
+custom-geojson	{"07d369db-1f87-cf8d-eb28-99318c546982":{"name":"Ontario","url":"https://raw.githubusercontent.com/tristen/toronto-map/master/layers/ontario-lake.geojson","region_key":"Name1","region_name":"Name2"}}
+custom-homepage-dashboard	1
+custom-homepage	true
+startup-time-millis	18776
+settings-last-updated	2023-12-03 02:37:13.637793+00
+\.
+
+
+--
+-- TOC entry 4886 (class 0 OID 27327)
+-- Dependencies: 303
+-- Data for Name: task_history; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.task_history (id, task, db_id, started_at, ended_at, duration, task_details) FROM stdin;
+1	sync	1	2023-11-17 02:55:31.366575+00	2023-11-17 02:55:51.845892+00	20479	\N
+2	sync-dbms-version	1	2023-11-17 02:55:31.367512+00	2023-11-17 02:55:31.531787+00	164	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+3	sync-timezone	1	2023-11-17 02:55:31.532391+00	2023-11-17 02:55:31.798825+00	266	{"timezone-id":"UTC"}
+4	sync-tables	1	2023-11-17 02:55:31.798969+00	2023-11-17 02:55:34.361868+00	2562	{"updated-tables":8,"total-tables":0}
+5	sync-fields	1	2023-11-17 02:55:34.361994+00	2023-11-17 02:55:39.138417+00	4776	{"total-fields":71,"updated-fields":71}
+6	sync-fks	1	2023-11-17 02:55:39.138539+00	2023-11-17 02:55:41.635668+00	2497	{"total-fks":6,"updated-fks":6,"total-failed":0}
+7	sync-metabase-metadata	1	2023-11-17 02:55:41.635823+00	2023-11-17 02:55:51.845851+00	10210	\N
+8	analyze	1	2023-11-17 02:55:52.742301+00	2023-11-17 02:56:13.977401+00	21235	\N
+9	fingerprint-fields	1	2023-11-17 02:55:52.742319+00	2023-11-17 02:56:07.160208+00	14417	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":63,"fingerprints-attempted":63}
+10	classify-fields	1	2023-11-17 02:56:07.160282+00	2023-11-17 02:56:12.844767+00	5684	{"fields-classified":63,"fields-failed":0}
+11	classify-tables	1	2023-11-17 02:56:12.844798+00	2023-11-17 02:56:13.977332+00	1132	{"total-tables":8,"tables-classified":8}
+12	field values scanning	1	2023-11-17 02:56:14.561411+00	2023-11-17 02:56:35.764991+00	21203	\N
+13	delete-expired-advanced-field-values	1	2023-11-17 02:56:14.56143+00	2023-11-17 02:56:23.685074+00	9123	{"deleted":0}
+14	update-field-values	1	2023-11-17 02:56:23.685152+00	2023-11-17 02:56:35.764957+00	12079	{"errors":0,"created":24,"updated":0,"deleted":1}
+15	send-pulses	\N	2023-11-17 03:00:00.275+00	2023-11-17 03:00:00.418+00	143	\N
+16	sync	2	2023-11-17 03:15:38.720203+00	2023-11-17 03:15:52.08082+00	13360	\N
+17	sync-dbms-version	2	2023-11-17 03:15:38.721164+00	2023-11-17 03:15:38.945951+00	224	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+18	sync-timezone	2	2023-11-17 03:15:38.946406+00	2023-11-17 03:15:39.27432+00	327	{"timezone-id":"UTC"}
+19	sync-tables	2	2023-11-17 03:15:39.274399+00	2023-11-17 03:15:41.43994+00	2165	{"updated-tables":6,"total-tables":0}
+20	sync-fields	2	2023-11-17 03:15:41.44013+00	2023-11-17 03:15:49.442223+00	8002	{"total-fields":38,"updated-fields":38}
+21	sync-fks	2	2023-11-17 03:15:49.442286+00	2023-11-17 03:15:52.078958+00	2636	{"total-fks":2,"updated-fks":2,"total-failed":0}
+22	sync-metabase-metadata	2	2023-11-17 03:15:52.079069+00	2023-11-17 03:15:52.080797+00	1	\N
+23	analyze	2	2023-11-17 03:15:52.981288+00	2023-11-17 03:16:08.888385+00	15907	\N
+24	fingerprint-fields	2	2023-11-17 03:15:52.981309+00	2023-11-17 03:16:05.38338+00	12402	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":30,"fingerprints-attempted":34}
+25	classify-fields	2	2023-11-17 03:16:05.383488+00	2023-11-17 03:16:07.93404+00	2550	{"fields-classified":30,"fields-failed":0}
+26	classify-tables	2	2023-11-17 03:16:07.934076+00	2023-11-17 03:16:08.888349+00	954	{"total-tables":6,"tables-classified":6}
+27	field values scanning	2	2023-11-17 03:16:09.468996+00	2023-11-17 03:16:22.092478+00	12623	\N
+28	delete-expired-advanced-field-values	2	2023-11-17 03:16:09.469017+00	2023-11-17 03:16:14.419344+00	4950	{"deleted":0}
+29	update-field-values	2	2023-11-17 03:16:14.419414+00	2023-11-17 03:16:22.092413+00	7672	{"errors":0,"created":12,"updated":0,"deleted":0}
+30	sync	1	2023-11-17 03:39:00.745706+00	2023-11-17 03:39:14.407676+00	13661	\N
+31	sync-dbms-version	1	2023-11-17 03:39:00.745723+00	2023-11-17 03:39:00.747626+00	1	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+32	sync-timezone	1	2023-11-17 03:39:00.747692+00	2023-11-17 03:39:00.823701+00	76	{"timezone-id":"UTC"}
+33	sync-tables	1	2023-11-17 03:39:00.823769+00	2023-11-17 03:39:00.857092+00	33	{"updated-tables":0,"total-tables":8}
+34	sync-fields	1	2023-11-17 03:39:00.857148+00	2023-11-17 03:39:03.748056+00	2890	{"total-fields":71,"updated-fields":0}
+35	sync-fks	1	2023-11-17 03:39:03.748105+00	2023-11-17 03:39:03.974817+00	226	{"total-fks":6,"updated-fks":0,"total-failed":0}
+36	sync-metabase-metadata	1	2023-11-17 03:39:03.974874+00	2023-11-17 03:39:14.407619+00	10432	\N
+37	analyze	1	2023-11-17 03:39:15.16248+00	2023-11-17 03:39:16.006695+00	844	\N
+38	fingerprint-fields	1	2023-11-17 03:39:15.162533+00	2023-11-17 03:39:15.660624+00	498	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+39	classify-fields	1	2023-11-17 03:39:15.660669+00	2023-11-17 03:39:15.910013+00	249	{"fields-classified":0,"fields-failed":0}
+40	classify-tables	1	2023-11-17 03:39:15.910063+00	2023-11-17 03:39:16.006668+00	96	{"total-tables":8,"tables-classified":0}
+41	sync	2	2023-11-17 03:50:01.287226+00	2023-11-17 03:50:08.494197+00	7206	\N
+42	sync-dbms-version	2	2023-11-17 03:50:01.287253+00	2023-11-17 03:50:01.375862+00	88	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+43	sync-timezone	2	2023-11-17 03:50:01.375913+00	2023-11-17 03:50:01.56491+00	188	{"timezone-id":"UTC"}
+44	sync-tables	2	2023-11-17 03:50:01.564963+00	2023-11-17 03:50:01.601066+00	36	{"updated-tables":0,"total-tables":6}
+45	sync-fields	2	2023-11-17 03:50:01.601128+00	2023-11-17 03:50:07.209832+00	5608	{"total-fields":38,"updated-fields":0}
+46	sync-fks	2	2023-11-17 03:50:07.209871+00	2023-11-17 03:50:08.493583+00	1283	{"total-fks":2,"updated-fks":0,"total-failed":0}
+47	sync-metabase-metadata	2	2023-11-17 03:50:08.493635+00	2023-11-17 03:50:08.494177+00	0	\N
+48	analyze	2	2023-11-17 03:50:09.204684+00	2023-11-17 03:50:10.479091+00	1274	\N
+49	fingerprint-fields	2	2023-11-17 03:50:09.204698+00	2023-11-17 03:50:10.094669+00	889	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+50	classify-fields	2	2023-11-17 03:50:10.094717+00	2023-11-17 03:50:10.282117+00	187	{"fields-classified":0,"fields-failed":0}
+51	classify-tables	2	2023-11-17 03:50:10.282172+00	2023-11-17 03:50:10.479057+00	196	{"total-tables":6,"tables-classified":0}
+52	send-pulses	\N	2023-11-17 04:00:00.324+00	2023-11-17 04:00:00.47+00	146	\N
+53	task-history-cleanup	\N	2023-11-18 00:05:57.258+00	2023-11-18 00:05:57.327+00	69	\N
+54	sync	2	2023-11-19 01:41:01.758485+00	2023-11-19 01:41:09.457476+00	7698	\N
+55	sync-dbms-version	2	2023-11-19 01:41:01.759242+00	2023-11-19 01:41:01.856118+00	96	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+56	sync-timezone	2	2023-11-19 01:41:01.856526+00	2023-11-19 01:41:02.10218+00	245	{"timezone-id":"UTC"}
+57	sync-tables	2	2023-11-19 01:41:02.102287+00	2023-11-19 01:41:02.186723+00	84	{"updated-tables":0,"total-tables":6}
+58	sync-fields	2	2023-11-19 01:41:02.186788+00	2023-11-19 01:41:08.107613+00	5920	{"total-fields":38,"updated-fields":0}
+59	sync-fks	2	2023-11-19 01:41:08.107662+00	2023-11-19 01:41:09.455361+00	1347	{"total-fks":2,"updated-fks":0,"total-failed":0}
+60	sync-metabase-metadata	2	2023-11-19 01:41:09.455447+00	2023-11-19 01:41:09.457429+00	1	\N
+61	analyze	2	2023-11-19 01:41:10.232246+00	2023-11-19 01:41:11.830108+00	1597	\N
+62	fingerprint-fields	2	2023-11-19 01:41:10.232264+00	2023-11-19 01:41:11.422368+00	1190	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+63	classify-fields	2	2023-11-19 01:41:11.422445+00	2023-11-19 01:41:11.631556+00	209	{"fields-classified":0,"fields-failed":0}
+64	classify-tables	2	2023-11-19 01:41:11.631617+00	2023-11-19 01:41:11.830058+00	198	{"total-tables":6,"tables-classified":0}
+65	send-pulses	\N	2023-11-19 02:00:00.276+00	2023-11-19 02:00:00.482+00	206	\N
+66	sync	1	2023-11-19 02:44:44.523051+00	2023-11-19 02:44:59.149493+00	14626	\N
+67	sync-dbms-version	1	2023-11-19 02:44:44.524013+00	2023-11-19 02:44:44.528514+00	4	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+68	sync-timezone	1	2023-11-19 02:44:44.529003+00	2023-11-19 02:44:44.678768+00	149	{"timezone-id":"UTC"}
+69	sync-tables	1	2023-11-19 02:44:44.678896+00	2023-11-19 02:44:44.779913+00	101	{"updated-tables":0,"total-tables":8}
+70	sync-fields	1	2023-11-19 02:44:44.780118+00	2023-11-19 02:44:48.016968+00	3236	{"total-fields":71,"updated-fields":0}
+71	sync-fks	1	2023-11-19 02:44:48.017012+00	2023-11-19 02:44:48.320118+00	303	{"total-fks":6,"updated-fks":0,"total-failed":0}
+72	sync-metabase-metadata	1	2023-11-19 02:44:48.320201+00	2023-11-19 02:44:59.149398+00	10829	\N
+73	analyze	1	2023-11-19 02:45:00.061612+00	2023-11-19 02:45:01.020262+00	958	\N
+146	classify-tables	1	2023-11-20 01:39:15.548209+00	2023-11-20 01:39:15.651385+00	103	{"total-tables":8,"tables-classified":0}
+74	fingerprint-fields	1	2023-11-19 02:45:00.061632+00	2023-11-19 02:45:00.658083+00	596	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+75	classify-fields	1	2023-11-19 02:45:00.658143+00	2023-11-19 02:45:00.916429+00	258	{"fields-classified":0,"fields-failed":0}
+76	classify-tables	1	2023-11-19 02:45:00.916496+00	2023-11-19 02:45:01.020202+00	103	{"total-tables":8,"tables-classified":0}
+77	sync	2	2023-11-19 02:45:03.549812+00	2023-11-19 02:45:12.503964+00	8954	\N
+78	sync-dbms-version	2	2023-11-19 02:45:03.54983+00	2023-11-19 02:45:03.642775+00	92	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+79	sync-timezone	2	2023-11-19 02:45:03.64283+00	2023-11-19 02:45:03.838082+00	195	{"timezone-id":"UTC"}
+80	sync-tables	2	2023-11-19 02:45:03.838143+00	2023-11-19 02:45:03.871893+00	33	{"updated-tables":0,"total-tables":6}
+81	sync-fields	2	2023-11-19 02:45:03.871949+00	2023-11-19 02:45:10.854829+00	6982	{"total-fields":38,"updated-fields":0}
+82	sync-fks	2	2023-11-19 02:45:10.8549+00	2023-11-19 02:45:12.502475+00	1647	{"total-fks":2,"updated-fks":0,"total-failed":0}
+83	sync-metabase-metadata	2	2023-11-19 02:45:12.502579+00	2023-11-19 02:45:12.503937+00	1	\N
+84	analyze	2	2023-11-19 02:45:13.231029+00	2023-11-19 02:45:15.188763+00	1957	\N
+85	fingerprint-fields	2	2023-11-19 02:45:13.231048+00	2023-11-19 02:45:14.692164+00	1461	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+86	classify-fields	2	2023-11-19 02:45:14.692241+00	2023-11-19 02:45:14.9648+00	272	{"fields-classified":0,"fields-failed":0}
+87	classify-tables	2	2023-11-19 02:45:14.964865+00	2023-11-19 02:45:15.188708+00	223	{"total-tables":6,"tables-classified":0}
+88	send-pulses	\N	2023-11-19 03:00:00.251+00	2023-11-19 03:00:00.397+00	146	\N
+89	sync	1	2023-11-19 23:39:00.839125+00	2023-11-19 23:39:16.092515+00	15253	\N
+90	sync-dbms-version	1	2023-11-19 23:39:00.839967+00	2023-11-19 23:39:00.846219+00	6	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+91	sync-timezone	1	2023-11-19 23:39:00.846683+00	2023-11-19 23:39:01.009525+00	162	{"timezone-id":"UTC"}
+92	sync-tables	1	2023-11-19 23:39:01.009747+00	2023-11-19 23:39:01.058543+00	48	{"updated-tables":0,"total-tables":8}
+93	sync-fields	1	2023-11-19 23:39:01.058629+00	2023-11-19 23:39:04.428516+00	3369	{"total-fields":71,"updated-fields":0}
+94	sync-fks	1	2023-11-19 23:39:04.428588+00	2023-11-19 23:39:04.677116+00	248	{"total-fks":6,"updated-fks":0,"total-failed":0}
+95	sync-metabase-metadata	1	2023-11-19 23:39:04.677158+00	2023-11-19 23:39:16.092457+00	11415	\N
+96	analyze	1	2023-11-19 23:39:16.988361+00	2023-11-19 23:39:17.980201+00	991	\N
+97	fingerprint-fields	1	2023-11-19 23:39:16.988383+00	2023-11-19 23:39:17.567458+00	579	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+98	classify-fields	1	2023-11-19 23:39:17.567501+00	2023-11-19 23:39:17.8653+00	297	{"fields-classified":0,"fields-failed":0}
+99	classify-tables	1	2023-11-19 23:39:17.865344+00	2023-11-19 23:39:17.98015+00	114	{"total-tables":8,"tables-classified":0}
+100	sync	2	2023-11-19 23:41:01.268245+00	2023-11-19 23:41:09.373384+00	8105	\N
+101	sync-dbms-version	2	2023-11-19 23:41:01.268283+00	2023-11-19 23:41:01.358408+00	90	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+102	sync-timezone	2	2023-11-19 23:41:01.358463+00	2023-11-19 23:41:01.586577+00	228	{"timezone-id":"UTC"}
+103	sync-tables	2	2023-11-19 23:41:01.58663+00	2023-11-19 23:41:01.620681+00	34	{"updated-tables":0,"total-tables":6}
+104	sync-fields	2	2023-11-19 23:41:01.620727+00	2023-11-19 23:41:07.938211+00	6317	{"total-fields":38,"updated-fields":0}
+105	sync-fks	2	2023-11-19 23:41:07.938241+00	2023-11-19 23:41:09.372674+00	1434	{"total-fks":2,"updated-fks":0,"total-failed":0}
+106	sync-metabase-metadata	2	2023-11-19 23:41:09.372719+00	2023-11-19 23:41:09.373369+00	0	\N
+107	analyze	2	2023-11-19 23:41:10.273154+00	2023-11-19 23:41:11.719598+00	1446	\N
+108	fingerprint-fields	2	2023-11-19 23:41:10.273173+00	2023-11-19 23:41:11.318604+00	1045	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+109	classify-fields	2	2023-11-19 23:41:11.318667+00	2023-11-19 23:41:11.519733+00	201	{"fields-classified":0,"fields-failed":0}
+110	classify-tables	2	2023-11-19 23:41:11.51978+00	2023-11-19 23:41:11.719569+00	199	{"total-tables":6,"tables-classified":0}
+111	send-pulses	\N	2023-11-20 00:00:00.307+00	2023-11-20 00:00:00.444+00	137	\N
+112	task-history-cleanup	\N	2023-11-20 00:00:00.795+00	2023-11-20 00:00:00.83+00	35	\N
+113	sync	1	2023-11-20 00:39:00.493225+00	2023-11-20 00:39:14.137944+00	13644	\N
+114	sync-dbms-version	1	2023-11-20 00:39:00.493242+00	2023-11-20 00:39:00.494034+00	0	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+115	sync-timezone	1	2023-11-20 00:39:00.494083+00	2023-11-20 00:39:00.560751+00	66	{"timezone-id":"UTC"}
+116	sync-tables	1	2023-11-20 00:39:00.560791+00	2023-11-20 00:39:00.592975+00	32	{"updated-tables":0,"total-tables":8}
+117	sync-fields	1	2023-11-20 00:39:00.593011+00	2023-11-20 00:39:03.570445+00	2977	{"total-fields":71,"updated-fields":0}
+118	sync-fks	1	2023-11-20 00:39:03.570472+00	2023-11-20 00:39:03.799838+00	229	{"total-fks":6,"updated-fks":0,"total-failed":0}
+119	sync-metabase-metadata	1	2023-11-20 00:39:03.799877+00	2023-11-20 00:39:14.137922+00	10338	\N
+120	analyze	1	2023-11-20 00:39:14.884437+00	2023-11-20 00:39:15.737447+00	853	\N
+121	fingerprint-fields	1	2023-11-20 00:39:14.88445+00	2023-11-20 00:39:15.388926+00	504	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+122	classify-fields	1	2023-11-20 00:39:15.388963+00	2023-11-20 00:39:15.640752+00	251	{"fields-classified":0,"fields-failed":0}
+123	classify-tables	1	2023-11-20 00:39:15.640794+00	2023-11-20 00:39:15.737418+00	96	{"total-tables":8,"tables-classified":0}
+124	sync	2	2023-11-20 00:41:01.300069+00	2023-11-20 00:41:08.710821+00	7410	\N
+125	sync-dbms-version	2	2023-11-20 00:41:01.300083+00	2023-11-20 00:41:01.394377+00	94	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+126	sync-timezone	2	2023-11-20 00:41:01.39442+00	2023-11-20 00:41:01.586394+00	191	{"timezone-id":"UTC"}
+127	sync-tables	2	2023-11-20 00:41:01.586436+00	2023-11-20 00:41:01.619886+00	33	{"updated-tables":0,"total-tables":6}
+128	sync-fields	2	2023-11-20 00:41:01.619921+00	2023-11-20 00:41:07.370681+00	5750	{"total-fields":38,"updated-fields":0}
+129	sync-fks	2	2023-11-20 00:41:07.370709+00	2023-11-20 00:41:08.709915+00	1339	{"total-fks":2,"updated-fks":0,"total-failed":0}
+130	sync-metabase-metadata	2	2023-11-20 00:41:08.70998+00	2023-11-20 00:41:08.710749+00	0	\N
+131	analyze	2	2023-11-20 00:41:09.4453+00	2023-11-20 00:41:10.743897+00	1298	\N
+132	fingerprint-fields	2	2023-11-20 00:41:09.445314+00	2023-11-20 00:41:10.349489+00	904	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+133	classify-fields	2	2023-11-20 00:41:10.349533+00	2023-11-20 00:41:10.542044+00	192	{"fields-classified":0,"fields-failed":0}
+134	classify-tables	2	2023-11-20 00:41:10.542087+00	2023-11-20 00:41:10.743872+00	201	{"total-tables":6,"tables-classified":0}
+135	send-pulses	\N	2023-11-20 01:00:00.292+00	2023-11-20 01:00:00.425+00	133	\N
+136	sync	1	2023-11-20 01:39:00.458344+00	2023-11-20 01:39:14.120493+00	13662	\N
+137	sync-dbms-version	1	2023-11-20 01:39:00.458356+00	2023-11-20 01:39:00.458998+00	0	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+138	sync-timezone	1	2023-11-20 01:39:00.459033+00	2023-11-20 01:39:00.529613+00	70	{"timezone-id":"UTC"}
+139	sync-tables	1	2023-11-20 01:39:00.529666+00	2023-11-20 01:39:00.56517+00	35	{"updated-tables":0,"total-tables":8}
+140	sync-fields	1	2023-11-20 01:39:00.565203+00	2023-11-20 01:39:03.516472+00	2951	{"total-fields":71,"updated-fields":0}
+141	sync-fks	1	2023-11-20 01:39:03.516503+00	2023-11-20 01:39:03.749201+00	232	{"total-fks":6,"updated-fks":0,"total-failed":0}
+142	sync-metabase-metadata	1	2023-11-20 01:39:03.749232+00	2023-11-20 01:39:14.12047+00	10371	\N
+143	analyze	1	2023-11-20 01:39:14.821922+00	2023-11-20 01:39:15.65141+00	829	\N
+144	fingerprint-fields	1	2023-11-20 01:39:14.821935+00	2023-11-20 01:39:15.305824+00	483	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+145	classify-fields	1	2023-11-20 01:39:15.305903+00	2023-11-20 01:39:15.548166+00	242	{"fields-classified":0,"fields-failed":0}
+147	sync	2	2023-11-20 01:41:01.199399+00	2023-11-20 01:41:08.32123+00	7121	\N
+148	sync-dbms-version	2	2023-11-20 01:41:01.199415+00	2023-11-20 01:41:01.291263+00	91	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+149	sync-timezone	2	2023-11-20 01:41:01.291332+00	2023-11-20 01:41:01.474929+00	183	{"timezone-id":"UTC"}
+150	sync-tables	2	2023-11-20 01:41:01.474973+00	2023-11-20 01:41:01.505342+00	30	{"updated-tables":0,"total-tables":6}
+151	sync-fields	2	2023-11-20 01:41:01.505373+00	2023-11-20 01:41:07.019003+00	5513	{"total-fields":38,"updated-fields":0}
+152	sync-fks	2	2023-11-20 01:41:07.019039+00	2023-11-20 01:41:08.320873+00	1301	{"total-fks":2,"updated-fks":0,"total-failed":0}
+153	sync-metabase-metadata	2	2023-11-20 01:41:08.320921+00	2023-11-20 01:41:08.321214+00	0	\N
+154	analyze	2	2023-11-20 01:41:09.066023+00	2023-11-20 01:41:10.299943+00	1233	\N
+155	fingerprint-fields	2	2023-11-20 01:41:09.066037+00	2023-11-20 01:41:09.921284+00	855	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+156	classify-fields	2	2023-11-20 01:41:09.921368+00	2023-11-20 01:41:10.11135+00	189	{"fields-classified":0,"fields-failed":0}
+157	classify-tables	2	2023-11-20 01:41:10.1114+00	2023-11-20 01:41:10.299918+00	188	{"total-tables":6,"tables-classified":0}
+159	sync	1	2023-11-20 02:39:00.449831+00	2023-11-20 02:39:13.818658+00	13368	\N
+160	sync-dbms-version	1	2023-11-20 02:39:00.449882+00	2023-11-20 02:39:00.45074+00	0	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+161	sync-timezone	1	2023-11-20 02:39:00.450793+00	2023-11-20 02:39:00.521426+00	70	{"timezone-id":"UTC"}
+162	sync-tables	1	2023-11-20 02:39:00.521473+00	2023-11-20 02:39:00.558512+00	37	{"updated-tables":0,"total-tables":8}
+163	sync-fields	1	2023-11-20 02:39:00.558557+00	2023-11-20 02:39:03.370122+00	2811	{"total-fields":71,"updated-fields":0}
+164	sync-fks	1	2023-11-20 02:39:03.37015+00	2023-11-20 02:39:03.591782+00	221	{"total-fks":6,"updated-fks":0,"total-failed":0}
+165	sync-metabase-metadata	1	2023-11-20 02:39:03.591825+00	2023-11-20 02:39:13.818638+00	10226	\N
+166	analyze	1	2023-11-20 02:39:14.507827+00	2023-11-20 02:39:15.378217+00	870	\N
+167	fingerprint-fields	1	2023-11-20 02:39:14.50784+00	2023-11-20 02:39:15.018094+00	510	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+168	classify-fields	1	2023-11-20 02:39:15.018177+00	2023-11-20 02:39:15.270789+00	252	{"fields-classified":0,"fields-failed":0}
+169	classify-tables	1	2023-11-20 02:39:15.270831+00	2023-11-20 02:39:15.378051+00	107	{"total-tables":8,"tables-classified":0}
+158	send-pulses	\N	2023-11-20 02:00:00.263+00	2023-11-20 02:00:00.333+00	70	\N
+170	sync	2	2023-11-20 02:41:01.210059+00	2023-11-20 02:41:08.238341+00	7028	\N
+171	sync-dbms-version	2	2023-11-20 02:41:01.210073+00	2023-11-20 02:41:01.296432+00	86	{"flavor":"PostgreSQL","version":"15.3","semantic-version":[15,3]}
+172	sync-timezone	2	2023-11-20 02:41:01.296521+00	2023-11-20 02:41:01.492632+00	196	{"timezone-id":"UTC"}
+173	sync-tables	2	2023-11-20 02:41:01.492674+00	2023-11-20 02:41:01.52252+00	29	{"updated-tables":0,"total-tables":6}
+174	sync-fields	2	2023-11-20 02:41:01.522554+00	2023-11-20 02:41:06.991876+00	5469	{"total-fields":38,"updated-fields":0}
+175	sync-fks	2	2023-11-20 02:41:06.991904+00	2023-11-20 02:41:08.237758+00	1245	{"total-fks":2,"updated-fks":0,"total-failed":0}
+176	sync-metabase-metadata	2	2023-11-20 02:41:08.237805+00	2023-11-20 02:41:08.238317+00	0	\N
+177	analyze	2	2023-11-20 02:41:08.971338+00	2023-11-20 02:41:10.178638+00	1207	\N
+178	fingerprint-fields	2	2023-11-20 02:41:08.971363+00	2023-11-20 02:41:09.807295+00	835	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+179	classify-fields	2	2023-11-20 02:41:09.807355+00	2023-11-20 02:41:09.995145+00	187	{"fields-classified":0,"fields-failed":0}
+180	classify-tables	2	2023-11-20 02:41:09.995222+00	2023-11-20 02:41:10.178612+00	183	{"total-tables":6,"tables-classified":0}
+181	send-pulses	\N	2023-11-20 03:00:00.27+00	2023-11-20 03:00:00.408+00	138	\N
+182	sync	1	2023-12-02 23:39:22.966649+00	2023-12-02 23:39:39.922234+00	16955	\N
+183	sync-dbms-version	1	2023-12-02 23:39:22.968191+00	2023-12-02 23:39:22.974516+00	6	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+184	sync-timezone	1	2023-12-02 23:39:22.975159+00	2023-12-02 23:39:23.098023+00	122	{"timezone-id":"UTC"}
+185	sync-tables	1	2023-12-02 23:39:23.098225+00	2023-12-02 23:39:23.20298+00	104	{"updated-tables":0,"total-tables":8}
+186	sync-fields	1	2023-12-02 23:39:23.203194+00	2023-12-02 23:39:27.276617+00	4073	{"total-fields":71,"updated-fields":0}
+187	sync-fks	1	2023-12-02 23:39:27.276661+00	2023-12-02 23:39:27.684985+00	408	{"total-fks":6,"updated-fks":0,"total-failed":0}
+188	sync-metabase-metadata	1	2023-12-02 23:39:27.685035+00	2023-12-02 23:39:39.922178+00	12237	\N
+189	analyze	1	2023-12-02 23:39:40.755925+00	2023-12-02 23:39:41.479623+00	723	\N
+190	fingerprint-fields	1	2023-12-02 23:39:40.755942+00	2023-12-02 23:39:41.074633+00	318	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+191	classify-fields	1	2023-12-02 23:39:41.074713+00	2023-12-02 23:39:41.3666+00	291	{"fields-classified":0,"fields-failed":0}
+192	classify-tables	1	2023-12-02 23:39:41.366653+00	2023-12-02 23:39:41.479572+00	112	{"total-tables":8,"tables-classified":0}
+193	sync	2	2023-12-02 23:41:01.669437+00	2023-12-02 23:41:09.957252+00	8287	\N
+194	sync-dbms-version	2	2023-12-02 23:41:01.669523+00	2023-12-02 23:41:01.923179+00	253	{"flavor":"PostgreSQL","version":"15.4","semantic-version":[15,4]}
+195	sync-timezone	2	2023-12-02 23:41:01.923288+00	2023-12-02 23:41:02.171181+00	247	{"timezone-id":"UTC"}
+196	sync-tables	2	2023-12-02 23:41:02.171265+00	2023-12-02 23:41:02.206418+00	35	{"updated-tables":0,"total-tables":6}
+197	sync-fields	2	2023-12-02 23:41:02.206463+00	2023-12-02 23:41:08.646111+00	6439	{"total-fields":38,"updated-fields":0}
+198	sync-fks	2	2023-12-02 23:41:08.646143+00	2023-12-02 23:41:09.956385+00	1310	{"total-fks":2,"updated-fks":0,"total-failed":0}
+199	sync-metabase-metadata	2	2023-12-02 23:41:09.956456+00	2023-12-02 23:41:09.957231+00	0	\N
+200	analyze	2	2023-12-02 23:41:10.756143+00	2023-12-02 23:41:12.313706+00	1557	\N
+201	fingerprint-fields	2	2023-12-02 23:41:10.75616+00	2023-12-02 23:41:11.882729+00	1126	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+202	classify-fields	2	2023-12-02 23:41:11.882787+00	2023-12-02 23:41:12.096858+00	214	{"fields-classified":0,"fields-failed":0}
+203	classify-tables	2	2023-12-02 23:41:12.096923+00	2023-12-02 23:41:12.313674+00	216	{"total-tables":6,"tables-classified":0}
+204	sync	1	2023-12-03 01:49:58.650813+00	2023-12-03 01:50:16.097387+00	17446	\N
+205	sync-dbms-version	1	2023-12-03 01:49:58.653148+00	2023-12-03 01:49:58.662225+00	9	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}
+206	sync-timezone	1	2023-12-03 01:49:58.663346+00	2023-12-03 01:49:58.891496+00	228	{"timezone-id":"UTC"}
+207	sync-tables	1	2023-12-03 01:49:58.892047+00	2023-12-03 01:49:59.059771+00	167	{"updated-tables":0,"total-tables":8}
+208	sync-fields	1	2023-12-03 01:49:59.060087+00	2023-12-03 01:50:03.19282+00	4132	{"total-fields":71,"updated-fields":0}
+209	sync-fks	1	2023-12-03 01:50:03.192881+00	2023-12-03 01:50:03.573489+00	380	{"total-fks":6,"updated-fks":0,"total-failed":0}
+210	sync-metabase-metadata	1	2023-12-03 01:50:03.573556+00	2023-12-03 01:50:16.097355+00	12523	\N
+211	analyze	1	2023-12-03 01:50:16.917683+00	2023-12-03 01:50:17.650078+00	732	\N
+212	fingerprint-fields	1	2023-12-03 01:50:16.917705+00	2023-12-03 01:50:17.230304+00	312	{"no-data-fingerprints":0,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":0}
+213	classify-fields	1	2023-12-03 01:50:17.230353+00	2023-12-03 01:50:17.525392+00	295	{"fields-classified":0,"fields-failed":0}
+214	classify-tables	1	2023-12-03 01:50:17.525452+00	2023-12-03 01:50:17.650039+00	124	{"total-tables":8,"tables-classified":0}
+215	sync	2	2023-12-03 01:50:19.939845+00	2023-12-03 01:50:28.4393+00	8499	\N
+216	sync-dbms-version	2	2023-12-03 01:50:19.939871+00	2023-12-03 01:50:20.046251+00	106	{"flavor":"PostgreSQL","version":"15.4","semantic-version":[15,4]}
+217	sync-timezone	2	2023-12-03 01:50:20.04634+00	2023-12-03 01:50:20.263085+00	216	{"timezone-id":"UTC"}
+218	sync-tables	2	2023-12-03 01:50:20.263172+00	2023-12-03 01:50:20.305881+00	42	{"updated-tables":0,"total-tables":6}
+219	sync-fields	2	2023-12-03 01:50:20.305925+00	2023-12-03 01:50:27.142704+00	6836	{"total-fields":38,"updated-fields":0}
+220	sync-fks	2	2023-12-03 01:50:27.14275+00	2023-12-03 01:50:28.438388+00	1295	{"total-fks":2,"updated-fks":0,"total-failed":0}
+221	sync-metabase-metadata	2	2023-12-03 01:50:28.438457+00	2023-12-03 01:50:28.439276+00	0	\N
+222	analyze	2	2023-12-03 01:50:29.233776+00	2023-12-03 01:50:30.626965+00	1393	\N
+223	fingerprint-fields	2	2023-12-03 01:50:29.233808+00	2023-12-03 01:50:30.138581+00	904	{"no-data-fingerprints":4,"failed-fingerprints":0,"updated-fingerprints":0,"fingerprints-attempted":4}
+224	classify-fields	2	2023-12-03 01:50:30.138651+00	2023-12-03 01:50:30.376234+00	237	{"fields-classified":0,"fields-failed":0}
+225	classify-tables	2	2023-12-03 01:50:30.376299+00	2023-12-03 01:50:30.626887+00	250	{"total-tables":6,"tables-classified":0}
+226	send-pulses	\N	2023-12-03 02:00:00.286+00	2023-12-03 02:00:00.448+00	162	\N
+\.
+
+
+--
+-- TOC entry 4896 (class 0 OID 27698)
+-- Dependencies: 313
+-- Data for Name: timeline; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.timeline (id, name, description, icon, collection_id, archived, creator_id, created_at, updated_at, "default", entity_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4898 (class 0 OID 27719)
+-- Dependencies: 315
+-- Data for Name: timeline_event; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.timeline_event (id, timeline_id, name, description, "timestamp", time_matters, timezone, icon, archived, creator_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4824 (class 0 OID 26666)
+-- Dependencies: 241
+-- Data for Name: view_log; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.view_log (id, user_id, model, model_id, "timestamp", metadata) FROM stdin;
+1	1	card	1	2023-11-17 03:22:03.798353+00	{"cached":null,"ignore_cache":null,"context":null}
+2	1	card	1	2023-11-17 03:22:04.706244+00	{"cached":null,"ignore_cache":null,"context":null}
+3	1	dashboard	1	2023-11-17 03:22:19.788042+00	{"cached":null,"ignore_cache":null,"context":null}
+4	1	card	1	2023-11-17 03:22:21.799911+00	{"cached":null,"ignore_cache":false,"context":"question"}
+5	1	dashboard	1	2023-11-17 03:23:34.907048+00	{"cached":null,"ignore_cache":null,"context":null}
+6	1	dashboard	1	2023-11-17 03:23:52.441509+00	{"cached":null,"ignore_cache":null,"context":null}
+7	1	table	9	2023-11-17 03:24:02.742407+00	{"cached":null,"ignore_cache":null,"context":null}
+8	1	table	9	2023-11-17 03:24:13.061203+00	{"cached":null,"ignore_cache":null,"context":null}
+9	1	table	9	2023-11-17 03:24:21.39103+00	{"cached":null,"ignore_cache":null,"context":null}
+10	1	table	9	2023-11-17 03:24:29.402834+00	{"cached":null,"ignore_cache":null,"context":null}
+11	1	table	9	2023-11-17 03:24:32.881075+00	{"cached":null,"ignore_cache":null,"context":null}
+12	1	table	9	2023-11-17 03:24:36.147635+00	{"cached":null,"ignore_cache":null,"context":null}
+13	1	table	9	2023-11-17 03:25:59.284274+00	{"cached":null,"ignore_cache":null,"context":null}
+14	1	card	2	2023-11-17 03:26:09.067342+00	{"cached":null,"ignore_cache":null,"context":null}
+15	1	card	2	2023-11-17 03:26:09.725002+00	{"cached":null,"ignore_cache":null,"context":null}
+16	1	dashboard	1	2023-11-17 03:26:12.635241+00	{"cached":null,"ignore_cache":null,"context":null}
+17	1	card	2	2023-11-17 03:26:13.530887+00	{"cached":null,"ignore_cache":false,"context":"question"}
+18	1	card	1	2023-11-17 03:26:15.020712+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+19	1	dashboard	1	2023-11-17 03:26:21.26033+00	{"cached":null,"ignore_cache":null,"context":null}
+20	1	dashboard	1	2023-11-17 03:32:03.320027+00	{"cached":null,"ignore_cache":null,"context":null}
+21	1	dashboard	1	2023-11-17 03:33:16.430941+00	{"cached":null,"ignore_cache":null,"context":null}
+22	1	dashboard	1	2023-11-17 03:37:23.911255+00	{"cached":null,"ignore_cache":null,"context":null}
+23	1	dashboard	1	2023-11-17 03:38:02.176689+00	{"cached":null,"ignore_cache":null,"context":null}
+24	1	dashboard	1	2023-11-17 03:42:08.932625+00	{"cached":null,"ignore_cache":null,"context":null}
+25	1	card	2	2023-11-17 03:42:09.692992+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+26	1	card	2	2023-11-17 03:42:52.744095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+27	1	dashboard	1	2023-11-17 03:44:01.098858+00	{"cached":null,"ignore_cache":null,"context":null}
+28	1	dashboard	1	2023-11-17 04:03:08.328408+00	{"cached":null,"ignore_cache":null,"context":null}
+29	1	table	9	2023-11-17 04:03:19.892715+00	{"cached":null,"ignore_cache":null,"context":null}
+30	1	dashboard	1	2023-11-19 02:45:14.832141+00	{"cached":null,"ignore_cache":null,"context":null}
+31	1	card	2	2023-11-19 02:45:16.68388+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+32	1	table	9	2023-11-19 02:45:25.569715+00	{"cached":null,"ignore_cache":null,"context":null}
+33	1	card	1	2023-11-19 02:45:39.568731+00	{"cached":null,"ignore_cache":null,"context":null}
+34	1	card	1	2023-11-19 02:45:42.582985+00	{"cached":null,"ignore_cache":false,"context":"question"}
+35	1	table	9	2023-11-19 02:46:17.876392+00	{"cached":null,"ignore_cache":null,"context":null}
+36	1	dashboard	1	2023-11-19 02:46:41.460002+00	{"cached":null,"ignore_cache":null,"context":null}
+37	1	card	2	2023-11-19 02:46:42.258223+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+38	1	dashboard	1	2023-11-19 02:47:16.706396+00	{"cached":null,"ignore_cache":null,"context":null}
+39	1	dashboard	1	2023-11-19 02:49:08.070733+00	{"cached":null,"ignore_cache":null,"context":null}
+40	1	card	2	2023-11-19 02:49:09.002932+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+41	1	table	11	2023-11-19 02:52:34.618731+00	{"cached":null,"ignore_cache":null,"context":null}
+42	1	table	11	2023-11-19 02:53:39.772229+00	{"cached":null,"ignore_cache":null,"context":null}
+43	1	table	11	2023-11-19 02:54:38.1869+00	{"cached":null,"ignore_cache":null,"context":null}
+44	1	card	3	2023-11-19 02:56:41.633724+00	{"cached":null,"ignore_cache":null,"context":null}
+45	1	card	3	2023-11-19 02:56:42.53245+00	{"cached":null,"ignore_cache":null,"context":null}
+46	1	dashboard	1	2023-11-19 02:56:45.949504+00	{"cached":null,"ignore_cache":null,"context":null}
+47	1	card	3	2023-11-19 02:56:47.00442+00	{"cached":null,"ignore_cache":false,"context":"question"}
+48	1	card	2	2023-11-19 02:56:47.273436+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+49	1	dashboard	1	2023-11-19 02:56:54.52239+00	{"cached":null,"ignore_cache":null,"context":null}
+50	1	dashboard	1	2023-11-19 02:58:05.343075+00	{"cached":null,"ignore_cache":null,"context":null}
+51	1	card	2	2023-11-19 02:58:06.172572+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+52	1	card	3	2023-11-19 02:58:06.366302+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+53	1	card	2	2023-11-19 02:58:15.732373+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+54	1	card	3	2023-11-19 02:58:15.857934+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+55	1	card	2	2023-11-19 02:58:19.895603+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+56	1	card	3	2023-11-19 02:58:20.002736+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+57	1	card	2	2023-11-19 02:58:22.201272+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+58	1	card	3	2023-11-19 02:58:22.349154+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+59	1	card	2	2023-11-19 02:58:25.762694+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+60	1	card	3	2023-11-19 02:58:25.961086+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+61	1	card	2	2023-11-19 02:58:54.577287+00	{"cached":null,"ignore_cache":null,"context":null}
+62	1	card	2	2023-11-19 02:58:59.992566+00	{"cached":null,"ignore_cache":false,"context":"question"}
+63	1	dashboard	1	2023-11-19 02:59:32.11007+00	{"cached":null,"ignore_cache":null,"context":null}
+64	1	card	2	2023-11-19 02:59:32.833771+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+65	1	card	3	2023-11-19 02:59:32.981316+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+66	1	card	2	2023-11-19 03:00:29.199731+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+67	1	card	3	2023-11-19 03:00:29.324424+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+68	1	card	2	2023-11-19 03:00:34.480396+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+69	1	card	3	2023-11-19 03:00:34.619903+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+70	1	card	2	2023-11-19 03:00:41.187344+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+71	1	card	3	2023-11-19 03:00:41.221937+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+72	1	dashboard	1	2023-11-19 23:31:17.269164+00	{"cached":null,"ignore_cache":null,"context":null}
+73	1	card	3	2023-11-19 23:31:19.351797+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+74	1	card	2	2023-11-19 23:31:19.373747+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+75	1	table	11	2023-11-19 23:55:45.019788+00	{"cached":null,"ignore_cache":null,"context":null}
+76	1	table	11	2023-11-19 23:56:14.933062+00	{"cached":null,"ignore_cache":null,"context":null}
+77	1	table	11	2023-11-19 23:56:47.835569+00	{"cached":null,"ignore_cache":null,"context":null}
+78	1	table	11	2023-11-19 23:57:27.22157+00	{"cached":null,"ignore_cache":null,"context":null}
+79	1	table	11	2023-11-20 00:18:45.558858+00	{"cached":null,"ignore_cache":null,"context":null}
+80	1	table	11	2023-11-20 00:19:36.494555+00	{"cached":null,"ignore_cache":null,"context":null}
+81	1	table	11	2023-11-20 00:25:38.030942+00	{"cached":null,"ignore_cache":null,"context":null}
+82	1	card	4	2023-11-20 00:25:54.517825+00	{"cached":null,"ignore_cache":null,"context":null}
+83	1	card	4	2023-11-20 00:25:55.305211+00	{"cached":null,"ignore_cache":null,"context":null}
+84	1	dashboard	1	2023-11-20 00:25:58.760284+00	{"cached":null,"ignore_cache":null,"context":null}
+85	1	card	4	2023-11-20 00:26:00.153553+00	{"cached":null,"ignore_cache":false,"context":"question"}
+86	1	card	2	2023-11-20 00:26:00.280875+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+87	1	card	3	2023-11-20 00:26:00.361194+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+88	1	dashboard	1	2023-11-20 00:26:19.710843+00	{"cached":null,"ignore_cache":null,"context":null}
+89	1	dashboard	1	2023-11-20 00:30:57.280511+00	{"cached":null,"ignore_cache":null,"context":null}
+90	1	dashboard	1	2023-11-20 00:32:42.001021+00	{"cached":null,"ignore_cache":null,"context":null}
+91	1	card	4	2023-11-20 00:32:43.156609+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+92	1	dashboard	1	2023-11-20 00:33:14.083506+00	{"cached":null,"ignore_cache":null,"context":null}
+93	1	dashboard	1	2023-11-20 00:33:28.734501+00	{"cached":null,"ignore_cache":null,"context":null}
+94	1	card	2	2023-11-20 00:33:32.735624+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+95	1	card	3	2023-11-20 00:33:33.281397+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+96	1	card	4	2023-11-20 00:33:33.57219+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+97	1	dashboard	1	2023-11-20 00:34:08.54991+00	{"cached":null,"ignore_cache":null,"context":null}
+98	1	card	2	2023-11-20 00:34:09.336957+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+99	1	card	3	2023-11-20 00:34:09.566648+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+100	1	card	4	2023-11-20 00:34:09.661158+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+101	1	dashboard	1	2023-11-20 00:35:21.337671+00	{"cached":null,"ignore_cache":null,"context":null}
+102	1	card	2	2023-11-20 00:35:22.172142+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+103	1	card	3	2023-11-20 00:35:22.324191+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+104	1	card	4	2023-11-20 00:35:22.490035+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+105	1	card	4	2023-11-20 00:35:45.072095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+106	1	dashboard	1	2023-11-20 00:36:11.50483+00	{"cached":null,"ignore_cache":null,"context":null}
+107	1	card	4	2023-11-20 00:39:53.286041+00	{"cached":null,"ignore_cache":null,"context":null}
+108	1	card	4	2023-11-20 00:39:54.855781+00	{"cached":null,"ignore_cache":false,"context":"question"}
+109	1	dashboard	1	2023-11-20 00:42:22.821715+00	{"cached":null,"ignore_cache":null,"context":null}
+110	1	card	2	2023-11-20 00:42:23.660742+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+111	1	card	3	2023-11-20 00:42:24.162083+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+112	1	card	4	2023-11-20 00:42:24.419611+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+113	1	card	4	2023-11-20 00:42:56.24104+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+114	1	dashboard	1	2023-11-20 00:43:03.379657+00	{"cached":null,"ignore_cache":null,"context":null}
+115	1	card	2	2023-11-20 00:43:32.395865+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+116	1	card	3	2023-11-20 00:43:32.637781+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+117	1	card	4	2023-11-20 00:43:32.859634+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+118	1	dashboard	1	2023-11-20 00:47:32.24925+00	{"cached":null,"ignore_cache":null,"context":null}
+119	1	card	2	2023-11-20 00:47:33.141989+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+120	1	card	3	2023-11-20 00:47:33.315687+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+121	1	card	4	2023-11-20 00:47:33.515181+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+122	1	card	4	2023-11-20 00:47:45.114774+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+123	1	dashboard	1	2023-11-20 00:50:13.390476+00	{"cached":null,"ignore_cache":null,"context":null}
+124	1	card	4	2023-11-20 00:50:22.265023+00	{"cached":null,"ignore_cache":false,"context":"question"}
+125	1	card	4	2023-11-20 01:13:26.986727+00	{"cached":null,"ignore_cache":false,"context":"question"}
+126	1	card	4	2023-11-20 01:14:24.922273+00	{"cached":null,"ignore_cache":false,"context":"question"}
+127	1	card	4	2023-11-20 01:38:37.984266+00	{"cached":null,"ignore_cache":false,"context":"question"}
+128	1	table	11	2023-11-20 01:39:33.884251+00	{"cached":null,"ignore_cache":null,"context":null}
+129	1	table	11	2023-11-20 01:40:16.754998+00	{"cached":null,"ignore_cache":null,"context":null}
+130	1	card	4	2023-11-20 01:40:17.201926+00	{"cached":null,"ignore_cache":false,"context":"question"}
+131	1	table	11	2023-11-20 01:44:30.294142+00	{"cached":null,"ignore_cache":null,"context":null}
+132	1	table	11	2023-11-20 01:45:13.803439+00	{"cached":null,"ignore_cache":null,"context":null}
+133	1	table	11	2023-11-20 02:14:31.966452+00	{"cached":null,"ignore_cache":null,"context":null}
+134	1	table	11	2023-11-20 02:14:59.487657+00	{"cached":null,"ignore_cache":null,"context":null}
+135	1	table	11	2023-11-20 02:15:28.867258+00	{"cached":null,"ignore_cache":null,"context":null}
+136	1	table	11	2023-11-20 02:16:35.517764+00	{"cached":null,"ignore_cache":null,"context":null}
+137	1	table	11	2023-11-20 02:26:09.611743+00	{"cached":null,"ignore_cache":null,"context":null}
+138	1	table	11	2023-11-20 02:26:26.295639+00	{"cached":null,"ignore_cache":null,"context":null}
+139	1	table	11	2023-11-20 02:26:46.461573+00	{"cached":null,"ignore_cache":null,"context":null}
+141	1	table	11	2023-11-20 02:27:56.59906+00	{"cached":null,"ignore_cache":null,"context":null}
+151	1	table	11	2023-11-20 02:43:28.365435+00	{"cached":null,"ignore_cache":null,"context":null}
+155	1	table	11	2023-11-20 02:44:31.867068+00	{"cached":null,"ignore_cache":null,"context":null}
+158	1	table	11	2023-11-20 03:01:10.068253+00	{"cached":null,"ignore_cache":null,"context":null}
+160	1	table	11	2023-11-20 03:15:33.281364+00	{"cached":null,"ignore_cache":null,"context":null}
+162	1	table	11	2023-11-20 03:17:40.158961+00	{"cached":null,"ignore_cache":null,"context":null}
+165	1	table	11	2023-11-20 03:18:35.265305+00	{"cached":null,"ignore_cache":null,"context":null}
+178	1	card	3	2023-11-20 03:21:17.793562+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+183	1	card	4	2023-11-20 03:22:09.27082+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+140	1	table	11	2023-11-20 02:27:35.628909+00	{"cached":null,"ignore_cache":null,"context":null}
+142	1	table	11	2023-11-20 02:28:18.474558+00	{"cached":null,"ignore_cache":null,"context":null}
+143	1	table	11	2023-11-20 02:28:39.772423+00	{"cached":null,"ignore_cache":null,"context":null}
+144	1	table	11	2023-11-20 02:33:06.662392+00	{"cached":null,"ignore_cache":null,"context":null}
+145	1	table	11	2023-11-20 02:34:34.147327+00	{"cached":null,"ignore_cache":null,"context":null}
+146	1	table	11	2023-11-20 02:37:24.717606+00	{"cached":null,"ignore_cache":null,"context":null}
+147	1	table	11	2023-11-20 02:37:52.486545+00	{"cached":null,"ignore_cache":null,"context":null}
+148	1	table	11	2023-11-20 02:38:43.975251+00	{"cached":null,"ignore_cache":null,"context":null}
+149	1	table	11	2023-11-20 02:40:17.249903+00	{"cached":null,"ignore_cache":null,"context":null}
+150	1	table	11	2023-11-20 02:40:34.862064+00	{"cached":null,"ignore_cache":null,"context":null}
+152	1	table	11	2023-11-20 02:43:50.076911+00	{"cached":null,"ignore_cache":null,"context":null}
+153	1	table	11	2023-11-20 02:44:06.277056+00	{"cached":null,"ignore_cache":null,"context":null}
+154	1	table	11	2023-11-20 02:44:19.933183+00	{"cached":null,"ignore_cache":null,"context":null}
+156	1	table	11	2023-11-20 02:44:37.608469+00	{"cached":null,"ignore_cache":null,"context":null}
+157	1	table	11	2023-11-20 02:44:42.362493+00	{"cached":null,"ignore_cache":null,"context":null}
+159	1	table	11	2023-11-20 03:01:17.999021+00	{"cached":null,"ignore_cache":null,"context":null}
+161	1	table	11	2023-11-20 03:16:24.647871+00	{"cached":null,"ignore_cache":null,"context":null}
+163	1	table	11	2023-11-20 03:18:03.04256+00	{"cached":null,"ignore_cache":null,"context":null}
+164	1	table	11	2023-11-20 03:18:19.947929+00	{"cached":null,"ignore_cache":null,"context":null}
+166	1	table	11	2023-11-20 03:18:44.803125+00	{"cached":null,"ignore_cache":null,"context":null}
+167	1	dashboard	1	2023-11-20 03:19:44.74179+00	{"cached":null,"ignore_cache":null,"context":null}
+174	1	card	2	2023-11-20 03:21:04.40884+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+176	1	card	4	2023-11-20 03:21:04.988072+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+179	1	card	4	2023-11-20 03:21:18.299272+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+180	1	dashboard	1	2023-11-20 03:22:07.837744+00	{"cached":null,"ignore_cache":null,"context":null}
+181	1	card	2	2023-11-20 03:22:08.701213+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+186	1	dashboard	1	2023-11-20 03:24:37.422375+00	{"cached":null,"ignore_cache":null,"context":null}
+168	1	card	2	2023-11-20 03:19:45.619452+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+169	1	card	3	2023-11-20 03:19:46.15503+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+170	1	card	4	2023-11-20 03:19:46.397134+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+171	1	card	4	2023-11-20 03:19:55.961296+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+172	1	dashboard	1	2023-11-20 03:20:06.985673+00	{"cached":null,"ignore_cache":null,"context":null}
+173	1	dashboard	1	2023-11-20 03:20:18.181304+00	{"cached":null,"ignore_cache":null,"context":null}
+175	1	card	3	2023-11-20 03:21:04.564247+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+177	1	card	2	2023-11-20 03:21:17.645291+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+182	1	card	3	2023-11-20 03:22:08.904095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+184	1	dashboard	1	2023-11-20 03:24:09.138053+00	{"cached":null,"ignore_cache":null,"context":null}
+185	1	dashboard	1	2023-11-20 03:24:23.021113+00	{"cached":null,"ignore_cache":null,"context":null}
+187	1	table	13	2023-11-20 03:25:41.40864+00	{"cached":null,"ignore_cache":null,"context":null}
+188	1	table	10	2023-11-20 03:26:30.208301+00	{"cached":null,"ignore_cache":null,"context":null}
+189	1	table	10	2023-11-20 03:26:42.0485+00	{"cached":null,"ignore_cache":null,"context":null}
+190	1	table	13	2023-12-02 23:07:40.39239+00	{"cached":null,"ignore_cache":null,"context":null}
+191	1	dashboard	1	2023-12-02 23:07:47.930974+00	{"cached":null,"ignore_cache":null,"context":null}
+192	1	card	2	2023-12-02 23:07:49.180036+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+193	1	card	3	2023-12-02 23:07:49.357152+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+194	1	card	4	2023-12-02 23:07:52.585236+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+195	1	table	13	2023-12-02 23:08:06.128083+00	{"cached":null,"ignore_cache":null,"context":null}
+196	1	table	10	2023-12-02 23:08:30.663507+00	{"cached":null,"ignore_cache":null,"context":null}
+197	1	table	10	2023-12-03 01:09:30.252828+00	{"cached":null,"ignore_cache":null,"context":null}
+198	1	table	13	2023-12-03 01:09:36.295443+00	{"cached":null,"ignore_cache":null,"context":null}
+199	1	table	10	2023-12-03 01:09:42.15934+00	{"cached":null,"ignore_cache":null,"context":null}
+200	1	table	13	2023-12-03 01:09:46.931731+00	{"cached":null,"ignore_cache":null,"context":null}
+201	1	table	10	2023-12-03 01:10:48.436659+00	{"cached":null,"ignore_cache":null,"context":null}
+202	1	table	13	2023-12-03 01:10:51.432189+00	{"cached":null,"ignore_cache":null,"context":null}
+203	1	dashboard	1	2023-12-03 01:12:46.066949+00	{"cached":null,"ignore_cache":null,"context":null}
+204	1	dashboard	1	2023-12-03 01:21:45.332946+00	{"cached":null,"ignore_cache":null,"context":null}
+205	1	card	2	2023-12-03 01:21:46.820442+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+206	1	card	4	2023-12-03 01:21:47.489771+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+207	1	dashboard	1	2023-12-03 01:22:09.224594+00	{"cached":null,"ignore_cache":null,"context":null}
+208	1	dashboard	1	2023-12-03 01:22:31.072795+00	{"cached":null,"ignore_cache":null,"context":null}
+209	1	card	2	2023-12-03 01:22:32.640788+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+210	1	card	3	2023-12-03 01:22:32.861857+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+211	1	card	4	2023-12-03 01:22:33.429257+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+212	1	table	13	2023-12-03 01:23:21.334665+00	{"cached":null,"ignore_cache":null,"context":null}
+213	1	table	10	2023-12-03 01:23:24.94025+00	{"cached":null,"ignore_cache":null,"context":null}
+214	1	table	10	2023-12-03 01:23:27.032845+00	{"cached":null,"ignore_cache":null,"context":null}
+215	1	table	10	2023-12-03 01:23:37.166483+00	{"cached":null,"ignore_cache":null,"context":null}
+216	1	table	10	2023-12-03 01:23:50.818855+00	{"cached":null,"ignore_cache":null,"context":null}
+217	1	table	10	2023-12-03 01:23:52.718113+00	{"cached":null,"ignore_cache":null,"context":null}
+218	1	table	10	2023-12-03 01:23:58.177795+00	{"cached":null,"ignore_cache":null,"context":null}
+219	1	table	10	2023-12-03 01:24:11.177255+00	{"cached":null,"ignore_cache":null,"context":null}
+220	1	table	10	2023-12-03 01:24:12.384919+00	{"cached":null,"ignore_cache":null,"context":null}
+221	1	table	10	2023-12-03 01:24:16.221474+00	{"cached":null,"ignore_cache":null,"context":null}
+222	1	table	10	2023-12-03 01:24:16.393227+00	{"cached":null,"ignore_cache":null,"context":null}
+223	1	table	10	2023-12-03 01:24:19.01179+00	{"cached":null,"ignore_cache":null,"context":null}
+224	1	table	10	2023-12-03 01:24:46.774524+00	{"cached":null,"ignore_cache":null,"context":null}
+225	1	table	10	2023-12-03 01:25:04.874451+00	{"cached":null,"ignore_cache":null,"context":null}
+226	1	table	10	2023-12-03 01:25:42.875886+00	{"cached":null,"ignore_cache":null,"context":null}
+227	1	table	10	2023-12-03 01:26:33.465988+00	{"cached":null,"ignore_cache":null,"context":null}
+228	1	table	10	2023-12-03 01:26:37.669871+00	{"cached":null,"ignore_cache":null,"context":null}
+229	1	card	5	2023-12-03 01:28:04.150302+00	{"cached":null,"ignore_cache":null,"context":null}
+230	1	card	5	2023-12-03 01:28:05.026466+00	{"cached":null,"ignore_cache":null,"context":null}
+231	1	dashboard	1	2023-12-03 01:28:08.727152+00	{"cached":null,"ignore_cache":null,"context":null}
+232	1	card	2	2023-12-03 01:28:09.680867+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+233	1	card	3	2023-12-03 01:28:09.855886+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+234	1	card	5	2023-12-03 01:28:09.874871+00	{"cached":null,"ignore_cache":false,"context":"question"}
+235	1	card	4	2023-12-03 01:28:10.680394+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+236	1	card	4	2023-12-03 01:28:14.066786+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+237	1	card	5	2023-12-03 01:28:42.764097+00	{"cached":null,"ignore_cache":false,"context":"question"}
+238	1	dashboard	1	2023-12-03 01:32:09.595512+00	{"cached":null,"ignore_cache":null,"context":null}
+239	1	dashboard	1	2023-12-03 01:33:54.235746+00	{"cached":null,"ignore_cache":null,"context":null}
+240	1	dashboard	1	2023-12-03 01:50:08.754021+00	{"cached":null,"ignore_cache":null,"context":null}
+241	1	card	5	2023-12-03 01:50:11.007746+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+242	1	card	3	2023-12-03 01:51:54.72503+00	{"cached":null,"ignore_cache":null,"context":null}
+243	1	card	3	2023-12-03 01:51:57.299273+00	{"cached":null,"ignore_cache":false,"context":"question"}
+244	1	card	6	2023-12-03 01:52:18.048721+00	{"cached":null,"ignore_cache":null,"context":null}
+245	1	card	6	2023-12-03 01:52:18.912231+00	{"cached":null,"ignore_cache":null,"context":null}
+246	1	card	6	2023-12-03 01:52:27.987031+00	{"cached":null,"ignore_cache":false,"context":"question"}
+247	1	table	11	2023-12-03 01:52:50.658297+00	{"cached":null,"ignore_cache":null,"context":null}
+249	1	table	11	2023-12-03 01:57:06.230592+00	{"cached":null,"ignore_cache":null,"context":null}
+248	1	card	6	2023-12-03 01:56:30.283967+00	{"cached":null,"ignore_cache":false,"context":"question"}
+250	1	card	6	2023-12-03 02:06:33.165466+00	{"cached":null,"ignore_cache":false,"context":"question"}
+251	1	card	6	2023-12-03 02:09:48.892797+00	{"cached":null,"ignore_cache":false,"context":"question"}
+252	1	dashboard	1	2023-12-03 02:30:39.252609+00	{"cached":null,"ignore_cache":null,"context":null}
+253	1	dashboard	1	2023-12-03 02:30:41.169731+00	{"cached":null,"ignore_cache":null,"context":null}
+254	1	card	2	2023-12-03 02:30:42.247534+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+255	1	dashboard	1	2023-12-03 02:30:44.007607+00	{"cached":null,"ignore_cache":null,"context":null}
+256	1	card	2	2023-12-03 02:30:45.044493+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+257	1	card	3	2023-12-03 02:30:45.129488+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+258	1	card	4	2023-12-03 02:30:45.86258+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+259	1	dashboard	1	2023-12-03 02:30:53.056055+00	{"cached":null,"ignore_cache":null,"context":null}
+260	1	card	2	2023-12-03 02:30:54.049331+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+261	1	card	3	2023-12-03 02:30:54.131564+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+262	1	card	4	2023-12-03 02:30:54.717923+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+263	1	dashboard	1	2023-12-03 02:37:20.226148+00	{"cached":null,"ignore_cache":null,"context":null}
+264	1	dashboard	1	2023-12-03 02:37:21.063463+00	{"cached":null,"ignore_cache":null,"context":null}
+265	1	card	2	2023-12-03 02:37:23.377023+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+266	1	card	3	2023-12-03 02:37:23.406313+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+267	1	card	4	2023-12-03 02:37:23.967364+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+\.
+
+
+--
+-- TOC entry 5244 (class 0 OID 0)
+-- Dependencies: 328
+-- Name: action_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.action_id_seq', 1, false);
+
+
+--
+-- TOC entry 5245 (class 0 OID 0)
+-- Dependencies: 238
+-- Name: activity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.activity_id_seq', 19, true);
+
+
+--
+-- TOC entry 5246 (class 0 OID 0)
+-- Dependencies: 322
+-- Name: application_permissions_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.application_permissions_revision_id_seq', 1, false);
+
+
+--
+-- TOC entry 5247 (class 0 OID 0)
+-- Dependencies: 324
+-- Name: bookmark_ordering_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.bookmark_ordering_id_seq', 1, false);
+
+
+--
+-- TOC entry 5248 (class 0 OID 0)
+-- Dependencies: 318
+-- Name: card_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.card_bookmark_id_seq', 1, false);
+
+
+--
+-- TOC entry 5249 (class 0 OID 0)
+-- Dependencies: 261
+-- Name: card_label_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.card_label_id_seq', 1, false);
+
+
+--
+-- TOC entry 5250 (class 0 OID 0)
+-- Dependencies: 320
+-- Name: collection_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.collection_bookmark_id_seq', 1, false);
+
+
+--
+-- TOC entry 5251 (class 0 OID 0)
+-- Dependencies: 273
+-- Name: collection_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.collection_id_seq', 2, true);
+
+
+--
+-- TOC entry 5252 (class 0 OID 0)
+-- Dependencies: 275
+-- Name: collection_permission_graph_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.collection_permission_graph_revision_id_seq', 1, false);
+
+
+--
+-- TOC entry 5253 (class 0 OID 0)
+-- Dependencies: 285
+-- Name: computation_job_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.computation_job_id_seq', 1, false);
+
+
+--
+-- TOC entry 5254 (class 0 OID 0)
+-- Dependencies: 287
+-- Name: computation_job_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.computation_job_result_id_seq', 1, false);
+
+
+--
+-- TOC entry 5255 (class 0 OID 0)
+-- Dependencies: 340
+-- Name: connection_impersonations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.connection_impersonations_id_seq', 1, false);
+
+
+--
+-- TOC entry 5256 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: core_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.core_user_id_seq', 2, true);
+
+
+--
+-- TOC entry 5257 (class 0 OID 0)
+-- Dependencies: 316
+-- Name: dashboard_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.dashboard_bookmark_id_seq', 1, false);
+
+
+--
+-- TOC entry 5258 (class 0 OID 0)
+-- Dependencies: 281
+-- Name: dashboard_favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.dashboard_favorite_id_seq', 1, false);
+
+
+--
+-- TOC entry 5259 (class 0 OID 0)
+-- Dependencies: 335
+-- Name: dashboard_tab_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.dashboard_tab_id_seq', 3, true);
+
+
+--
+-- TOC entry 5260 (class 0 OID 0)
+-- Dependencies: 257
+-- Name: dashboardcard_series_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.dashboardcard_series_id_seq', 1, false);
+
+
+--
+-- TOC entry 5261 (class 0 OID 0)
+-- Dependencies: 253
+-- Name: dependency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.dependency_id_seq', 1, false);
+
+
+--
+-- TOC entry 5262 (class 0 OID 0)
+-- Dependencies: 283
+-- Name: dimension_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.dimension_id_seq', 1, false);
+
+
+--
+-- TOC entry 5263 (class 0 OID 0)
+-- Dependencies: 289
+-- Name: group_table_access_policy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.group_table_access_policy_id_seq', 1, false);
+
+
+--
+-- TOC entry 5264 (class 0 OID 0)
+-- Dependencies: 259
+-- Name: label_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.label_id_seq', 1, false);
+
+
+--
+-- TOC entry 5265 (class 0 OID 0)
+-- Dependencies: 306
+-- Name: login_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.login_history_id_seq', 6, true);
+
+
+--
+-- TOC entry 5266 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: metabase_database_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.metabase_database_id_seq', 2, true);
+
+
+--
+-- TOC entry 5267 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: metabase_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.metabase_field_id_seq', 109, true);
+
+
+--
+-- TOC entry 5268 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: metabase_fieldvalues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.metabase_fieldvalues_id_seq', 36, true);
+
+
+--
+-- TOC entry 5269 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: metabase_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.metabase_table_id_seq', 14, true);
+
+
+--
+-- TOC entry 5270 (class 0 OID 0)
+-- Dependencies: 255
+-- Name: metric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.metric_id_seq', 1, false);
+
+
+--
+-- TOC entry 5271 (class 0 OID 0)
+-- Dependencies: 263
+-- Name: metric_important_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.metric_important_field_id_seq', 1, false);
+
+
+--
+-- TOC entry 5272 (class 0 OID 0)
+-- Dependencies: 337
+-- Name: model_index_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.model_index_id_seq', 1, false);
+
+
+--
+-- TOC entry 5273 (class 0 OID 0)
+-- Dependencies: 308
+-- Name: moderation_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.moderation_review_id_seq', 1, false);
+
+
+--
+-- TOC entry 5274 (class 0 OID 0)
+-- Dependencies: 304
+-- Name: native_query_snippet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.native_query_snippet_id_seq', 1, false);
+
+
+--
+-- TOC entry 5275 (class 0 OID 0)
+-- Dependencies: 333
+-- Name: parameter_card_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.parameter_card_id_seq', 1, false);
+
+
+--
+-- TOC entry 5276 (class 0 OID 0)
+-- Dependencies: 265
+-- Name: permissions_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.permissions_group_id_seq', 2, true);
+
+
+--
+-- TOC entry 5277 (class 0 OID 0)
+-- Dependencies: 267
+-- Name: permissions_group_membership_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.permissions_group_membership_id_seq', 4, true);
+
+
+--
+-- TOC entry 5278 (class 0 OID 0)
+-- Dependencies: 269
+-- Name: permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.permissions_id_seq', 14, true);
+
+
+--
+-- TOC entry 5279 (class 0 OID 0)
+-- Dependencies: 271
+-- Name: permissions_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.permissions_revision_id_seq', 1, false);
+
+
+--
+-- TOC entry 5280 (class 0 OID 0)
+-- Dependencies: 326
+-- Name: persisted_info_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.persisted_info_id_seq', 1, false);
+
+
+--
+-- TOC entry 5281 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: pulse_card_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.pulse_card_id_seq', 1, false);
+
+
+--
+-- TOC entry 5282 (class 0 OID 0)
+-- Dependencies: 247
+-- Name: pulse_channel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.pulse_channel_id_seq', 1, false);
+
+
+--
+-- TOC entry 5283 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: pulse_channel_recipient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.pulse_channel_recipient_id_seq', 1, false);
+
+
+--
+-- TOC entry 5284 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: pulse_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.pulse_id_seq', 1, false);
+
+
+--
+-- TOC entry 5285 (class 0 OID 0)
+-- Dependencies: 277
+-- Name: query_execution_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.query_execution_id_seq', 240, true);
+
+
+--
+-- TOC entry 5286 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: report_card_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.report_card_id_seq', 6, true);
+
+
+--
+-- TOC entry 5287 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: report_cardfavorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.report_cardfavorite_id_seq', 1, false);
+
+
+--
+-- TOC entry 5288 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: report_dashboard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.report_dashboard_id_seq', 1, true);
+
+
+--
+-- TOC entry 5289 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: report_dashboardcard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.report_dashboardcard_id_seq', 7, true);
+
+
+--
+-- TOC entry 5290 (class 0 OID 0)
+-- Dependencies: 236
+-- Name: revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.revision_id_seq', 64, true);
+
+
+--
+-- TOC entry 5291 (class 0 OID 0)
+-- Dependencies: 310
+-- Name: secret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.secret_id_seq', 1, false);
+
+
+--
+-- TOC entry 5292 (class 0 OID 0)
+-- Dependencies: 251
+-- Name: segment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.segment_id_seq', 1, false);
+
+
+--
+-- TOC entry 5293 (class 0 OID 0)
+-- Dependencies: 302
+-- Name: task_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.task_history_id_seq', 226, true);
+
+
+--
+-- TOC entry 5294 (class 0 OID 0)
+-- Dependencies: 314
+-- Name: timeline_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.timeline_event_id_seq', 1, false);
+
+
+--
+-- TOC entry 5295 (class 0 OID 0)
+-- Dependencies: 312
+-- Name: timeline_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.timeline_id_seq', 1, false);
+
+
+--
+-- TOC entry 5296 (class 0 OID 0)
+-- Dependencies: 240
+-- Name: view_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.view_log_id_seq', 267, true);
+
+
+--
+-- TOC entry 4524 (class 2606 OID 28075)
+-- Name: action action_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.action
+    ADD CONSTRAINT action_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4526 (class 2606 OID 27904)
+-- Name: action action_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.action
+    ADD CONSTRAINT action_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4528 (class 2606 OID 28058)
+-- Name: action action_public_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.action
+    ADD CONSTRAINT action_public_uuid_key UNIQUE (public_uuid);
+
+
+--
+-- TOC entry 4279 (class 2606 OID 26656)
+-- Name: activity activity_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.activity
+    ADD CONSTRAINT activity_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4513 (class 2606 OID 27825)
+-- Name: bookmark_ordering bookmark_ordering_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.bookmark_ordering
+    ADD CONSTRAINT bookmark_ordering_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4499 (class 2606 OID 27769)
+-- Name: card_bookmark card_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_bookmark
+    ADD CONSTRAINT card_bookmark_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4340 (class 2606 OID 26842)
+-- Name: card_label card_label_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_label
+    ADD CONSTRAINT card_label_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4505 (class 2606 OID 27790)
+-- Name: collection_bookmark collection_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection_bookmark
+    ADD CONSTRAINT collection_bookmark_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4373 (class 2606 OID 27872)
+-- Name: collection collection_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection
+    ADD CONSTRAINT collection_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4375 (class 2606 OID 27011)
+-- Name: collection collection_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection
+    ADD CONSTRAINT collection_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4381 (class 2606 OID 27028)
+-- Name: collection_permission_graph_revision collection_revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection_permission_graph_revision
+    ADD CONSTRAINT collection_revision_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4409 (class 2606 OID 27132)
+-- Name: computation_job computation_job_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.computation_job
+    ADD CONSTRAINT computation_job_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4411 (class 2606 OID 27145)
+-- Name: computation_job_result computation_job_result_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.computation_job_result
+    ADD CONSTRAINT computation_job_result_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4553 (class 2606 OID 28176)
+-- Name: connection_impersonations conn_impersonation_unique_group_id_db_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.connection_impersonations
+    ADD CONSTRAINT conn_impersonation_unique_group_id_db_id UNIQUE (group_id, db_id);
+
+
+--
+-- TOC entry 4555 (class 2606 OID 28154)
+-- Name: connection_impersonations connection_impersonations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.connection_impersonations
+    ADD CONSTRAINT connection_impersonations_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4272 (class 2606 OID 26606)
+-- Name: core_session core_session_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_session
+    ADD CONSTRAINT core_session_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4216 (class 2606 OID 26259)
+-- Name: core_user core_user_email_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_user
+    ADD CONSTRAINT core_user_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 4218 (class 2606 OID 26257)
+-- Name: core_user core_user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_user
+    ADD CONSTRAINT core_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4493 (class 2606 OID 27748)
+-- Name: dashboard_bookmark dashboard_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_bookmark
+    ADD CONSTRAINT dashboard_bookmark_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4396 (class 2606 OID 27084)
+-- Name: dashboard_favorite dashboard_favorite_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_favorite
+    ADD CONSTRAINT dashboard_favorite_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4544 (class 2606 OID 28100)
+-- Name: dashboard_tab dashboard_tab_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_tab
+    ADD CONSTRAINT dashboard_tab_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4546 (class 2606 OID 28098)
+-- Name: dashboard_tab dashboard_tab_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_tab
+    ADD CONSTRAINT dashboard_tab_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4331 (class 2606 OID 26812)
+-- Name: dashboardcard_series dashboardcard_series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboardcard_series
+    ADD CONSTRAINT dashboardcard_series_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4288 (class 2606 OID 26684)
+-- Name: data_migrations data_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.data_migrations
+    ADD CONSTRAINT data_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4214 (class 2606 OID 26238)
+-- Name: databasechangeloglock databasechangeloglock_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.databasechangeloglock
+    ADD CONSTRAINT databasechangeloglock_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4318 (class 2606 OID 26780)
+-- Name: dependency dependency_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dependency
+    ADD CONSTRAINT dependency_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4402 (class 2606 OID 27876)
+-- Name: dimension dimension_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dimension
+    ADD CONSTRAINT dimension_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4404 (class 2606 OID 27107)
+-- Name: dimension dimension_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dimension
+    ADD CONSTRAINT dimension_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4511 (class 2606 OID 27812)
+-- Name: application_permissions_revision general_permissions_revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.application_permissions_revision
+    ADD CONSTRAINT general_permissions_revision_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4413 (class 2606 OID 27162)
+-- Name: sandboxes group_table_access_policy_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sandboxes
+    ADD CONSTRAINT group_table_access_policy_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4212 (class 2606 OID 27337)
+-- Name: databasechangelog idx_databasechangelog_id_author_filename; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.databasechangelog
+    ADD CONSTRAINT idx_databasechangelog_id_author_filename UNIQUE (id, author, filename);
+
+
+--
+-- TOC entry 4233 (class 2606 OID 27342)
+-- Name: metabase_field idx_uniq_field_table_id_parent_id_name; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_field
+    ADD CONSTRAINT idx_uniq_field_table_id_parent_id_name UNIQUE (table_id, parent_id, name);
+
+
+--
+-- TOC entry 4226 (class 2606 OID 28112)
+-- Name: metabase_table idx_uniq_table_db_id_schema_name; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_table
+    ADD CONSTRAINT idx_uniq_table_db_id_schema_name UNIQUE (db_id, schema, name);
+
+
+--
+-- TOC entry 4252 (class 2606 OID 26459)
+-- Name: report_cardfavorite idx_unique_cardfavorite_card_id_owner_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_cardfavorite
+    ADD CONSTRAINT idx_unique_cardfavorite_card_id_owner_id UNIQUE (card_id, owner_id);
+
+
+--
+-- TOC entry 4336 (class 2606 OID 26833)
+-- Name: label label_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.label
+    ADD CONSTRAINT label_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4338 (class 2606 OID 26835)
+-- Name: label label_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.label
+    ADD CONSTRAINT label_slug_key UNIQUE (slug);
+
+
+--
+-- TOC entry 4477 (class 2606 OID 27643)
+-- Name: login_history login_history_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.login_history
+    ADD CONSTRAINT login_history_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4221 (class 2606 OID 26299)
+-- Name: metabase_database metabase_database_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_database
+    ADD CONSTRAINT metabase_database_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4236 (class 2606 OID 26327)
+-- Name: metabase_field metabase_field_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_field
+    ADD CONSTRAINT metabase_field_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4239 (class 2606 OID 26359)
+-- Name: metabase_fieldvalues metabase_fieldvalues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_fieldvalues
+    ADD CONSTRAINT metabase_fieldvalues_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4229 (class 2606 OID 26313)
+-- Name: metabase_table metabase_table_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_table
+    ADD CONSTRAINT metabase_table_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4327 (class 2606 OID 27868)
+-- Name: metric metric_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric
+    ADD CONSTRAINT metric_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4348 (class 2606 OID 26913)
+-- Name: metric_important_field metric_important_field_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric_important_field
+    ADD CONSTRAINT metric_important_field_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4329 (class 2606 OID 26793)
+-- Name: metric metric_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric
+    ADD CONSTRAINT metric_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4549 (class 2606 OID 28123)
+-- Name: model_index model_index_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.model_index
+    ADD CONSTRAINT model_index_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4480 (class 2606 OID 27668)
+-- Name: moderation_review moderation_review_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.moderation_review
+    ADD CONSTRAINT moderation_review_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4466 (class 2606 OID 27882)
+-- Name: native_query_snippet native_query_snippet_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.native_query_snippet
+    ADD CONSTRAINT native_query_snippet_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4468 (class 2606 OID 27364)
+-- Name: native_query_snippet native_query_snippet_name_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.native_query_snippet
+    ADD CONSTRAINT native_query_snippet_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 4470 (class 2606 OID 27362)
+-- Name: native_query_snippet native_query_snippet_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.native_query_snippet
+    ADD CONSTRAINT native_query_snippet_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4540 (class 2606 OID 28039)
+-- Name: parameter_card parameter_card_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.parameter_card
+    ADD CONSTRAINT parameter_card_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4367 (class 2606 OID 26974)
+-- Name: permissions permissions_group_id_object_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions
+    ADD CONSTRAINT permissions_group_id_object_key UNIQUE (group_id, object);
+
+
+--
+-- TOC entry 4360 (class 2606 OID 26943)
+-- Name: permissions_group_membership permissions_group_membership_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_group_membership
+    ADD CONSTRAINT permissions_group_membership_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4353 (class 2606 OID 26934)
+-- Name: permissions_group permissions_group_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_group
+    ADD CONSTRAINT permissions_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4369 (class 2606 OID 26964)
+-- Name: permissions permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions
+    ADD CONSTRAINT permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4371 (class 2606 OID 26995)
+-- Name: permissions_revision permissions_revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_revision
+    ADD CONSTRAINT permissions_revision_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4520 (class 2606 OID 27851)
+-- Name: persisted_info persisted_info_card_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.persisted_info
+    ADD CONSTRAINT persisted_info_card_id_key UNIQUE (card_id);
+
+
+--
+-- TOC entry 4522 (class 2606 OID 27849)
+-- Name: persisted_info persisted_info_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.persisted_info
+    ADD CONSTRAINT persisted_info_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4534 (class 2606 OID 27932)
+-- Name: http_action pk_http_action; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.http_action
+    ADD CONSTRAINT pk_http_action PRIMARY KEY (action_id);
+
+
+--
+-- TOC entry 4536 (class 2606 OID 28166)
+-- Name: implicit_action pk_implicit_action; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.implicit_action
+    ADD CONSTRAINT pk_implicit_action PRIMARY KEY (action_id);
+
+
+--
+-- TOC entry 4442 (class 2606 OID 27271)
+-- Name: qrtz_blob_triggers pk_qrtz_blob_triggers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_blob_triggers
+    ADD CONSTRAINT pk_qrtz_blob_triggers PRIMARY KEY (sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4444 (class 2606 OID 27283)
+-- Name: qrtz_calendars pk_qrtz_calendars; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_calendars
+    ADD CONSTRAINT pk_qrtz_calendars PRIMARY KEY (sched_name, calendar_name);
+
+
+--
+-- TOC entry 4438 (class 2606 OID 27247)
+-- Name: qrtz_cron_triggers pk_qrtz_cron_triggers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_cron_triggers
+    ADD CONSTRAINT pk_qrtz_cron_triggers PRIMARY KEY (sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4454 (class 2606 OID 27295)
+-- Name: qrtz_fired_triggers pk_qrtz_fired_triggers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_fired_triggers
+    ADD CONSTRAINT pk_qrtz_fired_triggers PRIMARY KEY (sched_name, entry_id);
+
+
+--
+-- TOC entry 4420 (class 2606 OID 27216)
+-- Name: qrtz_job_details pk_qrtz_job_details; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_job_details
+    ADD CONSTRAINT pk_qrtz_job_details PRIMARY KEY (sched_name, job_name, job_group);
+
+
+--
+-- TOC entry 4458 (class 2606 OID 27305)
+-- Name: qrtz_locks pk_qrtz_locks; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_locks
+    ADD CONSTRAINT pk_qrtz_locks PRIMARY KEY (sched_name, lock_name);
+
+
+--
+-- TOC entry 4456 (class 2606 OID 27300)
+-- Name: qrtz_scheduler_state pk_qrtz_scheduler_state; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_scheduler_state
+    ADD CONSTRAINT pk_qrtz_scheduler_state PRIMARY KEY (sched_name, instance_name);
+
+
+--
+-- TOC entry 4436 (class 2606 OID 27235)
+-- Name: qrtz_simple_triggers pk_qrtz_simple_triggers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_simple_triggers
+    ADD CONSTRAINT pk_qrtz_simple_triggers PRIMARY KEY (sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4440 (class 2606 OID 27259)
+-- Name: qrtz_simprop_triggers pk_qrtz_simprop_triggers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_simprop_triggers
+    ADD CONSTRAINT pk_qrtz_simprop_triggers PRIMARY KEY (sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4434 (class 2606 OID 27223)
+-- Name: qrtz_triggers pk_qrtz_triggers; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_triggers
+    ADD CONSTRAINT pk_qrtz_triggers PRIMARY KEY (sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4532 (class 2606 OID 28030)
+-- Name: query_action pk_query_action; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.query_action
+    ADD CONSTRAINT pk_query_action PRIMARY KEY (action_id);
+
+
+--
+-- TOC entry 4446 (class 2606 OID 27288)
+-- Name: qrtz_paused_trigger_grps pk_sched_name; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_paused_trigger_grps
+    ADD CONSTRAINT pk_sched_name PRIMARY KEY (sched_name, trigger_group);
+
+
+--
+-- TOC entry 4299 (class 2606 OID 27892)
+-- Name: pulse_card pulse_card_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_card
+    ADD CONSTRAINT pulse_card_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4301 (class 2606 OID 26703)
+-- Name: pulse_card pulse_card_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_card
+    ADD CONSTRAINT pulse_card_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4305 (class 2606 OID 27894)
+-- Name: pulse_channel pulse_channel_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_channel
+    ADD CONSTRAINT pulse_channel_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4307 (class 2606 OID 26723)
+-- Name: pulse_channel pulse_channel_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_channel
+    ADD CONSTRAINT pulse_channel_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4309 (class 2606 OID 26736)
+-- Name: pulse_channel_recipient pulse_channel_recipient_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_channel_recipient
+    ADD CONSTRAINT pulse_channel_recipient_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4293 (class 2606 OID 27878)
+-- Name: pulse pulse_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse
+    ADD CONSTRAINT pulse_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4295 (class 2606 OID 26691)
+-- Name: pulse pulse_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse
+    ADD CONSTRAINT pulse_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4392 (class 2606 OID 27068)
+-- Name: query_cache query_cache_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.query_cache
+    ADD CONSTRAINT query_cache_pkey PRIMARY KEY (query_hash);
+
+
+--
+-- TOC entry 4389 (class 2606 OID 27059)
+-- Name: query_execution query_execution_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.query_execution
+    ADD CONSTRAINT query_execution_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4394 (class 2606 OID 27076)
+-- Name: query query_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.query
+    ADD CONSTRAINT query_pkey PRIMARY KEY (query_hash);
+
+
+--
+-- TOC entry 4244 (class 2606 OID 27880)
+-- Name: report_card report_card_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT report_card_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4246 (class 2606 OID 26429)
+-- Name: report_card report_card_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT report_card_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4248 (class 2606 OID 27035)
+-- Name: report_card report_card_public_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT report_card_public_uuid_key UNIQUE (public_uuid);
+
+
+--
+-- TOC entry 4254 (class 2606 OID 26447)
+-- Name: report_cardfavorite report_cardfavorite_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_cardfavorite
+    ADD CONSTRAINT report_cardfavorite_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4260 (class 2606 OID 27874)
+-- Name: report_dashboard report_dashboard_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboard
+    ADD CONSTRAINT report_dashboard_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4262 (class 2606 OID 26469)
+-- Name: report_dashboard report_dashboard_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboard
+    ADD CONSTRAINT report_dashboard_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4264 (class 2606 OID 27043)
+-- Name: report_dashboard report_dashboard_public_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboard
+    ADD CONSTRAINT report_dashboard_public_uuid_key UNIQUE (public_uuid);
+
+
+--
+-- TOC entry 4268 (class 2606 OID 27886)
+-- Name: report_dashboardcard report_dashboardcard_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboardcard
+    ADD CONSTRAINT report_dashboardcard_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4270 (class 2606 OID 26487)
+-- Name: report_dashboardcard report_dashboardcard_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboardcard
+    ADD CONSTRAINT report_dashboardcard_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4277 (class 2606 OID 26632)
+-- Name: revision revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.revision
+    ADD CONSTRAINT revision_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4482 (class 2606 OID 27677)
+-- Name: secret secret_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.secret
+    ADD CONSTRAINT secret_pkey PRIMARY KEY (id, version);
+
+
+--
+-- TOC entry 4314 (class 2606 OID 27870)
+-- Name: segment segment_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.segment
+    ADD CONSTRAINT segment_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4316 (class 2606 OID 26755)
+-- Name: segment segment_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.segment
+    ADD CONSTRAINT segment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4274 (class 2606 OID 26618)
+-- Name: setting setting_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.setting
+    ADD CONSTRAINT setting_pkey PRIMARY KEY (key);
+
+
+--
+-- TOC entry 4462 (class 2606 OID 27333)
+-- Name: task_history task_history_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.task_history
+    ADD CONSTRAINT task_history_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4485 (class 2606 OID 27884)
+-- Name: timeline timeline_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline
+    ADD CONSTRAINT timeline_entity_id_key UNIQUE (entity_id);
+
+
+--
+-- TOC entry 4491 (class 2606 OID 27728)
+-- Name: timeline_event timeline_event_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline_event
+    ADD CONSTRAINT timeline_event_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4487 (class 2606 OID 27707)
+-- Name: timeline timeline_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline
+    ADD CONSTRAINT timeline_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4516 (class 2606 OID 27834)
+-- Name: bookmark_ordering unique_bookmark_user_id_ordering; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.bookmark_ordering
+    ADD CONSTRAINT unique_bookmark_user_id_ordering UNIQUE (user_id, ordering);
+
+
+--
+-- TOC entry 4518 (class 2606 OID 27832)
+-- Name: bookmark_ordering unique_bookmark_user_id_type_item_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.bookmark_ordering
+    ADD CONSTRAINT unique_bookmark_user_id_type_item_id UNIQUE (user_id, type, item_id);
+
+
+--
+-- TOC entry 4503 (class 2606 OID 27781)
+-- Name: card_bookmark unique_card_bookmark_user_id_card_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_bookmark
+    ADD CONSTRAINT unique_card_bookmark_user_id_card_id UNIQUE (user_id, card_id);
+
+
+--
+-- TOC entry 4344 (class 2606 OID 26854)
+-- Name: card_label unique_card_label_card_id_label_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_label
+    ADD CONSTRAINT unique_card_label_card_id_label_id UNIQUE (card_id, label_id);
+
+
+--
+-- TOC entry 4509 (class 2606 OID 27802)
+-- Name: collection_bookmark unique_collection_bookmark_user_id_collection_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection_bookmark
+    ADD CONSTRAINT unique_collection_bookmark_user_id_collection_id UNIQUE (user_id, collection_id);
+
+
+--
+-- TOC entry 4379 (class 2606 OID 27202)
+-- Name: collection unique_collection_personal_owner_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection
+    ADD CONSTRAINT unique_collection_personal_owner_id UNIQUE (personal_owner_id);
+
+
+--
+-- TOC entry 4497 (class 2606 OID 27760)
+-- Name: dashboard_bookmark unique_dashboard_bookmark_user_id_dashboard_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_bookmark
+    ADD CONSTRAINT unique_dashboard_bookmark_user_id_dashboard_id UNIQUE (user_id, dashboard_id);
+
+
+--
+-- TOC entry 4400 (class 2606 OID 27096)
+-- Name: dashboard_favorite unique_dashboard_favorite_user_id_dashboard_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_favorite
+    ADD CONSTRAINT unique_dashboard_favorite_user_id_dashboard_id UNIQUE (user_id, dashboard_id);
+
+
+--
+-- TOC entry 4407 (class 2606 OID 28041)
+-- Name: dimension unique_dimension_field_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dimension
+    ADD CONSTRAINT unique_dimension_field_id UNIQUE (field_id);
+
+
+--
+-- TOC entry 4416 (class 2606 OID 27180)
+-- Name: sandboxes unique_gtap_table_id_group_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sandboxes
+    ADD CONSTRAINT unique_gtap_table_id_group_id UNIQUE (table_id, group_id);
+
+
+--
+-- TOC entry 4350 (class 2606 OID 26925)
+-- Name: metric_important_field unique_metric_important_field_metric_id_field_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric_important_field
+    ADD CONSTRAINT unique_metric_important_field_metric_id_field_id UNIQUE (metric_id, field_id);
+
+
+--
+-- TOC entry 4551 (class 2606 OID 28135)
+-- Name: model_index_value unique_model_index_value_model_index_id_model_pk; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.model_index_value
+    ADD CONSTRAINT unique_model_index_value_model_index_id_model_pk UNIQUE (model_index_id, model_pk);
+
+
+--
+-- TOC entry 4542 (class 2606 OID 28061)
+-- Name: parameter_card unique_parameterized_object_card_parameter; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.parameter_card
+    ADD CONSTRAINT unique_parameterized_object_card_parameter UNIQUE (parameterized_object_id, parameterized_object_type, parameter_id);
+
+
+--
+-- TOC entry 4362 (class 2606 OID 26955)
+-- Name: permissions_group_membership unique_permissions_group_membership_user_id_group_id; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_group_membership
+    ADD CONSTRAINT unique_permissions_group_membership_user_id_group_id UNIQUE (user_id, group_id);
+
+
+--
+-- TOC entry 4355 (class 2606 OID 26936)
+-- Name: permissions_group unique_permissions_group_name; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_group
+    ADD CONSTRAINT unique_permissions_group_name UNIQUE (name);
+
+
+--
+-- TOC entry 4286 (class 2606 OID 26670)
+-- Name: view_log view_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.view_log
+    ADD CONSTRAINT view_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4529 (class 1259 OID 28067)
+-- Name: idx_action_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_action_creator_id ON public.action USING btree (creator_id);
+
+
+--
+-- TOC entry 4530 (class 1259 OID 28059)
+-- Name: idx_action_public_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_action_public_uuid ON public.action USING btree (public_uuid);
+
+
+--
+-- TOC entry 4280 (class 1259 OID 26664)
+-- Name: idx_activity_custom_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_activity_custom_id ON public.activity USING btree (custom_id);
+
+
+--
+-- TOC entry 4281 (class 1259 OID 26662)
+-- Name: idx_activity_timestamp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_activity_timestamp ON public.activity USING btree ("timestamp");
+
+
+--
+-- TOC entry 4282 (class 1259 OID 26663)
+-- Name: idx_activity_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_activity_user_id ON public.activity USING btree (user_id);
+
+
+--
+-- TOC entry 4514 (class 1259 OID 27835)
+-- Name: idx_bookmark_ordering_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_bookmark_ordering_user_id ON public.bookmark_ordering USING btree (user_id);
+
+
+--
+-- TOC entry 4500 (class 1259 OID 27783)
+-- Name: idx_card_bookmark_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_bookmark_card_id ON public.card_bookmark USING btree (card_id);
+
+
+--
+-- TOC entry 4501 (class 1259 OID 27782)
+-- Name: idx_card_bookmark_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_bookmark_user_id ON public.card_bookmark USING btree (user_id);
+
+
+--
+-- TOC entry 4240 (class 1259 OID 27020)
+-- Name: idx_card_collection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_collection_id ON public.report_card USING btree (collection_id);
+
+
+--
+-- TOC entry 4241 (class 1259 OID 26440)
+-- Name: idx_card_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_creator_id ON public.report_card USING btree (creator_id);
+
+
+--
+-- TOC entry 4341 (class 1259 OID 26855)
+-- Name: idx_card_label_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_label_card_id ON public.card_label USING btree (card_id);
+
+
+--
+-- TOC entry 4342 (class 1259 OID 26856)
+-- Name: idx_card_label_label_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_label_label_id ON public.card_label USING btree (label_id);
+
+
+--
+-- TOC entry 4242 (class 1259 OID 27041)
+-- Name: idx_card_public_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_card_public_uuid ON public.report_card USING btree (public_uuid);
+
+
+--
+-- TOC entry 4249 (class 1259 OID 26460)
+-- Name: idx_cardfavorite_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_cardfavorite_card_id ON public.report_cardfavorite USING btree (card_id);
+
+
+--
+-- TOC entry 4250 (class 1259 OID 26461)
+-- Name: idx_cardfavorite_owner_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_cardfavorite_owner_id ON public.report_cardfavorite USING btree (owner_id);
+
+
+--
+-- TOC entry 4506 (class 1259 OID 27804)
+-- Name: idx_collection_bookmark_collection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_collection_bookmark_collection_id ON public.collection_bookmark USING btree (collection_id);
+
+
+--
+-- TOC entry 4507 (class 1259 OID 27803)
+-- Name: idx_collection_bookmark_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_collection_bookmark_user_id ON public.collection_bookmark USING btree (user_id);
+
+
+--
+-- TOC entry 4376 (class 1259 OID 27197)
+-- Name: idx_collection_location; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_collection_location ON public.collection USING btree (location);
+
+
+--
+-- TOC entry 4377 (class 1259 OID 27208)
+-- Name: idx_collection_personal_owner_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_collection_personal_owner_id ON public.collection USING btree (personal_owner_id);
+
+
+--
+-- TOC entry 4556 (class 1259 OID 28173)
+-- Name: idx_conn_impersonations_db_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_conn_impersonations_db_id ON public.connection_impersonations USING btree (db_id);
+
+
+--
+-- TOC entry 4557 (class 1259 OID 28174)
+-- Name: idx_conn_impersonations_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_conn_impersonations_group_id ON public.connection_impersonations USING btree (group_id);
+
+
+--
+-- TOC entry 4494 (class 1259 OID 27762)
+-- Name: idx_dashboard_bookmark_dashboard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_bookmark_dashboard_id ON public.dashboard_bookmark USING btree (dashboard_id);
+
+
+--
+-- TOC entry 4495 (class 1259 OID 27761)
+-- Name: idx_dashboard_bookmark_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_bookmark_user_id ON public.dashboard_bookmark USING btree (user_id);
+
+
+--
+-- TOC entry 4255 (class 1259 OID 27189)
+-- Name: idx_dashboard_collection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_collection_id ON public.report_dashboard USING btree (collection_id);
+
+
+--
+-- TOC entry 4256 (class 1259 OID 26480)
+-- Name: idx_dashboard_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_creator_id ON public.report_dashboard USING btree (creator_id);
+
+
+--
+-- TOC entry 4397 (class 1259 OID 27098)
+-- Name: idx_dashboard_favorite_dashboard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_favorite_dashboard_id ON public.dashboard_favorite USING btree (dashboard_id);
+
+
+--
+-- TOC entry 4398 (class 1259 OID 27097)
+-- Name: idx_dashboard_favorite_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_favorite_user_id ON public.dashboard_favorite USING btree (user_id);
+
+
+--
+-- TOC entry 4257 (class 1259 OID 27049)
+-- Name: idx_dashboard_public_uuid; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_public_uuid ON public.report_dashboard USING btree (public_uuid);
+
+
+--
+-- TOC entry 4265 (class 1259 OID 26498)
+-- Name: idx_dashboardcard_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboardcard_card_id ON public.report_dashboardcard USING btree (card_id);
+
+
+--
+-- TOC entry 4266 (class 1259 OID 26499)
+-- Name: idx_dashboardcard_dashboard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboardcard_dashboard_id ON public.report_dashboardcard USING btree (dashboard_id);
+
+
+--
+-- TOC entry 4332 (class 1259 OID 26824)
+-- Name: idx_dashboardcard_series_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboardcard_series_card_id ON public.dashboardcard_series USING btree (card_id);
+
+
+--
+-- TOC entry 4333 (class 1259 OID 26823)
+-- Name: idx_dashboardcard_series_dashboardcard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboardcard_series_dashboardcard_id ON public.dashboardcard_series USING btree (dashboardcard_id);
+
+
+--
+-- TOC entry 4289 (class 1259 OID 26685)
+-- Name: idx_data_migrations_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_data_migrations_id ON public.data_migrations USING btree (id);
+
+
+--
+-- TOC entry 4319 (class 1259 OID 26784)
+-- Name: idx_dependency_dependent_on_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dependency_dependent_on_id ON public.dependency USING btree (dependent_on_id);
+
+
+--
+-- TOC entry 4320 (class 1259 OID 26783)
+-- Name: idx_dependency_dependent_on_model; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dependency_dependent_on_model ON public.dependency USING btree (dependent_on_model);
+
+
+--
+-- TOC entry 4321 (class 1259 OID 26781)
+-- Name: idx_dependency_model; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dependency_model ON public.dependency USING btree (model);
+
+
+--
+-- TOC entry 4322 (class 1259 OID 26782)
+-- Name: idx_dependency_model_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dependency_model_id ON public.dependency USING btree (model_id);
+
+
+--
+-- TOC entry 4405 (class 1259 OID 27120)
+-- Name: idx_dimension_field_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dimension_field_id ON public.dimension USING btree (field_id);
+
+
+--
+-- TOC entry 4230 (class 1259 OID 27344)
+-- Name: idx_field_parent_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_field_parent_id ON public.metabase_field USING btree (parent_id);
+
+
+--
+-- TOC entry 4231 (class 1259 OID 26333)
+-- Name: idx_field_table_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_field_table_id ON public.metabase_field USING btree (table_id);
+
+
+--
+-- TOC entry 4237 (class 1259 OID 26365)
+-- Name: idx_fieldvalues_field_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_fieldvalues_field_id ON public.metabase_fieldvalues USING btree (field_id);
+
+
+--
+-- TOC entry 4414 (class 1259 OID 27178)
+-- Name: idx_gtap_table_id_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_gtap_table_id_group_id ON public.sandboxes USING btree (table_id, group_id);
+
+
+--
+-- TOC entry 4334 (class 1259 OID 26836)
+-- Name: idx_label_slug; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_label_slug ON public.label USING btree (slug);
+
+
+--
+-- TOC entry 4219 (class 1259 OID 27614)
+-- Name: idx_lower_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_lower_email ON public.core_user USING btree (lower((email)::text));
+
+
+--
+-- TOC entry 4222 (class 1259 OID 26983)
+-- Name: idx_metabase_table_db_id_schema; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metabase_table_db_id_schema ON public.metabase_table USING btree (db_id, schema);
+
+
+--
+-- TOC entry 4223 (class 1259 OID 26905)
+-- Name: idx_metabase_table_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metabase_table_show_in_getting_started ON public.metabase_table USING btree (show_in_getting_started);
+
+
+--
+-- TOC entry 4323 (class 1259 OID 26804)
+-- Name: idx_metric_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metric_creator_id ON public.metric USING btree (creator_id);
+
+
+--
+-- TOC entry 4345 (class 1259 OID 26927)
+-- Name: idx_metric_important_field_field_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metric_important_field_field_id ON public.metric_important_field USING btree (field_id);
+
+
+--
+-- TOC entry 4346 (class 1259 OID 26926)
+-- Name: idx_metric_important_field_metric_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metric_important_field_metric_id ON public.metric_important_field USING btree (metric_id);
+
+
+--
+-- TOC entry 4324 (class 1259 OID 26903)
+-- Name: idx_metric_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metric_show_in_getting_started ON public.metric USING btree (show_in_getting_started);
+
+
+--
+-- TOC entry 4325 (class 1259 OID 26805)
+-- Name: idx_metric_table_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metric_table_id ON public.metric USING btree (table_id);
+
+
+--
+-- TOC entry 4547 (class 1259 OID 28136)
+-- Name: idx_model_index_model_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_model_index_model_id ON public.model_index USING btree (model_id);
+
+
+--
+-- TOC entry 4478 (class 1259 OID 27686)
+-- Name: idx_moderation_review_item_type_item_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_moderation_review_item_type_item_id ON public.moderation_review USING btree (moderated_item_type, moderated_item_id);
+
+
+--
+-- TOC entry 4537 (class 1259 OID 28045)
+-- Name: idx_parameter_card_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_parameter_card_card_id ON public.parameter_card USING btree (card_id);
+
+
+--
+-- TOC entry 4538 (class 1259 OID 28044)
+-- Name: idx_parameter_card_parameterized_object_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_parameter_card_parameterized_object_id ON public.parameter_card USING btree (parameterized_object_id);
+
+
+--
+-- TOC entry 4363 (class 1259 OID 26970)
+-- Name: idx_permissions_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_group_id ON public.permissions USING btree (group_id);
+
+
+--
+-- TOC entry 4364 (class 1259 OID 26972)
+-- Name: idx_permissions_group_id_object; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_group_id_object ON public.permissions USING btree (group_id, object);
+
+
+--
+-- TOC entry 4356 (class 1259 OID 26956)
+-- Name: idx_permissions_group_membership_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_group_membership_group_id ON public.permissions_group_membership USING btree (group_id);
+
+
+--
+-- TOC entry 4357 (class 1259 OID 26958)
+-- Name: idx_permissions_group_membership_group_id_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_group_membership_group_id_user_id ON public.permissions_group_membership USING btree (group_id, user_id);
+
+
+--
+-- TOC entry 4358 (class 1259 OID 26957)
+-- Name: idx_permissions_group_membership_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_group_membership_user_id ON public.permissions_group_membership USING btree (user_id);
+
+
+--
+-- TOC entry 4351 (class 1259 OID 26937)
+-- Name: idx_permissions_group_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_group_name ON public.permissions_group USING btree (name);
+
+
+--
+-- TOC entry 4365 (class 1259 OID 26971)
+-- Name: idx_permissions_object; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_object ON public.permissions USING btree (object);
+
+
+--
+-- TOC entry 4296 (class 1259 OID 26715)
+-- Name: idx_pulse_card_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_card_card_id ON public.pulse_card USING btree (card_id);
+
+
+--
+-- TOC entry 4297 (class 1259 OID 26714)
+-- Name: idx_pulse_card_pulse_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_card_pulse_id ON public.pulse_card USING btree (pulse_id);
+
+
+--
+-- TOC entry 4302 (class 1259 OID 26729)
+-- Name: idx_pulse_channel_pulse_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_channel_pulse_id ON public.pulse_channel USING btree (pulse_id);
+
+
+--
+-- TOC entry 4303 (class 1259 OID 26730)
+-- Name: idx_pulse_channel_schedule_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_channel_schedule_type ON public.pulse_channel USING btree (schedule_type);
+
+
+--
+-- TOC entry 4290 (class 1259 OID 27195)
+-- Name: idx_pulse_collection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_collection_id ON public.pulse USING btree (collection_id);
+
+
+--
+-- TOC entry 4291 (class 1259 OID 26697)
+-- Name: idx_pulse_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_creator_id ON public.pulse USING btree (creator_id);
+
+
+--
+-- TOC entry 4447 (class 1259 OID 27321)
+-- Name: idx_qrtz_ft_inst_job_req_rcvry; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_ft_inst_job_req_rcvry ON public.qrtz_fired_triggers USING btree (sched_name, instance_name, requests_recovery);
+
+
+--
+-- TOC entry 4448 (class 1259 OID 27322)
+-- Name: idx_qrtz_ft_j_g; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_ft_j_g ON public.qrtz_fired_triggers USING btree (sched_name, job_name, job_group);
+
+
+--
+-- TOC entry 4449 (class 1259 OID 27323)
+-- Name: idx_qrtz_ft_jg; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_ft_jg ON public.qrtz_fired_triggers USING btree (sched_name, job_group);
+
+
+--
+-- TOC entry 4450 (class 1259 OID 27324)
+-- Name: idx_qrtz_ft_t_g; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_ft_t_g ON public.qrtz_fired_triggers USING btree (sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4451 (class 1259 OID 27325)
+-- Name: idx_qrtz_ft_tg; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_ft_tg ON public.qrtz_fired_triggers USING btree (sched_name, trigger_group);
+
+
+--
+-- TOC entry 4452 (class 1259 OID 27320)
+-- Name: idx_qrtz_ft_trig_inst_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_ft_trig_inst_name ON public.qrtz_fired_triggers USING btree (sched_name, instance_name);
+
+
+--
+-- TOC entry 4417 (class 1259 OID 27307)
+-- Name: idx_qrtz_j_grp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_j_grp ON public.qrtz_job_details USING btree (sched_name, job_group);
+
+
+--
+-- TOC entry 4418 (class 1259 OID 27306)
+-- Name: idx_qrtz_j_req_recovery; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_j_req_recovery ON public.qrtz_job_details USING btree (sched_name, requests_recovery);
+
+
+--
+-- TOC entry 4421 (class 1259 OID 27310)
+-- Name: idx_qrtz_t_c; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_c ON public.qrtz_triggers USING btree (sched_name, calendar_name);
+
+
+--
+-- TOC entry 4422 (class 1259 OID 27311)
+-- Name: idx_qrtz_t_g; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_g ON public.qrtz_triggers USING btree (sched_name, trigger_group);
+
+
+--
+-- TOC entry 4423 (class 1259 OID 27308)
+-- Name: idx_qrtz_t_j; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_j ON public.qrtz_triggers USING btree (sched_name, job_name, job_group);
+
+
+--
+-- TOC entry 4424 (class 1259 OID 27309)
+-- Name: idx_qrtz_t_jg; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_jg ON public.qrtz_triggers USING btree (sched_name, job_group);
+
+
+--
+-- TOC entry 4425 (class 1259 OID 27314)
+-- Name: idx_qrtz_t_n_g_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_n_g_state ON public.qrtz_triggers USING btree (sched_name, trigger_group, trigger_state);
+
+
+--
+-- TOC entry 4426 (class 1259 OID 27313)
+-- Name: idx_qrtz_t_n_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_n_state ON public.qrtz_triggers USING btree (sched_name, trigger_name, trigger_group, trigger_state);
+
+
+--
+-- TOC entry 4427 (class 1259 OID 27315)
+-- Name: idx_qrtz_t_next_fire_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_next_fire_time ON public.qrtz_triggers USING btree (sched_name, next_fire_time);
+
+
+--
+-- TOC entry 4428 (class 1259 OID 27317)
+-- Name: idx_qrtz_t_nft_misfire; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_nft_misfire ON public.qrtz_triggers USING btree (sched_name, misfire_instr, next_fire_time);
+
+
+--
+-- TOC entry 4429 (class 1259 OID 27316)
+-- Name: idx_qrtz_t_nft_st; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_nft_st ON public.qrtz_triggers USING btree (sched_name, trigger_state, next_fire_time);
+
+
+--
+-- TOC entry 4430 (class 1259 OID 27318)
+-- Name: idx_qrtz_t_nft_st_misfire; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_nft_st_misfire ON public.qrtz_triggers USING btree (sched_name, misfire_instr, next_fire_time, trigger_state);
+
+
+--
+-- TOC entry 4431 (class 1259 OID 27319)
+-- Name: idx_qrtz_t_nft_st_misfire_grp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_nft_st_misfire_grp ON public.qrtz_triggers USING btree (sched_name, misfire_instr, next_fire_time, trigger_group, trigger_state);
+
+
+--
+-- TOC entry 4432 (class 1259 OID 27312)
+-- Name: idx_qrtz_t_state; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_qrtz_t_state ON public.qrtz_triggers USING btree (sched_name, trigger_state);
+
+
+--
+-- TOC entry 4390 (class 1259 OID 27351)
+-- Name: idx_query_cache_updated_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_cache_updated_at ON public.query_cache USING btree (updated_at);
+
+
+--
+-- TOC entry 4382 (class 1259 OID 27685)
+-- Name: idx_query_execution_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_card_id ON public.query_execution USING btree (card_id);
+
+
+--
+-- TOC entry 4383 (class 1259 OID 27687)
+-- Name: idx_query_execution_card_id_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_card_id_started_at ON public.query_execution USING btree (card_id, started_at);
+
+
+--
+-- TOC entry 4384 (class 1259 OID 28056)
+-- Name: idx_query_execution_context; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_context ON public.query_execution USING btree (context);
+
+
+--
+-- TOC entry 4385 (class 1259 OID 28055)
+-- Name: idx_query_execution_executor_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_executor_id ON public.query_execution USING btree (executor_id);
+
+
+--
+-- TOC entry 4386 (class 1259 OID 27372)
+-- Name: idx_query_execution_query_hash_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_query_hash_started_at ON public.query_execution USING btree (hash, started_at);
+
+
+--
+-- TOC entry 4387 (class 1259 OID 27371)
+-- Name: idx_query_execution_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_started_at ON public.query_execution USING btree (started_at);
+
+
+--
+-- TOC entry 4258 (class 1259 OID 26901)
+-- Name: idx_report_dashboard_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_dashboard_show_in_getting_started ON public.report_dashboard USING btree (show_in_getting_started);
+
+
+--
+-- TOC entry 4275 (class 1259 OID 26638)
+-- Name: idx_revision_model_model_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_revision_model_model_id ON public.revision USING btree (model, model_id);
+
+
+--
+-- TOC entry 4310 (class 1259 OID 26766)
+-- Name: idx_segment_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_segment_creator_id ON public.segment USING btree (creator_id);
+
+
+--
+-- TOC entry 4311 (class 1259 OID 26907)
+-- Name: idx_segment_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_segment_show_in_getting_started ON public.segment USING btree (show_in_getting_started);
+
+
+--
+-- TOC entry 4312 (class 1259 OID 26767)
+-- Name: idx_segment_table_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_segment_table_id ON public.segment USING btree (table_id);
+
+
+--
+-- TOC entry 4471 (class 1259 OID 27655)
+-- Name: idx_session_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_session_id ON public.login_history USING btree (session_id);
+
+
+--
+-- TOC entry 4463 (class 1259 OID 27378)
+-- Name: idx_snippet_collection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_snippet_collection_id ON public.native_query_snippet USING btree (collection_id);
+
+
+--
+-- TOC entry 4464 (class 1259 OID 27370)
+-- Name: idx_snippet_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_snippet_name ON public.native_query_snippet USING btree (name);
+
+
+--
+-- TOC entry 4224 (class 1259 OID 26319)
+-- Name: idx_table_db_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_table_db_id ON public.metabase_table USING btree (db_id);
+
+
+--
+-- TOC entry 4459 (class 1259 OID 27335)
+-- Name: idx_task_history_db_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_task_history_db_id ON public.task_history USING btree (db_id);
+
+
+--
+-- TOC entry 4460 (class 1259 OID 27633)
+-- Name: idx_task_history_end_time; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_task_history_end_time ON public.task_history USING btree (ended_at);
+
+
+--
+-- TOC entry 4483 (class 1259 OID 27739)
+-- Name: idx_timeline_collection_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_timeline_collection_id ON public.timeline USING btree (collection_id);
+
+
+--
+-- TOC entry 4488 (class 1259 OID 27740)
+-- Name: idx_timeline_event_timeline_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_timeline_event_timeline_id ON public.timeline_event USING btree (timeline_id);
+
+
+--
+-- TOC entry 4489 (class 1259 OID 27741)
+-- Name: idx_timeline_event_timeline_id_timestamp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_timeline_event_timeline_id_timestamp ON public.timeline_event USING btree (timeline_id, "timestamp");
+
+
+--
+-- TOC entry 4472 (class 1259 OID 27656)
+-- Name: idx_timestamp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_timestamp ON public.login_history USING btree ("timestamp");
+
+
+--
+-- TOC entry 4234 (class 1259 OID 27343)
+-- Name: idx_uniq_field_table_id_parent_id_name_2col; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_uniq_field_table_id_parent_id_name_2col ON public.metabase_field USING btree (table_id, name) WHERE (parent_id IS NULL);
+
+
+--
+-- TOC entry 4227 (class 1259 OID 28113)
+-- Name: idx_uniq_table_db_id_schema_name_2col; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX idx_uniq_table_db_id_schema_name_2col ON public.metabase_table USING btree (db_id, name) WHERE (schema IS NULL);
+
+
+--
+-- TOC entry 4473 (class 1259 OID 27649)
+-- Name: idx_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_id ON public.login_history USING btree (user_id);
+
+
+--
+-- TOC entry 4474 (class 1259 OID 27657)
+-- Name: idx_user_id_device_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_id_device_id ON public.login_history USING btree (session_id, device_id);
+
+
+--
+-- TOC entry 4475 (class 1259 OID 27658)
+-- Name: idx_user_id_timestamp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_id_timestamp ON public.login_history USING btree (user_id, "timestamp");
+
+
+--
+-- TOC entry 4283 (class 1259 OID 26677)
+-- Name: idx_view_log_timestamp; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_view_log_timestamp ON public.view_log USING btree (model_id);
+
+
+--
+-- TOC entry 4284 (class 1259 OID 26676)
+-- Name: idx_view_log_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_view_log_user_id ON public.view_log USING btree (user_id);
+
+
+--
+-- TOC entry 4641 (class 2606 OID 28068)
+-- Name: action fk_action_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.action
+    ADD CONSTRAINT fk_action_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id);
+
+
+--
+-- TOC entry 4642 (class 2606 OID 28062)
+-- Name: action fk_action_made_public_by_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.action
+    ADD CONSTRAINT fk_action_made_public_by_id FOREIGN KEY (made_public_by_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4643 (class 2606 OID 28076)
+-- Name: action fk_action_model_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.action
+    ADD CONSTRAINT fk_action_model_id FOREIGN KEY (model_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4579 (class 2606 OID 27379)
+-- Name: activity fk_activity_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.activity
+    ADD CONSTRAINT fk_activity_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4637 (class 2606 OID 27826)
+-- Name: bookmark_ordering fk_bookmark_ordering_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.bookmark_ordering
+    ADD CONSTRAINT fk_bookmark_ordering_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4632 (class 2606 OID 27775)
+-- Name: card_bookmark fk_card_bookmark_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_bookmark
+    ADD CONSTRAINT fk_card_bookmark_dashboard_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4633 (class 2606 OID 27770)
+-- Name: card_bookmark fk_card_bookmark_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_bookmark
+    ADD CONSTRAINT fk_card_bookmark_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4563 (class 2606 OID 27534)
+-- Name: report_card fk_card_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT fk_card_collection_id FOREIGN KEY (collection_id) REFERENCES public.collection(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4596 (class 2606 OID 27384)
+-- Name: card_label fk_card_label_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_label
+    ADD CONSTRAINT fk_card_label_ref_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4597 (class 2606 OID 27389)
+-- Name: card_label fk_card_label_ref_label_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.card_label
+    ADD CONSTRAINT fk_card_label_ref_label_id FOREIGN KEY (label_id) REFERENCES public.label(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4564 (class 2606 OID 27539)
+-- Name: report_card fk_card_made_public_by_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT fk_card_made_public_by_id FOREIGN KEY (made_public_by_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4565 (class 2606 OID 27544)
+-- Name: report_card fk_card_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT fk_card_ref_user_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4568 (class 2606 OID 27559)
+-- Name: report_cardfavorite fk_cardfavorite_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_cardfavorite
+    ADD CONSTRAINT fk_cardfavorite_ref_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4569 (class 2606 OID 27564)
+-- Name: report_cardfavorite fk_cardfavorite_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_cardfavorite
+    ADD CONSTRAINT fk_cardfavorite_ref_user_id FOREIGN KEY (owner_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4634 (class 2606 OID 27796)
+-- Name: collection_bookmark fk_collection_bookmark_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection_bookmark
+    ADD CONSTRAINT fk_collection_bookmark_collection_id FOREIGN KEY (collection_id) REFERENCES public.collection(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4635 (class 2606 OID 27791)
+-- Name: collection_bookmark fk_collection_bookmark_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection_bookmark
+    ADD CONSTRAINT fk_collection_bookmark_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4604 (class 2606 OID 27394)
+-- Name: collection fk_collection_personal_owner_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection
+    ADD CONSTRAINT fk_collection_personal_owner_id FOREIGN KEY (personal_owner_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4605 (class 2606 OID 27399)
+-- Name: collection_permission_graph_revision fk_collection_revision_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.collection_permission_graph_revision
+    ADD CONSTRAINT fk_collection_revision_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4610 (class 2606 OID 27404)
+-- Name: computation_job fk_computation_job_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.computation_job
+    ADD CONSTRAINT fk_computation_job_ref_user_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4611 (class 2606 OID 27409)
+-- Name: computation_job_result fk_computation_result_ref_job_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.computation_job_result
+    ADD CONSTRAINT fk_computation_result_ref_job_id FOREIGN KEY (job_id) REFERENCES public.computation_job(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4653 (class 2606 OID 28177)
+-- Name: connection_impersonations fk_conn_impersonation_db_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.connection_impersonations
+    ADD CONSTRAINT fk_conn_impersonation_db_id FOREIGN KEY (db_id) REFERENCES public.metabase_database(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4654 (class 2606 OID 28182)
+-- Name: connection_impersonations fk_conn_impersonation_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.connection_impersonations
+    ADD CONSTRAINT fk_conn_impersonation_group_id FOREIGN KEY (group_id) REFERENCES public.permissions_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4630 (class 2606 OID 27754)
+-- Name: dashboard_bookmark fk_dashboard_bookmark_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_bookmark
+    ADD CONSTRAINT fk_dashboard_bookmark_dashboard_id FOREIGN KEY (dashboard_id) REFERENCES public.report_dashboard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4631 (class 2606 OID 27749)
+-- Name: dashboard_bookmark fk_dashboard_bookmark_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_bookmark
+    ADD CONSTRAINT fk_dashboard_bookmark_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4570 (class 2606 OID 27569)
+-- Name: report_dashboard fk_dashboard_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboard
+    ADD CONSTRAINT fk_dashboard_collection_id FOREIGN KEY (collection_id) REFERENCES public.collection(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4606 (class 2606 OID 27085)
+-- Name: dashboard_favorite fk_dashboard_favorite_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_favorite
+    ADD CONSTRAINT fk_dashboard_favorite_dashboard_id FOREIGN KEY (dashboard_id) REFERENCES public.report_dashboard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4607 (class 2606 OID 27090)
+-- Name: dashboard_favorite fk_dashboard_favorite_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_favorite
+    ADD CONSTRAINT fk_dashboard_favorite_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4571 (class 2606 OID 27574)
+-- Name: report_dashboard fk_dashboard_made_public_by_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboard
+    ADD CONSTRAINT fk_dashboard_made_public_by_id FOREIGN KEY (made_public_by_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4572 (class 2606 OID 27579)
+-- Name: report_dashboard fk_dashboard_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboard
+    ADD CONSTRAINT fk_dashboard_ref_user_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4649 (class 2606 OID 28101)
+-- Name: dashboard_tab fk_dashboard_tab_ref_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboard_tab
+    ADD CONSTRAINT fk_dashboard_tab_ref_dashboard_id FOREIGN KEY (dashboard_id) REFERENCES public.report_dashboard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4573 (class 2606 OID 27584)
+-- Name: report_dashboardcard fk_dashboardcard_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboardcard
+    ADD CONSTRAINT fk_dashboardcard_ref_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4574 (class 2606 OID 27589)
+-- Name: report_dashboardcard fk_dashboardcard_ref_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboardcard
+    ADD CONSTRAINT fk_dashboardcard_ref_dashboard_id FOREIGN KEY (dashboard_id) REFERENCES public.report_dashboard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4594 (class 2606 OID 27419)
+-- Name: dashboardcard_series fk_dashboardcard_series_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboardcard_series
+    ADD CONSTRAINT fk_dashboardcard_series_ref_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4595 (class 2606 OID 27424)
+-- Name: dashboardcard_series fk_dashboardcard_series_ref_dashboardcard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dashboardcard_series
+    ADD CONSTRAINT fk_dashboardcard_series_ref_dashboardcard_id FOREIGN KEY (dashboardcard_id) REFERENCES public.report_dashboardcard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4558 (class 2606 OID 27692)
+-- Name: metabase_database fk_database_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_database
+    ADD CONSTRAINT fk_database_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4608 (class 2606 OID 27113)
+-- Name: dimension fk_dimension_displayfk_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dimension
+    ADD CONSTRAINT fk_dimension_displayfk_ref_field_id FOREIGN KEY (human_readable_field_id) REFERENCES public.metabase_field(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4609 (class 2606 OID 27108)
+-- Name: dimension fk_dimension_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.dimension
+    ADD CONSTRAINT fk_dimension_ref_field_id FOREIGN KEY (field_id) REFERENCES public.metabase_field(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4628 (class 2606 OID 27729)
+-- Name: timeline_event fk_event_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline_event
+    ADD CONSTRAINT fk_event_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4629 (class 2606 OID 27734)
+-- Name: timeline_event fk_events_timeline_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline_event
+    ADD CONSTRAINT fk_events_timeline_id FOREIGN KEY (timeline_id) REFERENCES public.timeline(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4560 (class 2606 OID 27434)
+-- Name: metabase_field fk_field_parent_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_field
+    ADD CONSTRAINT fk_field_parent_ref_field_id FOREIGN KEY (parent_id) REFERENCES public.metabase_field(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4561 (class 2606 OID 27439)
+-- Name: metabase_field fk_field_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_field
+    ADD CONSTRAINT fk_field_ref_table_id FOREIGN KEY (table_id) REFERENCES public.metabase_table(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4562 (class 2606 OID 27444)
+-- Name: metabase_fieldvalues fk_fieldvalues_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_fieldvalues
+    ADD CONSTRAINT fk_fieldvalues_ref_field_id FOREIGN KEY (field_id) REFERENCES public.metabase_field(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4636 (class 2606 OID 27813)
+-- Name: application_permissions_revision fk_general_permissions_revision_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.application_permissions_revision
+    ADD CONSTRAINT fk_general_permissions_revision_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id);
+
+
+--
+-- TOC entry 4612 (class 2606 OID 27429)
+-- Name: sandboxes fk_gtap_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sandboxes
+    ADD CONSTRAINT fk_gtap_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4613 (class 2606 OID 27173)
+-- Name: sandboxes fk_gtap_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sandboxes
+    ADD CONSTRAINT fk_gtap_group_id FOREIGN KEY (group_id) REFERENCES public.permissions_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4614 (class 2606 OID 27168)
+-- Name: sandboxes fk_gtap_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sandboxes
+    ADD CONSTRAINT fk_gtap_table_id FOREIGN KEY (table_id) REFERENCES public.metabase_table(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4646 (class 2606 OID 27926)
+-- Name: http_action fk_http_action_ref_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.http_action
+    ADD CONSTRAINT fk_http_action_ref_action_id FOREIGN KEY (action_id) REFERENCES public.action(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4647 (class 2606 OID 28167)
+-- Name: implicit_action fk_implicit_action_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.implicit_action
+    ADD CONSTRAINT fk_implicit_action_action_id FOREIGN KEY (action_id) REFERENCES public.action(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4623 (class 2606 OID 27650)
+-- Name: login_history fk_login_history_session_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.login_history
+    ADD CONSTRAINT fk_login_history_session_id FOREIGN KEY (session_id) REFERENCES public.core_session(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4624 (class 2606 OID 27644)
+-- Name: login_history fk_login_history_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.login_history
+    ADD CONSTRAINT fk_login_history_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4598 (class 2606 OID 27464)
+-- Name: metric_important_field fk_metric_important_field_metabase_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric_important_field
+    ADD CONSTRAINT fk_metric_important_field_metabase_field_id FOREIGN KEY (field_id) REFERENCES public.metabase_field(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4599 (class 2606 OID 27469)
+-- Name: metric_important_field fk_metric_important_field_metric_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric_important_field
+    ADD CONSTRAINT fk_metric_important_field_metric_id FOREIGN KEY (metric_id) REFERENCES public.metric(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4592 (class 2606 OID 27454)
+-- Name: metric fk_metric_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric
+    ADD CONSTRAINT fk_metric_ref_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4593 (class 2606 OID 27459)
+-- Name: metric fk_metric_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metric
+    ADD CONSTRAINT fk_metric_ref_table_id FOREIGN KEY (table_id) REFERENCES public.metabase_table(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4650 (class 2606 OID 28124)
+-- Name: model_index fk_model_index_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.model_index
+    ADD CONSTRAINT fk_model_index_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4651 (class 2606 OID 28137)
+-- Name: model_index fk_model_index_model_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.model_index
+    ADD CONSTRAINT fk_model_index_model_id FOREIGN KEY (model_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4652 (class 2606 OID 28142)
+-- Name: model_index_value fk_model_index_value_model_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.model_index_value
+    ADD CONSTRAINT fk_model_index_value_model_id FOREIGN KEY (model_index_id) REFERENCES public.model_index(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4648 (class 2606 OID 28046)
+-- Name: parameter_card fk_parameter_card_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.parameter_card
+    ADD CONSTRAINT fk_parameter_card_ref_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4600 (class 2606 OID 27484)
+-- Name: permissions_group_membership fk_permissions_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_group_membership
+    ADD CONSTRAINT fk_permissions_group_group_id FOREIGN KEY (group_id) REFERENCES public.permissions_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4602 (class 2606 OID 27479)
+-- Name: permissions fk_permissions_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions
+    ADD CONSTRAINT fk_permissions_group_id FOREIGN KEY (group_id) REFERENCES public.permissions_group(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4601 (class 2606 OID 27489)
+-- Name: permissions_group_membership fk_permissions_group_membership_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_group_membership
+    ADD CONSTRAINT fk_permissions_group_membership_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4603 (class 2606 OID 27494)
+-- Name: permissions_revision fk_permissions_revision_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.permissions_revision
+    ADD CONSTRAINT fk_permissions_revision_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4638 (class 2606 OID 27852)
+-- Name: persisted_info fk_persisted_info_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.persisted_info
+    ADD CONSTRAINT fk_persisted_info_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4639 (class 2606 OID 27862)
+-- Name: persisted_info fk_persisted_info_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.persisted_info
+    ADD CONSTRAINT fk_persisted_info_database_id FOREIGN KEY (database_id) REFERENCES public.metabase_database(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4640 (class 2606 OID 27857)
+-- Name: persisted_info fk_persisted_info_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.persisted_info
+    ADD CONSTRAINT fk_persisted_info_ref_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id);
+
+
+--
+-- TOC entry 4584 (class 2606 OID 27509)
+-- Name: pulse_card fk_pulse_card_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_card
+    ADD CONSTRAINT fk_pulse_card_ref_card_id FOREIGN KEY (card_id) REFERENCES public.report_card(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4585 (class 2606 OID 27622)
+-- Name: pulse_card fk_pulse_card_ref_pulse_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_card
+    ADD CONSTRAINT fk_pulse_card_ref_pulse_card_id FOREIGN KEY (dashboard_card_id) REFERENCES public.report_dashboardcard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4586 (class 2606 OID 27514)
+-- Name: pulse_card fk_pulse_card_ref_pulse_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_card
+    ADD CONSTRAINT fk_pulse_card_ref_pulse_id FOREIGN KEY (pulse_id) REFERENCES public.pulse(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4588 (class 2606 OID 27524)
+-- Name: pulse_channel_recipient fk_pulse_channel_recipient_ref_pulse_channel_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_channel_recipient
+    ADD CONSTRAINT fk_pulse_channel_recipient_ref_pulse_channel_id FOREIGN KEY (pulse_channel_id) REFERENCES public.pulse_channel(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4589 (class 2606 OID 27529)
+-- Name: pulse_channel_recipient fk_pulse_channel_recipient_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_channel_recipient
+    ADD CONSTRAINT fk_pulse_channel_recipient_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4587 (class 2606 OID 27519)
+-- Name: pulse_channel fk_pulse_channel_ref_pulse_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse_channel
+    ADD CONSTRAINT fk_pulse_channel_ref_pulse_id FOREIGN KEY (pulse_id) REFERENCES public.pulse(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4581 (class 2606 OID 27499)
+-- Name: pulse fk_pulse_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse
+    ADD CONSTRAINT fk_pulse_collection_id FOREIGN KEY (collection_id) REFERENCES public.collection(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4582 (class 2606 OID 27504)
+-- Name: pulse fk_pulse_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse
+    ADD CONSTRAINT fk_pulse_ref_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4583 (class 2606 OID 27627)
+-- Name: pulse fk_pulse_ref_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.pulse
+    ADD CONSTRAINT fk_pulse_ref_dashboard_id FOREIGN KEY (dashboard_id) REFERENCES public.report_dashboard(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4620 (class 2606 OID 27272)
+-- Name: qrtz_blob_triggers fk_qrtz_blob_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_blob_triggers
+    ADD CONSTRAINT fk_qrtz_blob_triggers_triggers FOREIGN KEY (sched_name, trigger_name, trigger_group) REFERENCES public.qrtz_triggers(sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4618 (class 2606 OID 27248)
+-- Name: qrtz_cron_triggers fk_qrtz_cron_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_cron_triggers
+    ADD CONSTRAINT fk_qrtz_cron_triggers_triggers FOREIGN KEY (sched_name, trigger_name, trigger_group) REFERENCES public.qrtz_triggers(sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4617 (class 2606 OID 27236)
+-- Name: qrtz_simple_triggers fk_qrtz_simple_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_simple_triggers
+    ADD CONSTRAINT fk_qrtz_simple_triggers_triggers FOREIGN KEY (sched_name, trigger_name, trigger_group) REFERENCES public.qrtz_triggers(sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4619 (class 2606 OID 27260)
+-- Name: qrtz_simprop_triggers fk_qrtz_simprop_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_simprop_triggers
+    ADD CONSTRAINT fk_qrtz_simprop_triggers_triggers FOREIGN KEY (sched_name, trigger_name, trigger_group) REFERENCES public.qrtz_triggers(sched_name, trigger_name, trigger_group);
+
+
+--
+-- TOC entry 4616 (class 2606 OID 27224)
+-- Name: qrtz_triggers fk_qrtz_triggers_job_details; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.qrtz_triggers
+    ADD CONSTRAINT fk_qrtz_triggers_job_details FOREIGN KEY (sched_name, job_name, job_group) REFERENCES public.qrtz_job_details(sched_name, job_name, job_group);
+
+
+--
+-- TOC entry 4644 (class 2606 OID 28024)
+-- Name: query_action fk_query_action_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.query_action
+    ADD CONSTRAINT fk_query_action_database_id FOREIGN KEY (database_id) REFERENCES public.metabase_database(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4645 (class 2606 OID 27908)
+-- Name: query_action fk_query_action_ref_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.query_action
+    ADD CONSTRAINT fk_query_action_ref_action_id FOREIGN KEY (action_id) REFERENCES public.action(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4566 (class 2606 OID 27549)
+-- Name: report_card fk_report_card_ref_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT fk_report_card_ref_database_id FOREIGN KEY (database_id) REFERENCES public.metabase_database(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4567 (class 2606 OID 27554)
+-- Name: report_card fk_report_card_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_card
+    ADD CONSTRAINT fk_report_card_ref_table_id FOREIGN KEY (table_id) REFERENCES public.metabase_table(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4575 (class 2606 OID 27958)
+-- Name: report_dashboardcard fk_report_dashboardcard_ref_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboardcard
+    ADD CONSTRAINT fk_report_dashboardcard_ref_action_id FOREIGN KEY (action_id) REFERENCES public.action(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4576 (class 2606 OID 28106)
+-- Name: report_dashboardcard fk_report_dashboardcard_ref_dashboard_tab_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.report_dashboardcard
+    ADD CONSTRAINT fk_report_dashboardcard_ref_dashboard_tab_id FOREIGN KEY (dashboard_tab_id) REFERENCES public.dashboard_tab(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4578 (class 2606 OID 27594)
+-- Name: revision fk_revision_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.revision
+    ADD CONSTRAINT fk_revision_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4615 (class 2606 OID 28081)
+-- Name: sandboxes fk_sandboxes_ref_permissions; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.sandboxes
+    ADD CONSTRAINT fk_sandboxes_ref_permissions FOREIGN KEY (permission_id) REFERENCES public.permissions(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4625 (class 2606 OID 27678)
+-- Name: secret fk_secret_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.secret
+    ADD CONSTRAINT fk_secret_ref_user_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id);
+
+
+--
+-- TOC entry 4590 (class 2606 OID 27599)
+-- Name: segment fk_segment_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.segment
+    ADD CONSTRAINT fk_segment_ref_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4591 (class 2606 OID 27604)
+-- Name: segment fk_segment_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.segment
+    ADD CONSTRAINT fk_segment_ref_table_id FOREIGN KEY (table_id) REFERENCES public.metabase_table(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4577 (class 2606 OID 27414)
+-- Name: core_session fk_session_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.core_session
+    ADD CONSTRAINT fk_session_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4621 (class 2606 OID 27474)
+-- Name: native_query_snippet fk_snippet_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.native_query_snippet
+    ADD CONSTRAINT fk_snippet_collection_id FOREIGN KEY (collection_id) REFERENCES public.collection(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4622 (class 2606 OID 27365)
+-- Name: native_query_snippet fk_snippet_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.native_query_snippet
+    ADD CONSTRAINT fk_snippet_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4559 (class 2606 OID 27449)
+-- Name: metabase_table fk_table_ref_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.metabase_table
+    ADD CONSTRAINT fk_table_ref_database_id FOREIGN KEY (db_id) REFERENCES public.metabase_database(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4626 (class 2606 OID 27708)
+-- Name: timeline fk_timeline_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline
+    ADD CONSTRAINT fk_timeline_collection_id FOREIGN KEY (collection_id) REFERENCES public.collection(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4627 (class 2606 OID 27713)
+-- Name: timeline fk_timeline_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.timeline
+    ADD CONSTRAINT fk_timeline_creator_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4580 (class 2606 OID 27609)
+-- Name: view_log fk_view_log_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.view_log
+    ADD CONSTRAINT fk_view_log_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+-- Completed on 2024-01-17 21:13:57
+
+--
+-- PostgreSQL database dump complete
+--
+

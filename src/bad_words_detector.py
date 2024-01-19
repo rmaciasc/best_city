@@ -5,7 +5,6 @@ import string
 def detect_bad_words(text: str):
     if not isinstance(text, str):
         str(text)
-    text = "Shit nigga perro"
     profanity.load_censor_words()
     text = text.translate(str.maketrans("", "", string.punctuation)).lower()
 

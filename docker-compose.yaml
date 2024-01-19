@@ -21,14 +21,23 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./src/queries/:/docker-entrypoint-initdb.d/
-
+      - ./src/queries/best_city_db_init:/docker-entrypoint-initdb.d/
+  metabasedb:
+    image: postgres:16.1
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: metabaseappdb
+    ports:
+      - 5431:5432
+    volumes:
+      - ./src/queries/metabase_db_init:/docker-entrypoint-initdb.d/
   metabase:
     env_file:
-      - ../../.env
-    image: metabase/metabase:latest
+      - .env_demo
+    image: metabase/metabase:v0.48.3
     container_name: metabase
-    hostname: metabase
+    hostname: metabasedb
     volumes:
       - /dev/urandom:/dev/random:ro
     ports:
@@ -36,12 +45,12 @@ services:
     environment:
       MB_DB_TYPE: postgres
       MB_DB_DBNAME: metabaseappdb
-      MB_DB_PORT: 5432
+      MB_DB_PORT: 5431
     healthcheck:
       test: curl --fail -I http://localhost:3000/api/health || exit 1
       interval: 15s
       timeout: 5s
       retries: 5
     depends_on:
-      - db
+      - metabasedb
       - python
