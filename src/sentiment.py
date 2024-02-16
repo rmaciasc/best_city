@@ -33,6 +33,7 @@ def read_from_database():
                     );"""
     df_comm = pl.read_database(query_comm, conn)
     df_sub = pl.read_database(query, conn)
+    conn.close()
     return df_comm, df_sub
 
 

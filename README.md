@@ -17,10 +17,18 @@ This project is developed to be run either using:
 * Docker containers (either local or Azure Container Instances) and Airflow
 * Azure Virtual Machine and Airflow or CRON job
 
+## Setup
+
+Copy and paste the following command in the terminal:
+openssl rand -base64 32
+Set the MB_ENCRYPTION_SECRET_KEY env variable in .env_example with the result.
+
+MB_ENCRYPTION_SECRET_KEY="IYqrSi5QDthvFWe4/WdAxhnra5DZC3RKx3ZSrOJDKsM="
+
 ### Current state
 
 - [x] ETL
 - [x] NLP
 - [x] Data Visualization
-- [ ] Dockerize everything
-- [ ] Use multiprocessing
+- [x] Dockerize app
+- [ ] Write README.md

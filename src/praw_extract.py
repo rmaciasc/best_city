@@ -66,7 +66,7 @@ def save_comment(submission, comment, parent_id: bool = False):
         )
 
 
-def convert_submissions_to_df(submission_data):
+def convert_submissions_to_df(submission_data: SubmissionsData):
     df = pl.DataFrame(asdict(submission_data))
     assert df.columns == [
         "submission_id",
