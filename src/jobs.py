@@ -25,19 +25,22 @@ def retrieve_jobs():
 
     for keywords in state["search_keywords"]:
         for city in state["cities"]:
-            logger.info(f"Retrieving jobs for the keywords {keywords.upper()} in {city.upper()}")
-            url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace("[[CITY]]", city)
+            logger.info(
+                f"Retrieving jobs for the keywords {keywords.upper()} in {city.upper()}"
+            )
+            url = BASE_URL.replace("[[KEYWORD]]", keywords.replace(" ", "+")).replace(
+                "[[CITY]]", city
+            )
             driver.get(url)
             soup = BeautifulSoup(driver.page_source, "html.parser")
-            res = soup.select("div #job-list")
-            count_jobs_found = res[0]["aria-label"].split(" ")[0]
+
+            count_jobs_found = str(soup.select(".css-gu0het")[0].string)
 
             jobs.date_utc.append(datetime.now(timezone.utc).date())
             jobs.city.append(city)
             jobs.keyword.append(keywords)
             jobs.jobs_qty.append(count_jobs_found)
             sleep(5)
-
     return jobs
 
 
@@ -58,11 +61,17 @@ def test_jobs_df(df: pl.DataFrame):
     assert isinstance(df, pl.DataFrame)
     assert df.is_empty() is False, "Dataframe is empty."
     ## Check for nulls
-    assert df.select([pl.all().is_null().sum()]).sum(axis=1)[0] == 0, "NULL values found in Dataframe."
+    assert (
+        df.select([pl.all().is_null().sum()]).sum(axis=1)[0] == 0
+    ), "NULL values found in Dataframe."
     ## Check for empty str
-    assert df.select(pl.col(pl.Utf8) == "").sum().sum(axis=1)[0] == 0, "Empty str found in Dataframe."
+    assert (
+        df.select(pl.col(pl.Utf8) == "").sum().sum(axis=1)[0] == 0
+    ), "Empty str found in Dataframe."
     ## Check for str with spaces
-    assert df.select(pl.col(pl.Utf8) == " ").sum().sum(axis=1)[0] == 0, "Blank str found in Dataframe"
+    assert (
+        df.select(pl.col(pl.Utf8) == " ").sum().sum(axis=1)[0] == 0
+    ), "Blank str found in Dataframe"
 
 
 def get_chromedriver():
@@ -70,7 +79,9 @@ def get_chromedriver():
     chrome_options.add_argument("--headless=new")
     chrome_options.add_argument("--no-sandbox")
 
-    return webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    return webdriver.Chrome(
+        service=ChromeService(ChromeDriverManager().install()), options=chrome_options
+    )
 
 
 if __name__ == "__main__":

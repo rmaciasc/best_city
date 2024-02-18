@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.4
+-- Dumped from database version 16.1 (Debian 16.1-1.pgdg120+1)
 -- Dumped by pg_dump version 16.0
 
--- Started on 2024-01-17 21:13:48
+-- Started on 2024-02-12 21:10:08
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,20 +18,12 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 5 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: -
---
-
--- *not* creating schema, since initdb creates it
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- TOC entry 329 (class 1259 OID 27896)
+-- TOC entry 215 (class 1259 OID 16385)
 -- Name: action; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -55,8 +47,8 @@ CREATE TABLE public.action (
 
 
 --
--- TOC entry 4930 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4468 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: TABLE action; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -64,8 +56,8 @@ COMMENT ON TABLE public.action IS 'An action is something you can do, such as ru
 
 
 --
--- TOC entry 4931 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4469 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -73,8 +65,8 @@ COMMENT ON COLUMN public.action.created_at IS 'The timestamp of when the action 
 
 
 --
--- TOC entry 4932 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4470 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -82,8 +74,8 @@ COMMENT ON COLUMN public.action.updated_at IS 'The timestamp of when the action 
 
 
 --
--- TOC entry 4933 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4471 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -91,8 +83,8 @@ COMMENT ON COLUMN public.action.type IS 'Type of action';
 
 
 --
--- TOC entry 4934 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4472 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.model_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -100,8 +92,8 @@ COMMENT ON COLUMN public.action.model_id IS 'The associated model';
 
 
 --
--- TOC entry 4935 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4473 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -109,8 +101,8 @@ COMMENT ON COLUMN public.action.name IS 'The name of the action';
 
 
 --
--- TOC entry 4936 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4474 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.description; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -118,8 +110,8 @@ COMMENT ON COLUMN public.action.description IS 'The description of the action';
 
 
 --
--- TOC entry 4937 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4475 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.parameters; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -127,8 +119,8 @@ COMMENT ON COLUMN public.action.parameters IS 'The saved parameters for this act
 
 
 --
--- TOC entry 4938 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4476 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.parameter_mappings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -136,8 +128,8 @@ COMMENT ON COLUMN public.action.parameter_mappings IS 'The saved parameter mappi
 
 
 --
--- TOC entry 4939 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4477 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.visualization_settings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -145,8 +137,8 @@ COMMENT ON COLUMN public.action.visualization_settings IS 'The UI visualization_
 
 
 --
--- TOC entry 4940 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4478 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.public_uuid; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -154,8 +146,8 @@ COMMENT ON COLUMN public.action.public_uuid IS 'Unique UUID used to in publicall
 
 
 --
--- TOC entry 4941 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4479 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.made_public_by_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -163,8 +155,8 @@ COMMENT ON COLUMN public.action.made_public_by_id IS 'The ID of the User who fir
 
 
 --
--- TOC entry 4942 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4480 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -172,8 +164,8 @@ COMMENT ON COLUMN public.action.creator_id IS 'The user who created the action';
 
 
 --
--- TOC entry 4943 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4481 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.archived; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -181,8 +173,8 @@ COMMENT ON COLUMN public.action.archived IS 'Whether or not the action has been 
 
 
 --
--- TOC entry 4944 (class 0 OID 0)
--- Dependencies: 329
+-- TOC entry 4482 (class 0 OID 0)
+-- Dependencies: 215
 -- Name: COLUMN action.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -190,7 +182,7 @@ COMMENT ON COLUMN public.action.entity_id IS 'Random NanoID tag for unique ident
 
 
 --
--- TOC entry 328 (class 1259 OID 27895)
+-- TOC entry 216 (class 1259 OID 16393)
 -- Name: action_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -205,7 +197,7 @@ ALTER TABLE public.action ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 
 
 --
--- TOC entry 239 (class 1259 OID 26650)
+-- TOC entry 217 (class 1259 OID 16394)
 -- Name: activity; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -214,7 +206,7 @@ CREATE TABLE public.activity (
     topic character varying(32) NOT NULL,
     "timestamp" timestamp with time zone NOT NULL,
     user_id integer,
-    model character varying(16),
+    model character varying(32),
     model_id integer,
     database_id integer,
     table_id integer,
@@ -224,7 +216,7 @@ CREATE TABLE public.activity (
 
 
 --
--- TOC entry 238 (class 1259 OID 26649)
+-- TOC entry 218 (class 1259 OID 16399)
 -- Name: activity_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -239,7 +231,7 @@ ALTER TABLE public.activity ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
 
 
 --
--- TOC entry 323 (class 1259 OID 27806)
+-- TOC entry 219 (class 1259 OID 16400)
 -- Name: application_permissions_revision; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -254,8 +246,8 @@ CREATE TABLE public.application_permissions_revision (
 
 
 --
--- TOC entry 4945 (class 0 OID 0)
--- Dependencies: 323
+-- TOC entry 4483 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: TABLE application_permissions_revision; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -263,8 +255,8 @@ COMMENT ON TABLE public.application_permissions_revision IS 'Used to keep track 
 
 
 --
--- TOC entry 4946 (class 0 OID 0)
--- Dependencies: 323
+-- TOC entry 4484 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: COLUMN application_permissions_revision.before; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -272,8 +264,8 @@ COMMENT ON COLUMN public.application_permissions_revision.before IS 'Serialized 
 
 
 --
--- TOC entry 4947 (class 0 OID 0)
--- Dependencies: 323
+-- TOC entry 4485 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: COLUMN application_permissions_revision.after; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -281,8 +273,8 @@ COMMENT ON COLUMN public.application_permissions_revision.after IS 'Serialized J
 
 
 --
--- TOC entry 4948 (class 0 OID 0)
--- Dependencies: 323
+-- TOC entry 4486 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: COLUMN application_permissions_revision.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -290,8 +282,8 @@ COMMENT ON COLUMN public.application_permissions_revision.user_id IS 'The ID of 
 
 
 --
--- TOC entry 4949 (class 0 OID 0)
--- Dependencies: 323
+-- TOC entry 4487 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: COLUMN application_permissions_revision.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -299,8 +291,8 @@ COMMENT ON COLUMN public.application_permissions_revision.created_at IS 'The tim
 
 
 --
--- TOC entry 4950 (class 0 OID 0)
--- Dependencies: 323
+-- TOC entry 4488 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: COLUMN application_permissions_revision.remark; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -308,7 +300,7 @@ COMMENT ON COLUMN public.application_permissions_revision.remark IS 'Optional re
 
 
 --
--- TOC entry 322 (class 1259 OID 27805)
+-- TOC entry 220 (class 1259 OID 16405)
 -- Name: application_permissions_revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -323,7 +315,111 @@ ALTER TABLE public.application_permissions_revision ALTER COLUMN id ADD GENERATE
 
 
 --
--- TOC entry 325 (class 1259 OID 27821)
+-- TOC entry 221 (class 1259 OID 16406)
+-- Name: audit_log; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.audit_log (
+    id integer NOT NULL,
+    topic character varying(32) NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    end_timestamp timestamp with time zone,
+    user_id integer,
+    model character varying(32),
+    model_id integer,
+    details text NOT NULL
+);
+
+
+--
+-- TOC entry 4489 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: TABLE audit_log; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.audit_log IS 'Used to store application events for auditing use cases';
+
+
+--
+-- TOC entry 4490 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log.topic; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log.topic IS 'The topic of a given audit event';
+
+
+--
+-- TOC entry 4491 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log."timestamp"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log."timestamp" IS 'The time an event was recorded';
+
+
+--
+-- TOC entry 4492 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log.end_timestamp; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log.end_timestamp IS 'The time an event ended, if applicable';
+
+
+--
+-- TOC entry 4493 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log.user_id IS 'The user who performed an action or triggered an event';
+
+
+--
+-- TOC entry 4494 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log.model; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log.model IS 'The name of the model this event applies to (e.g. Card, Dashboard), if applicable';
+
+
+--
+-- TOC entry 4495 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log.model_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log.model_id IS 'The ID of the model this event applies to, if applicable';
+
+
+--
+-- TOC entry 4496 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: COLUMN audit_log.details; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.audit_log.details IS 'A JSON map with metadata about the event';
+
+
+--
+-- TOC entry 222 (class 1259 OID 16411)
+-- Name: audit_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.audit_log ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.audit_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 223 (class 1259 OID 16412)
 -- Name: bookmark_ordering; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -337,8 +433,8 @@ CREATE TABLE public.bookmark_ordering (
 
 
 --
--- TOC entry 4951 (class 0 OID 0)
--- Dependencies: 325
+-- TOC entry 4497 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: TABLE bookmark_ordering; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -346,8 +442,8 @@ COMMENT ON TABLE public.bookmark_ordering IS 'Table holding ordering information
 
 
 --
--- TOC entry 4952 (class 0 OID 0)
--- Dependencies: 325
+-- TOC entry 4498 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: COLUMN bookmark_ordering.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -355,8 +451,8 @@ COMMENT ON COLUMN public.bookmark_ordering.user_id IS 'ID of the User who ordere
 
 
 --
--- TOC entry 4953 (class 0 OID 0)
--- Dependencies: 325
+-- TOC entry 4499 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: COLUMN bookmark_ordering.type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -364,8 +460,8 @@ COMMENT ON COLUMN public.bookmark_ordering.type IS 'type of the Bookmark';
 
 
 --
--- TOC entry 4954 (class 0 OID 0)
--- Dependencies: 325
+-- TOC entry 4500 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: COLUMN bookmark_ordering.item_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -373,8 +469,8 @@ COMMENT ON COLUMN public.bookmark_ordering.item_id IS 'id of the item being book
 
 
 --
--- TOC entry 4955 (class 0 OID 0)
--- Dependencies: 325
+-- TOC entry 4501 (class 0 OID 0)
+-- Dependencies: 223
 -- Name: COLUMN bookmark_ordering.ordering; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -382,7 +478,7 @@ COMMENT ON COLUMN public.bookmark_ordering.ordering IS 'order of bookmark for us
 
 
 --
--- TOC entry 324 (class 1259 OID 27820)
+-- TOC entry 224 (class 1259 OID 16415)
 -- Name: bookmark_ordering_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -397,7 +493,7 @@ ALTER TABLE public.bookmark_ordering ALTER COLUMN id ADD GENERATED BY DEFAULT AS
 
 
 --
--- TOC entry 319 (class 1259 OID 27764)
+-- TOC entry 225 (class 1259 OID 16416)
 -- Name: card_bookmark; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -410,8 +506,8 @@ CREATE TABLE public.card_bookmark (
 
 
 --
--- TOC entry 4956 (class 0 OID 0)
--- Dependencies: 319
+-- TOC entry 4502 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: TABLE card_bookmark; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -419,8 +515,8 @@ COMMENT ON TABLE public.card_bookmark IS 'Table holding bookmarks on cards';
 
 
 --
--- TOC entry 4957 (class 0 OID 0)
--- Dependencies: 319
+-- TOC entry 4503 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: COLUMN card_bookmark.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -428,8 +524,8 @@ COMMENT ON COLUMN public.card_bookmark.user_id IS 'ID of the User who bookmarked
 
 
 --
--- TOC entry 4958 (class 0 OID 0)
--- Dependencies: 319
+-- TOC entry 4504 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: COLUMN card_bookmark.card_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -437,8 +533,8 @@ COMMENT ON COLUMN public.card_bookmark.card_id IS 'ID of the Card bookmarked by 
 
 
 --
--- TOC entry 4959 (class 0 OID 0)
--- Dependencies: 319
+-- TOC entry 4505 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: COLUMN card_bookmark.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -446,7 +542,7 @@ COMMENT ON COLUMN public.card_bookmark.created_at IS 'The timestamp of when the 
 
 
 --
--- TOC entry 318 (class 1259 OID 27763)
+-- TOC entry 226 (class 1259 OID 16420)
 -- Name: card_bookmark_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -461,7 +557,7 @@ ALTER TABLE public.card_bookmark ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 262 (class 1259 OID 26838)
+-- TOC entry 227 (class 1259 OID 16421)
 -- Name: card_label; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -473,7 +569,7 @@ CREATE TABLE public.card_label (
 
 
 --
--- TOC entry 261 (class 1259 OID 26837)
+-- TOC entry 228 (class 1259 OID 16424)
 -- Name: card_label_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -488,7 +584,7 @@ ALTER TABLE public.card_label ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- TOC entry 274 (class 1259 OID 27004)
+-- TOC entry 229 (class 1259 OID 16425)
 -- Name: collection; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -496,11 +592,10 @@ CREATE TABLE public.collection (
     id integer NOT NULL,
     name text NOT NULL,
     description text,
-    color character(7) NOT NULL,
     archived boolean DEFAULT false NOT NULL,
     location character varying(254) DEFAULT '/'::character varying NOT NULL,
     personal_owner_id integer,
-    slug character varying(254) NOT NULL,
+    slug character varying(510) NOT NULL,
     namespace character varying(254),
     authority_level character varying(255),
     entity_id character(21),
@@ -510,8 +605,8 @@ CREATE TABLE public.collection (
 
 
 --
--- TOC entry 4960 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4506 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: TABLE collection; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -519,8 +614,8 @@ COMMENT ON TABLE public.collection IS 'Collections are an optional way to organi
 
 
 --
--- TOC entry 4961 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4507 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -528,8 +623,8 @@ COMMENT ON COLUMN public.collection.name IS 'The user-facing name of this Collec
 
 
 --
--- TOC entry 4962 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4508 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.description; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -537,17 +632,8 @@ COMMENT ON COLUMN public.collection.description IS 'Optional description for thi
 
 
 --
--- TOC entry 4963 (class 0 OID 0)
--- Dependencies: 274
--- Name: COLUMN collection.color; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.collection.color IS 'Seven-character hex color for this Collection, including the preceding hash sign.';
-
-
---
--- TOC entry 4964 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4509 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.archived; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -555,8 +641,8 @@ COMMENT ON COLUMN public.collection.archived IS 'Whether this Collection has bee
 
 
 --
--- TOC entry 4965 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4510 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.location; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -564,8 +650,8 @@ COMMENT ON COLUMN public.collection.location IS 'Directory-structure path of anc
 
 
 --
--- TOC entry 4966 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4511 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.personal_owner_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -573,8 +659,8 @@ COMMENT ON COLUMN public.collection.personal_owner_id IS 'If set, this Collectio
 
 
 --
--- TOC entry 4967 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4512 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.slug; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -582,8 +668,8 @@ COMMENT ON COLUMN public.collection.slug IS 'Sluggified version of the Collectio
 
 
 --
--- TOC entry 4968 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4513 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.namespace; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -591,8 +677,8 @@ COMMENT ON COLUMN public.collection.namespace IS 'The namespace (hierachy) this 
 
 
 --
--- TOC entry 4969 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4514 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.authority_level; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -600,8 +686,8 @@ COMMENT ON COLUMN public.collection.authority_level IS 'Nullable column to incid
 
 
 --
--- TOC entry 4970 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4515 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -609,8 +695,8 @@ COMMENT ON COLUMN public.collection.entity_id IS 'Random NanoID tag for unique i
 
 
 --
--- TOC entry 4971 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4516 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -618,8 +704,8 @@ COMMENT ON COLUMN public.collection.created_at IS 'Timestamp of when this Collec
 
 
 --
--- TOC entry 4972 (class 0 OID 0)
--- Dependencies: 274
+-- TOC entry 4517 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: COLUMN collection.type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -627,7 +713,7 @@ COMMENT ON COLUMN public.collection.type IS 'This is used to differentiate insta
 
 
 --
--- TOC entry 321 (class 1259 OID 27785)
+-- TOC entry 230 (class 1259 OID 16433)
 -- Name: collection_bookmark; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -640,8 +726,8 @@ CREATE TABLE public.collection_bookmark (
 
 
 --
--- TOC entry 4973 (class 0 OID 0)
--- Dependencies: 321
+-- TOC entry 4518 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: TABLE collection_bookmark; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -649,8 +735,8 @@ COMMENT ON TABLE public.collection_bookmark IS 'Table holding bookmarks on colle
 
 
 --
--- TOC entry 4974 (class 0 OID 0)
--- Dependencies: 321
+-- TOC entry 4519 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: COLUMN collection_bookmark.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -658,8 +744,8 @@ COMMENT ON COLUMN public.collection_bookmark.user_id IS 'ID of the User who book
 
 
 --
--- TOC entry 4975 (class 0 OID 0)
--- Dependencies: 321
+-- TOC entry 4520 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: COLUMN collection_bookmark.collection_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -667,8 +753,8 @@ COMMENT ON COLUMN public.collection_bookmark.collection_id IS 'ID of the Card bo
 
 
 --
--- TOC entry 4976 (class 0 OID 0)
--- Dependencies: 321
+-- TOC entry 4521 (class 0 OID 0)
+-- Dependencies: 230
 -- Name: COLUMN collection_bookmark.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -676,7 +762,7 @@ COMMENT ON COLUMN public.collection_bookmark.created_at IS 'The timestamp of whe
 
 
 --
--- TOC entry 320 (class 1259 OID 27784)
+-- TOC entry 231 (class 1259 OID 16437)
 -- Name: collection_bookmark_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -691,7 +777,7 @@ ALTER TABLE public.collection_bookmark ALTER COLUMN id ADD GENERATED BY DEFAULT 
 
 
 --
--- TOC entry 273 (class 1259 OID 27003)
+-- TOC entry 232 (class 1259 OID 16438)
 -- Name: collection_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -706,7 +792,7 @@ ALTER TABLE public.collection ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- TOC entry 276 (class 1259 OID 27022)
+-- TOC entry 233 (class 1259 OID 16439)
 -- Name: collection_permission_graph_revision; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -721,8 +807,8 @@ CREATE TABLE public.collection_permission_graph_revision (
 
 
 --
--- TOC entry 4977 (class 0 OID 0)
--- Dependencies: 276
+-- TOC entry 4522 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: TABLE collection_permission_graph_revision; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -730,8 +816,8 @@ COMMENT ON TABLE public.collection_permission_graph_revision IS 'Used to keep tr
 
 
 --
--- TOC entry 4978 (class 0 OID 0)
--- Dependencies: 276
+-- TOC entry 4523 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: COLUMN collection_permission_graph_revision.before; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -739,8 +825,8 @@ COMMENT ON COLUMN public.collection_permission_graph_revision.before IS 'Seriali
 
 
 --
--- TOC entry 4979 (class 0 OID 0)
--- Dependencies: 276
+-- TOC entry 4524 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: COLUMN collection_permission_graph_revision.after; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -748,8 +834,8 @@ COMMENT ON COLUMN public.collection_permission_graph_revision.after IS 'Serializ
 
 
 --
--- TOC entry 4980 (class 0 OID 0)
--- Dependencies: 276
+-- TOC entry 4525 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: COLUMN collection_permission_graph_revision.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -757,8 +843,8 @@ COMMENT ON COLUMN public.collection_permission_graph_revision.user_id IS 'The ID
 
 
 --
--- TOC entry 4981 (class 0 OID 0)
--- Dependencies: 276
+-- TOC entry 4526 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: COLUMN collection_permission_graph_revision.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -766,8 +852,8 @@ COMMENT ON COLUMN public.collection_permission_graph_revision.created_at IS 'The
 
 
 --
--- TOC entry 4982 (class 0 OID 0)
--- Dependencies: 276
+-- TOC entry 4527 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: COLUMN collection_permission_graph_revision.remark; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -775,7 +861,7 @@ COMMENT ON COLUMN public.collection_permission_graph_revision.remark IS 'Optiona
 
 
 --
--- TOC entry 275 (class 1259 OID 27021)
+-- TOC entry 234 (class 1259 OID 16444)
 -- Name: collection_permission_graph_revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -790,87 +876,7 @@ ALTER TABLE public.collection_permission_graph_revision ALTER COLUMN id ADD GENE
 
 
 --
--- TOC entry 286 (class 1259 OID 27126)
--- Name: computation_job; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.computation_job (
-    id integer NOT NULL,
-    creator_id integer,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    type character varying(254) NOT NULL,
-    status character varying(254) NOT NULL,
-    context text,
-    ended_at timestamp without time zone
-);
-
-
---
--- TOC entry 4983 (class 0 OID 0)
--- Dependencies: 286
--- Name: TABLE computation_job; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON TABLE public.computation_job IS 'Stores submitted async computation jobs.';
-
-
---
--- TOC entry 285 (class 1259 OID 27125)
--- Name: computation_job_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.computation_job ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME public.computation_job_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 288 (class 1259 OID 27139)
--- Name: computation_job_result; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.computation_job_result (
-    id integer NOT NULL,
-    job_id integer NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
-    permanence character varying(254) NOT NULL,
-    payload text NOT NULL
-);
-
-
---
--- TOC entry 4984 (class 0 OID 0)
--- Dependencies: 288
--- Name: TABLE computation_job_result; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON TABLE public.computation_job_result IS 'Stores results of async computation jobs.';
-
-
---
--- TOC entry 287 (class 1259 OID 27138)
--- Name: computation_job_result_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-ALTER TABLE public.computation_job_result ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
-    SEQUENCE NAME public.computation_job_result_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- TOC entry 341 (class 1259 OID 28148)
+-- TOC entry 235 (class 1259 OID 16445)
 -- Name: connection_impersonations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -883,8 +889,8 @@ CREATE TABLE public.connection_impersonations (
 
 
 --
--- TOC entry 4985 (class 0 OID 0)
--- Dependencies: 341
+-- TOC entry 4528 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: TABLE connection_impersonations; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -892,8 +898,8 @@ COMMENT ON TABLE public.connection_impersonations IS 'Table for holding connecti
 
 
 --
--- TOC entry 4986 (class 0 OID 0)
--- Dependencies: 341
+-- TOC entry 4529 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: COLUMN connection_impersonations.db_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -901,8 +907,8 @@ COMMENT ON COLUMN public.connection_impersonations.db_id IS 'ID of the database 
 
 
 --
--- TOC entry 4987 (class 0 OID 0)
--- Dependencies: 341
+-- TOC entry 4530 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: COLUMN connection_impersonations.group_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -910,8 +916,8 @@ COMMENT ON COLUMN public.connection_impersonations.group_id IS 'ID of the permis
 
 
 --
--- TOC entry 4988 (class 0 OID 0)
--- Dependencies: 341
+-- TOC entry 4531 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: COLUMN connection_impersonations.attribute; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -919,7 +925,7 @@ COMMENT ON COLUMN public.connection_impersonations.attribute IS 'User attribute 
 
 
 --
--- TOC entry 340 (class 1259 OID 28147)
+-- TOC entry 236 (class 1259 OID 16450)
 -- Name: connection_impersonations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -934,7 +940,7 @@ ALTER TABLE public.connection_impersonations ALTER COLUMN id ADD GENERATED BY DE
 
 
 --
--- TOC entry 234 (class 1259 OID 26602)
+-- TOC entry 237 (class 1259 OID 16451)
 -- Name: core_session; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -947,8 +953,8 @@ CREATE TABLE public.core_session (
 
 
 --
--- TOC entry 4989 (class 0 OID 0)
--- Dependencies: 234
+-- TOC entry 4532 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: COLUMN core_session.anti_csrf_token; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -956,7 +962,7 @@ COMMENT ON COLUMN public.core_session.anti_csrf_token IS 'Anti-CSRF token for fu
 
 
 --
--- TOC entry 217 (class 1259 OID 26250)
+-- TOC entry 238 (class 1259 OID 16456)
 -- Name: core_user; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -984,8 +990,8 @@ CREATE TABLE public.core_user (
 
 
 --
--- TOC entry 4990 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 4533 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: COLUMN core_user.login_attributes; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -993,8 +999,8 @@ COMMENT ON COLUMN public.core_user.login_attributes IS 'JSON serialized map with
 
 
 --
--- TOC entry 4991 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 4534 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: COLUMN core_user.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1002,8 +1008,8 @@ COMMENT ON COLUMN public.core_user.updated_at IS 'When was this User last update
 
 
 --
--- TOC entry 4992 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 4535 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: COLUMN core_user.sso_source; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1011,8 +1017,8 @@ COMMENT ON COLUMN public.core_user.sso_source IS 'String to indicate the SSO bac
 
 
 --
--- TOC entry 4993 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 4536 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: COLUMN core_user.locale; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1020,8 +1026,8 @@ COMMENT ON COLUMN public.core_user.locale IS 'Preferred ISO locale (language/cou
 
 
 --
--- TOC entry 4994 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 4537 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: COLUMN core_user.is_datasetnewb; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1029,8 +1035,8 @@ COMMENT ON COLUMN public.core_user.is_datasetnewb IS 'Boolean flag to indicate i
 
 
 --
--- TOC entry 4995 (class 0 OID 0)
--- Dependencies: 217
+-- TOC entry 4538 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: COLUMN core_user.settings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1038,7 +1044,7 @@ COMMENT ON COLUMN public.core_user.settings IS 'Serialized JSON containing User-
 
 
 --
--- TOC entry 216 (class 1259 OID 26249)
+-- TOC entry 239 (class 1259 OID 16466)
 -- Name: core_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1053,7 +1059,7 @@ ALTER TABLE public.core_user ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTIT
 
 
 --
--- TOC entry 317 (class 1259 OID 27743)
+-- TOC entry 240 (class 1259 OID 16467)
 -- Name: dashboard_bookmark; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1066,8 +1072,8 @@ CREATE TABLE public.dashboard_bookmark (
 
 
 --
--- TOC entry 4996 (class 0 OID 0)
--- Dependencies: 317
+-- TOC entry 4539 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: TABLE dashboard_bookmark; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1075,8 +1081,8 @@ COMMENT ON TABLE public.dashboard_bookmark IS 'Table holding bookmarks on dashbo
 
 
 --
--- TOC entry 4997 (class 0 OID 0)
--- Dependencies: 317
+-- TOC entry 4540 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: COLUMN dashboard_bookmark.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1084,8 +1090,8 @@ COMMENT ON COLUMN public.dashboard_bookmark.user_id IS 'ID of the User who bookm
 
 
 --
--- TOC entry 4998 (class 0 OID 0)
--- Dependencies: 317
+-- TOC entry 4541 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: COLUMN dashboard_bookmark.dashboard_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1093,8 +1099,8 @@ COMMENT ON COLUMN public.dashboard_bookmark.dashboard_id IS 'ID of the Dashboard
 
 
 --
--- TOC entry 4999 (class 0 OID 0)
--- Dependencies: 317
+-- TOC entry 4542 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: COLUMN dashboard_bookmark.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1102,7 +1108,7 @@ COMMENT ON COLUMN public.dashboard_bookmark.created_at IS 'The timestamp of when
 
 
 --
--- TOC entry 316 (class 1259 OID 27742)
+-- TOC entry 241 (class 1259 OID 16471)
 -- Name: dashboard_bookmark_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1117,7 +1123,7 @@ ALTER TABLE public.dashboard_bookmark ALTER COLUMN id ADD GENERATED BY DEFAULT A
 
 
 --
--- TOC entry 282 (class 1259 OID 27080)
+-- TOC entry 242 (class 1259 OID 16472)
 -- Name: dashboard_favorite; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1129,8 +1135,8 @@ CREATE TABLE public.dashboard_favorite (
 
 
 --
--- TOC entry 5000 (class 0 OID 0)
--- Dependencies: 282
+-- TOC entry 4543 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: TABLE dashboard_favorite; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1138,8 +1144,8 @@ COMMENT ON TABLE public.dashboard_favorite IS 'Presence of a row here indicates 
 
 
 --
--- TOC entry 5001 (class 0 OID 0)
--- Dependencies: 282
+-- TOC entry 4544 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: COLUMN dashboard_favorite.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1147,8 +1153,8 @@ COMMENT ON COLUMN public.dashboard_favorite.user_id IS 'ID of the User who favor
 
 
 --
--- TOC entry 5002 (class 0 OID 0)
--- Dependencies: 282
+-- TOC entry 4545 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: COLUMN dashboard_favorite.dashboard_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1156,7 +1162,7 @@ COMMENT ON COLUMN public.dashboard_favorite.dashboard_id IS 'ID of the Dashboard
 
 
 --
--- TOC entry 281 (class 1259 OID 27079)
+-- TOC entry 243 (class 1259 OID 16475)
 -- Name: dashboard_favorite_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1171,7 +1177,7 @@ ALTER TABLE public.dashboard_favorite ALTER COLUMN id ADD GENERATED BY DEFAULT A
 
 
 --
--- TOC entry 336 (class 1259 OID 28090)
+-- TOC entry 244 (class 1259 OID 16476)
 -- Name: dashboard_tab; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1180,15 +1186,15 @@ CREATE TABLE public.dashboard_tab (
     dashboard_id integer NOT NULL,
     name text NOT NULL,
     "position" integer NOT NULL,
-    entity_id character(21) NOT NULL,
+    entity_id character(21),
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
 --
--- TOC entry 5003 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4546 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: TABLE dashboard_tab; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1196,8 +1202,8 @@ COMMENT ON TABLE public.dashboard_tab IS 'Join table connecting dashboard to das
 
 
 --
--- TOC entry 5004 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4547 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: COLUMN dashboard_tab.dashboard_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1205,8 +1211,8 @@ COMMENT ON COLUMN public.dashboard_tab.dashboard_id IS 'The dashboard that a tab
 
 
 --
--- TOC entry 5005 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4548 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: COLUMN dashboard_tab.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1214,8 +1220,8 @@ COMMENT ON COLUMN public.dashboard_tab.name IS 'Displayed name of the tab';
 
 
 --
--- TOC entry 5006 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4549 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: COLUMN dashboard_tab."position"; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1223,8 +1229,8 @@ COMMENT ON COLUMN public.dashboard_tab."position" IS 'Position of the tab with r
 
 
 --
--- TOC entry 5007 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4550 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: COLUMN dashboard_tab.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1232,8 +1238,8 @@ COMMENT ON COLUMN public.dashboard_tab.entity_id IS 'Random NanoID tag for uniqu
 
 
 --
--- TOC entry 5008 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4551 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: COLUMN dashboard_tab.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1241,8 +1247,8 @@ COMMENT ON COLUMN public.dashboard_tab.created_at IS 'The timestamp at which the
 
 
 --
--- TOC entry 5009 (class 0 OID 0)
--- Dependencies: 336
+-- TOC entry 4552 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: COLUMN dashboard_tab.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1250,7 +1256,7 @@ COMMENT ON COLUMN public.dashboard_tab.updated_at IS 'The timestamp at which the
 
 
 --
--- TOC entry 335 (class 1259 OID 28089)
+-- TOC entry 245 (class 1259 OID 16483)
 -- Name: dashboard_tab_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1265,7 +1271,7 @@ ALTER TABLE public.dashboard_tab ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 258 (class 1259 OID 26808)
+-- TOC entry 246 (class 1259 OID 16484)
 -- Name: dashboardcard_series; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1278,7 +1284,7 @@ CREATE TABLE public.dashboardcard_series (
 
 
 --
--- TOC entry 257 (class 1259 OID 26807)
+-- TOC entry 247 (class 1259 OID 16487)
 -- Name: dashboardcard_series_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1293,18 +1299,7 @@ ALTER TABLE public.dashboardcard_series ALTER COLUMN id ADD GENERATED BY DEFAULT
 
 
 --
--- TOC entry 242 (class 1259 OID 26680)
--- Name: data_migrations; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.data_migrations (
-    id character varying(254) NOT NULL,
-    "timestamp" timestamp without time zone NOT NULL
-);
-
-
---
--- TOC entry 214 (class 1259 OID 26229)
+-- TOC entry 248 (class 1259 OID 16488)
 -- Name: databasechangelog; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1327,7 +1322,7 @@ CREATE TABLE public.databasechangelog (
 
 
 --
--- TOC entry 215 (class 1259 OID 26234)
+-- TOC entry 249 (class 1259 OID 16493)
 -- Name: databasechangeloglock; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1340,7 +1335,7 @@ CREATE TABLE public.databasechangeloglock (
 
 
 --
--- TOC entry 254 (class 1259 OID 26776)
+-- TOC entry 250 (class 1259 OID 16496)
 -- Name: dependency; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1355,7 +1350,7 @@ CREATE TABLE public.dependency (
 
 
 --
--- TOC entry 253 (class 1259 OID 26775)
+-- TOC entry 251 (class 1259 OID 16499)
 -- Name: dependency_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1370,7 +1365,7 @@ ALTER TABLE public.dependency ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- TOC entry 284 (class 1259 OID 27101)
+-- TOC entry 252 (class 1259 OID 16500)
 -- Name: dimension; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1387,8 +1382,8 @@ CREATE TABLE public.dimension (
 
 
 --
--- TOC entry 5010 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4553 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: TABLE dimension; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1396,8 +1391,8 @@ COMMENT ON TABLE public.dimension IS 'Stores references to alternate views of ex
 
 
 --
--- TOC entry 5011 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4554 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.field_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1405,8 +1400,8 @@ COMMENT ON COLUMN public.dimension.field_id IS 'ID of the field this dimension r
 
 
 --
--- TOC entry 5012 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4555 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1414,8 +1409,8 @@ COMMENT ON COLUMN public.dimension.name IS 'Short description used as the displa
 
 
 --
--- TOC entry 5013 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4556 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1423,8 +1418,8 @@ COMMENT ON COLUMN public.dimension.type IS 'Either internal for a user defined r
 
 
 --
--- TOC entry 5014 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4557 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.human_readable_field_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1432,8 +1427,8 @@ COMMENT ON COLUMN public.dimension.human_readable_field_id IS 'Only used with ex
 
 
 --
--- TOC entry 5015 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4558 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1441,8 +1436,8 @@ COMMENT ON COLUMN public.dimension.created_at IS 'The timestamp of when the dime
 
 
 --
--- TOC entry 5016 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4559 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1450,8 +1445,8 @@ COMMENT ON COLUMN public.dimension.updated_at IS 'The timestamp of when these di
 
 
 --
--- TOC entry 5017 (class 0 OID 0)
--- Dependencies: 284
+-- TOC entry 4560 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: COLUMN dimension.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1459,7 +1454,7 @@ COMMENT ON COLUMN public.dimension.entity_id IS 'Random NanoID tag for unique id
 
 
 --
--- TOC entry 283 (class 1259 OID 27100)
+-- TOC entry 253 (class 1259 OID 16505)
 -- Name: dimension_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1474,7 +1469,7 @@ ALTER TABLE public.dimension ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTIT
 
 
 --
--- TOC entry 290 (class 1259 OID 27156)
+-- TOC entry 254 (class 1259 OID 16506)
 -- Name: sandboxes; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1489,8 +1484,8 @@ CREATE TABLE public.sandboxes (
 
 
 --
--- TOC entry 5018 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 4561 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: TABLE sandboxes; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1498,8 +1493,8 @@ COMMENT ON TABLE public.sandboxes IS 'Records that a given Card (Question) shoul
 
 
 --
--- TOC entry 5019 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 4562 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: COLUMN sandboxes.group_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1507,8 +1502,8 @@ COMMENT ON COLUMN public.sandboxes.group_id IS 'ID of the Permissions Group this
 
 
 --
--- TOC entry 5020 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 4563 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: COLUMN sandboxes.table_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1516,8 +1511,8 @@ COMMENT ON COLUMN public.sandboxes.table_id IS 'ID of the Table that should get 
 
 
 --
--- TOC entry 5021 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 4564 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: COLUMN sandboxes.card_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1525,8 +1520,8 @@ COMMENT ON COLUMN public.sandboxes.card_id IS 'ID of the Card (Question) to be u
 
 
 --
--- TOC entry 5022 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 4565 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: COLUMN sandboxes.attribute_remappings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1534,8 +1529,8 @@ COMMENT ON COLUMN public.sandboxes.attribute_remappings IS 'JSON-encoded map of 
 
 
 --
--- TOC entry 5023 (class 0 OID 0)
--- Dependencies: 290
+-- TOC entry 4566 (class 0 OID 0)
+-- Dependencies: 254
 -- Name: COLUMN sandboxes.permission_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1543,7 +1538,7 @@ COMMENT ON COLUMN public.sandboxes.permission_id IS 'The ID of the corresponding
 
 
 --
--- TOC entry 289 (class 1259 OID 27155)
+-- TOC entry 255 (class 1259 OID 16511)
 -- Name: group_table_access_policy_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1558,7 +1553,7 @@ ALTER TABLE public.sandboxes ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTIT
 
 
 --
--- TOC entry 331 (class 1259 OID 27921)
+-- TOC entry 256 (class 1259 OID 16512)
 -- Name: http_action; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1571,8 +1566,8 @@ CREATE TABLE public.http_action (
 
 
 --
--- TOC entry 5024 (class 0 OID 0)
--- Dependencies: 331
+-- TOC entry 4567 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: TABLE http_action; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1580,8 +1575,8 @@ COMMENT ON TABLE public.http_action IS 'An http api call type of action';
 
 
 --
--- TOC entry 5025 (class 0 OID 0)
--- Dependencies: 331
+-- TOC entry 4568 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: COLUMN http_action.action_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1589,8 +1584,8 @@ COMMENT ON COLUMN public.http_action.action_id IS 'The related action';
 
 
 --
--- TOC entry 5026 (class 0 OID 0)
--- Dependencies: 331
+-- TOC entry 4569 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: COLUMN http_action.template; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1598,8 +1593,8 @@ COMMENT ON COLUMN public.http_action.template IS 'A template that defines method
 
 
 --
--- TOC entry 5027 (class 0 OID 0)
--- Dependencies: 331
+-- TOC entry 4570 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: COLUMN http_action.response_handle; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1607,8 +1602,8 @@ COMMENT ON COLUMN public.http_action.response_handle IS 'A program to take an ap
 
 
 --
--- TOC entry 5028 (class 0 OID 0)
--- Dependencies: 331
+-- TOC entry 4571 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: COLUMN http_action.error_handle; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1616,7 +1611,7 @@ COMMENT ON COLUMN public.http_action.error_handle IS 'A program to take an api r
 
 
 --
--- TOC entry 332 (class 1259 OID 28007)
+-- TOC entry 257 (class 1259 OID 16517)
 -- Name: implicit_action; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1627,8 +1622,8 @@ CREATE TABLE public.implicit_action (
 
 
 --
--- TOC entry 5029 (class 0 OID 0)
--- Dependencies: 332
+-- TOC entry 4572 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: TABLE implicit_action; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1636,8 +1631,8 @@ COMMENT ON TABLE public.implicit_action IS 'An action with dynamic parameters ba
 
 
 --
--- TOC entry 5030 (class 0 OID 0)
--- Dependencies: 332
+-- TOC entry 4573 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: COLUMN implicit_action.action_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1645,8 +1640,8 @@ COMMENT ON COLUMN public.implicit_action.action_id IS 'The associated action';
 
 
 --
--- TOC entry 5031 (class 0 OID 0)
--- Dependencies: 332
+-- TOC entry 4574 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: COLUMN implicit_action.kind; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1654,7 +1649,7 @@ COMMENT ON COLUMN public.implicit_action.kind IS 'The kind of implicit action cr
 
 
 --
--- TOC entry 260 (class 1259 OID 26827)
+-- TOC entry 258 (class 1259 OID 16522)
 -- Name: label; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1667,7 +1662,7 @@ CREATE TABLE public.label (
 
 
 --
--- TOC entry 259 (class 1259 OID 26826)
+-- TOC entry 259 (class 1259 OID 16527)
 -- Name: label_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1682,7 +1677,7 @@ ALTER TABLE public.label ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 
 
 --
--- TOC entry 307 (class 1259 OID 27636)
+-- TOC entry 260 (class 1259 OID 16528)
 -- Name: login_history; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1698,8 +1693,8 @@ CREATE TABLE public.login_history (
 
 
 --
--- TOC entry 5032 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4575 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: TABLE login_history; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1707,8 +1702,8 @@ COMMENT ON TABLE public.login_history IS 'Keeps track of various logins for diff
 
 
 --
--- TOC entry 5033 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4576 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: COLUMN login_history."timestamp"; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1716,8 +1711,8 @@ COMMENT ON COLUMN public.login_history."timestamp" IS 'When this login occurred.
 
 
 --
--- TOC entry 5034 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4577 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: COLUMN login_history.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1725,8 +1720,8 @@ COMMENT ON COLUMN public.login_history.user_id IS 'ID of the User that logged in
 
 
 --
--- TOC entry 5035 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4578 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: COLUMN login_history.session_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1734,8 +1729,8 @@ COMMENT ON COLUMN public.login_history.session_id IS 'ID of the Session created 
 
 
 --
--- TOC entry 5036 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4579 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: COLUMN login_history.device_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1743,8 +1738,8 @@ COMMENT ON COLUMN public.login_history.device_id IS 'Cookie-based unique identif
 
 
 --
--- TOC entry 5037 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4580 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: COLUMN login_history.device_description; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1752,8 +1747,8 @@ COMMENT ON COLUMN public.login_history.device_description IS 'Description of the
 
 
 --
--- TOC entry 5038 (class 0 OID 0)
--- Dependencies: 307
+-- TOC entry 4581 (class 0 OID 0)
+-- Dependencies: 260
 -- Name: COLUMN login_history.ip_address; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1761,7 +1756,7 @@ COMMENT ON COLUMN public.login_history.ip_address IS 'IP address of the device t
 
 
 --
--- TOC entry 306 (class 1259 OID 27635)
+-- TOC entry 261 (class 1259 OID 16534)
 -- Name: login_history_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1776,7 +1771,7 @@ ALTER TABLE public.login_history ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 219 (class 1259 OID 26293)
+-- TOC entry 262 (class 1259 OID 16535)
 -- Name: metabase_database; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1796,7 +1791,6 @@ CREATE TABLE public.metabase_database (
     cache_field_values_schedule character varying(254) DEFAULT '0 50 0 * * ? *'::character varying NOT NULL,
     timezone character varying(254),
     is_on_demand boolean DEFAULT false NOT NULL,
-    options text,
     auto_run_queries boolean DEFAULT true NOT NULL,
     refingerprint boolean,
     cache_ttl integer,
@@ -1809,8 +1803,8 @@ CREATE TABLE public.metabase_database (
 
 
 --
--- TOC entry 5039 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4582 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.metadata_sync_schedule; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1818,8 +1812,8 @@ COMMENT ON COLUMN public.metabase_database.metadata_sync_schedule IS 'The cron s
 
 
 --
--- TOC entry 5040 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4583 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.cache_field_values_schedule; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1827,8 +1821,8 @@ COMMENT ON COLUMN public.metabase_database.cache_field_values_schedule IS 'The c
 
 
 --
--- TOC entry 5041 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4584 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.timezone; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1836,8 +1830,8 @@ COMMENT ON COLUMN public.metabase_database.timezone IS 'Timezone identifier for 
 
 
 --
--- TOC entry 5042 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4585 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.is_on_demand; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1845,17 +1839,8 @@ COMMENT ON COLUMN public.metabase_database.is_on_demand IS 'Whether we should do
 
 
 --
--- TOC entry 5043 (class 0 OID 0)
--- Dependencies: 219
--- Name: COLUMN metabase_database.options; Type: COMMENT; Schema: public; Owner: -
---
-
-COMMENT ON COLUMN public.metabase_database.options IS 'Serialized JSON containing various options like QB behavior.';
-
-
---
--- TOC entry 5044 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4586 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.auto_run_queries; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1863,8 +1848,8 @@ COMMENT ON COLUMN public.metabase_database.auto_run_queries IS 'Whether to autom
 
 
 --
--- TOC entry 5045 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4587 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.refingerprint; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1872,8 +1857,8 @@ COMMENT ON COLUMN public.metabase_database.refingerprint IS 'Whether or not to e
 
 
 --
--- TOC entry 5046 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4588 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.cache_ttl; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1881,8 +1866,8 @@ COMMENT ON COLUMN public.metabase_database.cache_ttl IS 'Granular cache TTL for 
 
 
 --
--- TOC entry 5047 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4589 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.initial_sync_status; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1890,8 +1875,8 @@ COMMENT ON COLUMN public.metabase_database.initial_sync_status IS 'String indica
 
 
 --
--- TOC entry 5048 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4590 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1899,8 +1884,8 @@ COMMENT ON COLUMN public.metabase_database.creator_id IS 'ID of the admin who ad
 
 
 --
--- TOC entry 5049 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4591 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.settings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1908,8 +1893,8 @@ COMMENT ON COLUMN public.metabase_database.settings IS 'Serialized JSON containi
 
 
 --
--- TOC entry 5050 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4592 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.dbms_version; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1917,8 +1902,8 @@ COMMENT ON COLUMN public.metabase_database.dbms_version IS 'A JSON object descri
 
 
 --
--- TOC entry 5051 (class 0 OID 0)
--- Dependencies: 219
+-- TOC entry 4593 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: COLUMN metabase_database.is_audit; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1926,7 +1911,7 @@ COMMENT ON COLUMN public.metabase_database.is_audit IS 'Only the app db, visible
 
 
 --
--- TOC entry 218 (class 1259 OID 26292)
+-- TOC entry 263 (class 1259 OID 16550)
 -- Name: metabase_database_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1941,7 +1926,7 @@ ALTER TABLE public.metabase_database ALTER COLUMN id ADD GENERATED BY DEFAULT AS
 
 
 --
--- TOC entry 223 (class 1259 OID 26321)
+-- TOC entry 264 (class 1259 OID 16551)
 -- Name: metabase_field; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1981,8 +1966,8 @@ CREATE TABLE public.metabase_field (
 
 
 --
--- TOC entry 5052 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4594 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.fingerprint; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1990,8 +1975,8 @@ COMMENT ON COLUMN public.metabase_field.fingerprint IS 'Serialized JSON containi
 
 
 --
--- TOC entry 5053 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4595 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.fingerprint_version; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -1999,8 +1984,8 @@ COMMENT ON COLUMN public.metabase_field.fingerprint_version IS 'The version of t
 
 
 --
--- TOC entry 5054 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4596 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.database_type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2008,8 +1993,8 @@ COMMENT ON COLUMN public.metabase_field.database_type IS 'The actual type of thi
 
 
 --
--- TOC entry 5055 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4597 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.has_field_values; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2017,8 +2002,8 @@ COMMENT ON COLUMN public.metabase_field.has_field_values IS 'Whether we have Fie
 
 
 --
--- TOC entry 5056 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4598 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.settings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2026,8 +2011,8 @@ COMMENT ON COLUMN public.metabase_field.settings IS 'Serialized JSON FE-specific
 
 
 --
--- TOC entry 5057 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4599 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.effective_type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2035,8 +2020,8 @@ COMMENT ON COLUMN public.metabase_field.effective_type IS 'The effective type of
 
 
 --
--- TOC entry 5058 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4600 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.coercion_strategy; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2044,8 +2029,8 @@ COMMENT ON COLUMN public.metabase_field.coercion_strategy IS 'A strategy to coer
 
 
 --
--- TOC entry 5059 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4601 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.nfc_path; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2053,8 +2038,8 @@ COMMENT ON COLUMN public.metabase_field.nfc_path IS 'Nested field column paths, 
 
 
 --
--- TOC entry 5060 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4602 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.database_required; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2062,8 +2047,8 @@ COMMENT ON COLUMN public.metabase_field.database_required IS 'Indicates this fie
 
 
 --
--- TOC entry 5061 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4603 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.json_unfolding; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2071,8 +2056,8 @@ COMMENT ON COLUMN public.metabase_field.json_unfolding IS 'Enable/disable JSON u
 
 
 --
--- TOC entry 5062 (class 0 OID 0)
--- Dependencies: 223
+-- TOC entry 4604 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: COLUMN metabase_field.database_is_auto_increment; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2080,7 +2065,7 @@ COMMENT ON COLUMN public.metabase_field.database_is_auto_increment IS 'Indicates
 
 
 --
--- TOC entry 222 (class 1259 OID 26320)
+-- TOC entry 265 (class 1259 OID 16566)
 -- Name: metabase_field_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2095,7 +2080,7 @@ ALTER TABLE public.metabase_field ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 
 
 --
--- TOC entry 225 (class 1259 OID 26353)
+-- TOC entry 266 (class 1259 OID 16567)
 -- Name: metabase_fieldvalues; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2114,8 +2099,8 @@ CREATE TABLE public.metabase_fieldvalues (
 
 
 --
--- TOC entry 5063 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 4605 (class 0 OID 0)
+-- Dependencies: 266
 -- Name: COLUMN metabase_fieldvalues.has_more_values; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2123,8 +2108,8 @@ COMMENT ON COLUMN public.metabase_fieldvalues.has_more_values IS 'true if the st
 
 
 --
--- TOC entry 5064 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 4606 (class 0 OID 0)
+-- Dependencies: 266
 -- Name: COLUMN metabase_fieldvalues.type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2132,8 +2117,8 @@ COMMENT ON COLUMN public.metabase_fieldvalues.type IS 'Type of FieldValues';
 
 
 --
--- TOC entry 5065 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 4607 (class 0 OID 0)
+-- Dependencies: 266
 -- Name: COLUMN metabase_fieldvalues.hash_key; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2141,8 +2126,8 @@ COMMENT ON COLUMN public.metabase_fieldvalues.hash_key IS 'Hash key for a cached
 
 
 --
--- TOC entry 5066 (class 0 OID 0)
--- Dependencies: 225
+-- TOC entry 4608 (class 0 OID 0)
+-- Dependencies: 266
 -- Name: COLUMN metabase_fieldvalues.last_used_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2150,7 +2135,7 @@ COMMENT ON COLUMN public.metabase_fieldvalues.last_used_at IS 'Timestamp of when
 
 
 --
--- TOC entry 224 (class 1259 OID 26352)
+-- TOC entry 267 (class 1259 OID 16575)
 -- Name: metabase_fieldvalues_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2165,7 +2150,7 @@ ALTER TABLE public.metabase_fieldvalues ALTER COLUMN id ADD GENERATED BY DEFAULT
 
 
 --
--- TOC entry 221 (class 1259 OID 26307)
+-- TOC entry 268 (class 1259 OID 16576)
 -- Name: metabase_table; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2191,8 +2176,8 @@ CREATE TABLE public.metabase_table (
 
 
 --
--- TOC entry 5067 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 4609 (class 0 OID 0)
+-- Dependencies: 268
 -- Name: COLUMN metabase_table.initial_sync_status; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2200,8 +2185,8 @@ COMMENT ON COLUMN public.metabase_table.initial_sync_status IS 'String indicatin
 
 
 --
--- TOC entry 5068 (class 0 OID 0)
--- Dependencies: 221
+-- TOC entry 4610 (class 0 OID 0)
+-- Dependencies: 268
 -- Name: COLUMN metabase_table.is_upload; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2209,7 +2194,7 @@ COMMENT ON COLUMN public.metabase_table.is_upload IS 'Was the table created from
 
 
 --
--- TOC entry 220 (class 1259 OID 26306)
+-- TOC entry 269 (class 1259 OID 16585)
 -- Name: metabase_table_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2224,7 +2209,7 @@ ALTER TABLE public.metabase_table ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 
 
 --
--- TOC entry 256 (class 1259 OID 26786)
+-- TOC entry 270 (class 1259 OID 16586)
 -- Name: metric; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2247,8 +2232,8 @@ CREATE TABLE public.metric (
 
 
 --
--- TOC entry 5069 (class 0 OID 0)
--- Dependencies: 256
+-- TOC entry 4611 (class 0 OID 0)
+-- Dependencies: 270
 -- Name: COLUMN metric.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2256,7 +2241,7 @@ COMMENT ON COLUMN public.metric.entity_id IS 'Random NanoID tag for unique ident
 
 
 --
--- TOC entry 255 (class 1259 OID 26785)
+-- TOC entry 271 (class 1259 OID 16593)
 -- Name: metric_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2271,7 +2256,7 @@ ALTER TABLE public.metric ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 
 
 --
--- TOC entry 264 (class 1259 OID 26909)
+-- TOC entry 272 (class 1259 OID 16594)
 -- Name: metric_important_field; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2283,7 +2268,7 @@ CREATE TABLE public.metric_important_field (
 
 
 --
--- TOC entry 263 (class 1259 OID 26908)
+-- TOC entry 273 (class 1259 OID 16597)
 -- Name: metric_important_field_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2298,7 +2283,7 @@ ALTER TABLE public.metric_important_field ALTER COLUMN id ADD GENERATED BY DEFAU
 
 
 --
--- TOC entry 338 (class 1259 OID 28116)
+-- TOC entry 274 (class 1259 OID 16598)
 -- Name: model_index; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2317,8 +2302,8 @@ CREATE TABLE public.model_index (
 
 
 --
--- TOC entry 5070 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4612 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: TABLE model_index; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2326,8 +2311,8 @@ COMMENT ON TABLE public.model_index IS 'Used to keep track of which models have 
 
 
 --
--- TOC entry 5071 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4613 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.model_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2335,8 +2320,8 @@ COMMENT ON COLUMN public.model_index.model_id IS 'The ID of the indexed model.';
 
 
 --
--- TOC entry 5072 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4614 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.pk_ref; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2344,8 +2329,8 @@ COMMENT ON COLUMN public.model_index.pk_ref IS 'Serialized JSON of the primary k
 
 
 --
--- TOC entry 5073 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4615 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.value_ref; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2353,8 +2338,8 @@ COMMENT ON COLUMN public.model_index.value_ref IS 'Serialized JSON of the label 
 
 
 --
--- TOC entry 5074 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4616 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.schedule; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2362,8 +2347,8 @@ COMMENT ON COLUMN public.model_index.schedule IS 'The cron schedule for when val
 
 
 --
--- TOC entry 5075 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4617 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.state; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2371,8 +2356,8 @@ COMMENT ON COLUMN public.model_index.state IS 'The status of the index: initiali
 
 
 --
--- TOC entry 5076 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4618 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.indexed_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2380,8 +2365,8 @@ COMMENT ON COLUMN public.model_index.indexed_at IS 'When the status changed';
 
 
 --
--- TOC entry 5077 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4619 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.error; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2389,8 +2374,8 @@ COMMENT ON COLUMN public.model_index.error IS 'The error message if the status i
 
 
 --
--- TOC entry 5078 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4620 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2398,8 +2383,8 @@ COMMENT ON COLUMN public.model_index.created_at IS 'The timestamp of when these 
 
 
 --
--- TOC entry 5079 (class 0 OID 0)
--- Dependencies: 338
+-- TOC entry 4621 (class 0 OID 0)
+-- Dependencies: 274
 -- Name: COLUMN model_index.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2407,7 +2392,7 @@ COMMENT ON COLUMN public.model_index.creator_id IS 'ID of the user who created t
 
 
 --
--- TOC entry 337 (class 1259 OID 28115)
+-- TOC entry 275 (class 1259 OID 16604)
 -- Name: model_index_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2422,7 +2407,7 @@ ALTER TABLE public.model_index ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENT
 
 
 --
--- TOC entry 339 (class 1259 OID 28129)
+-- TOC entry 276 (class 1259 OID 16605)
 -- Name: model_index_value; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2434,8 +2419,8 @@ CREATE TABLE public.model_index_value (
 
 
 --
--- TOC entry 5080 (class 0 OID 0)
--- Dependencies: 339
+-- TOC entry 4622 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: TABLE model_index_value; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2443,8 +2428,8 @@ COMMENT ON TABLE public.model_index_value IS 'Used to keep track of the values i
 
 
 --
--- TOC entry 5081 (class 0 OID 0)
--- Dependencies: 339
+-- TOC entry 4623 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: COLUMN model_index_value.model_index_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2452,8 +2437,8 @@ COMMENT ON COLUMN public.model_index_value.model_index_id IS 'The ID of the inde
 
 
 --
--- TOC entry 5082 (class 0 OID 0)
--- Dependencies: 339
+-- TOC entry 4624 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: COLUMN model_index_value.model_pk; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2461,8 +2446,8 @@ COMMENT ON COLUMN public.model_index_value.model_pk IS 'The primary key of the i
 
 
 --
--- TOC entry 5083 (class 0 OID 0)
--- Dependencies: 339
+-- TOC entry 4625 (class 0 OID 0)
+-- Dependencies: 276
 -- Name: COLUMN model_index_value.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2470,7 +2455,7 @@ COMMENT ON COLUMN public.model_index_value.name IS 'The label to display identif
 
 
 --
--- TOC entry 309 (class 1259 OID 27660)
+-- TOC entry 277 (class 1259 OID 16610)
 -- Name: moderation_review; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2488,8 +2473,8 @@ CREATE TABLE public.moderation_review (
 
 
 --
--- TOC entry 5084 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4626 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: TABLE moderation_review; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2497,8 +2482,8 @@ COMMENT ON TABLE public.moderation_review IS 'Reviews (from moderators) for a gi
 
 
 --
--- TOC entry 5085 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4627 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2506,8 +2491,8 @@ COMMENT ON COLUMN public.moderation_review.updated_at IS 'most recent modificati
 
 
 --
--- TOC entry 5086 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4628 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2515,8 +2500,8 @@ COMMENT ON COLUMN public.moderation_review.created_at IS 'creation time';
 
 
 --
--- TOC entry 5087 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4629 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.status; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2524,8 +2509,8 @@ COMMENT ON COLUMN public.moderation_review.status IS 'verified, misleading, conf
 
 
 --
--- TOC entry 5088 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4630 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.text; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2533,8 +2518,8 @@ COMMENT ON COLUMN public.moderation_review.text IS 'Explanation of the review';
 
 
 --
--- TOC entry 5089 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4631 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.moderated_item_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2542,8 +2527,8 @@ COMMENT ON COLUMN public.moderation_review.moderated_item_id IS 'either a docume
 
 
 --
--- TOC entry 5090 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4632 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.moderated_item_type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2551,8 +2536,8 @@ COMMENT ON COLUMN public.moderation_review.moderated_item_type IS 'whether it''s
 
 
 --
--- TOC entry 5091 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4633 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.moderator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2560,8 +2545,8 @@ COMMENT ON COLUMN public.moderation_review.moderator_id IS 'ID of the user who d
 
 
 --
--- TOC entry 5092 (class 0 OID 0)
--- Dependencies: 309
+-- TOC entry 4634 (class 0 OID 0)
+-- Dependencies: 277
 -- Name: COLUMN moderation_review.most_recent; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2569,7 +2554,7 @@ COMMENT ON COLUMN public.moderation_review.most_recent IS 'tag for most recent r
 
 
 --
--- TOC entry 308 (class 1259 OID 27659)
+-- TOC entry 278 (class 1259 OID 16617)
 -- Name: moderation_review_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2584,7 +2569,7 @@ ALTER TABLE public.moderation_review ALTER COLUMN id ADD GENERATED BY DEFAULT AS
 
 
 --
--- TOC entry 305 (class 1259 OID 27353)
+-- TOC entry 279 (class 1259 OID 16618)
 -- Name: native_query_snippet; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2603,8 +2588,8 @@ CREATE TABLE public.native_query_snippet (
 
 
 --
--- TOC entry 5093 (class 0 OID 0)
--- Dependencies: 305
+-- TOC entry 4635 (class 0 OID 0)
+-- Dependencies: 279
 -- Name: TABLE native_query_snippet; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2612,8 +2597,8 @@ COMMENT ON TABLE public.native_query_snippet IS 'Query snippets (raw text) to be
 
 
 --
--- TOC entry 5094 (class 0 OID 0)
--- Dependencies: 305
+-- TOC entry 4636 (class 0 OID 0)
+-- Dependencies: 279
 -- Name: COLUMN native_query_snippet.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2621,8 +2606,8 @@ COMMENT ON COLUMN public.native_query_snippet.name IS 'Name of the query snippet
 
 
 --
--- TOC entry 5095 (class 0 OID 0)
--- Dependencies: 305
+-- TOC entry 4637 (class 0 OID 0)
+-- Dependencies: 279
 -- Name: COLUMN native_query_snippet.content; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2630,8 +2615,8 @@ COMMENT ON COLUMN public.native_query_snippet.content IS 'Raw query snippet';
 
 
 --
--- TOC entry 5096 (class 0 OID 0)
--- Dependencies: 305
+-- TOC entry 4638 (class 0 OID 0)
+-- Dependencies: 279
 -- Name: COLUMN native_query_snippet.collection_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2639,8 +2624,8 @@ COMMENT ON COLUMN public.native_query_snippet.collection_id IS 'ID of the Snippe
 
 
 --
--- TOC entry 5097 (class 0 OID 0)
--- Dependencies: 305
+-- TOC entry 4639 (class 0 OID 0)
+-- Dependencies: 279
 -- Name: COLUMN native_query_snippet.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2648,7 +2633,7 @@ COMMENT ON COLUMN public.native_query_snippet.entity_id IS 'Random NanoID tag fo
 
 
 --
--- TOC entry 304 (class 1259 OID 27352)
+-- TOC entry 280 (class 1259 OID 16626)
 -- Name: native_query_snippet_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2663,7 +2648,7 @@ ALTER TABLE public.native_query_snippet ALTER COLUMN id ADD GENERATED BY DEFAULT
 
 
 --
--- TOC entry 334 (class 1259 OID 28033)
+-- TOC entry 281 (class 1259 OID 16627)
 -- Name: parameter_card; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2679,8 +2664,8 @@ CREATE TABLE public.parameter_card (
 
 
 --
--- TOC entry 5098 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4640 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: TABLE parameter_card; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2688,8 +2673,8 @@ COMMENT ON TABLE public.parameter_card IS 'Join table connecting cards to entiti
 
 
 --
--- TOC entry 5099 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4641 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: COLUMN parameter_card.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2697,8 +2682,8 @@ COMMENT ON COLUMN public.parameter_card.updated_at IS 'most recent modification 
 
 
 --
--- TOC entry 5100 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4642 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: COLUMN parameter_card.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2706,8 +2691,8 @@ COMMENT ON COLUMN public.parameter_card.created_at IS 'creation time';
 
 
 --
--- TOC entry 5101 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4643 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: COLUMN parameter_card.card_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2715,8 +2700,8 @@ COMMENT ON COLUMN public.parameter_card.card_id IS 'ID of the card generating th
 
 
 --
--- TOC entry 5102 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4644 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: COLUMN parameter_card.parameterized_object_type; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2724,8 +2709,8 @@ COMMENT ON COLUMN public.parameter_card.parameterized_object_type IS 'Type of th
 
 
 --
--- TOC entry 5103 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4645 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: COLUMN parameter_card.parameterized_object_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2733,8 +2718,8 @@ COMMENT ON COLUMN public.parameter_card.parameterized_object_id IS 'ID of the en
 
 
 --
--- TOC entry 5104 (class 0 OID 0)
--- Dependencies: 334
+-- TOC entry 4646 (class 0 OID 0)
+-- Dependencies: 281
 -- Name: COLUMN parameter_card.parameter_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2742,7 +2727,7 @@ COMMENT ON COLUMN public.parameter_card.parameter_id IS 'The parameter ID';
 
 
 --
--- TOC entry 333 (class 1259 OID 28032)
+-- TOC entry 282 (class 1259 OID 16632)
 -- Name: parameter_card_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2757,7 +2742,7 @@ ALTER TABLE public.parameter_card ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 
 
 --
--- TOC entry 270 (class 1259 OID 26960)
+-- TOC entry 283 (class 1259 OID 16633)
 -- Name: permissions; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2769,7 +2754,7 @@ CREATE TABLE public.permissions (
 
 
 --
--- TOC entry 266 (class 1259 OID 26930)
+-- TOC entry 284 (class 1259 OID 16636)
 -- Name: permissions_group; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2780,7 +2765,7 @@ CREATE TABLE public.permissions_group (
 
 
 --
--- TOC entry 265 (class 1259 OID 26929)
+-- TOC entry 285 (class 1259 OID 16639)
 -- Name: permissions_group_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2795,7 +2780,7 @@ ALTER TABLE public.permissions_group ALTER COLUMN id ADD GENERATED BY DEFAULT AS
 
 
 --
--- TOC entry 268 (class 1259 OID 26939)
+-- TOC entry 286 (class 1259 OID 16640)
 -- Name: permissions_group_membership; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2808,8 +2793,8 @@ CREATE TABLE public.permissions_group_membership (
 
 
 --
--- TOC entry 5105 (class 0 OID 0)
--- Dependencies: 268
+-- TOC entry 4647 (class 0 OID 0)
+-- Dependencies: 286
 -- Name: COLUMN permissions_group_membership.is_group_manager; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2817,7 +2802,7 @@ COMMENT ON COLUMN public.permissions_group_membership.is_group_manager IS 'Boole
 
 
 --
--- TOC entry 267 (class 1259 OID 26938)
+-- TOC entry 287 (class 1259 OID 16644)
 -- Name: permissions_group_membership_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2832,7 +2817,7 @@ ALTER TABLE public.permissions_group_membership ALTER COLUMN id ADD GENERATED BY
 
 
 --
--- TOC entry 269 (class 1259 OID 26959)
+-- TOC entry 288 (class 1259 OID 16645)
 -- Name: permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2847,7 +2832,7 @@ ALTER TABLE public.permissions ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENT
 
 
 --
--- TOC entry 272 (class 1259 OID 26989)
+-- TOC entry 289 (class 1259 OID 16646)
 -- Name: permissions_revision; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2862,8 +2847,8 @@ CREATE TABLE public.permissions_revision (
 
 
 --
--- TOC entry 5106 (class 0 OID 0)
--- Dependencies: 272
+-- TOC entry 4648 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: TABLE permissions_revision; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2871,8 +2856,8 @@ COMMENT ON TABLE public.permissions_revision IS 'Used to keep track of changes m
 
 
 --
--- TOC entry 5107 (class 0 OID 0)
--- Dependencies: 272
+-- TOC entry 4649 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: COLUMN permissions_revision.before; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2880,8 +2865,8 @@ COMMENT ON COLUMN public.permissions_revision.before IS 'Serialized JSON of the 
 
 
 --
--- TOC entry 5108 (class 0 OID 0)
--- Dependencies: 272
+-- TOC entry 4650 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: COLUMN permissions_revision.after; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2889,8 +2874,8 @@ COMMENT ON COLUMN public.permissions_revision.after IS 'Serialized JSON of the p
 
 
 --
--- TOC entry 5109 (class 0 OID 0)
--- Dependencies: 272
+-- TOC entry 4651 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: COLUMN permissions_revision.user_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2898,8 +2883,8 @@ COMMENT ON COLUMN public.permissions_revision.user_id IS 'The ID of the admin wh
 
 
 --
--- TOC entry 5110 (class 0 OID 0)
--- Dependencies: 272
+-- TOC entry 4652 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: COLUMN permissions_revision.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2907,8 +2892,8 @@ COMMENT ON COLUMN public.permissions_revision.created_at IS 'The timestamp of wh
 
 
 --
--- TOC entry 5111 (class 0 OID 0)
--- Dependencies: 272
+-- TOC entry 4653 (class 0 OID 0)
+-- Dependencies: 289
 -- Name: COLUMN permissions_revision.remark; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2916,7 +2901,7 @@ COMMENT ON COLUMN public.permissions_revision.remark IS 'Optional remarks explai
 
 
 --
--- TOC entry 271 (class 1259 OID 26988)
+-- TOC entry 290 (class 1259 OID 16651)
 -- Name: permissions_revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2931,7 +2916,7 @@ ALTER TABLE public.permissions_revision ALTER COLUMN id ADD GENERATED BY DEFAULT
 
 
 --
--- TOC entry 327 (class 1259 OID 27841)
+-- TOC entry 291 (class 1259 OID 16652)
 -- Name: persisted_info; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -2955,8 +2940,8 @@ CREATE TABLE public.persisted_info (
 
 
 --
--- TOC entry 5112 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4654 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: TABLE persisted_info; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2964,8 +2949,8 @@ COMMENT ON TABLE public.persisted_info IS 'Table holding information about persi
 
 
 --
--- TOC entry 5113 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4655 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.database_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2973,8 +2958,8 @@ COMMENT ON COLUMN public.persisted_info.database_id IS 'ID of the database assoc
 
 
 --
--- TOC entry 5114 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4656 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.card_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2982,8 +2967,8 @@ COMMENT ON COLUMN public.persisted_info.card_id IS 'ID of the Card model persist
 
 
 --
--- TOC entry 5115 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4657 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.question_slug; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -2991,8 +2976,8 @@ COMMENT ON COLUMN public.persisted_info.question_slug IS 'Slug of the card which
 
 
 --
--- TOC entry 5116 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4658 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.table_name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3000,8 +2985,8 @@ COMMENT ON COLUMN public.persisted_info.table_name IS 'Name of the table persist
 
 
 --
--- TOC entry 5117 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4659 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.definition; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3009,8 +2994,8 @@ COMMENT ON COLUMN public.persisted_info.definition IS 'JSON object that captures
 
 
 --
--- TOC entry 5118 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4660 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.query_hash; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3018,8 +3003,8 @@ COMMENT ON COLUMN public.persisted_info.query_hash IS 'Hash of the query persist
 
 
 --
--- TOC entry 5119 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4661 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.active; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3027,8 +3012,8 @@ COMMENT ON COLUMN public.persisted_info.active IS 'Indicating whether the persis
 
 
 --
--- TOC entry 5120 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4662 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.state; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3036,8 +3021,8 @@ COMMENT ON COLUMN public.persisted_info.state IS 'Persisted table state (creatin
 
 
 --
--- TOC entry 5121 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4663 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.refresh_begin; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3045,8 +3030,8 @@ COMMENT ON COLUMN public.persisted_info.refresh_begin IS 'The timestamp of when 
 
 
 --
--- TOC entry 5122 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4664 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.refresh_end; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3054,8 +3039,8 @@ COMMENT ON COLUMN public.persisted_info.refresh_end IS 'The timestamp of when th
 
 
 --
--- TOC entry 5123 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4665 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.state_change_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3063,8 +3048,8 @@ COMMENT ON COLUMN public.persisted_info.state_change_at IS 'The timestamp of whe
 
 
 --
--- TOC entry 5124 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4666 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.error; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3072,8 +3057,8 @@ COMMENT ON COLUMN public.persisted_info.error IS 'Error message from persisting 
 
 
 --
--- TOC entry 5125 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4667 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3081,8 +3066,8 @@ COMMENT ON COLUMN public.persisted_info.created_at IS 'The timestamp of when the
 
 
 --
--- TOC entry 5126 (class 0 OID 0)
--- Dependencies: 327
+-- TOC entry 4668 (class 0 OID 0)
+-- Dependencies: 291
 -- Name: COLUMN persisted_info.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3090,7 +3075,7 @@ COMMENT ON COLUMN public.persisted_info.creator_id IS 'The person who persisted 
 
 
 --
--- TOC entry 326 (class 1259 OID 27840)
+-- TOC entry 292 (class 1259 OID 16659)
 -- Name: persisted_info_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3105,7 +3090,7 @@ ALTER TABLE public.persisted_info ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 
 
 --
--- TOC entry 244 (class 1259 OID 26687)
+-- TOC entry 293 (class 1259 OID 16660)
 -- Name: pulse; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3129,8 +3114,8 @@ CREATE TABLE public.pulse (
 
 
 --
--- TOC entry 5127 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4669 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.skip_if_empty; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3138,8 +3123,8 @@ COMMENT ON COLUMN public.pulse.skip_if_empty IS 'Skip a scheduled Pulse if none 
 
 
 --
--- TOC entry 5128 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4670 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.alert_condition; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3147,8 +3132,8 @@ COMMENT ON COLUMN public.pulse.alert_condition IS 'Condition (i.e. "rows" or "go
 
 
 --
--- TOC entry 5129 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4671 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.alert_first_only; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3156,8 +3141,8 @@ COMMENT ON COLUMN public.pulse.alert_first_only IS 'True if the alert should be 
 
 
 --
--- TOC entry 5130 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4672 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.alert_above_goal; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3165,8 +3150,8 @@ COMMENT ON COLUMN public.pulse.alert_above_goal IS 'For a goal condition, alert 
 
 
 --
--- TOC entry 5131 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4673 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.collection_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3174,8 +3159,8 @@ COMMENT ON COLUMN public.pulse.collection_id IS 'Options ID of Collection this P
 
 
 --
--- TOC entry 5132 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4674 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.collection_position; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3183,8 +3168,8 @@ COMMENT ON COLUMN public.pulse.collection_position IS 'Optional pinned position 
 
 
 --
--- TOC entry 5133 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4675 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.archived; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3192,8 +3177,8 @@ COMMENT ON COLUMN public.pulse.archived IS 'Has this pulse been archived?';
 
 
 --
--- TOC entry 5134 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4676 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.dashboard_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3201,8 +3186,8 @@ COMMENT ON COLUMN public.pulse.dashboard_id IS 'ID of the Dashboard if this Puls
 
 
 --
--- TOC entry 5135 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4677 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.parameters; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3210,8 +3195,8 @@ COMMENT ON COLUMN public.pulse.parameters IS 'Let dashboard subscriptions have t
 
 
 --
--- TOC entry 5136 (class 0 OID 0)
--- Dependencies: 244
+-- TOC entry 4678 (class 0 OID 0)
+-- Dependencies: 293
 -- Name: COLUMN pulse.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3219,7 +3204,7 @@ COMMENT ON COLUMN public.pulse.entity_id IS 'Random NanoID tag for unique identi
 
 
 --
--- TOC entry 246 (class 1259 OID 26699)
+-- TOC entry 294 (class 1259 OID 16667)
 -- Name: pulse_card; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3236,8 +3221,8 @@ CREATE TABLE public.pulse_card (
 
 
 --
--- TOC entry 5137 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 4679 (class 0 OID 0)
+-- Dependencies: 294
 -- Name: COLUMN pulse_card.include_csv; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3245,8 +3230,8 @@ COMMENT ON COLUMN public.pulse_card.include_csv IS 'True if a CSV of the data sh
 
 
 --
--- TOC entry 5138 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 4680 (class 0 OID 0)
+-- Dependencies: 294
 -- Name: COLUMN pulse_card.include_xls; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3254,8 +3239,8 @@ COMMENT ON COLUMN public.pulse_card.include_xls IS 'True if a XLS of the data sh
 
 
 --
--- TOC entry 5139 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 4681 (class 0 OID 0)
+-- Dependencies: 294
 -- Name: COLUMN pulse_card.dashboard_card_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3263,8 +3248,8 @@ COMMENT ON COLUMN public.pulse_card.dashboard_card_id IS 'If this Pulse is a Das
 
 
 --
--- TOC entry 5140 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 4682 (class 0 OID 0)
+-- Dependencies: 294
 -- Name: COLUMN pulse_card.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3272,7 +3257,7 @@ COMMENT ON COLUMN public.pulse_card.entity_id IS 'Random NanoID tag for unique i
 
 
 --
--- TOC entry 245 (class 1259 OID 26698)
+-- TOC entry 295 (class 1259 OID 16672)
 -- Name: pulse_card_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3287,7 +3272,7 @@ ALTER TABLE public.pulse_card ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTI
 
 
 --
--- TOC entry 248 (class 1259 OID 26717)
+-- TOC entry 296 (class 1259 OID 16673)
 -- Name: pulse_channel; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3308,8 +3293,8 @@ CREATE TABLE public.pulse_channel (
 
 
 --
--- TOC entry 5141 (class 0 OID 0)
--- Dependencies: 248
+-- TOC entry 4683 (class 0 OID 0)
+-- Dependencies: 296
 -- Name: COLUMN pulse_channel.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3317,7 +3302,7 @@ COMMENT ON COLUMN public.pulse_channel.entity_id IS 'Random NanoID tag for uniqu
 
 
 --
--- TOC entry 247 (class 1259 OID 26716)
+-- TOC entry 297 (class 1259 OID 16679)
 -- Name: pulse_channel_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3332,7 +3317,7 @@ ALTER TABLE public.pulse_channel ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDE
 
 
 --
--- TOC entry 250 (class 1259 OID 26732)
+-- TOC entry 298 (class 1259 OID 16680)
 -- Name: pulse_channel_recipient; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3344,7 +3329,7 @@ CREATE TABLE public.pulse_channel_recipient (
 
 
 --
--- TOC entry 249 (class 1259 OID 26731)
+-- TOC entry 299 (class 1259 OID 16683)
 -- Name: pulse_channel_recipient_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3359,7 +3344,7 @@ ALTER TABLE public.pulse_channel_recipient ALTER COLUMN id ADD GENERATED BY DEFA
 
 
 --
--- TOC entry 243 (class 1259 OID 26686)
+-- TOC entry 300 (class 1259 OID 16684)
 -- Name: pulse_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3374,7 +3359,7 @@ ALTER TABLE public.pulse ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 
 
 --
--- TOC entry 296 (class 1259 OID 27265)
+-- TOC entry 301 (class 1259 OID 16685)
 -- Name: qrtz_blob_triggers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3387,8 +3372,8 @@ CREATE TABLE public.qrtz_blob_triggers (
 
 
 --
--- TOC entry 5142 (class 0 OID 0)
--- Dependencies: 296
+-- TOC entry 4684 (class 0 OID 0)
+-- Dependencies: 301
 -- Name: TABLE qrtz_blob_triggers; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3396,7 +3381,7 @@ COMMENT ON TABLE public.qrtz_blob_triggers IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 297 (class 1259 OID 27277)
+-- TOC entry 302 (class 1259 OID 16690)
 -- Name: qrtz_calendars; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3408,8 +3393,8 @@ CREATE TABLE public.qrtz_calendars (
 
 
 --
--- TOC entry 5143 (class 0 OID 0)
--- Dependencies: 297
+-- TOC entry 4685 (class 0 OID 0)
+-- Dependencies: 302
 -- Name: TABLE qrtz_calendars; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3417,7 +3402,7 @@ COMMENT ON TABLE public.qrtz_calendars IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 294 (class 1259 OID 27241)
+-- TOC entry 303 (class 1259 OID 16695)
 -- Name: qrtz_cron_triggers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3431,8 +3416,8 @@ CREATE TABLE public.qrtz_cron_triggers (
 
 
 --
--- TOC entry 5144 (class 0 OID 0)
--- Dependencies: 294
+-- TOC entry 4686 (class 0 OID 0)
+-- Dependencies: 303
 -- Name: TABLE qrtz_cron_triggers; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3440,7 +3425,7 @@ COMMENT ON TABLE public.qrtz_cron_triggers IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 299 (class 1259 OID 27289)
+-- TOC entry 304 (class 1259 OID 16700)
 -- Name: qrtz_fired_triggers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3462,8 +3447,8 @@ CREATE TABLE public.qrtz_fired_triggers (
 
 
 --
--- TOC entry 5145 (class 0 OID 0)
--- Dependencies: 299
+-- TOC entry 4687 (class 0 OID 0)
+-- Dependencies: 304
 -- Name: TABLE qrtz_fired_triggers; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3471,7 +3456,7 @@ COMMENT ON TABLE public.qrtz_fired_triggers IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 291 (class 1259 OID 27210)
+-- TOC entry 305 (class 1259 OID 16705)
 -- Name: qrtz_job_details; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3490,8 +3475,8 @@ CREATE TABLE public.qrtz_job_details (
 
 
 --
--- TOC entry 5146 (class 0 OID 0)
--- Dependencies: 291
+-- TOC entry 4688 (class 0 OID 0)
+-- Dependencies: 305
 -- Name: TABLE qrtz_job_details; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3499,7 +3484,7 @@ COMMENT ON TABLE public.qrtz_job_details IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 301 (class 1259 OID 27301)
+-- TOC entry 306 (class 1259 OID 16710)
 -- Name: qrtz_locks; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3510,8 +3495,8 @@ CREATE TABLE public.qrtz_locks (
 
 
 --
--- TOC entry 5147 (class 0 OID 0)
--- Dependencies: 301
+-- TOC entry 4689 (class 0 OID 0)
+-- Dependencies: 306
 -- Name: TABLE qrtz_locks; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3519,7 +3504,7 @@ COMMENT ON TABLE public.qrtz_locks IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 298 (class 1259 OID 27284)
+-- TOC entry 307 (class 1259 OID 16713)
 -- Name: qrtz_paused_trigger_grps; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3530,8 +3515,8 @@ CREATE TABLE public.qrtz_paused_trigger_grps (
 
 
 --
--- TOC entry 5148 (class 0 OID 0)
--- Dependencies: 298
+-- TOC entry 4690 (class 0 OID 0)
+-- Dependencies: 307
 -- Name: TABLE qrtz_paused_trigger_grps; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3539,7 +3524,7 @@ COMMENT ON TABLE public.qrtz_paused_trigger_grps IS 'Used for Quartz scheduler.'
 
 
 --
--- TOC entry 300 (class 1259 OID 27296)
+-- TOC entry 308 (class 1259 OID 16716)
 -- Name: qrtz_scheduler_state; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3552,8 +3537,8 @@ CREATE TABLE public.qrtz_scheduler_state (
 
 
 --
--- TOC entry 5149 (class 0 OID 0)
--- Dependencies: 300
+-- TOC entry 4691 (class 0 OID 0)
+-- Dependencies: 308
 -- Name: TABLE qrtz_scheduler_state; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3561,7 +3546,7 @@ COMMENT ON TABLE public.qrtz_scheduler_state IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 293 (class 1259 OID 27229)
+-- TOC entry 309 (class 1259 OID 16719)
 -- Name: qrtz_simple_triggers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3576,8 +3561,8 @@ CREATE TABLE public.qrtz_simple_triggers (
 
 
 --
--- TOC entry 5150 (class 0 OID 0)
--- Dependencies: 293
+-- TOC entry 4692 (class 0 OID 0)
+-- Dependencies: 309
 -- Name: TABLE qrtz_simple_triggers; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3585,7 +3570,7 @@ COMMENT ON TABLE public.qrtz_simple_triggers IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 295 (class 1259 OID 27253)
+-- TOC entry 310 (class 1259 OID 16724)
 -- Name: qrtz_simprop_triggers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3608,8 +3593,8 @@ CREATE TABLE public.qrtz_simprop_triggers (
 
 
 --
--- TOC entry 5151 (class 0 OID 0)
--- Dependencies: 295
+-- TOC entry 4693 (class 0 OID 0)
+-- Dependencies: 310
 -- Name: TABLE qrtz_simprop_triggers; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3617,7 +3602,7 @@ COMMENT ON TABLE public.qrtz_simprop_triggers IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 292 (class 1259 OID 27217)
+-- TOC entry 311 (class 1259 OID 16729)
 -- Name: qrtz_triggers; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3642,8 +3627,8 @@ CREATE TABLE public.qrtz_triggers (
 
 
 --
--- TOC entry 5152 (class 0 OID 0)
--- Dependencies: 292
+-- TOC entry 4694 (class 0 OID 0)
+-- Dependencies: 311
 -- Name: TABLE qrtz_triggers; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3651,7 +3636,7 @@ COMMENT ON TABLE public.qrtz_triggers IS 'Used for Quartz scheduler.';
 
 
 --
--- TOC entry 280 (class 1259 OID 27070)
+-- TOC entry 312 (class 1259 OID 16734)
 -- Name: query; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3663,8 +3648,8 @@ CREATE TABLE public.query (
 
 
 --
--- TOC entry 5153 (class 0 OID 0)
--- Dependencies: 280
+-- TOC entry 4695 (class 0 OID 0)
+-- Dependencies: 312
 -- Name: TABLE query; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3672,8 +3657,8 @@ COMMENT ON TABLE public.query IS 'Information (such as average execution time) f
 
 
 --
--- TOC entry 5154 (class 0 OID 0)
--- Dependencies: 280
+-- TOC entry 4696 (class 0 OID 0)
+-- Dependencies: 312
 -- Name: COLUMN query.query_hash; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3681,8 +3666,8 @@ COMMENT ON COLUMN public.query.query_hash IS 'The hash of the query dictionary. 
 
 
 --
--- TOC entry 5155 (class 0 OID 0)
--- Dependencies: 280
+-- TOC entry 4697 (class 0 OID 0)
+-- Dependencies: 312
 -- Name: COLUMN query.average_execution_time; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3690,8 +3675,8 @@ COMMENT ON COLUMN public.query.average_execution_time IS 'Average execution time
 
 
 --
--- TOC entry 5156 (class 0 OID 0)
--- Dependencies: 280
+-- TOC entry 4698 (class 0 OID 0)
+-- Dependencies: 312
 -- Name: COLUMN query.query; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3699,7 +3684,7 @@ COMMENT ON COLUMN public.query.query IS 'The actual "query dictionary" for this 
 
 
 --
--- TOC entry 330 (class 1259 OID 27905)
+-- TOC entry 313 (class 1259 OID 16739)
 -- Name: query_action; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3711,8 +3696,8 @@ CREATE TABLE public.query_action (
 
 
 --
--- TOC entry 5157 (class 0 OID 0)
--- Dependencies: 330
+-- TOC entry 4699 (class 0 OID 0)
+-- Dependencies: 313
 -- Name: TABLE query_action; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3720,8 +3705,8 @@ COMMENT ON TABLE public.query_action IS 'A readwrite query type of action';
 
 
 --
--- TOC entry 5158 (class 0 OID 0)
--- Dependencies: 330
+-- TOC entry 4700 (class 0 OID 0)
+-- Dependencies: 313
 -- Name: COLUMN query_action.action_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3729,8 +3714,8 @@ COMMENT ON COLUMN public.query_action.action_id IS 'The related action';
 
 
 --
--- TOC entry 5159 (class 0 OID 0)
--- Dependencies: 330
+-- TOC entry 4701 (class 0 OID 0)
+-- Dependencies: 313
 -- Name: COLUMN query_action.database_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3738,8 +3723,8 @@ COMMENT ON COLUMN public.query_action.database_id IS 'The associated database';
 
 
 --
--- TOC entry 5160 (class 0 OID 0)
--- Dependencies: 330
+-- TOC entry 4702 (class 0 OID 0)
+-- Dependencies: 313
 -- Name: COLUMN query_action.dataset_query; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3747,7 +3732,7 @@ COMMENT ON COLUMN public.query_action.dataset_query IS 'The MBQL writeback query
 
 
 --
--- TOC entry 279 (class 1259 OID 27062)
+-- TOC entry 314 (class 1259 OID 16744)
 -- Name: query_cache; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3759,8 +3744,8 @@ CREATE TABLE public.query_cache (
 
 
 --
--- TOC entry 5161 (class 0 OID 0)
--- Dependencies: 279
+-- TOC entry 4703 (class 0 OID 0)
+-- Dependencies: 314
 -- Name: TABLE query_cache; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3768,8 +3753,8 @@ COMMENT ON TABLE public.query_cache IS 'Cached results of queries are stored her
 
 
 --
--- TOC entry 5162 (class 0 OID 0)
--- Dependencies: 279
+-- TOC entry 4704 (class 0 OID 0)
+-- Dependencies: 314
 -- Name: COLUMN query_cache.query_hash; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3777,8 +3762,8 @@ COMMENT ON COLUMN public.query_cache.query_hash IS 'The hash of the query dictio
 
 
 --
--- TOC entry 5163 (class 0 OID 0)
--- Dependencies: 279
+-- TOC entry 4705 (class 0 OID 0)
+-- Dependencies: 314
 -- Name: COLUMN query_cache.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3786,8 +3771,8 @@ COMMENT ON COLUMN public.query_cache.updated_at IS 'The timestamp of when these 
 
 
 --
--- TOC entry 5164 (class 0 OID 0)
--- Dependencies: 279
+-- TOC entry 4706 (class 0 OID 0)
+-- Dependencies: 314
 -- Name: COLUMN query_cache.results; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3795,7 +3780,7 @@ COMMENT ON COLUMN public.query_cache.results IS 'Cached, compressed results of r
 
 
 --
--- TOC entry 278 (class 1259 OID 27053)
+-- TOC entry 315 (class 1259 OID 16749)
 -- Name: query_execution; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3813,13 +3798,16 @@ CREATE TABLE public.query_execution (
     dashboard_id integer,
     pulse_id integer,
     database_id integer,
-    cache_hit boolean
+    cache_hit boolean,
+    action_id integer,
+    is_sandboxed boolean,
+    cache_hash bytea
 );
 
 
 --
--- TOC entry 5165 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4707 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: TABLE query_execution; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3827,8 +3815,8 @@ COMMENT ON TABLE public.query_execution IS 'A log of executed queries, used for 
 
 
 --
--- TOC entry 5166 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4708 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.hash; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3836,8 +3824,8 @@ COMMENT ON COLUMN public.query_execution.hash IS 'The hash of the query dictiona
 
 
 --
--- TOC entry 5167 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4709 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.started_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3845,8 +3833,8 @@ COMMENT ON COLUMN public.query_execution.started_at IS 'Timestamp of when this q
 
 
 --
--- TOC entry 5168 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4710 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.running_time; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3854,8 +3842,8 @@ COMMENT ON COLUMN public.query_execution.running_time IS 'The time, in milliseco
 
 
 --
--- TOC entry 5169 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4711 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.result_rows; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3863,8 +3851,8 @@ COMMENT ON COLUMN public.query_execution.result_rows IS 'Number of rows in the q
 
 
 --
--- TOC entry 5170 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4712 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.native; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3872,8 +3860,8 @@ COMMENT ON COLUMN public.query_execution.native IS 'Whether the query was a nati
 
 
 --
--- TOC entry 5171 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4713 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.context; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3881,8 +3869,8 @@ COMMENT ON COLUMN public.query_execution.context IS 'Short string specifying how
 
 
 --
--- TOC entry 5172 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4714 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.error; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3890,8 +3878,8 @@ COMMENT ON COLUMN public.query_execution.error IS 'Error message returned by fai
 
 
 --
--- TOC entry 5173 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4715 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.executor_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3899,8 +3887,8 @@ COMMENT ON COLUMN public.query_execution.executor_id IS 'The ID of the User who 
 
 
 --
--- TOC entry 5174 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4716 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.card_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3908,8 +3896,8 @@ COMMENT ON COLUMN public.query_execution.card_id IS 'The ID of the Card (Questio
 
 
 --
--- TOC entry 5175 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4717 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.dashboard_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3917,8 +3905,8 @@ COMMENT ON COLUMN public.query_execution.dashboard_id IS 'The ID of the Dashboar
 
 
 --
--- TOC entry 5176 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4718 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.pulse_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3926,8 +3914,8 @@ COMMENT ON COLUMN public.query_execution.pulse_id IS 'The ID of the Pulse associ
 
 
 --
--- TOC entry 5177 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4719 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.database_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3935,8 +3923,8 @@ COMMENT ON COLUMN public.query_execution.database_id IS 'ID of the database this
 
 
 --
--- TOC entry 5178 (class 0 OID 0)
--- Dependencies: 278
+-- TOC entry 4720 (class 0 OID 0)
+-- Dependencies: 315
 -- Name: COLUMN query_execution.cache_hit; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -3944,7 +3932,34 @@ COMMENT ON COLUMN public.query_execution.cache_hit IS 'Cache hit on query execut
 
 
 --
--- TOC entry 277 (class 1259 OID 27052)
+-- TOC entry 4721 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN query_execution.action_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.action_id IS 'The ID of the action associated with this query execution, if any.';
+
+
+--
+-- TOC entry 4722 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN query_execution.is_sandboxed; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.is_sandboxed IS 'Is query from a sandboxed user';
+
+
+--
+-- TOC entry 4723 (class 0 OID 0)
+-- Dependencies: 315
+-- Name: COLUMN query_execution.cache_hash; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.query_execution.cache_hash IS 'Hash of normalized query, calculated in middleware.cache';
+
+
+--
+-- TOC entry 316 (class 1259 OID 16754)
 -- Name: query_execution_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -3959,7 +3974,81 @@ ALTER TABLE public.query_execution ALTER COLUMN id ADD GENERATED BY DEFAULT AS I
 
 
 --
--- TOC entry 227 (class 1259 OID 26423)
+-- TOC entry 317 (class 1259 OID 16755)
+-- Name: recent_views; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.recent_views (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    model character varying(16) NOT NULL,
+    model_id integer NOT NULL,
+    "timestamp" timestamp without time zone NOT NULL
+);
+
+
+--
+-- TOC entry 4724 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: TABLE recent_views; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.recent_views IS 'Used to store recently viewed objects for each user';
+
+
+--
+-- TOC entry 4725 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN recent_views.user_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.recent_views.user_id IS 'The user associated with this view';
+
+
+--
+-- TOC entry 4726 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN recent_views.model; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.recent_views.model IS 'The name of the model that was viewed';
+
+
+--
+-- TOC entry 4727 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN recent_views.model_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.recent_views.model_id IS 'The ID of the model that was viewed';
+
+
+--
+-- TOC entry 4728 (class 0 OID 0)
+-- Dependencies: 317
+-- Name: COLUMN recent_views."timestamp"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.recent_views."timestamp" IS 'The time a view was recorded';
+
+
+--
+-- TOC entry 318 (class 1259 OID 16758)
+-- Name: recent_views_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+ALTER TABLE public.recent_views ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.recent_views_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 319 (class 1259 OID 16759)
 -- Name: report_card; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -3989,13 +4078,14 @@ CREATE TABLE public.report_card (
     entity_id character(21),
     parameters text,
     parameter_mappings text,
-    collection_preview boolean DEFAULT true NOT NULL
+    collection_preview boolean DEFAULT true NOT NULL,
+    metabase_version character varying(100)
 );
 
 
 --
--- TOC entry 5179 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4729 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.collection_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4003,8 +4093,8 @@ COMMENT ON COLUMN public.report_card.collection_id IS 'Optional ID of Collection
 
 
 --
--- TOC entry 5180 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4730 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.public_uuid; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4012,8 +4102,8 @@ COMMENT ON COLUMN public.report_card.public_uuid IS 'Unique UUID used to in publ
 
 
 --
--- TOC entry 5181 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4731 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.made_public_by_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4021,8 +4111,8 @@ COMMENT ON COLUMN public.report_card.made_public_by_id IS 'The ID of the User wh
 
 
 --
--- TOC entry 5182 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4732 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.enable_embedding; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4030,8 +4120,8 @@ COMMENT ON COLUMN public.report_card.enable_embedding IS 'Is this Card allowed t
 
 
 --
--- TOC entry 5183 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4733 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.embedding_params; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4039,8 +4129,8 @@ COMMENT ON COLUMN public.report_card.embedding_params IS 'Serialized JSON contai
 
 
 --
--- TOC entry 5184 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4734 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.cache_ttl; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4048,8 +4138,8 @@ COMMENT ON COLUMN public.report_card.cache_ttl IS 'The maximum time, in seconds,
 
 
 --
--- TOC entry 5185 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4735 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.result_metadata; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4057,8 +4147,8 @@ COMMENT ON COLUMN public.report_card.result_metadata IS 'Serialized JSON contain
 
 
 --
--- TOC entry 5186 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4736 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.collection_position; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4066,8 +4156,8 @@ COMMENT ON COLUMN public.report_card.collection_position IS 'Optional pinned pos
 
 
 --
--- TOC entry 5187 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4737 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.dataset; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4075,8 +4165,8 @@ COMMENT ON COLUMN public.report_card.dataset IS 'Indicate whether question is a 
 
 
 --
--- TOC entry 5188 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4738 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4084,8 +4174,8 @@ COMMENT ON COLUMN public.report_card.entity_id IS 'Random NanoID tag for unique 
 
 
 --
--- TOC entry 5189 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4739 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.parameters; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4093,8 +4183,8 @@ COMMENT ON COLUMN public.report_card.parameters IS 'List of parameter associated
 
 
 --
--- TOC entry 5190 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4740 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.parameter_mappings; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4102,8 +4192,8 @@ COMMENT ON COLUMN public.report_card.parameter_mappings IS 'List of parameter as
 
 
 --
--- TOC entry 5191 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 4741 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: COLUMN report_card.collection_preview; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4111,7 +4201,16 @@ COMMENT ON COLUMN public.report_card.collection_preview IS 'Indicating whether t
 
 
 --
--- TOC entry 226 (class 1259 OID 26422)
+-- TOC entry 4742 (class 0 OID 0)
+-- Dependencies: 319
+-- Name: COLUMN report_card.metabase_version; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.report_card.metabase_version IS 'Metabase version used to create the card.';
+
+
+--
+-- TOC entry 320 (class 1259 OID 16768)
 -- Name: report_card_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4126,7 +4225,7 @@ ALTER TABLE public.report_card ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENT
 
 
 --
--- TOC entry 229 (class 1259 OID 26443)
+-- TOC entry 321 (class 1259 OID 16769)
 -- Name: report_cardfavorite; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4140,7 +4239,7 @@ CREATE TABLE public.report_cardfavorite (
 
 
 --
--- TOC entry 228 (class 1259 OID 26442)
+-- TOC entry 322 (class 1259 OID 16772)
 -- Name: report_cardfavorite_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4155,7 +4254,7 @@ ALTER TABLE public.report_cardfavorite ALTER COLUMN id ADD GENERATED BY DEFAULT 
 
 
 --
--- TOC entry 231 (class 1259 OID 26463)
+-- TOC entry 323 (class 1259 OID 16773)
 -- Name: report_dashboard; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4185,8 +4284,8 @@ CREATE TABLE public.report_dashboard (
 
 
 --
--- TOC entry 5192 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4743 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.public_uuid; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4194,8 +4293,8 @@ COMMENT ON COLUMN public.report_dashboard.public_uuid IS 'Unique UUID used to in
 
 
 --
--- TOC entry 5193 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4744 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.made_public_by_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4203,8 +4302,8 @@ COMMENT ON COLUMN public.report_dashboard.made_public_by_id IS 'The ID of the Us
 
 
 --
--- TOC entry 5194 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4745 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.enable_embedding; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4212,8 +4311,8 @@ COMMENT ON COLUMN public.report_dashboard.enable_embedding IS 'Is this Dashboard
 
 
 --
--- TOC entry 5195 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4746 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.embedding_params; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4221,8 +4320,8 @@ COMMENT ON COLUMN public.report_dashboard.embedding_params IS 'Serialized JSON c
 
 
 --
--- TOC entry 5196 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4747 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.archived; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4230,8 +4329,8 @@ COMMENT ON COLUMN public.report_dashboard.archived IS 'Is this Dashboard archive
 
 
 --
--- TOC entry 5197 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4748 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard."position"; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4239,8 +4338,8 @@ COMMENT ON COLUMN public.report_dashboard."position" IS 'The position this Dashb
 
 
 --
--- TOC entry 5198 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4749 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.collection_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4248,8 +4347,8 @@ COMMENT ON COLUMN public.report_dashboard.collection_id IS 'Optional ID of Colle
 
 
 --
--- TOC entry 5199 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4750 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.collection_position; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4257,8 +4356,8 @@ COMMENT ON COLUMN public.report_dashboard.collection_position IS 'Optional pinne
 
 
 --
--- TOC entry 5200 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4751 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.cache_ttl; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4266,8 +4365,8 @@ COMMENT ON COLUMN public.report_dashboard.cache_ttl IS 'Granular cache TTL for s
 
 
 --
--- TOC entry 5201 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4752 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4275,8 +4374,8 @@ COMMENT ON COLUMN public.report_dashboard.entity_id IS 'Random NanoID tag for un
 
 
 --
--- TOC entry 5202 (class 0 OID 0)
--- Dependencies: 231
+-- TOC entry 4753 (class 0 OID 0)
+-- Dependencies: 323
 -- Name: COLUMN report_dashboard.auto_apply_filters; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4284,7 +4383,7 @@ COMMENT ON COLUMN public.report_dashboard.auto_apply_filters IS 'Whether or not 
 
 
 --
--- TOC entry 230 (class 1259 OID 26462)
+-- TOC entry 324 (class 1259 OID 16782)
 -- Name: report_dashboard_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4299,7 +4398,7 @@ ALTER TABLE public.report_dashboard ALTER COLUMN id ADD GENERATED BY DEFAULT AS 
 
 
 --
--- TOC entry 233 (class 1259 OID 26483)
+-- TOC entry 325 (class 1259 OID 16783)
 -- Name: report_dashboardcard; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4322,8 +4421,8 @@ CREATE TABLE public.report_dashboardcard (
 
 
 --
--- TOC entry 5203 (class 0 OID 0)
--- Dependencies: 233
+-- TOC entry 4754 (class 0 OID 0)
+-- Dependencies: 325
 -- Name: COLUMN report_dashboardcard.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4331,8 +4430,8 @@ COMMENT ON COLUMN public.report_dashboardcard.entity_id IS 'Random NanoID tag fo
 
 
 --
--- TOC entry 5204 (class 0 OID 0)
--- Dependencies: 233
+-- TOC entry 4755 (class 0 OID 0)
+-- Dependencies: 325
 -- Name: COLUMN report_dashboardcard.action_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4340,8 +4439,8 @@ COMMENT ON COLUMN public.report_dashboardcard.action_id IS 'The related action';
 
 
 --
--- TOC entry 5205 (class 0 OID 0)
--- Dependencies: 233
+-- TOC entry 4756 (class 0 OID 0)
+-- Dependencies: 325
 -- Name: COLUMN report_dashboardcard.dashboard_tab_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4349,7 +4448,7 @@ COMMENT ON COLUMN public.report_dashboardcard.dashboard_tab_id IS 'The reference
 
 
 --
--- TOC entry 232 (class 1259 OID 26482)
+-- TOC entry 326 (class 1259 OID 16790)
 -- Name: report_dashboardcard_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4364,7 +4463,7 @@ ALTER TABLE public.report_dashboardcard ALTER COLUMN id ADD GENERATED BY DEFAULT
 
 
 --
--- TOC entry 237 (class 1259 OID 26625)
+-- TOC entry 327 (class 1259 OID 16791)
 -- Name: revision; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4377,12 +4476,32 @@ CREATE TABLE public.revision (
     object text NOT NULL,
     is_reversion boolean DEFAULT false NOT NULL,
     is_creation boolean DEFAULT false NOT NULL,
-    message text
+    message text,
+    most_recent boolean DEFAULT false NOT NULL,
+    metabase_version character varying(100)
 );
 
 
 --
--- TOC entry 236 (class 1259 OID 26624)
+-- TOC entry 4757 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN revision.most_recent; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.revision.most_recent IS 'Whether a revision is the most recent one';
+
+
+--
+-- TOC entry 4758 (class 0 OID 0)
+-- Dependencies: 327
+-- Name: COLUMN revision.metabase_version; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.revision.metabase_version IS 'Metabase version used to create the revision.';
+
+
+--
+-- TOC entry 328 (class 1259 OID 16799)
 -- Name: revision_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4397,7 +4516,7 @@ ALTER TABLE public.revision ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
 
 
 --
--- TOC entry 311 (class 1259 OID 27670)
+-- TOC entry 329 (class 1259 OID 16800)
 -- Name: secret; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4415,8 +4534,8 @@ CREATE TABLE public.secret (
 
 
 --
--- TOC entry 5206 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4759 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: TABLE secret; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4424,8 +4543,8 @@ COMMENT ON TABLE public.secret IS 'Storage for managed secrets (passwords, binar
 
 
 --
--- TOC entry 5207 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4760 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4433,8 +4552,8 @@ COMMENT ON COLUMN public.secret.id IS 'Part of composite primary key for secret;
 
 
 --
--- TOC entry 5208 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4761 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.version; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4442,8 +4561,8 @@ COMMENT ON COLUMN public.secret.version IS 'Part of composite primary key for se
 
 
 --
--- TOC entry 5209 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4762 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4451,8 +4570,8 @@ COMMENT ON COLUMN public.secret.creator_id IS 'User ID who created this secret i
 
 
 --
--- TOC entry 5210 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4763 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4460,8 +4579,8 @@ COMMENT ON COLUMN public.secret.created_at IS 'Timestamp for when this secret in
 
 
 --
--- TOC entry 5211 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4764 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4469,8 +4588,8 @@ COMMENT ON COLUMN public.secret.updated_at IS 'Timestamp for when this secret re
 
 
 --
--- TOC entry 5212 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4765 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4478,8 +4597,8 @@ COMMENT ON COLUMN public.secret.name IS 'The name of this secret record.';
 
 
 --
--- TOC entry 5213 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4766 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.kind; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4487,8 +4606,8 @@ COMMENT ON COLUMN public.secret.kind IS 'The kind of secret this record represen
 
 
 --
--- TOC entry 5214 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4767 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.source; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4496,8 +4615,8 @@ COMMENT ON COLUMN public.secret.source IS 'The source of secret record, which co
 
 
 --
--- TOC entry 5215 (class 0 OID 0)
--- Dependencies: 311
+-- TOC entry 4768 (class 0 OID 0)
+-- Dependencies: 329
 -- Name: COLUMN secret.value; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4505,7 +4624,7 @@ COMMENT ON COLUMN public.secret.value IS 'The base64 encoded binary value of thi
 
 
 --
--- TOC entry 310 (class 1259 OID 27669)
+-- TOC entry 330 (class 1259 OID 16806)
 -- Name: secret_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4520,7 +4639,7 @@ ALTER TABLE public.secret ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 
 
 --
--- TOC entry 252 (class 1259 OID 26748)
+-- TOC entry 331 (class 1259 OID 16807)
 -- Name: segment; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4542,8 +4661,8 @@ CREATE TABLE public.segment (
 
 
 --
--- TOC entry 5216 (class 0 OID 0)
--- Dependencies: 252
+-- TOC entry 4769 (class 0 OID 0)
+-- Dependencies: 331
 -- Name: COLUMN segment.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4551,7 +4670,7 @@ COMMENT ON COLUMN public.segment.entity_id IS 'Random NanoID tag for unique iden
 
 
 --
--- TOC entry 251 (class 1259 OID 26747)
+-- TOC entry 332 (class 1259 OID 16814)
 -- Name: segment_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4566,7 +4685,7 @@ ALTER TABLE public.segment ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY 
 
 
 --
--- TOC entry 235 (class 1259 OID 26612)
+-- TOC entry 333 (class 1259 OID 16815)
 -- Name: setting; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4577,7 +4696,85 @@ CREATE TABLE public.setting (
 
 
 --
--- TOC entry 303 (class 1259 OID 27327)
+-- TOC entry 334 (class 1259 OID 16820)
+-- Name: table_privileges; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.table_privileges (
+    table_id integer NOT NULL,
+    role character varying(255),
+    "select" boolean DEFAULT false NOT NULL,
+    update boolean DEFAULT false NOT NULL,
+    insert boolean DEFAULT false NOT NULL,
+    delete boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- TOC entry 4770 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: TABLE table_privileges; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON TABLE public.table_privileges IS 'Table for user and role privileges by table';
+
+
+--
+-- TOC entry 4771 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN table_privileges.table_id; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.table_privileges.table_id IS 'Table ID';
+
+
+--
+-- TOC entry 4772 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN table_privileges.role; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.table_privileges.role IS 'Role name. NULL indicates the privileges are the current user''s';
+
+
+--
+-- TOC entry 4773 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN table_privileges."select"; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.table_privileges."select" IS 'Privilege to select from the table';
+
+
+--
+-- TOC entry 4774 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN table_privileges.update; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.table_privileges.update IS 'Privilege to update records in the table';
+
+
+--
+-- TOC entry 4775 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN table_privileges.insert; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.table_privileges.insert IS 'Privilege to insert records into the table';
+
+
+--
+-- TOC entry 4776 (class 0 OID 0)
+-- Dependencies: 334
+-- Name: COLUMN table_privileges.delete; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.table_privileges.delete IS 'Privilege to delete records from the table';
+
+
+--
+-- TOC entry 335 (class 1259 OID 16827)
 -- Name: task_history; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4593,8 +4790,8 @@ CREATE TABLE public.task_history (
 
 
 --
--- TOC entry 5217 (class 0 OID 0)
--- Dependencies: 303
+-- TOC entry 4777 (class 0 OID 0)
+-- Dependencies: 335
 -- Name: TABLE task_history; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4602,8 +4799,8 @@ COMMENT ON TABLE public.task_history IS 'Timing and metadata info about backgrou
 
 
 --
--- TOC entry 5218 (class 0 OID 0)
--- Dependencies: 303
+-- TOC entry 4778 (class 0 OID 0)
+-- Dependencies: 335
 -- Name: COLUMN task_history.task; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4611,8 +4808,8 @@ COMMENT ON COLUMN public.task_history.task IS 'Name of the task';
 
 
 --
--- TOC entry 5219 (class 0 OID 0)
--- Dependencies: 303
+-- TOC entry 4779 (class 0 OID 0)
+-- Dependencies: 335
 -- Name: COLUMN task_history.task_details; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4620,7 +4817,7 @@ COMMENT ON COLUMN public.task_history.task_details IS 'JSON string with addition
 
 
 --
--- TOC entry 302 (class 1259 OID 27326)
+-- TOC entry 336 (class 1259 OID 16834)
 -- Name: task_history_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4635,7 +4832,7 @@ ALTER TABLE public.task_history ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDEN
 
 
 --
--- TOC entry 313 (class 1259 OID 27698)
+-- TOC entry 337 (class 1259 OID 16835)
 -- Name: timeline; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4655,8 +4852,8 @@ CREATE TABLE public.timeline (
 
 
 --
--- TOC entry 5220 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4780 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: TABLE timeline; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4664,8 +4861,8 @@ COMMENT ON TABLE public.timeline IS 'Timeline table to organize events';
 
 
 --
--- TOC entry 5221 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4781 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4673,8 +4870,8 @@ COMMENT ON COLUMN public.timeline.name IS 'Name of the timeline';
 
 
 --
--- TOC entry 5222 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4782 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.description; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4682,8 +4879,8 @@ COMMENT ON COLUMN public.timeline.description IS 'Optional description of the ti
 
 
 --
--- TOC entry 5223 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4783 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.icon; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4691,8 +4888,8 @@ COMMENT ON COLUMN public.timeline.icon IS 'the icon to use when displaying the e
 
 
 --
--- TOC entry 5224 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4784 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.collection_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4700,8 +4897,8 @@ COMMENT ON COLUMN public.timeline.collection_id IS 'ID of the collection contain
 
 
 --
--- TOC entry 5225 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4785 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.archived; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4709,8 +4906,8 @@ COMMENT ON COLUMN public.timeline.archived IS 'Whether or not the timeline has b
 
 
 --
--- TOC entry 5226 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4786 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4718,8 +4915,8 @@ COMMENT ON COLUMN public.timeline.creator_id IS 'ID of the user who created the 
 
 
 --
--- TOC entry 5227 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4787 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4727,8 +4924,8 @@ COMMENT ON COLUMN public.timeline.created_at IS 'The timestamp of when the timel
 
 
 --
--- TOC entry 5228 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4788 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4736,8 +4933,8 @@ COMMENT ON COLUMN public.timeline.updated_at IS 'The timestamp of when the timel
 
 
 --
--- TOC entry 5229 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4789 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline."default"; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4745,8 +4942,8 @@ COMMENT ON COLUMN public.timeline."default" IS 'Boolean value indicating if the 
 
 
 --
--- TOC entry 5230 (class 0 OID 0)
--- Dependencies: 313
+-- TOC entry 4790 (class 0 OID 0)
+-- Dependencies: 337
 -- Name: COLUMN timeline.entity_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4754,7 +4951,7 @@ COMMENT ON COLUMN public.timeline.entity_id IS 'Random NanoID tag for unique ide
 
 
 --
--- TOC entry 315 (class 1259 OID 27719)
+-- TOC entry 338 (class 1259 OID 16844)
 -- Name: timeline_event; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4775,8 +4972,8 @@ CREATE TABLE public.timeline_event (
 
 
 --
--- TOC entry 5231 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4791 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: TABLE timeline_event; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4784,8 +4981,8 @@ COMMENT ON TABLE public.timeline_event IS 'Events table';
 
 
 --
--- TOC entry 5232 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4792 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.timeline_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4793,8 +4990,8 @@ COMMENT ON COLUMN public.timeline_event.timeline_id IS 'ID of the timeline conta
 
 
 --
--- TOC entry 5233 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4793 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.name; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4802,8 +4999,8 @@ COMMENT ON COLUMN public.timeline_event.name IS 'Name of the event';
 
 
 --
--- TOC entry 5234 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4794 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.description; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4811,8 +5008,8 @@ COMMENT ON COLUMN public.timeline_event.description IS 'Optional markdown descri
 
 
 --
--- TOC entry 5235 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4795 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event."timestamp"; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4820,8 +5017,8 @@ COMMENT ON COLUMN public.timeline_event."timestamp" IS 'When the event happened'
 
 
 --
--- TOC entry 5236 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4796 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.time_matters; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4829,8 +5026,8 @@ COMMENT ON COLUMN public.timeline_event.time_matters IS 'Indicate whether the ti
 
 
 --
--- TOC entry 5237 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4797 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.timezone; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4838,8 +5035,8 @@ COMMENT ON COLUMN public.timeline_event.timezone IS 'Timezone to display the und
 
 
 --
--- TOC entry 5238 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4798 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.icon; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4847,8 +5044,8 @@ COMMENT ON COLUMN public.timeline_event.icon IS 'the icon to use when displaying
 
 
 --
--- TOC entry 5239 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4799 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.archived; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4856,8 +5053,8 @@ COMMENT ON COLUMN public.timeline_event.archived IS 'Whether or not the event ha
 
 
 --
--- TOC entry 5240 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4800 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.creator_id; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4865,8 +5062,8 @@ COMMENT ON COLUMN public.timeline_event.creator_id IS 'ID of the user who create
 
 
 --
--- TOC entry 5241 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4801 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.created_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4874,8 +5071,8 @@ COMMENT ON COLUMN public.timeline_event.created_at IS 'The timestamp of when the
 
 
 --
--- TOC entry 5242 (class 0 OID 0)
--- Dependencies: 315
+-- TOC entry 4802 (class 0 OID 0)
+-- Dependencies: 338
 -- Name: COLUMN timeline_event.updated_at; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4883,7 +5080,7 @@ COMMENT ON COLUMN public.timeline_event.updated_at IS 'The timestamp of when the
 
 
 --
--- TOC entry 314 (class 1259 OID 27718)
+-- TOC entry 339 (class 1259 OID 16852)
 -- Name: timeline_event_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4898,7 +5095,7 @@ ALTER TABLE public.timeline_event ALTER COLUMN id ADD GENERATED BY DEFAULT AS ID
 
 
 --
--- TOC entry 312 (class 1259 OID 27697)
+-- TOC entry 340 (class 1259 OID 16853)
 -- Name: timeline_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4913,7 +5110,400 @@ ALTER TABLE public.timeline ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
 
 
 --
--- TOC entry 241 (class 1259 OID 26666)
+-- TOC entry 341 (class 1259 OID 16854)
+-- Name: v_alerts; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_alerts AS
+ WITH agg_recipients AS (
+         SELECT pulse_channel_recipient.pulse_channel_id,
+            string_agg((core_user.email)::text, ','::text) AS recipients
+           FROM (public.pulse_channel_recipient
+             LEFT JOIN public.core_user ON ((pulse_channel_recipient.user_id = core_user.id)))
+          GROUP BY pulse_channel_recipient.pulse_channel_id
+        )
+ SELECT pulse.id AS entity_id,
+    ('pulse_'::text || pulse.id) AS entity_qualified_id,
+    pulse.created_at,
+    pulse.updated_at,
+    pulse.creator_id,
+    pulse_card.card_id,
+    ('card_'::text || pulse_card.card_id) AS card_qualified_id,
+    pulse.alert_condition,
+    pulse_channel.schedule_type,
+    pulse_channel.schedule_day,
+    pulse_channel.schedule_hour,
+    pulse.archived,
+    pulse_channel.channel_type AS recipient_type,
+    agg_recipients.recipients,
+    pulse_channel.details AS recipient_external
+   FROM (((public.pulse
+     LEFT JOIN public.pulse_card ON ((pulse.id = pulse_card.pulse_id)))
+     LEFT JOIN public.pulse_channel ON ((pulse.id = pulse_channel.pulse_id)))
+     LEFT JOIN agg_recipients ON ((pulse_channel.id = agg_recipients.pulse_channel_id)))
+  WHERE (pulse.alert_condition IS NOT NULL);
+
+
+--
+-- TOC entry 342 (class 1259 OID 16859)
+-- Name: v_audit_log; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_audit_log AS
+ SELECT id,
+        CASE
+            WHEN ((topic)::text = 'card-create'::text) THEN 'card-create'::character varying
+            WHEN ((topic)::text = 'card-delete'::text) THEN 'card-delete'::character varying
+            WHEN ((topic)::text = 'card-update'::text) THEN 'card-update'::character varying
+            WHEN ((topic)::text = 'pulse-create'::text) THEN 'subscription-create'::character varying
+            WHEN ((topic)::text = 'pulse-delete'::text) THEN 'subscription-delete'::character varying
+            ELSE topic
+        END AS topic,
+    "timestamp",
+    NULL::text AS end_timestamp,
+    user_id,
+    lower((model)::text) AS entity_type,
+    model_id AS entity_id,
+        CASE
+            WHEN ((model)::text = 'Dataset'::text) THEN ('card_'::text || model_id)
+            WHEN (model_id IS NULL) THEN NULL::text
+            ELSE ((lower((model)::text) || '_'::text) || model_id)
+        END AS entity_qualified_id,
+    details
+   FROM public.audit_log
+  WHERE ((topic)::text <> ALL (ARRAY[('card-read'::character varying)::text, ('card-query'::character varying)::text, ('dashboard-read'::character varying)::text, ('dashboard-query'::character varying)::text, ('table-read'::character varying)::text]));
+
+
+--
+-- TOC entry 343 (class 1259 OID 16864)
+-- Name: v_content; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_content AS
+ SELECT action.id AS entity_id,
+    ('action_'::text || action.id) AS entity_qualified_id,
+    'action'::text AS entity_type,
+    action.created_at,
+    action.updated_at,
+    action.creator_id,
+    action.name,
+    action.description,
+    NULL::integer AS collection_id,
+    action.made_public_by_id AS made_public_by_user,
+    NULL::boolean AS is_embedding_enabled,
+    action.archived,
+    action.type AS action_type,
+    action.model_id AS action_model_id,
+    NULL::boolean AS collection_is_official,
+    NULL::boolean AS collection_is_personal,
+    NULL::text AS question_viz_type,
+    NULL::text AS question_database_id,
+    NULL::boolean AS question_is_native,
+    NULL::timestamp without time zone AS event_timestamp
+   FROM public.action
+UNION
+ SELECT collection.id AS entity_id,
+    ('collection_'::text || collection.id) AS entity_qualified_id,
+    'collection'::text AS entity_type,
+    collection.created_at,
+    NULL::timestamp with time zone AS updated_at,
+    NULL::integer AS creator_id,
+    collection.name,
+    collection.description,
+    NULL::integer AS collection_id,
+    NULL::integer AS made_public_by_user,
+    NULL::boolean AS is_embedding_enabled,
+    collection.archived,
+    NULL::text AS action_type,
+    NULL::integer AS action_model_id,
+        CASE
+            WHEN ((collection.authority_level)::text = 'official'::text) THEN true
+            ELSE false
+        END AS collection_is_official,
+        CASE
+            WHEN (collection.personal_owner_id IS NOT NULL) THEN true
+            ELSE false
+        END AS collection_is_personal,
+    NULL::text AS question_viz_type,
+    NULL::text AS question_database_id,
+    NULL::boolean AS question_is_native,
+    NULL::timestamp without time zone AS event_timestamp
+   FROM public.collection
+UNION
+ SELECT report_card.id AS entity_id,
+    ('card_'::text || report_card.id) AS entity_qualified_id,
+        CASE
+            WHEN report_card.dataset THEN 'model'::text
+            ELSE 'question'::text
+        END AS entity_type,
+    report_card.created_at,
+    report_card.updated_at,
+    report_card.creator_id,
+    report_card.name,
+    report_card.description,
+    report_card.collection_id,
+    report_card.made_public_by_id AS made_public_by_user,
+    report_card.enable_embedding AS is_embedding_enabled,
+    report_card.archived,
+    NULL::text AS action_type,
+    NULL::integer AS action_model_id,
+    NULL::boolean AS collection_is_official,
+    NULL::boolean AS collection_is_personal,
+    report_card.display AS question_viz_type,
+    ('database_'::text || report_card.database_id) AS question_database_id,
+        CASE
+            WHEN ((report_card.query_type)::text = 'native'::text) THEN true
+            ELSE false
+        END AS question_is_native,
+    NULL::timestamp without time zone AS event_timestamp
+   FROM public.report_card
+UNION
+ SELECT report_dashboard.id AS entity_id,
+    ('dashboard_'::text || report_dashboard.id) AS entity_qualified_id,
+    'dashboard'::text AS entity_type,
+    report_dashboard.created_at,
+    report_dashboard.updated_at,
+    report_dashboard.creator_id,
+    report_dashboard.name,
+    report_dashboard.description,
+    report_dashboard.collection_id,
+    report_dashboard.made_public_by_id AS made_public_by_user,
+    report_dashboard.enable_embedding AS is_embedding_enabled,
+    report_dashboard.archived,
+    NULL::text AS action_type,
+    NULL::integer AS action_model_id,
+    NULL::boolean AS collection_is_official,
+    NULL::boolean AS collection_is_personal,
+    NULL::text AS question_viz_type,
+    NULL::text AS question_database_id,
+    NULL::boolean AS question_is_native,
+    NULL::timestamp without time zone AS event_timestamp
+   FROM public.report_dashboard
+UNION
+ SELECT event.id AS entity_id,
+    ('event_'::text || event.id) AS entity_qualified_id,
+    'event'::text AS entity_type,
+    event.created_at,
+    event.updated_at,
+    event.creator_id,
+    event.name,
+    event.description,
+    timeline.collection_id,
+    NULL::integer AS made_public_by_user,
+    NULL::boolean AS is_embedding_enabled,
+    event.archived,
+    NULL::text AS action_type,
+    NULL::integer AS action_model_id,
+    NULL::boolean AS collection_is_official,
+    NULL::boolean AS collection_is_personal,
+    NULL::text AS question_viz_type,
+    NULL::text AS question_database_id,
+    NULL::boolean AS question_is_native,
+    event."timestamp" AS event_timestamp
+   FROM (public.timeline_event event
+     LEFT JOIN public.timeline ON ((event.timeline_id = timeline.id)));
+
+
+--
+-- TOC entry 344 (class 1259 OID 16869)
+-- Name: v_dashboardcard; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_dashboardcard AS
+ SELECT id AS entity_id,
+    concat('dashboardcard_', id) AS entity_qualified_id,
+    concat('dashboard_', dashboard_id) AS dashboard_qualified_id,
+    concat('dashboardtab_', dashboard_tab_id) AS dashboardtab_id,
+    concat('card_', card_id) AS card_qualified_id,
+    created_at,
+    updated_at,
+    size_x,
+    size_y,
+    visualization_settings,
+    parameter_mappings
+   FROM public.report_dashboardcard;
+
+
+--
+-- TOC entry 345 (class 1259 OID 16873)
+-- Name: v_databases; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_databases AS
+ SELECT id AS entity_id,
+    concat('database_', id) AS entity_qualified_id,
+    created_at,
+    updated_at,
+    name,
+    description,
+    engine AS database_type,
+    metadata_sync_schedule,
+    cache_field_values_schedule,
+    timezone,
+    is_on_demand,
+    auto_run_queries,
+    cache_ttl,
+    creator_id,
+    dbms_version AS db_version
+   FROM public.metabase_database
+  WHERE (id <> 13371337);
+
+
+--
+-- TOC entry 346 (class 1259 OID 16878)
+-- Name: v_fields; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_fields AS
+ SELECT id AS entity_id,
+    ('field_'::text || id) AS entity_qualified_id,
+    created_at,
+    updated_at,
+    name,
+    display_name,
+    description,
+    base_type,
+    visibility_type,
+    fk_target_field_id,
+    has_field_values,
+    active,
+    table_id
+   FROM public.metabase_field;
+
+
+--
+-- TOC entry 347 (class 1259 OID 16882)
+-- Name: v_group_members; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_group_members AS
+ SELECT permissions_group_membership.user_id,
+    permissions_group.id AS group_id,
+    permissions_group.name AS group_name
+   FROM (public.permissions_group_membership
+     LEFT JOIN public.permissions_group ON ((permissions_group_membership.group_id = permissions_group.id)));
+
+
+--
+-- TOC entry 348 (class 1259 OID 16886)
+-- Name: v_query_log; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_query_log AS
+ SELECT id AS entity_id,
+    started_at,
+    ((running_time)::double precision / (1000)::double precision) AS running_time_seconds,
+    result_rows,
+    native AS is_native,
+    context AS query_source,
+    error,
+    executor_id AS user_id,
+    card_id,
+    ('card_'::text || card_id) AS card_qualified_id,
+    dashboard_id,
+    ('dashboard_'::text || dashboard_id) AS dashboard_qualified_id,
+    pulse_id,
+    database_id,
+    ('database_'::text || database_id) AS database_qualified_id,
+    cache_hit,
+    action_id,
+    ('action_'::text || action_id) AS action_qualified_id
+   FROM public.query_execution;
+
+
+--
+-- TOC entry 349 (class 1259 OID 16891)
+-- Name: v_subscriptions; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_subscriptions AS
+ WITH agg_recipients AS (
+         SELECT pulse_channel_recipient.pulse_channel_id,
+            string_agg((core_user.email)::text, ','::text) AS recipients
+           FROM (public.pulse_channel_recipient
+             LEFT JOIN public.core_user ON ((pulse_channel_recipient.user_id = core_user.id)))
+          GROUP BY pulse_channel_recipient.pulse_channel_id
+        )
+ SELECT pulse.id AS entity_id,
+    ('pulse_'::text || pulse.id) AS entity_qualified_id,
+    pulse.created_at,
+    pulse.updated_at,
+    pulse.creator_id,
+    pulse.archived,
+    ('dashboard_'::text || pulse.dashboard_id) AS dashboard_qualified_id,
+    pulse_channel.schedule_type,
+    pulse_channel.schedule_day,
+    pulse_channel.schedule_hour,
+    pulse_channel.channel_type AS recipient_type,
+    agg_recipients.recipients,
+    pulse_channel.details AS recipient_external,
+    pulse.parameters
+   FROM ((public.pulse
+     LEFT JOIN public.pulse_channel ON ((pulse.id = pulse_channel.pulse_id)))
+     LEFT JOIN agg_recipients ON ((pulse_channel.id = agg_recipients.pulse_channel_id)))
+  WHERE (pulse.alert_condition IS NULL);
+
+
+--
+-- TOC entry 350 (class 1259 OID 16896)
+-- Name: v_tables; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_tables AS
+ SELECT id AS entity_id,
+    ('table_'::text || id) AS entity_qualified_id,
+    created_at,
+    updated_at,
+    name,
+    display_name,
+    description,
+    active,
+    db_id AS database_id,
+    schema,
+    is_upload
+   FROM public.metabase_table;
+
+
+--
+-- TOC entry 351 (class 1259 OID 16900)
+-- Name: v_tasks; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_tasks AS
+ SELECT id,
+    task,
+    ('database_'::text || db_id) AS database_qualified_id,
+    started_at,
+    ended_at,
+    ((duration)::double precision / (1000)::double precision) AS duration_seconds,
+    task_details AS details
+   FROM public.task_history;
+
+
+--
+-- TOC entry 352 (class 1259 OID 16904)
+-- Name: v_users; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_users AS
+ SELECT id AS user_id,
+    ('user_'::text || id) AS entity_qualified_id,
+    email,
+    first_name,
+    last_name,
+    (((first_name)::text || ' '::text) || (last_name)::text) AS full_name,
+    date_joined,
+    last_login,
+    updated_at,
+    is_superuser AS is_admin,
+    is_active,
+    sso_source,
+    locale
+   FROM public.core_user;
+
+
+--
+-- TOC entry 353 (class 1259 OID 16908)
 -- Name: view_log; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -4923,13 +5513,15 @@ CREATE TABLE public.view_log (
     model character varying(16) NOT NULL,
     model_id integer NOT NULL,
     "timestamp" timestamp with time zone NOT NULL,
-    metadata text
+    metadata text,
+    has_access boolean,
+    context character varying(32)
 );
 
 
 --
--- TOC entry 5243 (class 0 OID 0)
--- Dependencies: 241
+-- TOC entry 4803 (class 0 OID 0)
+-- Dependencies: 353
 -- Name: COLUMN view_log.metadata; Type: COMMENT; Schema: public; Owner: -
 --
 
@@ -4937,7 +5529,40 @@ COMMENT ON COLUMN public.view_log.metadata IS 'Serialized JSON corresponding to 
 
 
 --
--- TOC entry 240 (class 1259 OID 26665)
+-- TOC entry 4804 (class 0 OID 0)
+-- Dependencies: 353
+-- Name: COLUMN view_log.has_access; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.view_log.has_access IS 'Whether the user who initiated the view had read access to the item being viewed.';
+
+
+--
+-- TOC entry 4805 (class 0 OID 0)
+-- Dependencies: 353
+-- Name: COLUMN view_log.context; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN public.view_log.context IS 'The context of the view, can be collection, question, or dashboard. Only for cards.';
+
+
+--
+-- TOC entry 354 (class 1259 OID 16913)
+-- Name: v_view_log; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.v_view_log AS
+ SELECT id,
+    "timestamp",
+    user_id,
+    model AS entity_type,
+    model_id AS entity_id,
+    (((model)::text || '_'::text) || model_id) AS entity_qualified_id
+   FROM public.view_log;
+
+
+--
+-- TOC entry 355 (class 1259 OID 16917)
 -- Name: view_log_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -4952,8 +5577,8 @@ ALTER TABLE public.view_log ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY
 
 
 --
--- TOC entry 4912 (class 0 OID 27896)
--- Dependencies: 329
+-- TOC entry 4335 (class 0 OID 16385)
+-- Dependencies: 215
 -- Data for Name: action; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -4962,8 +5587,8 @@ COPY public.action (id, created_at, updated_at, type, model_id, name, descriptio
 
 
 --
--- TOC entry 4822 (class 0 OID 26650)
--- Dependencies: 239
+-- TOC entry 4337 (class 0 OID 16394)
+-- Dependencies: 217
 -- Data for Name: activity; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -4991,8 +5616,8 @@ COPY public.activity (id, topic, "timestamp", user_id, model, model_id, database
 
 
 --
--- TOC entry 4906 (class 0 OID 27806)
--- Dependencies: 323
+-- TOC entry 4339 (class 0 OID 16400)
+-- Dependencies: 219
 -- Data for Name: application_permissions_revision; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5001,8 +5626,37 @@ COPY public.application_permissions_revision (id, before, after, user_id, create
 
 
 --
--- TOC entry 4908 (class 0 OID 27821)
--- Dependencies: 325
+-- TOC entry 4341 (class 0 OID 16406)
+-- Dependencies: 221
+-- Data for Name: audit_log; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.audit_log (id, topic, "timestamp", end_timestamp, user_id, model, model_id, details) FROM stdin;
+1	install	2023-11-17 02:55:30.237258+00	\N	\N	install	\N	{}
+2	user-joined	2023-11-17 03:15:37.483072+00	\N	1	user	1	{}
+3	card-create	2023-11-17 03:22:03.854916+00	\N	1	card	1	{"name": "main", "database_id": 2, "description": "base table to work on visualizations"}
+4	dashboard-create	2023-11-17 03:22:18.927124+00	\N	1	dashboard	1	{"name": "Best City", "description": null}
+5	dashboard-add-cards	2023-11-17 03:23:33.233873+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 1, "name": "main", "card_id": 1, "description": "base table to work on visualizations"}], "description": null}
+6	card-create	2023-11-17 03:26:09.253515+00	\N	1	card	2	{"name": "Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending", "table_id": 9, "database_id": 2, "description": null}
+7	dashboard-add-cards	2023-11-17 03:26:19.570583+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 2, "name": "Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending", "card_id": 2, "description": null}], "description": null}
+8	dashboard-remove-cards	2023-11-17 03:33:15.119154+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 1, "name": "main", "card_id": 1, "description": "base table to work on visualizations"}], "description": null}
+9	card-update	2023-11-19 02:45:58.383257+00	\N	1	card	1	{"name": "main", "database_id": 2, "description": "base table to work on visualizations"}
+10	card-create	2023-11-19 02:56:41.953458+00	\N	1	card	3	{"name": "Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending", "table_id": 11, "database_id": 2, "description": null}
+11	dashboard-add-cards	2023-11-19 02:56:53.17017+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 3, "name": "Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending", "card_id": 3, "description": null}], "description": null}
+12	card-create	2023-11-20 00:25:54.78645+00	\N	1	card	4	{"name": "Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending", "table_id": 11, "database_id": 2, "description": null}
+13	dashboard-add-cards	2023-11-20 00:26:17.988109+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 4, "name": "Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending", "card_id": 4, "description": null}], "description": null}
+14	card-update	2023-11-20 03:19:36.981836+00	\N	1	card	4	{"name": "Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending", "table_id": 11, "database_id": 2, "description": null}
+15	dashboard-add-cards	2023-11-20 03:24:07.503302+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 5, "card_id": null}], "description": null}
+16	card-create	2023-12-03 01:28:04.436266+00	\N	1	card	5	{"name": "Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month", "table_id": 10, "database_id": 2, "description": null}
+17	dashboard-add-cards	2023-12-03 01:32:07.388761+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 6, "name": "Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month", "card_id": 5, "description": null}], "description": null}
+18	dashboard-add-cards	2023-12-03 01:33:52.262706+00	\N	1	dashboard	1	{"name": "Best City", "dashcards": [{"id": 7, "card_id": null}], "description": null}
+19	card-create	2023-12-03 01:52:18.366266+00	\N	1	card	6	{"name": "Sentiment Map", "table_id": 11, "database_id": 2, "description": null}
+\.
+
+
+--
+-- TOC entry 4343 (class 0 OID 16412)
+-- Dependencies: 223
 -- Data for Name: bookmark_ordering; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5011,8 +5665,8 @@ COPY public.bookmark_ordering (id, user_id, type, item_id, ordering) FROM stdin;
 
 
 --
--- TOC entry 4902 (class 0 OID 27764)
--- Dependencies: 319
+-- TOC entry 4345 (class 0 OID 16416)
+-- Dependencies: 225
 -- Data for Name: card_bookmark; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5021,8 +5675,8 @@ COPY public.card_bookmark (id, user_id, card_id, created_at) FROM stdin;
 
 
 --
--- TOC entry 4845 (class 0 OID 26838)
--- Dependencies: 262
+-- TOC entry 4347 (class 0 OID 16421)
+-- Dependencies: 227
 -- Data for Name: card_label; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5031,20 +5685,20 @@ COPY public.card_label (id, card_id, label_id) FROM stdin;
 
 
 --
--- TOC entry 4857 (class 0 OID 27004)
--- Dependencies: 274
+-- TOC entry 4349 (class 0 OID 16425)
+-- Dependencies: 229
 -- Data for Name: collection; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.collection (id, name, description, color, archived, location, personal_owner_id, slug, namespace, authority_level, entity_id, created_at, type) FROM stdin;
-1	Raul Macias's Personal Collection	\N	#31698A	f	/	1	raul_macias_s_personal_collection	\N	\N	oSvJh9TKJkYJtY7IecuzE	2023-11-17 03:15:43.650105+00	\N
-2	John Doe's Personal Collection	\N	#31698A	f	/	2	john_doe_s_personal_collection	\N	\N	honvsU9mjBzZBOERB4RoU	2023-12-03 02:26:51.697639+00	\N
+COPY public.collection (id, name, description, archived, location, personal_owner_id, slug, namespace, authority_level, entity_id, created_at, type) FROM stdin;
+2	John Doe's Personal Collection	\N	f	/	2	john_doe_s_personal_collection	\N	\N	honvsU9mjBzZBOERB4RoU	2023-12-03 02:26:51.697639+00	\N
+1	John Doe's Personal Collection	\N	f	/	1	john_doe_s_personal_collection	\N	\N	oSvJh9TKJkYJtY7IecuzE	2023-11-17 03:15:43.650105+00	\N
 \.
 
 
 --
--- TOC entry 4904 (class 0 OID 27785)
--- Dependencies: 321
+-- TOC entry 4350 (class 0 OID 16433)
+-- Dependencies: 230
 -- Data for Name: collection_bookmark; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5053,8 +5707,8 @@ COPY public.collection_bookmark (id, user_id, collection_id, created_at) FROM st
 
 
 --
--- TOC entry 4859 (class 0 OID 27022)
--- Dependencies: 276
+-- TOC entry 4353 (class 0 OID 16439)
+-- Dependencies: 233
 -- Data for Name: collection_permission_graph_revision; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5063,28 +5717,8 @@ COPY public.collection_permission_graph_revision (id, before, after, user_id, cr
 
 
 --
--- TOC entry 4869 (class 0 OID 27126)
--- Dependencies: 286
--- Data for Name: computation_job; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.computation_job (id, creator_id, created_at, updated_at, type, status, context, ended_at) FROM stdin;
-\.
-
-
---
--- TOC entry 4871 (class 0 OID 27139)
--- Dependencies: 288
--- Data for Name: computation_job_result; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.computation_job_result (id, job_id, created_at, updated_at, permanence, payload) FROM stdin;
-\.
-
-
---
--- TOC entry 4924 (class 0 OID 28148)
--- Dependencies: 341
+-- TOC entry 4355 (class 0 OID 16445)
+-- Dependencies: 235
 -- Data for Name: connection_impersonations; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5093,31 +5727,31 @@ COPY public.connection_impersonations (id, db_id, group_id, attribute) FROM stdi
 
 
 --
--- TOC entry 4817 (class 0 OID 26602)
--- Dependencies: 234
+-- TOC entry 4357 (class 0 OID 16451)
+-- Dependencies: 237
 -- Data for Name: core_session; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.core_session (id, user_id, created_at, anti_csrf_token) FROM stdin;
-8b5d1223-95f6-454f-9a19-d0b11aecd382	1	2023-12-03 02:28:09.244931+00	\N
+e205cbb8-d2c5-4179-b84a-fe22ad1ab7d3	1	2024-02-12 00:56:05.495859+00	\N
 \.
 
 
 --
--- TOC entry 4800 (class 0 OID 26250)
--- Dependencies: 217
+-- TOC entry 4358 (class 0 OID 16456)
+-- Dependencies: 238
 -- Data for Name: core_user; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.core_user (id, email, first_name, last_name, password, password_salt, date_joined, last_login, is_superuser, is_active, reset_token, reset_triggered, is_qbnewb, login_attributes, updated_at, sso_source, locale, is_datasetnewb, settings) FROM stdin;
-1	rulomacraf_06@hotmail.com	Raul	Macias	$2a$10$sOxIMLSQIBINtvccJr6mi.Bqm3IdCEeF0IQ9n2W7Be27kAcrAsOCu	74d68a8a-b6b4-4d64-af59-13beda9453ea	2023-11-17 03:15:33.172664+00	2023-12-03 02:28:09.516958+00	t	t	\N	\N	f	\N	2023-12-03 02:37:20.949254	\N	\N	t	{"last-acknowledged-version":"v0.47.7","most-recently-viewed-dashboard":"{\\"id\\":1,\\"timestamp\\":\\"2023-12-03T02:37:19.616098Z\\"}","user-recent-views":"[{\\"model\\":\\"dashboard\\",\\"model_id\\":1},{\\"model\\":\\"card\\",\\"model_id\\":6},{\\"model\\":\\"table\\",\\"model_id\\":11},{\\"model\\":\\"card\\",\\"model_id\\":3},{\\"model\\":\\"card\\",\\"model_id\\":5},{\\"model\\":\\"table\\",\\"model_id\\":10},{\\"model\\":\\"table\\",\\"model_id\\":13},{\\"model\\":\\"card\\",\\"model_id\\":4},{\\"model\\":\\"card\\",\\"model_id\\":2},{\\"model\\":\\"table\\",\\"model_id\\":9}]","dismissed-custom-dashboard-toast":"true"}
 2	john.doe@metabase.com	John	Doe	$2a$10$vqbtYraL1GOnZu0bQ53xsuIuS42qs2Tm5Po8ISrmIEITV1hp5sHsa	c46fc1ac-d8cb-4ad5-99dc-17b8e77603ab	2023-12-03 02:26:50.389084+00	\N	t	t	$2a$10$szr/9xfhs1MhYudvHyiqgekY6aL6GDHtuI0OzFNHrMd96FoxgB0Ne	1701570409842	t	\N	2023-12-03 02:26:50.389084	\N	\N	t	{"last-acknowledged-version":"v0.47.7"}
+1	john.doe@hotmail.com	John	Doe	$2a$10$MT9u1QzuqeaCALKZ3jEGBOqhawaabupzfVI587z27vXrs0EbDsSDe	f9447de5-74f7-4929-ae1e-80042bc841fd	2023-11-17 03:15:33.172664+00	2024-02-12 00:56:05.515311+00	t	t	\N	\N	f	\N	2024-02-12 00:56:05.515311	\N	\N	t	{"last-acknowledged-version":"v0.47.7","most-recently-viewed-dashboard":"{\\"id\\":1,\\"timestamp\\":\\"2023-12-03T02:37:19.616098Z\\"}","user-recent-views":"[{\\"model\\":\\"dashboard\\",\\"model_id\\":1},{\\"model\\":\\"card\\",\\"model_id\\":6},{\\"model\\":\\"table\\",\\"model_id\\":11},{\\"model\\":\\"card\\",\\"model_id\\":3},{\\"model\\":\\"card\\",\\"model_id\\":5},{\\"model\\":\\"table\\",\\"model_id\\":10},{\\"model\\":\\"table\\",\\"model_id\\":13},{\\"model\\":\\"card\\",\\"model_id\\":4},{\\"model\\":\\"card\\",\\"model_id\\":2},{\\"model\\":\\"table\\",\\"model_id\\":9}]","dismissed-custom-dashboard-toast":"true"}
 \.
 
 
 --
--- TOC entry 4900 (class 0 OID 27743)
--- Dependencies: 317
+-- TOC entry 4360 (class 0 OID 16467)
+-- Dependencies: 240
 -- Data for Name: dashboard_bookmark; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5126,8 +5760,8 @@ COPY public.dashboard_bookmark (id, user_id, dashboard_id, created_at) FROM stdi
 
 
 --
--- TOC entry 4865 (class 0 OID 27080)
--- Dependencies: 282
+-- TOC entry 4362 (class 0 OID 16472)
+-- Dependencies: 242
 -- Data for Name: dashboard_favorite; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5136,8 +5770,8 @@ COPY public.dashboard_favorite (id, user_id, dashboard_id) FROM stdin;
 
 
 --
--- TOC entry 4919 (class 0 OID 28090)
--- Dependencies: 336
+-- TOC entry 4364 (class 0 OID 16476)
+-- Dependencies: 244
 -- Data for Name: dashboard_tab; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5148,8 +5782,8 @@ COPY public.dashboard_tab (id, dashboard_id, name, "position", entity_id, create
 
 
 --
--- TOC entry 4841 (class 0 OID 26808)
--- Dependencies: 258
+-- TOC entry 4366 (class 0 OID 16484)
+-- Dependencies: 246
 -- Data for Name: dashboardcard_series; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5158,648 +5792,691 @@ COPY public.dashboardcard_series (id, dashboardcard_id, card_id, "position") FRO
 
 
 --
--- TOC entry 4825 (class 0 OID 26680)
--- Dependencies: 242
--- Data for Name: data_migrations; Type: TABLE DATA; Schema: public; Owner: -
---
-
-COPY public.data_migrations (id, "timestamp") FROM stdin;
-migrate-click-through	2023-11-17 02:55:29.091244
-migrate-remove-admin-from-group-mapping-if-needed	2023-11-17 02:55:29.492853
-\.
-
-
---
--- TOC entry 4797 (class 0 OID 26229)
--- Dependencies: 214
+-- TOC entry 4368 (class 0 OID 16488)
+-- Dependencies: 248
 -- Data for Name: databasechangelog; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.databasechangelog (id, author, filename, dateexecuted, orderexecuted, exectype, md5sum, description, comments, tag, liquibase, contexts, labels, deployment_id) FROM stdin;
-2	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:31.556497	2	EXECUTED	8:ca241a2c777802abaedd43d8944927f3	createTable tableName=core_session		\N	4.11.0	\N	\N	0189608756
-19	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:34.982369	18	EXECUTED	8:269b129dbfc39a6f9e0d3bc61c3c3b70	addColumn tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
-34	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:38.773736	33	EXECUTED	8:52b082600b05bbbc46bfe837d1f37a82	addColumn tableName=pulse_channel		\N	4.11.0	\N	\N	0189608756
-115	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.145811	111	MARK_RAN	8:55c10c2ff7e967e3ea1fdffc5aeed93a	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-122	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.815637	118	MARK_RAN	8:929b3c551a8f631cdce2511612d82d62	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-124	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.001368	120	MARK_RAN	8:ce2322ca187dfac51be8f12f6a132818	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-125	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.095137	121	MARK_RAN	8:dd948ac004ceb9d0a300a8e06806945f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-126	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.195271	122	MARK_RAN	8:3d34c0d4e5dbb32b432b83d5322e2aa3	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-127	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.289253	123	MARK_RAN	8:18314b269fe11898a433ca9048400975	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-129	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.475613	125	MARK_RAN	8:f890168c47cc2113a8af77ed3875c4b3	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-130	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.575332	126	MARK_RAN	8:ecdcf1fd66b3477e5b6882c3286b2fd8	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-131	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.669344	127	MARK_RAN	8:453af2935194978c65b19eae445d85c9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-132	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.763776	128	MARK_RAN	8:d2c37bc80b42a15b65f148bcb1daa86e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-133	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.869763	129	MARK_RAN	8:5b9b539d146fbdb762577dc98e7f3430	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-134	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.964188	130	MARK_RAN	8:4d0f688a168db3e357a808263b6ad355	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-135	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.059409	131	MARK_RAN	8:2ca54b0828c6aca615fb42064f1ec728	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-136	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.153978	132	MARK_RAN	8:7115eebbcf664509b9fc0c39cb6f29e9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-137	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.251421	133	MARK_RAN	8:da754ac6e51313a32de6f6389b29e1ca	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-138	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.348684	134	MARK_RAN	8:bfb201761052189e96538f0de3ac76cf	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-139	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.451856	135	MARK_RAN	8:fdad4ec86aefb0cdf850b1929b618508	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-140	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.545714	136	MARK_RAN	8:a0cfe6468160bba8c9d602da736c41fb	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-141	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.639473	137	MARK_RAN	8:b6b7faa02cba069e1ed13e365f59cb6b	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-142	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.740312	138	MARK_RAN	8:0c291eb50cc0f1fef3d55cfe6b62bedb	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-143	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.835515	139	MARK_RAN	8:3d9a5cb41f77a33e834d0562fdddeab6	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-144	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:03.929599	140	MARK_RAN	8:1d5b7f79f97906105e90d330a17c4062	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-146	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.11429	142	MARK_RAN	8:8c0c1861582d15fe7859358f5d553c91	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-147	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.219429	143	MARK_RAN	8:5ccf590332ea0744414e40a990a43275	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-148	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.311897	144	MARK_RAN	8:12b42e87d40cd7b6399c1fb0c6704fa7	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-149	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.403366	145	MARK_RAN	8:dd45bfc4af5e05701a064a5f2a046d7f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-150	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.495885	146	MARK_RAN	8:48beda94aeaa494f798c38a66b90fb2a	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-151	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.589726	147	MARK_RAN	8:bb752a7d09d437c7ac294d5ab2600079	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-154	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.871756	150	MARK_RAN	8:7a1df4f7a679f47459ea1a1c0991cfba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-157	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.15877	153	MARK_RAN	8:0197c46bf8536a75dbf7e9aee731f3b2	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-158	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.260231	154	MARK_RAN	8:2ebdd5a179ce2487b2e23b6be74a407c	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-159	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.354857	155	MARK_RAN	8:c62719dad239c51f045315273b56e2a9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-160	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.449889	156	MARK_RAN	8:1441c71af662abb809cba3b3b360ce81	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-75	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:51.581426	73	EXECUTED	8:6072cabfe8188872d8e3da9a675f88c1	addColumn tableName=report_card	Added 0.28.2	\N	4.11.0	\N	\N	0189608756
-73	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:51.199948	71	EXECUTED	8:3c0f03d18ff78a0bcc9915e1d9c518d6	addColumn tableName=metabase_database	Added 0.29.0	\N	4.11.0	\N	\N	0189608756
-162	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.729861	157	EXECUTED	8:c37f015ad11d77d66e09925eed605cdf	dropTable tableName=query_queryexecution	Added 0.23.0 as a data migration; converted to Liquibase migration in 0.35.0	\N	4.11.0	\N	\N	0189608756
-163	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.889898	158	EXECUTED	8:9ef66a82624d70738fc89807a2398ed1	dropColumn columnName=read_permissions, tableName=report_card	Added 0.35.0	\N	4.11.0	\N	\N	0189608756
-109	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.571965	105	MARK_RAN	8:a5f4ea412eb1d5c1bc824046ad11692f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-164	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:06.072159	159	EXECUTED	8:f19470701bbb33f19f91b1199a915881	addColumn tableName=core_user	Added 0.35.0	\N	4.11.0	\N	\N	0189608756
-66	senior	migrations/000_migrations.yaml	2023-11-17 02:53:49.49361	64	EXECUTED	8:e77d66af8e3b83d46c5a0064a75a1aac	sql; sql	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-165	sb	migrations/000_migrations.yaml	2023-11-17 02:54:06.326215	160	EXECUTED	8:b3ae2b90db5c4264ea2ac50d304d6ad4	addColumn tableName=metabase_field; addColumn tableName=metabase_field; addColumn tableName=metabase_table; sql	Added field_order to Table and database_position to Field	\N	4.11.0	\N	\N	0189608756
-166	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:06.528399	161	EXECUTED	8:92dafa5c15c46e2af8380304449c7dfa	modifyDataType columnName=updated_at, tableName=metabase_fieldvalues; modifyDataType columnName=updated_at, tableName=query_cache	Added 0.36.0/1.35.4	\N	4.11.0	\N	\N	0189608756
-167	walterl, camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:06.876148	162	EXECUTED	8:4ed8c3a2d7d00700cc564095ddbb290f	sql; createTable tableName=native_query_snippet; createIndex indexName=idx_snippet_name, tableName=native_query_snippet	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-169	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.213431	164	EXECUTED	8:2b97e6eaa7854e179abb9f3749f73b18	dropColumn columnName=rows, tableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-170	sb	migrations/000_migrations.yaml	2023-11-17 02:54:07.371174	165	EXECUTED	8:dbd6ee52b0f9195e449a6d744606b599	dropColumn columnName=fields_hash, tableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-171	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.642108	166	EXECUTED	8:e08e8d6d9ea7073cd823e6ff75fc2b67	addColumn tableName=native_query_snippet; createIndex indexName=idx_snippet_collection_id, tableName=native_query_snippet	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-172	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.832206	167	EXECUTED	8:212f4010b504e358853fd017032f844f	addColumn tableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-174	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.154961	169	EXECUTED	8:66f31503ba532702e54ea531af668531	addForeignKeyConstraint baseTableName=activity, constraintName=fk_activity_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-175	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.314311	170	EXECUTED	8:c3ceddfca8827d73474cd9a70ea01d1c	dropForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-176	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.464593	171	EXECUTED	8:89c918faa84b7f3f5fa291d4da74414c	addForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-177	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.619983	172	EXECUTED	8:d45f2198befc83de1f1f963c750607af	dropForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_label_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-178	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.77864	173	EXECUTED	8:63d396999449da2d42b3d3e22f3454fa	addForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_label_id, referencedTableName=label	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-179	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:08.934722	174	EXECUTED	8:2a0a7956402ef074e5d54c73ac2d5405	dropForeignKeyConstraint baseTableName=collection, constraintName=fk_collection_personal_owner_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-180	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.092488	175	EXECUTED	8:b02225e5940a2bcca3d550f24f80123e	addForeignKeyConstraint baseTableName=collection, constraintName=fk_collection_personal_owner_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-93	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:58.042842	91	EXECUTED	8:93b0d408a3970e30d7184ed1166b5476	addColumn tableName=query	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
-181	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.25042	176	EXECUTED	8:16923f06b2bbb60c6ac78a0c4b7e4d4f	dropForeignKeyConstraint baseTableName=collection_revision, constraintName=fk_collection_revision_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-182	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.402379	177	EXECUTED	8:d59d864c038c530a49056704c93f231d	addForeignKeyConstraint baseTableName=collection_revision, constraintName=fk_collection_revision_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-183	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.560581	178	EXECUTED	8:c5ed9a4f44ee92af620a47c80e010a6b	dropForeignKeyConstraint baseTableName=computation_job, constraintName=fk_computation_job_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-184	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.717986	179	EXECUTED	8:70317e2bdaac90b9ddc33b1b93ada479	addForeignKeyConstraint baseTableName=computation_job, constraintName=fk_computation_job_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-185	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:09.874411	180	EXECUTED	8:12e7457ec2d2b1a99a3fadfc64d7b7f9	dropForeignKeyConstraint baseTableName=computation_job_result, constraintName=fk_computation_result_ref_job_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-186	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.056531	181	EXECUTED	8:526987d0f6b2f01d7bfc9e3179721be6	addForeignKeyConstraint baseTableName=computation_job_result, constraintName=fk_computation_result_ref_job_id, referencedTableName=computation_job	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-188	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.371259	183	EXECUTED	8:4dc500830cd4c5715ca8b0956e37b3d5	addForeignKeyConstraint baseTableName=core_session, constraintName=fk_session_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-189	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.538143	184	EXECUTED	8:e07396e0ee587dcf321d21cffa9eec29	dropForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-190	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.698629	185	EXECUTED	8:eded791094a16bf398896c790645c411	addForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-4	cammsaul	migrations/000_migrations.yaml	2023-11-17 02:53:31.734426	3	EXECUTED	8:a8e7822a91ea122212d376f5c2d4158f	createTable tableName=setting		\N	4.11.0	\N	\N	0189608756
-191	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.850176	186	EXECUTED	8:bb5b9a3d64b2e44318e159e7f1fecde2	dropForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_dashboardcard_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-192	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.014191	187	EXECUTED	8:7d96911036dec2fee64fe8ae57c131b3	addForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_dashboardcard_id, referencedTableName=report_dashboardcard	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-78	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:52.346598	76	EXECUTED	8:8ea54a54fa04fe657b0b8072125981af	createTable tableName=group_table_access_policy; createIndex indexName=idx_gtap_table_id_group_id, tableName=group_table_access_policy; addUniqueConstraint constraintName=unique_gtap_table_id_group_id, tableName=group_table_access_policy	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-195	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.486387	190	EXECUTED	8:1d720af9f917007024c91d40410bc91d	dropForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_parent_ref_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-196	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.636348	191	EXECUTED	8:c52f5dbf742feef12a3803bda92a425b	addForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_parent_ref_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-197	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.798211	192	EXECUTED	8:9c1c950b709050abe91cea17fd5970cc	dropForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-198	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.962741	193	EXECUTED	8:e24198ff4825a41d17ceaebd71692103	addForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-199	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.128561	194	EXECUTED	8:146efae3f2938538961835fe07433ee1	dropForeignKeyConstraint baseTableName=metabase_fieldvalues, constraintName=fk_fieldvalues_ref_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-200	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.302662	195	EXECUTED	8:f5e7e79cb81b8d2245663c482746c853	addForeignKeyConstraint baseTableName=metabase_fieldvalues, constraintName=fk_fieldvalues_ref_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-201	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.46245	196	EXECUTED	8:2d79321a27fde6cb3c4fabdb86dc60ec	dropForeignKeyConstraint baseTableName=metabase_table, constraintName=fk_table_ref_database_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-202	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.626348	197	EXECUTED	8:d0cefed061c4abbf2b0a0fd2a66817cb	addForeignKeyConstraint baseTableName=metabase_table, constraintName=fk_table_ref_database_id, referencedTableName=metabase_database	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-203	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.78267	198	EXECUTED	8:28b4ec07bfbf4b86532fe9357effdb8b	dropForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-204	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:12.960999	199	EXECUTED	8:7195937fd2144533edfa2302ba2ae653	addForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-205	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.1211	200	EXECUTED	8:4b2d5f1458641dd1b9dbc5f41600be8e	dropForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-116	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.249204	112	MARK_RAN	8:dbf7c3a1d8b1eb77b7f5888126b13c2e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-206	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.289355	201	EXECUTED	8:959ef448c23aaf3acf5b69f297fe4b2f	addForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-207	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.446872	202	EXECUTED	8:18135d674f2fe502313adb0475f5f139	dropForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metabase_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-208	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.606737	203	EXECUTED	8:4c86c17a00a81dfdf35a181e3dd3b08f	addForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metabase_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-209	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.76595	204	EXECUTED	8:1b9c3544bf89093fc9e4f7f191fdc6df	dropForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metric_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-210	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:13.935015	205	EXECUTED	8:842d166cdf7b0a29c88efdaf95c9d0bf	addForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metric_id, referencedTableName=metric	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-211	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.09885	206	EXECUTED	8:91c64815a1aefb07dd124d493bfeeea9	dropForeignKeyConstraint baseTableName=native_query_snippet, constraintName=fk_snippet_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-212	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.257036	207	EXECUTED	8:b25064ee26b71f61906a833bc22ebbc2	addForeignKeyConstraint baseTableName=native_query_snippet, constraintName=fk_snippet_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-213	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.421079	208	EXECUTED	8:60a7d628e4f68ee4c85f5f298b1d9865	dropForeignKeyConstraint baseTableName=permissions, constraintName=fk_permissions_group_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-214	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.588579	209	EXECUTED	8:1c3c480313967a2d9f324a094ba25f4d	addForeignKeyConstraint baseTableName=permissions, constraintName=fk_permissions_group_id, referencedTableName=permissions_group	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-152	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.685437	148	MARK_RAN	8:4bcbc472f2d6ae3a5e7eca425940e52b	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-215	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.753059	210	EXECUTED	8:5d2c67ccead52970e9d85beb7eda48b9	dropForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_group_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-216	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:14.915438	211	EXECUTED	8:35fcd5d48600e887188eb1b990e6cc35	addForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_group_id, referencedTableName=permissions_group	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-8	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:32.782095	7	EXECUTED	8:960ec59bbcb4c9f3fa8362eca9af4075	addColumn tableName=metabase_table; addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
-46	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:43.519259	45	EXECUTED	8:131df3cdd9a8c67b32c5988a3fb7fe3d	addNotNullConstraint columnName=row, tableName=report_dashboardcard; addNotNullConstraint columnName=col, tableName=report_dashboardcard; addDefaultValue columnName=row, tableName=report_dashboardcard; addDefaultValue columnName=col, tableName=rep...		\N	4.11.0	\N	\N	0189608756
-123	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.909254	119	MARK_RAN	8:35e5baddf78df5829fe6889d216436e5	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-155	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.976109	151	MARK_RAN	8:3c78b79c784e3a3ce09a77db1b1d0374	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-218	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.241188	213	EXECUTED	8:dc04b7eb04cd870c53102cb37fd75a5f	addForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_membership_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-219	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.410761	214	EXECUTED	8:02c690f34fe8803e42441f5037d33017	dropForeignKeyConstraint baseTableName=permissions_revision, constraintName=fk_permissions_revision_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-222	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.913529	217	EXECUTED	8:c5f22e925be3a8fd0e4f47a491f599ee	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-223	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.085166	218	EXECUTED	8:de743e384ff90a6a31a3caebe0abb775	dropForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-224	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.27555	219	EXECUTED	8:b8fdf9c14d7ea3131a0a6b1f1036f91a	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-225	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.444689	220	EXECUTED	8:495a4e12cf75cac5ff54738772e6a998	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-226	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.608858	221	EXECUTED	8:cf383d74bc407065c78c060203ba4560	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-227	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.77138	222	EXECUTED	8:e23eaf74ab7edacfb34bd5caf05cf66f	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-228	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:16.95022	223	EXECUTED	8:d458ddb160f61e93bb69738f262de2b4	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_id, referencedTableName=pulse	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-229	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.13063	224	EXECUTED	8:1cb939d172989cb1629e9a3da768596d	dropForeignKeyConstraint baseTableName=pulse_channel, constraintName=fk_pulse_channel_ref_pulse_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-230	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.295913	225	EXECUTED	8:62baea3334ac5f21feac84497f6bf643	addForeignKeyConstraint baseTableName=pulse_channel, constraintName=fk_pulse_channel_ref_pulse_id, referencedTableName=pulse	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-231	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.462854	226	EXECUTED	8:d096a9ce70fc0b7dfbc67ee1be4c3e31	dropForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_pulse_channel_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-232	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.630904	227	EXECUTED	8:be2457ae1e386c9d5ec5bfa4ae681fd6	addForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_pulse_channel_id, referencedTableName=pulse_channel	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-233	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.805705	228	EXECUTED	8:d5c018882af16093de446e025e2599b7	dropForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-234	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:17.988867	229	EXECUTED	8:edb6ced6c353064c46fa00b54e187aef	addForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-235	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.136652	230	EXECUTED	8:550c64e41e55233d52ac3ef24d664be1	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-236	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.297193	231	EXECUTED	8:04300b298b663fc2a2f3a324d1051c3c	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-237	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.477479	232	EXECUTED	8:227a9133cdff9f1b60d8af53688ab12e	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_made_public_by_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-238	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.64679	233	EXECUTED	8:7000766ddca2c914ac517611e7d86549	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_made_public_by_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-239	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.815427	234	EXECUTED	8:672f4972653f70464982008a7abea3e1	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-240	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:18.99082	235	EXECUTED	8:165b07c8ceb004097c83ee1b689164e4	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-241	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.16643	236	EXECUTED	8:b0a9e3d801e64e0a66c3190e458c01ae	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_database_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-242	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.339944	237	EXECUTED	8:bf10f944715f87c3ad0dd7472d84df62	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_database_id, referencedTableName=metabase_database	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-243	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.514973	238	EXECUTED	8:cba5d2bfb36e13c60d82cc6cca659b61	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-47	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:44.045277	46	EXECUTED	8:717ed16b2f279bd4fdf5c4aa2b5f5857	createTable tableName=collection; createIndex indexName=idx_collection_slug, tableName=collection; addColumn tableName=report_card; createIndex indexName=idx_card_collection_id, tableName=report_card		\N	4.11.0	\N	\N	0189608756
-79	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:52.744728	77	EXECUTED	8:37825e0d48bd4ed5cf1a068de30edc60	addColumn tableName=report_dashboard; createIndex indexName=idx_dashboard_collection_id, tableName=report_dashboard; addColumn tableName=pulse; createIndex indexName=idx_pulse_collection_id, tableName=pulse	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-246	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.01678	241	EXECUTED	8:e5db34b9db22254f7445fd65ecf45356	addForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-247	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.200028	242	EXECUTED	8:76de7337a12a5ef42dcbb9274bd2d70f	dropForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-248	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.355443	243	EXECUTED	8:0640fb00a090cbe5dc545afbe0d25811	addForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-249	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.508635	244	EXECUTED	8:16ef5909a72ac4779427e432b3b3ce18	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-250	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.667435	245	EXECUTED	8:2e80ebe19816b7bde99050638772cf99	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-251	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.822943	246	EXECUTED	8:c12aa099f293b1e3d71da5e3edb3c45a	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_made_public_by_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-252	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:20.973659	247	EXECUTED	8:26b16d4d0cf7a77c1d687f49b029f421	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_made_public_by_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-253	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.120029	248	EXECUTED	8:bbf118edaa88a8ad486ec0d6965504b6	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-254	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.277381	249	EXECUTED	8:7fc35d78c63f41eb4dbd23cfd1505f0b	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-255	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.447568	250	EXECUTED	8:f6564a7516ace55104a3173eebf4c629	dropForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-256	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.605189	251	EXECUTED	8:61db9be3b4dd7ed1e9d01a7254e87544	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-257	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.769805	252	EXECUTED	8:c8b51dc7ba4da9f7995a0b0c17fadad2	dropForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_dashboard_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-258	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:21.925875	253	EXECUTED	8:58974c6ad8aee63f09e6e48b1a78c267	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-259	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.090472	254	EXECUTED	8:be4a52feb3b12e655c0bbd34477749b0	dropForeignKeyConstraint baseTableName=revision, constraintName=fk_revision_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-260	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.24317	255	EXECUTED	8:4b370f9c9073a6f8f585aab713c57f47	addForeignKeyConstraint baseTableName=revision, constraintName=fk_revision_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-261	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.40136	256	EXECUTED	8:173fe552fdf72fdb4efbc01a6ac4f7ad	dropForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-262	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.558005	257	EXECUTED	8:50927b8b1d1809f32c11d2e649dbcb94	addForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-263	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.722748	258	EXECUTED	8:0b10c8664506917cc50359e9634c121c	dropForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-264	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:22.888333	259	EXECUTED	8:b132aedf6fbdcc5d956a2d3a154cc035	addForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-265	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:23.051209	260	EXECUTED	8:2e339ecb05463b3765f9bb266bd28297	dropForeignKeyConstraint baseTableName=view_log, constraintName=fk_view_log_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-266	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:23.209729	261	EXECUTED	8:31506e118764f5e520f755f26c696bb8	addForeignKeyConstraint baseTableName=view_log, constraintName=fk_view_log_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-268	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.381857	262	EXECUTED	8:4ccc4d50f9b233bc6515780d9cae360b	createIndex indexName=idx_lower_email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
-271	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.891829	264	MARK_RAN	8:ce8ddb253a303d4f8924ff5a187080c0	modifyDataType columnName=email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
-272	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.989164	265	MARK_RAN	8:54ad09ee0c67d58e78ccafe9b1499379	modifyDataType columnName=email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
-273	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:24.167737	266	EXECUTED	8:5348576bb9852f6f947e1aa39cd1626f	addDefaultValue columnName=is_superuser, tableName=core_user	Added 0.37.1	\N	4.11.0	\N	\N	0189608756
-274	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:24.325675	267	EXECUTED	8:11a8a84b9ba7634aeda625ff3f487d22	addDefaultValue columnName=is_active, tableName=core_user	Added 0.37.1	\N	4.11.0	\N	\N	0189608756
-80	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:52.989201	78	EXECUTED	8:199d0ce28955117819ca15bcc29323e5	addColumn tableName=collection; createIndex indexName=idx_collection_location, tableName=collection		\N	4.11.0	\N	\N	0189608756
-81	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:53.297241	79	EXECUTED	8:3a6dc22403660529194d004ca7f7ad39	addColumn tableName=report_dashboard; addColumn tableName=report_card; addColumn tableName=pulse	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-275	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:24.512899	268	EXECUTED	8:447d9e294f59dd1058940defec7e0f40	addColumn tableName=metabase_database	Added 0.38.0 refingerprint to Database	\N	4.11.0	\N	\N	0189608756
-277	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:24.895051	270	EXECUTED	8:367180f0820b72ad2c60212e67ae53e7	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_card_id	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
-278	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:25.067065	271	EXECUTED	8:fc4fb1c1e3344374edd7b9f1f0d34c89	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_card_id, referencedTableName=report_dashboardcard	Added 0.38.0 - Dashboard subscrptions	\N	4.11.0	\N	\N	0189608756
-280	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.423705	273	EXECUTED	8:ae966ee1e40f20ea438daba954a8c2a6	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
-283	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.915187	276	EXECUTED	8:2220e1b1cdb57212820b96fa3107f7c3	sql; sql; sql	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-284	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.100638	277	EXECUTED	8:c7dc9a60bcaf9b2ffcbaabd650c959b2	addColumn tableName=metabase_field	Added 0.39 - Semantic type system - add effective type	\N	4.11.0	\N	\N	0189608756
-285	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.297514	278	EXECUTED	8:cf7d6f5135fa3397a7dc67509d1c286e	addColumn tableName=metabase_field	Added 0.39 - Semantic type system - add coercion column	\N	4.11.0	\N	\N	0189608756
-286	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.449697	279	EXECUTED	8:bce9ab328411f05d8c52d64bff5bded0	sql	Added 0.39 - Semantic type system - set effective_type default	\N	4.11.0	\N	\N	0189608756
-288	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.797272	281	EXECUTED	8:943c6dd0c9339729fefcee9207227849	sql	Added 0.39 - Semantic type system - migrate unix timestamps	\N	4.11.0	\N	\N	0189608756
-289	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.961565	282	EXECUTED	8:9f7f2e9bbf3236f204c644dc8ea7abef	sql	Added 0.39 - Semantic type system - migrate unix timestamps (corrects typo- seconds was migrated correctly, not millis and micros)	\N	4.11.0	\N	\N	0189608756
-290	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:27.1197	283	EXECUTED	8:98ea7254bc843302db4afe493c4c75e6	sql	Added 0.39 - Semantic type system - Clobber semantic_type where there was a coercion	\N	4.11.0	\N	\N	0189608756
-292	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:27.707999	285	EXECUTED	8:e4ac005f4d4e73d5e1176bcbde510d6e	createIndex indexName=idx_user_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-293	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:27.865156	286	EXECUTED	8:7ba1bd887f8ae11a186b0e3fe69ab3e0	addForeignKeyConstraint baseTableName=login_history, constraintName=fk_login_history_session_id, referencedTableName=core_session	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-294	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.033743	287	EXECUTED	8:88d7a9c88866af42b9f0e7c1df9c2fd0	createIndex indexName=idx_session_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-5	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:31.896301	4	EXECUTED	8:4f8653d16f4b102b3dff647277b6b988	addColumn tableName=core_organization		\N	4.11.0	\N	\N	0189608756
-295	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.198555	288	EXECUTED	8:501e85a50912649416ec22b2871af087	createIndex indexName=idx_timestamp, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-296	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.365975	289	EXECUTED	8:f9eb8b15c2c889334f3848a6bb4ebdb4	createIndex indexName=idx_user_id_device_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-297	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:28.526824	290	EXECUTED	8:06c180e4c8361f7550f6f4deaf9fc855	createIndex indexName=idx_user_id_timestamp, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-299	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:28.901453	292	EXECUTED	8:ee3a96e30b07f37240a933e2f0710082	addNotNullConstraint columnName=parameters, tableName=pulse	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-300	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:29.069389	293	EXECUTED	8:8b142aea1e3697d8630a4620ae763c4d	renameTable newTableName=collection_permission_graph_revision, oldTableName=collection_revision	Added 0.40.0	\N	4.11.0	\N	\N	0189608756
-301	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:29.232233	294	EXECUTED	8:aaf1a546a6f5932a157d016f72c02f8a	sql	Added 0.40.0 renaming collection_revision to collection_permission_graph_revision	\N	4.11.0	\N	\N	0189608756
-303	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:29.698237	295	EXECUTED	8:506e174d6656b09ddedf19e97c0d3c3d	createTable tableName=moderation_review	Added 0.40.0	\N	4.11.0	\N	\N	0189608756
-304	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:29.862438	296	EXECUTED	8:35960cd7ee3081be719bfb5267ae1a83	sql	Added 0.40.0 (replaces a data migration dating back to 0.20.0)	\N	4.11.0	\N	\N	0189608756
-305	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:30.019773	297	EXECUTED	8:0a0c65f58b80bf74c149a3854cbeeae4	sql	Added 0.40.0 (replaces a data migration dating back to 0.20.0)	\N	4.11.0	\N	\N	0189608756
-308	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:30.207484	298	EXECUTED	8:4a52c3a0391a0313a062b60a52c0d7de	addColumn tableName=query_execution	Added 0.40.0 Track cache hits in query_execution table	\N	4.11.0	\N	\N	0189608756
-309	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:30.399521	299	EXECUTED	8:26cc1f3ba949d8ce0d56350caacffbd8	addColumn tableName=collection	Added 0.40.0 - Add type to collections	\N	4.11.0	\N	\N	0189608756
-311	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:30.564223	300	EXECUTED	8:33f9d29d709afd0c02bd47367c7d9181	sql; sql; sql	Added 0.40.0 Migrate friendly field names, not noop	\N	4.11.0	\N	\N	0189608756
-312	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:30.723262	301	EXECUTED	8:77ef89ba2e7bc19231d9364492091764	sql; sql; sql	Added 0.41.0 Backfill collection_id for dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
-282	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.739189	275	EXECUTED	8:d4b8566ee11d9f8a3d6c8c9539f6526d	sql; sql; sql	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-314	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:31.417678	303	EXECUTED	8:c9ad2637412d91b26b616a4df4190704	addColumn tableName=metabase_database	Added 0.41.0 Fine grained caching controls	\N	4.11.0	\N	\N	0189608756
-315	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:31.600006	304	EXECUTED	8:5b186b8ab743cde5a7f4bf5eadcd520c	addColumn tableName=report_dashboard	Added 0.41.0 Fine grained caching controls, pt 2	\N	4.11.0	\N	\N	0189608756
-316	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:31.803671	305	EXECUTED	8:1b7c340684b27af9179613bc351e444f	addColumn tableName=view_log	Added 0.41.0 Fine grained caching controls, pt 3	\N	4.11.0	\N	\N	0189608756
-269	rlotun	migrations/000_migrations.yaml	2023-11-17 02:54:23.539408	263	EXECUTED	8:215609ca9dce2181687b4fa65e7351ba	sql	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
-381	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:31.963588	306	EXECUTED	8:048be5b22042724ab3db240e14e43886	createIndex indexName=idx_query_execution_card_id, tableName=query_execution	Added 0.41.2 Add index to QueryExecution card_id to fix performance issues (#18759)	\N	4.11.0	\N	\N	0189608756
-382	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.149723	307	EXECUTED	8:e8c01b2cf428b1e8968393cf31afb188	createIndex indexName=idx_moderation_review_item_type_item_id, tableName=moderation_review	Added 0.41.2 Add index to ModerationReview moderated_item_type + moderated_item_id to fix performance issues (#18759)	\N	4.11.0	\N	\N	0189608756
-v42.00-001	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.707784	310	EXECUTED	8:9952153cbff16147bcb47b4a26e02089	sql; sql; sql	Added 0.42.0 Attempt to add Card.database_id (by parsing query) to rows that are missing it (#5999)	\N	4.11.0	\N	\N	0189608756
-v42.00-002	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.927139	311	EXECUTED	8:81e0ab53dd2e20cde32e7449155551c2	addNotNullConstraint columnName=database_id, tableName=report_card	Added 0.42.0 Added constraint we should have had all along (#5999)	\N	4.11.0	\N	\N	0189608756
-10	cammsaul	migrations/000_migrations.yaml	2023-11-17 02:53:33.148574	9	EXECUTED	8:57254d016f3508890638df4528e9755c	createTable tableName=revision; createIndex indexName=idx_revision_model_model_id, tableName=revision		\N	4.11.0	\N	\N	0189608756
-v42.00-003	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:33.171254	312	EXECUTED	8:4a2036164dac96df6066a0d633fab7b5	addColumn tableName=report_card	Added 0.42.0 Initial support for datasets based on questions	\N	4.11.0	\N	\N	0189608756
-v42.00-004	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.335713	313	EXECUTED	8:d9a1dbf5cdc249516796fd9ed81305a4	modifyDataType columnName=details, tableName=activity	Added 0.42.0 - modify type of activity.details from text to text	\N	4.11.0	\N	\N	0189608756
-v42.00-005	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.402061	314	MARK_RAN	8:136b2b7ee7dd813b8d3a3154d1bea708	modifyDataType columnName=description, tableName=collection	Added 0.42.0 - modify type of collection.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-006	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.501848	315	MARK_RAN	8:5fe4654ed7abd89f71eb9372ac208da3	modifyDataType columnName=name, tableName=collection	Added 0.42.0 - modify type of collection.name from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-007	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.597763	316	MARK_RAN	8:592bfa5fba147bd0ba28c267c796a65d	modifyDataType columnName=context, tableName=computation_job	Added 0.42.0 - modify type of computation_job.context from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-008	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.691846	317	MARK_RAN	8:ea964b569fd70a9f937967179ad96e96	modifyDataType columnName=payload, tableName=computation_job_result	Added 0.42.0 - modify type of computation_job_result.payload from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-009	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.790298	318	MARK_RAN	8:faa3d926a4c1ea101a87f80469e4c3b5	modifyDataType columnName=anti_csrf_token, tableName=core_session	Added 0.42.0 - modify type of core_session.anti_csrf_token from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-010	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:33.907702	319	MARK_RAN	8:1538ae25e827ae059a7cc4b7cf225258	modifyDataType columnName=login_attributes, tableName=core_user	Added 0.42.0 - modify type of core_user.login_attributes from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-011	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.021661	320	MARK_RAN	8:5a13403a42ddb4948873a5f115bb949e	modifyDataType columnName=attribute_remappings, tableName=group_table_access_policy	Added 0.42.0 - modify type of group_table_access_policy.attribute_remappings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-012	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.123662	321	MARK_RAN	8:0f7f6537b8a60d83024bcfeff9c5c9d6	modifyDataType columnName=device_description, tableName=login_history	Added 0.42.0 - modify type of login_history.device_description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-013	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.221805	322	MARK_RAN	8:0ee5d0c8b49419900a86acce11698b9f	modifyDataType columnName=ip_address, tableName=login_history	Added 0.42.0 - modify type of login_history.ip_address from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-014	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.314296	323	MARK_RAN	8:49dfb6668ca9c8d1cabf8c9656e7ba5b	modifyDataType columnName=caveats, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-015	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.410055	324	MARK_RAN	8:90a5ba43867c1a0772641ce942de8fe6	modifyDataType columnName=description, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-016	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.502177	325	MARK_RAN	8:09ea3ac9939b25db92cc5d4053e6fd4a	modifyDataType columnName=details, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-017	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.603709	326	MARK_RAN	8:14bf9629c1e94583b8240298df8fa6e7	modifyDataType columnName=options, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.options from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-018	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.704003	327	MARK_RAN	8:00408a84f8098e850a465a2c98e6aff5	modifyDataType columnName=points_of_interest, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-019	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.809715	328	MARK_RAN	8:afa168a1d459106a0ec607f76d15a0aa	modifyDataType columnName=caveats, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-020	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.904011	329	MARK_RAN	8:a3dd42bbe25c415ce21e4c180dc1c1d7	modifyDataType columnName=database_type, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.database_type from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-32	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:38.1618	31	EXECUTED	8:28afcfc9b7f1bd1b08caa9d527355c48	createTable tableName=label; createIndex indexName=idx_label_slug, tableName=label; createTable tableName=card_label; addUniqueConstraint constraintName=unique_card_label_card_id_label_id, tableName=card_label; createIndex indexName=idx_card_label...		\N	4.11.0	\N	\N	0189608756
-276	robroland	migrations/000_migrations.yaml	2023-11-17 02:54:24.739062	269	EXECUTED	8:ae43765761ef0f32c8a6f1fb88ead0ca	addColumn tableName=pulse_card	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
-v42.00-022	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.091291	331	MARK_RAN	8:60241b3d3d5f05f238adecfdca69b3b2	modifyDataType columnName=fingerprint, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.fingerprint from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-023	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.181808	332	MARK_RAN	8:fc6f2fc275a8f025c150215beb9aa776	modifyDataType columnName=has_field_values, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.has_field_values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-024	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.27373	333	MARK_RAN	8:5f7b73eb4774392a1239d7725bad052b	modifyDataType columnName=points_of_interest, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-025	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.368875	334	MARK_RAN	8:5ac77fe617f8f4481e8de7da9015c64f	modifyDataType columnName=settings, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-026	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.471638	335	MARK_RAN	8:fa7d6c62a44d0c1425fe9e9c43d9d359	modifyDataType columnName=human_readable_values, tableName=metabase_fieldvalues	Added 0.42.0 - modify type of metabase_fieldvalues.human_readable_values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-027	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.566897	336	MARK_RAN	8:dd1d2de653ed0fb632760c99987ad312	modifyDataType columnName=values, tableName=metabase_fieldvalues	Added 0.42.0 - modify type of metabase_fieldvalues.values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v43.00-008	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.086764	388	EXECUTED	8:86b57754999f0ec4b331f4f3ac98a2e0	sql; sql; sql	Added 0.43.0. Migrate legacy '-site-url' Setting to 'site-url'. Trim trailing slashes.	\N	4.11.0	\N	\N	0189608756
-v42.00-028	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.659911	337	MARK_RAN	8:12a413714ca4b88f6a502d624b8b6895	modifyDataType columnName=caveats, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-029	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.756857	338	MARK_RAN	8:96ae84ed0739fc71247112c488963883	modifyDataType columnName=description, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-281	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:25.577617	274	EXECUTED	8:3039286581c58eee7cca9c25fdf6d792	renameColumn newColumnName=semantic_type, oldColumnName=special_type, tableName=metabase_field	Added 0.39 - Semantic type system - rename special_type	\N	4.11.0	\N	\N	0189608756
-v42.00-030	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.854858	339	MARK_RAN	8:59e52a188f1d131bb62161ee3ab8f0b0	modifyDataType columnName=points_of_interest, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-031	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:35.950471	340	MARK_RAN	8:7d7a5bc0d758e61a5d48b9d0f46cdf9a	modifyDataType columnName=caveats, tableName=metric	Added 0.42.0 - modify type of metric.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-032	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.044411	341	MARK_RAN	8:7d8e0965438cd14097b835a598bcfdf7	modifyDataType columnName=definition, tableName=metric	Added 0.42.0 - modify type of metric.definition from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-033	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.138232	342	MARK_RAN	8:ecfed282a484cb27d2ac0122a9861d9c	modifyDataType columnName=description, tableName=metric	Added 0.42.0 - modify type of metric.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-034	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.235942	343	MARK_RAN	8:016c2de3176fa0b3c2d0238923e74e2e	modifyDataType columnName=how_is_this_calculated, tableName=metric	Added 0.42.0 - modify type of metric.how_is_this_calculated from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-035	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.33725	344	MARK_RAN	8:c8e3cf661d802b8772fefb28d54cc4d2	modifyDataType columnName=points_of_interest, tableName=metric	Added 0.42.0 - modify type of metric.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-036	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.435749	345	MARK_RAN	8:18880508f09bb76535dffb5226055256	modifyDataType columnName=text, tableName=moderation_review	Added 0.42.0 - modify type of moderation_review.text from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-037	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.534589	346	MARK_RAN	8:75b3734278af63ba604e709f3452330e	modifyDataType columnName=content, tableName=native_query_snippet	Added 0.42.0 - modify type of native_query_snippet.content from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-038	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.629803	347	MARK_RAN	8:50c5ebd57728d39a79c5de02b78d446f	modifyDataType columnName=description, tableName=native_query_snippet	Added 0.42.0 - modify type of native_query_snippet.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-039	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.732384	348	MARK_RAN	8:1126511637c1da363e26a8abfe0cd9a9	modifyDataType columnName=parameters, tableName=pulse	Added 0.42.0 - modify type of pulse.parameters from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-040	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.832099	349	MARK_RAN	8:ffcc4cd6e10c850dd78016c75947943f	modifyDataType columnName=details, tableName=pulse_channel	Added 0.42.0 - modify type of pulse_channel.details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-041	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:36.924357	350	MARK_RAN	8:aeffafbd763b7b2b20246dc780e352e2	modifyDataType columnName=query, tableName=query	Added 0.42.0 - modify type of query.query from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-83	senior	migrations/000_migrations.yaml	2023-11-17 02:53:53.676487	81	EXECUTED	8:ccd897d737737c05248293c7d56efe96	dropNotNullConstraint columnName=card_id, tableName=group_table_access_policy	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-48	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:44.400627	47	EXECUTED	8:b3b418a4bbcf558e40f5d32effd2c7da	createTable tableName=collection_revision		\N	4.11.0	\N	\N	0189608756
-49	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:45.01382	48	EXECUTED	8:a9a777c7ecd1c6a338126b800a8b46e8	addColumn tableName=report_card; addColumn tableName=report_card; createIndex indexName=idx_card_public_uuid, tableName=report_card; addColumn tableName=report_dashboard; addColumn tableName=report_dashboard; createIndex indexName=idx_dashboard_pu...		\N	4.11.0	\N	\N	0189608756
-v42.00-042	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.018831	351	MARK_RAN	8:337f1a807936a453d20339d05ef6505e	modifyDataType columnName=error, tableName=query_execution	Added 0.42.0 - modify type of query_execution.error from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-043	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.112549	352	MARK_RAN	8:d6d5d5f81726012b2c72e59d60a9894e	modifyDataType columnName=dataset_query, tableName=report_card	Added 0.42.0 - modify type of report_card.dataset_query from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-044	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.205995	353	MARK_RAN	8:63f3133301c1baca7b13a6266cf11e8d	modifyDataType columnName=description, tableName=report_card	Added 0.42.0 - modify type of report_card.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-045	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.300938	354	MARK_RAN	8:b3c0fc88880ccd64a880d439f7668307	modifyDataType columnName=embedding_params, tableName=report_card	Added 0.42.0 - modify type of report_card.embedding_params from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-046	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.392328	355	MARK_RAN	8:4b4c50c0dbc197c5a15f21d46cae81a9	modifyDataType columnName=result_metadata, tableName=report_card	Added 0.42.0 - modify type of report_card.result_metadata from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-047	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.489191	356	MARK_RAN	8:35f9bd24b4a500f748168d03273d91bf	modifyDataType columnName=visualization_settings, tableName=report_card	Added 0.42.0 - modify type of report_card.visualization_settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-048	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.598365	357	MARK_RAN	8:783ce0d26e51ba9244c5a25d0e8bfc1f	modifyDataType columnName=caveats, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-049	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.702299	358	MARK_RAN	8:de19cbe028a00c5831d676a0e9bb9453	modifyDataType columnName=description, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-050	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.794263	359	MARK_RAN	8:7f8278a770d9514f2d4518497bdd53d5	modifyDataType columnName=embedding_params, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.embedding_params from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-051	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.886503	360	MARK_RAN	8:e3727da5c8fd5077ba3c541d05e9d329	modifyDataType columnName=parameters, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.parameters from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-052	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:37.977017	361	MARK_RAN	8:bee03ae62b47cd8c7c7e78ef225be531	modifyDataType columnName=points_of_interest, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-053	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.072994	362	MARK_RAN	8:bf16b19d46ed69eb51663bbbec93d0a6	modifyDataType columnName=parameter_mappings, tableName=report_dashboardcard	Added 0.42.0 - modify type of report_dashboardcard.parameter_mappings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-054	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.166018	363	MARK_RAN	8:3088bdaabb4e1e04951ee3ab22487867	modifyDataType columnName=visualization_settings, tableName=report_dashboardcard	Added 0.42.0 - modify type of report_dashboardcard.visualization_settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-055	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.260847	364	MARK_RAN	8:d6753fc353f44b790b9e750952a869f9	modifyDataType columnName=message, tableName=revision	Added 0.42.0 - modify type of revision.message from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-056	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.44768	365	EXECUTED	8:6f1e02c9122309b99ac4329631724805	modifyDataType columnName=object, tableName=revision	Added 0.42.0 - modify type of revision.object from text to text	\N	4.11.0	\N	\N	0189608756
-v42.00-057	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.509685	366	MARK_RAN	8:21a0331ed3ba2796081a6ce6d5850ed8	modifyDataType columnName=caveats, tableName=segment	Added 0.42.0 - modify type of segment.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-058	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.604417	367	MARK_RAN	8:123b3de75914cd8415b20dbc964ac655	modifyDataType columnName=definition, tableName=segment	Added 0.42.0 - modify type of segment.definition from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-059	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.696354	368	MARK_RAN	8:edbe944897f5694257f7edc661b7067c	modifyDataType columnName=description, tableName=segment	Added 0.42.0 - modify type of segment.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-060	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.792257	369	MARK_RAN	8:30b35e6afdbc2cdf9588fdf40d9bc1b5	modifyDataType columnName=points_of_interest, tableName=segment	Added 0.42.0 - modify type of segment.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-061	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.892455	370	MARK_RAN	8:ae76887a049949a201f45132bb7cc23c	modifyDataType columnName=value, tableName=setting	Added 0.42.0 - modify type of setting.value from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-062	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:38.984386	371	MARK_RAN	8:b986105790c336d4f9e6c1a8755f23ca	modifyDataType columnName=task_details, tableName=task_history	Added 0.42.0 - modify type of task_history.task_details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-84	senior	migrations/000_migrations.yaml	2023-11-17 02:53:54.015351	82	EXECUTED	8:58afc10c3e283a8050ea471aac447a97	renameColumn newColumnName=archived, oldColumnName=is_active, tableName=metric; addDefaultValue columnName=archived, tableName=metric; renameColumn newColumnName=archived, oldColumnName=is_active, tableName=segment; addDefaultValue columnName=arch...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-16	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.418173	15	EXECUTED	8:ecc7f02641a589e6d35f88587ac6e02b	dropNotNullConstraint columnName=last_login, tableName=core_user		\N	4.11.0	\N	\N	0189608756
-v42.00-063	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:39.079976	372	MARK_RAN	8:69c5877d81b6cd3974530db1127f90b4	modifyDataType columnName=metadata, tableName=view_log	Added 0.42.0 - modify type of view_log.metadata from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v42.00-064	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:39.172499	373	MARK_RAN	8:9169e238663c5d036bd83428d2fa8e4b	modifyDataType columnName=results, tableName=query_cache	Added 0.42.0 - fix type of query_cache.results on upgrade (in case changeSet 97 was run before #16095)	\N	4.11.0	\N	\N	0189608756
-v42.00-065	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:39.392262	374	EXECUTED	8:5befdc16aff1cda15744a577889f242a	addColumn tableName=core_user	Added 0.42.0 - Another modal dismissed state on user. Retaining the same suffix and boolean style to ease an eventual migration.	\N	4.11.0	\N	\N	0189608756
-v42.00-066	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:39.582373	375	EXECUTED	8:b43c6357a5dacd4f7eb3b49c7372b908	addColumn tableName=metabase_database	Added 0.42.0 - new columns for initial DB sync progress UX. Indicates whether a database has succesfully synced at least one time.	\N	4.11.0	\N	\N	0189608756
-v42.00-067	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:39.780772	376	EXECUTED	8:cc9373fbb8ae35f5599105b1612f762c	addColumn tableName=metabase_table	Added 0.42.0 - new columns for initial DB sync progress UX. Indicates whether a table has succesfully synced at least one time.	\N	4.11.0	\N	\N	0189608756
-v42.00-068	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:39.981902	377	EXECUTED	8:5f3144422c5fa86d1344f6fe0cf2049f	addColumn tableName=metabase_database	Added 0.42.0 - new columns for initial DB sync progress UX. Records the ID of the admin who added a database. May be null for the sample dataset, or for databases added prior to 0.42.0.	\N	4.11.0	\N	\N	0189608756
-v42.00-069	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:40.138976	378	EXECUTED	8:1497ad69b4a6855a232a4ea121687ba2	addForeignKeyConstraint baseTableName=metabase_database, constraintName=fk_database_creator_id, referencedTableName=core_user	Added 0.42.0 - adds FK constraint for creator_id column, containing the ID of the admin who added a database.	\N	4.11.0	\N	\N	0189608756
-v42.00-070	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:40.405068	379	EXECUTED	8:82016397101b9d4444381f63d584fa7a	addColumn tableName=metabase_database	Added 0.42.0 - add Database.settings column to implement Database-local Settings	\N	4.11.0	\N	\N	0189608756
-v43.00-003	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.148729	383	EXECUTED	8:d220feb098ef8e5c6bd44e94166a92d9	sql	Added 0.43.0. Create magic 'Administrators' Permissions Group if it does not already exist.	\N	4.11.0	\N	\N	0189608756
-v43.00-004	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.308955	384	EXECUTED	8:1c28c6de37700b0ae5f679b86d335764	sql	Added 0.43.0. Add existing Users to 'All Users' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
-v43.00-005	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.471395	385	EXECUTED	8:17c0d62516f4af2090010ff9f0f1bf1c	sql	Added 0.43.0. Add existing Users with 'is_superuser' flag to 'Administrators' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
-v43.00-006	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.628874	386	EXECUTED	8:e83e560209f8aa4e57e10a6745715483	sql	Added 0.43.0. Create root '/' permissions entry for the 'Administrators' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
-v43.00-007	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:41.858769	387	EXECUTED	8:134265766925f53d8da208089e4e1082	sql	Added 0.43.0. Grant permissions for existing Databases to 'All Users' permissions group.	\N	4.11.0	\N	\N	0189608756
-v43.00-009	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.258776	389	EXECUTED	8:9dffa1da7ad8f84a12794bc7c96c15e7	sql; sql; sql	Added 0.43.0. Make sure 'site-url' Setting includes protocol.	\N	4.11.0	\N	\N	0189608756
-v43.00-010	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.500714	390	EXECUTED	8:5eedafb824c5e636c7ff14fc7922ca4a	sql; sql; sql	Added 0.43.0. Migrates value of legacy enable-advanced-humanization Setting to humanization-strategy Setting added in 0.28.0.	\N	4.11.0	\N	\N	0189608756
-v43.00-011	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.690687	391	EXECUTED	8:2c62d31bec1c6281d02ec41444c5932e	sql; sql; sql	Added 0.43.0. Remove legacy enable-advanced-humanization Setting.	\N	4.11.0	\N	\N	0189608756
-v43.00-012	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:42.926449	392	EXECUTED	8:a59acc0e562305bbef5721982deb2028	sql	Added 0.43.0. Set Field.has_field_values to 'list' if semantic_type derives from :type/Category.	\N	4.11.0	\N	\N	0189608756
-v43.00-014	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.108274	393	MARK_RAN	8:bf03710cb176dd7c720a3e2e47ae7782	sql	Added 0.43.0. Add 'Migrated Dashboards' Collection if needed and there are any Dashboards not in a Collection.	\N	4.11.0	\N	\N	0189608756
-v43.00-015	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.324395	394	MARK_RAN	8:f615da33f8be6bd251faac925bfc9bbd	sql	Added 0.43.0. Add 'Migrated Pulses' Collection if needed and there are any Pulses not in a Collection.	\N	4.11.0	\N	\N	0189608756
-v43.00-016	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.544975	395	MARK_RAN	8:d31ad47d1aa56ddee95c15726b6810d8	sql	Added 0.43.0. Add 'Migrated Questions' Collection if needed and there are any Cards not in a Collection.	\N	4.11.0	\N	\N	0189608756
-v43.00-017	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:43.798583	396	EXECUTED	8:969b947a5066941617a9add82975de9a	sql	Added 0.43.0. Move Dashboards not in a Collection to 'Migrated Dashboards'.	\N	4.11.0	\N	\N	0189608756
-v43.00-018	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:44.014696	397	EXECUTED	8:b105395ddb21d04c12756e8924ccba83	sql	Added 0.43.0. Move Pulses not in a Collection to 'Migrated Pulses'.	\N	4.11.0	\N	\N	0189608756
-v43.00-019	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:44.230815	398	EXECUTED	8:6b2e7344dbf0f3be8ec39b4efdb7a4d5	sql	Added 0.43.0. Move Cards not in a Collection to 'Migrated Questions'.	\N	4.11.0	\N	\N	0189608756
-11	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:33.306169	10	EXECUTED	8:ca6561cab1eedbcf4dcb6d6e22cd46c6	sql		\N	4.11.0	\N	\N	0189608756
-v43.00-020	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:44.457196	399	EXECUTED	8:e3399a0ef504c5f5140e9e866a2e49fd	sql	Added 0.43.0. Grant the 'All Users' Permissions Group readwrite perms for the Root Collection.	\N	4.11.0	\N	\N	0189608756
-v43.00-021	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:44.910791	400	EXECUTED	8:6b432682f811c4099b7018083dfab7a2	createTable tableName=timeline	Added 0.43.0 - Timeline table for Events	\N	4.11.0	\N	\N	0189608756
-v43.00-022	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:45.451396	401	EXECUTED	8:d4a7fd96d5f8299825fbed4a3e001d33	createTable tableName=timeline_event	Added 0.43.0 - Events table	\N	4.11.0	\N	\N	0189608756
-v43.00-023	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:45.616649	402	EXECUTED	8:68ea023407382a8f54dc282f601ac6cb	createIndex indexName=idx_timeline_collection_id, tableName=timeline	Added 0.43.0 - Index on timeline collection_id	\N	4.11.0	\N	\N	0189608756
-v43.00-024	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:45.777908	403	EXECUTED	8:0056b773435253b7e8e40d5261897823	createIndex indexName=idx_timeline_event_timeline_id, tableName=timeline_event	Added 0.43.0 - Index on timeline_event timeline_id	\N	4.11.0	\N	\N	0189608756
-v43.00-025	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:45.940893	404	EXECUTED	8:8839ff170d1faac11237f79ce729d637	createIndex indexName=idx_timeline_event_timeline_id_timestamp, tableName=timeline_event	Added 0.43.0 - Index on timeline timestamp	\N	4.11.0	\N	\N	0189608756
-v43.00-026	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:46.125953	405	EXECUTED	8:a04fac9421e10f1901979560afee3b7c	addColumn tableName=core_user	Added 0.43.0 - adds User.settings column to implement User-local Settings	\N	4.11.0	\N	\N	0189608756
-v43.00-027	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:46.285447	406	EXECUTED	8:141420f027b84d0d08e944ffc0d005df	dropNotNullConstraint columnName=password, tableName=core_user	Added 0.43.0. Drop NOT NULL constraint for core_user.password	\N	4.11.0	\N	\N	0189608756
-v43.00-028	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:46.4411	407	EXECUTED	8:c86e72e67598f29e10de00fe346095b3	dropNotNullConstraint columnName=password_salt, tableName=core_user	Added 0.43.0. Drop NOT NULL constraint for core_user.password_salt	\N	4.11.0	\N	\N	0189608756
-v43.00-029	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:46.591019	408	EXECUTED	8:4d5632ee6fae1f8d0d5e6068700ccb2e	sql	Added 0.43.0. Clear local password for Users using LDAP auth.	\N	4.11.0	\N	\N	0189608756
-v43.00-030	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:46.883437	409	EXECUTED	8:3b73196410d9a3716f705cdc96a0b98b	createTable tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table	\N	4.11.0	\N	\N	0189608756
-v43.00-031	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.047625	410	EXECUTED	8:1081aff22c7fef2be2c63cdec33aad06	addUniqueConstraint constraintName=unique_dashboard_bookmark_user_id_dashboard_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
-v43.00-032	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.21523	411	EXECUTED	8:573e98bd0b8392f3c207ae49b1eb20ce	createIndex indexName=idx_dashboard_bookmark_user_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
-v43.00-033	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.376537	412	EXECUTED	8:d9471b53e0666a6d3fc99e3c768ccafa	createIndex indexName=idx_dashboard_bookmark_dashboard_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table index on dashboard_id	\N	4.11.0	\N	\N	0189608756
-v43.00-035	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.83348	414	EXECUTED	8:9cce81eb78b0c25d01a23d2f74377eda	addUniqueConstraint constraintName=unique_card_bookmark_user_id_card_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
-v43.00-036	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.001045	415	EXECUTED	8:a107c119de1ee902e9526a0413158093	createIndex indexName=idx_card_bookmark_user_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
-v43.00-037	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.175829	416	EXECUTED	8:80b451e8506f3d3092347cb3f9a96c0c	createIndex indexName=idx_card_bookmark_card_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table index on card_id	\N	4.11.0	\N	\N	0189608756
-v43.00-038	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.471304	417	EXECUTED	8:12e445545dfcf946fd2f04b3f33e8bb7	createTable tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table	\N	4.11.0	\N	\N	0189608756
-v43.00-039	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.639371	418	EXECUTED	8:88c30bdf22c1bcae694850d81a65b175	addUniqueConstraint constraintName=unique_collection_bookmark_user_id_collection_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
-v43.00-040	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.796888	419	EXECUTED	8:455175f303c3f64cb9588aca5c6641e0	createIndex indexName=idx_collection_bookmark_user_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
-v43.00-041	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:48.96599	420	EXECUTED	8:b3a84ea8c47896be2931fb73e07459ce	createIndex indexName=idx_collection_bookmark_collection_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table index on collection_id	\N	4.11.0	\N	\N	0189608756
-v43.00-042	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:49.135474	421	EXECUTED	8:e0b982be997b8e591172f4a7c9dab869	sql	Added 0.43.0. Grant download permissions for existing Databases to 'All Users' permissions group	\N	4.11.0	\N	\N	0189608756
-v43.00-043	howonlee	migrations/000_migrations.yaml	2023-11-17 02:54:49.316038	422	EXECUTED	8:2b0195448dad18ba671d64a0c35ceb79	addColumn tableName=metabase_field	Added 0.43.0 - Nested field columns in fields	\N	4.11.0	\N	\N	0189608756
-v43.00-044	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:49.483537	423	EXECUTED	8:537bbbdc3a39703e704e80d757d8cead	sql	Added 0.43.0 - Removes MetaBot permissions group	\N	4.11.0	\N	\N	0189608756
-v43.00-046	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:49.834202	424	EXECUTED	8:de349aff4c691f7abd7417421ed4e54e	createTable tableName=general_permissions_revision	Added 0.43.0 - create General Permission Revision table	\N	4.11.0	\N	\N	0189608756
-v43.00-047	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:50.013414	425	EXECUTED	8:35c7324ab207528726cc332a5b433a58	sql	Added 0.43.0. Grant the 'All Users' Group permissions to create/edit subscriptions and alerts	\N	4.11.0	\N	\N	0189608756
-v43.00-049	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:50.179907	426	EXECUTED	8:3223a3f02b151cdca259da680de7f848	modifyDataType columnName=timestamp, tableName=view_log	Added 0.43.0 - Unify datatype with query_execution.started_at so comparable (see 168).	\N	4.11.0	\N	\N	0189608756
-v42.00-071	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:54:40.563186	380	EXECUTED	8:315c004fe2776340730f660504260575	sql	Added 0.42.0 - migrates the Sample Dataset to the name "Sample Database"	\N	4.11.0	\N	\N	0189608756
-v43.00-050	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:50.369334	427	EXECUTED	8:d4bc347f147647b361bbe3740d035413	addColumn tableName=permissions_group_membership	Added 0.43.0. Add permissions_group_membership.is_group_manager	\N	4.11.0	\N	\N	0189608756
-v43.00-051	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:50.558879	428	EXECUTED	8:cd0b3deabba3be0abcabd7b8f7fe03c8	addColumn tableName=timeline	Added 0.43.0 - default boolean on timelines to indicate default timeline for a collection	\N	4.11.0	\N	\N	0189608756
-v43.00-053	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:51.064263	430	EXECUTED	8:9660924a1b14881a4d5d11e535c6d838	addUniqueConstraint constraintName=unique_bookmark_user_id_type_item_id, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
-v43.00-054	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:51.253031	431	EXECUTED	8:b353fff839dde25895deba810f64c704	addUniqueConstraint constraintName=unique_bookmark_user_id_ordering, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
-v43.00-055	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:51.424285	432	EXECUTED	8:bd8dd0c8f4391a2ed375f369971b4023	createIndex indexName=idx_bookmark_ordering_user_id, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
-v43.00-056	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:51.58027	433	EXECUTED	8:c418d33e471acbbcd9f86e57b1df4468	renameTable newTableName=application_permissions_revision, oldTableName=general_permissions_revision	Added 0.43.0 - Rename general permission revision table It's safe to rename this table without breaking downgrades compatibility because this table was also added in 0.43.0.	\N	4.11.0	\N	\N	0189608756
-v43.00-057	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:51.749466	434	EXECUTED	8:a96791b95827101abd2cb77361c847ce	sql	Added 0.43.0 - Rename general_permissions_revision_id_seq	\N	4.11.0	\N	\N	0189608756
-v43.00-058	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:51.909153	435	EXECUTED	8:bbef3f445957c95a3d42b74b7c8b1fa3	sql	Added 0.43.0 - Rename general permissios to application permissions	\N	4.11.0	\N	\N	0189608756
-v43.00-059	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:52.107257	436	EXECUTED	8:57fb18b8a2b231c107b4d138521166dd	addNotNullConstraint columnName=icon, tableName=timeline	Added 0.43.0 - disallow nil timeline icons	\N	4.11.0	\N	\N	0189608756
-v43.00-060	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:52.298173	437	EXECUTED	8:25978d2800f7e2dd6e8f4ad61027dfa3	addNotNullConstraint columnName=icon, tableName=timeline_event	Added 0.43.0 - disallow nil timeline event icons	\N	4.11.0	\N	\N	0189608756
-v44.00-002	braden	migrations/000_migrations.yaml	2023-11-17 02:54:53.505615	441	EXECUTED	8:6dc28d92f89811023b6bcd9d77395634	addColumn tableName=metric	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-003	braden	migrations/000_migrations.yaml	2023-11-17 02:54:53.746041	442	EXECUTED	8:9bd778cae47bb09833a901fdcf76fee8	addColumn tableName=segment	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-004	braden	migrations/000_migrations.yaml	2023-11-17 02:54:53.988132	443	EXECUTED	8:4d9ac5fd2c5dbbb6768bb920bd2890cb	addColumn tableName=collection	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-005	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.217431	444	EXECUTED	8:8a3712f3787b8c58c3c6f307d5b641c5	addColumn tableName=report_dashboard	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-006	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.449588	445	EXECUTED	8:9d9eee07c7b8a7a3c87f6f98e4856b13	addColumn tableName=dimension	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-007	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.677413	446	EXECUTED	8:007f472f4397fba9deb7731ddd4a2a9e	addColumn tableName=pulse	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-008	braden	migrations/000_migrations.yaml	2023-11-17 02:54:54.931337	447	EXECUTED	8:ea3332f011482a9a9e709f922830ba95	addColumn tableName=report_card	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-009	braden	migrations/000_migrations.yaml	2023-11-17 02:54:55.154212	448	EXECUTED	8:ef0054e0f1d1ac22ff1c81cf01519d0b	addColumn tableName=native_query_snippet	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-010	braden	migrations/000_migrations.yaml	2023-11-17 02:54:55.38844	449	EXECUTED	8:0e58282581d53882d032811c4ea52c8d	addColumn tableName=timeline	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-011	braden	migrations/000_migrations.yaml	2023-11-17 02:54:55.615532	450	EXECUTED	8:6a606a9c9351749947263fea4255dc1e	addColumn tableName=report_dashboardcard	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
-v44.00-023	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:55.80161	451	EXECUTED	8:493153694fde9482c906922a6c63bf88	addColumn tableName=report_card	Added 0.44.0 - Add parameters to report_card	\N	4.11.0	\N	\N	0189608756
-v44.00-025	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:56.017261	452	EXECUTED	8:653792e7485e6c6d9063cdd085d8584c	addColumn tableName=report_card	Added 0.44.0 - Add parameter_mappings to report_card	\N	4.11.0	\N	\N	0189608756
-v44.00-027	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:56.175345	453	EXECUTED	8:4fb924ff28472bf113fd4abf5ec8cf1b	dropNotNullConstraint columnName=first_name, tableName=core_user	Added 0.44.0. Drop NOT NULL constraint for core_user.first_name	\N	4.11.0	\N	\N	0189608756
-v44.00-028	adam-james	migrations/000_migrations.yaml	2023-11-17 02:54:56.331455	454	EXECUTED	8:8c5c6b0342b7970e15fb93ed618a44c3	dropNotNullConstraint columnName=last_name, tableName=core_user	Added 0.44.0. Drop NOT NULL constraint for core_user.last_name	\N	4.11.0	\N	\N	0189608756
-v44.00-029	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:56.519898	455	EXECUTED	8:3380ac2de7c5c6a0b313c81c8a438f28	addColumn tableName=metabase_fieldvalues	Added 0.44.0 - Add has_more_values to metabase_fieldvalues	\N	4.11.0	\N	\N	0189608756
-v44.00-030	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:56.707299	456	EXECUTED	8:757a6d90116ca360a4d70bf9f910af1d	addColumn tableName=metabase_field	Added 0.44.0 - Add database_required to metabase_field	\N	4.11.0	\N	\N	0189608756
-v44.00-033	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:56.923194	457	EXECUTED	8:2407250e09ed3bd6e36f0fa340b206ac	sql	Added 0.43.0. Grant the 'All Users' Permissions Group readwrite perms for the Root Snippets Collection.	\N	4.11.0	\N	\N	0189608756
-50	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:45.39251	49	EXECUTED	8:98a6ab6428ea7a589507464e34ade58a	addColumn tableName=report_card; addColumn tableName=report_card; addColumn tableName=report_dashboard; addColumn tableName=report_dashboard		\N	4.11.0	\N	\N	0189608756
-v44.00-035	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:57.117513	458	EXECUTED	8:38dcbf6c407d7a19591ea6c7baa287e3	addColumn tableName=metabase_fieldvalues	Added 0.44.0. Add type to fieldvalues	\N	4.11.0	\N	\N	0189608756
-12	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:33.588343	11	EXECUTED	8:1cc6a5e29970d1ae5008ccd842b0b06a	addColumn tableName=report_card; addColumn tableName=report_card; addColumn tableName=report_card		\N	4.11.0	\N	\N	0189608756
-v44.00-037	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:57.313366	459	EXECUTED	8:6bb5be3d1c58c69d0dc42a38fa150d57	addColumn tableName=metabase_fieldvalues	Added 0.44.0. Add type to fieldvalues	\N	4.11.0	\N	\N	0189608756
-v44.00-038	metamben	migrations/000_migrations.yaml	2023-11-17 02:54:57.501898	460	EXECUTED	8:327897734fed2d9f16707cd16c0395f3	addColumn tableName=report_card	Added 0.44.0 - Add collection_preview to report_card	\N	4.11.0	\N	\N	0189608756
-v44.00-039	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:57.68364	461	EXECUTED	8:381712e81a39de0ddec9107419c1450a	addColumn tableName=native_query_snippet	Added 0.44.0 - Add template_tags to native_query_snippet	\N	4.11.0	\N	\N	0189608756
-v44.00-041	braden	migrations/000_migrations.yaml	2023-11-17 02:54:57.903808	462	EXECUTED	8:7fba8d5b9bfe7136d1a78c8d8d8fc402	addColumn tableName=pulse_card	Added 0.44.0 - add entity_id column to PulseCard, PulseChannel	\N	4.11.0	\N	\N	0189608756
-v44.00-042	braden	migrations/000_migrations.yaml	2023-11-17 02:54:58.125763	463	EXECUTED	8:ca3a5364fcac3da951d35f25d660144f	addColumn tableName=pulse_channel	Added 0.44.0 - add entity_id column to PulseCard, PulseChannel	\N	4.11.0	\N	\N	0189608756
-v45.00-001	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:58.639445	465	EXECUTED	8:da99b71a4ac7eb662f6a95e69585935e	createTable tableName=action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
-v45.00-002	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:58.951817	466	EXECUTED	8:6da7a6285edb138c404de0eeba209570	createTable tableName=query_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
-v45.00-011	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:59.463498	468	EXECUTED	8:dcf1cda9f20dca4b6ff8101b13b98c4a	addColumn tableName=report_card	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
-v45.00-012	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:59.94621	469	EXECUTED	8:aadf28229f585cff7c4b4c1918e558b2	createTable tableName=http_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
-v45.00-013	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:00.268078	470	EXECUTED	8:26dba276b14255d4346507a1a25d117b	addPrimaryKey constraintName=pk_http_action, tableName=http_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
-v45.00-022	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:00.811731	471	EXECUTED	8:d46fa24e4d75a11b2e92aecbf39c6ee1	createTable tableName=app	Added 0.45.0 - add app container	\N	4.11.0	\N	\N	0189608756
-20	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:35.468149	19	EXECUTED	8:1b6c23d69b9330b56dcb4bb7188e8d5e	createTable tableName=pulse; createIndex indexName=idx_pulse_creator_id, tableName=pulse; createTable tableName=pulse_card; createIndex indexName=idx_pulse_card_pulse_id, tableName=pulse_card; createIndex indexName=idx_pulse_card_card_id, tableNam...		\N	4.11.0	\N	\N	0189608756
-v45.00-023	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:00.993897	472	EXECUTED	8:c6c1ff9ca3b62d4cda3a2d782dd86f2f	addForeignKeyConstraint baseTableName=app, constraintName=fk_app_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.45.0 - add app container	\N	4.11.0	\N	\N	0189608756
-v45.00-025	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:01.196059	473	EXECUTED	8:50a43cea3123ecdb602123825f5a7dbf	addColumn tableName=report_dashboard	Added 0.45.0 - mark app pages	\N	4.11.0	\N	\N	0189608756
-v45.00-026	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:01.392181	474	EXECUTED	8:ae77d4086998911877e3207fcf90c9c7	addColumn tableName=report_dashboardcard	Added 0.45.0 - apps add action_id to report_dashboardcard	\N	4.11.0	\N	\N	0189608756
-v45.00-027	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:01.54825	475	EXECUTED	8:40c3c8391c1416a3bce09ca3c7237173	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_report_dashboardcard_ref_action_id, referencedTableName=action	Added 0.45.0 - apps add fk for action_id to report_dashboardcard	\N	4.11.0	\N	\N	0189608756
-v45.00-028	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:01.710532	476	EXECUTED	8:f8f68f80627aeb2ef7f28f2af2b5a31b	renameColumn newColumnName=size_x, oldColumnName=sizeX, tableName=report_dashboardcard	Added 0.45.0 -- rename DashboardCard sizeX to size_x. See https://github.com/metabase/metabase/issues/16344	\N	4.11.0	\N	\N	0189608756
-v45.00-029	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:01.878163	477	EXECUTED	8:579957652133eab3ee023dd911162a1e	renameColumn newColumnName=size_y, oldColumnName=sizeY, tableName=report_dashboardcard	Added 0.45.0 -- rename DashboardCard size_y to size_y. See https://github.com/metabase/metabase/issues/16344	\N	4.11.0	\N	\N	0189608756
-v45.00-030	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.037801	478	EXECUTED	8:41eda097feb034c4d01b2dbda74753c8	addDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.45.0 -- add default value to DashboardCard size_x -- this was previously done by Toucan	\N	4.11.0	\N	\N	0189608756
-v45.00-031	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.202228	479	EXECUTED	8:6416e373e335dc1c12c7571af674dede	addDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.45.0 -- add default value to DashboardCard size_y -- this was previously done by Toucan	\N	4.11.0	\N	\N	0189608756
-v45.00-032	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.382002	480	EXECUTED	8:d97444fe24a2dca618a2804741335f6d	addDefaultValue columnName=created_at, tableName=report_dashboardcard	Added 0.45.0 -- add default value for DashboardCard created_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
-v45.00-033	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.456075	481	MARK_RAN	8:34df79fc79e086ab05bb2fd79bb4e322	sql	Added 0.45.0 -- add default value for DashboardCard created_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
-v45.00-034	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.676365	482	EXECUTED	8:ba0505a87ef876026759cdcb4e704f41	addDefaultValue columnName=updated_at, tableName=report_dashboardcard	Added 0.45.0 -- add default value for DashboardCard updated_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
-v45.00-035	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:02.752566	483	MARK_RAN	8:dcee49781d80d9c4be5ad9dd51975a07	sql	Added 0.45.0 -- add default value for DashboardCard updated_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
-v45.00-036	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:03.229677	484	EXECUTED	8:cd4009254bd2c56aaf281082038c1f0b	createTable tableName=model_action	Added 0.45.0 - add model action table	\N	4.11.0	\N	\N	0189608756
-v45.00-037	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:03.441846	485	EXECUTED	8:56f548cc84a53cc6d18302761ee71554	addUniqueConstraint constraintName=unique_model_action_card_id_slug, tableName=model_action	Added 0.45.0 - model action	\N	4.11.0	\N	\N	0189608756
-v45.00-038	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.601782	486	EXECUTED	8:c38ddc295206e807c7254581ed9566c3	addDefaultValue columnName=created_at, tableName=metabase_database	Added 0.45.0 -- add default value for Database created_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
-v45.00-039	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.663575	487	MARK_RAN	8:2c539d76d3aead7f7366b15333132b30	sql	Added 0.45.0 -- add default value for Database created_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
-v45.00-040	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.863616	488	EXECUTED	8:00ac7c24cfd3e7ea3a21f21f4e45dbcf	addDefaultValue columnName=updated_at, tableName=metabase_database	Added 0.45.0 -- add default value for Database updated_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
-v45.00-041	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:03.927462	489	MARK_RAN	8:82dc368fa3e0163a06929da6e9556fe2	sql	Added 0.45.0 -- add default value for Database updated_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
-v45.00-042	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.11182	490	EXECUTED	8:d04207471480e335f14094e9a7a5d293	sql	Added 0.45.0 -- add default value for Database with NULL details	\N	4.11.0	\N	\N	0189608756
-32	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:38.616441	32	EXECUTED	8:32fb3ffb1ac9b619248c3de8e3d09b4b	createTable tableName=raw_table; createIndex indexName=idx_rawtable_database_id, tableName=raw_table; addUniqueConstraint constraintName=uniq_raw_table_db_schema_name, tableName=raw_table; createTable tableName=raw_column; createIndex indexName=id...		\N	4.11.0	\N	\N	0189608756
-v45.00-043	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.267825	491	EXECUTED	8:1d07a5435e51abd0663458d907865a6b	addNotNullConstraint columnName=details, tableName=metabase_database	Added 0.45.0 -- make Database details NOT NULL	\N	4.11.0	\N	\N	0189608756
-v45.00-044	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:04.6397	492	EXECUTED	8:0b23976c5d2248d511ac31b244efef22	createTable tableName=app_permission_graph_revision	Added 0.45.0 -- create app permission graph revision table	\N	4.11.0	\N	\N	0189608756
-v45.00-049	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.987169	494	EXECUTED	8:df2097d176fad99c142c5dd75ce8a3db	sql; sql; sql	Added 0.45.0 -- set Collection.created_at to User.date_joined for Personal Collections	\N	4.11.0	\N	\N	0189608756
-v45.00-050	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:05.150258	495	EXECUTED	8:65ecfe481e7c0141bb82bb3401cfa94e	sql; sql; sql	Added 0.45.0 -- seed Collection.created_at with value of oldest item for non-Personal Collections	\N	4.11.0	\N	\N	0189608756
-v45.00-051	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.215872	496	MARK_RAN	8:2378c7031da6871dcf1c737bf323d211	modifyDataType columnName=after, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.after from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v45.00-052	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.315952	497	MARK_RAN	8:b7343eb9556c3e636b6f8dd70708c0b3	modifyDataType columnName=before, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.before from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v45.00-053	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.411904	498	MARK_RAN	8:fa552605d5a587c4fa74e0c6bd358097	modifyDataType columnName=remark, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.remark from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v45.00-054	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.519654	499	MARK_RAN	8:60862c4ecf505727e839ac5e94f95528	modifyDataType columnName=after, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.after from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v45.00-055	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.617606	500	MARK_RAN	8:717f0c266da5768098a2ead6168f3b18	modifyDataType columnName=before, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.before from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v45.00-056	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.709853	501	MARK_RAN	8:a1f364d45a922c90b4fac741a22e66b3	modifyDataType columnName=remark, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.remark from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v46.00-000	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.098681	503	EXECUTED	8:97251413292221e51490e990b6f683f2	createTable tableName=implicit_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-002	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.480403	505	EXECUTED	8:b2b112f0df413692631b75822f658de1	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-003	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.662396	506	EXECUTED	8:45b8358f31811335aaa93032726a042b	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-004	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.858011	507	EXECUTED	8:0ce8ff05beffc5c72e2348bcec581eee	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-005	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.038451	508	EXECUTED	8:84cf1fbf435c7c3f794c973de4d62fad	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-006	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.232178	509	EXECUTED	8:df43ef08b76c33c5626dbf9b226717b5	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-007	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.384217	510	EXECUTED	8:6830901cccc14ad22cdfd86bd3a2afe7	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id, referencedTableName=report_card	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-008	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.574177	511	EXECUTED	8:6e73a8683d1b757c5f9034513ec8a581	addColumn tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-009	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.769846	512	EXECUTED	8:2b4fd7cee77d5ed8de22fcc2fba158bc	addColumn tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-010	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:07.923884	513	EXECUTED	8:77ca03e5a0dbe370461295da1c77cf0f	addForeignKeyConstraint baseTableName=query_action, constraintName=fk_query_action_database_id, referencedTableName=metabase_database	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-012	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.270476	515	EXECUTED	8:7e4dffe8bbbb740207001ead696a8557	dropNotNullConstraint columnName=card_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-31	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.762132	30	EXECUTED	8:30a33a82bab0bcbb2ccb6738d48e1421	addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
-v46.00-013	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.614158	516	EXECUTED	8:96dfaa20265be749af8590f75d465348	sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-51	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:46.010072	50	EXECUTED	8:43c90b5b9f6c14bfd0e41cc0b184617e	createTable tableName=query_execution; createIndex indexName=idx_query_execution_started_at, tableName=query_execution; createIndex indexName=idx_query_execution_query_hash_started_at, tableName=query_execution		\N	4.11.0	\N	\N	0189608756
-128	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:02.384315	124	MARK_RAN	8:44acbe257817286d88b7892e79363b66	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-v46.00-014	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.769763	517	EXECUTED	8:585958ee7e90e23a9cc22ebf7e4228cb	dropForeignKeyConstraint baseTableName=query_action, constraintName=fk_query_action_ref_card_id	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-35	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:38.931963	34	EXECUTED	8:91b72167fca724e6b6a94b64f886cf09	modifyDataType columnName=value, tableName=setting		\N	4.11.0	\N	\N	0189608756
-v46.00-015	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.926613	518	EXECUTED	8:9b57260e146618caff3f468116031008	dropColumn columnName=card_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-016	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.118118	519	EXECUTED	8:cb79eef9f483e73b3d9b571f916b8598	sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-017	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.286762	520	EXECUTED	8:90525ade34e7bb883bf75cdf8a2b3340	dropColumn columnName=name, tableName=http_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-018	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.448469	521	EXECUTED	8:cf3c31a975dc86f1def6ee5d11f5f9dc	dropColumn columnName=description, tableName=http_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-019	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.614079	522	EXECUTED	8:a9f70163707cc7f798bdd0527a55854b	dropColumn columnName=is_write, tableName=report_card	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-020	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.772993	523	EXECUTED	8:2def45c139267d7424e1187764122669	addNotNullConstraint columnName=database_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-022	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.112341	525	EXECUTED	8:52c8107f4bcc6e9889b270e0a4954921	addNotNullConstraint columnName=dataset_query, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-011	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:08.112868	514	EXECUTED	8:3c76c705376a9d70c98d26529db60efc	sql; sql; sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-024	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.427552	527	EXECUTED	8:080ff435bae61f324535393d9e78de38	addNotNullConstraint columnName=name, tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-025	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.596724	528	EXECUTED	8:60016f3de98c7382602485f13bc4e04f	dropTable tableName=model_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-026	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:10.800081	529	EXECUTED	8:948b9653bfbadeb29c847ef41d053dba	addColumn tableName=metabase_database	Added 0.46.0 -- add field for tracking DBMS versions	\N	4.11.0	\N	\N	0189608756
-v46.00-027	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.992364	530	EXECUTED	8:5f7773b797a3c85a99cd35cb60cfd0b3	addColumn tableName=metabase_fieldvalues	Added 0.46.0 -- add last_used_at to FieldValues	\N	4.11.0	\N	\N	0189608756
-v46.00-028	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:11.370692	531	EXECUTED	8:33cc1a038e926acb7dfd7cf29b4fa545	createTable tableName=parameter_card	Added 0.46.0 -- Join table connecting cards to dashboards/cards's parameters that need custom filter values from the card	\N	4.11.0	\N	\N	0189608756
-v46.00-029	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:11.542107	532	EXECUTED	8:96336855a4180eaf51d7be4a97f3b1a4	dropUniqueConstraint constraintName=unique_dimension_field_id_name, tableName=dimension	Make Dimension <=> Field a 1t1 relationship. Drop unique constraint on field_id + name. (1/3)	\N	4.11.0	\N	\N	0189608756
-v46.00-030	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:11.698197	533	EXECUTED	8:e1f67579cb8dc1102445df299636cb7b	sql	Make Dimension <=> Field a 1t1 relationship. Delete duplicate entries. (2/3)	\N	4.11.0	\N	\N	0189608756
-v46.00-031	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:11.862255	534	EXECUTED	8:a9b4c86de880b2bc01e208d8d4d8cf64	addUniqueConstraint constraintName=unique_dimension_field_id, tableName=dimension	Make Dimension <=> Field a 1t1 relationship. Add unique constraint on field_id. (3/3)	\N	4.11.0	\N	\N	0189608756
-v46.00-032	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.028062	535	EXECUTED	8:2a7de9726282af199737a334395f1068	addUniqueConstraint constraintName=unique_parameterized_object_card_parameter, tableName=parameter_card	Added 0.46.0 -- Unique parameter_card	\N	4.11.0	\N	\N	0189608756
-v46.00-033	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.192295	536	EXECUTED	8:25bc5b1a806d4b352d43f5b16e7e6e20	createIndex indexName=idx_parameter_card_parameterized_object_id, tableName=parameter_card	Added 0.46.0 -- parameter_card index on connected object	\N	4.11.0	\N	\N	0189608756
-v46.00-034	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.350555	537	EXECUTED	8:5a6b5a2cf7160baec4f81f6675de898c	createIndex indexName=idx_parameter_card_card_id, tableName=parameter_card	Added 0.46.0 -- parameter_card index on connected card	\N	4.11.0	\N	\N	0189608756
-v46.00-035	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:12.510792	538	EXECUTED	8:0639e4c0939848b4377792290311f239	addForeignKeyConstraint baseTableName=parameter_card, constraintName=fk_parameter_card_ref_card_id, referencedTableName=report_card	Added 0.46.0 - parameter_card.card_id foreign key	\N	4.11.0	\N	\N	0189608756
-v46.00-036	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:12.682163	539	EXECUTED	8:39d440f29a481e9f0915532106079a1a	dropTable tableName=app_permission_graph_revision	App containers are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
-v46.00-037	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:12.841373	540	EXECUTED	8:dbbe898501c554e3ee74c6b9ef9c1575	dropColumn columnName=is_app_page, tableName=report_dashboard	App pages are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
-v46.00-039	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:13.230391	542	EXECUTED	8:7ed32de11fbe8565148d8491f908ad05	addColumn tableName=parameter_card	Added 0.46.0 - add entity_id to parameter_card	\N	4.11.0	\N	\N	0189608756
-85	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:54.537185	83	EXECUTED	8:624bb71d09dc2bef7c16c025f57edff0	addColumn tableName=collection; createIndex indexName=idx_collection_personal_owner_id, tableName=collection; addColumn tableName=collection; sql; addNotNullConstraint columnName=_slug, tableName=collection; dropColumn columnName=slug, tableName=c...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-88	senior	migrations/000_migrations.yaml	2023-11-17 02:53:55.077	86	EXECUTED	8:04ff5a0738473938fc31d68c1d9952e1	addColumn tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-v46.00-040	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.388225	543	EXECUTED	8:7fec881cac598cce34b62c98fcf37563	addDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.46.0 -- Bump default dashcard size to 4x4	\N	4.11.0	\N	\N	0189608756
-v46.00-041	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.546086	544	EXECUTED	8:0214a8d0b94a9eb48aad75b1d50dd279	addDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.46.0 -- Bump default dashcard size to 4x4	\N	4.11.0	\N	\N	0189608756
-v46.00-042	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.706818	545	EXECUTED	8:7b91ad83569565517c43e9f7b9bfa29a	createIndex indexName=idx_query_execution_executor_id, tableName=query_execution	Added 0.46.0 -- index query_execution.executor_id	\N	4.11.0	\N	\N	0189608756
-36	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:39.243944	35	EXECUTED	8:252e08892449dceb16c3d91337bd9573	addColumn tableName=report_dashboard; addNotNullConstraint columnName=parameters, tableName=report_dashboard; addColumn tableName=report_dashboardcard; addNotNullConstraint columnName=parameter_mappings, tableName=report_dashboardcard		\N	4.11.0	\N	\N	0189608756
-v46.00-043	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:13.872428	546	EXECUTED	8:d9cab29076035068cfc49fb9570832af	createIndex indexName=idx_query_execution_context, tableName=query_execution	Added 0.46.0 -- index query_execution.context	\N	4.11.0	\N	\N	0189608756
-v46.00-045	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.09437	547	EXECUTED	8:7a9cabf1c693de8b0c9555f7deb072a4	addColumn tableName=action	Added 0.46.0 -- add public_uuid to action.	\N	4.11.0	\N	\N	0189608756
-v46.00-052	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.408179	549	EXECUTED	8:948c978fcb2d938d272a05b3e56808d1	dropDefaultValue columnName=col, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
-v46.00-053	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.562932	550	EXECUTED	8:04e092dbffdfda13f28b1e3ea38299a7	dropDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
-v46.00-001	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:06.289808	504	EXECUTED	8:4a90c7523749aa7e4e4d2ea9dd6db777	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-054	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.730176	551	EXECUTED	8:bc3abf9ab94199aeaebb2be28dea77aa	dropDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
-v46.00-055	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.922211	552	EXECUTED	8:48a516459b84a21e9edbdbfe1bffd671	addColumn tableName=action	Added 0.46.0 -- add made_public_by_id	\N	4.11.0	\N	\N	0189608756
-v46.00-056	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:15.090321	553	EXECUTED	8:af93ab591b44b5d81d8d8a496600c1bc	createIndex indexName=idx_action_public_uuid, tableName=action	Added 0.46.0 -- add public_uuid and made_public_by_id to action. public_uuid is indexed	\N	4.11.0	\N	\N	0189608756
-v46.00-057	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:15.266561	554	EXECUTED	8:aff3b0e15dcfc36a4fd97faade0751c0	modifyDataType columnName=parameter_id, tableName=parameter_card	Added 0.46.0 -- parameter_card.parameter_id long enough to hold a uuid	\N	4.11.0	\N	\N	0189608756
-v46.00-058	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:15.426701	555	EXECUTED	8:11440c629413c7231e7f156347353761	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_made_public_by_id, referencedTableName=core_user	Added 0.46.0 -- add FK constraint for action.made_public_by_id with core_user.id	\N	4.11.0	\N	\N	0189608756
-v46.00-060	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:15.784266	557	EXECUTED	8:fc1762a930726afb11131acf3a56312b	createIndex indexName=idx_action_creator_id, tableName=action	Added 0.46.0 -- action.creator_id index	\N	4.11.0	\N	\N	0189608756
-v46.00-061	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:15.95034	558	EXECUTED	8:d57393ae0e96a9b1a0bd7a66597cb485	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_creator_id, referencedTableName=core_user	Added 0.46.0 -- action.creator_id index	\N	4.11.0	\N	\N	0189608756
-v46.00-062	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:16.146754	559	EXECUTED	8:20efdbd79df3c76cbf77318d871a9836	addColumn tableName=action	Added 0.46.0 -- add actions.archived	\N	4.11.0	\N	\N	0189608756
-v46.00-064	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:16.32914	560	EXECUTED	8:0ac10ca0d82f1bbe39737eb0a8fdcd7d	renameTable newTableName=sandboxes, oldTableName=group_table_access_policy	Added 0.46.0 -- rename `group_table_access_policy` to `sandboxes`	\N	4.11.0	\N	\N	0189608756
-v46.00-065	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:16.519544	561	EXECUTED	8:5cbb335952dd1ab7a137d80d6c1ab82e	addColumn tableName=sandboxes	Added 0.46.0 -- add `permission_id` to `sandboxes`	\N	4.11.0	\N	\N	0189608756
-v46.00-070	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:16.762715	562	EXECUTED	8:d440a8d0aef0bbfdae24a9c70bd37605	addColumn tableName=action	Added 0.46.0 - add entity_id column to action	\N	4.11.0	\N	\N	0189608756
-v46.00-074	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:16.919883	563	EXECUTED	8:c1273a3003d82638a0a5413bf2aa6777	modifyDataType columnName=updated_at, tableName=report_card	Added 0.46.0 -- increase precision of updated_at of report_card	\N	4.11.0	\N	\N	0189608756
-v46.00-079	john-metabase	migrations/000_migrations.yaml	2023-11-17 02:55:17.090664	564	EXECUTED	8:de167f33d3f7670246623466487d2e67	sql	Added 0.46.0 -- migrates Databases using deprecated and removed presto driver to presto-jdbc	\N	4.11.0	\N	\N	0189608756
-v46.00-080	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:17.76677	565	EXECUTED	8:022a846feb10103f2e9fe4b58cb792d6	customChange	Migrate data permission paths from v1 to v2 (splitting them into separate data and query permissions)	\N	4.11.0	\N	\N	0189608756
-52	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:46.405774	51	EXECUTED	8:5af9ea2a96cd6e75a8ac1e6afde7126b	createTable tableName=query_cache; createIndex indexName=idx_query_cache_updated_at, tableName=query_cache; addColumn tableName=report_card		\N	4.11.0	\N	\N	0189608756
-v46.00-084	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:17.922981	566	EXECUTED	8:b4f465ca3be584028e077b907656b804	dropForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id	Added 0.46.0 - CASCADE delete for action.model_id	\N	4.11.0	\N	\N	0189608756
-v46.00-085	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:18.096831	567	EXECUTED	8:17fe48c56aa457a6a09775099d44d7a5	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id, referencedTableName=report_card	Added 0.46.0 - CASCADE delete for action.model_id	\N	4.11.0	\N	\N	0189608756
-54	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:46.857853	53	EXECUTED	8:e410005b585f5eeb5f202076ff9468f7	addColumn tableName=pulse		\N	4.11.0	\N	\N	0189608756
-87	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:54.889644	85	EXECUTED	8:0eccf19a93cb0ba4017aafd1d308c097	dropTable tableName=raw_column; dropTable tableName=raw_table	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-v46.00-086	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:19.036606	568	EXECUTED	8:677e076d8741275d31a02e97531fd930	customChange	Added 0.46.0 - Delete the abandonment email task	\N	4.11.0	\N	\N	0189608756
-v46.00-088	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:19.194503	569	EXECUTED	8:ff9defc19920960db55ef71e4d32b4ea	sql	Added 0.46.5 -- backfill `permission_id` values in `sandboxes`. This is a fixed verison of v46.00-066 which has been removed, since it had a bug that blocked a customer from upgrading.	\N	4.11.0	\N	\N	0189608756
-v46.00-089	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:19.34508	570	EXECUTED	8:e0fbd2514cc960cc74106204ac65a3ea	sql	Added 0.46.5 -- remove orphaned entries in `sandboxes`	\N	4.11.0	\N	\N	0189608756
-v46.00-090	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:19.508901	571	EXECUTED	8:963c0cd3a7bd2858e4dbfd4d4aad95cb	addForeignKeyConstraint baseTableName=sandboxes, constraintName=fk_sandboxes_ref_permissions, referencedTableName=permissions	Add foreign key constraint on sandboxes.permission_id	\N	4.11.0	\N	\N	0189608756
-v47.00-002	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:19.85553	573	EXECUTED	8:963690f41f487b122464277c627823f6	addColumn tableName=metabase_field	Added 0.47.0 - Add json_unfolding column to metabase_field	\N	4.11.0	\N	\N	0189608756
-v47.00-003	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:20.007209	574	EXECUTED	8:97bccdf5e9bcdfacd1c315fa1342c167	sql	Added 0.47.0 - Populate metabase_field.json_unfolding based on base_type	\N	4.11.0	\N	\N	0189608756
-v47.00-004	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:20.194884	575	EXECUTED	8:58ad79be7de00e413da51fab3c8beea0	addColumn tableName=metabase_field	Added 0.47.0 - Add auto_incremented to metabase_field	\N	4.11.0	\N	\N	0189608756
-v47.00-005	winlost	migrations/000_migrations.yaml	2023-11-17 02:55:20.37578	576	EXECUTED	8:ccf53f27a551fd0799d0103bd65cca99	addColumn tableName=report_dashboard	Added 0.47.0 - Add auto_apply_filters to dashboard	\N	4.11.0	\N	\N	0189608756
-v47.00-006	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:20.757849	577	EXECUTED	8:b63ff10d3d121bed42eece1ae3dbb177	createTable tableName=dashboard_tab	Added 0.47.0 - Add dashboard_tab table	\N	4.11.0	\N	\N	0189608756
-v47.00-007	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:20.942908	578	EXECUTED	8:e9f7d6b18d65be6fde07c0b5471b8760	addColumn tableName=report_dashboardcard	Added 0.47.0 -- add report_dashboardcard.dashboard_tab_id	\N	4.11.0	\N	\N	0189608756
-v47.00-008	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:21.099702	579	EXECUTED	8:e37c88d202007bd3e6a72b6404d1b0e9	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_report_dashboardcard_ref_dashboard_tab_id, referencedTableName=dashboard_tab	Added 0.47.0 -- add report_dashboardcard.dashboard_tab_id fk constraint	\N	4.11.0	\N	\N	0189608756
-v47.00-009	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:21.25452	580	EXECUTED	8:398124b0dd4dd6e117cdc1378152469b	sql	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
-v47.00-012	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:21.742218	583	EXECUTED	8:bf19ef077bc6bc517c515dd78ca46e3b	dropColumn columnName=google_auth, tableName=core_user	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
-v47.00-001	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:19.668823	572	EXECUTED	8:14bf2732687c04256e9c036ba142aa93	sql	Added 0.47.0 -- set base-type to type/JSON for JSON database-types for postgres and mysql	\N	4.11.0	\N	\N	0189608756
-v47.00-013	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:21.902858	584	EXECUTED	8:044aec6d07049e3c5a45830797189ab0	sql	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
-v47.00-014	qwef	migrations/000_migrations.yaml	2023-11-17 02:55:22.060699	585	EXECUTED	8:6a973f3198ad4596ecade95e61b35991	dropColumn columnName=ldap_auth, tableName=core_user	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
-v47.00-015	escherize	migrations/000_migrations.yaml	2023-11-17 02:55:22.250649	586	EXECUTED	8:d2d5eea99db75e656709006b3a7749f0	addColumn tableName=metabase_database	added 0.47.0 - Add is_audit to metabase_database	\N	4.11.0	\N	\N	0189608756
-v47.00-016	calherres	migrations/000_migrations.yaml	2023-11-17 02:55:22.475294	587	EXECUTED	8:62290f0389eb2a17170a9c0351ac8a85	customChange	Added 0.47.0 - Migrate the report_card.visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
-v47.00-019	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.237682	589	EXECUTED	8:7a5589d70c80b3ffc99a85722f440a91	createTable tableName=model_index_value	Indexed Entities values table	\N	4.11.0	\N	\N	0189608756
-v47.00-020	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.410215	590	EXECUTED	8:d32a4cf7b37f012a7db74628cdde48df	addUniqueConstraint constraintName=unique_model_index_value_model_index_id_model_pk, tableName=model_index_value	Add unique constraint on index_id and pk	\N	4.11.0	\N	\N	0189608756
-v47.00-023	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.56975	591	EXECUTED	8:5d9e81c3e950afad66cb5e9e823b1f03	createIndex indexName=idx_model_index_model_id, tableName=model_index	Added 0.47.0 -- model_index index	\N	4.11.0	\N	\N	0189608756
-v47.00-031	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:25.120843	599	EXECUTED	8:ad9bdb62df65cf26a5a9892a82779ea7	sql; sql	Added 0.47.0 - migrate dashboard grid size from 18 to 24	\N	4.11.0	\N	\N	0189608756
-v47.00-025	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.881054	593	EXECUTED	8:6889e314a2016c9bc017a358b81ed24e	addForeignKeyConstraint baseTableName=model_index_value, constraintName=fk_model_index_value_model_id, referencedTableName=model_index	Added 0.47.0 -- model_index_value foriegn key to model_index	\N	4.11.0	\N	\N	0189608756
-89	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:57.250715	87	EXECUTED	8:2ee410aba3f9bcd144ea362494a19a58	createTable tableName=qrtz_job_details; addPrimaryKey constraintName=pk_qrtz_job_details, tableName=qrtz_job_details; createTable tableName=qrtz_triggers; addPrimaryKey constraintName=pk_qrtz_triggers, tableName=qrtz_triggers; addForeignKeyConstra...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-v47.00-027	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:24.392914	595	EXECUTED	8:c720f3de8feed35e592c0ca9b9975a18	customChange	Added 0.47.0 - Migrate field_ref in report_card.result_metadata from legacy format	\N	4.11.0	\N	\N	0189608756
-v47.00-028	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:24.583361	596	EXECUTED	8:f38598170766acaaa8fd3b20ef683372	customChange	Added 0.47.0 - Add join-alias to the report_card.visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
-v47.00-029	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:24.743626	597	EXECUTED	8:c7625e5018087e915e547f9318b2b8f5	customChange	Added 0.47.0 - Stack cards vertically for dashboard with tabs on downgrade	\N	4.11.0	\N	\N	0189608756
-v47.00-030	escherize	migrations/000_migrations.yaml	2023-11-17 02:55:24.9408	598	EXECUTED	8:7919d959008457419a09fd3275d3ed00	addColumn tableName=collection	Added 0.47.0 - Type column for collections for instance-analytics	\N	4.11.0	\N	\N	0189608756
-v47.00-036	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.040839	604	EXECUTED	8:e815729b6ebfd4799743b249409558aa	addPrimaryKey constraintName=pk_implicit_action, tableName=implicit_action	Added 0.47.0 - Set primary key to action_id for implicit_action table	\N	4.11.0	\N	\N	0189608756
-v47.00-037	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.20753	605	EXECUTED	8:58c705a18bb3441e3ed5d1167ec64fcb	addForeignKeyConstraint baseTableName=implicit_action, constraintName=fk_implicit_action_action_id, referencedTableName=action	Added 0.47.0 - Add foreign key constraint on implicit_action.action_id	\N	4.11.0	\N	\N	0189608756
-13	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:33.859979	12	EXECUTED	8:8cb1df98d24b215132d5e0175bc7009f	createTable tableName=activity; createIndex indexName=idx_activity_timestamp, tableName=activity; createIndex indexName=idx_activity_user_id, tableName=activity; createIndex indexName=idx_activity_custom_id, tableName=activity		\N	4.11.0	\N	\N	0189608756
-37	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:39.537794	36	EXECUTED	8:07d959eff81777e5690e2920583cfe5f	addColumn tableName=query_queryexecution; addNotNullConstraint columnName=query_hash, tableName=query_queryexecution; createIndex indexName=idx_query_queryexecution_query_hash, tableName=query_queryexecution; createIndex indexName=idx_query_querye...		\N	4.11.0	\N	\N	0189608756
-v47.00-018	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:22.945862	588	EXECUTED	8:7bacd2f60393eebd3bebcfdb0e952ecd	createTable tableName=model_index	Indexed Entities information table	\N	4.11.0	\N	\N	0189608756
-14	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.106836	13	EXECUTED	8:22397aede818dcd23b443810127b665f	createTable tableName=view_log; createIndex indexName=idx_view_log_user_id, tableName=view_log; createIndex indexName=idx_view_log_timestamp, tableName=view_log		\N	4.11.0	\N	\N	0189608756
-15	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.264358	14	EXECUTED	8:505b91530103673a9be3382cd2db1070	addColumn tableName=revision		\N	4.11.0	\N	\N	0189608756
-v47.00-044	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.617172	607	EXECUTED	8:1828d1bd8e2da6eec14ca61e6c01a56f	customChange	Added 0.47.0 - Add join-alias to the report_dashboardcard.visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
-v47.00-045	calherres	migrations/000_migrations.yaml	2023-11-17 02:55:26.800859	608	EXECUTED	8:d7f479a389877010f5af9dc7ec859b51	customChange	Added 0.47.0 - Migrate dashboard revision dashboard cards' visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
-v47.00-046	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:26.989221	609	EXECUTED	8:1e43c8712a5b36809a3c3fa9933a523c	customChange	Added 0.47.0 - Add join-alias to dashboard revision dashboard cards' visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
-v47.00-050	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:27.171168	610	EXECUTED	8:a5d516f2b5ea92f401387646b49a9950	addColumn tableName=metabase_table	Added 0.47.0 - table.is_upload	\N	4.11.0	\N	\N	0189608756
-21	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:35.720021	20	EXECUTED	8:be31f33e7fa7961b902c3ee4a56e19a7	createTable tableName=segment; createIndex indexName=idx_segment_creator_id, tableName=segment; createIndex indexName=idx_segment_table_id, tableName=segment		\N	4.11.0	\N	\N	0189608756
-23	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.060456	22	EXECUTED	8:b6f054835db2b2688a1be1de3707f9a9	modifyDataType columnName=rows, tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
-24	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.3879	23	EXECUTED	8:60825b125b452747098b577310c142b1	createTable tableName=dependency; createIndex indexName=idx_dependency_model, tableName=dependency; createIndex indexName=idx_dependency_model_id, tableName=dependency; createIndex indexName=idx_dependency_dependent_on_model, tableName=dependency;...		\N	4.11.0	\N	\N	0189608756
-25	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.636554	24	EXECUTED	8:ea4cd56cdc21ddf73495101a2a1cb3d4	createTable tableName=metric; createIndex indexName=idx_metric_creator_id, tableName=metric; createIndex indexName=idx_metric_table_id, tableName=metric		\N	4.11.0	\N	\N	0189608756
-26	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:36.82593	25	EXECUTED	8:ddef40b95c55cf4ac0e6a5161911a4cb	addColumn tableName=metabase_database; sql		\N	4.11.0	\N	\N	0189608756
-27	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.068077	26	EXECUTED	8:4778d6724e114803d2d805f494008fb1	createTable tableName=dashboardcard_series; createIndex indexName=idx_dashboardcard_series_dashboardcard_id, tableName=dashboardcard_series; createIndex indexName=idx_dashboardcard_series_card_id, tableName=dashboardcard_series		\N	4.11.0	\N	\N	0189608756
-6	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:32.40009	5	EXECUTED	8:2d2f5d1756ecb81da7c09ccfb9b1565a	dropNotNullConstraint columnName=organization_id, tableName=metabase_database; dropForeignKeyConstraint baseTableName=metabase_database, constraintName=fk_database_ref_organization_id; dropNotNullConstraint columnName=organization_id, tableName=re...		\N	4.11.0	\N	\N	0189608756
-173	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.988354	168	EXECUTED	8:4d32b4b7be3f4801e51aeffa5dd47649	dropForeignKeyConstraint baseTableName=activity, constraintName=fk_activity_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-v47.00-024	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:55:23.722918	592	EXECUTED	8:3079db8d91e54ff2b41050f7dab27936	addForeignKeyConstraint baseTableName=model_index, constraintName=fk_model_index_model_id, referencedTableName=report_card	Added 0.47.0 -- model_index foriegn key to report_card	\N	4.11.0	\N	\N	0189608756
-v47.00-026	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:24.178647	594	EXECUTED	8:acf279edf538ee29a4ea9103d809b3da	createTable tableName=connection_impersonations	Added 0.47.0 - New table for connection impersonation policies	\N	4.11.0	\N	\N	0189608756
-17	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:34.610079	16	EXECUTED	8:051c23cd15359364b9895c1569c319e7	addColumn tableName=metabase_database; sql		\N	4.11.0	\N	\N	0189608756
-18	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:34.812424	17	EXECUTED	8:62a0483dde183cfd18dd0a86e9354288	createTable tableName=data_migrations; createIndex indexName=idx_data_migrations_id, tableName=data_migrations		\N	4.11.0	\N	\N	0189608756
-71	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:50.730882	69	EXECUTED	8:755e5c3dd8a55793f29b2c95cb79c211	dropNotNullConstraint columnName=card_id, tableName=report_dashboardcard	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
-145	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.021865	141	MARK_RAN	8:b162dd48ef850ab4300e2d714eac504e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-55	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:47.35226	54	EXECUTED	8:088fee4d7555e104bc96fed923bce9aa	addColumn tableName=report_dashboard; addColumn tableName=report_dashboard; createTable tableName=dashboard_favorite; addUniqueConstraint constraintName=unique_dashboard_favorite_user_id_dashboard_id, tableName=dashboard_favorite; createIndex inde...		\N	4.11.0	\N	\N	0189608756
-57	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:47.689815	56	EXECUTED	8:aab81d477e2d19a9ab18c58b78c9af88	addColumn tableName=report_card	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
-187	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:10.219388	182	EXECUTED	8:3fbb75c0c491dc6628583184202b8f39	dropForeignKeyConstraint baseTableName=core_session, constraintName=fk_session_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-287	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:26.617069	280	EXECUTED	8:0679eedae767a8648383aac2f923e413	sql	Added 0.39 - Semantic type system - migrate ISO8601 strings	\N	4.11.0	\N	\N	0189608756
-38	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:40.50456	37	EXECUTED	8:c9251b99ab1122ef441117d5d9852d29	addColumn tableName=metabase_database; addColumn tableName=metabase_table; addColumn tableName=metabase_field; addColumn tableName=report_dashboard; addColumn tableName=metric; addColumn tableName=segment; addColumn tableName=metabase_database; ad...		\N	4.11.0	\N	\N	0189608756
-39	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:40.672063	38	EXECUTED	8:334adc22af5ded71ff27759b7a556951	addColumn tableName=core_user		\N	4.11.0	\N	\N	0189608756
-7	cammsaul	migrations/000_migrations.yaml	2023-11-17 02:53:32.592262	6	EXECUTED	8:4f23ddbddd447461588462fa8bb443dd	addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
-9	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:32.935456	8	EXECUTED	8:d560283a190e3c60802eb04f5532a49d	addColumn tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
-40	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:41.451922	39	EXECUTED	8:69326196bb1696f76fbce059b6d7520e	createTable tableName=permissions_group; createIndex indexName=idx_permissions_group_name, tableName=permissions_group; createTable tableName=permissions_group_membership; addUniqueConstraint constraintName=unique_permissions_group_membership_user...		\N	4.11.0	\N	\N	0189608756
-v47.00-033	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:25.531015	601	EXECUTED	8:c4a38673bf2a702e807a2074c0d0b719	customChange	Added 0.47.0 - Migrate field refs in visualization_settings.column_settings keys from legacy format	\N	4.11.0	\N	\N	0189608756
-v47.00-034	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:25.712781	602	EXECUTED	8:bb77d686c5c204e480a1da5fcfb518e2	customChange	Added 0.47.0 - Add join-alias to the visualization_settings.column_settings field refs in card revisions	\N	4.11.0	\N	\N	0189608756
-28	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.223989	27	EXECUTED	8:428e4eb05e4e29141735adf9ae141a0b	addColumn tableName=core_user		\N	4.11.0	\N	\N	0189608756
-29	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.389957	28	EXECUTED	8:8b02731cc34add3722c926dfd7376ae0	addColumn tableName=pulse_channel		\N	4.11.0	\N	\N	0189608756
-30	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:37.607944	29	EXECUTED	8:2c3a50cef177cb90d47a9973cd5934e5	addColumn tableName=metabase_field; addNotNullConstraint columnName=visibility_type, tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
-56	wwwiiilll	migrations/000_migrations.yaml	2023-11-17 02:53:47.506271	55	EXECUTED	8:9f46051abaee599e2838733512a32ad0	addColumn tableName=core_user	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
-168	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:07.050783	163	EXECUTED	8:6d40bfa472bccd2d54284aeb89e1ec3c	modifyDataType columnName=started_at, tableName=query_execution	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-43	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:42.758523	42	EXECUTED	8:3cf48c3e52ea315379a8ed538c9f2624	createTable tableName=permissions_revision		\N	4.11.0	\N	\N	0189608756
-44	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:42.975072	43	EXECUTED	8:2e356e8a1049286f1c78324828ee7867	dropColumn columnName=public_perms, tableName=report_card; dropColumn columnName=public_perms, tableName=report_dashboard; dropColumn columnName=public_perms, tableName=pulse		\N	4.11.0	\N	\N	0189608756
-45	tlrobinson	migrations/000_migrations.yaml	2023-11-17 02:53:43.209945	44	EXECUTED	8:421edd38ee0cb0983162f57193f81b0b	addColumn tableName=report_dashboardcard; addNotNullConstraint columnName=visualization_settings, tableName=report_dashboardcard		\N	4.11.0	\N	\N	0189608756
-53	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:46.671992	52	EXECUTED	8:78d015c5090c57cd6972eb435601d3d0	createTable tableName=query		\N	4.11.0	\N	\N	0189608756
-104	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.143345	101	EXECUTED	8:21709f17e6d1b521d3d3b8cbb5445218	addColumn tableName=core_session	Added EE 1.1.6/CE 0.33.0	\N	4.11.0	\N	\N	0189608756
-217	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.074471	212	EXECUTED	8:da7460a35a724109ae9b5096cd18666b	dropForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_membership_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-244	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.680826	239	EXECUTED	8:4d40104eaa47d01981644462ef56f369	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-v43.00-062	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:52.454331	438	EXECUTED	8:2c24e7af74d3053920fb809b29190303	modifyDataType columnName=timestamp, tableName=revision	Added 0.43.0 - Unify datatype with revision.timestamp for timezone info (see 17829).	\N	4.11.0	\N	\N	0189608756
-v45.00-003	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:59.216034	467	EXECUTED	8:512337d6d4af38016aa79585abbe03a1	addPrimaryKey constraintName=pk_query_action, tableName=query_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
-90	senior	migrations/000_migrations.yaml	2023-11-17 02:53:57.489234	88	EXECUTED	8:8562a72a1190deadc5fa59a23a6396dc	addColumn tableName=core_user; sql; dropColumn columnName=saml_auth, tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-91	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:57.670953	89	EXECUTED	8:9b8831e1e409f08e874c4ece043d0340	dropColumn columnName=raw_table_id, tableName=metabase_table; dropColumn columnName=raw_column_id, tableName=metabase_field	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-92	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:57.859986	90	EXECUTED	8:1e5bc2d66778316ea640a561862c23b4	addColumn tableName=query_execution	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
-v46.00-021	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:09.931132	524	EXECUTED	8:52c8107f4bcc6e9889b270e0a4954921	addNotNullConstraint columnName=dataset_query, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-58	senior	migrations/000_migrations.yaml	2023-11-17 02:53:48.163577	57	EXECUTED	8:9e6d48acacceb109e0bd27e4e44a8cb4	createTable tableName=dimension; addUniqueConstraint constraintName=unique_dimension_field_id_name, tableName=dimension; createIndex indexName=idx_dimension_field_id, tableName=dimension	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
-59	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:48.341883	58	EXECUTED	8:5b6ce52371e0e9eee88e6d766225a94b	addColumn tableName=metabase_field	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-60	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:48.585503	59	EXECUTED	8:2141162a1c99a5dd95e5a67c5595e6d7	addColumn tableName=metabase_database; addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-61	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:48.771573	60	EXECUTED	8:7dded6fd5bf74d79b9a0b62511981272	addColumn tableName=metabase_field	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-62	senior	migrations/000_migrations.yaml	2023-11-17 02:53:48.960333	61	EXECUTED	8:cb32e6eaa1a2140703def2730f81fef2	addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-63	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:49.150022	62	EXECUTED	8:226f73b9f6617495892d281b0f8303db	addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-64	senior	migrations/000_migrations.yaml	2023-11-17 02:53:49.299821	63	EXECUTED	8:4dcc8ffd836b56756f494d5dfce07b50	dropForeignKeyConstraint baseTableName=raw_table, constraintName=fk_rawtable_ref_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
-67	attekei	migrations/000_migrations.yaml	2023-11-17 02:53:49.777602	65	EXECUTED	8:a03608d97e19b8a716989e918efad0a6	createTable tableName=computation_job; createTable tableName=computation_job_result	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
-68	sbelak	migrations/000_migrations.yaml	2023-11-17 02:53:49.975715	66	EXECUTED	8:b4ac06d133dfbdc6567d992c7e18c6ec	addColumn tableName=computation_job; addColumn tableName=computation_job	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
-69	senior	migrations/000_migrations.yaml	2023-11-17 02:53:50.321697	67	EXECUTED	8:eadbe00e97eb53df4b3df60462f593f6	addColumn tableName=pulse; addColumn tableName=pulse; addColumn tableName=pulse; dropNotNullConstraint columnName=name, tableName=pulse	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
-70	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:50.573322	68	EXECUTED	8:4e4eff7abb983b1127a32ba8107e7fb8	addColumn tableName=metabase_field; addNotNullConstraint columnName=database_type, tableName=metabase_field	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
-72	senior	migrations/000_migrations.yaml	2023-11-17 02:53:51.000564	70	EXECUTED	8:4dc6debdf779ab9273cf2158a84bb154	addColumn tableName=pulse_card; addColumn tableName=pulse_card	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
-v47.00-010	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:21.425306	581	EXECUTED	8:3c4f9fc116fbced18c50952def65b3e0	modifyDataType columnName=name, tableName=metabase_table	Added 0.47.0 - Make metabase_table.name long enough for H2 names	\N	4.11.0	\N	\N	0189608756
-v47.00-051	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.337852	611	EXECUTED	8:83a8b7ad58b2deb0732e671db51fa608	dropForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_db_id	Added 0.47.0 - Drop foreign key constraint on connection_impersonations.db_id	\N	4.11.0	\N	\N	0189608756
-74	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:51.386389	72	EXECUTED	8:16726d6560851325930c25caf3c8ab96	addColumn tableName=metabase_field	Added 0.29.0	\N	4.11.0	\N	\N	0189608756
-76	senior	migrations/000_migrations.yaml	2023-11-17 02:53:51.767211	74	EXECUTED	8:9b7190c9171ccca72617d508875c3c82	addColumn tableName=metabase_table	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-41	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:41.730606	40	EXECUTED	8:fae0855adf2f702f1133e32fc98d02a5	dropColumn columnName=field_type, tableName=metabase_field; addDefaultValue columnName=active, tableName=metabase_field; addDefaultValue columnName=preview_display, tableName=metabase_field; addDefaultValue columnName=position, tableName=metabase_...		\N	4.11.0	\N	\N	0189608756
-42	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:42.399429	41	EXECUTED	8:e32b3a1624fa289a6ee1f3f0a2dac1f6	dropForeignKeyConstraint baseTableName=query_queryexecution, constraintName=fk_queryexecution_ref_query_id; dropColumn columnName=query_id, tableName=query_queryexecution; dropColumn columnName=is_staff, tableName=core_user; dropColumn columnName=...		\N	4.11.0	\N	\N	0189608756
-v47.00-032	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:25.342925	600	EXECUTED	8:98d2edfc9caa3a03d307aa965a3b51c9	customChange	Added 0.47.0 - migrate dashboard grid size from 18 to 24 for revisions	\N	4.11.0	\N	\N	0189608756
-94	senior	migrations/000_migrations.yaml	2023-11-17 02:53:58.389124	92	EXECUTED	8:a2a1eedf1e8f8756856c9d49c7684bfe	createTable tableName=task_history; createIndex indexName=idx_task_history_end_time, tableName=task_history; createIndex indexName=idx_task_history_db_id, tableName=task_history	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
-95	senior	migrations/000_migrations.yaml	2023-11-17 02:53:58.617146	93	EXECUTED	8:e7cd8168533c58c865dacf320e819218	addUniqueConstraint constraintName=idx_databasechangelog_id_author_filename, tableName=databasechangelog	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
-96	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:58.804503	94	EXECUTED	8:5cb2f36edcca9c6e14c5e109d6aeb68b	addColumn tableName=metabase_field	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
-97	senior	migrations/000_migrations.yaml	2023-11-17 02:53:58.867244	95	MARK_RAN	8:9169e238663c5d036bd83428d2fa8e4b	modifyDataType columnName=results, tableName=query_cache	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
-98	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.160505	96	EXECUTED	8:f036d20a4dc86fb60ffb64ea838ed6b9	addUniqueConstraint constraintName=idx_uniq_table_db_id_schema_name, tableName=metabase_table; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
-99	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.427634	97	EXECUTED	8:274bb516dd95b76c954b26084eed1dfe	addUniqueConstraint constraintName=idx_uniq_field_table_id_parent_id_name, tableName=metabase_field; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
-100	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.582736	98	EXECUTED	8:28b6b684c539d4668110b920985ee363	sql; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
-101	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.745203	99	EXECUTED	8:58eabb08a175fafe8985208545374675	createIndex indexName=idx_field_parent_id, tableName=metabase_field	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
-103	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:59.943338	100	EXECUTED	8:fda3670fd16a40fd9d0f89a003098d54	addColumn tableName=metabase_database	Added 0.32.10	\N	4.11.0	\N	\N	0189608756
-106	sb	migrations/000_migrations.yaml	2023-11-17 02:54:00.309825	102	EXECUTED	8:a3dd42bbe25c415ce21e4c180dc1c1d7	modifyDataType columnName=database_type, tableName=metabase_field	Added 0.33.5	\N	4.11.0	\N	\N	0189608756
-107	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.387207	103	MARK_RAN	8:605c2b4d212315c83727aa3d914cf57f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-108	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.477566	104	MARK_RAN	8:d11419da9384fd27d7b1670707ac864c	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-110	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.664634	106	MARK_RAN	8:82343097044b9652f73f3d3a2ddd04fe	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-111	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.768996	107	MARK_RAN	8:528de1245ba3aa106871d3e5b3eee0ba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-112	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.858903	108	MARK_RAN	8:010a3931299429d1adfa91941c806ea4	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-113	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:00.954399	109	MARK_RAN	8:8f8e0836064bdea82487ecf64a129767	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-114	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.046002	110	MARK_RAN	8:7a0bcb25ece6d9a311d6c6be7ed89bb7	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-117	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.341275	113	MARK_RAN	8:f2d7f9fb1b6713bc5362fe40bfe3f91f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-119	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.533521	115	MARK_RAN	8:195cf171ac1d5531e455baf44d9d6561	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-120	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.625209	116	MARK_RAN	8:61f53fac337020aec71868656a719bba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-121	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.719307	117	MARK_RAN	8:1baa145d2ffe1e18d097a63a95476c5f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-193	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.171068	188	EXECUTED	8:db171179fe094db9fee7e2e7df60fa4e	dropForeignKeyConstraint baseTableName=group_table_access_policy, constraintName=fk_gtap_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-221	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.744076	216	EXECUTED	8:54a4c0d8a4eda80dc81fb549a629d075	dropForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-383	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.313505	308	EXECUTED	8:eacd3281e0397c61047e4a69e725a5ec	createIndex indexName=idx_query_execution_card_id_started_at, tableName=query_execution	Added 0.41.3 -- Add index to QueryExecution card_id + started_at to fix performance issue	\N	4.11.0	\N	\N	0189608756
-v42.00-021	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:34.999704	330	MARK_RAN	8:041c129167b10c951f337dba672020d6	modifyDataType columnName=description, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v43.00-001	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:40.715578	381	EXECUTED	8:200f0cc5989f637c12a497a5cad56a58	sql	Added 0.43.0 - migrates any Database using the old bigquery driver to bigquery-cloud-sdk instead	\N	4.11.0	\N	\N	0189608756
-v44.00-001	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:53.276113	440	EXECUTED	8:ca1fe70c2560c013653bbc00b58e2964	dropNotNullConstraint columnName=creator_id, tableName=persisted_info	Added 0.44.0 - Remove not null constraint from persisted_info.creator_id	\N	4.11.0	\N	\N	0189608756
-v45.00-057	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:05.805972	502	MARK_RAN	8:650a5b435f8195765a2ab1e3e4bc7b14	modifyDataType columnName=value, tableName=secret	Added 0.45.0 - modify type of secret.value from blob to longblob on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
-v46.00-023	snoe	migrations/000_migrations.yaml	2023-11-17 02:55:10.268074	526	EXECUTED	8:33c91db1b039855af8bf1dc8315bd5d2	addNotNullConstraint columnName=model_id, tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
-v46.00-038	metamben	migrations/000_migrations.yaml	2023-11-17 02:55:13.002294	541	EXECUTED	8:220a27bae93423a2c9a76f611f10b87b	dropTable tableName=app	App containers are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
-82	senior	migrations/000_migrations.yaml	2023-11-17 02:53:53.513246	80	EXECUTED	8:ac4b94df8c648f88cfff661284d6392d	addColumn tableName=core_user; sql	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-118	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:01.433296	114	MARK_RAN	8:17f4410e30a0c7e84a36517ebf4dab64	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-77	senior	migrations/000_migrations.yaml	2023-11-17 02:53:51.956134	75	EXECUTED	8:07f0a6cd8dbbd9b89be0bd7378f7bdc8	addColumn tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-86	camsaul	migrations/000_migrations.yaml	2023-11-17 02:53:54.698596	84	EXECUTED	8:50c75bb29f479e0b3fb782d89f7d6717	sql	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
-156	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:05.067858	152	MARK_RAN	8:51859ee6cca4aca9d141a3350eb5d6b1	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-153	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:04.778007	149	MARK_RAN	8:adce2cca96fe0531b00f9bed6bed8352	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
-245	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:19.83724	240	EXECUTED	8:a8f9206dadfe23662d547035f71e3846	dropForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-279	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:25.26196	272	EXECUTED	8:63dfccd51b62b939da71fe4435f58679	addColumn tableName=pulse	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
-313	jeff303	migrations/000_migrations.yaml	2023-11-17 02:54:31.229587	302	EXECUTED	8:d5f248d823d81bee7d63c8b796e5851f	createTable tableName=secret	Added 0.42.0 - Secret domain object.	\N	4.11.0	\N	\N	0189608756
-298	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:54:28.7092	291	EXECUTED	8:3c73f77d8d939d14320964a35aeaad5e	addColumn tableName=pulse	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-v43.00-002	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:40.93447	382	EXECUTED	8:f964db8e5d278f825b9eb6414195d54d	sql	Added 0.43.0. Create magic 'All Users' Permissions Group if it does not already exist.	\N	4.11.0	\N	\N	0189608756
-v44.00-044	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:54:58.286466	464	EXECUTED	8:601311f94a0587a67013e27d793d2cc2	dropColumn columnName=template_tags, tableName=native_query_snippet	Added 0.44.0 - drop native_query_snippet.template_tags added in v44.00-039	\N	4.11.0	\N	\N	0189608756
-v45.00-048	camsaul	migrations/000_migrations.yaml	2023-11-17 02:55:04.827693	493	EXECUTED	8:0aca8f157f163e62805b7202f8aa202f	addColumn tableName=collection	Added 0.45.0 -- add created_at to Collection	\N	4.11.0	\N	\N	0189608756
-v46.00-051	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:14.255077	548	EXECUTED	8:74e83fc2ee7c1a06a94f07830f361773	dropDefaultValue columnName=row, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
-v47.00-043	calherres	migrations/000_migrations.yaml	2023-11-17 02:55:26.430866	606	EXECUTED	8:5e030b73be03e7cd8b19a5a46f9b2a4c	customChange	Added 0.47.0 - Migrate report_dashboardcard.visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
-22	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:35.87619	21	EXECUTED	8:80bc8a62a90791a79adedcf1ac3c6f08	addColumn tableName=revision		\N	4.11.0	\N	\N	0189608756
-v43.00-052	snoe	migrations/000_migrations.yaml	2023-11-17 02:54:50.873042	429	EXECUTED	8:b3963d6c168f5c30f1288c222b8e0e83	createTable tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
-194	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:11.330123	189	EXECUTED	8:fccb724d7ae7606e2e7638de1791392a	addForeignKeyConstraint baseTableName=group_table_access_policy, constraintName=fk_gtap_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-220	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:15.583627	215	EXECUTED	8:8b8447405d7b2b52358c9676d64b7651	addForeignKeyConstraint baseTableName=permissions_revision, constraintName=fk_permissions_revision_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
-v42.00-000	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:32.550903	309	EXECUTED	8:5500782a64248810f4a5ca1dc9a6144d	dropColumn columnName=entity_name, tableName=metabase_table	Added 0.42.0 Remove unused column (#5240)	\N	4.11.0	\N	\N	0189608756
-v43.00-034	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:47.667929	413	EXECUTED	8:1db8bd1c85b5337a1560c0da7fb8e062	createTable tableName=card_bookmark	Added 0.43.0 - Card bookmarks table	\N	4.11.0	\N	\N	0189608756
-v44.00-000	dpsutton	migrations/000_migrations.yaml	2023-11-17 02:54:53.117589	439	EXECUTED	8:05de4b32e627b65202e15435c344e135	createTable tableName=persisted_info	Added 0.44.0 - Persisted Info for models	\N	4.11.0	\N	\N	0189608756
-v46.00-059	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:15.612793	556	EXECUTED	8:6ddec7d622e9200e36bd5e2e2e0a48c2	addColumn tableName=action	Added 0.46.0 -- add actions.creator_id	\N	4.11.0	\N	\N	0189608756
-v47.00-011	tsmacdonald	migrations/000_migrations.yaml	2023-11-17 02:55:21.578589	582	EXECUTED	8:148b982debddfa511cb45b87179b8c46	modifyDataType columnName=display_name, tableName=metabase_table	Added 0.47.0 - Make metabase_table.display_name long enough for H2 names	\N	4.11.0	\N	\N	0189608756
-v47.00-052	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.489439	612	EXECUTED	8:d170bef8f707027360cf08fb55e91452	dropForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_group_id	Added 0.47.0 - Drop foreign key constraint on connection_impersonations.group_id	\N	4.11.0	\N	\N	0189608756
-v47.00-053	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.667258	613	EXECUTED	8:3b52631c2c82b88043b840391c7d9ef0	createIndex indexName=idx_conn_impersonations_db_id, tableName=connection_impersonations	Added 0.47.0 -- connection_impersonations index for db_id column	\N	4.11.0	\N	\N	0189608756
-v47.00-054	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:27.847576	614	EXECUTED	8:5404d7e3781f0dfcc984676ea434c842	createIndex indexName=idx_conn_impersonations_group_id, tableName=connection_impersonations	Added 0.47.0 -- connection_impersonations index for group_id column	\N	4.11.0	\N	\N	0189608756
-v47.00-055	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:28.069053	615	EXECUTED	8:295c4477995058b93eba2857090eb6f6	addUniqueConstraint constraintName=conn_impersonation_unique_group_id_db_id, tableName=connection_impersonations	Added 0.47.0 - unique constraint for connection impersonations	\N	4.11.0	\N	\N	0189608756
-1	agilliland	migrations/000_migrations.yaml	2023-11-17 02:53:31.355957	1	EXECUTED	8:70d9a1021171b879cc55058f4d094a9c	createTable tableName=core_organization; createTable tableName=core_user; createTable tableName=core_userorgperm; addUniqueConstraint constraintName=idx_unique_user_id_organization_id, tableName=core_userorgperm; createIndex indexName=idx_userorgp...		\N	4.11.0	\N	\N	0189608756
-291	camsaul	migrations/000_migrations.yaml	2023-11-17 02:54:27.523456	284	EXECUTED	8:f1b9110e87c7cb627c29fe6fb243b675	createTable tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
-v47.00-035	calherries	migrations/000_migrations.yaml	2023-11-17 02:55:25.875281	603	EXECUTED	8:aeafa7ff310f799eb3fb2e14640a9e06	dropForeignKeyConstraint baseTableName=implicit_action, constraintName=fk_implicit_action_action_id	Added 0.47.0 - Drop foreign key constraint on implicit_action.action_id	\N	4.11.0	\N	\N	0189608756
-v47.00-056	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:28.26511	616	EXECUTED	8:bd965141f770a65982ecebab51a565e9	addForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_db_id, referencedTableName=metabase_database	Added 0.47.0 - re-add foreign key constraint on connection_impersonations.db_id	\N	4.11.0	\N	\N	0189608756
-v47.00-057	noahmoss	migrations/000_migrations.yaml	2023-11-17 02:55:28.421386	617	EXECUTED	8:fe79acdba9db58709b6fffbb7aac2844	addForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_group_id, referencedTableName=permissions_group	Added 0.47.0 - re-add foreign key constraint on connection_impersonations.group_id	\N	4.11.0	\N	\N	0189608756
-v47.00-058	qnkhuat	migrations/000_migrations.yaml	2023-11-17 02:55:28.639533	618	EXECUTED	8:05731b3e62deb09c64b60bc10031d206	dropColumn columnName=entity_id, tableName=parameter_card	Drop parameter_card.entity_id	\N	4.11.0	\N	\N	0189608756
+156	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.067858	152	MARK_RAN	8:51859ee6cca4aca9d141a3350eb5d6b1	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+147	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.219429	143	MARK_RAN	8:5ccf590332ea0744414e40a990a43275	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+131	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.669344	127	MARK_RAN	8:453af2935194978c65b19eae445d85c9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+136	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.153978	132	MARK_RAN	8:7115eebbcf664509b9fc0c39cb6f29e9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v48.00-022	johnswanson	migrations/001_update_migrations.yaml	2024-01-23 03:13:43.401481	640	MARK_RAN	8:0f034d06b1ad5336c3c81b0d22cde259	customChange	Migrate migrate-click-through to a custom migration	\N	4.21.1	\N	\N	5979601574
+v48.00-023	piranha	migrations/001_update_migrations.yaml	2024-01-23 03:13:43.987498	641	MARK_RAN	8:f18e5e053b508aab0bdd8c4bf1d7de4b	customChange	Data migration migrate-remove-admin-from-group-mapping-if-needed	\N	4.21.1	\N	\N	5979601574
+v48.00-024	piranha	migrations/001_update_migrations.yaml	2024-01-23 03:13:44.699398	642	EXECUTED	8:fab2a51d73c66cea059d55a6fea8bb2f	dropTable tableName=data_migrations	All data migrations were transferred to custom_migrations!	\N	4.21.1	\N	\N	5979601574
+v46.00-086	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:19.036606	568	EXECUTED	8:677e076d8741275d31a02e97531fd930	customChange	Added 0.46.0 - Delete the abandonment email task	\N	4.11.0	\N	\N	0189608756
+26	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:36.82593	25	EXECUTED	8:ddef40b95c55cf4ac0e6a5161911a4cb	addColumn tableName=metabase_database; sql		\N	4.11.0	\N	\N	0189608756
+v48.00-018	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:41.011968	636	EXECUTED	8:efae52e7403f39c1458f53e885b4393d	createTable tableName=recent_views	Add new recent_views table	\N	4.21.1	\N	\N	5979601574
+v48.00-025	piranha	migrations/001_update_migrations.yaml	2024-01-23 03:13:45.391746	643	EXECUTED	8:a2fa9ab0913b9e4b97dff91f973344d6	addColumn tableName=revision	Revisions store Metabase version used to create them	\N	4.21.1	\N	\N	5979601574
+v48.00-026	lbrdnk	migrations/001_update_migrations.yaml	2024-01-23 03:13:46.001343	644	EXECUTED	8:7c8330e861c16997780a9b0881144b26	update tableName=metabase_field	Set semantic_type with value type/Number to null (#18754)	\N	4.21.1	\N	\N	5979601574
+v48.00-027	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:46.598504	645	EXECUTED	8:41eae119438c45330e25e193f5936f6b	sql	No op migration	\N	4.21.1	\N	\N	5979601574
+v48.00-039	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:55.986012	657	EXECUTED	8:b43481a01df86830c4cb1adb8189d400	sqlFile path=instance_analytics_views/tables/v1/postgres-tables.sql; sqlFile path=instance_analytics_views/tables/v1/mysql-tables.sql; sqlFile path=instance_analytics_views/tables/v1/h2-tables.sql	Added 0.48.0 - new view v_tables	\N	4.21.1	\N	\N	5979601574
+2	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:31.556497	2	EXECUTED	8:ca241a2c777802abaedd43d8944927f3	createTable tableName=core_session		\N	4.11.0	\N	\N	0189608756
+19	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:34.982369	18	EXECUTED	8:269b129dbfc39a6f9e0d3bc61c3c3b70	addColumn tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
+34	tlrobinson	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:38.773736	33	EXECUTED	8:52b082600b05bbbc46bfe837d1f37a82	addColumn tableName=pulse_channel		\N	4.11.0	\N	\N	0189608756
+180	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:09.092488	175	EXECUTED	8:b02225e5940a2bcca3d550f24f80123e	addForeignKeyConstraint baseTableName=collection, constraintName=fk_collection_personal_owner_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+183	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:09.560581	178	EXECUTED	8:c5ed9a4f44ee92af620a47c80e010a6b	dropForeignKeyConstraint baseTableName=computation_job, constraintName=fk_computation_job_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+184	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:09.717986	179	EXECUTED	8:70317e2bdaac90b9ddc33b1b93ada479	addForeignKeyConstraint baseTableName=computation_job, constraintName=fk_computation_job_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+185	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:09.874411	180	EXECUTED	8:12e7457ec2d2b1a99a3fadfc64d7b7f9	dropForeignKeyConstraint baseTableName=computation_job_result, constraintName=fk_computation_result_ref_job_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+186	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:10.056531	181	EXECUTED	8:526987d0f6b2f01d7bfc9e3179721be6	addForeignKeyConstraint baseTableName=computation_job_result, constraintName=fk_computation_result_ref_job_id, referencedTableName=computation_job	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+188	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:10.371259	183	EXECUTED	8:4dc500830cd4c5715ca8b0956e37b3d5	addForeignKeyConstraint baseTableName=core_session, constraintName=fk_session_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+189	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:10.538143	184	EXECUTED	8:e07396e0ee587dcf321d21cffa9eec29	dropForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+190	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:10.698629	185	EXECUTED	8:eded791094a16bf398896c790645c411	addForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+191	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:10.850176	186	EXECUTED	8:bb5b9a3d64b2e44318e159e7f1fecde2	dropForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_dashboardcard_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+192	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.014191	187	EXECUTED	8:7d96911036dec2fee64fe8ae57c131b3	addForeignKeyConstraint baseTableName=dashboardcard_series, constraintName=fk_dashboardcard_series_ref_dashboardcard_id, referencedTableName=report_dashboardcard	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v48.00-014	calherries	migrations/001_update_migrations.yaml	2024-01-23 03:13:38.639447	633	EXECUTED	8:b2c1361f1dc14c2390a1dc25a4a86311	createIndex indexName=idx_table_privileges_table_id, tableName=table_privileges	Added 0.48.0 - Create table_privileges.table_id index	\N	4.21.1	\N	\N	5979601574
+78	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:52.346598	76	EXECUTED	8:8ea54a54fa04fe657b0b8072125981af	createTable tableName=group_table_access_policy; createIndex indexName=idx_gtap_table_id_group_id, tableName=group_table_access_policy; addUniqueConstraint constraintName=unique_gtap_table_id_group_id, tableName=group_table_access_policy	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+195	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.486387	190	EXECUTED	8:1d720af9f917007024c91d40410bc91d	dropForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_parent_ref_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+9	tlrobinson	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:32.935456	8	EXECUTED	8:d560283a190e3c60802eb04f5532a49d	addColumn tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
+196	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.636348	191	EXECUTED	8:c52f5dbf742feef12a3803bda92a425b	addForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_parent_ref_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+197	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.798211	192	EXECUTED	8:9c1c950b709050abe91cea17fd5970cc	dropForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+198	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.962741	193	EXECUTED	8:e24198ff4825a41d17ceaebd71692103	addForeignKeyConstraint baseTableName=metabase_field, constraintName=fk_field_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+199	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:12.128561	194	EXECUTED	8:146efae3f2938538961835fe07433ee1	dropForeignKeyConstraint baseTableName=metabase_fieldvalues, constraintName=fk_fieldvalues_ref_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+200	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:12.302662	195	EXECUTED	8:f5e7e79cb81b8d2245663c482746c853	addForeignKeyConstraint baseTableName=metabase_fieldvalues, constraintName=fk_fieldvalues_ref_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+201	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:12.46245	196	EXECUTED	8:2d79321a27fde6cb3c4fabdb86dc60ec	dropForeignKeyConstraint baseTableName=metabase_table, constraintName=fk_table_ref_database_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+202	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:12.626348	197	EXECUTED	8:d0cefed061c4abbf2b0a0fd2a66817cb	addForeignKeyConstraint baseTableName=metabase_table, constraintName=fk_table_ref_database_id, referencedTableName=metabase_database	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+43	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:42.758523	42	EXECUTED	8:3cf48c3e52ea315379a8ed538c9f2624	createTable tableName=permissions_revision		\N	4.11.0	\N	\N	0189608756
+203	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:12.78267	198	EXECUTED	8:28b4ec07bfbf4b86532fe9357effdb8b	dropForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+204	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:12.960999	199	EXECUTED	8:7195937fd2144533edfa2302ba2ae653	addForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+205	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:13.1211	200	EXECUTED	8:4b2d5f1458641dd1b9dbc5f41600be8e	dropForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+116	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.249204	112	MARK_RAN	8:dbf7c3a1d8b1eb77b7f5888126b13c2e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+206	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:13.289355	201	EXECUTED	8:959ef448c23aaf3acf5b69f297fe4b2f	addForeignKeyConstraint baseTableName=metric, constraintName=fk_metric_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+207	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:13.446872	202	EXECUTED	8:18135d674f2fe502313adb0475f5f139	dropForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metabase_field_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+208	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:13.606737	203	EXECUTED	8:4c86c17a00a81dfdf35a181e3dd3b08f	addForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metabase_field_id, referencedTableName=metabase_field	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+209	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:13.76595	204	EXECUTED	8:1b9c3544bf89093fc9e4f7f191fdc6df	dropForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metric_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+210	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:13.935015	205	EXECUTED	8:842d166cdf7b0a29c88efdaf95c9d0bf	addForeignKeyConstraint baseTableName=metric_important_field, constraintName=fk_metric_important_field_metric_id, referencedTableName=metric	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+211	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:14.09885	206	EXECUTED	8:91c64815a1aefb07dd124d493bfeeea9	dropForeignKeyConstraint baseTableName=native_query_snippet, constraintName=fk_snippet_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+212	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:14.257036	207	EXECUTED	8:b25064ee26b71f61906a833bc22ebbc2	addForeignKeyConstraint baseTableName=native_query_snippet, constraintName=fk_snippet_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+213	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:14.421079	208	EXECUTED	8:60a7d628e4f68ee4c85f5f298b1d9865	dropForeignKeyConstraint baseTableName=permissions, constraintName=fk_permissions_group_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+214	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:14.588579	209	EXECUTED	8:1c3c480313967a2d9f324a094ba25f4d	addForeignKeyConstraint baseTableName=permissions, constraintName=fk_permissions_group_id, referencedTableName=permissions_group	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+215	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:14.753059	210	EXECUTED	8:5d2c67ccead52970e9d85beb7eda48b9	dropForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_group_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+216	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:14.915438	211	EXECUTED	8:35fcd5d48600e887188eb1b990e6cc35	addForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_group_id, referencedTableName=permissions_group	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+8	tlrobinson	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:32.782095	7	EXECUTED	8:960ec59bbcb4c9f3fa8362eca9af4075	addColumn tableName=metabase_table; addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+46	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:43.519259	45	EXECUTED	8:131df3cdd9a8c67b32c5988a3fb7fe3d	addNotNullConstraint columnName=row, tableName=report_dashboardcard; addNotNullConstraint columnName=col, tableName=report_dashboardcard; addDefaultValue columnName=row, tableName=report_dashboardcard; addDefaultValue columnName=col, tableName=rep...		\N	4.11.0	\N	\N	0189608756
+123	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.909254	119	MARK_RAN	8:35e5baddf78df5829fe6889d216436e5	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+155	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.976109	151	MARK_RAN	8:3c78b79c784e3a3ce09a77db1b1d0374	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+218	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:15.241188	213	EXECUTED	8:dc04b7eb04cd870c53102cb37fd75a5f	addForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_membership_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+219	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:15.410761	214	EXECUTED	8:02c690f34fe8803e42441f5037d33017	dropForeignKeyConstraint baseTableName=permissions_revision, constraintName=fk_permissions_revision_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+222	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:15.913529	217	EXECUTED	8:c5f22e925be3a8fd0e4f47a491f599ee	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+223	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:16.085166	218	EXECUTED	8:de743e384ff90a6a31a3caebe0abb775	dropForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+115	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.145811	111	MARK_RAN	8:55c10c2ff7e967e3ea1fdffc5aeed93a	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+224	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:16.27555	219	EXECUTED	8:b8fdf9c14d7ea3131a0a6b1f1036f91a	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+225	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:16.444689	220	EXECUTED	8:495a4e12cf75cac5ff54738772e6a998	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+226	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:16.608858	221	EXECUTED	8:cf383d74bc407065c78c060203ba4560	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+227	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:16.77138	222	EXECUTED	8:e23eaf74ab7edacfb34bd5caf05cf66f	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+228	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:16.95022	223	EXECUTED	8:d458ddb160f61e93bb69738f262de2b4	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_id, referencedTableName=pulse	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+229	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:17.13063	224	EXECUTED	8:1cb939d172989cb1629e9a3da768596d	dropForeignKeyConstraint baseTableName=pulse_channel, constraintName=fk_pulse_channel_ref_pulse_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+230	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:17.295913	225	EXECUTED	8:62baea3334ac5f21feac84497f6bf643	addForeignKeyConstraint baseTableName=pulse_channel, constraintName=fk_pulse_channel_ref_pulse_id, referencedTableName=pulse	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+124	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.001368	120	MARK_RAN	8:ce2322ca187dfac51be8f12f6a132818	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+231	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:17.462854	226	EXECUTED	8:d096a9ce70fc0b7dfbc67ee1be4c3e31	dropForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_pulse_channel_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+233	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:17.805705	228	EXECUTED	8:d5c018882af16093de446e025e2599b7	dropForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+234	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:17.988867	229	EXECUTED	8:edb6ced6c353064c46fa00b54e187aef	addForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+235	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:18.136652	230	EXECUTED	8:550c64e41e55233d52ac3ef24d664be1	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+236	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:18.297193	231	EXECUTED	8:04300b298b663fc2a2f3a324d1051c3c	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+237	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:18.477479	232	EXECUTED	8:227a9133cdff9f1b60d8af53688ab12e	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_made_public_by_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+238	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:18.64679	233	EXECUTED	8:7000766ddca2c914ac517611e7d86549	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_made_public_by_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+239	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:18.815427	234	EXECUTED	8:672f4972653f70464982008a7abea3e1	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+240	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:18.99082	235	EXECUTED	8:165b07c8ceb004097c83ee1b689164e4	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_card_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+241	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:19.16643	236	EXECUTED	8:b0a9e3d801e64e0a66c3190e458c01ae	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_database_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+242	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:19.339944	237	EXECUTED	8:bf10f944715f87c3ad0dd7472d84df62	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_database_id, referencedTableName=metabase_database	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+243	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:19.514973	238	EXECUTED	8:cba5d2bfb36e13c60d82cc6cca659b61	dropForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+47	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:44.045277	46	EXECUTED	8:717ed16b2f279bd4fdf5c4aa2b5f5857	createTable tableName=collection; createIndex indexName=idx_collection_slug, tableName=collection; addColumn tableName=report_card; createIndex indexName=idx_card_collection_id, tableName=report_card		\N	4.11.0	\N	\N	0189608756
+79	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:52.744728	77	EXECUTED	8:37825e0d48bd4ed5cf1a068de30edc60	addColumn tableName=report_dashboard; createIndex indexName=idx_dashboard_collection_id, tableName=report_dashboard; addColumn tableName=pulse; createIndex indexName=idx_pulse_collection_id, tableName=pulse	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+246	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.01678	241	EXECUTED	8:e5db34b9db22254f7445fd65ecf45356	addForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+247	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.200028	242	EXECUTED	8:76de7337a12a5ef42dcbb9274bd2d70f	dropForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+248	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.355443	243	EXECUTED	8:0640fb00a090cbe5dc545afbe0d25811	addForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+249	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.508635	244	EXECUTED	8:16ef5909a72ac4779427e432b3b3ce18	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+250	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.667435	245	EXECUTED	8:2e80ebe19816b7bde99050638772cf99	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_collection_id, referencedTableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+251	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.822943	246	EXECUTED	8:c12aa099f293b1e3d71da5e3edb3c45a	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_made_public_by_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+252	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:20.973659	247	EXECUTED	8:26b16d4d0cf7a77c1d687f49b029f421	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_made_public_by_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+253	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:21.120029	248	EXECUTED	8:bbf118edaa88a8ad486ec0d6965504b6	dropForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+254	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:21.277381	249	EXECUTED	8:7fc35d78c63f41eb4dbd23cfd1505f0b	addForeignKeyConstraint baseTableName=report_dashboard, constraintName=fk_dashboard_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+255	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:21.447568	250	EXECUTED	8:f6564a7516ace55104a3173eebf4c629	dropForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v48.00-040	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:56.691177	658	EXECUTED	8:b8842eac1c7cba6e997d4d288306e36c	sqlFile path=instance_analytics_views/view_log/v1/postgres-view_log.sql; sqlFile path=instance_analytics_views/view_log/v1/mysql-view_log.sql; sqlFile path=instance_analytics_views/view_log/v1/h2-view_log.sql	Added 0.48.0 - new view v_view_log	\N	4.21.1	\N	\N	5979601574
+125	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.095137	121	MARK_RAN	8:dd948ac004ceb9d0a300a8e06806945f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+126	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.195271	122	MARK_RAN	8:3d34c0d4e5dbb32b432b83d5322e2aa3	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+256	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:21.605189	251	EXECUTED	8:61db9be3b4dd7ed1e9d01a7254e87544	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+257	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:21.769805	252	EXECUTED	8:c8b51dc7ba4da9f7995a0b0c17fadad2	dropForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_dashboard_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+259	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:22.090472	254	EXECUTED	8:be4a52feb3b12e655c0bbd34477749b0	dropForeignKeyConstraint baseTableName=revision, constraintName=fk_revision_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+260	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:22.24317	255	EXECUTED	8:4b370f9c9073a6f8f585aab713c57f47	addForeignKeyConstraint baseTableName=revision, constraintName=fk_revision_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+261	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:22.40136	256	EXECUTED	8:173fe552fdf72fdb4efbc01a6ac4f7ad	dropForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_creator_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+262	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:22.558005	257	EXECUTED	8:50927b8b1d1809f32c11d2e649dbcb94	addForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_creator_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+263	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:22.722748	258	EXECUTED	8:0b10c8664506917cc50359e9634c121c	dropForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_table_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+264	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:22.888333	259	EXECUTED	8:b132aedf6fbdcc5d956a2d3a154cc035	addForeignKeyConstraint baseTableName=segment, constraintName=fk_segment_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+265	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:23.051209	260	EXECUTED	8:2e339ecb05463b3765f9bb266bd28297	dropForeignKeyConstraint baseTableName=view_log, constraintName=fk_view_log_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+266	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:23.209729	261	EXECUTED	8:31506e118764f5e520f755f26c696bb8	addForeignKeyConstraint baseTableName=view_log, constraintName=fk_view_log_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+268	rlotun	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:23.381857	262	EXECUTED	8:4ccc4d50f9b233bc6515780d9cae360b	createIndex indexName=idx_lower_email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+271	rlotun	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:23.891829	264	MARK_RAN	8:ce8ddb253a303d4f8924ff5a187080c0	modifyDataType columnName=email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+272	rlotun	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:23.989164	265	MARK_RAN	8:54ad09ee0c67d58e78ccafe9b1499379	modifyDataType columnName=email, tableName=core_user	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+273	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:24.167737	266	EXECUTED	8:5348576bb9852f6f947e1aa39cd1626f	addDefaultValue columnName=is_superuser, tableName=core_user	Added 0.37.1	\N	4.11.0	\N	\N	0189608756
+274	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:24.325675	267	EXECUTED	8:11a8a84b9ba7634aeda625ff3f487d22	addDefaultValue columnName=is_active, tableName=core_user	Added 0.37.1	\N	4.11.0	\N	\N	0189608756
+80	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:52.989201	78	EXECUTED	8:199d0ce28955117819ca15bcc29323e5	addColumn tableName=collection; createIndex indexName=idx_collection_location, tableName=collection		\N	4.11.0	\N	\N	0189608756
+v46.00-038	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:13.002294	541	EXECUTED	8:220a27bae93423a2c9a76f611f10b87b	dropTable tableName=app	App containers are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
+81	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:53.297241	79	EXECUTED	8:3a6dc22403660529194d004ca7f7ad39	addColumn tableName=report_dashboard; addColumn tableName=report_card; addColumn tableName=pulse	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+275	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:24.512899	268	EXECUTED	8:447d9e294f59dd1058940defec7e0f40	addColumn tableName=metabase_database	Added 0.38.0 refingerprint to Database	\N	4.11.0	\N	\N	0189608756
+277	tsmacdonald	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:24.895051	270	EXECUTED	8:367180f0820b72ad2c60212e67ae53e7	dropForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_card_id	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+278	tsmacdonald	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:25.067065	271	EXECUTED	8:fc4fb1c1e3344374edd7b9f1f0d34c89	addForeignKeyConstraint baseTableName=pulse_card, constraintName=fk_pulse_card_ref_pulse_card_id, referencedTableName=report_dashboardcard	Added 0.38.0 - Dashboard subscrptions	\N	4.11.0	\N	\N	0189608756
+280	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:25.423705	273	EXECUTED	8:ae966ee1e40f20ea438daba954a8c2a6	addForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+284	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:26.100638	277	EXECUTED	8:c7dc9a60bcaf9b2ffcbaabd650c959b2	addColumn tableName=metabase_field	Added 0.39 - Semantic type system - add effective type	\N	4.11.0	\N	\N	0189608756
+285	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:26.297514	278	EXECUTED	8:cf7d6f5135fa3397a7dc67509d1c286e	addColumn tableName=metabase_field	Added 0.39 - Semantic type system - add coercion column	\N	4.11.0	\N	\N	0189608756
+286	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:26.449697	279	EXECUTED	8:bce9ab328411f05d8c52d64bff5bded0	sql	Added 0.39 - Semantic type system - set effective_type default	\N	4.11.0	\N	\N	0189608756
+288	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:26.797272	281	EXECUTED	8:943c6dd0c9339729fefcee9207227849	sql	Added 0.39 - Semantic type system - migrate unix timestamps	\N	4.11.0	\N	\N	0189608756
+v48.00-045	qwef	migrations/001_update_migrations.yaml	2024-01-23 03:13:57.408055	659	EXECUTED	8:874f14ae26d742448d8dd2b47dc8aa3d	addColumn tableName=query_execution	Added 0.48.0 - add is_sandboxed to query_execution	\N	4.21.1	\N	\N	5979601574
+289	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:26.961565	282	EXECUTED	8:9f7f2e9bbf3236f204c644dc8ea7abef	sql	Added 0.39 - Semantic type system - migrate unix timestamps (corrects typo- seconds was migrated correctly, not millis and micros)	\N	4.11.0	\N	\N	0189608756
+127	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.289253	123	MARK_RAN	8:18314b269fe11898a433ca9048400975	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+129	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.475613	125	MARK_RAN	8:f890168c47cc2113a8af77ed3875c4b3	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+130	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.575332	126	MARK_RAN	8:ecdcf1fd66b3477e5b6882c3286b2fd8	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+290	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:27.1197	283	EXECUTED	8:98ea7254bc843302db4afe493c4c75e6	sql	Added 0.39 - Semantic type system - Clobber semantic_type where there was a coercion	\N	4.11.0	\N	\N	0189608756
+292	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:27.707999	285	EXECUTED	8:e4ac005f4d4e73d5e1176bcbde510d6e	createIndex indexName=idx_user_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+293	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:27.865156	286	EXECUTED	8:7ba1bd887f8ae11a186b0e3fe69ab3e0	addForeignKeyConstraint baseTableName=login_history, constraintName=fk_login_history_session_id, referencedTableName=core_session	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+294	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:28.033743	287	EXECUTED	8:88d7a9c88866af42b9f0e7c1df9c2fd0	createIndex indexName=idx_session_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+5	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:31.896301	4	EXECUTED	8:4f8653d16f4b102b3dff647277b6b988	addColumn tableName=core_organization		\N	4.11.0	\N	\N	0189608756
+295	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:28.198555	288	EXECUTED	8:501e85a50912649416ec22b2871af087	createIndex indexName=idx_timestamp, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+296	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:28.365975	289	EXECUTED	8:f9eb8b15c2c889334f3848a6bb4ebdb4	createIndex indexName=idx_user_id_device_id, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+297	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:28.526824	290	EXECUTED	8:06c180e4c8361f7550f6f4deaf9fc855	createIndex indexName=idx_user_id_timestamp, tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+299	tsmacdonald	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:28.901453	292	EXECUTED	8:ee3a96e30b07f37240a933e2f0710082	addNotNullConstraint columnName=parameters, tableName=pulse	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+300	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:29.069389	293	EXECUTED	8:8b142aea1e3697d8630a4620ae763c4d	renameTable newTableName=collection_permission_graph_revision, oldTableName=collection_revision	Added 0.40.0	\N	4.11.0	\N	\N	0189608756
+301	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:29.232233	294	EXECUTED	8:aaf1a546a6f5932a157d016f72c02f8a	sql	Added 0.40.0 renaming collection_revision to collection_permission_graph_revision	\N	4.11.0	\N	\N	0189608756
+303	tsmacdonald	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:29.698237	295	EXECUTED	8:506e174d6656b09ddedf19e97c0d3c3d	createTable tableName=moderation_review	Added 0.40.0	\N	4.11.0	\N	\N	0189608756
+304	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:29.862438	296	EXECUTED	8:35960cd7ee3081be719bfb5267ae1a83	sql	Added 0.40.0 (replaces a data migration dating back to 0.20.0)	\N	4.11.0	\N	\N	0189608756
+305	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:30.019773	297	EXECUTED	8:0a0c65f58b80bf74c149a3854cbeeae4	sql	Added 0.40.0 (replaces a data migration dating back to 0.20.0)	\N	4.11.0	\N	\N	0189608756
+308	howonlee	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:30.207484	298	EXECUTED	8:4a52c3a0391a0313a062b60a52c0d7de	addColumn tableName=query_execution	Added 0.40.0 Track cache hits in query_execution table	\N	4.11.0	\N	\N	0189608756
+309	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:30.399521	299	EXECUTED	8:26cc1f3ba949d8ce0d56350caacffbd8	addColumn tableName=collection	Added 0.40.0 - Add type to collections	\N	4.11.0	\N	\N	0189608756
+311	howonlee	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:30.564223	300	EXECUTED	8:33f9d29d709afd0c02bd47367c7d9181	sql; sql; sql	Added 0.40.0 Migrate friendly field names, not noop	\N	4.11.0	\N	\N	0189608756
+312	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:30.723262	301	EXECUTED	8:77ef89ba2e7bc19231d9364492091764	sql; sql; sql	Added 0.41.0 Backfill collection_id for dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+282	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:25.739189	275	EXECUTED	8:d4b8566ee11d9f8a3d6c8c9539f6526d	sql; sql; sql	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+314	howonlee	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:31.417678	303	EXECUTED	8:c9ad2637412d91b26b616a4df4190704	addColumn tableName=metabase_database	Added 0.41.0 Fine grained caching controls	\N	4.11.0	\N	\N	0189608756
+315	howonlee	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:31.600006	304	EXECUTED	8:5b186b8ab743cde5a7f4bf5eadcd520c	addColumn tableName=report_dashboard	Added 0.41.0 Fine grained caching controls, pt 2	\N	4.11.0	\N	\N	0189608756
+316	howonlee	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:31.803671	305	EXECUTED	8:1b7c340684b27af9179613bc351e444f	addColumn tableName=view_log	Added 0.41.0 Fine grained caching controls, pt 3	\N	4.11.0	\N	\N	0189608756
+381	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:31.963588	306	EXECUTED	8:048be5b22042724ab3db240e14e43886	createIndex indexName=idx_query_execution_card_id, tableName=query_execution	Added 0.41.2 Add index to QueryExecution card_id to fix performance issues (#18759)	\N	4.11.0	\N	\N	0189608756
+382	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:32.149723	307	EXECUTED	8:e8c01b2cf428b1e8968393cf31afb188	createIndex indexName=idx_moderation_review_item_type_item_id, tableName=moderation_review	Added 0.41.2 Add index to ModerationReview moderated_item_type + moderated_item_id to fix performance issues (#18759)	\N	4.11.0	\N	\N	0189608756
+v42.00-001	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:32.707784	310	EXECUTED	8:9952153cbff16147bcb47b4a26e02089	sql; sql; sql	Added 0.42.0 Attempt to add Card.database_id (by parsing query) to rows that are missing it (#5999)	\N	4.11.0	\N	\N	0189608756
+v43.00-020	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:44.457196	399	EXECUTED	8:e3399a0ef504c5f5140e9e866a2e49fd	sql	Added 0.43.0. Grant the 'All Users' Permissions Group readwrite perms for the Root Collection.	\N	4.11.0	\N	\N	0189608756
+v45.00-034	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:02.676365	482	EXECUTED	8:ba0505a87ef876026759cdcb4e704f41	addDefaultValue columnName=updated_at, tableName=report_dashboardcard	Added 0.45.0 -- add default value for DashboardCard updated_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v48.00-046	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:59.113	660	EXECUTED	8:4bb11295621890202e066cd15de93a52	sqlFile path=instance_analytics_views/indexes/v1/postgres-indexes.sql; sqlFile path=instance_analytics_views/indexes/v1/mysql-indexes.sql; sqlFile path=instance_analytics_views/indexes/v1/mariadb-indexes.sql; sqlFile path=instance_analytics_views/...	Added 0.48.0 - new indexes to optimize audit v2 queries	\N	4.21.1	\N	\N	5979601574
+v42.00-002	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:32.927139	311	EXECUTED	8:81e0ab53dd2e20cde32e7449155551c2	addNotNullConstraint columnName=database_id, tableName=report_card	Added 0.42.0 Added constraint we should have had all along (#5999)	\N	4.11.0	\N	\N	0189608756
+10	cammsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:33.148574	9	EXECUTED	8:57254d016f3508890638df4528e9755c	createTable tableName=revision; createIndex indexName=idx_revision_model_model_id, tableName=revision		\N	4.11.0	\N	\N	0189608756
+132	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.763776	128	MARK_RAN	8:d2c37bc80b42a15b65f148bcb1daa86e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+133	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.869763	129	MARK_RAN	8:5b9b539d146fbdb762577dc98e7f3430	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v42.00-003	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.171254	312	EXECUTED	8:4a2036164dac96df6066a0d633fab7b5	addColumn tableName=report_card	Added 0.42.0 Initial support for datasets based on questions	\N	4.11.0	\N	\N	0189608756
+v42.00-004	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.335713	313	EXECUTED	8:d9a1dbf5cdc249516796fd9ed81305a4	modifyDataType columnName=details, tableName=activity	Added 0.42.0 - modify type of activity.details from text to text	\N	4.11.0	\N	\N	0189608756
+v42.00-005	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.402061	314	MARK_RAN	8:136b2b7ee7dd813b8d3a3154d1bea708	modifyDataType columnName=description, tableName=collection	Added 0.42.0 - modify type of collection.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-006	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.501848	315	MARK_RAN	8:5fe4654ed7abd89f71eb9372ac208da3	modifyDataType columnName=name, tableName=collection	Added 0.42.0 - modify type of collection.name from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-007	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.597763	316	MARK_RAN	8:592bfa5fba147bd0ba28c267c796a65d	modifyDataType columnName=context, tableName=computation_job	Added 0.42.0 - modify type of computation_job.context from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-008	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.691846	317	MARK_RAN	8:ea964b569fd70a9f937967179ad96e96	modifyDataType columnName=payload, tableName=computation_job_result	Added 0.42.0 - modify type of computation_job_result.payload from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-009	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.790298	318	MARK_RAN	8:faa3d926a4c1ea101a87f80469e4c3b5	modifyDataType columnName=anti_csrf_token, tableName=core_session	Added 0.42.0 - modify type of core_session.anti_csrf_token from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-010	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:33.907702	319	MARK_RAN	8:1538ae25e827ae059a7cc4b7cf225258	modifyDataType columnName=login_attributes, tableName=core_user	Added 0.42.0 - modify type of core_user.login_attributes from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+283	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:25.915187	276	EXECUTED	8:2220e1b1cdb57212820b96fa3107f7c3	sql; sql; sql	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+v42.00-011	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.021661	320	MARK_RAN	8:5a13403a42ddb4948873a5f115bb949e	modifyDataType columnName=attribute_remappings, tableName=group_table_access_policy	Added 0.42.0 - modify type of group_table_access_policy.attribute_remappings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-012	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.123662	321	MARK_RAN	8:0f7f6537b8a60d83024bcfeff9c5c9d6	modifyDataType columnName=device_description, tableName=login_history	Added 0.42.0 - modify type of login_history.device_description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-013	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.221805	322	MARK_RAN	8:0ee5d0c8b49419900a86acce11698b9f	modifyDataType columnName=ip_address, tableName=login_history	Added 0.42.0 - modify type of login_history.ip_address from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+269	rlotun	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:23.539408	263	EXECUTED	8:215609ca9dce2181687b4fa65e7351ba	sql	Added 0.37.0	\N	4.11.0	\N	\N	0189608756
+v42.00-014	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.314296	323	MARK_RAN	8:49dfb6668ca9c8d1cabf8c9656e7ba5b	modifyDataType columnName=caveats, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-015	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.410055	324	MARK_RAN	8:90a5ba43867c1a0772641ce942de8fe6	modifyDataType columnName=description, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-016	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.502177	325	MARK_RAN	8:09ea3ac9939b25db92cc5d4053e6fd4a	modifyDataType columnName=details, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-017	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.603709	326	MARK_RAN	8:14bf9629c1e94583b8240298df8fa6e7	modifyDataType columnName=options, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.options from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-018	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.704003	327	MARK_RAN	8:00408a84f8098e850a465a2c98e6aff5	modifyDataType columnName=points_of_interest, tableName=metabase_database	Added 0.42.0 - modify type of metabase_database.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-019	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.809715	328	MARK_RAN	8:afa168a1d459106a0ec607f76d15a0aa	modifyDataType columnName=caveats, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-020	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.904011	329	MARK_RAN	8:a3dd42bbe25c415ce21e4c180dc1c1d7	modifyDataType columnName=database_type, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.database_type from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v43.00-021	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:44.910791	400	EXECUTED	8:6b432682f811c4099b7018083dfab7a2	createTable tableName=timeline	Added 0.43.0 - Timeline table for Events	\N	4.11.0	\N	\N	0189608756
+32	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:38.1618	31	EXECUTED	8:28afcfc9b7f1bd1b08caa9d527355c48	createTable tableName=label; createIndex indexName=idx_label_slug, tableName=label; createTable tableName=card_label; addUniqueConstraint constraintName=unique_card_label_card_id_label_id, tableName=card_label; createIndex indexName=idx_card_label...		\N	4.11.0	\N	\N	0189608756
+v42.00-022	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.091291	331	MARK_RAN	8:60241b3d3d5f05f238adecfdca69b3b2	modifyDataType columnName=fingerprint, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.fingerprint from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v48.00-006	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:30.17329	626	EXECUTED	8:cf1413241565a186bf98eece35d519bf	createIndex indexName=idx_query_execution_action_id, tableName=query_execution	Added 0.48.0 - Index query_execution.action_id	\N	4.21.1	\N	\N	5979601574
+v48.00-007	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:30.893353	627	EXECUTED	8:15d05ceba05e5b7d25d351fb6ec5b100	addColumn tableName=revision	Added 0.48.0 - Add revision.most_recent	\N	4.21.1	\N	\N	5979601574
+v48.00-008	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:31.51739	628	EXECUTED	8:c0a512701d6dfd5cc1c4a689919be074	sql; sql	Set revision.most_recent = true for latest revisions	\N	4.21.1	\N	\N	5979601574
+134	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.964188	130	MARK_RAN	8:4d0f688a168db3e357a808263b6ad355	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+135	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.059409	131	MARK_RAN	8:2ca54b0828c6aca615fb42064f1ec728	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v42.00-023	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.181808	332	MARK_RAN	8:fc6f2fc275a8f025c150215beb9aa776	modifyDataType columnName=has_field_values, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.has_field_values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-024	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.27373	333	MARK_RAN	8:5f7b73eb4774392a1239d7725bad052b	modifyDataType columnName=points_of_interest, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-025	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.368875	334	MARK_RAN	8:5ac77fe617f8f4481e8de7da9015c64f	modifyDataType columnName=settings, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-026	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.471638	335	MARK_RAN	8:fa7d6c62a44d0c1425fe9e9c43d9d359	modifyDataType columnName=human_readable_values, tableName=metabase_fieldvalues	Added 0.42.0 - modify type of metabase_fieldvalues.human_readable_values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-027	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.566897	336	MARK_RAN	8:dd1d2de653ed0fb632760c99987ad312	modifyDataType columnName=values, tableName=metabase_fieldvalues	Added 0.42.0 - modify type of metabase_fieldvalues.values from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v43.00-008	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:42.086764	388	EXECUTED	8:86b57754999f0ec4b331f4f3ac98a2e0	sql; sql; sql	Added 0.43.0. Migrate legacy '-site-url' Setting to 'site-url'. Trim trailing slashes.	\N	4.11.0	\N	\N	0189608756
+v42.00-028	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.659911	337	MARK_RAN	8:12a413714ca4b88f6a502d624b8b6895	modifyDataType columnName=caveats, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-029	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.756857	338	MARK_RAN	8:96ae84ed0739fc71247112c488963883	modifyDataType columnName=description, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+281	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:25.577617	274	EXECUTED	8:3039286581c58eee7cca9c25fdf6d792	renameColumn newColumnName=semantic_type, oldColumnName=special_type, tableName=metabase_field	Added 0.39 - Semantic type system - rename special_type	\N	4.11.0	\N	\N	0189608756
+v42.00-031	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.950471	340	MARK_RAN	8:7d7a5bc0d758e61a5d48b9d0f46cdf9a	modifyDataType columnName=caveats, tableName=metric	Added 0.42.0 - modify type of metric.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-032	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.044411	341	MARK_RAN	8:7d8e0965438cd14097b835a598bcfdf7	modifyDataType columnName=definition, tableName=metric	Added 0.42.0 - modify type of metric.definition from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-033	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.138232	342	MARK_RAN	8:ecfed282a484cb27d2ac0122a9861d9c	modifyDataType columnName=description, tableName=metric	Added 0.42.0 - modify type of metric.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-034	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.235942	343	MARK_RAN	8:016c2de3176fa0b3c2d0238923e74e2e	modifyDataType columnName=how_is_this_calculated, tableName=metric	Added 0.42.0 - modify type of metric.how_is_this_calculated from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-035	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.33725	344	MARK_RAN	8:c8e3cf661d802b8772fefb28d54cc4d2	modifyDataType columnName=points_of_interest, tableName=metric	Added 0.42.0 - modify type of metric.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-036	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.435749	345	MARK_RAN	8:18880508f09bb76535dffb5226055256	modifyDataType columnName=text, tableName=moderation_review	Added 0.42.0 - modify type of moderation_review.text from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-037	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.534589	346	MARK_RAN	8:75b3734278af63ba604e709f3452330e	modifyDataType columnName=content, tableName=native_query_snippet	Added 0.42.0 - modify type of native_query_snippet.content from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-038	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.629803	347	MARK_RAN	8:50c5ebd57728d39a79c5de02b78d446f	modifyDataType columnName=description, tableName=native_query_snippet	Added 0.42.0 - modify type of native_query_snippet.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-039	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.732384	348	MARK_RAN	8:1126511637c1da363e26a8abfe0cd9a9	modifyDataType columnName=parameters, tableName=pulse	Added 0.42.0 - modify type of pulse.parameters from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-040	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.832099	349	MARK_RAN	8:ffcc4cd6e10c850dd78016c75947943f	modifyDataType columnName=details, tableName=pulse_channel	Added 0.42.0 - modify type of pulse_channel.details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-041	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:36.924357	350	MARK_RAN	8:aeffafbd763b7b2b20246dc780e352e2	modifyDataType columnName=query, tableName=query	Added 0.42.0 - modify type of query.query from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+83	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:53.676487	81	EXECUTED	8:ccd897d737737c05248293c7d56efe96	dropNotNullConstraint columnName=card_id, tableName=group_table_access_policy	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+48	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:44.400627	47	EXECUTED	8:b3b418a4bbcf558e40f5d32effd2c7da	createTable tableName=collection_revision		\N	4.11.0	\N	\N	0189608756
+49	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:45.01382	48	EXECUTED	8:a9a777c7ecd1c6a338126b800a8b46e8	addColumn tableName=report_card; addColumn tableName=report_card; createIndex indexName=idx_card_public_uuid, tableName=report_card; addColumn tableName=report_dashboard; addColumn tableName=report_dashboard; createIndex indexName=idx_dashboard_pu...		\N	4.11.0	\N	\N	0189608756
+v48.00-047	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:59.698801	661	EXECUTED	8:2b18bed0e1ae18dd7b26a0770dac54c0	dropForeignKeyConstraint baseTableName=recent_views, constraintName=fk_recent_views_ref_user_id	Drop foreign key on recent_views so that it can be recreated with onDelete policy	\N	4.21.1	\N	\N	5979601574
+v42.00-042	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.018831	351	MARK_RAN	8:337f1a807936a453d20339d05ef6505e	modifyDataType columnName=error, tableName=query_execution	Added 0.42.0 - modify type of query_execution.error from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-043	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.112549	352	MARK_RAN	8:d6d5d5f81726012b2c72e59d60a9894e	modifyDataType columnName=dataset_query, tableName=report_card	Added 0.42.0 - modify type of report_card.dataset_query from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-044	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.205995	353	MARK_RAN	8:63f3133301c1baca7b13a6266cf11e8d	modifyDataType columnName=description, tableName=report_card	Added 0.42.0 - modify type of report_card.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-045	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.300938	354	MARK_RAN	8:b3c0fc88880ccd64a880d439f7668307	modifyDataType columnName=embedding_params, tableName=report_card	Added 0.42.0 - modify type of report_card.embedding_params from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-046	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.392328	355	MARK_RAN	8:4b4c50c0dbc197c5a15f21d46cae81a9	modifyDataType columnName=result_metadata, tableName=report_card	Added 0.42.0 - modify type of report_card.result_metadata from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-047	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.489191	356	MARK_RAN	8:35f9bd24b4a500f748168d03273d91bf	modifyDataType columnName=visualization_settings, tableName=report_card	Added 0.42.0 - modify type of report_card.visualization_settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-048	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.598365	357	MARK_RAN	8:783ce0d26e51ba9244c5a25d0e8bfc1f	modifyDataType columnName=caveats, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-049	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.702299	358	MARK_RAN	8:de19cbe028a00c5831d676a0e9bb9453	modifyDataType columnName=description, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-050	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.794263	359	MARK_RAN	8:7f8278a770d9514f2d4518497bdd53d5	modifyDataType columnName=embedding_params, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.embedding_params from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-052	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.977017	361	MARK_RAN	8:bee03ae62b47cd8c7c7e78ef225be531	modifyDataType columnName=points_of_interest, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+82	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:53.513246	80	EXECUTED	8:ac4b94df8c648f88cfff661284d6392d	addColumn tableName=core_user; sql	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v42.00-053	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.072994	362	MARK_RAN	8:bf16b19d46ed69eb51663bbbec93d0a6	modifyDataType columnName=parameter_mappings, tableName=report_dashboardcard	Added 0.42.0 - modify type of report_dashboardcard.parameter_mappings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-023	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:00.993897	472	EXECUTED	8:c6c1ff9ca3b62d4cda3a2d782dd86f2f	addForeignKeyConstraint baseTableName=app, constraintName=fk_app_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.45.0 - add app container	\N	4.11.0	\N	\N	0189608756
+v42.00-054	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.166018	363	MARK_RAN	8:3088bdaabb4e1e04951ee3ab22487867	modifyDataType columnName=visualization_settings, tableName=report_dashboardcard	Added 0.42.0 - modify type of report_dashboardcard.visualization_settings from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-055	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.260847	364	MARK_RAN	8:d6753fc353f44b790b9e750952a869f9	modifyDataType columnName=message, tableName=revision	Added 0.42.0 - modify type of revision.message from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-056	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.44768	365	EXECUTED	8:6f1e02c9122309b99ac4329631724805	modifyDataType columnName=object, tableName=revision	Added 0.42.0 - modify type of revision.object from text to text	\N	4.11.0	\N	\N	0189608756
+v42.00-057	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.509685	366	MARK_RAN	8:21a0331ed3ba2796081a6ce6d5850ed8	modifyDataType columnName=caveats, tableName=segment	Added 0.42.0 - modify type of segment.caveats from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-058	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.604417	367	MARK_RAN	8:123b3de75914cd8415b20dbc964ac655	modifyDataType columnName=definition, tableName=segment	Added 0.42.0 - modify type of segment.definition from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-059	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.696354	368	MARK_RAN	8:edbe944897f5694257f7edc661b7067c	modifyDataType columnName=description, tableName=segment	Added 0.42.0 - modify type of segment.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-060	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.792257	369	MARK_RAN	8:30b35e6afdbc2cdf9588fdf40d9bc1b5	modifyDataType columnName=points_of_interest, tableName=segment	Added 0.42.0 - modify type of segment.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-061	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.892455	370	MARK_RAN	8:ae76887a049949a201f45132bb7cc23c	modifyDataType columnName=value, tableName=setting	Added 0.42.0 - modify type of setting.value from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-062	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:38.984386	371	MARK_RAN	8:b986105790c336d4f9e6c1a8755f23ca	modifyDataType columnName=task_details, tableName=task_history	Added 0.42.0 - modify type of task_history.task_details from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+84	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:54.015351	82	EXECUTED	8:58afc10c3e283a8050ea471aac447a97	renameColumn newColumnName=archived, oldColumnName=is_active, tableName=metric; addDefaultValue columnName=archived, tableName=metric; renameColumn newColumnName=archived, oldColumnName=is_active, tableName=segment; addDefaultValue columnName=arch...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v42.00-063	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:39.079976	372	MARK_RAN	8:69c5877d81b6cd3974530db1127f90b4	modifyDataType columnName=metadata, tableName=view_log	Added 0.42.0 - modify type of view_log.metadata from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-064	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:39.172499	373	MARK_RAN	8:9169e238663c5d036bd83428d2fa8e4b	modifyDataType columnName=results, tableName=query_cache	Added 0.42.0 - fix type of query_cache.results on upgrade (in case changeSet 97 was run before #16095)	\N	4.11.0	\N	\N	0189608756
+137	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.251421	133	MARK_RAN	8:da754ac6e51313a32de6f6389b29e1ca	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v42.00-065	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:39.392262	374	EXECUTED	8:5befdc16aff1cda15744a577889f242a	addColumn tableName=core_user	Added 0.42.0 - Another modal dismissed state on user. Retaining the same suffix and boolean style to ease an eventual migration.	\N	4.11.0	\N	\N	0189608756
+v42.00-066	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:39.582373	375	EXECUTED	8:b43c6357a5dacd4f7eb3b49c7372b908	addColumn tableName=metabase_database	Added 0.42.0 - new columns for initial DB sync progress UX. Indicates whether a database has succesfully synced at least one time.	\N	4.11.0	\N	\N	0189608756
+v42.00-067	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:39.780772	376	EXECUTED	8:cc9373fbb8ae35f5599105b1612f762c	addColumn tableName=metabase_table	Added 0.42.0 - new columns for initial DB sync progress UX. Indicates whether a table has succesfully synced at least one time.	\N	4.11.0	\N	\N	0189608756
+v42.00-068	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:39.981902	377	EXECUTED	8:5f3144422c5fa86d1344f6fe0cf2049f	addColumn tableName=metabase_database	Added 0.42.0 - new columns for initial DB sync progress UX. Records the ID of the admin who added a database. May be null for the sample dataset, or for databases added prior to 0.42.0.	\N	4.11.0	\N	\N	0189608756
+v42.00-069	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:40.138976	378	EXECUTED	8:1497ad69b4a6855a232a4ea121687ba2	addForeignKeyConstraint baseTableName=metabase_database, constraintName=fk_database_creator_id, referencedTableName=core_user	Added 0.42.0 - adds FK constraint for creator_id column, containing the ID of the admin who added a database.	\N	4.11.0	\N	\N	0189608756
+v42.00-070	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:40.405068	379	EXECUTED	8:82016397101b9d4444381f63d584fa7a	addColumn tableName=metabase_database	Added 0.42.0 - add Database.settings column to implement Database-local Settings	\N	4.11.0	\N	\N	0189608756
+v43.00-003	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:41.148729	383	EXECUTED	8:d220feb098ef8e5c6bd44e94166a92d9	sql	Added 0.43.0. Create magic 'Administrators' Permissions Group if it does not already exist.	\N	4.11.0	\N	\N	0189608756
+v43.00-004	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:41.308955	384	EXECUTED	8:1c28c6de37700b0ae5f679b86d335764	sql	Added 0.43.0. Add existing Users to 'All Users' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
+v43.00-005	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:41.471395	385	EXECUTED	8:17c0d62516f4af2090010ff9f0f1bf1c	sql	Added 0.43.0. Add existing Users with 'is_superuser' flag to 'Administrators' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
+v43.00-006	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:41.628874	386	EXECUTED	8:e83e560209f8aa4e57e10a6745715483	sql	Added 0.43.0. Create root '/' permissions entry for the 'Administrators' magic Permissions Group if needed.	\N	4.11.0	\N	\N	0189608756
+v43.00-007	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:41.858769	387	EXECUTED	8:134265766925f53d8da208089e4e1082	sql	Added 0.43.0. Grant permissions for existing Databases to 'All Users' permissions group.	\N	4.11.0	\N	\N	0189608756
+v43.00-009	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:42.258776	389	EXECUTED	8:9dffa1da7ad8f84a12794bc7c96c15e7	sql; sql; sql	Added 0.43.0. Make sure 'site-url' Setting includes protocol.	\N	4.11.0	\N	\N	0189608756
+150	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.495885	146	MARK_RAN	8:48beda94aeaa494f798c38a66b90fb2a	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v43.00-010	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:42.500714	390	EXECUTED	8:5eedafb824c5e636c7ff14fc7922ca4a	sql; sql; sql	Added 0.43.0. Migrates value of legacy enable-advanced-humanization Setting to humanization-strategy Setting added in 0.28.0.	\N	4.11.0	\N	\N	0189608756
+v43.00-011	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:42.690687	391	EXECUTED	8:2c62d31bec1c6281d02ec41444c5932e	sql; sql; sql	Added 0.43.0. Remove legacy enable-advanced-humanization Setting.	\N	4.11.0	\N	\N	0189608756
+v43.00-012	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:42.926449	392	EXECUTED	8:a59acc0e562305bbef5721982deb2028	sql	Added 0.43.0. Set Field.has_field_values to 'list' if semantic_type derives from :type/Category.	\N	4.11.0	\N	\N	0189608756
+v43.00-014	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:43.108274	393	MARK_RAN	8:bf03710cb176dd7c720a3e2e47ae7782	sql	Added 0.43.0. Add 'Migrated Dashboards' Collection if needed and there are any Dashboards not in a Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-015	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:43.324395	394	MARK_RAN	8:f615da33f8be6bd251faac925bfc9bbd	sql	Added 0.43.0. Add 'Migrated Pulses' Collection if needed and there are any Pulses not in a Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-016	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:43.544975	395	MARK_RAN	8:d31ad47d1aa56ddee95c15726b6810d8	sql	Added 0.43.0. Add 'Migrated Questions' Collection if needed and there are any Cards not in a Collection.	\N	4.11.0	\N	\N	0189608756
+v43.00-017	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:43.798583	396	EXECUTED	8:969b947a5066941617a9add82975de9a	sql	Added 0.43.0. Move Dashboards not in a Collection to 'Migrated Dashboards'.	\N	4.11.0	\N	\N	0189608756
+v43.00-018	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:44.014696	397	EXECUTED	8:b105395ddb21d04c12756e8924ccba83	sql	Added 0.43.0. Move Pulses not in a Collection to 'Migrated Pulses'.	\N	4.11.0	\N	\N	0189608756
+v43.00-019	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:44.230815	398	EXECUTED	8:6b2e7344dbf0f3be8ec39b4efdb7a4d5	sql	Added 0.43.0. Move Cards not in a Collection to 'Migrated Questions'.	\N	4.11.0	\N	\N	0189608756
+v48.00-048	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:00.28884	662	EXECUTED	8:872e632a8ffa42eb2969f77823e8bfc8	addForeignKeyConstraint baseTableName=recent_views, constraintName=fk_recent_views_ref_user_id, referencedTableName=core_user	Add foreign key on recent_views with onDelete CASCADE	\N	4.21.1	\N	\N	5979601574
+v43.00-022	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:45.451396	401	EXECUTED	8:d4a7fd96d5f8299825fbed4a3e001d33	createTable tableName=timeline_event	Added 0.43.0 - Events table	\N	4.11.0	\N	\N	0189608756
+v43.00-023	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:45.616649	402	EXECUTED	8:68ea023407382a8f54dc282f601ac6cb	createIndex indexName=idx_timeline_collection_id, tableName=timeline	Added 0.43.0 - Index on timeline collection_id	\N	4.11.0	\N	\N	0189608756
+138	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.348684	134	MARK_RAN	8:bfb201761052189e96538f0de3ac76cf	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+139	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.451856	135	MARK_RAN	8:fdad4ec86aefb0cdf850b1929b618508	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+140	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.545714	136	MARK_RAN	8:a0cfe6468160bba8c9d602da736c41fb	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+141	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.639473	137	MARK_RAN	8:b6b7faa02cba069e1ed13e365f59cb6b	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v43.00-024	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:45.777908	403	EXECUTED	8:0056b773435253b7e8e40d5261897823	createIndex indexName=idx_timeline_event_timeline_id, tableName=timeline_event	Added 0.43.0 - Index on timeline_event timeline_id	\N	4.11.0	\N	\N	0189608756
+v43.00-025	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:45.940893	404	EXECUTED	8:8839ff170d1faac11237f79ce729d637	createIndex indexName=idx_timeline_event_timeline_id_timestamp, tableName=timeline_event	Added 0.43.0 - Index on timeline timestamp	\N	4.11.0	\N	\N	0189608756
+v43.00-026	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:46.125953	405	EXECUTED	8:a04fac9421e10f1901979560afee3b7c	addColumn tableName=core_user	Added 0.43.0 - adds User.settings column to implement User-local Settings	\N	4.11.0	\N	\N	0189608756
+v43.00-027	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:46.285447	406	EXECUTED	8:141420f027b84d0d08e944ffc0d005df	dropNotNullConstraint columnName=password, tableName=core_user	Added 0.43.0. Drop NOT NULL constraint for core_user.password	\N	4.11.0	\N	\N	0189608756
+v43.00-028	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:46.4411	407	EXECUTED	8:c86e72e67598f29e10de00fe346095b3	dropNotNullConstraint columnName=password_salt, tableName=core_user	Added 0.43.0. Drop NOT NULL constraint for core_user.password_salt	\N	4.11.0	\N	\N	0189608756
+v43.00-029	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:46.591019	408	EXECUTED	8:4d5632ee6fae1f8d0d5e6068700ccb2e	sql	Added 0.43.0. Clear local password for Users using LDAP auth.	\N	4.11.0	\N	\N	0189608756
+v43.00-030	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:46.883437	409	EXECUTED	8:3b73196410d9a3716f705cdc96a0b98b	createTable tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table	\N	4.11.0	\N	\N	0189608756
+v43.00-031	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:47.047625	410	EXECUTED	8:1081aff22c7fef2be2c63cdec33aad06	addUniqueConstraint constraintName=unique_dashboard_bookmark_user_id_dashboard_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
+v43.00-032	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:47.21523	411	EXECUTED	8:573e98bd0b8392f3c207ae49b1eb20ce	createIndex indexName=idx_dashboard_bookmark_user_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
+v43.00-033	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:47.376537	412	EXECUTED	8:d9471b53e0666a6d3fc99e3c768ccafa	createIndex indexName=idx_dashboard_bookmark_dashboard_id, tableName=dashboard_bookmark	Added 0.43.0 - Dashboard bookmarks table index on dashboard_id	\N	4.11.0	\N	\N	0189608756
+v43.00-035	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:47.83348	414	EXECUTED	8:9cce81eb78b0c25d01a23d2f74377eda	addUniqueConstraint constraintName=unique_card_bookmark_user_id_card_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
+v43.00-036	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:48.001045	415	EXECUTED	8:a107c119de1ee902e9526a0413158093	createIndex indexName=idx_card_bookmark_user_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
+v43.00-037	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:48.175829	416	EXECUTED	8:80b451e8506f3d3092347cb3f9a96c0c	createIndex indexName=idx_card_bookmark_card_id, tableName=card_bookmark	Added 0.43.0 - Card bookmarks table index on card_id	\N	4.11.0	\N	\N	0189608756
+v43.00-039	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:48.639371	418	EXECUTED	8:88c30bdf22c1bcae694850d81a65b175	addUniqueConstraint constraintName=unique_collection_bookmark_user_id_collection_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table unique constraint	\N	4.11.0	\N	\N	0189608756
+v43.00-040	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:48.796888	419	EXECUTED	8:455175f303c3f64cb9588aca5c6641e0	createIndex indexName=idx_collection_bookmark_user_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table index on user_id	\N	4.11.0	\N	\N	0189608756
+v43.00-041	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:48.96599	420	EXECUTED	8:b3a84ea8c47896be2931fb73e07459ce	createIndex indexName=idx_collection_bookmark_collection_id, tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table index on collection_id	\N	4.11.0	\N	\N	0189608756
+v43.00-042	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:49.135474	421	EXECUTED	8:e0b982be997b8e591172f4a7c9dab869	sql	Added 0.43.0. Grant download permissions for existing Databases to 'All Users' permissions group	\N	4.11.0	\N	\N	0189608756
+v43.00-043	howonlee	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:49.316038	422	EXECUTED	8:2b0195448dad18ba671d64a0c35ceb79	addColumn tableName=metabase_field	Added 0.43.0 - Nested field columns in fields	\N	4.11.0	\N	\N	0189608756
+v43.00-044	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:49.483537	423	EXECUTED	8:537bbbdc3a39703e704e80d757d8cead	sql	Added 0.43.0 - Removes MetaBot permissions group	\N	4.11.0	\N	\N	0189608756
+v43.00-046	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:49.834202	424	EXECUTED	8:de349aff4c691f7abd7417421ed4e54e	createTable tableName=general_permissions_revision	Added 0.43.0 - create General Permission Revision table	\N	4.11.0	\N	\N	0189608756
+142	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.740312	138	MARK_RAN	8:0c291eb50cc0f1fef3d55cfe6b62bedb	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v43.00-047	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:50.013414	425	EXECUTED	8:35c7324ab207528726cc332a5b433a58	sql	Added 0.43.0. Grant the 'All Users' Group permissions to create/edit subscriptions and alerts	\N	4.11.0	\N	\N	0189608756
+29	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:37.389957	28	EXECUTED	8:8b02731cc34add3722c926dfd7376ae0	addColumn tableName=pulse_channel		\N	4.11.0	\N	\N	0189608756
+v43.00-049	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:50.179907	426	EXECUTED	8:3223a3f02b151cdca259da680de7f848	modifyDataType columnName=timestamp, tableName=view_log	Added 0.43.0 - Unify datatype with query_execution.started_at so comparable (see 168).	\N	4.11.0	\N	\N	0189608756
+v48.00-049	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:00.887364	663	EXECUTED	8:853f2a24c53470bf2d9e85b1246bab7b	sql; sql; sql	Migrate data from activity to audit_log	\N	4.21.1	\N	\N	5979601574
+v48.00-050	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:01.348429	664	EXECUTED	8:d41d8cd98f00b204e9800998ecf8427e	empty	Added 0.48.0 - no-op migration to remove audit DB and collection on downgrade	\N	4.21.1	\N	\N	5979601574
+v48.00-051	calherries	migrations/001_update_migrations.yaml	2024-01-23 03:14:01.945491	665	EXECUTED	8:5f5d1fd5b6153a6613511fd8f765737d	sql; sql	Migrate metabase_field when the fk target field is inactive	\N	4.21.1	\N	\N	5979601574
+v42.00-071	noahmoss	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:40.563186	380	EXECUTED	8:315c004fe2776340730f660504260575	sql	Added 0.42.0 - migrates the Sample Dataset to the name "Sample Database"	\N	4.11.0	\N	\N	0189608756
+v43.00-050	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:50.369334	427	EXECUTED	8:d4bc347f147647b361bbe3740d035413	addColumn tableName=permissions_group_membership	Added 0.43.0. Add permissions_group_membership.is_group_manager	\N	4.11.0	\N	\N	0189608756
+v43.00-051	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:50.558879	428	EXECUTED	8:cd0b3deabba3be0abcabd7b8f7fe03c8	addColumn tableName=timeline	Added 0.43.0 - default boolean on timelines to indicate default timeline for a collection	\N	4.11.0	\N	\N	0189608756
+v43.00-053	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:51.064263	430	EXECUTED	8:9660924a1b14881a4d5d11e535c6d838	addUniqueConstraint constraintName=unique_bookmark_user_id_type_item_id, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+v43.00-054	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:51.253031	431	EXECUTED	8:b353fff839dde25895deba810f64c704	addUniqueConstraint constraintName=unique_bookmark_user_id_ordering, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+v43.00-055	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:51.424285	432	EXECUTED	8:bd8dd0c8f4391a2ed375f369971b4023	createIndex indexName=idx_bookmark_ordering_user_id, tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+v43.00-056	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:51.58027	433	EXECUTED	8:c418d33e471acbbcd9f86e57b1df4468	renameTable newTableName=application_permissions_revision, oldTableName=general_permissions_revision	Added 0.43.0 - Rename general permission revision table It's safe to rename this table without breaking downgrades compatibility because this table was also added in 0.43.0.	\N	4.11.0	\N	\N	0189608756
+v43.00-057	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:51.749466	434	EXECUTED	8:a96791b95827101abd2cb77361c847ce	sql	Added 0.43.0 - Rename general_permissions_revision_id_seq	\N	4.11.0	\N	\N	0189608756
+v43.00-058	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:51.909153	435	EXECUTED	8:bbef3f445957c95a3d42b74b7c8b1fa3	sql	Added 0.43.0 - Rename general permissios to application permissions	\N	4.11.0	\N	\N	0189608756
+v43.00-059	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:52.107257	436	EXECUTED	8:57fb18b8a2b231c107b4d138521166dd	addNotNullConstraint columnName=icon, tableName=timeline	Added 0.43.0 - disallow nil timeline icons	\N	4.11.0	\N	\N	0189608756
+v43.00-060	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:52.298173	437	EXECUTED	8:25978d2800f7e2dd6e8f4ad61027dfa3	addNotNullConstraint columnName=icon, tableName=timeline_event	Added 0.43.0 - disallow nil timeline event icons	\N	4.11.0	\N	\N	0189608756
+v44.00-002	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:53.505615	441	EXECUTED	8:6dc28d92f89811023b6bcd9d77395634	addColumn tableName=metric	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-003	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:53.746041	442	EXECUTED	8:9bd778cae47bb09833a901fdcf76fee8	addColumn tableName=segment	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-004	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:53.988132	443	EXECUTED	8:4d9ac5fd2c5dbbb6768bb920bd2890cb	addColumn tableName=collection	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-005	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:54.217431	444	EXECUTED	8:8a3712f3787b8c58c3c6f307d5b641c5	addColumn tableName=report_dashboard	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-006	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:54.449588	445	EXECUTED	8:9d9eee07c7b8a7a3c87f6f98e4856b13	addColumn tableName=dimension	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-008	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:54.931337	447	EXECUTED	8:ea3332f011482a9a9e709f922830ba95	addColumn tableName=report_card	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-009	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:55.154212	448	EXECUTED	8:ef0054e0f1d1ac22ff1c81cf01519d0b	addColumn tableName=native_query_snippet	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-010	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:55.38844	449	EXECUTED	8:0e58282581d53882d032811c4ea52c8d	addColumn tableName=timeline	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-011	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:55.615532	450	EXECUTED	8:6a606a9c9351749947263fea4255dc1e	addColumn tableName=report_dashboardcard	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v44.00-023	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:55.80161	451	EXECUTED	8:493153694fde9482c906922a6c63bf88	addColumn tableName=report_card	Added 0.44.0 - Add parameters to report_card	\N	4.11.0	\N	\N	0189608756
+v44.00-025	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:56.017261	452	EXECUTED	8:653792e7485e6c6d9063cdd085d8584c	addColumn tableName=report_card	Added 0.44.0 - Add parameter_mappings to report_card	\N	4.11.0	\N	\N	0189608756
+v44.00-027	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:56.175345	453	EXECUTED	8:4fb924ff28472bf113fd4abf5ec8cf1b	dropNotNullConstraint columnName=first_name, tableName=core_user	Added 0.44.0. Drop NOT NULL constraint for core_user.first_name	\N	4.11.0	\N	\N	0189608756
+v44.00-028	adam-james	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:56.331455	454	EXECUTED	8:8c5c6b0342b7970e15fb93ed618a44c3	dropNotNullConstraint columnName=last_name, tableName=core_user	Added 0.44.0. Drop NOT NULL constraint for core_user.last_name	\N	4.11.0	\N	\N	0189608756
+v44.00-029	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:56.519898	455	EXECUTED	8:3380ac2de7c5c6a0b313c81c8a438f28	addColumn tableName=metabase_fieldvalues	Added 0.44.0 - Add has_more_values to metabase_fieldvalues	\N	4.11.0	\N	\N	0189608756
+v48.00-053	johnswanson	migrations/001_update_migrations.yaml	2024-01-23 03:14:02.5321	666	EXECUTED	8:8b41162170f6d712871b2ee9221adc1a	modifyDataType columnName=model, tableName=activity	Increase length of `activity.model` to fit longer model names	\N	4.21.1	\N	\N	5979601574
+v44.00-030	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:56.707299	456	EXECUTED	8:757a6d90116ca360a4d70bf9f910af1d	addColumn tableName=metabase_field	Added 0.44.0 - Add database_required to metabase_field	\N	4.11.0	\N	\N	0189608756
+v44.00-033	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:56.923194	457	EXECUTED	8:2407250e09ed3bd6e36f0fa340b206ac	sql	Added 0.43.0. Grant the 'All Users' Permissions Group readwrite perms for the Root Snippets Collection.	\N	4.11.0	\N	\N	0189608756
+143	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.835515	139	MARK_RAN	8:3d9a5cb41f77a33e834d0562fdddeab6	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+144	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:03.929599	140	MARK_RAN	8:1d5b7f79f97906105e90d330a17c4062	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+50	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:45.39251	49	EXECUTED	8:98a6ab6428ea7a589507464e34ade58a	addColumn tableName=report_card; addColumn tableName=report_card; addColumn tableName=report_dashboard; addColumn tableName=report_dashboard		\N	4.11.0	\N	\N	0189608756
+v44.00-035	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:57.117513	458	EXECUTED	8:38dcbf6c407d7a19591ea6c7baa287e3	addColumn tableName=metabase_fieldvalues	Added 0.44.0. Add type to fieldvalues	\N	4.11.0	\N	\N	0189608756
+12	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:33.588343	11	EXECUTED	8:1cc6a5e29970d1ae5008ccd842b0b06a	addColumn tableName=report_card; addColumn tableName=report_card; addColumn tableName=report_card		\N	4.11.0	\N	\N	0189608756
+v44.00-037	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:57.313366	459	EXECUTED	8:6bb5be3d1c58c69d0dc42a38fa150d57	addColumn tableName=metabase_fieldvalues	Added 0.44.0. Add type to fieldvalues	\N	4.11.0	\N	\N	0189608756
+v44.00-038	metamben	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:57.501898	460	EXECUTED	8:327897734fed2d9f16707cd16c0395f3	addColumn tableName=report_card	Added 0.44.0 - Add collection_preview to report_card	\N	4.11.0	\N	\N	0189608756
+v44.00-039	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:57.68364	461	EXECUTED	8:381712e81a39de0ddec9107419c1450a	addColumn tableName=native_query_snippet	Added 0.44.0 - Add template_tags to native_query_snippet	\N	4.11.0	\N	\N	0189608756
+v44.00-041	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:57.903808	462	EXECUTED	8:7fba8d5b9bfe7136d1a78c8d8d8fc402	addColumn tableName=pulse_card	Added 0.44.0 - add entity_id column to PulseCard, PulseChannel	\N	4.11.0	\N	\N	0189608756
+v44.00-042	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:58.125763	463	EXECUTED	8:ca3a5364fcac3da951d35f25d660144f	addColumn tableName=pulse_channel	Added 0.44.0 - add entity_id column to PulseCard, PulseChannel	\N	4.11.0	\N	\N	0189608756
+v45.00-001	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:54:58.639445	465	EXECUTED	8:da99b71a4ac7eb662f6a95e69585935e	createTable tableName=action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-002	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:54:58.951817	466	EXECUTED	8:6da7a6285edb138c404de0eeba209570	createTable tableName=query_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-011	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:54:59.463498	468	EXECUTED	8:dcf1cda9f20dca4b6ff8101b13b98c4a	addColumn tableName=report_card	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-012	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:54:59.94621	469	EXECUTED	8:aadf28229f585cff7c4b4c1918e558b2	createTable tableName=http_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-013	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:00.268078	470	EXECUTED	8:26dba276b14255d4346507a1a25d117b	addPrimaryKey constraintName=pk_http_action, tableName=http_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+v45.00-022	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:00.811731	471	EXECUTED	8:d46fa24e4d75a11b2e92aecbf39c6ee1	createTable tableName=app	Added 0.45.0 - add app container	\N	4.11.0	\N	\N	0189608756
+20	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:35.468149	19	EXECUTED	8:1b6c23d69b9330b56dcb4bb7188e8d5e	createTable tableName=pulse; createIndex indexName=idx_pulse_creator_id, tableName=pulse; createTable tableName=pulse_card; createIndex indexName=idx_pulse_card_pulse_id, tableName=pulse_card; createIndex indexName=idx_pulse_card_card_id, tableNam...		\N	4.11.0	\N	\N	0189608756
+23	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:36.060456	22	EXECUTED	8:b6f054835db2b2688a1be1de3707f9a9	modifyDataType columnName=rows, tableName=metabase_table		\N	4.11.0	\N	\N	0189608756
+148	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.311897	144	MARK_RAN	8:12b42e87d40cd7b6399c1fb0c6704fa7	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v45.00-025	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:01.196059	473	EXECUTED	8:50a43cea3123ecdb602123825f5a7dbf	addColumn tableName=report_dashboard	Added 0.45.0 - mark app pages	\N	4.11.0	\N	\N	0189608756
+v45.00-026	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:01.392181	474	EXECUTED	8:ae77d4086998911877e3207fcf90c9c7	addColumn tableName=report_dashboardcard	Added 0.45.0 - apps add action_id to report_dashboardcard	\N	4.11.0	\N	\N	0189608756
+v45.00-028	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:01.710532	476	EXECUTED	8:f8f68f80627aeb2ef7f28f2af2b5a31b	renameColumn newColumnName=size_x, oldColumnName=sizeX, tableName=report_dashboardcard	Added 0.45.0 -- rename DashboardCard sizeX to size_x. See https://github.com/metabase/metabase/issues/16344	\N	4.11.0	\N	\N	0189608756
+v45.00-029	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:01.878163	477	EXECUTED	8:579957652133eab3ee023dd911162a1e	renameColumn newColumnName=size_y, oldColumnName=sizeY, tableName=report_dashboardcard	Added 0.45.0 -- rename DashboardCard size_y to size_y. See https://github.com/metabase/metabase/issues/16344	\N	4.11.0	\N	\N	0189608756
+v45.00-030	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:02.037801	478	EXECUTED	8:41eda097feb034c4d01b2dbda74753c8	addDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.45.0 -- add default value to DashboardCard size_x -- this was previously done by Toucan	\N	4.11.0	\N	\N	0189608756
+v45.00-031	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:02.202228	479	EXECUTED	8:6416e373e335dc1c12c7571af674dede	addDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.45.0 -- add default value to DashboardCard size_y -- this was previously done by Toucan	\N	4.11.0	\N	\N	0189608756
+v45.00-032	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:02.382002	480	EXECUTED	8:d97444fe24a2dca618a2804741335f6d	addDefaultValue columnName=created_at, tableName=report_dashboardcard	Added 0.45.0 -- add default value for DashboardCard created_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-033	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:02.456075	481	MARK_RAN	8:34df79fc79e086ab05bb2fd79bb4e322	sql	Added 0.45.0 -- add default value for DashboardCard created_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-035	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:02.752566	483	MARK_RAN	8:dcee49781d80d9c4be5ad9dd51975a07	sql	Added 0.45.0 -- add default value for DashboardCard updated_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v48.00-054	escherize	migrations/001_update_migrations.yaml	2024-01-23 03:14:03.007012	667	EXECUTED	8:d41d8cd98f00b204e9800998ecf8427e	empty	Added 0.48.0 - no-op migration to remove Internal Metabase User on downgrade	\N	4.21.1	\N	\N	5979601574
+v45.00-036	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:03.229677	484	EXECUTED	8:cd4009254bd2c56aaf281082038c1f0b	createTable tableName=model_action	Added 0.45.0 - add model action table	\N	4.11.0	\N	\N	0189608756
+v45.00-037	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:03.441846	485	EXECUTED	8:56f548cc84a53cc6d18302761ee71554	addUniqueConstraint constraintName=unique_model_action_card_id_slug, tableName=model_action	Added 0.45.0 - model action	\N	4.11.0	\N	\N	0189608756
+v45.00-038	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:03.601782	486	EXECUTED	8:c38ddc295206e807c7254581ed9566c3	addDefaultValue columnName=created_at, tableName=metabase_database	Added 0.45.0 -- add default value for Database created_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-039	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:03.663575	487	MARK_RAN	8:2c539d76d3aead7f7366b15333132b30	sql	Added 0.45.0 -- add default value for Database created_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-040	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:03.863616	488	EXECUTED	8:00ac7c24cfd3e7ea3a21f21f4e45dbcf	addDefaultValue columnName=updated_at, tableName=metabase_database	Added 0.45.0 -- add default value for Database updated_at (Postgres/H2)	\N	4.11.0	\N	\N	0189608756
+v45.00-041	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:03.927462	489	MARK_RAN	8:82dc368fa3e0163a06929da6e9556fe2	sql	Added 0.45.0 -- add default value for Database updated_at (MySQL/MariaDB)	\N	4.11.0	\N	\N	0189608756
+v45.00-042	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:04.11182	490	EXECUTED	8:d04207471480e335f14094e9a7a5d293	sql	Added 0.45.0 -- add default value for Database with NULL details	\N	4.11.0	\N	\N	0189608756
+118	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.433296	114	MARK_RAN	8:17f4410e30a0c7e84a36517ebf4dab64	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+32	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:38.616441	32	EXECUTED	8:32fb3ffb1ac9b619248c3de8e3d09b4b	createTable tableName=raw_table; createIndex indexName=idx_rawtable_database_id, tableName=raw_table; addUniqueConstraint constraintName=uniq_raw_table_db_schema_name, tableName=raw_table; createTable tableName=raw_column; createIndex indexName=id...		\N	4.11.0	\N	\N	0189608756
+v45.00-043	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:04.267825	491	EXECUTED	8:1d07a5435e51abd0663458d907865a6b	addNotNullConstraint columnName=details, tableName=metabase_database	Added 0.45.0 -- make Database details NOT NULL	\N	4.11.0	\N	\N	0189608756
+v45.00-044	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:04.6397	492	EXECUTED	8:0b23976c5d2248d511ac31b244efef22	createTable tableName=app_permission_graph_revision	Added 0.45.0 -- create app permission graph revision table	\N	4.11.0	\N	\N	0189608756
+v45.00-049	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:04.987169	494	EXECUTED	8:df2097d176fad99c142c5dd75ce8a3db	sql; sql; sql	Added 0.45.0 -- set Collection.created_at to User.date_joined for Personal Collections	\N	4.11.0	\N	\N	0189608756
+v45.00-050	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.150258	495	EXECUTED	8:65ecfe481e7c0141bb82bb3401cfa94e	sql; sql; sql	Added 0.45.0 -- seed Collection.created_at with value of oldest item for non-Personal Collections	\N	4.11.0	\N	\N	0189608756
+v45.00-051	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.215872	496	MARK_RAN	8:2378c7031da6871dcf1c737bf323d211	modifyDataType columnName=after, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.after from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-052	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.315952	497	MARK_RAN	8:b7343eb9556c3e636b6f8dd70708c0b3	modifyDataType columnName=before, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.before from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+154	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.871756	150	MARK_RAN	8:7a1df4f7a679f47459ea1a1c0991cfba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v45.00-053	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.411904	498	MARK_RAN	8:fa552605d5a587c4fa74e0c6bd358097	modifyDataType columnName=remark, tableName=collection_permission_graph_revision	Added 0.45.0 - modify type of collection_permission_graph_revision.remark from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-054	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.519654	499	MARK_RAN	8:60862c4ecf505727e839ac5e94f95528	modifyDataType columnName=after, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.after from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-055	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.617606	500	MARK_RAN	8:717f0c266da5768098a2ead6168f3b18	modifyDataType columnName=before, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.before from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v45.00-056	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.709853	501	MARK_RAN	8:a1f364d45a922c90b4fac741a22e66b3	modifyDataType columnName=remark, tableName=permissions_revision	Added 0.45.0 - modify type of permissions_revision.remark from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v46.00-000	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:06.098681	503	EXECUTED	8:97251413292221e51490e990b6f683f2	createTable tableName=implicit_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-003	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:06.662396	506	EXECUTED	8:45b8358f31811335aaa93032726a042b	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-004	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:06.858011	507	EXECUTED	8:0ce8ff05beffc5c72e2348bcec581eee	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-005	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:07.038451	508	EXECUTED	8:84cf1fbf435c7c3f794c973de4d62fad	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-006	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:07.232178	509	EXECUTED	8:df43ef08b76c33c5626dbf9b226717b5	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-007	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:07.384217	510	EXECUTED	8:6830901cccc14ad22cdfd86bd3a2afe7	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id, referencedTableName=report_card	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-008	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:07.574177	511	EXECUTED	8:6e73a8683d1b757c5f9034513ec8a581	addColumn tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-009	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:07.769846	512	EXECUTED	8:2b4fd7cee77d5ed8de22fcc2fba158bc	addColumn tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-010	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:07.923884	513	EXECUTED	8:77ca03e5a0dbe370461295da1c77cf0f	addForeignKeyConstraint baseTableName=query_action, constraintName=fk_query_action_database_id, referencedTableName=metabase_database	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-012	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:08.270476	515	EXECUTED	8:7e4dffe8bbbb740207001ead696a8557	dropNotNullConstraint columnName=card_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-013	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:08.614158	516	EXECUTED	8:96dfaa20265be749af8590f75d465348	sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+51	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:46.010072	50	EXECUTED	8:43c90b5b9f6c14bfd0e41cc0b184617e	createTable tableName=query_execution; createIndex indexName=idx_query_execution_started_at, tableName=query_execution; createIndex indexName=idx_query_execution_query_hash_started_at, tableName=query_execution		\N	4.11.0	\N	\N	0189608756
+128	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:02.384315	124	MARK_RAN	8:44acbe257817286d88b7892e79363b66	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v46.00-014	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:08.769763	517	EXECUTED	8:585958ee7e90e23a9cc22ebf7e4228cb	dropForeignKeyConstraint baseTableName=query_action, constraintName=fk_query_action_ref_card_id	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+35	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:38.931963	34	EXECUTED	8:91b72167fca724e6b6a94b64f886cf09	modifyDataType columnName=value, tableName=setting		\N	4.11.0	\N	\N	0189608756
+v46.00-015	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:08.926613	518	EXECUTED	8:9b57260e146618caff3f468116031008	dropColumn columnName=card_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-016	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:09.118118	519	EXECUTED	8:cb79eef9f483e73b3d9b571f916b8598	sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-017	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:09.286762	520	EXECUTED	8:90525ade34e7bb883bf75cdf8a2b3340	dropColumn columnName=name, tableName=http_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-018	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:09.448469	521	EXECUTED	8:cf3c31a975dc86f1def6ee5d11f5f9dc	dropColumn columnName=description, tableName=http_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-019	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:09.614079	522	EXECUTED	8:a9f70163707cc7f798bdd0527a55854b	dropColumn columnName=is_write, tableName=report_card	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-020	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:09.772993	523	EXECUTED	8:2def45c139267d7424e1187764122669	addNotNullConstraint columnName=database_id, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-022	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:10.112341	525	EXECUTED	8:52c8107f4bcc6e9889b270e0a4954921	addNotNullConstraint columnName=dataset_query, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-011	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:08.112868	514	EXECUTED	8:3c76c705376a9d70c98d26529db60efc	sql; sql; sql	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-024	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:10.427552	527	EXECUTED	8:080ff435bae61f324535393d9e78de38	addNotNullConstraint columnName=name, tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-025	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:10.596724	528	EXECUTED	8:60016f3de98c7382602485f13bc4e04f	dropTable tableName=model_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-026	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:10.800081	529	EXECUTED	8:948b9653bfbadeb29c847ef41d053dba	addColumn tableName=metabase_database	Added 0.46.0 -- add field for tracking DBMS versions	\N	4.11.0	\N	\N	0189608756
+v46.00-027	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:10.992364	530	EXECUTED	8:5f7773b797a3c85a99cd35cb60cfd0b3	addColumn tableName=metabase_fieldvalues	Added 0.46.0 -- add last_used_at to FieldValues	\N	4.11.0	\N	\N	0189608756
+v46.00-029	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:11.542107	532	EXECUTED	8:96336855a4180eaf51d7be4a97f3b1a4	dropUniqueConstraint constraintName=unique_dimension_field_id_name, tableName=dimension	Make Dimension <=> Field a 1t1 relationship. Drop unique constraint on field_id + name. (1/3)	\N	4.11.0	\N	\N	0189608756
+v46.00-030	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:11.698197	533	EXECUTED	8:e1f67579cb8dc1102445df299636cb7b	sql	Make Dimension <=> Field a 1t1 relationship. Delete duplicate entries. (2/3)	\N	4.11.0	\N	\N	0189608756
+v46.00-031	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:11.862255	534	EXECUTED	8:a9b4c86de880b2bc01e208d8d4d8cf64	addUniqueConstraint constraintName=unique_dimension_field_id, tableName=dimension	Make Dimension <=> Field a 1t1 relationship. Add unique constraint on field_id. (3/3)	\N	4.11.0	\N	\N	0189608756
+v46.00-032	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:12.028062	535	EXECUTED	8:2a7de9726282af199737a334395f1068	addUniqueConstraint constraintName=unique_parameterized_object_card_parameter, tableName=parameter_card	Added 0.46.0 -- Unique parameter_card	\N	4.11.0	\N	\N	0189608756
+v46.00-033	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:12.192295	536	EXECUTED	8:25bc5b1a806d4b352d43f5b16e7e6e20	createIndex indexName=idx_parameter_card_parameterized_object_id, tableName=parameter_card	Added 0.46.0 -- parameter_card index on connected object	\N	4.11.0	\N	\N	0189608756
+v46.00-034	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:12.350555	537	EXECUTED	8:5a6b5a2cf7160baec4f81f6675de898c	createIndex indexName=idx_parameter_card_card_id, tableName=parameter_card	Added 0.46.0 -- parameter_card index on connected card	\N	4.11.0	\N	\N	0189608756
+v46.00-035	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:12.510792	538	EXECUTED	8:0639e4c0939848b4377792290311f239	addForeignKeyConstraint baseTableName=parameter_card, constraintName=fk_parameter_card_ref_card_id, referencedTableName=report_card	Added 0.46.0 - parameter_card.card_id foreign key	\N	4.11.0	\N	\N	0189608756
+v46.00-036	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:12.682163	539	EXECUTED	8:39d440f29a481e9f0915532106079a1a	dropTable tableName=app_permission_graph_revision	App containers are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
+v46.00-037	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:12.841373	540	EXECUTED	8:dbbe898501c554e3ee74c6b9ef9c1575	dropColumn columnName=is_app_page, tableName=report_dashboard	App pages are removed in 0.46.0	\N	4.11.0	\N	\N	0189608756
+v46.00-039	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:13.230391	542	EXECUTED	8:7ed32de11fbe8565148d8491f908ad05	addColumn tableName=parameter_card	Added 0.46.0 - add entity_id to parameter_card	\N	4.11.0	\N	\N	0189608756
+85	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:54.537185	83	EXECUTED	8:624bb71d09dc2bef7c16c025f57edff0	addColumn tableName=collection; createIndex indexName=idx_collection_personal_owner_id, tableName=collection; addColumn tableName=collection; sql; addNotNullConstraint columnName=_slug, tableName=collection; dropColumn columnName=slug, tableName=c...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+88	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:55.077	86	EXECUTED	8:04ff5a0738473938fc31d68c1d9952e1	addColumn tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v46.00-040	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:13.388225	543	EXECUTED	8:7fec881cac598cce34b62c98fcf37563	addDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.46.0 -- Bump default dashcard size to 4x4	\N	4.11.0	\N	\N	0189608756
+v46.00-041	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:13.546086	544	EXECUTED	8:0214a8d0b94a9eb48aad75b1d50dd279	addDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.46.0 -- Bump default dashcard size to 4x4	\N	4.11.0	\N	\N	0189608756
+v46.00-042	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:13.706818	545	EXECUTED	8:7b91ad83569565517c43e9f7b9bfa29a	createIndex indexName=idx_query_execution_executor_id, tableName=query_execution	Added 0.46.0 -- index query_execution.executor_id	\N	4.11.0	\N	\N	0189608756
+36	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:39.243944	35	EXECUTED	8:252e08892449dceb16c3d91337bd9573	addColumn tableName=report_dashboard; addNotNullConstraint columnName=parameters, tableName=report_dashboard; addColumn tableName=report_dashboardcard; addNotNullConstraint columnName=parameter_mappings, tableName=report_dashboardcard		\N	4.11.0	\N	\N	0189608756
+v46.00-043	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:13.872428	546	EXECUTED	8:d9cab29076035068cfc49fb9570832af	createIndex indexName=idx_query_execution_context, tableName=query_execution	Added 0.46.0 -- index query_execution.context	\N	4.11.0	\N	\N	0189608756
+v46.00-045	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:14.09437	547	EXECUTED	8:7a9cabf1c693de8b0c9555f7deb072a4	addColumn tableName=action	Added 0.46.0 -- add public_uuid to action.	\N	4.11.0	\N	\N	0189608756
+31	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:37.762132	30	EXECUTED	8:30a33a82bab0bcbb2ccb6738d48e1421	addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+v46.00-052	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:14.408179	549	EXECUTED	8:948c978fcb2d938d272a05b3e56808d1	dropDefaultValue columnName=col, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v46.00-053	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:14.562932	550	EXECUTED	8:04e092dbffdfda13f28b1e3ea38299a7	dropDefaultValue columnName=size_x, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v46.00-001	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:06.289808	504	EXECUTED	8:4a90c7523749aa7e4e4d2ea9dd6db777	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-054	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:14.730176	551	EXECUTED	8:bc3abf9ab94199aeaebb2be28dea77aa	dropDefaultValue columnName=size_y, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v46.00-055	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:14.922211	552	EXECUTED	8:48a516459b84a21e9edbdbfe1bffd671	addColumn tableName=action	Added 0.46.0 -- add made_public_by_id	\N	4.11.0	\N	\N	0189608756
+v46.00-056	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:15.090321	553	EXECUTED	8:af93ab591b44b5d81d8d8a496600c1bc	createIndex indexName=idx_action_public_uuid, tableName=action	Added 0.46.0 -- add public_uuid and made_public_by_id to action. public_uuid is indexed	\N	4.11.0	\N	\N	0189608756
+v46.00-057	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:15.266561	554	EXECUTED	8:aff3b0e15dcfc36a4fd97faade0751c0	modifyDataType columnName=parameter_id, tableName=parameter_card	Added 0.46.0 -- parameter_card.parameter_id long enough to hold a uuid	\N	4.11.0	\N	\N	0189608756
+v46.00-058	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:15.426701	555	EXECUTED	8:11440c629413c7231e7f156347353761	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_made_public_by_id, referencedTableName=core_user	Added 0.46.0 -- add FK constraint for action.made_public_by_id with core_user.id	\N	4.11.0	\N	\N	0189608756
+v46.00-061	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:15.95034	558	EXECUTED	8:d57393ae0e96a9b1a0bd7a66597cb485	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_creator_id, referencedTableName=core_user	Added 0.46.0 -- action.creator_id index	\N	4.11.0	\N	\N	0189608756
+v46.00-062	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:16.146754	559	EXECUTED	8:20efdbd79df3c76cbf77318d871a9836	addColumn tableName=action	Added 0.46.0 -- add actions.archived	\N	4.11.0	\N	\N	0189608756
+v46.00-064	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:16.32914	560	EXECUTED	8:0ac10ca0d82f1bbe39737eb0a8fdcd7d	renameTable newTableName=sandboxes, oldTableName=group_table_access_policy	Added 0.46.0 -- rename `group_table_access_policy` to `sandboxes`	\N	4.11.0	\N	\N	0189608756
+v46.00-065	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:16.519544	561	EXECUTED	8:5cbb335952dd1ab7a137d80d6c1ab82e	addColumn tableName=sandboxes	Added 0.46.0 -- add `permission_id` to `sandboxes`	\N	4.11.0	\N	\N	0189608756
+v46.00-070	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:16.762715	562	EXECUTED	8:d440a8d0aef0bbfdae24a9c70bd37605	addColumn tableName=action	Added 0.46.0 - add entity_id column to action	\N	4.11.0	\N	\N	0189608756
+v46.00-074	metamben	migrations/001_update_migrations.yaml	2023-11-17 02:55:16.919883	563	EXECUTED	8:c1273a3003d82638a0a5413bf2aa6777	modifyDataType columnName=updated_at, tableName=report_card	Added 0.46.0 -- increase precision of updated_at of report_card	\N	4.11.0	\N	\N	0189608756
+v46.00-079	john-metabase	migrations/001_update_migrations.yaml	2023-11-17 02:55:17.090664	564	EXECUTED	8:de167f33d3f7670246623466487d2e67	sql	Added 0.46.0 -- migrates Databases using deprecated and removed presto driver to presto-jdbc	\N	4.11.0	\N	\N	0189608756
+v46.00-080	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:17.76677	565	EXECUTED	8:022a846feb10103f2e9fe4b58cb792d6	customChange	Migrate data permission paths from v1 to v2 (splitting them into separate data and query permissions)	\N	4.11.0	\N	\N	0189608756
+52	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:46.405774	51	EXECUTED	8:5af9ea2a96cd6e75a8ac1e6afde7126b	createTable tableName=query_cache; createIndex indexName=idx_query_cache_updated_at, tableName=query_cache; addColumn tableName=report_card		\N	4.11.0	\N	\N	0189608756
+v46.00-084	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:17.922981	566	EXECUTED	8:b4f465ca3be584028e077b907656b804	dropForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id	Added 0.46.0 - CASCADE delete for action.model_id	\N	4.11.0	\N	\N	0189608756
+v46.00-085	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:18.096831	567	EXECUTED	8:17fe48c56aa457a6a09775099d44d7a5	addForeignKeyConstraint baseTableName=action, constraintName=fk_action_model_id, referencedTableName=report_card	Added 0.46.0 - CASCADE delete for action.model_id	\N	4.11.0	\N	\N	0189608756
+87	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:54.889644	85	EXECUTED	8:0eccf19a93cb0ba4017aafd1d308c097	dropTable tableName=raw_column; dropTable tableName=raw_table	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v46.00-088	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:19.194503	569	EXECUTED	8:ff9defc19920960db55ef71e4d32b4ea	sql	Added 0.46.5 -- backfill `permission_id` values in `sandboxes`. This is a fixed verison of v46.00-066 which has been removed, since it had a bug that blocked a customer from upgrading.	\N	4.11.0	\N	\N	0189608756
+v46.00-089	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:19.34508	570	EXECUTED	8:e0fbd2514cc960cc74106204ac65a3ea	sql	Added 0.46.5 -- remove orphaned entries in `sandboxes`	\N	4.11.0	\N	\N	0189608756
+v46.00-090	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:19.508901	571	EXECUTED	8:963c0cd3a7bd2858e4dbfd4d4aad95cb	addForeignKeyConstraint baseTableName=sandboxes, constraintName=fk_sandboxes_ref_permissions, referencedTableName=permissions	Add foreign key constraint on sandboxes.permission_id	\N	4.11.0	\N	\N	0189608756
+v47.00-002	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:19.85553	573	EXECUTED	8:963690f41f487b122464277c627823f6	addColumn tableName=metabase_field	Added 0.47.0 - Add json_unfolding column to metabase_field	\N	4.11.0	\N	\N	0189608756
+v47.00-003	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:20.007209	574	EXECUTED	8:97bccdf5e9bcdfacd1c315fa1342c167	sql	Added 0.47.0 - Populate metabase_field.json_unfolding based on base_type	\N	4.11.0	\N	\N	0189608756
+v47.00-004	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:20.194884	575	EXECUTED	8:58ad79be7de00e413da51fab3c8beea0	addColumn tableName=metabase_field	Added 0.47.0 - Add auto_incremented to metabase_field	\N	4.11.0	\N	\N	0189608756
+v47.00-005	winlost	migrations/001_update_migrations.yaml	2023-11-17 02:55:20.37578	576	EXECUTED	8:ccf53f27a551fd0799d0103bd65cca99	addColumn tableName=report_dashboard	Added 0.47.0 - Add auto_apply_filters to dashboard	\N	4.11.0	\N	\N	0189608756
+v47.00-006	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:20.757849	577	EXECUTED	8:b63ff10d3d121bed42eece1ae3dbb177	createTable tableName=dashboard_tab	Added 0.47.0 - Add dashboard_tab table	\N	4.11.0	\N	\N	0189608756
+v47.00-007	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:20.942908	578	EXECUTED	8:e9f7d6b18d65be6fde07c0b5471b8760	addColumn tableName=report_dashboardcard	Added 0.47.0 -- add report_dashboardcard.dashboard_tab_id	\N	4.11.0	\N	\N	0189608756
+v47.00-008	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:21.099702	579	EXECUTED	8:e37c88d202007bd3e6a72b6404d1b0e9	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_report_dashboardcard_ref_dashboard_tab_id, referencedTableName=dashboard_tab	Added 0.47.0 -- add report_dashboardcard.dashboard_tab_id fk constraint	\N	4.11.0	\N	\N	0189608756
+v47.00-009	qwef	migrations/001_update_migrations.yaml	2023-11-17 02:55:21.25452	580	EXECUTED	8:398124b0dd4dd6e117cdc1378152469b	sql	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-012	qwef	migrations/001_update_migrations.yaml	2023-11-17 02:55:21.742218	583	EXECUTED	8:bf19ef077bc6bc517c515dd78ca46e3b	dropColumn columnName=google_auth, tableName=core_user	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-001	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:19.668823	572	EXECUTED	8:14bf2732687c04256e9c036ba142aa93	sql	Added 0.47.0 -- set base-type to type/JSON for JSON database-types for postgres and mysql	\N	4.11.0	\N	\N	0189608756
+v47.00-013	qwef	migrations/001_update_migrations.yaml	2023-11-17 02:55:21.902858	584	EXECUTED	8:044aec6d07049e3c5a45830797189ab0	sql	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-014	qwef	migrations/001_update_migrations.yaml	2023-11-17 02:55:22.060699	585	EXECUTED	8:6a973f3198ad4596ecade95e61b35991	dropColumn columnName=ldap_auth, tableName=core_user	Added 0.47.0 - Replace user google_auth and ldap_auth columns with sso_source values	\N	4.11.0	\N	\N	0189608756
+v47.00-015	escherize	migrations/001_update_migrations.yaml	2023-11-17 02:55:22.250649	586	EXECUTED	8:d2d5eea99db75e656709006b3a7749f0	addColumn tableName=metabase_database	added 0.47.0 - Add is_audit to metabase_database	\N	4.11.0	\N	\N	0189608756
+v48.00-055	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:03.717812	668	EXECUTED	8:fd36092d50982fbf31ce16757c16e47e	sqlFile path=instance_analytics_views/tasks/v1/postgres-tasks.sql; sqlFile path=instance_analytics_views/tasks/v1/mysql-tasks.sql; sqlFile path=instance_analytics_views/tasks/v1/h2-tasks.sql	Added 0.48.0 - new view v_tasks	\N	4.21.1	\N	\N	5979601574
+v48.00-056	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:04.424634	669	EXECUTED	8:229e8058cc8309053b344bbfdb042405	addColumn tableName=view_log	Adjust view_log schema for Audit Log v2	\N	4.21.1	\N	\N	5979601574
+v48.00-057	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:05.121852	670	EXECUTED	8:8e32153df1031ea12005d58ce1674873	addColumn tableName=view_log	Adjust view_log schema for Audit Log v2	\N	4.21.1	\N	\N	5979601574
+v47.00-016	calherres	migrations/001_update_migrations.yaml	2023-11-17 02:55:22.475294	587	EXECUTED	8:62290f0389eb2a17170a9c0351ac8a85	customChange	Added 0.47.0 - Migrate the report_card.visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-019	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:23.237682	589	EXECUTED	8:7a5589d70c80b3ffc99a85722f440a91	createTable tableName=model_index_value	Indexed Entities values table	\N	4.11.0	\N	\N	0189608756
+v47.00-020	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:23.410215	590	EXECUTED	8:d32a4cf7b37f012a7db74628cdde48df	addUniqueConstraint constraintName=unique_model_index_value_model_index_id_model_pk, tableName=model_index_value	Add unique constraint on index_id and pk	\N	4.11.0	\N	\N	0189608756
+53	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:46.671992	52	EXECUTED	8:78d015c5090c57cd6972eb435601d3d0	createTable tableName=query		\N	4.11.0	\N	\N	0189608756
+77	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:51.956134	75	EXECUTED	8:07f0a6cd8dbbd9b89be0bd7378f7bdc8	addColumn tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v47.00-023	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:23.56975	591	EXECUTED	8:5d9e81c3e950afad66cb5e9e823b1f03	createIndex indexName=idx_model_index_model_id, tableName=model_index	Added 0.47.0 -- model_index index	\N	4.11.0	\N	\N	0189608756
+v47.00-031	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:25.120843	599	EXECUTED	8:ad9bdb62df65cf26a5a9892a82779ea7	sql; sql	Added 0.47.0 - migrate dashboard grid size from 18 to 24	\N	4.11.0	\N	\N	0189608756
+v47.00-025	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:23.881054	593	EXECUTED	8:6889e314a2016c9bc017a358b81ed24e	addForeignKeyConstraint baseTableName=model_index_value, constraintName=fk_model_index_value_model_id, referencedTableName=model_index	Added 0.47.0 -- model_index_value foriegn key to model_index	\N	4.11.0	\N	\N	0189608756
+89	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:57.250715	87	EXECUTED	8:2ee410aba3f9bcd144ea362494a19a58	createTable tableName=qrtz_job_details; addPrimaryKey constraintName=pk_qrtz_job_details, tableName=qrtz_job_details; createTable tableName=qrtz_triggers; addPrimaryKey constraintName=pk_qrtz_triggers, tableName=qrtz_triggers; addForeignKeyConstra...	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+v47.00-027	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:24.392914	595	EXECUTED	8:c720f3de8feed35e592c0ca9b9975a18	customChange	Added 0.47.0 - Migrate field_ref in report_card.result_metadata from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-028	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:24.583361	596	EXECUTED	8:f38598170766acaaa8fd3b20ef683372	customChange	Added 0.47.0 - Add join-alias to the report_card.visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
+v47.00-029	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:24.743626	597	EXECUTED	8:c7625e5018087e915e547f9318b2b8f5	customChange	Added 0.47.0 - Stack cards vertically for dashboard with tabs on downgrade	\N	4.11.0	\N	\N	0189608756
+v47.00-030	escherize	migrations/001_update_migrations.yaml	2023-11-17 02:55:24.9408	598	EXECUTED	8:7919d959008457419a09fd3275d3ed00	addColumn tableName=collection	Added 0.47.0 - Type column for collections for instance-analytics	\N	4.11.0	\N	\N	0189608756
+v47.00-036	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:26.040839	604	EXECUTED	8:e815729b6ebfd4799743b249409558aa	addPrimaryKey constraintName=pk_implicit_action, tableName=implicit_action	Added 0.47.0 - Set primary key to action_id for implicit_action table	\N	4.11.0	\N	\N	0189608756
+v47.00-037	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:26.20753	605	EXECUTED	8:58c705a18bb3441e3ed5d1167ec64fcb	addForeignKeyConstraint baseTableName=implicit_action, constraintName=fk_implicit_action_action_id, referencedTableName=action	Added 0.47.0 - Add foreign key constraint on implicit_action.action_id	\N	4.11.0	\N	\N	0189608756
+13	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:33.859979	12	EXECUTED	8:8cb1df98d24b215132d5e0175bc7009f	createTable tableName=activity; createIndex indexName=idx_activity_timestamp, tableName=activity; createIndex indexName=idx_activity_user_id, tableName=activity; createIndex indexName=idx_activity_custom_id, tableName=activity		\N	4.11.0	\N	\N	0189608756
+37	tlrobinson	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:39.537794	36	EXECUTED	8:07d959eff81777e5690e2920583cfe5f	addColumn tableName=query_queryexecution; addNotNullConstraint columnName=query_hash, tableName=query_queryexecution; createIndex indexName=idx_query_queryexecution_query_hash, tableName=query_queryexecution; createIndex indexName=idx_query_querye...		\N	4.11.0	\N	\N	0189608756
+v47.00-018	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:22.945862	588	EXECUTED	8:7bacd2f60393eebd3bebcfdb0e952ecd	createTable tableName=model_index	Indexed Entities information table	\N	4.11.0	\N	\N	0189608756
+14	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:34.106836	13	EXECUTED	8:22397aede818dcd23b443810127b665f	createTable tableName=view_log; createIndex indexName=idx_view_log_user_id, tableName=view_log; createIndex indexName=idx_view_log_timestamp, tableName=view_log		\N	4.11.0	\N	\N	0189608756
+15	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:34.264358	14	EXECUTED	8:505b91530103673a9be3382cd2db1070	addColumn tableName=revision		\N	4.11.0	\N	\N	0189608756
+v47.00-044	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:26.617172	607	EXECUTED	8:1828d1bd8e2da6eec14ca61e6c01a56f	customChange	Added 0.47.0 - Add join-alias to the report_dashboardcard.visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
+v47.00-045	calherres	migrations/001_update_migrations.yaml	2023-11-17 02:55:26.800859	608	EXECUTED	8:d7f479a389877010f5af9dc7ec859b51	customChange	Added 0.47.0 - Migrate dashboard revision dashboard cards' visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-046	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:26.989221	609	EXECUTED	8:1e43c8712a5b36809a3c3fa9933a523c	customChange	Added 0.47.0 - Add join-alias to dashboard revision dashboard cards' visualization_settings.column_settings field refs	\N	4.11.0	\N	\N	0189608756
+v47.00-050	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:27.171168	610	EXECUTED	8:a5d516f2b5ea92f401387646b49a9950	addColumn tableName=metabase_table	Added 0.47.0 - table.is_upload	\N	4.11.0	\N	\N	0189608756
+21	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:35.720021	20	EXECUTED	8:be31f33e7fa7961b902c3ee4a56e19a7	createTable tableName=segment; createIndex indexName=idx_segment_creator_id, tableName=segment; createIndex indexName=idx_segment_table_id, tableName=segment		\N	4.11.0	\N	\N	0189608756
+24	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:36.3879	23	EXECUTED	8:60825b125b452747098b577310c142b1	createTable tableName=dependency; createIndex indexName=idx_dependency_model, tableName=dependency; createIndex indexName=idx_dependency_model_id, tableName=dependency; createIndex indexName=idx_dependency_dependent_on_model, tableName=dependency;...		\N	4.11.0	\N	\N	0189608756
+25	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:36.636554	24	EXECUTED	8:ea4cd56cdc21ddf73495101a2a1cb3d4	createTable tableName=metric; createIndex indexName=idx_metric_creator_id, tableName=metric; createIndex indexName=idx_metric_table_id, tableName=metric		\N	4.11.0	\N	\N	0189608756
+v48.00-059	qwef	migrations/001_update_migrations.yaml	2024-01-23 03:14:05.719133	671	EXECUTED	8:fd8b5031dbbf69c4588ce2699eb20f33	sql	Update the namespace of any audit collections that are already loaded	\N	4.21.1	\N	\N	5979601574
+157	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.15877	153	MARK_RAN	8:0197c46bf8536a75dbf7e9aee731f3b2	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+158	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.260231	154	MARK_RAN	8:2ebdd5a179ce2487b2e23b6be74a407c	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+159	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.354857	155	MARK_RAN	8:c62719dad239c51f045315273b56e2a9	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+27	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:37.068077	26	EXECUTED	8:4778d6724e114803d2d805f494008fb1	createTable tableName=dashboardcard_series; createIndex indexName=idx_dashboardcard_series_dashboardcard_id, tableName=dashboardcard_series; createIndex indexName=idx_dashboardcard_series_card_id, tableName=dashboardcard_series		\N	4.11.0	\N	\N	0189608756
+6	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:32.40009	5	EXECUTED	8:2d2f5d1756ecb81da7c09ccfb9b1565a	dropNotNullConstraint columnName=organization_id, tableName=metabase_database; dropForeignKeyConstraint baseTableName=metabase_database, constraintName=fk_database_ref_organization_id; dropNotNullConstraint columnName=organization_id, tableName=re...		\N	4.11.0	\N	\N	0189608756
+173	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:07.988354	168	EXECUTED	8:4d32b4b7be3f4801e51aeffa5dd47649	dropForeignKeyConstraint baseTableName=activity, constraintName=fk_activity_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v47.00-024	dpsutton	migrations/001_update_migrations.yaml	2023-11-17 02:55:23.722918	592	EXECUTED	8:3079db8d91e54ff2b41050f7dab27936	addForeignKeyConstraint baseTableName=model_index, constraintName=fk_model_index_model_id, referencedTableName=report_card	Added 0.47.0 -- model_index foriegn key to report_card	\N	4.11.0	\N	\N	0189608756
+v47.00-026	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:24.178647	594	EXECUTED	8:acf279edf538ee29a4ea9103d809b3da	createTable tableName=connection_impersonations	Added 0.47.0 - New table for connection impersonation policies	\N	4.11.0	\N	\N	0189608756
+17	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:34.610079	16	EXECUTED	8:051c23cd15359364b9895c1569c319e7	addColumn tableName=metabase_database; sql		\N	4.11.0	\N	\N	0189608756
+18	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:34.812424	17	EXECUTED	8:62a0483dde183cfd18dd0a86e9354288	createTable tableName=data_migrations; createIndex indexName=idx_data_migrations_id, tableName=data_migrations		\N	4.11.0	\N	\N	0189608756
+71	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:50.730882	69	EXECUTED	8:755e5c3dd8a55793f29b2c95cb79c211	dropNotNullConstraint columnName=card_id, tableName=report_dashboardcard	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
+145	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.021865	141	MARK_RAN	8:b162dd48ef850ab4300e2d714eac504e	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+55	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:47.35226	54	EXECUTED	8:088fee4d7555e104bc96fed923bce9aa	addColumn tableName=report_dashboard; addColumn tableName=report_dashboard; createTable tableName=dashboard_favorite; addUniqueConstraint constraintName=unique_dashboard_favorite_user_id_dashboard_id, tableName=dashboard_favorite; createIndex inde...		\N	4.11.0	\N	\N	0189608756
+57	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:47.689815	56	EXECUTED	8:aab81d477e2d19a9ab18c58b78c9af88	addColumn tableName=report_card	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
+187	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:10.219388	182	EXECUTED	8:3fbb75c0c491dc6628583184202b8f39	dropForeignKeyConstraint baseTableName=core_session, constraintName=fk_session_ref_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+287	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:26.617069	280	EXECUTED	8:0679eedae767a8648383aac2f923e413	sql	Added 0.39 - Semantic type system - migrate ISO8601 strings	\N	4.11.0	\N	\N	0189608756
+38	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:40.50456	37	EXECUTED	8:c9251b99ab1122ef441117d5d9852d29	addColumn tableName=metabase_database; addColumn tableName=metabase_table; addColumn tableName=metabase_field; addColumn tableName=report_dashboard; addColumn tableName=metric; addColumn tableName=segment; addColumn tableName=metabase_database; ad...		\N	4.11.0	\N	\N	0189608756
+39	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:40.672063	38	EXECUTED	8:334adc22af5ded71ff27759b7a556951	addColumn tableName=core_user		\N	4.11.0	\N	\N	0189608756
+7	cammsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:32.592262	6	EXECUTED	8:4f23ddbddd447461588462fa8bb443dd	addColumn tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+40	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:41.451922	39	EXECUTED	8:69326196bb1696f76fbce059b6d7520e	createTable tableName=permissions_group; createIndex indexName=idx_permissions_group_name, tableName=permissions_group; createTable tableName=permissions_group_membership; addUniqueConstraint constraintName=unique_permissions_group_membership_user...		\N	4.11.0	\N	\N	0189608756
+v47.00-033	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:25.531015	601	EXECUTED	8:c4a38673bf2a702e807a2074c0d0b719	customChange	Added 0.47.0 - Migrate field refs in visualization_settings.column_settings keys from legacy format	\N	4.11.0	\N	\N	0189608756
+v47.00-034	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:25.712781	602	EXECUTED	8:bb77d686c5c204e480a1da5fcfb518e2	customChange	Added 0.47.0 - Add join-alias to the visualization_settings.column_settings field refs in card revisions	\N	4.11.0	\N	\N	0189608756
+28	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:37.223989	27	EXECUTED	8:428e4eb05e4e29141735adf9ae141a0b	addColumn tableName=core_user		\N	4.11.0	\N	\N	0189608756
+v48.00-060	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:14:06.315955	672	EXECUTED	8:a59027f5494811033ce77cd0ba05d6bd	createIndex indexName=idx_task_history_started_at, tableName=task_history	Added 0.48.0 - task_history.started_at	\N	4.21.1	\N	\N	5979601574
+v48.00-061	piranha	migrations/001_update_migrations.yaml	2024-01-23 03:14:07.033349	673	EXECUTED	8:9b9939aad6ca12f7cf4dfa85dae6eb1c	addColumn tableName=query_execution	Adds query_execution.cache_hash -> query_cache.query_hash	\N	4.21.1	\N	\N	5979601574
+30	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:37.607944	29	EXECUTED	8:2c3a50cef177cb90d47a9973cd5934e5	addColumn tableName=metabase_field; addNotNullConstraint columnName=visibility_type, tableName=metabase_field		\N	4.11.0	\N	\N	0189608756
+56	wwwiiilll	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:47.506271	55	EXECUTED	8:9f46051abaee599e2838733512a32ad0	addColumn tableName=core_user	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
+44	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:42.975072	43	EXECUTED	8:2e356e8a1049286f1c78324828ee7867	dropColumn columnName=public_perms, tableName=report_card; dropColumn columnName=public_perms, tableName=report_dashboard; dropColumn columnName=public_perms, tableName=pulse		\N	4.11.0	\N	\N	0189608756
+45	tlrobinson	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:43.209945	44	EXECUTED	8:421edd38ee0cb0983162f57193f81b0b	addColumn tableName=report_dashboardcard; addNotNullConstraint columnName=visualization_settings, tableName=report_dashboardcard		\N	4.11.0	\N	\N	0189608756
+104	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.143345	101	EXECUTED	8:21709f17e6d1b521d3d3b8cbb5445218	addColumn tableName=core_session	Added EE 1.1.6/CE 0.33.0	\N	4.11.0	\N	\N	0189608756
+217	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:15.074471	212	EXECUTED	8:da7460a35a724109ae9b5096cd18666b	dropForeignKeyConstraint baseTableName=permissions_group_membership, constraintName=fk_permissions_group_membership_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+244	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:19.680826	239	EXECUTED	8:4d40104eaa47d01981644462ef56f369	addForeignKeyConstraint baseTableName=report_card, constraintName=fk_report_card_ref_table_id, referencedTableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v43.00-062	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:52.454331	438	EXECUTED	8:2c24e7af74d3053920fb809b29190303	modifyDataType columnName=timestamp, tableName=revision	Added 0.43.0 - Unify datatype with revision.timestamp for timezone info (see 17829).	\N	4.11.0	\N	\N	0189608756
+v45.00-003	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:54:59.216034	467	EXECUTED	8:512337d6d4af38016aa79585abbe03a1	addPrimaryKey constraintName=pk_query_action, tableName=query_action	Added 0.44.0 - writeback	\N	4.11.0	\N	\N	0189608756
+90	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:57.489234	88	EXECUTED	8:8562a72a1190deadc5fa59a23a6396dc	addColumn tableName=core_user; sql; dropColumn columnName=saml_auth, tableName=core_user	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+91	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:57.670953	89	EXECUTED	8:9b8831e1e409f08e874c4ece043d0340	dropColumn columnName=raw_table_id, tableName=metabase_table; dropColumn columnName=raw_column_id, tableName=metabase_field	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+92	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:57.859986	90	EXECUTED	8:1e5bc2d66778316ea640a561862c23b4	addColumn tableName=query_execution	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+v46.00-021	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:09.931132	524	EXECUTED	8:52c8107f4bcc6e9889b270e0a4954921	addNotNullConstraint columnName=dataset_query, tableName=query_action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+58	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:48.163577	57	EXECUTED	8:9e6d48acacceb109e0bd27e4e44a8cb4	createTable tableName=dimension; addUniqueConstraint constraintName=unique_dimension_field_id_name, tableName=dimension; createIndex indexName=idx_dimension_field_id, tableName=dimension	Added 0.25.0	\N	4.11.0	\N	\N	0189608756
+59	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:48.341883	58	EXECUTED	8:5b6ce52371e0e9eee88e6d766225a94b	addColumn tableName=metabase_field	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+60	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:48.585503	59	EXECUTED	8:2141162a1c99a5dd95e5a67c5595e6d7	addColumn tableName=metabase_database; addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+61	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:48.771573	60	EXECUTED	8:7dded6fd5bf74d79b9a0b62511981272	addColumn tableName=metabase_field	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+62	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:48.960333	61	EXECUTED	8:cb32e6eaa1a2140703def2730f81fef2	addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+63	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:49.150022	62	EXECUTED	8:226f73b9f6617495892d281b0f8303db	addColumn tableName=metabase_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+64	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:49.299821	63	EXECUTED	8:4dcc8ffd836b56756f494d5dfce07b50	dropForeignKeyConstraint baseTableName=raw_table, constraintName=fk_rawtable_ref_database	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+67	attekei	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:49.777602	65	EXECUTED	8:a03608d97e19b8a716989e918efad0a6	createTable tableName=computation_job; createTable tableName=computation_job_result	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
+68	sbelak	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:49.975715	66	EXECUTED	8:b4ac06d133dfbdc6567d992c7e18c6ec	addColumn tableName=computation_job; addColumn tableName=computation_job	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
+69	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:50.321697	67	EXECUTED	8:eadbe00e97eb53df4b3df60462f593f6	addColumn tableName=pulse; addColumn tableName=pulse; addColumn tableName=pulse; dropNotNullConstraint columnName=name, tableName=pulse	Added 0.27.0	\N	4.11.0	\N	\N	0189608756
+70	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:50.573322	68	EXECUTED	8:4e4eff7abb983b1127a32ba8107e7fb8	addColumn tableName=metabase_field; addNotNullConstraint columnName=database_type, tableName=metabase_field	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
+72	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:51.000564	70	EXECUTED	8:4dc6debdf779ab9273cf2158a84bb154	addColumn tableName=pulse_card; addColumn tableName=pulse_card	Added 0.28.0	\N	4.11.0	\N	\N	0189608756
+v47.00-010	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:21.425306	581	EXECUTED	8:3c4f9fc116fbced18c50952def65b3e0	modifyDataType columnName=name, tableName=metabase_table	Added 0.47.0 - Make metabase_table.name long enough for H2 names	\N	4.11.0	\N	\N	0189608756
+v47.00-051	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:27.337852	611	EXECUTED	8:83a8b7ad58b2deb0732e671db51fa608	dropForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_db_id	Added 0.47.0 - Drop foreign key constraint on connection_impersonations.db_id	\N	4.11.0	\N	\N	0189608756
+74	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:51.386389	72	EXECUTED	8:16726d6560851325930c25caf3c8ab96	addColumn tableName=metabase_field	Added 0.29.0	\N	4.11.0	\N	\N	0189608756
+76	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:51.767211	74	EXECUTED	8:9b7190c9171ccca72617d508875c3c82	addColumn tableName=metabase_table	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+149	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.403366	145	MARK_RAN	8:dd45bfc4af5e05701a064a5f2a046d7f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+42	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:42.399429	41	EXECUTED	8:e32b3a1624fa289a6ee1f3f0a2dac1f6	dropForeignKeyConstraint baseTableName=query_queryexecution, constraintName=fk_queryexecution_ref_query_id; dropColumn columnName=query_id, tableName=query_queryexecution; dropColumn columnName=is_staff, tableName=core_user; dropColumn columnName=...		\N	4.11.0	\N	\N	0189608756
+160	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.449889	156	MARK_RAN	8:1441c71af662abb809cba3b3b360ce81	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+75	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:51.581426	73	EXECUTED	8:6072cabfe8188872d8e3da9a675f88c1	addColumn tableName=report_card	Added 0.28.2	\N	4.11.0	\N	\N	0189608756
+73	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:51.199948	71	EXECUTED	8:3c0f03d18ff78a0bcc9915e1d9c518d6	addColumn tableName=metabase_database	Added 0.29.0	\N	4.11.0	\N	\N	0189608756
+162	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.729861	157	EXECUTED	8:c37f015ad11d77d66e09925eed605cdf	dropTable tableName=query_queryexecution	Added 0.23.0 as a data migration; converted to Liquibase migration in 0.35.0	\N	4.11.0	\N	\N	0189608756
+163	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:05.889898	158	EXECUTED	8:9ef66a82624d70738fc89807a2398ed1	dropColumn columnName=read_permissions, tableName=report_card	Added 0.35.0	\N	4.11.0	\N	\N	0189608756
+164	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:06.072159	159	EXECUTED	8:f19470701bbb33f19f91b1199a915881	addColumn tableName=core_user	Added 0.35.0	\N	4.11.0	\N	\N	0189608756
+66	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:49.49361	64	EXECUTED	8:e77d66af8e3b83d46c5a0064a75a1aac	sql; sql	Added 0.26.0	\N	4.11.0	\N	\N	0189608756
+v47.00-032	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:25.342925	600	EXECUTED	8:98d2edfc9caa3a03d307aa965a3b51c9	customChange	Added 0.47.0 - migrate dashboard grid size from 18 to 24 for revisions	\N	4.11.0	\N	\N	0189608756
+94	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:58.389124	92	EXECUTED	8:a2a1eedf1e8f8756856c9d49c7684bfe	createTable tableName=task_history; createIndex indexName=idx_task_history_end_time, tableName=task_history; createIndex indexName=idx_task_history_db_id, tableName=task_history	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+95	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:58.617146	93	EXECUTED	8:e7cd8168533c58c865dacf320e819218	addUniqueConstraint constraintName=idx_databasechangelog_id_author_filename, tableName=databasechangelog	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+96	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:58.804503	94	EXECUTED	8:5cb2f36edcca9c6e14c5e109d6aeb68b	addColumn tableName=metabase_field	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+97	senior	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:58.867244	95	MARK_RAN	8:9169e238663c5d036bd83428d2fa8e4b	modifyDataType columnName=results, tableName=query_cache	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+98	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:59.160505	96	EXECUTED	8:f036d20a4dc86fb60ffb64ea838ed6b9	addUniqueConstraint constraintName=idx_uniq_table_db_id_schema_name, tableName=metabase_table; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+99	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:59.427634	97	EXECUTED	8:274bb516dd95b76c954b26084eed1dfe	addUniqueConstraint constraintName=idx_uniq_field_table_id_parent_id_name, tableName=metabase_field; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+100	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:59.582736	98	EXECUTED	8:28b6b684c539d4668110b920985ee363	sql; sql	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+101	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:59.745203	99	EXECUTED	8:58eabb08a175fafe8985208545374675	createIndex indexName=idx_field_parent_id, tableName=metabase_field	Added 0.32.0	\N	4.11.0	\N	\N	0189608756
+103	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:59.943338	100	EXECUTED	8:fda3670fd16a40fd9d0f89a003098d54	addColumn tableName=metabase_database	Added 0.32.10	\N	4.11.0	\N	\N	0189608756
+106	sb	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.309825	102	EXECUTED	8:a3dd42bbe25c415ce21e4c180dc1c1d7	modifyDataType columnName=database_type, tableName=metabase_field	Added 0.33.5	\N	4.11.0	\N	\N	0189608756
+107	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.387207	103	MARK_RAN	8:605c2b4d212315c83727aa3d914cf57f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+108	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.477566	104	MARK_RAN	8:d11419da9384fd27d7b1670707ac864c	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+110	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.664634	106	MARK_RAN	8:82343097044b9652f73f3d3a2ddd04fe	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+111	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.768996	107	MARK_RAN	8:528de1245ba3aa106871d3e5b3eee0ba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+112	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.858903	108	MARK_RAN	8:010a3931299429d1adfa91941c806ea4	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+113	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.954399	109	MARK_RAN	8:8f8e0836064bdea82487ecf64a129767	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+114	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.046002	110	MARK_RAN	8:7a0bcb25ece6d9a311d6c6be7ed89bb7	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+117	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.341275	113	MARK_RAN	8:f2d7f9fb1b6713bc5362fe40bfe3f91f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+119	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.533521	115	MARK_RAN	8:195cf171ac1d5531e455baf44d9d6561	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+120	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.625209	116	MARK_RAN	8:61f53fac337020aec71868656a719bba	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+165	sb	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:06.326215	160	EXECUTED	8:b3ae2b90db5c4264ea2ac50d304d6ad4	addColumn tableName=metabase_field; addColumn tableName=metabase_field; addColumn tableName=metabase_table; sql	Added field_order to Table and database_position to Field	\N	4.11.0	\N	\N	0189608756
+166	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:06.528399	161	EXECUTED	8:92dafa5c15c46e2af8380304449c7dfa	modifyDataType columnName=updated_at, tableName=metabase_fieldvalues; modifyDataType columnName=updated_at, tableName=query_cache	Added 0.36.0/1.35.4	\N	4.11.0	\N	\N	0189608756
+167	walterl, camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:06.876148	162	EXECUTED	8:4ed8c3a2d7d00700cc564095ddbb290f	sql; createTable tableName=native_query_snippet; createIndex indexName=idx_snippet_name, tableName=native_query_snippet	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+169	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:07.213431	164	EXECUTED	8:2b97e6eaa7854e179abb9f3749f73b18	dropColumn columnName=rows, tableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+170	sb	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:07.371174	165	EXECUTED	8:dbd6ee52b0f9195e449a6d744606b599	dropColumn columnName=fields_hash, tableName=metabase_table	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+171	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:07.642108	166	EXECUTED	8:e08e8d6d9ea7073cd823e6ff75fc2b67	addColumn tableName=native_query_snippet; createIndex indexName=idx_snippet_collection_id, tableName=native_query_snippet	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+172	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:07.832206	167	EXECUTED	8:212f4010b504e358853fd017032f844f	addColumn tableName=collection	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+174	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:08.154961	169	EXECUTED	8:66f31503ba532702e54ea531af668531	addForeignKeyConstraint baseTableName=activity, constraintName=fk_activity_ref_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+175	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:08.314311	170	EXECUTED	8:c3ceddfca8827d73474cd9a70ea01d1c	dropForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+176	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:08.464593	171	EXECUTED	8:89c918faa84b7f3f5fa291d4da74414c	addForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+177	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:08.619983	172	EXECUTED	8:d45f2198befc83de1f1f963c750607af	dropForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_label_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+178	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:08.77864	173	EXECUTED	8:63d396999449da2d42b3d3e22f3454fa	addForeignKeyConstraint baseTableName=card_label, constraintName=fk_card_label_ref_label_id, referencedTableName=label	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+179	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:08.934722	174	EXECUTED	8:2a0a7956402ef074e5d54c73ac2d5405	dropForeignKeyConstraint baseTableName=collection, constraintName=fk_collection_personal_owner_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+93	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:58.042842	91	EXECUTED	8:93b0d408a3970e30d7184ed1166b5476	addColumn tableName=query	Added 0.31.0	\N	4.11.0	\N	\N	0189608756
+181	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:09.25042	176	EXECUTED	8:16923f06b2bbb60c6ac78a0c4b7e4d4f	dropForeignKeyConstraint baseTableName=collection_revision, constraintName=fk_collection_revision_user_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+86	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:54.698596	84	EXECUTED	8:50c75bb29f479e0b3fb782d89f7d6717	sql	Added 0.30.0	\N	4.11.0	\N	\N	0189608756
+182	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:09.402379	177	EXECUTED	8:d59d864c038c530a49056704c93f231d	addForeignKeyConstraint baseTableName=collection_revision, constraintName=fk_collection_revision_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+4	cammsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:31.734426	3	EXECUTED	8:a8e7822a91ea122212d376f5c2d4158f	createTable tableName=setting		\N	4.11.0	\N	\N	0189608756
+152	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.685437	148	MARK_RAN	8:4bcbc472f2d6ae3a5e7eca425940e52b	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+232	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:17.630904	227	EXECUTED	8:be2457ae1e386c9d5ec5bfa4ae681fd6	addForeignKeyConstraint baseTableName=pulse_channel_recipient, constraintName=fk_pulse_channel_recipient_ref_pulse_channel_id, referencedTableName=pulse_channel	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+258	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:21.925875	253	EXECUTED	8:58974c6ad8aee63f09e6e48b1a78c267	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_dashboardcard_ref_dashboard_id, referencedTableName=report_dashboard	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+276	robroland	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:24.739062	269	EXECUTED	8:ae43765761ef0f32c8a6f1fb88ead0ca	addColumn tableName=pulse_card	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+v42.00-030	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:35.854858	339	MARK_RAN	8:59e52a188f1d131bb62161ee3ab8f0b0	modifyDataType columnName=points_of_interest, tableName=metabase_table	Added 0.42.0 - modify type of metabase_table.points_of_interest from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v42.00-051	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:37.886503	360	MARK_RAN	8:e3727da5c8fd5077ba3c541d05e9d329	modifyDataType columnName=parameters, tableName=report_dashboard	Added 0.42.0 - modify type of report_dashboard.parameters from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+11	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:33.306169	10	EXECUTED	8:ca6561cab1eedbcf4dcb6d6e22cd46c6	sql		\N	4.11.0	\N	\N	0189608756
+v43.00-038	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:48.471304	417	EXECUTED	8:12e445545dfcf946fd2f04b3f33e8bb7	createTable tableName=collection_bookmark	Added 0.43.0 - Collection bookmarks table	\N	4.11.0	\N	\N	0189608756
+v44.00-007	braden	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:54.677413	446	EXECUTED	8:007f472f4397fba9deb7731ddd4a2a9e	addColumn tableName=pulse	Added 0.44.0 - add entity_id column to all internal entities	\N	4.11.0	\N	\N	0189608756
+v45.00-027	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:01.54825	475	EXECUTED	8:40c3c8391c1416a3bce09ca3c7237173	addForeignKeyConstraint baseTableName=report_dashboardcard, constraintName=fk_report_dashboardcard_ref_action_id, referencedTableName=action	Added 0.45.0 - apps add fk for action_id to report_dashboardcard	\N	4.11.0	\N	\N	0189608756
+v46.00-002	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:06.480403	505	EXECUTED	8:b2b112f0df413692631b75822f658de1	addColumn tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+v46.00-028	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:11.370692	531	EXECUTED	8:33cc1a038e926acb7dfd7cf29b4fa545	createTable tableName=parameter_card	Added 0.46.0 -- Join table connecting cards to dashboards/cards's parameters that need custom filter values from the card	\N	4.11.0	\N	\N	0189608756
+151	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.589726	147	MARK_RAN	8:bb752a7d09d437c7ac294d5ab2600079	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+v46.00-060	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:15.784266	557	EXECUTED	8:fc1762a930726afb11131acf3a56312b	createIndex indexName=idx_action_creator_id, tableName=action	Added 0.46.0 -- action.creator_id index	\N	4.11.0	\N	\N	0189608756
+168	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:07.050783	163	EXECUTED	8:6d40bfa472bccd2d54284aeb89e1ec3c	modifyDataType columnName=started_at, tableName=query_execution	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+41	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:41.730606	40	EXECUTED	8:fae0855adf2f702f1133e32fc98d02a5	dropColumn columnName=field_type, tableName=metabase_field; addDefaultValue columnName=active, tableName=metabase_field; addDefaultValue columnName=preview_display, tableName=metabase_field; addDefaultValue columnName=position, tableName=metabase_...		\N	4.11.0	\N	\N	0189608756
+121	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.719307	117	MARK_RAN	8:1baa145d2ffe1e18d097a63a95476c5f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+193	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.171068	188	EXECUTED	8:db171179fe094db9fee7e2e7df60fa4e	dropForeignKeyConstraint baseTableName=group_table_access_policy, constraintName=fk_gtap_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+221	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:15.744076	216	EXECUTED	8:54a4c0d8a4eda80dc81fb549a629d075	dropForeignKeyConstraint baseTableName=pulse, constraintName=fk_pulse_collection_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+383	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:32.313505	308	EXECUTED	8:eacd3281e0397c61047e4a69e725a5ec	createIndex indexName=idx_query_execution_card_id_started_at, tableName=query_execution	Added 0.41.3 -- Add index to QueryExecution card_id + started_at to fix performance issue	\N	4.11.0	\N	\N	0189608756
+v42.00-021	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:34.999704	330	MARK_RAN	8:041c129167b10c951f337dba672020d6	modifyDataType columnName=description, tableName=metabase_field	Added 0.42.0 - modify type of metabase_field.description from text to text on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v43.00-001	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:40.715578	381	EXECUTED	8:200f0cc5989f637c12a497a5cad56a58	sql	Added 0.43.0 - migrates any Database using the old bigquery driver to bigquery-cloud-sdk instead	\N	4.11.0	\N	\N	0189608756
+v44.00-001	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:53.276113	440	EXECUTED	8:ca1fe70c2560c013653bbc00b58e2964	dropNotNullConstraint columnName=creator_id, tableName=persisted_info	Added 0.44.0 - Remove not null constraint from persisted_info.creator_id	\N	4.11.0	\N	\N	0189608756
+v45.00-057	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:05.805972	502	MARK_RAN	8:650a5b435f8195765a2ab1e3e4bc7b14	modifyDataType columnName=value, tableName=secret	Added 0.45.0 - modify type of secret.value from blob to longblob on mysql,mariadb	\N	4.11.0	\N	\N	0189608756
+v46.00-023	snoe	migrations/001_update_migrations.yaml	2023-11-17 02:55:10.268074	526	EXECUTED	8:33c91db1b039855af8bf1dc8315bd5d2	addNotNullConstraint columnName=model_id, tableName=action	Added 0.46.0 - Unify action representation	\N	4.11.0	\N	\N	0189608756
+245	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:19.83724	240	EXECUTED	8:a8f9206dadfe23662d547035f71e3846	dropForeignKeyConstraint baseTableName=report_cardfavorite, constraintName=fk_cardfavorite_ref_card_id	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+279	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:25.26196	272	EXECUTED	8:63dfccd51b62b939da71fe4435f58679	addColumn tableName=pulse	Added 0.38.0 - Dashboard subscriptions	\N	4.11.0	\N	\N	0189608756
+313	jeff303	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:31.229587	302	EXECUTED	8:d5f248d823d81bee7d63c8b796e5851f	createTable tableName=secret	Added 0.42.0 - Secret domain object.	\N	4.11.0	\N	\N	0189608756
+298	tsmacdonald	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:28.7092	291	EXECUTED	8:3c73f77d8d939d14320964a35aeaad5e	addColumn tableName=pulse	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+v43.00-002	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:40.93447	382	EXECUTED	8:f964db8e5d278f825b9eb6414195d54d	sql	Added 0.43.0. Create magic 'All Users' Permissions Group if it does not already exist.	\N	4.11.0	\N	\N	0189608756
+v44.00-044	qnkhuat	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:58.286466	464	EXECUTED	8:601311f94a0587a67013e27d793d2cc2	dropColumn columnName=template_tags, tableName=native_query_snippet	Added 0.44.0 - drop native_query_snippet.template_tags added in v44.00-039	\N	4.11.0	\N	\N	0189608756
+v45.00-048	camsaul	migrations/001_update_migrations.yaml	2023-11-17 02:55:04.827693	493	EXECUTED	8:0aca8f157f163e62805b7202f8aa202f	addColumn tableName=collection	Added 0.45.0 -- add created_at to Collection	\N	4.11.0	\N	\N	0189608756
+v46.00-051	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:14.255077	548	EXECUTED	8:74e83fc2ee7c1a06a94f07830f361773	dropDefaultValue columnName=row, tableName=report_dashboardcard	Added 0.46.0 -- drop defaults for dashcard's position and size	\N	4.11.0	\N	\N	0189608756
+v47.00-043	calherres	migrations/001_update_migrations.yaml	2023-11-17 02:55:26.430866	606	EXECUTED	8:5e030b73be03e7cd8b19a5a46f9b2a4c	customChange	Added 0.47.0 - Migrate report_dashboardcard.visualization_settings.column_settings field refs from legacy format	\N	4.11.0	\N	\N	0189608756
+22	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:35.87619	21	EXECUTED	8:80bc8a62a90791a79adedcf1ac3c6f08	addColumn tableName=revision		\N	4.11.0	\N	\N	0189608756
+v43.00-052	snoe	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:50.873042	429	EXECUTED	8:b3963d6c168f5c30f1288c222b8e0e83	createTable tableName=bookmark_ordering	Added 0.43.0 - bookmark ordering	\N	4.11.0	\N	\N	0189608756
+194	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:11.330123	189	EXECUTED	8:fccb724d7ae7606e2e7638de1791392a	addForeignKeyConstraint baseTableName=group_table_access_policy, constraintName=fk_gtap_card_id, referencedTableName=report_card	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+16	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:34.418173	15	EXECUTED	8:ecc7f02641a589e6d35f88587ac6e02b	dropNotNullConstraint columnName=last_login, tableName=core_user		\N	4.11.0	\N	\N	0189608756
+220	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:15.583627	215	EXECUTED	8:8b8447405d7b2b52358c9676d64b7651	addForeignKeyConstraint baseTableName=permissions_revision, constraintName=fk_permissions_revision_user_id, referencedTableName=core_user	Added 0.36.0	\N	4.11.0	\N	\N	0189608756
+v42.00-000	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:32.550903	309	EXECUTED	8:5500782a64248810f4a5ca1dc9a6144d	dropColumn columnName=entity_name, tableName=metabase_table	Added 0.42.0 Remove unused column (#5240)	\N	4.11.0	\N	\N	0189608756
+v43.00-034	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:47.667929	413	EXECUTED	8:1db8bd1c85b5337a1560c0da7fb8e062	createTable tableName=card_bookmark	Added 0.43.0 - Card bookmarks table	\N	4.11.0	\N	\N	0189608756
+v44.00-000	dpsutton	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:53.117589	439	EXECUTED	8:05de4b32e627b65202e15435c344e135	createTable tableName=persisted_info	Added 0.44.0 - Persisted Info for models	\N	4.11.0	\N	\N	0189608756
+v46.00-059	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:15.612793	556	EXECUTED	8:6ddec7d622e9200e36bd5e2e2e0a48c2	addColumn tableName=action	Added 0.46.0 -- add actions.creator_id	\N	4.11.0	\N	\N	0189608756
+v47.00-011	tsmacdonald	migrations/001_update_migrations.yaml	2023-11-17 02:55:21.578589	582	EXECUTED	8:148b982debddfa511cb45b87179b8c46	modifyDataType columnName=display_name, tableName=metabase_table	Added 0.47.0 - Make metabase_table.display_name long enough for H2 names	\N	4.11.0	\N	\N	0189608756
+v47.00-052	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:27.489439	612	EXECUTED	8:d170bef8f707027360cf08fb55e91452	dropForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_group_id	Added 0.47.0 - Drop foreign key constraint on connection_impersonations.group_id	\N	4.11.0	\N	\N	0189608756
+v47.00-053	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:27.667258	613	EXECUTED	8:3b52631c2c82b88043b840391c7d9ef0	createIndex indexName=idx_conn_impersonations_db_id, tableName=connection_impersonations	Added 0.47.0 -- connection_impersonations index for db_id column	\N	4.11.0	\N	\N	0189608756
+v47.00-054	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:27.847576	614	EXECUTED	8:5404d7e3781f0dfcc984676ea434c842	createIndex indexName=idx_conn_impersonations_group_id, tableName=connection_impersonations	Added 0.47.0 -- connection_impersonations index for group_id column	\N	4.11.0	\N	\N	0189608756
+v47.00-055	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:28.069053	615	EXECUTED	8:295c4477995058b93eba2857090eb6f6	addUniqueConstraint constraintName=conn_impersonation_unique_group_id_db_id, tableName=connection_impersonations	Added 0.47.0 - unique constraint for connection impersonations	\N	4.11.0	\N	\N	0189608756
+1	agilliland	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:31.355957	1	EXECUTED	8:70d9a1021171b879cc55058f4d094a9c	createTable tableName=core_organization; createTable tableName=core_user; createTable tableName=core_userorgperm; addUniqueConstraint constraintName=idx_unique_user_id_organization_id, tableName=core_userorgperm; createIndex indexName=idx_userorgp...		\N	4.11.0	\N	\N	0189608756
+v47.00-035	calherries	migrations/001_update_migrations.yaml	2023-11-17 02:55:25.875281	603	EXECUTED	8:aeafa7ff310f799eb3fb2e14640a9e06	dropForeignKeyConstraint baseTableName=implicit_action, constraintName=fk_implicit_action_action_id	Added 0.47.0 - Drop foreign key constraint on implicit_action.action_id	\N	4.11.0	\N	\N	0189608756
+v47.00-056	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:28.26511	616	EXECUTED	8:bd965141f770a65982ecebab51a565e9	addForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_db_id, referencedTableName=metabase_database	Added 0.47.0 - re-add foreign key constraint on connection_impersonations.db_id	\N	4.11.0	\N	\N	0189608756
+v47.00-057	noahmoss	migrations/001_update_migrations.yaml	2023-11-17 02:55:28.421386	617	EXECUTED	8:fe79acdba9db58709b6fffbb7aac2844	addForeignKeyConstraint baseTableName=connection_impersonations, constraintName=fk_conn_impersonation_group_id, referencedTableName=permissions_group	Added 0.47.0 - re-add foreign key constraint on connection_impersonations.group_id	\N	4.11.0	\N	\N	0189608756
+v47.00-058	qnkhuat	migrations/001_update_migrations.yaml	2023-11-17 02:55:28.639533	618	EXECUTED	8:05731b3e62deb09c64b60bc10031d206	dropColumn columnName=entity_id, tableName=parameter_card	Drop parameter_card.entity_id	\N	4.11.0	\N	\N	0189608756
+v00.00-000	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:24.816025	619	MARK_RAN	8:a59595109e74e7a2678a1b0dfd25f74a	sqlFile path=initialization/metabase_postgres.sql; sqlFile path=initialization/metabase_mysql.sql; sqlFile path=initialization/metabase_h2.sql	Initialze metabase	\N	4.21.1	\N	\N	5979601574
+v47.00-059	piranha	migrations/001_update_migrations.yaml	2024-01-23 03:13:25.676317	620	EXECUTED	8:123cf42eed168444f88418f071d2730f	dropNotNullConstraint columnName=entity_id, tableName=dashboard_tab	Drops not null from dashboard_tab.entity_id since it breaks drop-entity-ids command	\N	4.21.1	\N	\N	5979601574
+v48.00-002	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:27.158383	622	EXECUTED	8:deceb81591f51f2d7253976f247e36cc	dropColumn columnName=options, tableName=metabase_database	Added 0.47.0 - drop metabase_database.options	\N	4.21.1	\N	\N	5979601574
+v48.00-003	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:28.011465	623	EXECUTED	8:da33cde0f1f93eed56c0f6d9ac2007df	dropTable tableName=computation_job_result	Added 0.48.0 - drop computation_job_result table	\N	4.21.1	\N	\N	5979601574
+v48.00-004	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:28.843517	624	EXECUTED	8:d0b1d7cc179c332b7e31f065325b7275	dropTable tableName=computation_job	Added 0.48.0 - drop computation_job table	\N	4.21.1	\N	\N	5979601574
+v48.00-005	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:29.55462	625	EXECUTED	8:a570f2e1d90a302bc207c00e3776eaaf	addColumn tableName=query_execution	Added 0.48.0 - Add query_execution.action_id	\N	4.21.1	\N	\N	5979601574
+v48.00-009	calherries	migrations/001_update_migrations.yaml	2024-01-23 03:13:32.939606	629	EXECUTED	8:dfd90256380263274ea7f5cc0c5ed413	createTable tableName=table_privileges	Added 0.48.0 - Create table_privileges table	\N	4.21.1	\N	\N	5979601574
+v48.00-010	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:33.174057	630	MARK_RAN	8:da6117039b6e0249b710cc3160af982d	sql	Remove ON UPDATE for revision.timestamp on mysql, mariadb	\N	4.21.1	\N	\N	5979601574
+v48.00-011	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:33.885439	631	EXECUTED	8:65ef87949a7e9555fabaf69069806ee0	createIndex indexName=idx_revision_most_recent, tableName=revision	Index revision.most_recent	\N	4.21.1	\N	\N	5979601574
+v48.00-013	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:38.046089	632	EXECUTED	8:145eb766e2d49e95f31d8a08df8ff776	sql	Index unindexed FKs for postgres	\N	4.21.1	\N	\N	5979601574
+v48.00-015	calherries	migrations/001_update_migrations.yaml	2024-01-23 03:13:39.238178	634	EXECUTED	8:6f58cf60c8048bb39bbf6128058ff85e	createIndex indexName=idx_table_privileges_role, tableName=table_privileges	Added 0.48.0 - Create table_privileges.role index	\N	4.21.1	\N	\N	5979601574
+v48.00-016	calherries	migrations/001_update_migrations.yaml	2024-01-23 03:13:39.835564	635	EXECUTED	8:ea2cb901edad5cf3a1250bdd2a9b0866	modifyDataType columnName=slug, tableName=collection	Added 0.48.0 - Change the type of collection.slug to varchar(510)	\N	4.21.1	\N	\N	5979601574
+v48.00-019	nemanjaglumac	migrations/001_update_migrations.yaml	2024-01-23 03:13:41.640618	637	EXECUTED	8:c3866a4b7cfbb49d4b626dc2fd750935	dropColumn columnName=color, tableName=collection	Collection color is removed in 0.48.0	\N	4.21.1	\N	\N	5979601574
+v48.00-020	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:42.226957	638	EXECUTED	8:2c410019e1834304131ff57278003d35	createIndex indexName=idx_recent_views_user_id, tableName=recent_views	Added 0.48.0 - Create recent_views.user_id index	\N	4.21.1	\N	\N	5979601574
+v48.00-021	piranha	migrations/001_update_migrations.yaml	2024-01-23 03:13:42.931296	639	EXECUTED	8:a1543239e39c70dc9bab3bbc303242b1	addColumn tableName=report_card	Cards store Metabase version used to create them	\N	4.21.1	\N	\N	5979601574
+v48.00-028	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:48.14894	646	EXECUTED	8:818119252c2e7877bbf46aec40fab160	createTable tableName=audit_log	Add new audit_log table	\N	4.21.1	\N	\N	5979601574
+v48.00-029	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:48.87451	647	EXECUTED	8:1994760ab0950e7f591c40e887295e1a	sqlFile path=instance_analytics_views/audit_log/v1/postgres-audit_log.sql; sqlFile path=instance_analytics_views/audit_log/v1/mysql-audit_log.sql; sqlFile path=instance_analytics_views/audit_log/v1/h2-audit_log.sql	Added 0.48.0 - new view v_audit_log	\N	4.21.1	\N	\N	5979601574
+109	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:00.571965	105	MARK_RAN	8:a5f4ea412eb1d5c1bc824046ad11692f	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+153	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.778007	149	MARK_RAN	8:adce2cca96fe0531b00f9bed6bed8352	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+291	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:27.523456	284	EXECUTED	8:f1b9110e87c7cb627c29fe6fb243b675	createTable tableName=login_history	Added 0.39.0	\N	4.11.0	\N	\N	0189608756
+v48.00-030	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:49.588088	648	EXECUTED	8:965d6479698fe55f2f6799be552b5edb	sqlFile path=instance_analytics_views/content/v1/postgres-content.sql; sqlFile path=instance_analytics_views/content/v1/mysql-content.sql; sqlFile path=instance_analytics_views/content/v1/h2-content.sql	Added 0.48.0 - new view v_content	\N	4.21.1	\N	\N	5979601574
+146	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:04.11429	142	MARK_RAN	8:8c0c1861582d15fe7859358f5d553c91	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+122	camsaul	migrations/000_legacy_migrations.yaml	2023-11-17 02:54:01.815637	118	MARK_RAN	8:929b3c551a8f631cdce2511612d82d62	sql	Added 0.34.2	\N	4.11.0	\N	\N	0189608756
+54	tlrobinson	migrations/000_legacy_migrations.yaml	2023-11-17 02:53:46.857853	53	EXECUTED	8:e410005b585f5eeb5f202076ff9468f7	addColumn tableName=pulse		\N	4.11.0	\N	\N	0189608756
+v48.00-001	qnkhuat	migrations/001_update_migrations.yaml	2024-01-23 03:13:26.539298	621	EXECUTED	8:c38ceb502af7907aed614f17da6c3f80	customChange	Added 0.47.0 - Migrate database.options to database.settings	\N	4.21.1	\N	\N	5979601574
+v48.00-031	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:50.302272	649	EXECUTED	8:721bedb0dd362793a1a216cf3e552f3b	sqlFile path=instance_analytics_views/dashboardcard/v1/dashboardcard.sql	Added 0.48.0 - new view v_dashboardcard	\N	4.21.1	\N	\N	5979601574
+v48.00-032	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:51.003423	650	EXECUTED	8:64d52462def7bb6981a3b6a40d42e67e	sqlFile path=instance_analytics_views/group_members/v1/group_members.sql	Added 0.48.0 - new view v_group_members	\N	4.21.1	\N	\N	5979601574
+v48.00-033	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:51.719354	651	EXECUTED	8:7ac57373a0fba4bd9613c242702c863d	sqlFile path=instance_analytics_views/subscriptions/v1/postgres-subscriptions.sql; sqlFile path=instance_analytics_views/subscriptions/v1/mysql-subscriptions.sql; sqlFile path=instance_analytics_views/subscriptions/v1/h2-subscriptions.sql	Added 0.48.0 - new view v_subscriptions for postgres	\N	4.21.1	\N	\N	5979601574
+v48.00-034	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:52.423407	652	EXECUTED	8:1c268d93ce69eaee11e3ecdf9951449a	sqlFile path=instance_analytics_views/users/v1/postgres-users.sql; sqlFile path=instance_analytics_views/users/v1/mysql-users.sql; sqlFile path=instance_analytics_views/users/v1/h2-users.sql	Added 0.48.0 - new view v_users	\N	4.21.1	\N	\N	5979601574
+v48.00-035	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:53.141495	653	EXECUTED	8:c0276764af3e1b4b5b0c4e5fdc979e60	sqlFile path=instance_analytics_views/alerts/v1/postgres-alerts.sql; sqlFile path=instance_analytics_views/alerts/v1/mysql-alerts.sql; sqlFile path=instance_analytics_views/alerts/v1/h2-alerts.sql	Added 0.48.0 - new view v_alerts	\N	4.21.1	\N	\N	5979601574
+v48.00-036	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:53.838548	654	EXECUTED	8:8a35e1bdf0738ccac5da8062d6671dd0	sqlFile path=instance_analytics_views/databases/v1/databases.sql	Added 0.48.0 - new view v_databases	\N	4.21.1	\N	\N	5979601574
+v48.00-037	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:54.542409	655	EXECUTED	8:a4b6ebd594b4663a6a888211f36ce6c3	sqlFile path=instance_analytics_views/fields/v1/postgres-fields.sql; sqlFile path=instance_analytics_views/fields/v1/mysql-fields.sql; sqlFile path=instance_analytics_views/fields/v1/h2-fields.sql	Added 0.48.0 - new view v_fields	\N	4.21.1	\N	\N	5979601574
+v48.00-038	noahmoss	migrations/001_update_migrations.yaml	2024-01-23 03:13:55.254066	656	EXECUTED	8:a24f4bcd3336e79d1c8ef33ab81c0db3	sqlFile path=instance_analytics_views/query_log/v1/postgres-query_log.sql; sqlFile path=instance_analytics_views/query_log/v1/mysql-query_log.sql; sqlFile path=instance_analytics_views/query_log/v1/h2-query_log.sql	Added 0.48.0 - new view v_query_log	\N	4.21.1	\N	\N	5979601574
 \.
 
 
 --
--- TOC entry 4798 (class 0 OID 26234)
--- Dependencies: 215
+-- TOC entry 4369 (class 0 OID 16493)
+-- Dependencies: 249
 -- Data for Name: databasechangeloglock; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5809,8 +6486,8 @@ COPY public.databasechangeloglock (id, locked, lockgranted, lockedby) FROM stdin
 
 
 --
--- TOC entry 4837 (class 0 OID 26776)
--- Dependencies: 254
+-- TOC entry 4370 (class 0 OID 16496)
+-- Dependencies: 250
 -- Data for Name: dependency; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5819,8 +6496,8 @@ COPY public.dependency (id, model, model_id, dependent_on_model, dependent_on_id
 
 
 --
--- TOC entry 4867 (class 0 OID 27101)
--- Dependencies: 284
+-- TOC entry 4372 (class 0 OID 16500)
+-- Dependencies: 252
 -- Data for Name: dimension; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5829,8 +6506,8 @@ COPY public.dimension (id, field_id, name, type, human_readable_field_id, create
 
 
 --
--- TOC entry 4914 (class 0 OID 27921)
--- Dependencies: 331
+-- TOC entry 4376 (class 0 OID 16512)
+-- Dependencies: 256
 -- Data for Name: http_action; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5839,8 +6516,8 @@ COPY public.http_action (action_id, template, response_handle, error_handle) FRO
 
 
 --
--- TOC entry 4915 (class 0 OID 28007)
--- Dependencies: 332
+-- TOC entry 4377 (class 0 OID 16517)
+-- Dependencies: 257
 -- Data for Name: implicit_action; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5849,8 +6526,8 @@ COPY public.implicit_action (action_id, kind) FROM stdin;
 
 
 --
--- TOC entry 4843 (class 0 OID 26827)
--- Dependencies: 260
+-- TOC entry 4378 (class 0 OID 16522)
+-- Dependencies: 258
 -- Data for Name: label; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5859,8 +6536,8 @@ COPY public.label (id, name, slug, icon) FROM stdin;
 
 
 --
--- TOC entry 4890 (class 0 OID 27636)
--- Dependencies: 307
+-- TOC entry 4380 (class 0 OID 16528)
+-- Dependencies: 260
 -- Data for Name: login_history; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -5870,25 +6547,28 @@ COPY public.login_history (id, "timestamp", user_id, session_id, device_id, devi
 2	2023-11-19 23:31:10.388163+00	1	\N	a7e71c75-e7c3-428d-84d1-41197617394d	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
 4	2023-12-02 23:40:47.419721+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
 5	2023-12-03 02:27:40.322174+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
-6	2023-12-03 02:28:09.435236+00	1	8b5d1223-95f6-454f-9a19-d0b11aecd382	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+6	2023-12-03 02:28:09.435236+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0	172.18.0.1
+7	2024-01-23 04:04:49.797754+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0	172.19.0.1
+8	2024-02-10 19:12:35.840401+00	1	\N	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0	172.19.0.1
+9	2024-02-12 00:56:05.522757+00	1	e205cbb8-d2c5-4179-b84a-fe22ad1ab7d3	f81962c6-9c94-48b9-b543-9134090d2d47	Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0	172.21.0.1
 \.
 
 
 --
--- TOC entry 4802 (class 0 OID 26293)
--- Dependencies: 219
+-- TOC entry 4382 (class 0 OID 16535)
+-- Dependencies: 262
 -- Data for Name: metabase_database; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.metabase_database (id, created_at, updated_at, name, description, details, engine, is_sample, is_full_sync, points_of_interest, caveats, metadata_sync_schedule, cache_field_values_schedule, timezone, is_on_demand, options, auto_run_queries, refingerprint, cache_ttl, initial_sync_status, creator_id, settings, dbms_version, is_audit) FROM stdin;
-2	2023-11-17 03:15:33.172664+00	2023-12-02 23:41:02.8308+00	Azure	\N	{"ssl-use-client-auth":false,"ssl":true,"password":"prince13:D","port":5432,"advanced-options":false,"schema-filters-type":"all","dbname":"best_city","host":"best-city-postgres.postgres.database.azure.com","tunnel-enabled":false,"user":"user_raul","ssl-mode":"require"}	postgres	f	t	\N	\N	0 41 * * * ? *	0 0 9 * * ? *	UTC	f	\N	t	\N	\N	complete	1	\N	{"flavor":"PostgreSQL","version":"15.4","semantic-version":[15,4]}	f
-1	2023-11-17 02:55:30.303819+00	2023-12-03 01:50:13.339377+00	Sample Database	Some example data for you to play around with as you embark on your Metabase journey.	{"db":"file:/plugins/sample-database.db;USER=GUEST;PASSWORD=guest"}	h2	t	t	You can find all sorts of different joinable tables ranging from products to people to reviews here.	You probably don't want to use this for your business-critical analyses, but hey, it's your world, we're just living in it.	0 39 * * * ? *	0 0 12 * * ? *	UTC	f	\N	t	\N	\N	complete	\N	\N	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}	f
+COPY public.metabase_database (id, created_at, updated_at, name, description, details, engine, is_sample, is_full_sync, points_of_interest, caveats, metadata_sync_schedule, cache_field_values_schedule, timezone, is_on_demand, auto_run_queries, refingerprint, cache_ttl, initial_sync_status, creator_id, settings, dbms_version, is_audit) FROM stdin;
+1	2023-11-17 02:55:30.303819+00	2023-12-03 01:50:13.339377+00	Sample Database	Some example data for you to play around with as you embark on your Metabase journey.	{"db":"file:/plugins/sample-database.db;USER=GUEST;PASSWORD=guest"}	h2	t	t	You can find all sorts of different joinable tables ranging from products to people to reviews here.	You probably don't want to use this for your business-critical analyses, but hey, it's your world, we're just living in it.	0 39 * * * ? *	0 0 12 * * ? *	UTC	f	t	\N	\N	complete	\N	\N	{"flavor":"H2","version":"2.1.214 (2022-06-13)","semantic-version":[2,1]}	f
+2	2023-11-17 03:15:33.172664+00	2024-02-12 00:07:29.320035+00	Docker	\N	vvZBpL6jv0D97XuFB4tM5oiUNYUgKajRMtWBMgbqFDB+tOxHzkCc43HARPbp9VT0FjVTUPkDTruUH2fZEMVL1ibVs3KeuQOy2I4Fu2RT1I7lXVhEJyV0aokImaHkpgW6dUxSYETJd3O1mzZkXXYq+FqKStek8pNiGACXsSDhXNRfgGVpUPPaXO4qBegIAvBmrEsJSqLpNW9e+9ItAOdXrAZ7JPMsnuEF9UqYR64RaoKvVkAUqnW8pK6qvLDiJHz9TVA9+rrl7K/0+dAbrp1RHyf9IAm93Y37kIHqAQJ7wSA9kK4AtXybK0qqzGB+xLJum29TGPP+VoSAmsWycuLoRoqqHKKLhAbE1p2DXIMbh6x+GAqoZyzZlcR6yUj2nXqHZ1Owacs2BbMvVjfnPGt853t3Lqg/lZT/ahbGCkD0492WJva3hO8krDixJRJrz8JkkcmFURqxx3F6JLuy9t/Z/184QH1Y+/bfr2zJ36iYARk=	postgres	f	t	\N	\N	0 41 * * * ? *	0 0 9 * * ? *	UTC	f	t	\N	\N	complete	1	\N	{"flavor":"PostgreSQL","version":"15.4","semantic-version":[15,4]}	f
 \.
 
 
 --
--- TOC entry 4806 (class 0 OID 26321)
--- Dependencies: 223
+-- TOC entry 4384 (class 0 OID 16551)
+-- Dependencies: 264
 -- Data for Name: metabase_field; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6006,8 +6686,8 @@ COPY public.metabase_field (id, created_at, updated_at, name, base_type, semanti
 
 
 --
--- TOC entry 4808 (class 0 OID 26353)
--- Dependencies: 225
+-- TOC entry 4386 (class 0 OID 16567)
+-- Dependencies: 266
 -- Data for Name: metabase_fieldvalues; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6052,8 +6732,8 @@ COPY public.metabase_fieldvalues (id, created_at, updated_at, "values", human_re
 
 
 --
--- TOC entry 4804 (class 0 OID 26307)
--- Dependencies: 221
+-- TOC entry 4388 (class 0 OID 16576)
+-- Dependencies: 268
 -- Data for Name: metabase_table; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6076,8 +6756,8 @@ COPY public.metabase_table (id, created_at, updated_at, name, description, entit
 
 
 --
--- TOC entry 4839 (class 0 OID 26786)
--- Dependencies: 256
+-- TOC entry 4390 (class 0 OID 16586)
+-- Dependencies: 270
 -- Data for Name: metric; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6086,8 +6766,8 @@ COPY public.metric (id, table_id, creator_id, name, description, archived, defin
 
 
 --
--- TOC entry 4847 (class 0 OID 26909)
--- Dependencies: 264
+-- TOC entry 4392 (class 0 OID 16594)
+-- Dependencies: 272
 -- Data for Name: metric_important_field; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6096,8 +6776,8 @@ COPY public.metric_important_field (id, metric_id, field_id) FROM stdin;
 
 
 --
--- TOC entry 4921 (class 0 OID 28116)
--- Dependencies: 338
+-- TOC entry 4394 (class 0 OID 16598)
+-- Dependencies: 274
 -- Data for Name: model_index; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6106,8 +6786,8 @@ COPY public.model_index (id, model_id, pk_ref, value_ref, schedule, state, index
 
 
 --
--- TOC entry 4922 (class 0 OID 28129)
--- Dependencies: 339
+-- TOC entry 4396 (class 0 OID 16605)
+-- Dependencies: 276
 -- Data for Name: model_index_value; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6116,8 +6796,8 @@ COPY public.model_index_value (model_index_id, model_pk, name) FROM stdin;
 
 
 --
--- TOC entry 4892 (class 0 OID 27660)
--- Dependencies: 309
+-- TOC entry 4397 (class 0 OID 16610)
+-- Dependencies: 277
 -- Data for Name: moderation_review; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6126,8 +6806,8 @@ COPY public.moderation_review (id, updated_at, created_at, status, text, moderat
 
 
 --
--- TOC entry 4888 (class 0 OID 27353)
--- Dependencies: 305
+-- TOC entry 4399 (class 0 OID 16618)
+-- Dependencies: 279
 -- Data for Name: native_query_snippet; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6136,8 +6816,8 @@ COPY public.native_query_snippet (id, name, description, content, creator_id, ar
 
 
 --
--- TOC entry 4917 (class 0 OID 28033)
--- Dependencies: 334
+-- TOC entry 4401 (class 0 OID 16627)
+-- Dependencies: 281
 -- Data for Name: parameter_card; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6146,8 +6826,8 @@ COPY public.parameter_card (id, updated_at, created_at, card_id, parameterized_o
 
 
 --
--- TOC entry 4853 (class 0 OID 26960)
--- Dependencies: 270
+-- TOC entry 4403 (class 0 OID 16633)
+-- Dependencies: 283
 -- Data for Name: permissions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6166,8 +6846,8 @@ COPY public.permissions (id, object, group_id) FROM stdin;
 
 
 --
--- TOC entry 4849 (class 0 OID 26930)
--- Dependencies: 266
+-- TOC entry 4404 (class 0 OID 16636)
+-- Dependencies: 284
 -- Data for Name: permissions_group; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6178,8 +6858,8 @@ COPY public.permissions_group (id, name) FROM stdin;
 
 
 --
--- TOC entry 4851 (class 0 OID 26939)
--- Dependencies: 268
+-- TOC entry 4406 (class 0 OID 16640)
+-- Dependencies: 286
 -- Data for Name: permissions_group_membership; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6192,8 +6872,8 @@ COPY public.permissions_group_membership (id, user_id, group_id, is_group_manage
 
 
 --
--- TOC entry 4855 (class 0 OID 26989)
--- Dependencies: 272
+-- TOC entry 4409 (class 0 OID 16646)
+-- Dependencies: 289
 -- Data for Name: permissions_revision; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6202,8 +6882,8 @@ COPY public.permissions_revision (id, before, after, user_id, created_at, remark
 
 
 --
--- TOC entry 4910 (class 0 OID 27841)
--- Dependencies: 327
+-- TOC entry 4411 (class 0 OID 16652)
+-- Dependencies: 291
 -- Data for Name: persisted_info; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6212,8 +6892,8 @@ COPY public.persisted_info (id, database_id, card_id, question_slug, table_name,
 
 
 --
--- TOC entry 4827 (class 0 OID 26687)
--- Dependencies: 244
+-- TOC entry 4413 (class 0 OID 16660)
+-- Dependencies: 293
 -- Data for Name: pulse; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6222,8 +6902,8 @@ COPY public.pulse (id, creator_id, name, created_at, updated_at, skip_if_empty, 
 
 
 --
--- TOC entry 4829 (class 0 OID 26699)
--- Dependencies: 246
+-- TOC entry 4414 (class 0 OID 16667)
+-- Dependencies: 294
 -- Data for Name: pulse_card; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6232,8 +6912,8 @@ COPY public.pulse_card (id, pulse_id, card_id, "position", include_csv, include_
 
 
 --
--- TOC entry 4831 (class 0 OID 26717)
--- Dependencies: 248
+-- TOC entry 4416 (class 0 OID 16673)
+-- Dependencies: 296
 -- Data for Name: pulse_channel; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6242,8 +6922,8 @@ COPY public.pulse_channel (id, pulse_id, channel_type, details, schedule_type, s
 
 
 --
--- TOC entry 4833 (class 0 OID 26732)
--- Dependencies: 250
+-- TOC entry 4418 (class 0 OID 16680)
+-- Dependencies: 298
 -- Data for Name: pulse_channel_recipient; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6252,8 +6932,8 @@ COPY public.pulse_channel_recipient (id, pulse_channel_id, user_id) FROM stdin;
 
 
 --
--- TOC entry 4879 (class 0 OID 27265)
--- Dependencies: 296
+-- TOC entry 4421 (class 0 OID 16685)
+-- Dependencies: 301
 -- Data for Name: qrtz_blob_triggers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6262,8 +6942,8 @@ COPY public.qrtz_blob_triggers (sched_name, trigger_name, trigger_group, blob_da
 
 
 --
--- TOC entry 4880 (class 0 OID 27277)
--- Dependencies: 297
+-- TOC entry 4422 (class 0 OID 16690)
+-- Dependencies: 302
 -- Data for Name: qrtz_calendars; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6272,29 +6952,30 @@ COPY public.qrtz_calendars (sched_name, calendar_name, calendar) FROM stdin;
 
 
 --
--- TOC entry 4877 (class 0 OID 27241)
--- Dependencies: 294
+-- TOC entry 4423 (class 0 OID 16695)
+-- Dependencies: 303
 -- Data for Name: qrtz_cron_triggers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.qrtz_cron_triggers (sched_name, trigger_name, trigger_group, cron_expression, time_zone_id) FROM stdin;
-MetabaseScheduler	metabase.task.send-pulses.trigger	DEFAULT	0 0 * * * ? *	GMT
-MetabaseScheduler	metabase.task.follow-up-emails.trigger	DEFAULT	0 0 12 * * ? *	GMT
-MetabaseScheduler	metabase.task.task-history-cleanup.trigger	DEFAULT	0 0 0 * * ? *	GMT
 MetabaseScheduler	metabase.task.truncate-audit-log.trigger	DEFAULT	0 0 */12 * * ? *	GMT
 MetabaseScheduler	metabase.task.sync-and-analyze.trigger.1	DEFAULT	0 39 * * * ? *	GMT
 MetabaseScheduler	metabase.task.sync-and-analyze.trigger.2	DEFAULT	0 41 * * * ? *	GMT
-MetabaseScheduler	metabase.task.upgrade-checks.trigger	DEFAULT	0 15 6,18 * * ? *	GMT
-MetabaseScheduler	metabase.task.anonymous-stats.trigger	DEFAULT	0 19 0 * * ? *	GMT
-MetabaseScheduler	metabase.task.refresh-channel-cache.trigger	DEFAULT	0 57 0/4 1/1 * ? *	GMT
 MetabaseScheduler	metabase.task.update-field-values.trigger.2	DEFAULT	0 0 9 * * ? *	GMT
 MetabaseScheduler	metabase.task.update-field-values.trigger.1	DEFAULT	0 0 12 * * ? *	GMT
+MetabaseScheduler	metabase.task.upgrade-checks.trigger	DEFAULT	0 15 6,18 * * ? *	GMT
+MetabaseScheduler	metabase.task.anonymous-stats.trigger	DEFAULT	0 40 9 * * ? *	GMT
+MetabaseScheduler	metabase.task.refresh-channel-cache.trigger	DEFAULT	0 45 0/4 1/1 * ? *	GMT
+MetabaseScheduler	metabase.task.truncate-audit-tables.trigger	DEFAULT	0 0 */12 * * ? *	GMT
+MetabaseScheduler	metabase.task.follow-up-emails.trigger	DEFAULT	0 0 12 * * ? *	GMT
+MetabaseScheduler	metabase.task.task-history-cleanup.trigger	DEFAULT	0 0 0 * * ? *	GMT
+MetabaseScheduler	metabase.task.send-pulses.trigger	DEFAULT	0 0 * * * ? *	GMT
 \.
 
 
 --
--- TOC entry 4882 (class 0 OID 27289)
--- Dependencies: 299
+-- TOC entry 4424 (class 0 OID 16700)
+-- Dependencies: 304
 -- Data for Name: qrtz_fired_triggers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6303,8 +6984,8 @@ COPY public.qrtz_fired_triggers (sched_name, entry_id, trigger_name, trigger_gro
 
 
 --
--- TOC entry 4874 (class 0 OID 27210)
--- Dependencies: 291
+-- TOC entry 4425 (class 0 OID 16705)
+-- Dependencies: 305
 -- Data for Name: qrtz_job_details; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6316,17 +6997,19 @@ MetabaseScheduler	metabase.task.send-pulses.job	DEFAULT	\N	metabase.task.send_pu
 MetabaseScheduler	metabase.task.follow-up-emails.job	DEFAULT	\N	metabase.task.follow_up_emails.FollowUpEmail	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 MetabaseScheduler	metabase.task.task-history-cleanup.job	DEFAULT	\N	metabase.task.task_history_cleanup.TaskHistoryCleanup	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 MetabaseScheduler	metabase.task.truncate-audit-log.job	DEFAULT	\N	metabase.task.truncate_audit_log.TruncateAuditLog	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
-MetabaseScheduler	metabase.task.IndexValues.job	DEFAULT	Indexed Value Refresh task	metabase.task.index_values.ModelIndexRefresh	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.truncate-audit-tables.job	DEFAULT	\N	metabase.task.truncate_audit_tables.TruncateAuditTables	f	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.email-remove-legacy-pulse.job	DEFAULT	\N	metabase.task.email_remove_legacy_pulse.EmailRemoveLegacyPulse	t	f	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 MetabaseScheduler	metabase.task.sync-and-analyze.job	DEFAULT	sync-and-analyze for all databases	metabase.task.sync_databases.SyncAndAnalyzeDatabase	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 MetabaseScheduler	metabase.task.update-field-values.job	DEFAULT	update-field-values for all databases	metabase.task.sync_databases.UpdateFieldValues	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 MetabaseScheduler	metabase.task.PersistenceRefresh.job	DEFAULT	Persisted Model refresh task	metabase.task.persist_refresh.PersistenceRefresh	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 MetabaseScheduler	metabase.task.PersistencePrune.job	DEFAULT	Persisted Model prune task	metabase.task.persist_refresh.PersistencePrune	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
+MetabaseScheduler	metabase.task.IndexValues.job	DEFAULT	Indexed Value Refresh task	metabase.task.index_values.ModelIndexRefresh	t	t	f	f	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f40000000000010770800000010000000007800
 \.
 
 
 --
--- TOC entry 4884 (class 0 OID 27301)
--- Dependencies: 301
+-- TOC entry 4426 (class 0 OID 16710)
+-- Dependencies: 306
 -- Data for Name: qrtz_locks; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6337,8 +7020,8 @@ MetabaseScheduler	TRIGGER_ACCESS
 
 
 --
--- TOC entry 4881 (class 0 OID 27284)
--- Dependencies: 298
+-- TOC entry 4427 (class 0 OID 16713)
+-- Dependencies: 307
 -- Data for Name: qrtz_paused_trigger_grps; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6347,19 +7030,19 @@ COPY public.qrtz_paused_trigger_grps (sched_name, trigger_group) FROM stdin;
 
 
 --
--- TOC entry 4883 (class 0 OID 27296)
--- Dependencies: 300
+-- TOC entry 4428 (class 0 OID 16716)
+-- Dependencies: 308
 -- Data for Name: qrtz_scheduler_state; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.qrtz_scheduler_state (sched_name, instance_name, last_checkin_time, checkin_interval) FROM stdin;
-MetabaseScheduler	metabase1701571024703	1701571092520	7500
+MetabaseScheduler	metabase-app1707789544119	1707790204558	7500
 \.
 
 
 --
--- TOC entry 4876 (class 0 OID 27229)
--- Dependencies: 293
+-- TOC entry 4429 (class 0 OID 16719)
+-- Dependencies: 309
 -- Data for Name: qrtz_simple_triggers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6368,8 +7051,8 @@ COPY public.qrtz_simple_triggers (sched_name, trigger_name, trigger_group, repea
 
 
 --
--- TOC entry 4878 (class 0 OID 27253)
--- Dependencies: 295
+-- TOC entry 4430 (class 0 OID 16724)
+-- Dependencies: 310
 -- Data for Name: qrtz_simprop_triggers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6378,8 +7061,8 @@ COPY public.qrtz_simprop_triggers (sched_name, trigger_name, trigger_group, str_
 
 
 --
--- TOC entry 4875 (class 0 OID 27217)
--- Dependencies: 292
+-- TOC entry 4431 (class 0 OID 16729)
+-- Dependencies: 311
 -- Data for Name: qrtz_triggers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6388,19 +7071,20 @@ MetabaseScheduler	metabase.task.update-field-values.trigger.2	DEFAULT	metabase.t
 MetabaseScheduler	metabase.task.update-field-values.trigger.1	DEFAULT	metabase.task.update-field-values.job	DEFAULT	update-field-values Database 1	1701604800000	-1	5	WAITING	CRON	1700189796000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000017800
 MetabaseScheduler	metabase.task.sync-and-analyze.trigger.1	DEFAULT	metabase.task.sync-and-analyze.job	DEFAULT	sync-and-analyze Database 1	1701571140000	1701567540000	5	WAITING	CRON	1700189796000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000017800
 MetabaseScheduler	metabase.task.sync-and-analyze.trigger.2	DEFAULT	metabase.task.sync-and-analyze.job	DEFAULT	sync-and-analyze Database 2	1701571260000	1701567660000	5	WAITING	CRON	1700358014000	0	\N	2	\\xaced0005737200156f72672e71756172747a2e4a6f62446174614d61709fb083e8bfa9b0cb020000787200266f72672e71756172747a2e7574696c732e537472696e674b65794469727479466c61674d61708208e8c3fbc55d280200015a0013616c6c6f77735472616e7369656e74446174617872001d6f72672e71756172747a2e7574696c732e4469727479466c61674d617013e62ead28760ace0200025a000564697274794c00036d617074000f4c6a6176612f7574696c2f4d61703b787000737200116a6176612e7574696c2e486173684d61700507dac1c31660d103000246000a6c6f6164466163746f724900097468726573686f6c6478703f4000000000000c7708000000100000000174000564622d6964737200116a6176612e6c616e672e496e746567657212e2a0a4f781873802000149000576616c7565787200106a6176612e6c616e672e4e756d62657286ac951d0b94e08b0200007870000000027800
-MetabaseScheduler	metabase.task.upgrade-checks.trigger	DEFAULT	metabase.task.upgrade-checks.job	DEFAULT	\N	1701584100000	-1	5	WAITING	CRON	1701571025000	0	\N	0	\\x
-MetabaseScheduler	metabase.task.anonymous-stats.trigger	DEFAULT	metabase.task.anonymous-stats.job	DEFAULT	\N	1701649140000	-1	5	WAITING	CRON	1701571026000	0	\N	0	\\x
-MetabaseScheduler	metabase.task.refresh-channel-cache.trigger	DEFAULT	metabase.task.refresh-channel-cache.job	DEFAULT	\N	1701579420000	-1	5	WAITING	CRON	1701571027000	0	\N	2	\\x
-MetabaseScheduler	metabase.task.send-pulses.trigger	DEFAULT	metabase.task.send-pulses.job	DEFAULT	\N	1701572400000	-1	5	WAITING	CRON	1701571028000	0	\N	1	\\x
-MetabaseScheduler	metabase.task.follow-up-emails.trigger	DEFAULT	metabase.task.follow-up-emails.job	DEFAULT	\N	1701604800000	-1	5	WAITING	CRON	1701571029000	0	\N	0	\\x
-MetabaseScheduler	metabase.task.task-history-cleanup.trigger	DEFAULT	metabase.task.task-history-cleanup.job	DEFAULT	\N	1701648000000	-1	5	WAITING	CRON	1701571030000	0	\N	0	\\x
 MetabaseScheduler	metabase.task.truncate-audit-log.trigger	DEFAULT	metabase.task.truncate-audit-log.job	DEFAULT	\N	1701604800000	-1	5	WAITING	CRON	1701571031000	0	\N	2	\\x
+MetabaseScheduler	metabase.task.upgrade-checks.trigger	DEFAULT	metabase.task.upgrade-checks.job	DEFAULT	\N	1707804900000	-1	5	WAITING	CRON	1707789544000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.anonymous-stats.trigger	DEFAULT	metabase.task.anonymous-stats.job	DEFAULT	\N	1707817200000	-1	5	WAITING	CRON	1707789544000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.refresh-channel-cache.trigger	DEFAULT	metabase.task.refresh-channel-cache.job	DEFAULT	\N	1707799500000	-1	5	WAITING	CRON	1707789544000	0	\N	2	\\x
+MetabaseScheduler	metabase.task.truncate-audit-tables.trigger	DEFAULT	metabase.task.truncate-audit-tables.job	DEFAULT	\N	1707825600000	-1	5	WAITING	CRON	1707789544000	0	\N	2	\\x
+MetabaseScheduler	metabase.task.follow-up-emails.trigger	DEFAULT	metabase.task.follow-up-emails.job	DEFAULT	\N	1707825600000	-1	5	WAITING	CRON	1707789544000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.task-history-cleanup.trigger	DEFAULT	metabase.task.task-history-cleanup.job	DEFAULT	\N	1707868800000	-1	5	WAITING	CRON	1707789544000	0	\N	0	\\x
+MetabaseScheduler	metabase.task.send-pulses.trigger	DEFAULT	metabase.task.send-pulses.job	DEFAULT	\N	1707793200000	1707789600000	5	WAITING	CRON	1707789544000	0	\N	1	\\x
 \.
 
 
 --
--- TOC entry 4863 (class 0 OID 27070)
--- Dependencies: 280
+-- TOC entry 4432 (class 0 OID 16734)
+-- Dependencies: 312
 -- Data for Name: query; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6419,28 +7103,25 @@ COPY public.query (query_hash, average_execution_time, query) FROM stdin;
 \\xf32f08ba945682722af0bdc08ee2f10d76ba6ee085a609c0db2d190f1cb0d594	562	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	1951	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"native","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2,"async?":true,"cache-ttl":null}
 \\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	1150	{"database":2,"query":{"source-table":9},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
-\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	647	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
 \\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	1044	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	550	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	933	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"async?":true,"cache-ttl":null}
-\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	749	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
-\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	632	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	686	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\xbfaefc42192e3dfa56db46b04801fc6a05ecae27bb1e4954e4baa6ce2c20edc5	163	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past30hours","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
 \\x020a565784d820307f8a04f2a331248aa21e14128d9e63fd9ee921f166335ac3	835	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1days","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x733fd252cdf09dc296d6e6308b034510a5e428fddeb87a8fecd12a96c6f28c1d	703	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past2days","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
-\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	735	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
-\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	641	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
 \\xbc0201f8360103149374b43d59f5c36e6aa8461907304d493f115a96832d7ba6	177	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past49hours","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
 \\xd2d1b83ca1f04601f8f2bba8e9266deda6f31410c61fa773fc378942d9760a5d	757	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past3days","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x7349c69966e1c33cacb9d23ead4221deca4d4b5f12d84bad7ce186f3c34a6f86	704	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past1days","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
-\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	1085	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
-\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	765	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x90418f0bf08dbfb2ff42643a8d50f5dc9726891104d893f1f5823fa0fcec6224	259	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past30hours","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x063f91aec1e21a3df3d2d77f8016d1cc63d5819ce54f06f6308b1ced363b1669	263	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past49hours","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\xa2f6414584d56597330e6fdc9b948716d0ce98365bb1f5391167d301cdd8c223	623	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past3days","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	593	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	707	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x66f15c7ecd61f55d800d887e5eef2641b186c1d7b3a22edb2fb7a754448730aa	751	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past2days","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\xea8b6981c9c792688d76d616ba9f0090c6a4c9e03ceb4e0d28225ff122ad35e3	632	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x0a65c444c78157860d35cecbc1dfa6b092925f961370f193e4df6fa2368d9969	575	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xec194f7b48c61cf3b44f418c200985b08db19a606bf7d7c9b1ef6785c900853b	54	{"database":2,"type":"query","query":{"limit":10,"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x525587c0ad6e49ad9bb17a51b792542fd6e82145216a303e1677395e6fced27b	855	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["asc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x2609faf5e62c9a7921fb3f3141aace02d1e15ed43f9af9ce26c09005c0356418	861	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["desc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xbb94164b295634007be21439cc7286ec95654d812aafb6f34fd16b40410f1555	1075	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
@@ -6450,7 +7131,6 @@ COPY public.query (query_hash, average_execution_time, query) FROM stdin;
 \\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	1053	{"database":2,"type":"query","query":{"filter":["!=",["field","bad_words",{"base-type":"type/Text"}],""],"source-query":{"source-table":11,"breakout":[["field",96,{"base-type":"type/Text"}],["field",106,{"base-type":"type/Text","source-field":99}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	1083	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"async?":true,"cache-ttl":null}
 \\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	764	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"async?":true,"cache-ttl":null}
-\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	955	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
 \\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	772	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xcb664257fb91837cbc4c4b8a3e11d21250cf5a04d5c949257a1336d0a133610c	563	{"type":"native","native":{"query":"SELECT\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" AS \\"submissions__via__submission_id__subreddit\\",\\n  CASE WHEN \\"staging\\".\\"comments\\".\\"bad_words\\" = '' THEN 'EMPTY'\\n  ELSE UPPER(\\"staging\\".\\"comments\\".\\"bad_words\\") end AS \\"bad_words\\",\\n  COUNT(*) AS \\"count\\"\\nFROM\\n  \\"staging\\".\\"comments\\"\\n \\nLEFT JOIN \\"staging\\".\\"submissions\\" AS \\"submissions__via__submission_id\\" ON \\"staging\\".\\"comments\\".\\"submission_id\\" = \\"submissions__via__submission_id\\".\\"submission_id\\"\\nGROUP BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\",\\n  \\"staging\\".\\"comments\\".\\"bad_words\\"\\nORDER BY\\n  \\"submissions__via__submission_id\\".\\"subreddit\\" ASC,\\n  \\"count\\" DESC,\\n  \\"staging\\".\\"comments\\".\\"bad_words\\" ASC","template-tags":{},"collection":"comments"},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x9b4ccaf4f87ad5eb499605c034ce8809f2e7293ba5f752333aeff36801197762	806	{"database":2,"type":"query","query":{"filter":[">",["field","count",{"base-type":"type/Integer"}],5],"source-query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
@@ -6493,7 +7173,6 @@ COPY public.query (query_hash, average_execution_time, query) FROM stdin;
 \\x3ac55e9c0745bc1796cdb5a629aeed828c2fc80c9a17a763c014ba8ae5bcd6eb	825	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"limit":10,"filter":["!=",["expression","Bad Word"],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xd84326649d8a87f167f9fb2b77eb09d89d416f8cc16e553b5b3f716efdbde395	907	{"database":2,"type":"query","query":{"source-table":11,"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"limit":10,"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x550ade057f8af70c20cc0511ad535d1ba113f5d08858f4bc85d5981d4d6223cb	691	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past12months","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
-\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	707	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
 \\xee2df50d2c582273cbc433fbd39d25c49c56738578d44dcbebf9c6455c164da8	713	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"\\\\b\\\\w+\\\\b"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x757f9fc0e563456bbbac68370b5bffd2d21eeb7bcdb938fb91828a186e7ede3f	661	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["regex-match-first",["field",96,null],"(\\\\w+)(?=.+\\\\b\\\\1\\\\b)"]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x6e193788d9d33f5b90c76cf3f29cfb9ddba90017ca6f14b7eca336099b0babf9	787	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["regex-match-first",["field",96,null],"\\\\w*"]]},"filter":["!=",["field",96,null],""]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
@@ -6516,9 +7195,8 @@ COPY public.query (query_hash, average_execution_time, query) FROM stdin;
 \\x691bcc80e9159cde3c3e64f52afc4c4e287d55b552a2451c22ee88588dd0d913	1205	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"past1months","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
 \\xbf1b98e73ba299cafb7c2d2ac5757fcc10dcc21e1f521ceb845cca478309bdde	853	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past12months","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
 \\x386557dd279bb3c85182cdc34e277ced3fd714b75045ba31802c5bb1b6bb13b9	1275	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"past12months","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
-\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	855	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
-\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	1338	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
 \\x5ed22ca3af1abd92f10eb8ff2202ab987c67b0d75535103d85426e3c58cc10e1	465	{"database":2,"type":"query","query":{"source-table":13,"aggregation":[["sum",["field",100,{"base-type":"type/Integer"}]]],"breakout":[["field",103,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	1237	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
 \\x0d3092614680820ae540910f93fe2d9ceab3dc86175d72c2fcdd8d478df5f3c1	497	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["sum",["field",81,{"base-type":"type/Integer","binning":{"strategy":"default","lib/type":"metabase.lib.binning/binning"}}]]],"breakout":[["field",84,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x9462b571ab360177f5a54ed3291f5354fd7eb918d4385ce199614d3c77861a70	425	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["sum",["field",81,{"base-type":"type/Integer","binning":{"strategy":"default","lib/type":"metabase.lib.binning/binning"}}]]],"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x908de81cc816ebf3bd572497eaf952c55525fd3061b3dd2870f1c8ed2450fc0b	658	{"database":2,"type":"query","query":{"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
@@ -6528,21 +7206,48 @@ COPY public.query (query_hash, average_execution_time, query) FROM stdin;
 \\x8302c073628fb8bad702e9c94663d96986f5f2c74ea84fa55d330a680bcae49f	541	{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	499	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["count"]],"breakout":[["field",82,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	437	{"database":2,"type":"query","query":{"source-table":10,"aggregation":[["count"]],"breakout":[["field",84,{"base-type":"type/Text"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
-\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	1729	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
 \\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	1118	{"database":2,"type":"query","query":{"source-table":13},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
-\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	658	{"database":2,"type":"query","query":{"source-table":10,"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\xe69c7b7108907fdd5e0d8fd2f15256c4c76459479350d05a49759b37c2b9f4eb	722	{"database":2,"type":"query","query":{"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"week",{"include-current":false}],"source-query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}],["field",83,{"base-type":"type/Date","temporal-unit":"day"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	451	{"database":2,"type":"query","query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	521	{"database":2,"type":"query","query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}],["field",83,{"base-type":"type/Date","temporal-unit":"day"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \\x1183fb8db9cb4f0247c44ffab453d516626d00a4f53801ec1d5524784610e6b0	613	{"database":2,"type":"query","query":{"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10,"breakout":[["field",84,{"base-type":"type/Text"}],["field",82,{"base-type":"type/Text"}],["field",83,{"base-type":"type/Date","temporal-unit":"day"}]],"aggregation":[["sum",["field",81,{"base-type":"type/Integer"}]]]}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
-\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	996	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"async?":true,"cache-ttl":null}
 \\xdf0202efa5571abb4f2109dcc00a34f901d0720411f3faf6fa254718e29b5dea	792	{"database":2,"type":"query","query":{"source-query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"filter":["is-null",["field","avg",{"base-type":"type/Decimal"}]]},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x7b25ebdd597bac676736043ca51134c67b9c53d973ea88a5b39500c2b1877a24	402	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past4quarters","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xb14b848760a58b4bf9dadaa683c61b2a31e4bba32d6123eff4bca0de401a5414	1319	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"past4quarters","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	543	{"database":2,"type":"query","query":{"source-table":10,"limit":10},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x5348d088d0529f7c30825eaa9cdda424cd707a6ed8796aab5b0f3372b11e57d9	565	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"past4quarters","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x4158ae0fcc35d280f3f7d6c4927813bff8d91f9b0dde58b1ce4f9f7832e34cbe	322	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"~2023-12-19","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x5950eb5a5e3a710f2fb645f5ed647d3072335a3b27d24acc31b3f608a017f2b9	825	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"~2023-12-19","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\xe2834b53cb4df9c09c0cba30907712848f88d3723bca98d221faac0b6d0fb7ff	185	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\xcfd91f764f534c240864877db227f818f98b66353b40f8d6b68a98e022574d7e	408	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"~2023-12-19","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x3449fd851acd3128f7e6ef58413ef3142fed56e82594bce07420381a266d6f81	299	{"database":3,"query":{"source-table":18},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xf6513c3df790b2c2169e13ed2a025a741f44500871e8c65f8af31740fed62fb4	242	{"database":2,"query":{"source-table":12},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	592	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisweek","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x9b6b213bbf08f9d4b3bc74f469eb94114713392732d2d7ce7310241272452349	255	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thismonth","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	645	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	743	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	1030	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisquarter","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x8b466ad2244ed40ea8d5526620d03abbd00882cb6e5c702304732686630794b8	144	{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"source-query":{"source-table":10}},"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	790	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false,"process-viz-settings?":false},"database":2,"query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}},"async?":true,"cache-ttl":null}
+\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	610	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	791	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisyear","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x3d89ce3740695a71dfa8f3d61c07a18a586c90904aad81cd0f0187f3c7c4ddbd	219	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"source-query":{"source-table":10}},"async?":true,"cache-ttl":null}
+\\xdd65bbbd58e74c7d5cc21ad003ffd7a542b8d9a8eea6aadfc56a634f4917d2db	102	{"database":2,"query":{"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,{"base-type":"type/Text"}],".",""],",",""],"!",""]]},"filter":["and",["!=",["field",96,{"base-type":"type/Text"}],""],["=",["expression","Bad Word"],"HELL"],["=",["field",106,{"base-type":"type/Text","source-field":99}],"Toronto"]],"source-table":11},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x5e72d811279c891d7611d657e2cfb624f0c73feda97b36464147523efbdbe431	261	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x7b22e02b397a049414fba6c81a40b05f1baccb23ea36cdb3ac92adf6405064ea	94	{"database":2,"query":{"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,{"base-type":"type/Text"}],".",""],",",""],"!",""]]},"filter":["and",["!=",["field",96,{"base-type":"type/Text"}],""],["=",["expression","Bad Word"],"SEX RAPED DRUNK"],["=",["field",106,{"base-type":"type/Text","source-field":99}],"Calgary"]],"source-table":11},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\x1b57271dca2d17d3b5c1e6a88625679d2ef64f309c19de258e1c9db8c82c0377	88	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\xbc1300d28ba4288148a2458267b4a7338feb5e368e80c8f358ddb12a14114b7f	116	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\x7b15d382969e772d9aec9477d19746dec2b921306420b2aafb15887bf2b2692c	66	{"type":"query","query":{"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,{"base-type":"type/Text"}],".",""],",",""],"!",""]]},"filter":["and",["!=",["field",96,{"base-type":"type/Text"}],""],["=",["expression","Bad Word"],"SEX RAPED DRUNK"],["=",["field",106,{"base-type":"type/Text","source-field":99}],"Calgary"],["=",["field",99,null],"1apcrxc"]],"source-table":11},"database":2,"middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
+\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	541	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",108,null]]}],"async?":true,"cache-ttl":null}
+\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	631	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"database":2,"query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",108,{"source-field":99}]]}],"async?":true,"cache-ttl":null}
+\\xf0dbf0237c9b89c82b7ba388539dd965e8c2b0ca8cc940c1f37a5facca3b4868	270	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"query","middleware":{"js-int-to-string?":true,"ignore-cached-results?":false},"viz-settings":{},"database":2,"query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]},"parameters":[{"type":"date/all-options","value":"thisday","id":"51ec7d3c","target":["dimension",["field",93,null]]}],"async?":true,"cache-ttl":null}
+\\x64736e2c7d6b1d8d354405aa3c75cc8698625e8be7226ace575994ba5d512f6c	100	{"database":2,"query":{"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,{"base-type":"type/Text"}],".",""],",",""],"!",""]]},"filter":["and",["!=",["field",96,{"base-type":"type/Text"}],""],["=",["expression","Bad Word"],"GAY HIV SHIT"],["=",["field",106,{"base-type":"type/Text","source-field":99}],"Kitcher / Waterloo"]],"source-table":11},"type":"query","middleware":{"js-int-to-string?":true,"add-default-userland-constraints?":true}}
 \.
 
 
 --
--- TOC entry 4913 (class 0 OID 27905)
--- Dependencies: 330
+-- TOC entry 4433 (class 0 OID 16739)
+-- Dependencies: 313
 -- Data for Name: query_action; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6551,8 +7256,8 @@ COPY public.query_action (action_id, database_id, dataset_query) FROM stdin;
 
 
 --
--- TOC entry 4862 (class 0 OID 27062)
--- Dependencies: 279
+-- TOC entry 4434 (class 0 OID 16744)
+-- Dependencies: 314
 -- Data for Name: query_cache; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6561,274 +7266,385 @@ COPY public.query_cache (query_hash, updated_at, results) FROM stdin;
 
 
 --
--- TOC entry 4861 (class 0 OID 27053)
--- Dependencies: 278
+-- TOC entry 4435 (class 0 OID 16749)
+-- Dependencies: 315
 -- Data for Name: query_execution; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.query_execution (id, hash, started_at, running_time, result_rows, native, context, error, executor_id, card_id, dashboard_id, pulse_id, database_id, cache_hit) FROM stdin;
-1	\\x7cbe84d59a31cb2c9bd7cc44ce3a659287dd4f413355b28f2c22a1b086e5f297	2023-11-17 03:17:27.024862+00	1350	2000	t	ad-hoc	\N	1	\N	\N	\N	2	f
-2	\\x87f9b35546070bec3dc992bf20f2baefb6854acd88bd1e6d62650b5bdb777314	2023-11-17 03:19:00.372927+00	305	10	t	ad-hoc	\N	1	\N	\N	\N	2	f
-3	\\x35ad2a3f8af60c53bf1a6310e5198913bbdec22e565b103255024e01b7f42a7a	2023-11-17 03:21:23.967302+00	1667	2000	t	ad-hoc	\N	1	\N	\N	\N	2	f
-4	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-17 03:22:19.74368+00	1865	2000	t	question	\N	1	1	1	\N	2	f
-5	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-17 03:24:02.628386+00	1183	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
-6	\\x502faebbc3dda77eaf14f23de581987316179aba4dee28b1657a93e7220a4d6d	2023-11-17 03:24:12.927316+00	761	2563	f	ad-hoc	\N	1	\N	\N	\N	2	f
-7	\\x89f5947ea3313eefbfd1c462677f1309481335eb54d1b00553cd6d0c4265fcc8	2023-11-17 03:24:21.268358+00	531	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
-8	\\xbb370c59889198e0ffb178669e812cac17068b5fd1afc2283be516ee5ca235cd	2023-11-17 03:24:29.276864+00	764	2563	f	ad-hoc	\N	1	\N	\N	\N	2	f
-9	\\xc94fa845168c771e8522a5f7ecc5d2cbe69f6c6e1fe5646d8ee4e9c09d5d1747	2023-11-17 03:24:32.705507+00	292	1	f	ad-hoc	\N	1	\N	\N	\N	2	f
-10	\\x7734381cdc1e08105de1b8478987bf16ac792ee07fb7acdd89e1f75429c807a9	2023-11-17 03:24:36.027206+00	356	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-11	\\x5cd8f54dd310aed5388163e778b9b1548395c6f2a0ae95980babe02e02b5fc80	2023-11-17 03:25:59.165577+00	365	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-12	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-17 03:26:12.64844+00	743	8	f	question	\N	1	2	1	\N	2	f
-13	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-17 03:26:12.833777+00	2260	2000	t	dashboard	\N	1	1	1	\N	2	f
-14	\\xf735edaa676af91450272e6a06af9e8b4416022f4cf5d93b8adb15718f145335	2023-11-17 03:42:09.087202+00	680	8	f	dashboard	\N	1	2	1	\N	2	f
-15	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-17 03:42:52.159109+00	652	8	f	dashboard	\N	1	2	1	\N	2	f
-16	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-17 04:03:19.743323+00	972	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
-17	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:45:15.066047+00	998	8	f	dashboard	\N	1	2	1	\N	2	f
-18	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-19 02:45:24.761907+00	1264	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
-19	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-19 02:45:39.399586+00	2367	2000	t	question	\N	1	1	\N	\N	2	f
-20	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-19 02:46:17.068536+00	952	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f
-21	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:46:40.925589+00	723	8	f	dashboard	\N	1	2	1	\N	2	f
-22	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:49:07.574946+00	817	8	f	dashboard	\N	1	2	1	\N	2	f
-23	\\x5b284f80070bc1fcb528c1570d6d5083128bcbf89ae9970c67de20c49e67ff27	2023-11-19 02:52:33.811109+00	1051	2545	f	ad-hoc	\N	1	\N	\N	\N	2	f
-24	\\xf32f08ba945682722af0bdc08ee2f10d76ba6ee085a609c0db2d190f1cb0d594	2023-11-19 02:53:38.95243+00	562	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-25	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-11-19 02:54:37.397172+00	522	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-26	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-19 02:56:45.345312+00	857	8	f	question	\N	1	3	1	\N	2	f
-27	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:56:45.503639+00	1164	8	f	dashboard	\N	1	2	1	\N	2	f
-28	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 02:58:04.842465+00	733	8	f	dashboard	\N	1	2	1	\N	2	f
-29	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 02:58:04.842494+00	927	8	f	dashboard	\N	1	3	1	\N	2	f
-30	\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	2023-11-19 02:58:14.492487+00	647	0	f	dashboard	\N	1	2	1	\N	2	f
-31	\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	2023-11-19 02:58:14.502256+00	749	0	f	dashboard	\N	1	3	1	\N	2	f
-32	\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	2023-11-19 02:58:18.662176+00	632	0	f	dashboard	\N	1	2	1	\N	2	f
-33	\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	2023-11-19 02:58:18.666178+00	735	0	f	dashboard	\N	1	3	1	\N	2	f
-34	\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	2023-11-19 02:58:20.966838+00	641	8	f	dashboard	\N	1	2	1	\N	2	f
-35	\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	2023-11-19 02:58:20.978277+00	765	8	f	dashboard	\N	1	3	1	\N	2	f
-36	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-11-19 02:58:24.525256+00	644	8	f	dashboard	\N	1	2	1	\N	2	f
-37	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-11-19 02:58:24.531275+00	837	8	f	dashboard	\N	1	3	1	\N	2	f
-38	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:58:58.463694+00	708	8	f	question	\N	1	2	\N	\N	2	f
-39	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 02:59:31.587099+00	649	8	f	dashboard	\N	1	2	1	\N	2	f
-40	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 02:59:31.580477+00	791	8	f	dashboard	\N	1	3	1	\N	2	f
-41	\\xbfaefc42192e3dfa56db46b04801fc6a05ecae27bb1e4954e4baa6ce2c20edc5	2023-11-19 02:59:55.336315+00	163	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	2	1	\N	2	\N
-42	\\x90418f0bf08dbfb2ff42643a8d50f5dc9726891104d893f1f5823fa0fcec6224	2023-11-19 02:59:55.348794+00	259	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	3	1	\N	2	\N
-43	\\xbc0201f8360103149374b43d59f5c36e6aa8461907304d493f115a96832d7ba6	2023-11-19 03:00:07.4658+00	177	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	2	1	\N	2	\N
-44	\\x063f91aec1e21a3df3d2d77f8016d1cc63d5819ce54f06f6308b1ced363b1669	2023-11-19 03:00:07.470891+00	263	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	3	1	\N	2	\N
-45	\\xa2f6414584d56597330e6fdc9b948716d0ce98365bb1f5391167d301cdd8c223	2023-11-19 03:00:27.969605+00	623	8	f	dashboard	\N	1	2	1	\N	2	f
-46	\\xd2d1b83ca1f04601f8f2bba8e9266deda6f31410c61fa773fc378942d9760a5d	2023-11-19 03:00:27.961748+00	757	8	f	dashboard	\N	1	3	1	\N	2	f
-47	\\x7349c69966e1c33cacb9d23ead4221deca4d4b5f12d84bad7ce186f3c34a6f86	2023-11-19 03:00:33.178035+00	704	2	f	dashboard	\N	1	2	1	\N	2	f
-48	\\x020a565784d820307f8a04f2a331248aa21e14128d9e63fd9ee921f166335ac3	2023-11-19 03:00:33.18081+00	835	2	f	dashboard	\N	1	3	1	\N	2	f
-49	\\x733fd252cdf09dc296d6e6308b034510a5e428fddeb87a8fecd12a96c6f28c1d	2023-11-19 03:00:39.875874+00	703	8	f	dashboard	\N	1	2	1	\N	2	f
-50	\\x66f15c7ecd61f55d800d887e5eef2641b186c1d7b3a22edb2fb7a754448730aa	2023-11-19 03:00:39.866415+00	751	8	f	dashboard	\N	1	3	1	\N	2	f
-51	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 23:31:17.679044+00	1654	8	f	dashboard	\N	1	3	1	\N	2	f
-52	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 23:31:17.612839+00	1736	8	f	dashboard	\N	1	2	1	\N	2	f
-53	\\xea8b6981c9c792688d76d616ba9f0090c6a4c9e03ceb4e0d28225ff122ad35e3	2023-11-19 23:55:44.755475+00	632	958	f	ad-hoc	\N	1	\N	\N	\N	2	f
-54	\\x0a65c444c78157860d35cecbc1dfa6b092925f961370f193e4df6fa2368d9969	2023-11-19 23:56:14.662463+00	575	958	f	ad-hoc	\N	1	\N	\N	\N	2	f
-55	\\x525587c0ad6e49ad9bb17a51b792542fd6e82145216a303e1677395e6fced27b	2023-11-19 23:56:47.640095+00	855	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
-56	\\x2609faf5e62c9a7921fb3f3141aace02d1e15ed43f9af9ce26c09005c0356418	2023-11-19 23:57:27.012394+00	861	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
-57	\\xbb94164b295634007be21439cc7286ec95654d812aafb6f34fd16b40410f1555	2023-11-19 23:57:59.789378+00	1075	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-58	\\x3e4094d88da767dacf5d4b5207bfbb1620d1219e338f8ffe9cb80f2badad5ed7	2023-11-20 00:16:11.934187+00	1071	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-59	\\x74aa5b35b92d00197cb3ae45858fbc8437fe55b543fa49dfa6aeb653c7b8acec	2023-11-20 00:16:30.190204+00	1084	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-60	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:16:43.851628+00	1070	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-61	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:18:07.276505+00	955	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-62	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:18:27.28272+00	995	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-63	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:18:45.355302+00	773	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
-64	\\x8731a4588d8b2ba91337afcc5a6e71b58a754a86213f2b2bce91f85b568f78a3	2023-11-20 00:19:02.957254+00	1059	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-65	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:19:36.302045+00	740	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
-66	\\x9b4ccaf4f87ad5eb499605c034ce8809f2e7293ba5f752333aeff36801197762	2023-11-20 00:20:07.610755+00	806	165	f	ad-hoc	\N	1	\N	\N	\N	2	f
-75	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:34:08.666594+00	667	8	f	dashboard	\N	1	2	1	\N	2	f
-85	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:42:22.951085+00	1222	8	f	dashboard	\N	1	3	1	\N	2	f
-90	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:43:31.740835+00	1125	1580	f	dashboard	\N	1	4	1	\N	2	f
-67	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:25:37.854587+00	791	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f
-68	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:25:58.790344+00	1090	1580	f	question	\N	1	4	1	\N	2	f
-69	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:25:59.060153+00	1204	8	f	dashboard	\N	1	2	1	\N	2	f
-70	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:25:58.882245+00	1484	8	f	dashboard	\N	1	3	1	\N	2	f
-71	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:32:42.099822+00	1062	582	f	dashboard	\N	1	4	1	\N	2	f
-72	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:33:32.018971+00	720	8	f	dashboard	\N	1	2	1	\N	2	f
-73	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:33:32.051637+00	1229	8	f	dashboard	\N	1	3	1	\N	2	f
-74	\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	2023-11-20 00:33:32.057813+00	1523	962	f	dashboard	\N	1	4	1	\N	2	f
-76	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:34:08.660263+00	918	8	f	dashboard	\N	1	3	1	\N	2	f
-77	\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	2023-11-20 00:34:08.665782+00	996	962	f	dashboard	\N	1	4	1	\N	2	f
-78	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:35:21.518177+00	655	8	f	dashboard	\N	1	2	1	\N	2	f
-79	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:35:21.495168+00	827	8	f	dashboard	\N	1	3	1	\N	2	f
-80	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:35:21.55397+00	945	582	f	dashboard	\N	1	4	1	\N	2	f
-81	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:35:44.090595+00	991	937	f	dashboard	\N	1	4	1	\N	2	f
-82	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:39:53.576685+00	1050	1580	f	question	\N	1	4	\N	\N	2	f
-83	\\x2ef42b077c056e5510617581412e30a501e1bc53431ce64a9d27ae5077c957a9	2023-11-20 00:41:50.54584+00	766	293	f	ad-hoc	\N	1	\N	\N	\N	2	f
-84	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:42:22.9298+00	728	8	f	dashboard	\N	1	2	1	\N	2	f
-86	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:42:22.96899+00	1442	582	f	dashboard	\N	1	4	1	\N	2	f
-87	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:42:55.273886+00	974	937	f	dashboard	\N	1	4	1	\N	2	f
-88	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:43:31.722394+00	674	8	f	dashboard	\N	1	2	1	\N	2	f
-89	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:43:31.740929+00	908	8	f	dashboard	\N	1	3	1	\N	2	f
-91	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:47:32.482665+00	663	8	f	dashboard	\N	1	2	1	\N	2	f
-92	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:47:32.501441+00	824	8	f	dashboard	\N	1	3	1	\N	2	f
-93	\\x7f0edaaa1a053c1a6e4051cab36fa5b6408cb0755d5b8ee64a777dec1eb29eec	2023-11-20 00:47:32.507619+00	1022	0	f	dashboard	\N	1	4	1	\N	2	f
-94	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:47:44.142294+00	985	937	f	dashboard	\N	1	4	1	\N	2	f
-95	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:50:20.929991+00	1139	1580	f	question	\N	1	4	\N	\N	2	f
-96	\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	2023-11-20 01:01:41.772762+00	233	0	t	ad-hoc	ERROR: zero-length delimited identifier at or near """"\n  Position: 270	1	\N	\N	\N	2	\N
-97	\\x854152be96f19657d7f2f3b60d4a0ea6fc955d3ec2acf5b3ce73fa1be1e6a83a	2023-11-20 01:02:10.727477+00	244	0	t	ad-hoc	ERROR: syntax error at or near "AS"\n  Position: 334	1	\N	\N	\N	2	\N
-98	\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	2023-11-20 01:03:06.730168+00	218	0	t	ad-hoc	ERROR: zero-length delimited identifier at or near """"\n  Position: 270	1	\N	\N	\N	2	\N
-99	\\x73e84bbe9811d56bd276680a6fc722e9498e68c9f9356c6f4834d9c75a90ef05	2023-11-20 01:03:13.648713+00	217	0	t	ad-hoc	ERROR: syntax error at or near "AS"\n  Position: 333	1	\N	\N	\N	2	\N
-100	\\xe1f09291618b058323dd9df7ac62f056286d49ab852952d9dcfc8ad24ca887ef	2023-11-20 01:12:34.223903+00	234	0	t	ad-hoc	ERROR: column "EMPTY" does not exist\n  Position: 278	1	\N	\N	\N	2	\N
-101	\\xb54c4ff8d11f70dbbfa9971ea077a3f05363c450586f32cdbd2960e19c9aa253	2023-11-20 01:12:44.745631+00	712	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-102	\\xee97310c569792adbb28280d6767b2ead4084bff111f9e2f030c9e8d7f82b49d	2023-11-20 01:13:12.743821+00	636	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-103	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:13:25.761624+00	1027	1580	f	question	\N	1	4	\N	\N	2	f
-104	\\xcb664257fb91837cbc4c4b8a3e11d21250cf5a04d5c949257a1336d0a133610c	2023-11-20 01:13:53.461963+00	563	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-105	\\x28eb73715575d3ca6f28fb5cc3c43b9196d36583d888e57bde7aaf0df6934e6b	2023-11-20 01:14:12.929657+00	662	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-106	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:14:23.670817+00	1078	1580	f	question	\N	1	4	\N	\N	2	f
-107	\\x3e972a53120cb9d061952b23312d34fcad161c36aa4ff4ab874964cc48995ae3	2023-11-20 01:14:29.830214+00	590	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-108	\\x35b68817467c6e11a756f72f6a38b43507bbfbbd96a9ee22da4377c608f3a3a0	2023-11-20 01:17:08.618564+00	277	0	t	ad-hoc	ERROR: syntax error at or near "ORDER"\n  Position: 585	1	\N	\N	\N	2	\N
-109	\\xf815b417eace1fa4ba1900c7b426217732cb36c15a7cd93bd71c2713d1fe351c	2023-11-20 01:17:19.22478+00	243	0	t	ad-hoc	ERROR: syntax error at or near "ORDER"\n  Position: 585	1	\N	\N	\N	2	\N
-110	\\xccaa9c662613d621491ed30989c5ff186b5ba4e6ff67d0f1aa6dc498f1277740	2023-11-20 01:17:31.356043+00	247	0	t	ad-hoc	ERROR: column "comments.bad_words" must appear in the GROUP BY clause or be used in an aggregate function\n  Position: 225	1	\N	\N	\N	2	\N
-111	\\x65efbdbd40bd565fab27adb621edfeafae9712e3781135d6be2000fcb4a916f4	2023-11-20 01:18:01.717626+00	682	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-112	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:18:14.236259+00	586	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-113	\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	2023-11-20 01:18:27.579583+00	562	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-114	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:18:37.068525+00	569	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-115	\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	2023-11-20 01:38:30.243958+00	596	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-116	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:38:32.052516+00	597	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f
-117	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:38:36.737643+00	1052	1580	f	question	\N	1	4	\N	\N	2	f
-118	\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	2023-11-20 01:39:33.709839+00	831	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-119	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:40:15.958361+00	1075	1580	f	question	\N	1	4	\N	\N	2	f
-120	\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	2023-11-20 01:40:16.595965+00	992	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-121	\\x56964a3ab1541c80917a79a7938188966b382024e68e0ed99bcd50e1c3e92db5	2023-11-20 01:44:30.142821+00	888	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f
-122	\\x7c9668363ad1e61a76255f86667c62f91e7dca55d6315bd08c03d8ea33389310	2023-11-20 01:45:13.655446+00	907	1406	f	ad-hoc	\N	1	\N	\N	\N	2	f
-123	\\x01da739110fa3826c8d2555b6ffa7cd2b01cb0f5a89d0e7a7bf1f0b7ea13fdd8	2023-11-20 02:14:31.830152+00	700	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-124	\\xe3d06b7c3548dae25d6447405334d49774b66c1f891f20bcf7dddec9bc60ca53	2023-11-20 02:14:59.353878+00	653	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-125	\\x0c8b2a4625ef8878d6d46e18f9e249835e8b47bfef698693a7a645a50b40c3fd	2023-11-20 02:15:28.731609+00	752	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-126	\\xcb5f7fd3ce21e693e4bc7871f16953e74d71671a06939148a2ed31ec0eac44ee	2023-11-20 02:16:35.385952+00	660	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-127	\\x75e81bdb4f24b7a3f4a0a819d6c3d44234dd448b959f56bf9a94b4c749eff8f4	2023-11-20 02:26:09.472142+00	676	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-128	\\x78f9d4dcd418808e2932e521794e5775b7d434268fe39a026803ffbdfd8cd060	2023-11-20 02:26:26.150228+00	733	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-129	\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	2023-11-20 02:26:46.325122+00	874	561	f	ad-hoc	\N	1	\N	\N	\N	2	f
-130	\\x8036b85e0aaea3bd4d0a1c5d7dfa22f7440c1f9995fb91908a7f1d71ca26aef0	2023-11-20 02:27:35.484822+00	671	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-131	\\xa1e186c21a5612844561451773104a7b6804b6d61fd9fa76ac27ce48deb06d0e	2023-11-20 02:27:56.470071+00	685	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-132	\\xee2df50d2c582273cbc433fbd39d25c49c56738578d44dcbebf9c6455c164da8	2023-11-20 02:28:18.340556+00	713	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-133	\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	2023-11-20 02:28:39.640788+00	771	561	f	ad-hoc	\N	1	\N	\N	\N	2	f
-134	\\x50ae1ab620a44d02ccae34eab1ce65d48877256998591b2c94d0804cd133728a	2023-11-20 02:33:06.513363+00	676	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-138	\\x861d5e44937d1d41733a9c083989924fa553f8f231837db575bbe25e4260447f	2023-11-20 02:38:43.821583+00	848	439	f	ad-hoc	\N	1	\N	\N	\N	2	f
-140	\\xa4b5b96fe88f459cc1c283dd5cccadfd180c1b395dfd47e874115ef4afbb4862	2023-11-20 02:40:34.72925+00	796	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-141	\\xd0bae741aa38b421763b905da18326844f8e6b361c5083f5f5bb118bd62857a2	2023-11-20 02:43:28.231458+00	812	0	f	ad-hoc	ERROR: invalid regular expression: invalid escape \\ sequence	1	\N	\N	\N	2	\N
-144	\\x3c8947c41092bc3dc1a0cb952cc7af39e977490c1250b5b001d0130ba1260314	2023-11-20 02:44:19.792141+00	736	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-145	\\xac8e5037ca1e05972a59041ce285c083859bdf336c815e2bd1f8bbeb463a80f6	2023-11-20 02:44:31.744389+00	802	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-148	\\x99984618035d55be51f7a46a4b23797736ff97543be700bb190dd564b1a50055	2023-11-20 03:01:09.944027+00	792	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-149	\\x28b7e7e43fdd091ffc139f7f3ecca3ed6a247e557849b9507bdb1363e25f8d63	2023-11-20 03:01:17.872888+00	821	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-157	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 03:19:44.89352+00	783	8	f	dashboard	\N	1	2	1	\N	2	f
-159	\\x3391173579f3b39377edcf7276bca62448db54abbf33efa91fe545fc52b95694	2023-11-20 03:19:44.92317+00	1539	0	f	dashboard	\N	1	4	1	\N	2	f
-160	\\x691bcc80e9159cde3c3e64f52afc4c4e287d55b552a2451c22ee88588dd0d913	2023-11-20 03:19:54.820604+00	1205	675	f	dashboard	\N	1	4	1	\N	2	f
-162	\\xbf1b98e73ba299cafb7c2d2ac5757fcc10dcc21e1f521ceb845cca478309bdde	2023-11-20 03:21:03.778202+00	853	8	f	dashboard	\N	1	3	1	\N	2	f
-163	\\x386557dd279bb3c85182cdc34e277ced3fd714b75045ba31802c5bb1b6bb13b9	2023-11-20 03:21:03.784811+00	1275	849	f	dashboard	\N	1	4	1	\N	2	f
-168	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-11-20 03:22:08.052347+00	906	8	f	dashboard	\N	1	3	1	\N	2	f
-169	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-11-20 03:22:08.052449+00	1291	955	f	dashboard	\N	1	4	1	\N	2	f
-135	\\x757f9fc0e563456bbbac68370b5bffd2d21eeb7bcdb938fb91828a186e7ede3f	2023-11-20 02:34:34.022599+00	661	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N
-137	\\x6e193788d9d33f5b90c76cf3f29cfb9ddba90017ca6f14b7eca336099b0babf9	2023-11-20 02:37:52.353494+00	787	446	f	ad-hoc	\N	1	\N	\N	\N	2	f
-139	\\x4136ed0d69e4e1c9e118089629d438be1aacccf2559995abd5cadb7d1f34882a	2023-11-20 02:40:17.100565+00	851	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-142	\\xa6d097f92866c59218fd38f414fd69db9eb007f3089333d591cf3ce5fceb4131	2023-11-20 02:43:49.956751+00	807	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-146	\\x2e69be93a442fe05a0a7e614cbc8cf6243bb77b22b6489611ea28359fccd9498	2023-11-20 02:44:37.472872+00	770	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-153	\\xbaf124c6b1f88db68c8d8c5e1e4ee90b76bdedaa09201843c99d593c5a0f5950	2023-11-20 03:18:02.879528+00	1056	1118	f	ad-hoc	\N	1	\N	\N	\N	2	f
-156	\\xf0abe70096de06d3319caebcdcc8e84cfd7f4efd6b91333ae19ec449e5c928b5	2023-11-20 03:18:44.655668+00	962	1118	f	ad-hoc	\N	1	\N	\N	\N	2	f
-167	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-11-20 03:22:08.052671+00	710	8	f	dashboard	\N	1	2	1	\N	2	f
-136	\\xbd0af112c6888eedd6595104043d1d1dbde3bd244bae9268af4242f71aaf1181	2023-11-20 02:37:24.586337+00	791	562	f	ad-hoc	\N	1	\N	\N	\N	2	f
-143	\\xc2fec72d80dc889dc7b8303dc25e750b939ca2c74f82ccd5fd4b3604d4efb430	2023-11-20 02:44:06.155577+00	788	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-147	\\x2c26b34a091112bc2ddac01940bf1a9d05c9972dda315373be7a846304cd71c8	2023-11-20 02:44:42.240037+00	783	12	f	ad-hoc	\N	1	\N	\N	\N	2	f
-150	\\xaa6f346e6f21cd72d3ce78928b2e87e1c487b98d0b48a22c75b32e51eb61d171	2023-11-20 03:15:33.142352+00	8	0	f	ad-hoc	Input to resolve-card-id-source-tables* does not match schema: \n\n\t [0;33m  [(named {:query {:expressions {"Bad Word" (named [nil nil (named (not (instance? java.lang.String a-clojure.lang.PersistentVector)) "match") nil] "Must be a valid instance of one of these clauses: :substring, :trim, :ltrim, :rtrim, :replace, :lower, :upper, :concat, :regex-match-first, :coalesce, :case")}}} arg0)] [0m \n\n	1	\N	\N	\N	2	\N
-151	\\xd1962bfdba1f7a89d6009a5da921878f93ee2a7815235e5ab71ebb019ec3069e	2023-11-20 03:16:24.507367+00	1024	1397	f	ad-hoc	\N	1	\N	\N	\N	2	f
-152	\\xd0f5e620587f6dc34ddf871577f5942aaf01f484800488cc7d2cdc27ad68f22e	2023-11-20 03:17:40.0299+00	1012	1279	f	ad-hoc	\N	1	\N	\N	\N	2	f
-154	\\x3ac55e9c0745bc1796cdb5a629aeed828c2fc80c9a17a763c014ba8ae5bcd6eb	2023-11-20 03:18:19.801114+00	825	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-155	\\xd84326649d8a87f167f9fb2b77eb09d89d416f8cc16e553b5b3f716efdbde395	2023-11-20 03:18:35.126151+00	907	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-158	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 03:19:44.915389+00	1291	8	f	dashboard	\N	1	3	1	\N	2	f
-161	\\x550ade057f8af70c20cc0511ad535d1ba113f5d08858f4bc85d5981d4d6223cb	2023-11-20 03:21:03.774878+00	691	8	f	dashboard	\N	1	2	1	\N	2	f
-164	\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	2023-11-20 03:21:16.995495+00	707	8	f	dashboard	\N	1	2	1	\N	2	f
-165	\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	2023-11-20 03:21:17.006343+00	855	8	f	dashboard	\N	1	3	1	\N	2	f
-166	\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	2023-11-20 03:21:17.017463+00	1338	1118	f	dashboard	\N	1	4	1	\N	2	f
-170	\\x5ed22ca3af1abd92f10eb8ff2202ab987c67b0d75535103d85426e3c58cc10e1	2023-11-20 03:25:41.27113+00	465	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-171	\\x0d3092614680820ae540910f93fe2d9ceab3dc86175d72c2fcdd8d478df5f3c1	2023-11-20 03:26:30.074602+00	497	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
-172	\\x9462b571ab360177f5a54ed3291f5354fd7eb918d4385ce199614d3c77861a70	2023-11-20 03:26:41.917187+00	425	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-173	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-02 23:07:39.023992+00	1412	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-174	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-02 23:07:47.038128+00	1111	8	f	dashboard	\N	1	2	1	\N	2	f
-175	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-02 23:07:47.148397+00	1177	8	f	dashboard	\N	1	3	1	\N	2	f
-176	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-02 23:07:47.19512+00	4088	1111	f	dashboard	\N	1	4	1	\N	2	f
-177	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-02 23:08:04.863373+00	592	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-178	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-02 23:08:29.335818+00	729	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-179	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:09:28.796437+00	1722	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-180	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:09:34.854861+00	882	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-181	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:09:40.825563+00	622	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-182	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:09:45.677076+00	764	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-183	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:10:47.218369+00	638	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-184	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:10:50.221188+00	652	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-185	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:21:44.599219+00	1230	8	f	dashboard	\N	1	2	1	\N	2	f
-186	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:21:44.599219+00	1304	0	f	dashboard	Closed	1	2	1	\N	2	\N
-187	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:21:44.591275+00	1379	0	f	dashboard	ERROR: canceling statement due to user request	1	3	1	\N	2	\N
-188	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:21:44.496693+00	2015	0	f	dashboard	\N	1	4	1	\N	2	f
-189	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:21:44.496693+00	2100	0	f	dashboard	Closed	1	4	1	\N	2	\N
-190	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:22:30.414001+00	1228	8	f	dashboard	\N	1	2	1	\N	2	f
-191	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:22:30.533983+00	1336	8	f	dashboard	\N	1	3	1	\N	2	f
-192	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:22:30.509622+00	1934	1111	f	dashboard	\N	1	4	1	\N	2	f
-193	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:23:20.134307+00	609	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-194	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:23.745124+00	589	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-195	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:25.756897+00	599	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-196	\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	2023-12-03 01:23:35.940848+00	453	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
-197	\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	2023-12-03 01:23:49.613419+00	432	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
-198	\\x072dadc2d9883a2a6789e9b3bc13d0ceaa2d957a5e88f7fe1e18e7623350100f	2023-12-03 01:23:51.512521+00	318	1	f	ad-hoc	\N	1	\N	\N	\N	2	f
-199	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:56.486594+00	1080	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-200	\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	2023-12-03 01:24:09.945409+00	445	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
-201	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:11.099084+00	502	2	f	ad-hoc	\N	1	\N	\N	\N	2	f
-202	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:15.012848+00	448	2	f	ad-hoc	\N	1	\N	\N	\N	2	f
-203	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:15.18456+00	514	2	f	ad-hoc	\N	1	\N	\N	\N	2	f
-204	\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	2023-12-03 01:24:17.772133+00	485	5	f	ad-hoc	\N	1	\N	\N	\N	2	f
-205	\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	2023-12-03 01:24:45.540646+00	528	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-206	\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	2023-12-03 01:25:03.613951+00	452	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-207	\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	2023-12-03 01:25:41.673595+00	658	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-208	\\xe69c7b7108907fdd5e0d8fd2f15256c4c76459479350d05a49759b37c2b9f4eb	2023-12-03 01:26:26.891581+00	722	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-209	\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	2023-12-03 01:26:32.251363+00	440	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-210	\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	2023-12-03 01:26:36.451844+00	453	20	f	ad-hoc	\N	1	\N	\N	\N	2	f
-211	\\x1183fb8db9cb4f0247c44ffab453d516626d00a4f53801ec1d5524784610e6b0	2023-12-03 01:26:57.989328+00	613	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-212	\\x908de81cc816ebf3bd572497eaf952c55525fd3061b3dd2870f1c8ed2450fc0b	2023-12-03 01:27:18.12274+00	658	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-213	\\x8302c073628fb8bad702e9c94663d96986f5f2c74ea84fa55d330a680bcae49f	2023-12-03 01:27:47.011034+00	541	10	f	ad-hoc	\N	1	\N	\N	\N	2	f
-214	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:28:07.904902+00	787	8	f	dashboard	\N	1	2	1	\N	2	f
-215	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:28:07.704654+00	882	10	f	question	\N	1	5	1	\N	2	f
-216	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:28:07.896731+00	970	8	f	dashboard	\N	1	3	1	\N	2	f
-217	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:28:07.888505+00	1810	1111	f	dashboard	\N	1	4	1	\N	2	f
-218	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:28:11.626088+00	1461	1111	f	dashboard	\N	1	4	1	\N	2	f
-219	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:28:40.662028+00	893	10	f	question	\N	1	5	1	\N	2	f
-220	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:50:08.013697+00	2012	10	f	dashboard	\N	1	5	1	\N	2	f
-221	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:51:54.992551+00	1103	8	f	question	\N	1	3	\N	\N	2	f
-222	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:52:25.717091+00	1002	8	f	question	\N	1	6	\N	\N	2	f
-223	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-12-03 01:52:49.423061+00	691	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-224	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:56:28.136821+00	933	8	f	question	\N	1	6	\N	\N	2	f
-225	\\xdf0202efa5571abb4f2109dcc00a34f901d0720411f3faf6fa254718e29b5dea	2023-12-03 01:56:58.984319+00	792	0	f	ad-hoc	\N	1	\N	\N	\N	2	f
-226	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-12-03 01:57:05.059907+00	649	8	f	ad-hoc	\N	1	\N	\N	\N	2	f
-227	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 02:06:30.90622+00	1016	8	f	question	\N	1	6	\N	\N	2	f
-228	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 02:09:46.785002+00	903	8	f	question	\N	1	6	\N	\N	2	f
-229	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:40.425923+00	854	8	f	dashboard	\N	1	2	1	\N	2	f
-230	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:40.455483+00	1299	0	f	dashboard	ERROR: canceling statement due to user request	1	4	1	\N	2	\N
-231	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:40.57508+00	1221	0	f	dashboard	ERROR: canceling statement due to user request	1	3	1	\N	2	\N
-232	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:43.210469+00	873	8	f	dashboard	\N	1	2	1	\N	2	f
-233	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:43.165393+00	998	8	f	dashboard	\N	1	3	1	\N	2	f
-234	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:43.287593+00	1612	1111	f	dashboard	\N	1	4	1	\N	2	f
-235	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:52.245335+00	837	8	f	dashboard	\N	1	2	1	\N	2	f
-237	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:52.254959+00	1510	1111	f	dashboard	\N	1	4	1	\N	2	f
-236	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:52.255197+00	913	8	f	dashboard	\N	1	3	1	\N	2	f
-238	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:37:20.459764+00	1954	8	f	dashboard	\N	1	2	1	\N	2	f
-239	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:37:20.45962+00	1977	8	f	dashboard	\N	1	3	1	\N	2	f
-240	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:37:20.330096+00	2666	1111	f	dashboard	\N	1	4	1	\N	2	f
+COPY public.query_execution (id, hash, started_at, running_time, result_rows, native, context, error, executor_id, card_id, dashboard_id, pulse_id, database_id, cache_hit, action_id, is_sandboxed, cache_hash) FROM stdin;
+1	\\x7cbe84d59a31cb2c9bd7cc44ce3a659287dd4f413355b28f2c22a1b086e5f297	2023-11-17 03:17:27.024862+00	1350	2000	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+2	\\x87f9b35546070bec3dc992bf20f2baefb6854acd88bd1e6d62650b5bdb777314	2023-11-17 03:19:00.372927+00	305	10	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+3	\\x35ad2a3f8af60c53bf1a6310e5198913bbdec22e565b103255024e01b7f42a7a	2023-11-17 03:21:23.967302+00	1667	2000	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+4	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-17 03:22:19.74368+00	1865	2000	t	question	\N	1	1	1	\N	2	f	\N	\N	\N
+5	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-17 03:24:02.628386+00	1183	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+6	\\x502faebbc3dda77eaf14f23de581987316179aba4dee28b1657a93e7220a4d6d	2023-11-17 03:24:12.927316+00	761	2563	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+7	\\x89f5947ea3313eefbfd1c462677f1309481335eb54d1b00553cd6d0c4265fcc8	2023-11-17 03:24:21.268358+00	531	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+8	\\xbb370c59889198e0ffb178669e812cac17068b5fd1afc2283be516ee5ca235cd	2023-11-17 03:24:29.276864+00	764	2563	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+9	\\xc94fa845168c771e8522a5f7ecc5d2cbe69f6c6e1fe5646d8ee4e9c09d5d1747	2023-11-17 03:24:32.705507+00	292	1	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+10	\\x7734381cdc1e08105de1b8478987bf16ac792ee07fb7acdd89e1f75429c807a9	2023-11-17 03:24:36.027206+00	356	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+11	\\x5cd8f54dd310aed5388163e778b9b1548395c6f2a0ae95980babe02e02b5fc80	2023-11-17 03:25:59.165577+00	365	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+12	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-17 03:26:12.64844+00	743	8	f	question	\N	1	2	1	\N	2	f	\N	\N	\N
+13	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-17 03:26:12.833777+00	2260	2000	t	dashboard	\N	1	1	1	\N	2	f	\N	\N	\N
+14	\\xf735edaa676af91450272e6a06af9e8b4416022f4cf5d93b8adb15718f145335	2023-11-17 03:42:09.087202+00	680	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+15	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-17 03:42:52.159109+00	652	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+16	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-17 04:03:19.743323+00	972	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+17	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:45:15.066047+00	998	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+18	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-19 02:45:24.761907+00	1264	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+19	\\xada1ed755431302c5b559b62da1beeca165d68d75c4d8e46e5ba767d4dadf397	2023-11-19 02:45:39.399586+00	2367	2000	t	question	\N	1	1	\N	\N	2	f	\N	\N	\N
+20	\\x9874682a930cd29c37fa2558429daf223e1fbe7fc43140b1073b272545a8c30e	2023-11-19 02:46:17.068536+00	952	2000	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+21	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:46:40.925589+00	723	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+22	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:49:07.574946+00	817	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+23	\\x5b284f80070bc1fcb528c1570d6d5083128bcbf89ae9970c67de20c49e67ff27	2023-11-19 02:52:33.811109+00	1051	2545	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+24	\\xf32f08ba945682722af0bdc08ee2f10d76ba6ee085a609c0db2d190f1cb0d594	2023-11-19 02:53:38.95243+00	562	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+25	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-11-19 02:54:37.397172+00	522	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+26	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-19 02:56:45.345312+00	857	8	f	question	\N	1	3	1	\N	2	f	\N	\N	\N
+27	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:56:45.503639+00	1164	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+28	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 02:58:04.842465+00	733	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+29	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 02:58:04.842494+00	927	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+30	\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	2023-11-19 02:58:14.492487+00	647	0	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+31	\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	2023-11-19 02:58:14.502256+00	749	0	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+32	\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	2023-11-19 02:58:18.662176+00	632	0	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+33	\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	2023-11-19 02:58:18.666178+00	735	0	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+34	\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	2023-11-19 02:58:20.966838+00	641	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+35	\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	2023-11-19 02:58:20.978277+00	765	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+36	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-11-19 02:58:24.525256+00	644	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+37	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-11-19 02:58:24.531275+00	837	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+38	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-19 02:58:58.463694+00	708	8	f	question	\N	1	2	\N	\N	2	f	\N	\N	\N
+39	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 02:59:31.587099+00	649	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+40	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 02:59:31.580477+00	791	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+41	\\xbfaefc42192e3dfa56db46b04801fc6a05ecae27bb1e4954e4baa6ce2c20edc5	2023-11-19 02:59:55.336315+00	163	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	2	1	\N	2	\N	\N	\N	\N
+42	\\x90418f0bf08dbfb2ff42643a8d50f5dc9726891104d893f1f5823fa0fcec6224	2023-11-19 02:59:55.348794+00	259	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	3	1	\N	2	\N	\N	\N	\N
+43	\\xbc0201f8360103149374b43d59f5c36e6aa8461907304d493f115a96832d7ba6	2023-11-19 03:00:07.4658+00	177	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	2	1	\N	2	\N	\N	\N	\N
+44	\\x063f91aec1e21a3df3d2d77f8016d1cc63d5819ce54f06f6308b1ced363b1669	2023-11-19 03:00:07.470891+00	263	0	f	dashboard	Unsupported temporal bucketing: You can't bucket a :type/Date Field by :hour.	1	3	1	\N	2	\N	\N	\N	\N
+45	\\xa2f6414584d56597330e6fdc9b948716d0ce98365bb1f5391167d301cdd8c223	2023-11-19 03:00:27.969605+00	623	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+46	\\xd2d1b83ca1f04601f8f2bba8e9266deda6f31410c61fa773fc378942d9760a5d	2023-11-19 03:00:27.961748+00	757	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+47	\\x7349c69966e1c33cacb9d23ead4221deca4d4b5f12d84bad7ce186f3c34a6f86	2023-11-19 03:00:33.178035+00	704	2	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+48	\\x020a565784d820307f8a04f2a331248aa21e14128d9e63fd9ee921f166335ac3	2023-11-19 03:00:33.18081+00	835	2	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+49	\\x733fd252cdf09dc296d6e6308b034510a5e428fddeb87a8fecd12a96c6f28c1d	2023-11-19 03:00:39.875874+00	703	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+50	\\x66f15c7ecd61f55d800d887e5eef2641b186c1d7b3a22edb2fb7a754448730aa	2023-11-19 03:00:39.866415+00	751	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+51	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-19 23:31:17.679044+00	1654	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+52	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-19 23:31:17.612839+00	1736	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+53	\\xea8b6981c9c792688d76d616ba9f0090c6a4c9e03ceb4e0d28225ff122ad35e3	2023-11-19 23:55:44.755475+00	632	958	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+54	\\x0a65c444c78157860d35cecbc1dfa6b092925f961370f193e4df6fa2368d9969	2023-11-19 23:56:14.662463+00	575	958	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+55	\\x525587c0ad6e49ad9bb17a51b792542fd6e82145216a303e1677395e6fced27b	2023-11-19 23:56:47.640095+00	855	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+56	\\x2609faf5e62c9a7921fb3f3141aace02d1e15ed43f9af9ce26c09005c0356418	2023-11-19 23:57:27.012394+00	861	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+57	\\xbb94164b295634007be21439cc7286ec95654d812aafb6f34fd16b40410f1555	2023-11-19 23:57:59.789378+00	1075	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+58	\\x3e4094d88da767dacf5d4b5207bfbb1620d1219e338f8ffe9cb80f2badad5ed7	2023-11-20 00:16:11.934187+00	1071	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+59	\\x74aa5b35b92d00197cb3ae45858fbc8437fe55b543fa49dfa6aeb653c7b8acec	2023-11-20 00:16:30.190204+00	1084	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+60	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:16:43.851628+00	1070	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+61	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:18:07.276505+00	955	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+62	\\x6f55cb5bd4beb747f0a38a7c3934617ef5411d5f10209947ac8fd1d985ccfee0	2023-11-20 00:18:27.28272+00	995	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+63	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:18:45.355302+00	773	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+64	\\x8731a4588d8b2ba91337afcc5a6e71b58a754a86213f2b2bce91f85b568f78a3	2023-11-20 00:19:02.957254+00	1059	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+65	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:19:36.302045+00	740	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+66	\\x9b4ccaf4f87ad5eb499605c034ce8809f2e7293ba5f752333aeff36801197762	2023-11-20 00:20:07.610755+00	806	165	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+75	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:34:08.666594+00	667	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+85	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:42:22.951085+00	1222	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+90	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:43:31.740835+00	1125	1580	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+67	\\x962c470c71b68c54148fd4d2f83a694572cb4266146f01613d54efaf490a5864	2023-11-20 00:25:37.854587+00	791	1580	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+68	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:25:58.790344+00	1090	1580	f	question	\N	1	4	1	\N	2	f	\N	\N	\N
+69	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:25:59.060153+00	1204	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+70	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:25:58.882245+00	1484	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+71	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:32:42.099822+00	1062	582	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+72	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:33:32.018971+00	720	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+73	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:33:32.051637+00	1229	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+74	\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	2023-11-20 00:33:32.057813+00	1523	962	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+76	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:34:08.660263+00	918	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+77	\\xdd57f2c1bc6cc828c94d8b530b064e8acc8584d544e14d9d6d12506583f6cfb6	2023-11-20 00:34:08.665782+00	996	962	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+78	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:35:21.518177+00	655	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+79	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:35:21.495168+00	827	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+80	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:35:21.55397+00	945	582	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+81	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:35:44.090595+00	991	937	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+82	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:39:53.576685+00	1050	1580	f	question	\N	1	4	\N	\N	2	f	\N	\N	\N
+83	\\x2ef42b077c056e5510617581412e30a501e1bc53431ce64a9d27ae5077c957a9	2023-11-20 00:41:50.54584+00	766	293	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+84	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:42:22.9298+00	728	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+86	\\xdf303ebd7ea360ec02dc64f3649e40beb5700da9440119ce44804c643092725f	2023-11-20 00:42:22.96899+00	1442	582	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+87	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:42:55.273886+00	974	937	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+88	\\xea2072f30b20528e98c29a36487410637ba87ce0c909c60ede4e1764a76bf431	2023-11-20 00:43:31.722394+00	674	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+89	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-11-20 00:43:31.740929+00	908	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+91	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 00:47:32.482665+00	663	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+92	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 00:47:32.501441+00	824	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+93	\\x7f0edaaa1a053c1a6e4051cab36fa5b6408cb0755d5b8ee64a777dec1eb29eec	2023-11-20 00:47:32.507619+00	1022	0	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+94	\\x8333e57b3c6288b90bbf7060285442b3faed3a469856ade3d991fb99c8c33a28	2023-11-20 00:47:44.142294+00	985	937	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+95	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 00:50:20.929991+00	1139	1580	f	question	\N	1	4	\N	\N	2	f	\N	\N	\N
+96	\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	2023-11-20 01:01:41.772762+00	233	0	t	ad-hoc	ERROR: zero-length delimited identifier at or near """"\n  Position: 270	1	\N	\N	\N	2	\N	\N	\N	\N
+97	\\x854152be96f19657d7f2f3b60d4a0ea6fc955d3ec2acf5b3ce73fa1be1e6a83a	2023-11-20 01:02:10.727477+00	244	0	t	ad-hoc	ERROR: syntax error at or near "AS"\n  Position: 334	1	\N	\N	\N	2	\N	\N	\N	\N
+98	\\xa5e7a66e187ed5722442eb39ecc82f343d03e81ae9913a39b6a6ecb7e7b0d218	2023-11-20 01:03:06.730168+00	218	0	t	ad-hoc	ERROR: zero-length delimited identifier at or near """"\n  Position: 270	1	\N	\N	\N	2	\N	\N	\N	\N
+99	\\x73e84bbe9811d56bd276680a6fc722e9498e68c9f9356c6f4834d9c75a90ef05	2023-11-20 01:03:13.648713+00	217	0	t	ad-hoc	ERROR: syntax error at or near "AS"\n  Position: 333	1	\N	\N	\N	2	\N	\N	\N	\N
+100	\\xe1f09291618b058323dd9df7ac62f056286d49ab852952d9dcfc8ad24ca887ef	2023-11-20 01:12:34.223903+00	234	0	t	ad-hoc	ERROR: column "EMPTY" does not exist\n  Position: 278	1	\N	\N	\N	2	\N	\N	\N	\N
+101	\\xb54c4ff8d11f70dbbfa9971ea077a3f05363c450586f32cdbd2960e19c9aa253	2023-11-20 01:12:44.745631+00	712	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+102	\\xee97310c569792adbb28280d6767b2ead4084bff111f9e2f030c9e8d7f82b49d	2023-11-20 01:13:12.743821+00	636	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+103	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:13:25.761624+00	1027	1580	f	question	\N	1	4	\N	\N	2	f	\N	\N	\N
+104	\\xcb664257fb91837cbc4c4b8a3e11d21250cf5a04d5c949257a1336d0a133610c	2023-11-20 01:13:53.461963+00	563	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+105	\\x28eb73715575d3ca6f28fb5cc3c43b9196d36583d888e57bde7aaf0df6934e6b	2023-11-20 01:14:12.929657+00	662	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+106	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:14:23.670817+00	1078	1580	f	question	\N	1	4	\N	\N	2	f	\N	\N	\N
+107	\\x3e972a53120cb9d061952b23312d34fcad161c36aa4ff4ab874964cc48995ae3	2023-11-20 01:14:29.830214+00	590	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+108	\\x35b68817467c6e11a756f72f6a38b43507bbfbbd96a9ee22da4377c608f3a3a0	2023-11-20 01:17:08.618564+00	277	0	t	ad-hoc	ERROR: syntax error at or near "ORDER"\n  Position: 585	1	\N	\N	\N	2	\N	\N	\N	\N
+109	\\xf815b417eace1fa4ba1900c7b426217732cb36c15a7cd93bd71c2713d1fe351c	2023-11-20 01:17:19.22478+00	243	0	t	ad-hoc	ERROR: syntax error at or near "ORDER"\n  Position: 585	1	\N	\N	\N	2	\N	\N	\N	\N
+110	\\xccaa9c662613d621491ed30989c5ff186b5ba4e6ff67d0f1aa6dc498f1277740	2023-11-20 01:17:31.356043+00	247	0	t	ad-hoc	ERROR: column "comments.bad_words" must appear in the GROUP BY clause or be used in an aggregate function\n  Position: 225	1	\N	\N	\N	2	\N	\N	\N	\N
+111	\\x65efbdbd40bd565fab27adb621edfeafae9712e3781135d6be2000fcb4a916f4	2023-11-20 01:18:01.717626+00	682	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+112	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:18:14.236259+00	586	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+113	\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	2023-11-20 01:18:27.579583+00	562	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+114	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:18:37.068525+00	569	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+115	\\x762cab6fea13959930efaad883f1e0024ae19cbbd3c60f3ed191f95ae847e710	2023-11-20 01:38:30.243958+00	596	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+116	\\x1ceba2bb8985a62a2c56176356180f290b7730f15b24c20018ad38a8cbae2cbc	2023-11-20 01:38:32.052516+00	597	1580	t	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+117	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:38:36.737643+00	1052	1580	f	question	\N	1	4	\N	\N	2	f	\N	\N	\N
+118	\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	2023-11-20 01:39:33.709839+00	831	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+119	\\xc76f5e83e4c8df5bd1ba7df63803377d7cb6eef5adc0efe4f01f21cac9059d83	2023-11-20 01:40:15.958361+00	1075	1580	f	question	\N	1	4	\N	\N	2	f	\N	\N	\N
+120	\\x8dfd1d93d1ec412a16ba6e4cc3eebd817082cf5ecd4a64e89c634d58a10b1653	2023-11-20 01:40:16.595965+00	992	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+121	\\x56964a3ab1541c80917a79a7938188966b382024e68e0ed99bcd50e1c3e92db5	2023-11-20 01:44:30.142821+00	888	1572	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+122	\\x7c9668363ad1e61a76255f86667c62f91e7dca55d6315bd08c03d8ea33389310	2023-11-20 01:45:13.655446+00	907	1406	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+123	\\x01da739110fa3826c8d2555b6ffa7cd2b01cb0f5a89d0e7a7bf1f0b7ea13fdd8	2023-11-20 02:14:31.830152+00	700	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+124	\\xe3d06b7c3548dae25d6447405334d49774b66c1f891f20bcf7dddec9bc60ca53	2023-11-20 02:14:59.353878+00	653	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+125	\\x0c8b2a4625ef8878d6d46e18f9e249835e8b47bfef698693a7a645a50b40c3fd	2023-11-20 02:15:28.731609+00	752	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+126	\\xcb5f7fd3ce21e693e4bc7871f16953e74d71671a06939148a2ed31ec0eac44ee	2023-11-20 02:16:35.385952+00	660	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+255	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-11 17:55:14.771987+00	321	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+127	\\x75e81bdb4f24b7a3f4a0a819d6c3d44234dd448b959f56bf9a94b4c749eff8f4	2023-11-20 02:26:09.472142+00	676	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+128	\\x78f9d4dcd418808e2932e521794e5775b7d434268fe39a026803ffbdfd8cd060	2023-11-20 02:26:26.150228+00	733	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+129	\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	2023-11-20 02:26:46.325122+00	874	561	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+130	\\x8036b85e0aaea3bd4d0a1c5d7dfa22f7440c1f9995fb91908a7f1d71ca26aef0	2023-11-20 02:27:35.484822+00	671	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+131	\\xa1e186c21a5612844561451773104a7b6804b6d61fd9fa76ac27ce48deb06d0e	2023-11-20 02:27:56.470071+00	685	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+132	\\xee2df50d2c582273cbc433fbd39d25c49c56738578d44dcbebf9c6455c164da8	2023-11-20 02:28:18.340556+00	713	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+133	\\xd7f8b43fd23985d078adbe82c38cd34c9b598ee8a0a37ad5dd9a39198456b46d	2023-11-20 02:28:39.640788+00	771	561	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+134	\\x50ae1ab620a44d02ccae34eab1ce65d48877256998591b2c94d0804cd133728a	2023-11-20 02:33:06.513363+00	676	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+138	\\x861d5e44937d1d41733a9c083989924fa553f8f231837db575bbe25e4260447f	2023-11-20 02:38:43.821583+00	848	439	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+140	\\xa4b5b96fe88f459cc1c283dd5cccadfd180c1b395dfd47e874115ef4afbb4862	2023-11-20 02:40:34.72925+00	796	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+141	\\xd0bae741aa38b421763b905da18326844f8e6b361c5083f5f5bb118bd62857a2	2023-11-20 02:43:28.231458+00	812	0	f	ad-hoc	ERROR: invalid regular expression: invalid escape \\ sequence	1	\N	\N	\N	2	\N	\N	\N	\N
+144	\\x3c8947c41092bc3dc1a0cb952cc7af39e977490c1250b5b001d0130ba1260314	2023-11-20 02:44:19.792141+00	736	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+145	\\xac8e5037ca1e05972a59041ce285c083859bdf336c815e2bd1f8bbeb463a80f6	2023-11-20 02:44:31.744389+00	802	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+148	\\x99984618035d55be51f7a46a4b23797736ff97543be700bb190dd564b1a50055	2023-11-20 03:01:09.944027+00	792	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+149	\\x28b7e7e43fdd091ffc139f7f3ecca3ed6a247e557849b9507bdb1363e25f8d63	2023-11-20 03:01:17.872888+00	821	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+157	\\x3ab7fc27a0291486a7afe1de2766d66b489fc66f28c562d9c33ba4f3fcd24a4a	2023-11-20 03:19:44.89352+00	783	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+159	\\x3391173579f3b39377edcf7276bca62448db54abbf33efa91fe545fc52b95694	2023-11-20 03:19:44.92317+00	1539	0	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+160	\\x691bcc80e9159cde3c3e64f52afc4c4e287d55b552a2451c22ee88588dd0d913	2023-11-20 03:19:54.820604+00	1205	675	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+162	\\xbf1b98e73ba299cafb7c2d2ac5757fcc10dcc21e1f521ceb845cca478309bdde	2023-11-20 03:21:03.778202+00	853	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+163	\\x386557dd279bb3c85182cdc34e277ced3fd714b75045ba31802c5bb1b6bb13b9	2023-11-20 03:21:03.784811+00	1275	849	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+168	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-11-20 03:22:08.052347+00	906	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+169	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-11-20 03:22:08.052449+00	1291	955	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+135	\\x757f9fc0e563456bbbac68370b5bffd2d21eeb7bcdb938fb91828a186e7ede3f	2023-11-20 02:34:34.022599+00	661	0	f	ad-hoc	ERROR: invalid regular expression: invalid backreference number	1	\N	\N	\N	2	\N	\N	\N	\N
+137	\\x6e193788d9d33f5b90c76cf3f29cfb9ddba90017ca6f14b7eca336099b0babf9	2023-11-20 02:37:52.353494+00	787	446	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+139	\\x4136ed0d69e4e1c9e118089629d438be1aacccf2559995abd5cadb7d1f34882a	2023-11-20 02:40:17.100565+00	851	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+142	\\xa6d097f92866c59218fd38f414fd69db9eb007f3089333d591cf3ce5fceb4131	2023-11-20 02:43:49.956751+00	807	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+146	\\x2e69be93a442fe05a0a7e614cbc8cf6243bb77b22b6489611ea28359fccd9498	2023-11-20 02:44:37.472872+00	770	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+153	\\xbaf124c6b1f88db68c8d8c5e1e4ee90b76bdedaa09201843c99d593c5a0f5950	2023-11-20 03:18:02.879528+00	1056	1118	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+156	\\xf0abe70096de06d3319caebcdcc8e84cfd7f4efd6b91333ae19ec449e5c928b5	2023-11-20 03:18:44.655668+00	962	1118	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+167	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-11-20 03:22:08.052671+00	710	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+136	\\xbd0af112c6888eedd6595104043d1d1dbde3bd244bae9268af4242f71aaf1181	2023-11-20 02:37:24.586337+00	791	562	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+143	\\xc2fec72d80dc889dc7b8303dc25e750b939ca2c74f82ccd5fd4b3604d4efb430	2023-11-20 02:44:06.155577+00	788	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+147	\\x2c26b34a091112bc2ddac01940bf1a9d05c9972dda315373be7a846304cd71c8	2023-11-20 02:44:42.240037+00	783	12	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+150	\\xaa6f346e6f21cd72d3ce78928b2e87e1c487b98d0b48a22c75b32e51eb61d171	2023-11-20 03:15:33.142352+00	8	0	f	ad-hoc	Input to resolve-card-id-source-tables* does not match schema: \n\n\t [0;33m  [(named {:query {:expressions {"Bad Word" (named [nil nil (named (not (instance? java.lang.String a-clojure.lang.PersistentVector)) "match") nil] "Must be a valid instance of one of these clauses: :substring, :trim, :ltrim, :rtrim, :replace, :lower, :upper, :concat, :regex-match-first, :coalesce, :case")}}} arg0)] [0m \n\n	1	\N	\N	\N	2	\N	\N	\N	\N
+151	\\xd1962bfdba1f7a89d6009a5da921878f93ee2a7815235e5ab71ebb019ec3069e	2023-11-20 03:16:24.507367+00	1024	1397	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+152	\\xd0f5e620587f6dc34ddf871577f5942aaf01f484800488cc7d2cdc27ad68f22e	2023-11-20 03:17:40.0299+00	1012	1279	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+154	\\x3ac55e9c0745bc1796cdb5a629aeed828c2fc80c9a17a763c014ba8ae5bcd6eb	2023-11-20 03:18:19.801114+00	825	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+155	\\xd84326649d8a87f167f9fb2b77eb09d89d416f8cc16e553b5b3f716efdbde395	2023-11-20 03:18:35.126151+00	907	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+158	\\xa756488d83d438d5a63b1114e8aa1d25e8a5de0b324070545950d0c6368eae8a	2023-11-20 03:19:44.915389+00	1291	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+161	\\x550ade057f8af70c20cc0511ad535d1ba113f5d08858f4bc85d5981d4d6223cb	2023-11-20 03:21:03.774878+00	691	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+164	\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	2023-11-20 03:21:16.995495+00	707	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+165	\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	2023-11-20 03:21:17.006343+00	855	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+166	\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	2023-11-20 03:21:17.017463+00	1338	1118	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+170	\\x5ed22ca3af1abd92f10eb8ff2202ab987c67b0d75535103d85426e3c58cc10e1	2023-11-20 03:25:41.27113+00	465	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+171	\\x0d3092614680820ae540910f93fe2d9ceab3dc86175d72c2fcdd8d478df5f3c1	2023-11-20 03:26:30.074602+00	497	5	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+172	\\x9462b571ab360177f5a54ed3291f5354fd7eb918d4385ce199614d3c77861a70	2023-11-20 03:26:41.917187+00	425	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+173	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-02 23:07:39.023992+00	1412	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+174	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-02 23:07:47.038128+00	1111	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+175	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-02 23:07:47.148397+00	1177	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+176	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-02 23:07:47.19512+00	4088	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+177	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-02 23:08:04.863373+00	592	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+178	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-02 23:08:29.335818+00	729	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+179	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:09:28.796437+00	1722	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+180	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:09:34.854861+00	882	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+181	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:09:40.825563+00	622	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+182	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:09:45.677076+00	764	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+183	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:10:47.218369+00	638	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+184	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:10:50.221188+00	652	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+185	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:21:44.599219+00	1230	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+186	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:21:44.599219+00	1304	0	f	dashboard	Closed	1	2	1	\N	2	\N	\N	\N	\N
+187	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:21:44.591275+00	1379	0	f	dashboard	ERROR: canceling statement due to user request	1	3	1	\N	2	\N	\N	\N	\N
+188	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:21:44.496693+00	2015	0	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+189	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:21:44.496693+00	2100	0	f	dashboard	Closed	1	4	1	\N	2	\N	\N	\N	\N
+190	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:22:30.414001+00	1228	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+191	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:22:30.533983+00	1336	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+192	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:22:30.509622+00	1934	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+193	\\x85594d7d07461c4c58d6048728f19655e187a70075346c1040dc01ee514d47a3	2023-12-03 01:23:20.134307+00	609	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+194	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:23.745124+00	589	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+195	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:25.756897+00	599	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+196	\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	2023-12-03 01:23:35.940848+00	453	5	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+197	\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	2023-12-03 01:23:49.613419+00	432	5	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+198	\\x072dadc2d9883a2a6789e9b3bc13d0ceaa2d957a5e88f7fe1e18e7623350100f	2023-12-03 01:23:51.512521+00	318	1	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+199	\\x2d9f34c32bc11c0150389d08b8887eb2f054a38a7f6d751cee8519b56d847718	2023-12-03 01:23:56.486594+00	1080	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+200	\\xc78ed91faee94905348a18fb52790709e9f4f6581acdb31b8e91ff6102f5f944	2023-12-03 01:24:09.945409+00	445	5	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+201	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:11.099084+00	502	2	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+202	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:15.012848+00	448	2	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+203	\\xe0a47c20a1e679db93d58a87f65dedb7f77878d2bbcbbd32696d217726a54b31	2023-12-03 01:24:15.18456+00	514	2	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+204	\\xe164c854f2dbe4d73e7b37922e08c0fd2a756a801c10b47170cb50ade079e8c2	2023-12-03 01:24:17.772133+00	485	5	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+205	\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	2023-12-03 01:24:45.540646+00	528	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+206	\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	2023-12-03 01:25:03.613951+00	452	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+207	\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	2023-12-03 01:25:41.673595+00	658	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+208	\\xe69c7b7108907fdd5e0d8fd2f15256c4c76459479350d05a49759b37c2b9f4eb	2023-12-03 01:26:26.891581+00	722	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+209	\\x6ea4290288f55d6d3c592b594d5bc4e947bd671c58ea3aef714e0ad1f1fb98aa	2023-12-03 01:26:32.251363+00	440	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+210	\\x8b97091adeff46b6b585af618892d0671c8ef38ec06e7cbcecb6b70c98df5f05	2023-12-03 01:26:36.451844+00	453	20	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+211	\\x1183fb8db9cb4f0247c44ffab453d516626d00a4f53801ec1d5524784610e6b0	2023-12-03 01:26:57.989328+00	613	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+212	\\x908de81cc816ebf3bd572497eaf952c55525fd3061b3dd2870f1c8ed2450fc0b	2023-12-03 01:27:18.12274+00	658	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+213	\\x8302c073628fb8bad702e9c94663d96986f5f2c74ea84fa55d330a680bcae49f	2023-12-03 01:27:47.011034+00	541	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+214	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 01:28:07.904902+00	787	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+215	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:28:07.704654+00	882	10	f	question	\N	1	5	1	\N	2	f	\N	\N	\N
+216	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 01:28:07.896731+00	970	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+217	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:28:07.888505+00	1810	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+218	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 01:28:11.626088+00	1461	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+219	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:28:40.662028+00	893	10	f	question	\N	1	5	1	\N	2	f	\N	\N	\N
+220	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2023-12-03 01:50:08.013697+00	2012	10	f	dashboard	\N	1	5	1	\N	2	f	\N	\N	\N
+221	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:51:54.992551+00	1103	8	f	question	\N	1	3	\N	\N	2	f	\N	\N	\N
+222	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:52:25.717091+00	1002	8	f	question	\N	1	6	\N	\N	2	f	\N	\N	\N
+223	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-12-03 01:52:49.423061+00	691	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+224	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 01:56:28.136821+00	933	8	f	question	\N	1	6	\N	\N	2	f	\N	\N	\N
+225	\\xdf0202efa5571abb4f2109dcc00a34f901d0720411f3faf6fa254718e29b5dea	2023-12-03 01:56:58.984319+00	792	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+226	\\x5c84fcebb2a056826c21b8ff2dda7d784b63158dafe0c541b48befc10b6b3ab4	2023-12-03 01:57:05.059907+00	649	8	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	\N	\N
+227	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 02:06:30.90622+00	1016	8	f	question	\N	1	6	\N	\N	2	f	\N	\N	\N
+228	\\x89ff273b19d90eb077435cda8459b7cd083b4e80ab10669cdcbf3071fca594ca	2023-12-03 02:09:46.785002+00	903	8	f	question	\N	1	6	\N	\N	2	f	\N	\N	\N
+229	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:40.425923+00	854	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+230	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:40.455483+00	1299	0	f	dashboard	ERROR: canceling statement due to user request	1	4	1	\N	2	\N	\N	\N	\N
+231	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:40.57508+00	1221	0	f	dashboard	ERROR: canceling statement due to user request	1	3	1	\N	2	\N	\N	\N	\N
+232	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:43.210469+00	873	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+233	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:43.165393+00	998	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+234	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:43.287593+00	1612	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+235	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:30:52.245335+00	837	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+237	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:30:52.254959+00	1510	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+236	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:30:52.255197+00	913	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+238	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2023-12-03 02:37:20.459764+00	1954	8	f	dashboard	\N	1	2	1	\N	2	f	\N	\N	\N
+239	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2023-12-03 02:37:20.45962+00	1977	8	f	dashboard	\N	1	3	1	\N	2	f	\N	\N	\N
+240	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2023-12-03 02:37:20.330096+00	2666	1111	f	dashboard	\N	1	4	1	\N	2	f	\N	\N	\N
+241	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-10 19:12:36.867764+00	1742	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+242	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-10 19:12:36.868231+00	2311	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+243	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-10 19:12:36.8686+00	2324	8	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+244	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-11 03:19:02.107469+00	1439	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+245	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-11 03:19:02.101374+00	1445	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+246	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-11 03:19:02.101374+00	1541	8	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+247	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-11 17:53:42.667714+00	335	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+248	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-11 17:53:42.689817+00	575	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+249	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-11 17:53:42.692684+00	915	8	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+250	\\x7b25ebdd597bac676736043ca51134c67b9c53d973ea88a5b39500c2b1877a24	2024-02-11 17:53:51.627748+00	402	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+251	\\x5348d088d0529f7c30825eaa9cdda424cd707a6ed8796aab5b0f3372b11e57d9	2024-02-11 17:53:51.626875+00	565	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+252	\\xb14b848760a58b4bf9dadaa683c61b2a31e4bba32d6123eff4bca0de401a5414	2024-02-11 17:53:51.62964+00	1319	1523	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+253	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2024-02-11 17:54:02.647412+00	664	10	f	dashboard	\N	1	5	1	\N	2	f	\N	f	\N
+254	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-11 17:55:14.775555+00	254	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+256	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-11 17:55:14.815262+00	648	8	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+260	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-12 00:06:43.878035+00	315	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+261	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-12 00:06:43.896412+00	541	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+264	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-12 00:06:54.367658+00	244	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+266	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-12 00:06:54.383228+00	516	8	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+272	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-12 00:07:56.52399+00	154	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+280	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2024-02-12 00:08:07.168378+00	159	0	f	dashboard	\N	1	5	1	\N	2	f	\N	f	\N
+257	\\x4158ae0fcc35d280f3f7d6c4927813bff8d91f9b0dde58b1ce4f9f7832e34cbe	2024-02-11 17:56:21.081923+00	322	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+259	\\x5950eb5a5e3a710f2fb645f5ed647d3072335a3b27d24acc31b3f608a017f2b9	2024-02-11 17:56:21.078461+00	825	1450	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+271	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-12 00:07:56.510928+00	129	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+273	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-12 00:07:56.51935+00	222	79	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+276	\\xe2834b53cb4df9c09c0cba30907712848f88d3723bca98d221faac0b6d0fb7ff	2024-02-12 00:07:59.294957+00	185	0	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+258	\\xcfd91f764f534c240864877db227f818f98b66353b40f8d6b68a98e022574d7e	2024-02-11 17:56:21.071024+00	408	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+262	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-12 00:06:43.894667+00	823	8	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+263	\\x3449fd851acd3128f7e6ef58413ef3142fed56e82594bce07420381a266d6f81	2024-02-12 00:06:47.862373+00	299	1281	f	ad-hoc	\N	1	\N	\N	\N	3	f	\N	f	\N
+268	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-12 00:07:33.021139+00	253	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+269	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-12 00:07:33.02753+00	349	79	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+265	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-12 00:06:54.373978+00	362	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+267	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-12 00:07:33.018899+00	247	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+270	\\xf6513c3df790b2c2169e13ed2a025a741f44500871e8c65f8af31740fed62fb4	2024-02-12 00:07:44.600462+00	242	1281	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+274	\\x1091204f666bba2bfca6a64d72d42ba23af331fd8d4f8dd3955b01f5d99094ff	2024-02-12 00:07:59.284233+00	99	0	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+275	\\x96a2373dca4f72d7238e5f5c945adb47f1376cd8ec6bb9b10af17e16dbfb817f	2024-02-12 00:07:59.290932+00	123	0	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+277	\\xfc7f4cffcc9656ca96f0a929790c12a8a84f84637263b125f72cb37af970b10f	2024-02-12 00:08:02.163872+00	158	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+278	\\x12d2c57ecf3ff9d50bc702d6ab2d04bbb212b7b26942da8360412317c482a1b0	2024-02-12 00:08:02.1783+00	189	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+279	\\x9b6b213bbf08f9d4b3bc74f469eb94114713392732d2d7ce7310241272452349	2024-02-12 00:08:02.181438+00	255	79	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+281	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-12 00:54:49.505264+00	711	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+282	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-12 00:54:49.505538+00	711	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+283	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-12 00:54:49.506372+00	711	63	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+284	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-13 01:51:03.057092+00	692	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+285	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-13 01:51:03.057042+00	696	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+286	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-13 01:51:03.056704+00	752	127	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+287	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2024-02-13 01:51:05.90693+00	213	0	f	dashboard	\N	1	5	1	\N	2	f	\N	f	\N
+288	\\x7913f02197dab00e7b20d3fab5829b4ca5d39c39657825e43524e53266430725	2024-02-13 02:02:40.714631+00	557	0	f	dashboard	\N	1	5	1	\N	2	f	\N	f	\N
+289	\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	2024-02-13 02:04:34.919192+00	55	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+290	\\x02f1fe973a2f3eb615ac9810d5253c3c6a734031271cdc963ee5f7187527a8cc	2024-02-13 02:04:40.887016+00	243	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+291	\\x3d80d8ada422e370cc44b1430886165fd53e96f9c2b749ddea06a574fd0da13c	2024-02-13 02:04:40.896537+00	274	0	f	dashboard	Error reducing result rows: null	1	3	1	\N	2	\N	\N	\N	\N
+292	\\x692aa932c69afe41ab7af4a571c64daf2084df112a1fb48a53119c458371e4d7	2024-02-13 02:04:40.909023+00	370	0	f	dashboard	Error reducing result rows: null	1	4	1	\N	2	\N	\N	\N	\N
+293	\\x95ea6a41ed01987b744e5d947a603f122687565173d490e2f0a2399bff28573d	2024-02-13 02:04:55.833475+00	44	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+294	\\xec194f7b48c61cf3b44f418c200985b08db19a606bf7d7c9b1ef6785c900853b	2024-02-13 02:04:57.547271+00	54	0	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+295	\\x8b466ad2244ed40ea8d5526620d03abbd00882cb6e5c702304732686630794b8	2024-02-13 02:05:03.229503+00	144	10	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+296	\\x3d89ce3740695a71dfa8f3d61c07a18a586c90904aad81cd0f0187f3c7c4ddbd	2024-02-13 02:05:15.78616+00	217	0	f	dashboard	Error reducing result rows: null	1	5	1	\N	2	\N	\N	\N	\N
+297	\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	2024-02-13 02:05:15.84716+00	194	0	f	dashboard	Broken pipe	1	2	1	\N	2	\N	\N	\N	\N
+298	\\xed825c87ea9bd9c45c5f5772c3a8980c304586d21f5853b22f3e43b4bc5adde7	2024-02-13 02:05:15.84716+00	192	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+299	\\xb99866529713e833d1fd7979f4b7411ce08c3094356be624fc2128b198ae1dd3	2024-02-13 02:05:15.85314+00	210	0	f	dashboard	Error reducing result rows: null	1	3	1	\N	2	\N	\N	\N	\N
+300	\\x3d89ce3740695a71dfa8f3d61c07a18a586c90904aad81cd0f0187f3c7c4ddbd	2024-02-13 02:05:15.927221+00	233	10	f	dashboard	\N	1	5	1	\N	2	f	\N	f	\N
+301	\\x2fa81e0b6a7962d46ef83354e1004f2d9a87fdb0c5a2199116de9293d63dd98b	2024-02-13 02:05:15.850165+00	330	0	f	dashboard	Error reducing result rows: null	1	4	1	\N	2	\N	\N	\N	\N
+302	\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	2024-02-13 02:05:33.41992+00	182	1	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+303	\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	2024-02-13 02:05:33.440562+00	195	1	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+304	\\xf0dbf0237c9b89c82b7ba388539dd965e8c2b0ca8cc940c1f37a5facca3b4868	2024-02-13 02:05:33.443493+00	270	0	f	dashboard	Error reducing result rows: null	1	4	1	\N	2	\N	\N	\N	\N
+305	\\xf6bfc1df98188492119cb22da9240aa209967b18c709ee8a69ae38187d7376d2	2024-02-13 02:05:37.310843+00	130	1	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+306	\\x6f94a17034698874a2d7cbd146e19b43272442ef8f8958af4594c5ff88ce4b10	2024-02-13 02:05:37.308074+00	185	1	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+307	\\xf0dbf0237c9b89c82b7ba388539dd965e8c2b0ca8cc940c1f37a5facca3b4868	2024-02-13 02:05:37.314809+00	273	15	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+308	\\x1b57271dca2d17d3b5c1e6a88625679d2ef64f309c19de258e1c9db8c82c0377	2024-02-13 02:05:41.909525+00	86	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+309	\\xbc1300d28ba4288148a2458267b4a7338feb5e368e80c8f358ddb12a14114b7f	2024-02-13 02:05:41.912719+00	114	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+310	\\x5e72d811279c891d7611d657e2cfb624f0c73feda97b36464147523efbdbe431	2024-02-13 02:05:41.918421+00	258	127	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+311	\\xdd65bbbd58e74c7d5cc21ad003ffd7a542b8d9a8eea6aadfc56a634f4917d2db	2024-02-13 02:06:23.103347+00	102	4	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+312	\\x1b57271dca2d17d3b5c1e6a88625679d2ef64f309c19de258e1c9db8c82c0377	2024-02-13 02:06:27.672641+00	98	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+313	\\xbc1300d28ba4288148a2458267b4a7338feb5e368e80c8f358ddb12a14114b7f	2024-02-13 02:06:27.676897+00	142	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+314	\\x5e72d811279c891d7611d657e2cfb624f0c73feda97b36464147523efbdbe431	2024-02-13 02:06:27.68428+00	301	127	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+315	\\x64736e2c7d6b1d8d354405aa3c75cc8698625e8be7226ace575994ba5d512f6c	2024-02-13 02:06:43.672798+00	100	1	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+316	\\x1b57271dca2d17d3b5c1e6a88625679d2ef64f309c19de258e1c9db8c82c0377	2024-02-13 02:07:01.065317+00	93	8	f	dashboard	\N	1	2	1	\N	2	f	\N	f	\N
+317	\\xbc1300d28ba4288148a2458267b4a7338feb5e368e80c8f358ddb12a14114b7f	2024-02-13 02:07:01.072432+00	111	8	f	dashboard	\N	1	3	1	\N	2	f	\N	f	\N
+318	\\x5e72d811279c891d7611d657e2cfb624f0c73feda97b36464147523efbdbe431	2024-02-13 02:07:01.073395+00	249	127	f	dashboard	\N	1	4	1	\N	2	f	\N	f	\N
+319	\\x7b22e02b397a049414fba6c81a40b05f1baccb23ea36cdb3ac92adf6405064ea	2024-02-13 02:07:22.978134+00	94	1	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
+320	\\x7b15d382969e772d9aec9477d19746dec2b921306420b2aafb15887bf2b2692c	2024-02-13 02:07:45.309862+00	66	1	f	ad-hoc	\N	1	\N	\N	\N	2	f	\N	f	\N
 \.
 
 
 --
--- TOC entry 4810 (class 0 OID 26423)
--- Dependencies: 227
+-- TOC entry 4437 (class 0 OID 16755)
+-- Dependencies: 317
+-- Data for Name: recent_views; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.recent_views (id, user_id, model, model_id, "timestamp") FROM stdin;
+1	1	dashboard	1	2024-01-23 04:05:00.176048
+2	1	dashboard	1	2024-02-10 19:12:36.487577
+3	1	dashboard	1	2024-02-11 03:19:01.722113
+4	1	dashboard	1	2024-02-11 17:53:42.310478
+5	1	dashboard	1	2024-02-12 00:06:43.716237
+6	1	table	18	2024-02-12 00:06:47.854952
+7	1	dashboard	1	2024-02-12 00:06:54.220297
+8	1	dashboard	1	2024-02-12 00:07:32.848986
+9	1	table	12	2024-02-12 00:07:44.59542
+10	1	dashboard	1	2024-02-12 00:07:56.317356
+11	1	dashboard	1	2024-02-12 00:54:48.770763
+12	1	dashboard	1	2024-02-12 00:54:49.151679
+13	1	dashboard	1	2024-02-13 01:51:02.297904
+14	1	dashboard	1	2024-02-13 01:51:02.637309
+15	1	dashboard	1	2024-02-13 02:02:40.368001
+16	1	table	10	2024-02-13 02:04:34.908437
+17	1	table	10	2024-02-13 02:04:55.817278
+18	1	table	11	2024-02-13 02:06:23.095899
+19	1	table	11	2024-02-13 02:06:43.66279
+20	1	table	11	2024-02-13 02:07:22.971024
+21	1	table	11	2024-02-13 02:07:45.303564
+\.
+
+
+--
+-- TOC entry 4439 (class 0 OID 16759)
+-- Dependencies: 319
 -- Data for Name: report_card; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.report_card (id, created_at, updated_at, name, description, display, dataset_query, visualization_settings, creator_id, database_id, table_id, query_type, archived, collection_id, public_uuid, made_public_by_id, enable_embedding, embedding_params, cache_ttl, result_metadata, collection_position, dataset, entity_id, parameters, parameter_mappings, collection_preview) FROM stdin;
-1	2023-11-17 03:22:03.573662+00	2023-11-19 02:45:57.968843+00	main	base table to work on visualizations	table	{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2}	{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"}	1	2	\N	native	t	\N	\N	\N	f	\N	\N	[{"display_name":"submission_id","field_ref":["field","submission_id",{"base-type":"type/Text"}],"name":"submission_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"subreddit","field_ref":["field","subreddit",{"base-type":"type/Text"}],"name":"subreddit","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.8135}}}},{"display_name":"date_utc","field_ref":["field","date_utc",{"base-type":"type/Date"}],"name":"date_utc","base_type":"type/Date","effective_type":"type/Date","semantic_type":null,"fingerprint":{"global":{"distinct-count":11,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-21T00:00:00Z","latest":"2023-10-24T00:00:00Z"}}}},{"display_name":"title","field_ref":["field","title",{"base-type":"type/Text"}],"name":"title","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Title","fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":75.567}}}},{"display_name":"upvote_ratio","field_ref":["field","upvote_ratio",{"base-type":"type/Decimal"}],"name":"upvote_ratio","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":0.7025804934004054,"q3":1.0,"max":1.0,"sd":0.06694767356299806,"avg":0.9955}}}},{"display_name":"title_sentiment","field_ref":["field","title_sentiment",{"base-type":"type/Decimal"}],"name":"title_sentiment","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":3,"nil%":0.0},"type":{"type/Number":{"min":-1.0,"q1":-0.857020004771601,"q3":0.12066515645625253,"max":1.0,"sd":0.5224092799021318,"avg":-0.365}}}},{"display_name":"submission_id","field_ref":["field","submission_id_2",{"base-type":"type/Text"}],"name":"submission_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"comment_id","field_ref":["field","comment_id",{"base-type":"type/Text"}],"name":"comment_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":2000,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"comment_tier","field_ref":["field","comment_tier",{"base-type":"type/Text"}],"name":"comment_tier","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.844}}}},{"display_name":"parent_id","field_ref":["field","parent_id",{"base-type":"type/Text"}],"name":"parent_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":463,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":2.954}}}},{"display_name":"date_utc","field_ref":["field","date_utc_2",{"base-type":"type/Date"}],"name":"date_utc","base_type":"type/Date","effective_type":"type/Date","semantic_type":null,"fingerprint":{"global":{"distinct-count":12,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-21T00:00:00Z","latest":"2023-10-24T00:00:00Z"}}}},{"display_name":"comment","field_ref":["field","comment",{"base-type":"type/Text"}],"name":"comment","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":1956,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":5.0E-4,"percent-email":0.0,"percent-state":0.0,"average-length":157.826}}}},{"display_name":"is_author","field_ref":["field","is_author",{"base-type":"type/Boolean"}],"name":"is_author","base_type":"type/Boolean","effective_type":"type/Boolean","semantic_type":null,"fingerprint":{"global":{"distinct-count":2,"nil%":0.0}}},{"display_name":"score","field_ref":["field","score",{"base-type":"type/Float"}],"name":"score","base_type":"type/Float","effective_type":"type/Float","semantic_type":"type/Score","fingerprint":{"global":{"distinct-count":163,"nil%":0.0},"type":{"type/Number":{"min":-150.0,"q1":0.7345698455330574,"q3":8.82587117294352,"max":451.0,"sd":31.225890688289386,"avg":10.6865}}}},{"display_name":"comment_sentiment","field_ref":["field","comment_sentiment",{"base-type":"type/Decimal"}],"name":"comment_sentiment","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":1949,"nil%":0.0},"type":{"type/Number":{"min":-0.97775,"q1":-0.7051203557156647,"q3":0.09460854498503803,"max":0.99084,"sd":0.5651486939353781,"avg":-0.20800162499999997}}}},{"display_name":"bad_words","field_ref":["field","bad_words",{"base-type":"type/Text"}],"name":"bad_words","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":71,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.4775}}}}]	\N	f	QomHh8IaGpnJkwS6Qks3u	[]	[]	t
-4	2023-11-20 00:25:54.340864+00	2023-12-03 02:37:23.835433+00	Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending	\N	table	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]}}	{"table.pivot_column":"subreddit","table.cell_column":"count","table.column_widths":[368]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Bad Word","field_ref":["expression","Bad Word"],"name":"Bad Word","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":653,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":10.323132313231323}}}},{"display_name":"Count","semantic_type":"type/Quantity","field_ref":["aggregation",0],"name":"count","base_type":"type/BigInteger","effective_type":"type/BigInteger","fingerprint":{"global":{"distinct-count":53,"nil%":0.0},"type":{"type/Number":{"min":1.0,"q1":1.0,"q3":2.1206319880780184,"max":204.0,"sd":15.771474211523326,"avg":4.623762376237623}}}}]	\N	f	FMneKC90khMN-hnbFe8CE	[]	[]	t
-2	2023-11-17 03:26:08.902336+00	2023-12-03 02:37:23.2605+00	Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending	\N	bar	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.dimensions":["subreddit"],"graph.metrics":["avg"]}	1	2	9	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text"}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Title Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.2949438202247191,"q1":-0.149668247187143,"q3":-0.0712388701878446,"max":-0.0221606648199446,"sd":0.08322173797965142,"avg":-0.12114018307792783}}}}]	\N	f	n9ucj3PY4-9YU2dtIQFoV	[]	[]	t
-5	2023-12-03 01:28:03.959044+00	2023-12-03 01:50:10.889891+00	Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month	\N	bar	{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}}}	{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]}	1	2	10	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/City","coercion_strategy":null,"name":"city","settings":null,"field_ref":["field",84,null],"effective_type":"type/Text","id":84,"visibility_type":"normal","display_name":"City","fingerprint":{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}},"base_type":"type/Text"},{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"keyword","settings":null,"field_ref":["field",82,null],"effective_type":"type/Text","id":82,"visibility_type":"normal","display_name":"Keyword","fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.0}}},"base_type":"type/Text"},{"display_name":"Sum of Jobs Qty","semantic_type":"type/Category","settings":null,"field_ref":["aggregation",0],"name":"sum","base_type":"type/BigInteger","effective_type":"type/BigInteger","fingerprint":{"global":{"distinct-count":10,"nil%":0.0},"type":{"type/Number":{"min":28.0,"q1":109.0,"q3":270.0,"max":1880.0,"sd":705.3804647139019,"avg":471.6}}}}]	\N	f	D5wGiURmv6yJ5FeHk5pcK	[]	[]	t
-6	2023-12-03 01:52:17.865819+00	2023-12-03 02:09:48.544823+00	Sentiment Map	\N	bar	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Comment Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.27423820023557127,"q1":-0.17325499937164487,"q3":-0.05323555302112361,"max":-0.023186875407697326,"sd":0.0840948249445815,"avg":-0.12268593748225998}}}}]	\N	f	8lwlA5BAOgcw86WOTweKj	[]	[]	t
-3	2023-11-19 02:56:41.465451+00	2023-12-03 02:37:23.274348+00	Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending	\N	bar	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Comment Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.27227045952314943,"q1":-0.1580758671865236,"q3":-0.046791775837063995,"max":-0.027429874093857307,"sd":0.08354917223248039,"avg":-0.11436211333763459}}}}]	\N	f	xXBeGY8q7pOY3XqtwlPcr	[]	[]	t
+COPY public.report_card (id, created_at, updated_at, name, description, display, dataset_query, visualization_settings, creator_id, database_id, table_id, query_type, archived, collection_id, public_uuid, made_public_by_id, enable_embedding, embedding_params, cache_ttl, result_metadata, collection_position, dataset, entity_id, parameters, parameter_mappings, collection_preview, metabase_version) FROM stdin;
+1	2023-11-17 03:22:03.573662+00	2023-11-19 02:45:57.968843+00	main	base table to work on visualizations	table	{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2}	{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"}	1	2	\N	native	t	\N	\N	\N	f	\N	\N	[{"display_name":"submission_id","field_ref":["field","submission_id",{"base-type":"type/Text"}],"name":"submission_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"subreddit","field_ref":["field","subreddit",{"base-type":"type/Text"}],"name":"subreddit","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.8135}}}},{"display_name":"date_utc","field_ref":["field","date_utc",{"base-type":"type/Date"}],"name":"date_utc","base_type":"type/Date","effective_type":"type/Date","semantic_type":null,"fingerprint":{"global":{"distinct-count":11,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-21T00:00:00Z","latest":"2023-10-24T00:00:00Z"}}}},{"display_name":"title","field_ref":["field","title",{"base-type":"type/Text"}],"name":"title","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Title","fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":75.567}}}},{"display_name":"upvote_ratio","field_ref":["field","upvote_ratio",{"base-type":"type/Decimal"}],"name":"upvote_ratio","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Number":{"min":0.0,"q1":0.7025804934004054,"q3":1.0,"max":1.0,"sd":0.06694767356299806,"avg":0.9955}}}},{"display_name":"title_sentiment","field_ref":["field","title_sentiment",{"base-type":"type/Decimal"}],"name":"title_sentiment","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":3,"nil%":0.0},"type":{"type/Number":{"min":-1.0,"q1":-0.857020004771601,"q3":0.12066515645625253,"max":1.0,"sd":0.5224092799021318,"avg":-0.365}}}},{"display_name":"submission_id","field_ref":["field","submission_id_2",{"base-type":"type/Text"}],"name":"submission_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":108,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"comment_id","field_ref":["field","comment_id",{"base-type":"type/Text"}],"name":"comment_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":2000,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}}},{"display_name":"comment_tier","field_ref":["field","comment_tier",{"base-type":"type/Text"}],"name":"comment_tier","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.844}}}},{"display_name":"parent_id","field_ref":["field","parent_id",{"base-type":"type/Text"}],"name":"parent_id","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":463,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":2.954}}}},{"display_name":"date_utc","field_ref":["field","date_utc_2",{"base-type":"type/Date"}],"name":"date_utc","base_type":"type/Date","effective_type":"type/Date","semantic_type":null,"fingerprint":{"global":{"distinct-count":12,"nil%":0.0},"type":{"type/DateTime":{"earliest":"2023-09-21T00:00:00Z","latest":"2023-10-24T00:00:00Z"}}}},{"display_name":"comment","field_ref":["field","comment",{"base-type":"type/Text"}],"name":"comment","base_type":"type/Text","effective_type":"type/Text","semantic_type":"type/Comment","fingerprint":{"global":{"distinct-count":1956,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":5.0E-4,"percent-email":0.0,"percent-state":0.0,"average-length":157.826}}}},{"display_name":"is_author","field_ref":["field","is_author",{"base-type":"type/Boolean"}],"name":"is_author","base_type":"type/Boolean","effective_type":"type/Boolean","semantic_type":null,"fingerprint":{"global":{"distinct-count":2,"nil%":0.0}}},{"display_name":"score","field_ref":["field","score",{"base-type":"type/Float"}],"name":"score","base_type":"type/Float","effective_type":"type/Float","semantic_type":"type/Score","fingerprint":{"global":{"distinct-count":163,"nil%":0.0},"type":{"type/Number":{"min":-150.0,"q1":0.7345698455330574,"q3":8.82587117294352,"max":451.0,"sd":31.225890688289386,"avg":10.6865}}}},{"display_name":"comment_sentiment","field_ref":["field","comment_sentiment",{"base-type":"type/Decimal"}],"name":"comment_sentiment","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":1949,"nil%":0.0},"type":{"type/Number":{"min":-0.97775,"q1":-0.7051203557156647,"q3":0.09460854498503803,"max":0.99084,"sd":0.5651486939353781,"avg":-0.20800162499999997}}}},{"display_name":"bad_words","field_ref":["field","bad_words",{"base-type":"type/Text"}],"name":"bad_words","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":71,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":0.4775}}}}]	\N	f	QomHh8IaGpnJkwS6Qks3u	[]	[]	t	\N
+6	2023-12-03 01:52:17.865819+00	2023-12-03 02:09:48.544823+00	Sentiment Map	\N	bar	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Comment Sentiment","semantic_type":null,"settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.27423820023557127,"q1":-0.17325499937164487,"q3":-0.05323555302112361,"max":-0.023186875407697326,"sd":0.0840948249445815,"avg":-0.12268593748225998}}}}]	\N	f	8lwlA5BAOgcw86WOTweKj	[]	[]	t	\N
+4	2023-11-20 00:25:54.340864+00	2024-02-13 02:07:01.318258+00	Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending	\N	table	{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]}}	{"table.pivot_column":"subreddit","table.cell_column":"count","table.column_widths":[368]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"fk_target_field_id":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Bad Word","field_ref":["expression","Bad Word"],"name":"Bad Word","base_type":"type/Text","effective_type":"type/Text","semantic_type":null,"fingerprint":{"global":{"distinct-count":77,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":6.519685039370079}}}},{"display_name":"Count","semantic_type":"type/Quantity","field_ref":["aggregation",0],"name":"count","base_type":"type/BigInteger","effective_type":"type/BigInteger","fingerprint":{"global":{"distinct-count":6,"nil%":0.0},"type":{"type/Number":{"min":1.0,"q1":1.0,"q3":1.6037967777717148,"max":7.0,"sd":0.9598879241331447,"avg":1.3858267716535433}}}}]	\N	f	FMneKC90khMN-hnbFe8CE	[]	[]	t	\N
+5	2023-12-03 01:28:03.959044+00	2024-02-13 02:05:16.142288+00	Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month	\N	bar	{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"source-query":{"source-table":10}}}	{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]}	1	2	10	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/City","coercion_strategy":null,"name":"city","settings":null,"fk_target_field_id":null,"field_ref":["field",84,null],"effective_type":"type/Text","id":84,"visibility_type":"normal","display_name":"City","fingerprint":{"global":{"distinct-count":5,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":7.0}}},"base_type":"type/Text"},{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"keyword","settings":null,"fk_target_field_id":null,"field_ref":["field",82,null],"effective_type":"type/Text","id":82,"visibility_type":"normal","display_name":"Keyword","fingerprint":{"global":{"distinct-count":2,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":5.0}}},"base_type":"type/Text"},{"display_name":"Sum of Jobs Qty","settings":null,"field_ref":["aggregation",0],"name":"sum","base_type":"type/BigInteger","effective_type":"type/BigInteger","semantic_type":null,"fingerprint":{"global":{"distinct-count":10,"nil%":0.0},"type":{"type/Number":{"min":33.0,"q1":114.0,"q3":298.0,"max":1818.0,"sd":684.7905113568999,"avg":469.4}}}}]	\N	f	D5wGiURmv6yJ5FeHk5pcK	[]	[]	t	\N
+2	2023-11-17 03:26:08.902336+00	2024-02-13 02:07:01.153825+00	Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending	\N	bar	{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.dimensions":["subreddit"],"graph.metrics":["avg"]}	1	2	9	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"fk_target_field_id":null,"field_ref":["field",106,{"base-type":"type/Text"}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Title Sentiment","settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":6,"nil%":0.0},"type":{"type/Number":{"min":-0.4166666666666667,"q1":-0.18899576603592688,"q3":0.041666666666666664,"max":0.15384615384615385,"sd":0.1812041762985347,"avg":-0.08493589743589744}}}}]	\N	f	n9ucj3PY4-9YU2dtIQFoV	[]	[]	t	\N
+3	2023-11-19 02:56:41.465451+00	2024-02-13 02:07:01.179489+00	Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending	\N	bar	{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}}	{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]}	1	2	11	query	f	\N	\N	\N	f	\N	\N	[{"description":null,"semantic_type":"type/Category","coercion_strategy":null,"name":"subreddit","settings":null,"fk_target_field_id":null,"field_ref":["field",106,{"base-type":"type/Text","source-field":99}],"effective_type":"type/Text","id":106,"visibility_type":"normal","display_name":"Submission → Subreddit","fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Text":{"percent-json":0.0,"percent-url":0.0,"percent-email":0.0,"percent-state":0.0,"average-length":8.745610612563402}}},"base_type":"type/Text"},{"display_name":"Average of Comment Sentiment","settings":null,"field_ref":["aggregation",0],"name":"avg","base_type":"type/Decimal","effective_type":"type/Decimal","semantic_type":null,"fingerprint":{"global":{"distinct-count":8,"nil%":0.0},"type":{"type/Number":{"min":-0.317093,"q1":-0.21531735085538184,"q3":0.041293608247422675,"max":0.1505322767857143,"sd":0.1629161036667485,"avg":-0.0885737102620445}}}}]	\N	f	xXBeGY8q7pOY3XqtwlPcr	[]	[]	t	\N
 \.
 
 
 --
--- TOC entry 4812 (class 0 OID 26443)
--- Dependencies: 229
+-- TOC entry 4441 (class 0 OID 16769)
+-- Dependencies: 321
 -- Data for Name: report_cardfavorite; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6837,8 +7653,8 @@ COPY public.report_cardfavorite (id, created_at, updated_at, card_id, owner_id) 
 
 
 --
--- TOC entry 4814 (class 0 OID 26463)
--- Dependencies: 231
+-- TOC entry 4443 (class 0 OID 16773)
+-- Dependencies: 323
 -- Data for Name: report_dashboard; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6848,8 +7664,8 @@ COPY public.report_dashboard (id, created_at, updated_at, name, description, cre
 
 
 --
--- TOC entry 4816 (class 0 OID 26483)
--- Dependencies: 233
+-- TOC entry 4445 (class 0 OID 16783)
+-- Dependencies: 325
 -- Data for Name: report_dashboardcard; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6864,41 +7680,42 @@ COPY public.report_dashboardcard (id, created_at, updated_at, size_x, size_y, "r
 
 
 --
--- TOC entry 4820 (class 0 OID 26625)
--- Dependencies: 237
+-- TOC entry 4447 (class 0 OID 16791)
+-- Dependencies: 327
 -- Data for Name: revision; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.revision (id, model, model_id, user_id, "timestamp", object, is_reversion, is_creation, message) FROM stdin;
-1	Card	1	1	2023-11-17 03:22:04.041525+00	{"description":"base table to work on visualizations","archived":false,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"main","embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"},"parameters":[],"dataset":false}	f	t	\N
-4	Card	2	1	2023-11-17 03:26:09.247303+00	{"description":null,"archived":false,"collection_position":null,"table_id":9,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["subreddit"],"graph.metrics":["avg"]},"parameters":[],"dataset":false}	f	t	\N
-14	Card	1	1	2023-11-19 02:45:58.529816+00	{"description":"base table to work on visualizations","archived":true,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"main","embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"},"parameters":[],"dataset":false}	f	f	\N
-17	Card	3	1	2023-11-19 02:56:41.82563+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]},"parameters":[],"dataset":false}	f	t	\N
-25	Card	4	1	2023-11-20 00:25:54.69703+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"subreddit","table.cell_column":"count"},"parameters":[],"dataset":false}	f	t	\N
-44	Card	4	1	2023-11-20 03:19:36.842522+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]}},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"subreddit","table.cell_column":"count","table.column_widths":[368]},"parameters":[],"dataset":false}	f	f	\N
-50	Dashboard	1	1	2023-11-20 03:24:07.899082+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-61	Dashboard	1	1	2023-12-03 01:33:52.719606+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-52	Dashboard	1	1	2023-11-20 03:24:07.904915+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-49	Dashboard	1	1	2023-11-20 03:24:07.872252+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-56	Dashboard	1	1	2023-11-20 03:24:36.202249+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-48	Dashboard	1	1	2023-11-20 03:22:07.201276+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-51	Dashboard	1	1	2023-11-20 03:24:07.8997+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-53	Dashboard	1	1	2023-11-20 03:24:21.721632+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":8,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-54	Dashboard	1	1	2023-11-20 03:24:21.729758+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":8,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-55	Dashboard	1	1	2023-11-20 03:24:36.184263+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-57	Card	5	1	2023-12-03 01:28:04.329151+00	{"description":null,"archived":false,"collection_position":null,"table_id":10,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]},"parameters":[],"dataset":false}	f	t	\N
-58	Dashboard	1	1	2023-12-03 01:32:07.861604+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-59	Dashboard	1	1	2023-12-03 01:32:07.862623+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-60	Dashboard	1	1	2023-12-03 01:32:07.863129+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-62	Dashboard	1	1	2023-12-03 01:33:52.728727+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-63	Dashboard	1	1	2023-12-03 01:33:52.798884+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N
-64	Card	6	1	2023-12-03 01:52:18.25577+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sentiment Map","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]},"parameters":[],"dataset":false}	f	t	\N
+COPY public.revision (id, model, model_id, user_id, "timestamp", object, is_reversion, is_creation, message, most_recent, metabase_version) FROM stdin;
+1	Card	1	1	2023-11-17 03:22:04.041525+00	{"description":"base table to work on visualizations","archived":false,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"main","embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"},"parameters":[],"dataset":false}	f	t	\N	f	\N
+4	Card	2	1	2023-11-17 03:26:09.247303+00	{"description":null,"archived":false,"collection_position":null,"table_id":9,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Submissions, Average of Title Sentiment, Grouped by Subreddit, Sorted by Average of Title Sentiment ascending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":9,"aggregation":[["avg",["field",109,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text"}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["subreddit"],"graph.metrics":["avg"]},"parameters":[],"dataset":false}	f	t	\N	t	\N
+14	Card	1	1	2023-11-19 02:45:58.529816+00	{"description":"base table to work on visualizations","archived":true,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"main","embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from staging.submissions s\\nleft join staging.comments c\\non s.submission_id = c.submission_id;","template-tags":{}},"database":2},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"upvote_ratio","table.cell_column":"title_sentiment"},"parameters":[],"dataset":false}	f	f	\N	t	\N
+25	Card	4	1	2023-11-20 00:25:54.69703+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["field",96,{"base-type":"type/Text"}]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]]}},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"subreddit","table.cell_column":"count"},"parameters":[],"dataset":false}	f	t	\N	f	\N
+44	Card	4	1	2023-11-20 03:19:36.842522+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Count, Grouped by Submission → Subreddit and Bad Words, Sorted by Submission → Subreddit ascending and Count descending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"breakout":[["field",106,{"base-type":"type/Text","source-field":99}],["expression","Bad Word"]],"aggregation":[["count"]],"order-by":[["asc",["field",106,{"base-type":"type/Text","source-field":99}]],["desc",["aggregation",0]]],"expressions":{"Bad Word":["upper",["replace",["replace",["replace",["field",96,null],".",""],",",""],"!",""]]},"filter":["!=",["field",96,null],""]}},"parameter_mappings":[],"display":"table","collection_preview":true,"visualization_settings":{"table.pivot_column":"subreddit","table.cell_column":"count","table.column_widths":[368]},"parameters":[],"dataset":false}	f	f	\N	t	\N
+50	Dashboard	1	1	2023-11-20 03:24:07.899082+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+61	Dashboard	1	1	2023-12-03 01:33:52.719606+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+65	Card	5	1	2024-02-13 02:05:11.679122+00	{"description":null,"archived":false,"collection_position":null,"table_id":10,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"source-query":{"source-table":10}}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]},"parameters":[],"dataset":false}	f	f	\N	t	v0.48.3 (80d8323)
+52	Dashboard	1	1	2023-11-20 03:24:07.904915+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+49	Dashboard	1	1	2023-11-20 03:24:07.872252+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+56	Dashboard	1	1	2023-11-20 03:24:36.202249+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+48	Dashboard	1	1	2023-11-20 03:22:07.201276+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+57	Card	5	1	2023-12-03 01:28:04.329151+00	{"description":null,"archived":false,"collection_position":null,"table_id":10,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sum of Jobs Qty, Grouped by City and Keyword, Filtered by Date Utc is within previous month","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"aggregation":[["sum",["field","jobs_qty",{"base-type":"type/Integer"}]]],"breakout":[["field","city",{"base-type":"type/Text"}],["field","keyword",{"base-type":"type/Text"}]],"filter":["time-interval",["field","date_utc",{"base-type":"type/Date"}],-1,"month",{"include-current":false}],"source-query":{"source-table":10}}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.dimensions":["city","keyword"],"graph.metrics":["sum"]},"parameters":[],"dataset":false}	f	t	\N	f	\N
+51	Dashboard	1	1	2023-11-20 03:24:07.8997+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":4,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+53	Dashboard	1	1	2023-11-20 03:24:21.721632+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":8,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+54	Dashboard	1	1	2023-11-20 03:24:21.729758+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":8,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+55	Dashboard	1	1	2023-11-20 03:24:36.184263+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+58	Dashboard	1	1	2023-12-03 01:32:07.861604+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+59	Dashboard	1	1	2023-12-03 01:32:07.862623+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+60	Dashboard	1	1	2023-12-03 01:32:07.863129+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":5,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+62	Dashboard	1	1	2023-12-03 01:33:52.728727+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	f	\N
+17	Card	3	1	2023-11-19 02:56:41.82563+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Comments, Average of Comment Sentiment, Grouped by Submission → Subreddit, Sorted by Average of Comment Sentiment ascending","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]},"parameters":[],"dataset":false}	f	t	\N	t	\N
+63	Dashboard	1	1	2023-12-03 01:33:52.798884+00	{"description":null,"archived":false,"collection_position":null,"tabs":[{"id":1,"dashboard_id":1,"name":"Overview","position":0},{"id":3,"dashboard_id":1,"name":"Jobs","position":1}],"enable_embedding":false,"collection_id":null,"name":"Best City","embedding_params":null,"cache_ttl":null,"cards":[{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":2,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":2,"target":["dimension",["field",108,null]]}],"card_id":2,"visualization_settings":{"graph.dimensions":["subreddit"],"series_settings":{"avg":{"color":"#EF8C8C","display":"bar","line.interpolate":"step-after"}},"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.metrics":["avg"]},"size_y":6,"dashboard_id":1,"row":0},{"size_x":12,"dashboard_tab_id":1,"series":[],"action_id":null,"col":12,"id":3,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":3,"target":["dimension",["field",108,{"source-field":99}]]}],"card_id":3,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":1,"series":[],"action_id":null,"col":0,"id":4,"parameter_mappings":[{"parameter_id":"51ec7d3c","card_id":4,"target":["dimension",["field",93,null]]}],"card_id":4,"visualization_settings":{},"size_y":9,"dashboard_id":1,"row":6},{"size_x":5,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":5,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"link","visualization_settings":{},"dataset_query":{},"archived":false},"link":{"url":"https://github.com/rmaciasc/best_city"}},"size_y":1,"dashboard_id":1,"row":7},{"size_x":12,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":6,"parameter_mappings":[],"card_id":5,"visualization_settings":{},"size_y":6,"dashboard_id":1,"row":0},{"size_x":24,"dashboard_tab_id":3,"series":[],"action_id":null,"col":0,"id":7,"parameter_mappings":[],"card_id":null,"visualization_settings":{"virtual_card":{"name":null,"display":"heading","visualization_settings":{},"dataset_query":{},"archived":false},"dashcard.background":false,"text":"Check out the repo"},"size_y":1,"dashboard_id":1,"row":6}],"parameters":[{"name":"Date Filter","slug":"date_filter","id":"51ec7d3c","type":"date/all-options","sectionId":"date","default":"thisquarter"}],"auto_apply_filters":true}	f	f	\N	t	\N
+64	Card	6	1	2023-12-03 01:52:18.25577+00	{"description":null,"archived":false,"collection_position":null,"table_id":11,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"query","name":"Sentiment Map","embedding_params":null,"cache_ttl":null,"dataset_query":{"database":2,"type":"query","query":{"source-table":11,"aggregation":[["avg",["field",94,{"base-type":"type/Decimal"}]]],"breakout":[["field",106,{"base-type":"type/Text","source-field":99}]],"order-by":[["asc",["aggregation",0]]]}},"parameter_mappings":[],"display":"bar","collection_preview":true,"visualization_settings":{"graph.show_goal":false,"graph.show_values":true,"graph.x_axis.labels_enabled":false,"graph.y_axis.labels_enabled":true,"graph.metrics":["avg"],"graph.label_value_formatting":"auto","series_settings":{"avg":{"color":"#98D9D9"}},"graph.y_axis.auto_range":true,"graph.dimensions":["subreddit"]},"parameters":[],"dataset":false}	f	t	\N	t	\N
 \.
 
 
 --
--- TOC entry 4873 (class 0 OID 27156)
--- Dependencies: 290
+-- TOC entry 4374 (class 0 OID 16506)
+-- Dependencies: 254
 -- Data for Name: sandboxes; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6907,8 +7724,8 @@ COPY public.sandboxes (id, group_id, table_id, card_id, attribute_remappings, pe
 
 
 --
--- TOC entry 4894 (class 0 OID 27670)
--- Dependencies: 311
+-- TOC entry 4449 (class 0 OID 16800)
+-- Dependencies: 329
 -- Data for Name: secret; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6917,8 +7734,8 @@ COPY public.secret (id, version, creator_id, created_at, updated_at, name, kind,
 
 
 --
--- TOC entry 4835 (class 0 OID 26748)
--- Dependencies: 252
+-- TOC entry 4451 (class 0 OID 16807)
+-- Dependencies: 331
 -- Data for Name: segment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6927,8 +7744,8 @@ COPY public.segment (id, table_id, creator_id, name, description, archived, defi
 
 
 --
--- TOC entry 4818 (class 0 OID 26612)
--- Dependencies: 235
+-- TOC entry 4453 (class 0 OID 16815)
+-- Dependencies: 333
 -- Data for Name: setting; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -6947,14 +7764,24 @@ enable-public-sharing	true
 custom-geojson	{"07d369db-1f87-cf8d-eb28-99318c546982":{"name":"Ontario","url":"https://raw.githubusercontent.com/tristen/toronto-map/master/layers/ontario-lake.geojson","region_key":"Name1","region_name":"Name2"}}
 custom-homepage-dashboard	1
 custom-homepage	true
-startup-time-millis	18776
-settings-last-updated	2023-12-03 02:37:13.637793+00
+startup-time-millis	GpP4sArSoZsgcNPU9zlAx5yOqFc0GG7+a3Mrnu/9/rzxDduISn8JpqeIcGenS+cgf7gW+YF2uSOPdMCnqYe9iw==
+settings-last-updated	2024-02-13 01:59:04.505817+00
 \.
 
 
 --
--- TOC entry 4886 (class 0 OID 27327)
--- Dependencies: 303
+-- TOC entry 4454 (class 0 OID 16820)
+-- Dependencies: 334
+-- Data for Name: table_privileges; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.table_privileges (table_id, role, "select", update, insert, delete) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4455 (class 0 OID 16827)
+-- Dependencies: 335
 -- Data for Name: task_history; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -7185,12 +8012,30 @@ COPY public.task_history (id, task, db_id, started_at, ended_at, duration, task_
 224	classify-fields	2	2023-12-03 01:50:30.138651+00	2023-12-03 01:50:30.376234+00	237	{"fields-classified":0,"fields-failed":0}
 225	classify-tables	2	2023-12-03 01:50:30.376299+00	2023-12-03 01:50:30.626887+00	250	{"total-tables":6,"tables-classified":0}
 226	send-pulses	\N	2023-12-03 02:00:00.286+00	2023-12-03 02:00:00.448+00	162	\N
+227	send-pulses	\N	2024-01-23 04:00:00.927+00	2024-01-23 04:00:01.434+00	507	\N
+228	send-pulses	\N	2024-02-10 20:00:00.03+00	2024-02-10 20:00:00.066+00	36	\N
+229	sync	3	2024-02-12 00:06:35.586012+00	2024-02-12 00:06:36.437391+00	851	\N
+230	sync-dbms-version	3	2024-02-12 00:06:35.586752+00	2024-02-12 00:06:35.615213+00	28	{"flavor":"PostgreSQL","version":"16.1 (Debian 16.1-1.pgdg120+1)","semantic-version":[16,1]}
+231	sync-timezone	3	2024-02-12 00:06:35.615794+00	2024-02-12 00:06:35.635847+00	20	{"timezone-id":"GMT"}
+232	sync-tables	3	2024-02-12 00:06:35.636052+00	2024-02-12 00:06:35.891577+00	255	{"updated-tables":6,"total-tables":0}
+233	sync-fields	3	2024-02-12 00:06:35.891652+00	2024-02-12 00:06:36.294071+00	402	{"total-fields":38,"updated-fields":38}
+234	sync-fks	3	2024-02-12 00:06:36.29411+00	2024-02-12 00:06:36.417488+00	123	{"total-fks":2,"updated-fks":2,"total-failed":0}
+235	sync-metabase-metadata	3	2024-02-12 00:06:36.417583+00	2024-02-12 00:06:36.418906+00	1	\N
+236	sync-table-privileges	3	2024-02-12 00:06:36.418965+00	2024-02-12 00:06:36.437257+00	18	{"total-table-privileges":6}
+237	analyze	3	2024-02-12 00:06:36.48379+00	2024-02-12 00:06:37.688284+00	1204	\N
+238	fingerprint-fields	3	2024-02-12 00:06:36.483807+00	2024-02-12 00:06:37.512591+00	1028	{"no-data-fingerprints":8,"failed-fingerprints":0,"updated-fingerprints":26,"fingerprints-attempted":34}
+239	classify-fields	3	2024-02-12 00:06:37.512676+00	2024-02-12 00:06:37.644212+00	131	{"fields-classified":26,"fields-failed":0}
+240	classify-tables	3	2024-02-12 00:06:37.644283+00	2024-02-12 00:06:37.688242+00	43	{"total-tables":6,"tables-classified":6}
+241	field values scanning	3	2024-02-12 00:06:37.726524+00	2024-02-12 00:06:38.285307+00	558	\N
+242	delete-expired-advanced-field-values	3	2024-02-12 00:06:37.726543+00	2024-02-12 00:06:37.900109+00	173	{"deleted":0}
+243	update-field-values	3	2024-02-12 00:06:37.900192+00	2024-02-12 00:06:38.285271+00	385	{"errors":0,"created":13,"updated":0,"deleted":0}
+244	send-pulses	\N	2024-02-13 02:00:00.02+00	2024-02-13 02:00:00.052+00	32	\N
 \.
 
 
 --
--- TOC entry 4896 (class 0 OID 27698)
--- Dependencies: 313
+-- TOC entry 4457 (class 0 OID 16835)
+-- Dependencies: 337
 -- Data for Name: timeline; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -7199,8 +8044,8 @@ COPY public.timeline (id, name, description, icon, collection_id, archived, crea
 
 
 --
--- TOC entry 4898 (class 0 OID 27719)
--- Dependencies: 315
+-- TOC entry 4458 (class 0 OID 16844)
+-- Dependencies: 338
 -- Data for Name: timeline_event; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -7209,285 +8054,360 @@ COPY public.timeline_event (id, timeline_id, name, description, "timestamp", tim
 
 
 --
--- TOC entry 4824 (class 0 OID 26666)
--- Dependencies: 241
+-- TOC entry 4461 (class 0 OID 16908)
+-- Dependencies: 353
 -- Data for Name: view_log; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.view_log (id, user_id, model, model_id, "timestamp", metadata) FROM stdin;
-1	1	card	1	2023-11-17 03:22:03.798353+00	{"cached":null,"ignore_cache":null,"context":null}
-2	1	card	1	2023-11-17 03:22:04.706244+00	{"cached":null,"ignore_cache":null,"context":null}
-3	1	dashboard	1	2023-11-17 03:22:19.788042+00	{"cached":null,"ignore_cache":null,"context":null}
-4	1	card	1	2023-11-17 03:22:21.799911+00	{"cached":null,"ignore_cache":false,"context":"question"}
-5	1	dashboard	1	2023-11-17 03:23:34.907048+00	{"cached":null,"ignore_cache":null,"context":null}
-6	1	dashboard	1	2023-11-17 03:23:52.441509+00	{"cached":null,"ignore_cache":null,"context":null}
-7	1	table	9	2023-11-17 03:24:02.742407+00	{"cached":null,"ignore_cache":null,"context":null}
-8	1	table	9	2023-11-17 03:24:13.061203+00	{"cached":null,"ignore_cache":null,"context":null}
-9	1	table	9	2023-11-17 03:24:21.39103+00	{"cached":null,"ignore_cache":null,"context":null}
-10	1	table	9	2023-11-17 03:24:29.402834+00	{"cached":null,"ignore_cache":null,"context":null}
-11	1	table	9	2023-11-17 03:24:32.881075+00	{"cached":null,"ignore_cache":null,"context":null}
-12	1	table	9	2023-11-17 03:24:36.147635+00	{"cached":null,"ignore_cache":null,"context":null}
-13	1	table	9	2023-11-17 03:25:59.284274+00	{"cached":null,"ignore_cache":null,"context":null}
-14	1	card	2	2023-11-17 03:26:09.067342+00	{"cached":null,"ignore_cache":null,"context":null}
-15	1	card	2	2023-11-17 03:26:09.725002+00	{"cached":null,"ignore_cache":null,"context":null}
-16	1	dashboard	1	2023-11-17 03:26:12.635241+00	{"cached":null,"ignore_cache":null,"context":null}
-17	1	card	2	2023-11-17 03:26:13.530887+00	{"cached":null,"ignore_cache":false,"context":"question"}
-18	1	card	1	2023-11-17 03:26:15.020712+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-19	1	dashboard	1	2023-11-17 03:26:21.26033+00	{"cached":null,"ignore_cache":null,"context":null}
-20	1	dashboard	1	2023-11-17 03:32:03.320027+00	{"cached":null,"ignore_cache":null,"context":null}
-21	1	dashboard	1	2023-11-17 03:33:16.430941+00	{"cached":null,"ignore_cache":null,"context":null}
-22	1	dashboard	1	2023-11-17 03:37:23.911255+00	{"cached":null,"ignore_cache":null,"context":null}
-23	1	dashboard	1	2023-11-17 03:38:02.176689+00	{"cached":null,"ignore_cache":null,"context":null}
-24	1	dashboard	1	2023-11-17 03:42:08.932625+00	{"cached":null,"ignore_cache":null,"context":null}
-25	1	card	2	2023-11-17 03:42:09.692992+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-26	1	card	2	2023-11-17 03:42:52.744095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-27	1	dashboard	1	2023-11-17 03:44:01.098858+00	{"cached":null,"ignore_cache":null,"context":null}
-28	1	dashboard	1	2023-11-17 04:03:08.328408+00	{"cached":null,"ignore_cache":null,"context":null}
-29	1	table	9	2023-11-17 04:03:19.892715+00	{"cached":null,"ignore_cache":null,"context":null}
-30	1	dashboard	1	2023-11-19 02:45:14.832141+00	{"cached":null,"ignore_cache":null,"context":null}
-31	1	card	2	2023-11-19 02:45:16.68388+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-32	1	table	9	2023-11-19 02:45:25.569715+00	{"cached":null,"ignore_cache":null,"context":null}
-33	1	card	1	2023-11-19 02:45:39.568731+00	{"cached":null,"ignore_cache":null,"context":null}
-34	1	card	1	2023-11-19 02:45:42.582985+00	{"cached":null,"ignore_cache":false,"context":"question"}
-35	1	table	9	2023-11-19 02:46:17.876392+00	{"cached":null,"ignore_cache":null,"context":null}
-36	1	dashboard	1	2023-11-19 02:46:41.460002+00	{"cached":null,"ignore_cache":null,"context":null}
-37	1	card	2	2023-11-19 02:46:42.258223+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-38	1	dashboard	1	2023-11-19 02:47:16.706396+00	{"cached":null,"ignore_cache":null,"context":null}
-39	1	dashboard	1	2023-11-19 02:49:08.070733+00	{"cached":null,"ignore_cache":null,"context":null}
-40	1	card	2	2023-11-19 02:49:09.002932+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-41	1	table	11	2023-11-19 02:52:34.618731+00	{"cached":null,"ignore_cache":null,"context":null}
-42	1	table	11	2023-11-19 02:53:39.772229+00	{"cached":null,"ignore_cache":null,"context":null}
-43	1	table	11	2023-11-19 02:54:38.1869+00	{"cached":null,"ignore_cache":null,"context":null}
-44	1	card	3	2023-11-19 02:56:41.633724+00	{"cached":null,"ignore_cache":null,"context":null}
-45	1	card	3	2023-11-19 02:56:42.53245+00	{"cached":null,"ignore_cache":null,"context":null}
-46	1	dashboard	1	2023-11-19 02:56:45.949504+00	{"cached":null,"ignore_cache":null,"context":null}
-47	1	card	3	2023-11-19 02:56:47.00442+00	{"cached":null,"ignore_cache":false,"context":"question"}
-48	1	card	2	2023-11-19 02:56:47.273436+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-49	1	dashboard	1	2023-11-19 02:56:54.52239+00	{"cached":null,"ignore_cache":null,"context":null}
-50	1	dashboard	1	2023-11-19 02:58:05.343075+00	{"cached":null,"ignore_cache":null,"context":null}
-51	1	card	2	2023-11-19 02:58:06.172572+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-52	1	card	3	2023-11-19 02:58:06.366302+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-53	1	card	2	2023-11-19 02:58:15.732373+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-54	1	card	3	2023-11-19 02:58:15.857934+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-55	1	card	2	2023-11-19 02:58:19.895603+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-56	1	card	3	2023-11-19 02:58:20.002736+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-57	1	card	2	2023-11-19 02:58:22.201272+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-58	1	card	3	2023-11-19 02:58:22.349154+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-59	1	card	2	2023-11-19 02:58:25.762694+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-60	1	card	3	2023-11-19 02:58:25.961086+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-61	1	card	2	2023-11-19 02:58:54.577287+00	{"cached":null,"ignore_cache":null,"context":null}
-62	1	card	2	2023-11-19 02:58:59.992566+00	{"cached":null,"ignore_cache":false,"context":"question"}
-63	1	dashboard	1	2023-11-19 02:59:32.11007+00	{"cached":null,"ignore_cache":null,"context":null}
-64	1	card	2	2023-11-19 02:59:32.833771+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-65	1	card	3	2023-11-19 02:59:32.981316+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-66	1	card	2	2023-11-19 03:00:29.199731+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-67	1	card	3	2023-11-19 03:00:29.324424+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-68	1	card	2	2023-11-19 03:00:34.480396+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-69	1	card	3	2023-11-19 03:00:34.619903+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-70	1	card	2	2023-11-19 03:00:41.187344+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-71	1	card	3	2023-11-19 03:00:41.221937+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-72	1	dashboard	1	2023-11-19 23:31:17.269164+00	{"cached":null,"ignore_cache":null,"context":null}
-73	1	card	3	2023-11-19 23:31:19.351797+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-74	1	card	2	2023-11-19 23:31:19.373747+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-75	1	table	11	2023-11-19 23:55:45.019788+00	{"cached":null,"ignore_cache":null,"context":null}
-76	1	table	11	2023-11-19 23:56:14.933062+00	{"cached":null,"ignore_cache":null,"context":null}
-77	1	table	11	2023-11-19 23:56:47.835569+00	{"cached":null,"ignore_cache":null,"context":null}
-78	1	table	11	2023-11-19 23:57:27.22157+00	{"cached":null,"ignore_cache":null,"context":null}
-79	1	table	11	2023-11-20 00:18:45.558858+00	{"cached":null,"ignore_cache":null,"context":null}
-80	1	table	11	2023-11-20 00:19:36.494555+00	{"cached":null,"ignore_cache":null,"context":null}
-81	1	table	11	2023-11-20 00:25:38.030942+00	{"cached":null,"ignore_cache":null,"context":null}
-82	1	card	4	2023-11-20 00:25:54.517825+00	{"cached":null,"ignore_cache":null,"context":null}
-83	1	card	4	2023-11-20 00:25:55.305211+00	{"cached":null,"ignore_cache":null,"context":null}
-84	1	dashboard	1	2023-11-20 00:25:58.760284+00	{"cached":null,"ignore_cache":null,"context":null}
-85	1	card	4	2023-11-20 00:26:00.153553+00	{"cached":null,"ignore_cache":false,"context":"question"}
-86	1	card	2	2023-11-20 00:26:00.280875+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-87	1	card	3	2023-11-20 00:26:00.361194+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-88	1	dashboard	1	2023-11-20 00:26:19.710843+00	{"cached":null,"ignore_cache":null,"context":null}
-89	1	dashboard	1	2023-11-20 00:30:57.280511+00	{"cached":null,"ignore_cache":null,"context":null}
-90	1	dashboard	1	2023-11-20 00:32:42.001021+00	{"cached":null,"ignore_cache":null,"context":null}
-91	1	card	4	2023-11-20 00:32:43.156609+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-92	1	dashboard	1	2023-11-20 00:33:14.083506+00	{"cached":null,"ignore_cache":null,"context":null}
-93	1	dashboard	1	2023-11-20 00:33:28.734501+00	{"cached":null,"ignore_cache":null,"context":null}
-94	1	card	2	2023-11-20 00:33:32.735624+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-95	1	card	3	2023-11-20 00:33:33.281397+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-96	1	card	4	2023-11-20 00:33:33.57219+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-97	1	dashboard	1	2023-11-20 00:34:08.54991+00	{"cached":null,"ignore_cache":null,"context":null}
-98	1	card	2	2023-11-20 00:34:09.336957+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-99	1	card	3	2023-11-20 00:34:09.566648+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-100	1	card	4	2023-11-20 00:34:09.661158+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-101	1	dashboard	1	2023-11-20 00:35:21.337671+00	{"cached":null,"ignore_cache":null,"context":null}
-102	1	card	2	2023-11-20 00:35:22.172142+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-103	1	card	3	2023-11-20 00:35:22.324191+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-104	1	card	4	2023-11-20 00:35:22.490035+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-105	1	card	4	2023-11-20 00:35:45.072095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-106	1	dashboard	1	2023-11-20 00:36:11.50483+00	{"cached":null,"ignore_cache":null,"context":null}
-107	1	card	4	2023-11-20 00:39:53.286041+00	{"cached":null,"ignore_cache":null,"context":null}
-108	1	card	4	2023-11-20 00:39:54.855781+00	{"cached":null,"ignore_cache":false,"context":"question"}
-109	1	dashboard	1	2023-11-20 00:42:22.821715+00	{"cached":null,"ignore_cache":null,"context":null}
-110	1	card	2	2023-11-20 00:42:23.660742+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-111	1	card	3	2023-11-20 00:42:24.162083+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-112	1	card	4	2023-11-20 00:42:24.419611+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-113	1	card	4	2023-11-20 00:42:56.24104+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-114	1	dashboard	1	2023-11-20 00:43:03.379657+00	{"cached":null,"ignore_cache":null,"context":null}
-115	1	card	2	2023-11-20 00:43:32.395865+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-116	1	card	3	2023-11-20 00:43:32.637781+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-117	1	card	4	2023-11-20 00:43:32.859634+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-118	1	dashboard	1	2023-11-20 00:47:32.24925+00	{"cached":null,"ignore_cache":null,"context":null}
-119	1	card	2	2023-11-20 00:47:33.141989+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-120	1	card	3	2023-11-20 00:47:33.315687+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-121	1	card	4	2023-11-20 00:47:33.515181+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-122	1	card	4	2023-11-20 00:47:45.114774+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-123	1	dashboard	1	2023-11-20 00:50:13.390476+00	{"cached":null,"ignore_cache":null,"context":null}
-124	1	card	4	2023-11-20 00:50:22.265023+00	{"cached":null,"ignore_cache":false,"context":"question"}
-125	1	card	4	2023-11-20 01:13:26.986727+00	{"cached":null,"ignore_cache":false,"context":"question"}
-126	1	card	4	2023-11-20 01:14:24.922273+00	{"cached":null,"ignore_cache":false,"context":"question"}
-127	1	card	4	2023-11-20 01:38:37.984266+00	{"cached":null,"ignore_cache":false,"context":"question"}
-128	1	table	11	2023-11-20 01:39:33.884251+00	{"cached":null,"ignore_cache":null,"context":null}
-129	1	table	11	2023-11-20 01:40:16.754998+00	{"cached":null,"ignore_cache":null,"context":null}
-130	1	card	4	2023-11-20 01:40:17.201926+00	{"cached":null,"ignore_cache":false,"context":"question"}
-131	1	table	11	2023-11-20 01:44:30.294142+00	{"cached":null,"ignore_cache":null,"context":null}
-132	1	table	11	2023-11-20 01:45:13.803439+00	{"cached":null,"ignore_cache":null,"context":null}
-133	1	table	11	2023-11-20 02:14:31.966452+00	{"cached":null,"ignore_cache":null,"context":null}
-134	1	table	11	2023-11-20 02:14:59.487657+00	{"cached":null,"ignore_cache":null,"context":null}
-135	1	table	11	2023-11-20 02:15:28.867258+00	{"cached":null,"ignore_cache":null,"context":null}
-136	1	table	11	2023-11-20 02:16:35.517764+00	{"cached":null,"ignore_cache":null,"context":null}
-137	1	table	11	2023-11-20 02:26:09.611743+00	{"cached":null,"ignore_cache":null,"context":null}
-138	1	table	11	2023-11-20 02:26:26.295639+00	{"cached":null,"ignore_cache":null,"context":null}
-139	1	table	11	2023-11-20 02:26:46.461573+00	{"cached":null,"ignore_cache":null,"context":null}
-141	1	table	11	2023-11-20 02:27:56.59906+00	{"cached":null,"ignore_cache":null,"context":null}
-151	1	table	11	2023-11-20 02:43:28.365435+00	{"cached":null,"ignore_cache":null,"context":null}
-155	1	table	11	2023-11-20 02:44:31.867068+00	{"cached":null,"ignore_cache":null,"context":null}
-158	1	table	11	2023-11-20 03:01:10.068253+00	{"cached":null,"ignore_cache":null,"context":null}
-160	1	table	11	2023-11-20 03:15:33.281364+00	{"cached":null,"ignore_cache":null,"context":null}
-162	1	table	11	2023-11-20 03:17:40.158961+00	{"cached":null,"ignore_cache":null,"context":null}
-165	1	table	11	2023-11-20 03:18:35.265305+00	{"cached":null,"ignore_cache":null,"context":null}
-178	1	card	3	2023-11-20 03:21:17.793562+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-183	1	card	4	2023-11-20 03:22:09.27082+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-140	1	table	11	2023-11-20 02:27:35.628909+00	{"cached":null,"ignore_cache":null,"context":null}
-142	1	table	11	2023-11-20 02:28:18.474558+00	{"cached":null,"ignore_cache":null,"context":null}
-143	1	table	11	2023-11-20 02:28:39.772423+00	{"cached":null,"ignore_cache":null,"context":null}
-144	1	table	11	2023-11-20 02:33:06.662392+00	{"cached":null,"ignore_cache":null,"context":null}
-145	1	table	11	2023-11-20 02:34:34.147327+00	{"cached":null,"ignore_cache":null,"context":null}
-146	1	table	11	2023-11-20 02:37:24.717606+00	{"cached":null,"ignore_cache":null,"context":null}
-147	1	table	11	2023-11-20 02:37:52.486545+00	{"cached":null,"ignore_cache":null,"context":null}
-148	1	table	11	2023-11-20 02:38:43.975251+00	{"cached":null,"ignore_cache":null,"context":null}
-149	1	table	11	2023-11-20 02:40:17.249903+00	{"cached":null,"ignore_cache":null,"context":null}
-150	1	table	11	2023-11-20 02:40:34.862064+00	{"cached":null,"ignore_cache":null,"context":null}
-152	1	table	11	2023-11-20 02:43:50.076911+00	{"cached":null,"ignore_cache":null,"context":null}
-153	1	table	11	2023-11-20 02:44:06.277056+00	{"cached":null,"ignore_cache":null,"context":null}
-154	1	table	11	2023-11-20 02:44:19.933183+00	{"cached":null,"ignore_cache":null,"context":null}
-156	1	table	11	2023-11-20 02:44:37.608469+00	{"cached":null,"ignore_cache":null,"context":null}
-157	1	table	11	2023-11-20 02:44:42.362493+00	{"cached":null,"ignore_cache":null,"context":null}
-159	1	table	11	2023-11-20 03:01:17.999021+00	{"cached":null,"ignore_cache":null,"context":null}
-161	1	table	11	2023-11-20 03:16:24.647871+00	{"cached":null,"ignore_cache":null,"context":null}
-163	1	table	11	2023-11-20 03:18:03.04256+00	{"cached":null,"ignore_cache":null,"context":null}
-164	1	table	11	2023-11-20 03:18:19.947929+00	{"cached":null,"ignore_cache":null,"context":null}
-166	1	table	11	2023-11-20 03:18:44.803125+00	{"cached":null,"ignore_cache":null,"context":null}
-167	1	dashboard	1	2023-11-20 03:19:44.74179+00	{"cached":null,"ignore_cache":null,"context":null}
-174	1	card	2	2023-11-20 03:21:04.40884+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-176	1	card	4	2023-11-20 03:21:04.988072+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-179	1	card	4	2023-11-20 03:21:18.299272+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-180	1	dashboard	1	2023-11-20 03:22:07.837744+00	{"cached":null,"ignore_cache":null,"context":null}
-181	1	card	2	2023-11-20 03:22:08.701213+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-186	1	dashboard	1	2023-11-20 03:24:37.422375+00	{"cached":null,"ignore_cache":null,"context":null}
-168	1	card	2	2023-11-20 03:19:45.619452+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-169	1	card	3	2023-11-20 03:19:46.15503+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-170	1	card	4	2023-11-20 03:19:46.397134+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-171	1	card	4	2023-11-20 03:19:55.961296+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-172	1	dashboard	1	2023-11-20 03:20:06.985673+00	{"cached":null,"ignore_cache":null,"context":null}
-173	1	dashboard	1	2023-11-20 03:20:18.181304+00	{"cached":null,"ignore_cache":null,"context":null}
-175	1	card	3	2023-11-20 03:21:04.564247+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-177	1	card	2	2023-11-20 03:21:17.645291+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-182	1	card	3	2023-11-20 03:22:08.904095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-184	1	dashboard	1	2023-11-20 03:24:09.138053+00	{"cached":null,"ignore_cache":null,"context":null}
-185	1	dashboard	1	2023-11-20 03:24:23.021113+00	{"cached":null,"ignore_cache":null,"context":null}
-187	1	table	13	2023-11-20 03:25:41.40864+00	{"cached":null,"ignore_cache":null,"context":null}
-188	1	table	10	2023-11-20 03:26:30.208301+00	{"cached":null,"ignore_cache":null,"context":null}
-189	1	table	10	2023-11-20 03:26:42.0485+00	{"cached":null,"ignore_cache":null,"context":null}
-190	1	table	13	2023-12-02 23:07:40.39239+00	{"cached":null,"ignore_cache":null,"context":null}
-191	1	dashboard	1	2023-12-02 23:07:47.930974+00	{"cached":null,"ignore_cache":null,"context":null}
-192	1	card	2	2023-12-02 23:07:49.180036+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-193	1	card	3	2023-12-02 23:07:49.357152+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-194	1	card	4	2023-12-02 23:07:52.585236+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-195	1	table	13	2023-12-02 23:08:06.128083+00	{"cached":null,"ignore_cache":null,"context":null}
-196	1	table	10	2023-12-02 23:08:30.663507+00	{"cached":null,"ignore_cache":null,"context":null}
-197	1	table	10	2023-12-03 01:09:30.252828+00	{"cached":null,"ignore_cache":null,"context":null}
-198	1	table	13	2023-12-03 01:09:36.295443+00	{"cached":null,"ignore_cache":null,"context":null}
-199	1	table	10	2023-12-03 01:09:42.15934+00	{"cached":null,"ignore_cache":null,"context":null}
-200	1	table	13	2023-12-03 01:09:46.931731+00	{"cached":null,"ignore_cache":null,"context":null}
-201	1	table	10	2023-12-03 01:10:48.436659+00	{"cached":null,"ignore_cache":null,"context":null}
-202	1	table	13	2023-12-03 01:10:51.432189+00	{"cached":null,"ignore_cache":null,"context":null}
-203	1	dashboard	1	2023-12-03 01:12:46.066949+00	{"cached":null,"ignore_cache":null,"context":null}
-204	1	dashboard	1	2023-12-03 01:21:45.332946+00	{"cached":null,"ignore_cache":null,"context":null}
-205	1	card	2	2023-12-03 01:21:46.820442+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-206	1	card	4	2023-12-03 01:21:47.489771+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-207	1	dashboard	1	2023-12-03 01:22:09.224594+00	{"cached":null,"ignore_cache":null,"context":null}
-208	1	dashboard	1	2023-12-03 01:22:31.072795+00	{"cached":null,"ignore_cache":null,"context":null}
-209	1	card	2	2023-12-03 01:22:32.640788+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-210	1	card	3	2023-12-03 01:22:32.861857+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-211	1	card	4	2023-12-03 01:22:33.429257+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-212	1	table	13	2023-12-03 01:23:21.334665+00	{"cached":null,"ignore_cache":null,"context":null}
-213	1	table	10	2023-12-03 01:23:24.94025+00	{"cached":null,"ignore_cache":null,"context":null}
-214	1	table	10	2023-12-03 01:23:27.032845+00	{"cached":null,"ignore_cache":null,"context":null}
-215	1	table	10	2023-12-03 01:23:37.166483+00	{"cached":null,"ignore_cache":null,"context":null}
-216	1	table	10	2023-12-03 01:23:50.818855+00	{"cached":null,"ignore_cache":null,"context":null}
-217	1	table	10	2023-12-03 01:23:52.718113+00	{"cached":null,"ignore_cache":null,"context":null}
-218	1	table	10	2023-12-03 01:23:58.177795+00	{"cached":null,"ignore_cache":null,"context":null}
-219	1	table	10	2023-12-03 01:24:11.177255+00	{"cached":null,"ignore_cache":null,"context":null}
-220	1	table	10	2023-12-03 01:24:12.384919+00	{"cached":null,"ignore_cache":null,"context":null}
-221	1	table	10	2023-12-03 01:24:16.221474+00	{"cached":null,"ignore_cache":null,"context":null}
-222	1	table	10	2023-12-03 01:24:16.393227+00	{"cached":null,"ignore_cache":null,"context":null}
-223	1	table	10	2023-12-03 01:24:19.01179+00	{"cached":null,"ignore_cache":null,"context":null}
-224	1	table	10	2023-12-03 01:24:46.774524+00	{"cached":null,"ignore_cache":null,"context":null}
-225	1	table	10	2023-12-03 01:25:04.874451+00	{"cached":null,"ignore_cache":null,"context":null}
-226	1	table	10	2023-12-03 01:25:42.875886+00	{"cached":null,"ignore_cache":null,"context":null}
-227	1	table	10	2023-12-03 01:26:33.465988+00	{"cached":null,"ignore_cache":null,"context":null}
-228	1	table	10	2023-12-03 01:26:37.669871+00	{"cached":null,"ignore_cache":null,"context":null}
-229	1	card	5	2023-12-03 01:28:04.150302+00	{"cached":null,"ignore_cache":null,"context":null}
-230	1	card	5	2023-12-03 01:28:05.026466+00	{"cached":null,"ignore_cache":null,"context":null}
-231	1	dashboard	1	2023-12-03 01:28:08.727152+00	{"cached":null,"ignore_cache":null,"context":null}
-232	1	card	2	2023-12-03 01:28:09.680867+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-233	1	card	3	2023-12-03 01:28:09.855886+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-234	1	card	5	2023-12-03 01:28:09.874871+00	{"cached":null,"ignore_cache":false,"context":"question"}
-235	1	card	4	2023-12-03 01:28:10.680394+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-236	1	card	4	2023-12-03 01:28:14.066786+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-237	1	card	5	2023-12-03 01:28:42.764097+00	{"cached":null,"ignore_cache":false,"context":"question"}
-238	1	dashboard	1	2023-12-03 01:32:09.595512+00	{"cached":null,"ignore_cache":null,"context":null}
-239	1	dashboard	1	2023-12-03 01:33:54.235746+00	{"cached":null,"ignore_cache":null,"context":null}
-240	1	dashboard	1	2023-12-03 01:50:08.754021+00	{"cached":null,"ignore_cache":null,"context":null}
-241	1	card	5	2023-12-03 01:50:11.007746+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-242	1	card	3	2023-12-03 01:51:54.72503+00	{"cached":null,"ignore_cache":null,"context":null}
-243	1	card	3	2023-12-03 01:51:57.299273+00	{"cached":null,"ignore_cache":false,"context":"question"}
-244	1	card	6	2023-12-03 01:52:18.048721+00	{"cached":null,"ignore_cache":null,"context":null}
-245	1	card	6	2023-12-03 01:52:18.912231+00	{"cached":null,"ignore_cache":null,"context":null}
-246	1	card	6	2023-12-03 01:52:27.987031+00	{"cached":null,"ignore_cache":false,"context":"question"}
-247	1	table	11	2023-12-03 01:52:50.658297+00	{"cached":null,"ignore_cache":null,"context":null}
-249	1	table	11	2023-12-03 01:57:06.230592+00	{"cached":null,"ignore_cache":null,"context":null}
-248	1	card	6	2023-12-03 01:56:30.283967+00	{"cached":null,"ignore_cache":false,"context":"question"}
-250	1	card	6	2023-12-03 02:06:33.165466+00	{"cached":null,"ignore_cache":false,"context":"question"}
-251	1	card	6	2023-12-03 02:09:48.892797+00	{"cached":null,"ignore_cache":false,"context":"question"}
-252	1	dashboard	1	2023-12-03 02:30:39.252609+00	{"cached":null,"ignore_cache":null,"context":null}
-253	1	dashboard	1	2023-12-03 02:30:41.169731+00	{"cached":null,"ignore_cache":null,"context":null}
-254	1	card	2	2023-12-03 02:30:42.247534+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-255	1	dashboard	1	2023-12-03 02:30:44.007607+00	{"cached":null,"ignore_cache":null,"context":null}
-256	1	card	2	2023-12-03 02:30:45.044493+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-257	1	card	3	2023-12-03 02:30:45.129488+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-258	1	card	4	2023-12-03 02:30:45.86258+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-259	1	dashboard	1	2023-12-03 02:30:53.056055+00	{"cached":null,"ignore_cache":null,"context":null}
-260	1	card	2	2023-12-03 02:30:54.049331+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-261	1	card	3	2023-12-03 02:30:54.131564+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-262	1	card	4	2023-12-03 02:30:54.717923+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-263	1	dashboard	1	2023-12-03 02:37:20.226148+00	{"cached":null,"ignore_cache":null,"context":null}
-264	1	dashboard	1	2023-12-03 02:37:21.063463+00	{"cached":null,"ignore_cache":null,"context":null}
-265	1	card	2	2023-12-03 02:37:23.377023+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-266	1	card	3	2023-12-03 02:37:23.406313+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
-267	1	card	4	2023-12-03 02:37:23.967364+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}
+COPY public.view_log (id, user_id, model, model_id, "timestamp", metadata, has_access, context) FROM stdin;
+1	1	card	1	2023-11-17 03:22:03.798353+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+2	1	card	1	2023-11-17 03:22:04.706244+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+3	1	dashboard	1	2023-11-17 03:22:19.788042+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+4	1	card	1	2023-11-17 03:22:21.799911+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+5	1	dashboard	1	2023-11-17 03:23:34.907048+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+6	1	dashboard	1	2023-11-17 03:23:52.441509+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+7	1	table	9	2023-11-17 03:24:02.742407+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+8	1	table	9	2023-11-17 03:24:13.061203+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+9	1	table	9	2023-11-17 03:24:21.39103+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+10	1	table	9	2023-11-17 03:24:29.402834+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+11	1	table	9	2023-11-17 03:24:32.881075+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+12	1	table	9	2023-11-17 03:24:36.147635+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+13	1	table	9	2023-11-17 03:25:59.284274+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+14	1	card	2	2023-11-17 03:26:09.067342+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+15	1	card	2	2023-11-17 03:26:09.725002+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+16	1	dashboard	1	2023-11-17 03:26:12.635241+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+17	1	card	2	2023-11-17 03:26:13.530887+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+18	1	card	1	2023-11-17 03:26:15.020712+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+19	1	dashboard	1	2023-11-17 03:26:21.26033+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+20	1	dashboard	1	2023-11-17 03:32:03.320027+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+21	1	dashboard	1	2023-11-17 03:33:16.430941+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+22	1	dashboard	1	2023-11-17 03:37:23.911255+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+23	1	dashboard	1	2023-11-17 03:38:02.176689+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+24	1	dashboard	1	2023-11-17 03:42:08.932625+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+25	1	card	2	2023-11-17 03:42:09.692992+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+26	1	card	2	2023-11-17 03:42:52.744095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+27	1	dashboard	1	2023-11-17 03:44:01.098858+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+28	1	dashboard	1	2023-11-17 04:03:08.328408+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+29	1	table	9	2023-11-17 04:03:19.892715+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+30	1	dashboard	1	2023-11-19 02:45:14.832141+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+31	1	card	2	2023-11-19 02:45:16.68388+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+32	1	table	9	2023-11-19 02:45:25.569715+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+33	1	card	1	2023-11-19 02:45:39.568731+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+34	1	card	1	2023-11-19 02:45:42.582985+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+35	1	table	9	2023-11-19 02:46:17.876392+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+36	1	dashboard	1	2023-11-19 02:46:41.460002+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+37	1	card	2	2023-11-19 02:46:42.258223+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+38	1	dashboard	1	2023-11-19 02:47:16.706396+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+39	1	dashboard	1	2023-11-19 02:49:08.070733+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+40	1	card	2	2023-11-19 02:49:09.002932+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+41	1	table	11	2023-11-19 02:52:34.618731+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+42	1	table	11	2023-11-19 02:53:39.772229+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+43	1	table	11	2023-11-19 02:54:38.1869+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+44	1	card	3	2023-11-19 02:56:41.633724+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+45	1	card	3	2023-11-19 02:56:42.53245+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+46	1	dashboard	1	2023-11-19 02:56:45.949504+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+47	1	card	3	2023-11-19 02:56:47.00442+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+48	1	card	2	2023-11-19 02:56:47.273436+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+49	1	dashboard	1	2023-11-19 02:56:54.52239+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+50	1	dashboard	1	2023-11-19 02:58:05.343075+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+51	1	card	2	2023-11-19 02:58:06.172572+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+52	1	card	3	2023-11-19 02:58:06.366302+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+53	1	card	2	2023-11-19 02:58:15.732373+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+54	1	card	3	2023-11-19 02:58:15.857934+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+55	1	card	2	2023-11-19 02:58:19.895603+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+56	1	card	3	2023-11-19 02:58:20.002736+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+57	1	card	2	2023-11-19 02:58:22.201272+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+58	1	card	3	2023-11-19 02:58:22.349154+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+59	1	card	2	2023-11-19 02:58:25.762694+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+60	1	card	3	2023-11-19 02:58:25.961086+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+61	1	card	2	2023-11-19 02:58:54.577287+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+62	1	card	2	2023-11-19 02:58:59.992566+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+63	1	dashboard	1	2023-11-19 02:59:32.11007+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+64	1	card	2	2023-11-19 02:59:32.833771+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+65	1	card	3	2023-11-19 02:59:32.981316+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+66	1	card	2	2023-11-19 03:00:29.199731+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+67	1	card	3	2023-11-19 03:00:29.324424+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+68	1	card	2	2023-11-19 03:00:34.480396+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+69	1	card	3	2023-11-19 03:00:34.619903+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+70	1	card	2	2023-11-19 03:00:41.187344+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+71	1	card	3	2023-11-19 03:00:41.221937+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+72	1	dashboard	1	2023-11-19 23:31:17.269164+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+73	1	card	3	2023-11-19 23:31:19.351797+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+74	1	card	2	2023-11-19 23:31:19.373747+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+75	1	table	11	2023-11-19 23:55:45.019788+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+76	1	table	11	2023-11-19 23:56:14.933062+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+77	1	table	11	2023-11-19 23:56:47.835569+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+78	1	table	11	2023-11-19 23:57:27.22157+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+79	1	table	11	2023-11-20 00:18:45.558858+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+80	1	table	11	2023-11-20 00:19:36.494555+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+81	1	table	11	2023-11-20 00:25:38.030942+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+82	1	card	4	2023-11-20 00:25:54.517825+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+83	1	card	4	2023-11-20 00:25:55.305211+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+84	1	dashboard	1	2023-11-20 00:25:58.760284+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+85	1	card	4	2023-11-20 00:26:00.153553+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+86	1	card	2	2023-11-20 00:26:00.280875+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+87	1	card	3	2023-11-20 00:26:00.361194+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+88	1	dashboard	1	2023-11-20 00:26:19.710843+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+89	1	dashboard	1	2023-11-20 00:30:57.280511+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+90	1	dashboard	1	2023-11-20 00:32:42.001021+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+91	1	card	4	2023-11-20 00:32:43.156609+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+92	1	dashboard	1	2023-11-20 00:33:14.083506+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+93	1	dashboard	1	2023-11-20 00:33:28.734501+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+94	1	card	2	2023-11-20 00:33:32.735624+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+95	1	card	3	2023-11-20 00:33:33.281397+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+96	1	card	4	2023-11-20 00:33:33.57219+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+97	1	dashboard	1	2023-11-20 00:34:08.54991+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+98	1	card	2	2023-11-20 00:34:09.336957+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+99	1	card	3	2023-11-20 00:34:09.566648+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+100	1	card	4	2023-11-20 00:34:09.661158+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+101	1	dashboard	1	2023-11-20 00:35:21.337671+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+102	1	card	2	2023-11-20 00:35:22.172142+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+103	1	card	3	2023-11-20 00:35:22.324191+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+104	1	card	4	2023-11-20 00:35:22.490035+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+105	1	card	4	2023-11-20 00:35:45.072095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+106	1	dashboard	1	2023-11-20 00:36:11.50483+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+107	1	card	4	2023-11-20 00:39:53.286041+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+108	1	card	4	2023-11-20 00:39:54.855781+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+109	1	dashboard	1	2023-11-20 00:42:22.821715+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+110	1	card	2	2023-11-20 00:42:23.660742+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+111	1	card	3	2023-11-20 00:42:24.162083+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+112	1	card	4	2023-11-20 00:42:24.419611+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+113	1	card	4	2023-11-20 00:42:56.24104+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+114	1	dashboard	1	2023-11-20 00:43:03.379657+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+115	1	card	2	2023-11-20 00:43:32.395865+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+116	1	card	3	2023-11-20 00:43:32.637781+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+117	1	card	4	2023-11-20 00:43:32.859634+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+118	1	dashboard	1	2023-11-20 00:47:32.24925+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+119	1	card	2	2023-11-20 00:47:33.141989+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+120	1	card	3	2023-11-20 00:47:33.315687+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+121	1	card	4	2023-11-20 00:47:33.515181+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+122	1	card	4	2023-11-20 00:47:45.114774+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+123	1	dashboard	1	2023-11-20 00:50:13.390476+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+124	1	card	4	2023-11-20 00:50:22.265023+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+125	1	card	4	2023-11-20 01:13:26.986727+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+126	1	card	4	2023-11-20 01:14:24.922273+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+127	1	card	4	2023-11-20 01:38:37.984266+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+128	1	table	11	2023-11-20 01:39:33.884251+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+129	1	table	11	2023-11-20 01:40:16.754998+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+130	1	card	4	2023-11-20 01:40:17.201926+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+131	1	table	11	2023-11-20 01:44:30.294142+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+132	1	table	11	2023-11-20 01:45:13.803439+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+133	1	table	11	2023-11-20 02:14:31.966452+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+134	1	table	11	2023-11-20 02:14:59.487657+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+135	1	table	11	2023-11-20 02:15:28.867258+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+276	1	card	4	2024-02-10 19:12:36.467396+00	\N	t	dashboard
+136	1	table	11	2023-11-20 02:16:35.517764+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+137	1	table	11	2023-11-20 02:26:09.611743+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+138	1	table	11	2023-11-20 02:26:26.295639+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+139	1	table	11	2023-11-20 02:26:46.461573+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+141	1	table	11	2023-11-20 02:27:56.59906+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+151	1	table	11	2023-11-20 02:43:28.365435+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+155	1	table	11	2023-11-20 02:44:31.867068+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+158	1	table	11	2023-11-20 03:01:10.068253+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+160	1	table	11	2023-11-20 03:15:33.281364+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+162	1	table	11	2023-11-20 03:17:40.158961+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+165	1	table	11	2023-11-20 03:18:35.265305+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+178	1	card	3	2023-11-20 03:21:17.793562+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+183	1	card	4	2023-11-20 03:22:09.27082+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+140	1	table	11	2023-11-20 02:27:35.628909+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+142	1	table	11	2023-11-20 02:28:18.474558+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+143	1	table	11	2023-11-20 02:28:39.772423+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+144	1	table	11	2023-11-20 02:33:06.662392+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+145	1	table	11	2023-11-20 02:34:34.147327+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+146	1	table	11	2023-11-20 02:37:24.717606+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+147	1	table	11	2023-11-20 02:37:52.486545+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+148	1	table	11	2023-11-20 02:38:43.975251+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+149	1	table	11	2023-11-20 02:40:17.249903+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+150	1	table	11	2023-11-20 02:40:34.862064+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+152	1	table	11	2023-11-20 02:43:50.076911+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+153	1	table	11	2023-11-20 02:44:06.277056+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+154	1	table	11	2023-11-20 02:44:19.933183+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+156	1	table	11	2023-11-20 02:44:37.608469+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+157	1	table	11	2023-11-20 02:44:42.362493+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+159	1	table	11	2023-11-20 03:01:17.999021+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+161	1	table	11	2023-11-20 03:16:24.647871+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+163	1	table	11	2023-11-20 03:18:03.04256+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+164	1	table	11	2023-11-20 03:18:19.947929+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+166	1	table	11	2023-11-20 03:18:44.803125+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+167	1	dashboard	1	2023-11-20 03:19:44.74179+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+174	1	card	2	2023-11-20 03:21:04.40884+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+176	1	card	4	2023-11-20 03:21:04.988072+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+179	1	card	4	2023-11-20 03:21:18.299272+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+180	1	dashboard	1	2023-11-20 03:22:07.837744+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+181	1	card	2	2023-11-20 03:22:08.701213+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+186	1	dashboard	1	2023-11-20 03:24:37.422375+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+168	1	card	2	2023-11-20 03:19:45.619452+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+169	1	card	3	2023-11-20 03:19:46.15503+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+170	1	card	4	2023-11-20 03:19:46.397134+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+171	1	card	4	2023-11-20 03:19:55.961296+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+172	1	dashboard	1	2023-11-20 03:20:06.985673+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+173	1	dashboard	1	2023-11-20 03:20:18.181304+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+175	1	card	3	2023-11-20 03:21:04.564247+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+177	1	card	2	2023-11-20 03:21:17.645291+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+182	1	card	3	2023-11-20 03:22:08.904095+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+184	1	dashboard	1	2023-11-20 03:24:09.138053+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+185	1	dashboard	1	2023-11-20 03:24:23.021113+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+187	1	table	13	2023-11-20 03:25:41.40864+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+188	1	table	10	2023-11-20 03:26:30.208301+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+189	1	table	10	2023-11-20 03:26:42.0485+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+190	1	table	13	2023-12-02 23:07:40.39239+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+191	1	dashboard	1	2023-12-02 23:07:47.930974+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+192	1	card	2	2023-12-02 23:07:49.180036+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+193	1	card	3	2023-12-02 23:07:49.357152+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+194	1	card	4	2023-12-02 23:07:52.585236+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+195	1	table	13	2023-12-02 23:08:06.128083+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+196	1	table	10	2023-12-02 23:08:30.663507+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+197	1	table	10	2023-12-03 01:09:30.252828+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+198	1	table	13	2023-12-03 01:09:36.295443+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+199	1	table	10	2023-12-03 01:09:42.15934+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+200	1	table	13	2023-12-03 01:09:46.931731+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+201	1	table	10	2023-12-03 01:10:48.436659+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+202	1	table	13	2023-12-03 01:10:51.432189+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+203	1	dashboard	1	2023-12-03 01:12:46.066949+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+204	1	dashboard	1	2023-12-03 01:21:45.332946+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+205	1	card	2	2023-12-03 01:21:46.820442+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+206	1	card	4	2023-12-03 01:21:47.489771+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+207	1	dashboard	1	2023-12-03 01:22:09.224594+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+208	1	dashboard	1	2023-12-03 01:22:31.072795+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+209	1	card	2	2023-12-03 01:22:32.640788+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+210	1	card	3	2023-12-03 01:22:32.861857+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+211	1	card	4	2023-12-03 01:22:33.429257+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+212	1	table	13	2023-12-03 01:23:21.334665+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+213	1	table	10	2023-12-03 01:23:24.94025+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+214	1	table	10	2023-12-03 01:23:27.032845+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+215	1	table	10	2023-12-03 01:23:37.166483+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+216	1	table	10	2023-12-03 01:23:50.818855+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+217	1	table	10	2023-12-03 01:23:52.718113+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+218	1	table	10	2023-12-03 01:23:58.177795+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+219	1	table	10	2023-12-03 01:24:11.177255+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+220	1	table	10	2023-12-03 01:24:12.384919+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+221	1	table	10	2023-12-03 01:24:16.221474+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+222	1	table	10	2023-12-03 01:24:16.393227+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+223	1	table	10	2023-12-03 01:24:19.01179+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+224	1	table	10	2023-12-03 01:24:46.774524+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+225	1	table	10	2023-12-03 01:25:04.874451+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+226	1	table	10	2023-12-03 01:25:42.875886+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+227	1	table	10	2023-12-03 01:26:33.465988+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+228	1	table	10	2023-12-03 01:26:37.669871+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+229	1	card	5	2023-12-03 01:28:04.150302+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+230	1	card	5	2023-12-03 01:28:05.026466+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+231	1	dashboard	1	2023-12-03 01:28:08.727152+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+232	1	card	2	2023-12-03 01:28:09.680867+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+233	1	card	3	2023-12-03 01:28:09.855886+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+234	1	card	5	2023-12-03 01:28:09.874871+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+235	1	card	4	2023-12-03 01:28:10.680394+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+236	1	card	4	2023-12-03 01:28:14.066786+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+237	1	card	5	2023-12-03 01:28:42.764097+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+238	1	dashboard	1	2023-12-03 01:32:09.595512+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+239	1	dashboard	1	2023-12-03 01:33:54.235746+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+240	1	dashboard	1	2023-12-03 01:50:08.754021+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+241	1	card	5	2023-12-03 01:50:11.007746+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+242	1	card	3	2023-12-03 01:51:54.72503+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+243	1	card	3	2023-12-03 01:51:57.299273+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+244	1	card	6	2023-12-03 01:52:18.048721+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+245	1	card	6	2023-12-03 01:52:18.912231+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+246	1	card	6	2023-12-03 01:52:27.987031+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+247	1	table	11	2023-12-03 01:52:50.658297+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+249	1	table	11	2023-12-03 01:57:06.230592+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+248	1	card	6	2023-12-03 01:56:30.283967+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+250	1	card	6	2023-12-03 02:06:33.165466+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+251	1	card	6	2023-12-03 02:09:48.892797+00	{"cached":null,"ignore_cache":false,"context":"question"}	\N	\N
+252	1	dashboard	1	2023-12-03 02:30:39.252609+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+253	1	dashboard	1	2023-12-03 02:30:41.169731+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+254	1	card	2	2023-12-03 02:30:42.247534+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+255	1	dashboard	1	2023-12-03 02:30:44.007607+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+256	1	card	2	2023-12-03 02:30:45.044493+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+257	1	card	3	2023-12-03 02:30:45.129488+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+258	1	card	4	2023-12-03 02:30:45.86258+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+259	1	dashboard	1	2023-12-03 02:30:53.056055+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+260	1	card	2	2023-12-03 02:30:54.049331+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+261	1	card	3	2023-12-03 02:30:54.131564+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+262	1	card	4	2023-12-03 02:30:54.717923+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+263	1	dashboard	1	2023-12-03 02:37:20.226148+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+264	1	dashboard	1	2023-12-03 02:37:21.063463+00	{"cached":null,"ignore_cache":null,"context":null}	\N	\N
+265	1	card	2	2023-12-03 02:37:23.377023+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+266	1	card	3	2023-12-03 02:37:23.406313+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+267	1	card	4	2023-12-03 02:37:23.967364+00	{"cached":null,"ignore_cache":false,"context":"dashboard"}	\N	\N
+268	1	dashboard	1	2024-01-23 04:04:59.812998+00	\N	t	\N
+269	1	card	2	2024-01-23 04:04:59.812998+00	\N	t	dashboard
+270	1	card	3	2024-01-23 04:04:59.812998+00	\N	t	dashboard
+271	1	card	4	2024-01-23 04:04:59.812998+00	\N	t	dashboard
+272	1	card	5	2024-01-23 04:04:59.812998+00	\N	t	dashboard
+273	1	dashboard	1	2024-02-10 19:12:36.467396+00	\N	t	\N
+274	1	card	2	2024-02-10 19:12:36.467396+00	\N	t	dashboard
+275	1	card	3	2024-02-10 19:12:36.467396+00	\N	t	dashboard
+277	1	card	5	2024-02-10 19:12:36.467396+00	\N	t	dashboard
+278	1	dashboard	1	2024-02-11 03:19:01.701915+00	\N	t	\N
+279	1	card	2	2024-02-11 03:19:01.701915+00	\N	t	dashboard
+280	1	card	3	2024-02-11 03:19:01.701915+00	\N	t	dashboard
+281	1	card	4	2024-02-11 03:19:01.701915+00	\N	t	dashboard
+282	1	card	5	2024-02-11 03:19:01.701915+00	\N	t	dashboard
+283	1	dashboard	1	2024-02-11 17:53:42.303897+00	\N	t	\N
+284	1	card	2	2024-02-11 17:53:42.303897+00	\N	t	dashboard
+285	1	card	3	2024-02-11 17:53:42.303897+00	\N	t	dashboard
+286	1	card	4	2024-02-11 17:53:42.303897+00	\N	t	dashboard
+287	1	card	5	2024-02-11 17:53:42.303897+00	\N	t	dashboard
+288	1	dashboard	1	2024-02-12 00:06:43.712254+00	\N	t	\N
+289	1	card	2	2024-02-12 00:06:43.712254+00	\N	t	dashboard
+290	1	card	3	2024-02-12 00:06:43.712254+00	\N	t	dashboard
+291	1	card	4	2024-02-12 00:06:43.712254+00	\N	t	dashboard
+292	1	card	5	2024-02-12 00:06:43.712254+00	\N	t	dashboard
+293	1	table	18	2024-02-12 00:06:47.851903+00	\N	t	\N
+294	1	dashboard	1	2024-02-12 00:06:54.216492+00	\N	t	\N
+295	1	card	2	2024-02-12 00:06:54.216492+00	\N	t	dashboard
+296	1	card	3	2024-02-12 00:06:54.216492+00	\N	t	dashboard
+297	1	card	4	2024-02-12 00:06:54.216492+00	\N	t	dashboard
+298	1	card	5	2024-02-12 00:06:54.216492+00	\N	t	dashboard
+299	1	dashboard	1	2024-02-12 00:07:32.845405+00	\N	t	\N
+300	1	card	2	2024-02-12 00:07:32.845405+00	\N	t	dashboard
+301	1	card	3	2024-02-12 00:07:32.845405+00	\N	t	dashboard
+302	1	card	4	2024-02-12 00:07:32.845405+00	\N	t	dashboard
+303	1	card	5	2024-02-12 00:07:32.845405+00	\N	t	dashboard
+304	1	table	12	2024-02-12 00:07:44.59259+00	\N	t	\N
+305	1	dashboard	1	2024-02-12 00:07:56.313704+00	\N	t	\N
+306	1	card	2	2024-02-12 00:07:56.313704+00	\N	t	dashboard
+307	1	card	3	2024-02-12 00:07:56.313704+00	\N	t	dashboard
+308	1	card	4	2024-02-12 00:07:56.313704+00	\N	t	dashboard
+309	1	card	5	2024-02-12 00:07:56.313704+00	\N	t	dashboard
+310	1	dashboard	1	2024-02-12 00:54:48.747844+00	\N	t	\N
+311	1	card	2	2024-02-12 00:54:48.747844+00	\N	t	dashboard
+312	1	card	3	2024-02-12 00:54:48.747844+00	\N	t	dashboard
+313	1	card	4	2024-02-12 00:54:48.747844+00	\N	t	dashboard
+314	1	card	5	2024-02-12 00:54:48.747844+00	\N	t	dashboard
+315	1	dashboard	1	2024-02-12 00:54:49.140493+00	\N	t	\N
+316	1	card	2	2024-02-12 00:54:49.140493+00	\N	t	dashboard
+317	1	card	3	2024-02-12 00:54:49.140493+00	\N	t	dashboard
+318	1	card	4	2024-02-12 00:54:49.140493+00	\N	t	dashboard
+319	1	card	5	2024-02-12 00:54:49.140493+00	\N	t	dashboard
+320	1	dashboard	1	2024-02-13 01:51:02.281878+00	\N	t	\N
+321	1	card	2	2024-02-13 01:51:02.281878+00	\N	t	dashboard
+322	1	card	3	2024-02-13 01:51:02.281878+00	\N	t	dashboard
+323	1	card	4	2024-02-13 01:51:02.281878+00	\N	t	dashboard
+324	1	card	5	2024-02-13 01:51:02.281878+00	\N	t	dashboard
+325	1	dashboard	1	2024-02-13 01:51:02.633982+00	\N	t	\N
+326	1	card	2	2024-02-13 01:51:02.633982+00	\N	t	dashboard
+327	1	card	3	2024-02-13 01:51:02.633982+00	\N	t	dashboard
+328	1	card	4	2024-02-13 01:51:02.633982+00	\N	t	dashboard
+329	1	card	5	2024-02-13 01:51:02.633982+00	\N	t	dashboard
+330	1	dashboard	1	2024-02-13 02:02:40.352142+00	\N	t	\N
+331	1	card	2	2024-02-13 02:02:40.352142+00	\N	t	dashboard
+332	1	card	3	2024-02-13 02:02:40.352142+00	\N	t	dashboard
+333	1	card	4	2024-02-13 02:02:40.352142+00	\N	t	dashboard
+334	1	card	5	2024-02-13 02:02:40.352142+00	\N	t	dashboard
+335	1	card	5	2024-02-13 02:04:26.622431+00	\N	t	question
+336	1	table	10	2024-02-13 02:04:34.89892+00	\N	t	\N
+337	1	table	10	2024-02-13 02:04:55.807053+00	\N	t	\N
+338	1	card	4	2024-02-13 02:06:22.94982+00	\N	t	question
+339	1	table	11	2024-02-13 02:06:23.092711+00	\N	t	\N
+340	1	table	11	2024-02-13 02:06:43.658741+00	\N	t	\N
+341	1	table	11	2024-02-13 02:07:22.967856+00	\N	t	\N
+342	1	table	11	2024-02-13 02:07:45.300843+00	\N	t	\N
 \.
 
 
 --
--- TOC entry 5244 (class 0 OID 0)
--- Dependencies: 328
+-- TOC entry 4806 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: action_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7495,8 +8415,8 @@ SELECT pg_catalog.setval('public.action_id_seq', 1, false);
 
 
 --
--- TOC entry 5245 (class 0 OID 0)
--- Dependencies: 238
+-- TOC entry 4807 (class 0 OID 0)
+-- Dependencies: 218
 -- Name: activity_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7504,8 +8424,8 @@ SELECT pg_catalog.setval('public.activity_id_seq', 19, true);
 
 
 --
--- TOC entry 5246 (class 0 OID 0)
--- Dependencies: 322
+-- TOC entry 4808 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: application_permissions_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7513,8 +8433,17 @@ SELECT pg_catalog.setval('public.application_permissions_revision_id_seq', 1, fa
 
 
 --
--- TOC entry 5247 (class 0 OID 0)
--- Dependencies: 324
+-- TOC entry 4809 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: audit_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.audit_log_id_seq', 19, true);
+
+
+--
+-- TOC entry 4810 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: bookmark_ordering_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7522,8 +8451,8 @@ SELECT pg_catalog.setval('public.bookmark_ordering_id_seq', 1, false);
 
 
 --
--- TOC entry 5248 (class 0 OID 0)
--- Dependencies: 318
+-- TOC entry 4811 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: card_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7531,8 +8460,8 @@ SELECT pg_catalog.setval('public.card_bookmark_id_seq', 1, false);
 
 
 --
--- TOC entry 5249 (class 0 OID 0)
--- Dependencies: 261
+-- TOC entry 4812 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: card_label_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7540,8 +8469,8 @@ SELECT pg_catalog.setval('public.card_label_id_seq', 1, false);
 
 
 --
--- TOC entry 5250 (class 0 OID 0)
--- Dependencies: 320
+-- TOC entry 4813 (class 0 OID 0)
+-- Dependencies: 231
 -- Name: collection_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7549,8 +8478,8 @@ SELECT pg_catalog.setval('public.collection_bookmark_id_seq', 1, false);
 
 
 --
--- TOC entry 5251 (class 0 OID 0)
--- Dependencies: 273
+-- TOC entry 4814 (class 0 OID 0)
+-- Dependencies: 232
 -- Name: collection_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7558,8 +8487,8 @@ SELECT pg_catalog.setval('public.collection_id_seq', 2, true);
 
 
 --
--- TOC entry 5252 (class 0 OID 0)
--- Dependencies: 275
+-- TOC entry 4815 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: collection_permission_graph_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7567,26 +8496,8 @@ SELECT pg_catalog.setval('public.collection_permission_graph_revision_id_seq', 1
 
 
 --
--- TOC entry 5253 (class 0 OID 0)
--- Dependencies: 285
--- Name: computation_job_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.computation_job_id_seq', 1, false);
-
-
---
--- TOC entry 5254 (class 0 OID 0)
--- Dependencies: 287
--- Name: computation_job_result_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
---
-
-SELECT pg_catalog.setval('public.computation_job_result_id_seq', 1, false);
-
-
---
--- TOC entry 5255 (class 0 OID 0)
--- Dependencies: 340
+-- TOC entry 4816 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: connection_impersonations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7594,8 +8505,8 @@ SELECT pg_catalog.setval('public.connection_impersonations_id_seq', 1, false);
 
 
 --
--- TOC entry 5256 (class 0 OID 0)
--- Dependencies: 216
+-- TOC entry 4817 (class 0 OID 0)
+-- Dependencies: 239
 -- Name: core_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7603,8 +8514,8 @@ SELECT pg_catalog.setval('public.core_user_id_seq', 2, true);
 
 
 --
--- TOC entry 5257 (class 0 OID 0)
--- Dependencies: 316
+-- TOC entry 4818 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: dashboard_bookmark_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7612,8 +8523,8 @@ SELECT pg_catalog.setval('public.dashboard_bookmark_id_seq', 1, false);
 
 
 --
--- TOC entry 5258 (class 0 OID 0)
--- Dependencies: 281
+-- TOC entry 4819 (class 0 OID 0)
+-- Dependencies: 243
 -- Name: dashboard_favorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7621,8 +8532,8 @@ SELECT pg_catalog.setval('public.dashboard_favorite_id_seq', 1, false);
 
 
 --
--- TOC entry 5259 (class 0 OID 0)
--- Dependencies: 335
+-- TOC entry 4820 (class 0 OID 0)
+-- Dependencies: 245
 -- Name: dashboard_tab_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7630,8 +8541,8 @@ SELECT pg_catalog.setval('public.dashboard_tab_id_seq', 3, true);
 
 
 --
--- TOC entry 5260 (class 0 OID 0)
--- Dependencies: 257
+-- TOC entry 4821 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: dashboardcard_series_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7639,8 +8550,8 @@ SELECT pg_catalog.setval('public.dashboardcard_series_id_seq', 1, false);
 
 
 --
--- TOC entry 5261 (class 0 OID 0)
--- Dependencies: 253
+-- TOC entry 4822 (class 0 OID 0)
+-- Dependencies: 251
 -- Name: dependency_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7648,8 +8559,8 @@ SELECT pg_catalog.setval('public.dependency_id_seq', 1, false);
 
 
 --
--- TOC entry 5262 (class 0 OID 0)
--- Dependencies: 283
+-- TOC entry 4823 (class 0 OID 0)
+-- Dependencies: 253
 -- Name: dimension_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7657,8 +8568,8 @@ SELECT pg_catalog.setval('public.dimension_id_seq', 1, false);
 
 
 --
--- TOC entry 5263 (class 0 OID 0)
--- Dependencies: 289
+-- TOC entry 4824 (class 0 OID 0)
+-- Dependencies: 255
 -- Name: group_table_access_policy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7666,7 +8577,7 @@ SELECT pg_catalog.setval('public.group_table_access_policy_id_seq', 1, false);
 
 
 --
--- TOC entry 5264 (class 0 OID 0)
+-- TOC entry 4825 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: label_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
@@ -7675,53 +8586,53 @@ SELECT pg_catalog.setval('public.label_id_seq', 1, false);
 
 
 --
--- TOC entry 5265 (class 0 OID 0)
--- Dependencies: 306
+-- TOC entry 4826 (class 0 OID 0)
+-- Dependencies: 261
 -- Name: login_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.login_history_id_seq', 6, true);
+SELECT pg_catalog.setval('public.login_history_id_seq', 9, true);
 
 
 --
--- TOC entry 5266 (class 0 OID 0)
--- Dependencies: 218
+-- TOC entry 4827 (class 0 OID 0)
+-- Dependencies: 263
 -- Name: metabase_database_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.metabase_database_id_seq', 2, true);
+SELECT pg_catalog.setval('public.metabase_database_id_seq', 3, true);
 
 
 --
--- TOC entry 5267 (class 0 OID 0)
--- Dependencies: 222
+-- TOC entry 4828 (class 0 OID 0)
+-- Dependencies: 265
 -- Name: metabase_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.metabase_field_id_seq', 109, true);
+SELECT pg_catalog.setval('public.metabase_field_id_seq', 147, true);
 
 
 --
--- TOC entry 5268 (class 0 OID 0)
--- Dependencies: 224
+-- TOC entry 4829 (class 0 OID 0)
+-- Dependencies: 267
 -- Name: metabase_fieldvalues_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.metabase_fieldvalues_id_seq', 36, true);
+SELECT pg_catalog.setval('public.metabase_fieldvalues_id_seq', 49, true);
 
 
 --
--- TOC entry 5269 (class 0 OID 0)
--- Dependencies: 220
+-- TOC entry 4830 (class 0 OID 0)
+-- Dependencies: 269
 -- Name: metabase_table_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.metabase_table_id_seq', 14, true);
+SELECT pg_catalog.setval('public.metabase_table_id_seq', 20, true);
 
 
 --
--- TOC entry 5270 (class 0 OID 0)
--- Dependencies: 255
+-- TOC entry 4831 (class 0 OID 0)
+-- Dependencies: 271
 -- Name: metric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7729,8 +8640,8 @@ SELECT pg_catalog.setval('public.metric_id_seq', 1, false);
 
 
 --
--- TOC entry 5271 (class 0 OID 0)
--- Dependencies: 263
+-- TOC entry 4832 (class 0 OID 0)
+-- Dependencies: 273
 -- Name: metric_important_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7738,8 +8649,8 @@ SELECT pg_catalog.setval('public.metric_important_field_id_seq', 1, false);
 
 
 --
--- TOC entry 5272 (class 0 OID 0)
--- Dependencies: 337
+-- TOC entry 4833 (class 0 OID 0)
+-- Dependencies: 275
 -- Name: model_index_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7747,8 +8658,8 @@ SELECT pg_catalog.setval('public.model_index_id_seq', 1, false);
 
 
 --
--- TOC entry 5273 (class 0 OID 0)
--- Dependencies: 308
+-- TOC entry 4834 (class 0 OID 0)
+-- Dependencies: 278
 -- Name: moderation_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7756,8 +8667,8 @@ SELECT pg_catalog.setval('public.moderation_review_id_seq', 1, false);
 
 
 --
--- TOC entry 5274 (class 0 OID 0)
--- Dependencies: 304
+-- TOC entry 4835 (class 0 OID 0)
+-- Dependencies: 280
 -- Name: native_query_snippet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7765,8 +8676,8 @@ SELECT pg_catalog.setval('public.native_query_snippet_id_seq', 1, false);
 
 
 --
--- TOC entry 5275 (class 0 OID 0)
--- Dependencies: 333
+-- TOC entry 4836 (class 0 OID 0)
+-- Dependencies: 282
 -- Name: parameter_card_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7774,8 +8685,8 @@ SELECT pg_catalog.setval('public.parameter_card_id_seq', 1, false);
 
 
 --
--- TOC entry 5276 (class 0 OID 0)
--- Dependencies: 265
+-- TOC entry 4837 (class 0 OID 0)
+-- Dependencies: 285
 -- Name: permissions_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7783,8 +8694,8 @@ SELECT pg_catalog.setval('public.permissions_group_id_seq', 2, true);
 
 
 --
--- TOC entry 5277 (class 0 OID 0)
--- Dependencies: 267
+-- TOC entry 4838 (class 0 OID 0)
+-- Dependencies: 287
 -- Name: permissions_group_membership_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7792,17 +8703,17 @@ SELECT pg_catalog.setval('public.permissions_group_membership_id_seq', 4, true);
 
 
 --
--- TOC entry 5278 (class 0 OID 0)
--- Dependencies: 269
+-- TOC entry 4839 (class 0 OID 0)
+-- Dependencies: 288
 -- Name: permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.permissions_id_seq', 14, true);
+SELECT pg_catalog.setval('public.permissions_id_seq', 19, true);
 
 
 --
--- TOC entry 5279 (class 0 OID 0)
--- Dependencies: 271
+-- TOC entry 4840 (class 0 OID 0)
+-- Dependencies: 290
 -- Name: permissions_revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7810,8 +8721,8 @@ SELECT pg_catalog.setval('public.permissions_revision_id_seq', 1, false);
 
 
 --
--- TOC entry 5280 (class 0 OID 0)
--- Dependencies: 326
+-- TOC entry 4841 (class 0 OID 0)
+-- Dependencies: 292
 -- Name: persisted_info_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7819,8 +8730,8 @@ SELECT pg_catalog.setval('public.persisted_info_id_seq', 1, false);
 
 
 --
--- TOC entry 5281 (class 0 OID 0)
--- Dependencies: 245
+-- TOC entry 4842 (class 0 OID 0)
+-- Dependencies: 295
 -- Name: pulse_card_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7828,8 +8739,8 @@ SELECT pg_catalog.setval('public.pulse_card_id_seq', 1, false);
 
 
 --
--- TOC entry 5282 (class 0 OID 0)
--- Dependencies: 247
+-- TOC entry 4843 (class 0 OID 0)
+-- Dependencies: 297
 -- Name: pulse_channel_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7837,8 +8748,8 @@ SELECT pg_catalog.setval('public.pulse_channel_id_seq', 1, false);
 
 
 --
--- TOC entry 5283 (class 0 OID 0)
--- Dependencies: 249
+-- TOC entry 4844 (class 0 OID 0)
+-- Dependencies: 299
 -- Name: pulse_channel_recipient_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7846,8 +8757,8 @@ SELECT pg_catalog.setval('public.pulse_channel_recipient_id_seq', 1, false);
 
 
 --
--- TOC entry 5284 (class 0 OID 0)
--- Dependencies: 243
+-- TOC entry 4845 (class 0 OID 0)
+-- Dependencies: 300
 -- Name: pulse_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7855,17 +8766,26 @@ SELECT pg_catalog.setval('public.pulse_id_seq', 1, false);
 
 
 --
--- TOC entry 5285 (class 0 OID 0)
--- Dependencies: 277
+-- TOC entry 4846 (class 0 OID 0)
+-- Dependencies: 316
 -- Name: query_execution_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.query_execution_id_seq', 240, true);
+SELECT pg_catalog.setval('public.query_execution_id_seq', 320, true);
 
 
 --
--- TOC entry 5286 (class 0 OID 0)
--- Dependencies: 226
+-- TOC entry 4847 (class 0 OID 0)
+-- Dependencies: 318
+-- Name: recent_views_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.recent_views_id_seq', 21, true);
+
+
+--
+-- TOC entry 4848 (class 0 OID 0)
+-- Dependencies: 320
 -- Name: report_card_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7873,8 +8793,8 @@ SELECT pg_catalog.setval('public.report_card_id_seq', 6, true);
 
 
 --
--- TOC entry 5287 (class 0 OID 0)
--- Dependencies: 228
+-- TOC entry 4849 (class 0 OID 0)
+-- Dependencies: 322
 -- Name: report_cardfavorite_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7882,8 +8802,8 @@ SELECT pg_catalog.setval('public.report_cardfavorite_id_seq', 1, false);
 
 
 --
--- TOC entry 5288 (class 0 OID 0)
--- Dependencies: 230
+-- TOC entry 4850 (class 0 OID 0)
+-- Dependencies: 324
 -- Name: report_dashboard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7891,8 +8811,8 @@ SELECT pg_catalog.setval('public.report_dashboard_id_seq', 1, true);
 
 
 --
--- TOC entry 5289 (class 0 OID 0)
--- Dependencies: 232
+-- TOC entry 4851 (class 0 OID 0)
+-- Dependencies: 326
 -- Name: report_dashboardcard_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7900,17 +8820,17 @@ SELECT pg_catalog.setval('public.report_dashboardcard_id_seq', 7, true);
 
 
 --
--- TOC entry 5290 (class 0 OID 0)
--- Dependencies: 236
+-- TOC entry 4852 (class 0 OID 0)
+-- Dependencies: 328
 -- Name: revision_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.revision_id_seq', 64, true);
+SELECT pg_catalog.setval('public.revision_id_seq', 65, true);
 
 
 --
--- TOC entry 5291 (class 0 OID 0)
--- Dependencies: 310
+-- TOC entry 4853 (class 0 OID 0)
+-- Dependencies: 330
 -- Name: secret_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7918,8 +8838,8 @@ SELECT pg_catalog.setval('public.secret_id_seq', 1, false);
 
 
 --
--- TOC entry 5292 (class 0 OID 0)
--- Dependencies: 251
+-- TOC entry 4854 (class 0 OID 0)
+-- Dependencies: 332
 -- Name: segment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7927,17 +8847,17 @@ SELECT pg_catalog.setval('public.segment_id_seq', 1, false);
 
 
 --
--- TOC entry 5293 (class 0 OID 0)
--- Dependencies: 302
+-- TOC entry 4855 (class 0 OID 0)
+-- Dependencies: 336
 -- Name: task_history_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.task_history_id_seq', 226, true);
+SELECT pg_catalog.setval('public.task_history_id_seq', 244, true);
 
 
 --
--- TOC entry 5294 (class 0 OID 0)
--- Dependencies: 314
+-- TOC entry 4856 (class 0 OID 0)
+-- Dependencies: 339
 -- Name: timeline_event_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7945,8 +8865,8 @@ SELECT pg_catalog.setval('public.timeline_event_id_seq', 1, false);
 
 
 --
--- TOC entry 5295 (class 0 OID 0)
--- Dependencies: 312
+-- TOC entry 4857 (class 0 OID 0)
+-- Dependencies: 340
 -- Name: timeline_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
@@ -7954,16 +8874,16 @@ SELECT pg_catalog.setval('public.timeline_id_seq', 1, false);
 
 
 --
--- TOC entry 5296 (class 0 OID 0)
--- Dependencies: 240
+-- TOC entry 4858 (class 0 OID 0)
+-- Dependencies: 355
 -- Name: view_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.view_log_id_seq', 267, true);
+SELECT pg_catalog.setval('public.view_log_id_seq', 342, true);
 
 
 --
--- TOC entry 4524 (class 2606 OID 28075)
+-- TOC entry 3695 (class 2606 OID 16924)
 -- Name: action action_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7972,7 +8892,7 @@ ALTER TABLE ONLY public.action
 
 
 --
--- TOC entry 4526 (class 2606 OID 27904)
+-- TOC entry 3697 (class 2606 OID 16926)
 -- Name: action action_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7981,7 +8901,7 @@ ALTER TABLE ONLY public.action
 
 
 --
--- TOC entry 4528 (class 2606 OID 28058)
+-- TOC entry 3699 (class 2606 OID 16928)
 -- Name: action action_public_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7990,7 +8910,7 @@ ALTER TABLE ONLY public.action
 
 
 --
--- TOC entry 4279 (class 2606 OID 26656)
+-- TOC entry 3705 (class 2606 OID 16930)
 -- Name: activity activity_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -7999,7 +8919,16 @@ ALTER TABLE ONLY public.activity
 
 
 --
--- TOC entry 4513 (class 2606 OID 27825)
+-- TOC entry 3714 (class 2606 OID 16932)
+-- Name: audit_log audit_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.audit_log
+    ADD CONSTRAINT audit_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3717 (class 2606 OID 16934)
 -- Name: bookmark_ordering bookmark_ordering_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8008,7 +8937,7 @@ ALTER TABLE ONLY public.bookmark_ordering
 
 
 --
--- TOC entry 4499 (class 2606 OID 27769)
+-- TOC entry 3724 (class 2606 OID 16936)
 -- Name: card_bookmark card_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8017,7 +8946,7 @@ ALTER TABLE ONLY public.card_bookmark
 
 
 --
--- TOC entry 4340 (class 2606 OID 26842)
+-- TOC entry 3730 (class 2606 OID 16938)
 -- Name: card_label card_label_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8026,7 +8955,7 @@ ALTER TABLE ONLY public.card_label
 
 
 --
--- TOC entry 4505 (class 2606 OID 27790)
+-- TOC entry 3744 (class 2606 OID 16940)
 -- Name: collection_bookmark collection_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8035,7 +8964,7 @@ ALTER TABLE ONLY public.collection_bookmark
 
 
 --
--- TOC entry 4373 (class 2606 OID 27872)
+-- TOC entry 3736 (class 2606 OID 16942)
 -- Name: collection collection_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8044,7 +8973,7 @@ ALTER TABLE ONLY public.collection
 
 
 --
--- TOC entry 4375 (class 2606 OID 27011)
+-- TOC entry 3738 (class 2606 OID 16944)
 -- Name: collection collection_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8053,7 +8982,7 @@ ALTER TABLE ONLY public.collection
 
 
 --
--- TOC entry 4381 (class 2606 OID 27028)
+-- TOC entry 3750 (class 2606 OID 16946)
 -- Name: collection_permission_graph_revision collection_revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8062,25 +8991,7 @@ ALTER TABLE ONLY public.collection_permission_graph_revision
 
 
 --
--- TOC entry 4409 (class 2606 OID 27132)
--- Name: computation_job computation_job_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.computation_job
-    ADD CONSTRAINT computation_job_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4411 (class 2606 OID 27145)
--- Name: computation_job_result computation_job_result_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.computation_job_result
-    ADD CONSTRAINT computation_job_result_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4553 (class 2606 OID 28176)
+-- TOC entry 3753 (class 2606 OID 16948)
 -- Name: connection_impersonations conn_impersonation_unique_group_id_db_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8089,7 +9000,7 @@ ALTER TABLE ONLY public.connection_impersonations
 
 
 --
--- TOC entry 4555 (class 2606 OID 28154)
+-- TOC entry 3755 (class 2606 OID 16950)
 -- Name: connection_impersonations connection_impersonations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8098,7 +9009,7 @@ ALTER TABLE ONLY public.connection_impersonations
 
 
 --
--- TOC entry 4272 (class 2606 OID 26606)
+-- TOC entry 3759 (class 2606 OID 16952)
 -- Name: core_session core_session_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8107,7 +9018,7 @@ ALTER TABLE ONLY public.core_session
 
 
 --
--- TOC entry 4216 (class 2606 OID 26259)
+-- TOC entry 3762 (class 2606 OID 16954)
 -- Name: core_user core_user_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8116,7 +9027,7 @@ ALTER TABLE ONLY public.core_user
 
 
 --
--- TOC entry 4218 (class 2606 OID 26257)
+-- TOC entry 3764 (class 2606 OID 16956)
 -- Name: core_user core_user_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8125,7 +9036,7 @@ ALTER TABLE ONLY public.core_user
 
 
 --
--- TOC entry 4493 (class 2606 OID 27748)
+-- TOC entry 3769 (class 2606 OID 16958)
 -- Name: dashboard_bookmark dashboard_bookmark_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8134,7 +9045,7 @@ ALTER TABLE ONLY public.dashboard_bookmark
 
 
 --
--- TOC entry 4396 (class 2606 OID 27084)
+-- TOC entry 3775 (class 2606 OID 16960)
 -- Name: dashboard_favorite dashboard_favorite_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8143,7 +9054,7 @@ ALTER TABLE ONLY public.dashboard_favorite
 
 
 --
--- TOC entry 4544 (class 2606 OID 28100)
+-- TOC entry 3781 (class 2606 OID 16962)
 -- Name: dashboard_tab dashboard_tab_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8152,7 +9063,7 @@ ALTER TABLE ONLY public.dashboard_tab
 
 
 --
--- TOC entry 4546 (class 2606 OID 28098)
+-- TOC entry 3783 (class 2606 OID 16964)
 -- Name: dashboard_tab dashboard_tab_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8161,7 +9072,7 @@ ALTER TABLE ONLY public.dashboard_tab
 
 
 --
--- TOC entry 4331 (class 2606 OID 26812)
+-- TOC entry 3786 (class 2606 OID 16966)
 -- Name: dashboardcard_series dashboardcard_series_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8170,16 +9081,7 @@ ALTER TABLE ONLY public.dashboardcard_series
 
 
 --
--- TOC entry 4288 (class 2606 OID 26684)
--- Name: data_migrations data_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.data_migrations
-    ADD CONSTRAINT data_migrations_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 4214 (class 2606 OID 26238)
+-- TOC entry 3792 (class 2606 OID 16968)
 -- Name: databasechangeloglock databasechangeloglock_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8188,7 +9090,7 @@ ALTER TABLE ONLY public.databasechangeloglock
 
 
 --
--- TOC entry 4318 (class 2606 OID 26780)
+-- TOC entry 3794 (class 2606 OID 16970)
 -- Name: dependency dependency_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8197,7 +9099,7 @@ ALTER TABLE ONLY public.dependency
 
 
 --
--- TOC entry 4402 (class 2606 OID 27876)
+-- TOC entry 3800 (class 2606 OID 16972)
 -- Name: dimension dimension_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8206,7 +9108,7 @@ ALTER TABLE ONLY public.dimension
 
 
 --
--- TOC entry 4404 (class 2606 OID 27107)
+-- TOC entry 3802 (class 2606 OID 16974)
 -- Name: dimension dimension_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8215,7 +9117,7 @@ ALTER TABLE ONLY public.dimension
 
 
 --
--- TOC entry 4511 (class 2606 OID 27812)
+-- TOC entry 3711 (class 2606 OID 16976)
 -- Name: application_permissions_revision general_permissions_revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8224,7 +9126,7 @@ ALTER TABLE ONLY public.application_permissions_revision
 
 
 --
--- TOC entry 4413 (class 2606 OID 27162)
+-- TOC entry 3808 (class 2606 OID 16978)
 -- Name: sandboxes group_table_access_policy_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8233,7 +9135,7 @@ ALTER TABLE ONLY public.sandboxes
 
 
 --
--- TOC entry 4212 (class 2606 OID 27337)
+-- TOC entry 3790 (class 2606 OID 16980)
 -- Name: databasechangelog idx_databasechangelog_id_author_filename; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8242,7 +9144,7 @@ ALTER TABLE ONLY public.databasechangelog
 
 
 --
--- TOC entry 4233 (class 2606 OID 27342)
+-- TOC entry 3837 (class 2606 OID 16982)
 -- Name: metabase_field idx_uniq_field_table_id_parent_id_name; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8251,7 +9153,7 @@ ALTER TABLE ONLY public.metabase_field
 
 
 --
--- TOC entry 4226 (class 2606 OID 28112)
+-- TOC entry 3848 (class 2606 OID 16984)
 -- Name: metabase_table idx_uniq_table_db_id_schema_name; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8260,7 +9162,7 @@ ALTER TABLE ONLY public.metabase_table
 
 
 --
--- TOC entry 4252 (class 2606 OID 26459)
+-- TOC entry 4019 (class 2606 OID 16986)
 -- Name: report_cardfavorite idx_unique_cardfavorite_card_id_owner_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8269,7 +9171,7 @@ ALTER TABLE ONLY public.report_cardfavorite
 
 
 --
--- TOC entry 4336 (class 2606 OID 26833)
+-- TOC entry 3820 (class 2606 OID 16988)
 -- Name: label label_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8278,7 +9180,7 @@ ALTER TABLE ONLY public.label
 
 
 --
--- TOC entry 4338 (class 2606 OID 26835)
+-- TOC entry 3822 (class 2606 OID 16990)
 -- Name: label label_slug_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8287,7 +9189,7 @@ ALTER TABLE ONLY public.label
 
 
 --
--- TOC entry 4477 (class 2606 OID 27643)
+-- TOC entry 3829 (class 2606 OID 16992)
 -- Name: login_history login_history_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8296,7 +9198,7 @@ ALTER TABLE ONLY public.login_history
 
 
 --
--- TOC entry 4221 (class 2606 OID 26299)
+-- TOC entry 3832 (class 2606 OID 16994)
 -- Name: metabase_database metabase_database_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8305,7 +9207,7 @@ ALTER TABLE ONLY public.metabase_database
 
 
 --
--- TOC entry 4236 (class 2606 OID 26327)
+-- TOC entry 3840 (class 2606 OID 16996)
 -- Name: metabase_field metabase_field_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8314,7 +9216,7 @@ ALTER TABLE ONLY public.metabase_field
 
 
 --
--- TOC entry 4239 (class 2606 OID 26359)
+-- TOC entry 3843 (class 2606 OID 16998)
 -- Name: metabase_fieldvalues metabase_fieldvalues_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8323,7 +9225,7 @@ ALTER TABLE ONLY public.metabase_fieldvalues
 
 
 --
--- TOC entry 4229 (class 2606 OID 26313)
+-- TOC entry 3851 (class 2606 OID 17000)
 -- Name: metabase_table metabase_table_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8332,7 +9234,7 @@ ALTER TABLE ONLY public.metabase_table
 
 
 --
--- TOC entry 4327 (class 2606 OID 27868)
+-- TOC entry 3856 (class 2606 OID 17002)
 -- Name: metric metric_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8341,7 +9243,7 @@ ALTER TABLE ONLY public.metric
 
 
 --
--- TOC entry 4348 (class 2606 OID 26913)
+-- TOC entry 3862 (class 2606 OID 17004)
 -- Name: metric_important_field metric_important_field_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8350,7 +9252,7 @@ ALTER TABLE ONLY public.metric_important_field
 
 
 --
--- TOC entry 4329 (class 2606 OID 26793)
+-- TOC entry 3858 (class 2606 OID 17006)
 -- Name: metric metric_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8359,7 +9261,7 @@ ALTER TABLE ONLY public.metric
 
 
 --
--- TOC entry 4549 (class 2606 OID 28123)
+-- TOC entry 3868 (class 2606 OID 17008)
 -- Name: model_index model_index_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8368,7 +9270,7 @@ ALTER TABLE ONLY public.model_index
 
 
 --
--- TOC entry 4480 (class 2606 OID 27668)
+-- TOC entry 3873 (class 2606 OID 17010)
 -- Name: moderation_review moderation_review_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8377,7 +9279,7 @@ ALTER TABLE ONLY public.moderation_review
 
 
 --
--- TOC entry 4466 (class 2606 OID 27882)
+-- TOC entry 3878 (class 2606 OID 17012)
 -- Name: native_query_snippet native_query_snippet_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8386,7 +9288,7 @@ ALTER TABLE ONLY public.native_query_snippet
 
 
 --
--- TOC entry 4468 (class 2606 OID 27364)
+-- TOC entry 3880 (class 2606 OID 17014)
 -- Name: native_query_snippet native_query_snippet_name_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8395,7 +9297,7 @@ ALTER TABLE ONLY public.native_query_snippet
 
 
 --
--- TOC entry 4470 (class 2606 OID 27362)
+-- TOC entry 3882 (class 2606 OID 17016)
 -- Name: native_query_snippet native_query_snippet_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8404,7 +9306,7 @@ ALTER TABLE ONLY public.native_query_snippet
 
 
 --
--- TOC entry 4540 (class 2606 OID 28039)
+-- TOC entry 3886 (class 2606 OID 17018)
 -- Name: parameter_card parameter_card_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8413,7 +9315,7 @@ ALTER TABLE ONLY public.parameter_card
 
 
 --
--- TOC entry 4367 (class 2606 OID 26974)
+-- TOC entry 3893 (class 2606 OID 17020)
 -- Name: permissions permissions_group_id_object_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8422,7 +9324,7 @@ ALTER TABLE ONLY public.permissions
 
 
 --
--- TOC entry 4360 (class 2606 OID 26943)
+-- TOC entry 3905 (class 2606 OID 17022)
 -- Name: permissions_group_membership permissions_group_membership_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8431,7 +9333,7 @@ ALTER TABLE ONLY public.permissions_group_membership
 
 
 --
--- TOC entry 4353 (class 2606 OID 26934)
+-- TOC entry 3898 (class 2606 OID 17024)
 -- Name: permissions_group permissions_group_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8440,7 +9342,7 @@ ALTER TABLE ONLY public.permissions_group
 
 
 --
--- TOC entry 4369 (class 2606 OID 26964)
+-- TOC entry 3895 (class 2606 OID 17026)
 -- Name: permissions permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8449,7 +9351,7 @@ ALTER TABLE ONLY public.permissions
 
 
 --
--- TOC entry 4371 (class 2606 OID 26995)
+-- TOC entry 3910 (class 2606 OID 17028)
 -- Name: permissions_revision permissions_revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8458,7 +9360,7 @@ ALTER TABLE ONLY public.permissions_revision
 
 
 --
--- TOC entry 4520 (class 2606 OID 27851)
+-- TOC entry 3914 (class 2606 OID 17030)
 -- Name: persisted_info persisted_info_card_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8467,7 +9369,7 @@ ALTER TABLE ONLY public.persisted_info
 
 
 --
--- TOC entry 4522 (class 2606 OID 27849)
+-- TOC entry 3916 (class 2606 OID 17032)
 -- Name: persisted_info persisted_info_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8476,7 +9378,7 @@ ALTER TABLE ONLY public.persisted_info
 
 
 --
--- TOC entry 4534 (class 2606 OID 27932)
+-- TOC entry 3815 (class 2606 OID 17034)
 -- Name: http_action pk_http_action; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8485,7 +9387,7 @@ ALTER TABLE ONLY public.http_action
 
 
 --
--- TOC entry 4536 (class 2606 OID 28166)
+-- TOC entry 3817 (class 2606 OID 17036)
 -- Name: implicit_action pk_implicit_action; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8494,7 +9396,7 @@ ALTER TABLE ONLY public.implicit_action
 
 
 --
--- TOC entry 4442 (class 2606 OID 27271)
+-- TOC entry 3942 (class 2606 OID 17038)
 -- Name: qrtz_blob_triggers pk_qrtz_blob_triggers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8503,7 +9405,7 @@ ALTER TABLE ONLY public.qrtz_blob_triggers
 
 
 --
--- TOC entry 4444 (class 2606 OID 27283)
+-- TOC entry 3944 (class 2606 OID 17040)
 -- Name: qrtz_calendars pk_qrtz_calendars; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8512,7 +9414,7 @@ ALTER TABLE ONLY public.qrtz_calendars
 
 
 --
--- TOC entry 4438 (class 2606 OID 27247)
+-- TOC entry 3946 (class 2606 OID 17042)
 -- Name: qrtz_cron_triggers pk_qrtz_cron_triggers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8521,7 +9423,7 @@ ALTER TABLE ONLY public.qrtz_cron_triggers
 
 
 --
--- TOC entry 4454 (class 2606 OID 27295)
+-- TOC entry 3954 (class 2606 OID 17044)
 -- Name: qrtz_fired_triggers pk_qrtz_fired_triggers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8530,7 +9432,7 @@ ALTER TABLE ONLY public.qrtz_fired_triggers
 
 
 --
--- TOC entry 4420 (class 2606 OID 27216)
+-- TOC entry 3958 (class 2606 OID 17046)
 -- Name: qrtz_job_details pk_qrtz_job_details; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8539,7 +9441,7 @@ ALTER TABLE ONLY public.qrtz_job_details
 
 
 --
--- TOC entry 4458 (class 2606 OID 27305)
+-- TOC entry 3960 (class 2606 OID 17048)
 -- Name: qrtz_locks pk_qrtz_locks; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8548,7 +9450,7 @@ ALTER TABLE ONLY public.qrtz_locks
 
 
 --
--- TOC entry 4456 (class 2606 OID 27300)
+-- TOC entry 3964 (class 2606 OID 17050)
 -- Name: qrtz_scheduler_state pk_qrtz_scheduler_state; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8557,7 +9459,7 @@ ALTER TABLE ONLY public.qrtz_scheduler_state
 
 
 --
--- TOC entry 4436 (class 2606 OID 27235)
+-- TOC entry 3966 (class 2606 OID 17052)
 -- Name: qrtz_simple_triggers pk_qrtz_simple_triggers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8566,7 +9468,7 @@ ALTER TABLE ONLY public.qrtz_simple_triggers
 
 
 --
--- TOC entry 4440 (class 2606 OID 27259)
+-- TOC entry 3968 (class 2606 OID 17054)
 -- Name: qrtz_simprop_triggers pk_qrtz_simprop_triggers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8575,7 +9477,7 @@ ALTER TABLE ONLY public.qrtz_simprop_triggers
 
 
 --
--- TOC entry 4434 (class 2606 OID 27223)
+-- TOC entry 3982 (class 2606 OID 17056)
 -- Name: qrtz_triggers pk_qrtz_triggers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8584,7 +9486,7 @@ ALTER TABLE ONLY public.qrtz_triggers
 
 
 --
--- TOC entry 4532 (class 2606 OID 28030)
+-- TOC entry 3987 (class 2606 OID 17058)
 -- Name: query_action pk_query_action; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8593,7 +9495,7 @@ ALTER TABLE ONLY public.query_action
 
 
 --
--- TOC entry 4446 (class 2606 OID 27288)
+-- TOC entry 3962 (class 2606 OID 17060)
 -- Name: qrtz_paused_trigger_grps pk_sched_name; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8602,7 +9504,7 @@ ALTER TABLE ONLY public.qrtz_paused_trigger_grps
 
 
 --
--- TOC entry 4299 (class 2606 OID 27892)
+-- TOC entry 3928 (class 2606 OID 17062)
 -- Name: pulse_card pulse_card_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8611,7 +9513,7 @@ ALTER TABLE ONLY public.pulse_card
 
 
 --
--- TOC entry 4301 (class 2606 OID 26703)
+-- TOC entry 3930 (class 2606 OID 17064)
 -- Name: pulse_card pulse_card_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8620,7 +9522,7 @@ ALTER TABLE ONLY public.pulse_card
 
 
 --
--- TOC entry 4305 (class 2606 OID 27894)
+-- TOC entry 3934 (class 2606 OID 17066)
 -- Name: pulse_channel pulse_channel_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8629,7 +9531,7 @@ ALTER TABLE ONLY public.pulse_channel
 
 
 --
--- TOC entry 4307 (class 2606 OID 26723)
+-- TOC entry 3936 (class 2606 OID 17068)
 -- Name: pulse_channel pulse_channel_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8638,7 +9540,7 @@ ALTER TABLE ONLY public.pulse_channel
 
 
 --
--- TOC entry 4309 (class 2606 OID 26736)
+-- TOC entry 3940 (class 2606 OID 17070)
 -- Name: pulse_channel_recipient pulse_channel_recipient_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8647,7 +9549,7 @@ ALTER TABLE ONLY public.pulse_channel_recipient
 
 
 --
--- TOC entry 4293 (class 2606 OID 27878)
+-- TOC entry 3921 (class 2606 OID 17072)
 -- Name: pulse pulse_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8656,7 +9558,7 @@ ALTER TABLE ONLY public.pulse
 
 
 --
--- TOC entry 4295 (class 2606 OID 26691)
+-- TOC entry 3923 (class 2606 OID 17074)
 -- Name: pulse pulse_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8665,7 +9567,7 @@ ALTER TABLE ONLY public.pulse
 
 
 --
--- TOC entry 4392 (class 2606 OID 27068)
+-- TOC entry 3990 (class 2606 OID 17076)
 -- Name: query_cache query_cache_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8674,7 +9576,7 @@ ALTER TABLE ONLY public.query_cache
 
 
 --
--- TOC entry 4389 (class 2606 OID 27059)
+-- TOC entry 4000 (class 2606 OID 17078)
 -- Name: query_execution query_execution_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8683,7 +9585,7 @@ ALTER TABLE ONLY public.query_execution
 
 
 --
--- TOC entry 4394 (class 2606 OID 27076)
+-- TOC entry 3984 (class 2606 OID 17080)
 -- Name: query query_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8692,7 +9594,16 @@ ALTER TABLE ONLY public.query
 
 
 --
--- TOC entry 4244 (class 2606 OID 27880)
+-- TOC entry 4003 (class 2606 OID 17082)
+-- Name: recent_views recent_views_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.recent_views
+    ADD CONSTRAINT recent_views_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4011 (class 2606 OID 17084)
 -- Name: report_card report_card_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8701,7 +9612,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4246 (class 2606 OID 26429)
+-- TOC entry 4013 (class 2606 OID 17086)
 -- Name: report_card report_card_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8710,7 +9621,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4248 (class 2606 OID 27035)
+-- TOC entry 4015 (class 2606 OID 17088)
 -- Name: report_card report_card_public_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8719,7 +9630,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4254 (class 2606 OID 26447)
+-- TOC entry 4021 (class 2606 OID 17090)
 -- Name: report_cardfavorite report_cardfavorite_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8728,7 +9639,7 @@ ALTER TABLE ONLY public.report_cardfavorite
 
 
 --
--- TOC entry 4260 (class 2606 OID 27874)
+-- TOC entry 4028 (class 2606 OID 17092)
 -- Name: report_dashboard report_dashboard_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8737,7 +9648,7 @@ ALTER TABLE ONLY public.report_dashboard
 
 
 --
--- TOC entry 4262 (class 2606 OID 26469)
+-- TOC entry 4030 (class 2606 OID 17094)
 -- Name: report_dashboard report_dashboard_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8746,7 +9657,7 @@ ALTER TABLE ONLY public.report_dashboard
 
 
 --
--- TOC entry 4264 (class 2606 OID 27043)
+-- TOC entry 4032 (class 2606 OID 17096)
 -- Name: report_dashboard report_dashboard_public_uuid_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8755,7 +9666,7 @@ ALTER TABLE ONLY public.report_dashboard
 
 
 --
--- TOC entry 4268 (class 2606 OID 27886)
+-- TOC entry 4038 (class 2606 OID 17098)
 -- Name: report_dashboardcard report_dashboardcard_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8764,7 +9675,7 @@ ALTER TABLE ONLY public.report_dashboardcard
 
 
 --
--- TOC entry 4270 (class 2606 OID 26487)
+-- TOC entry 4040 (class 2606 OID 17100)
 -- Name: report_dashboardcard report_dashboardcard_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8773,7 +9684,7 @@ ALTER TABLE ONLY public.report_dashboardcard
 
 
 --
--- TOC entry 4277 (class 2606 OID 26632)
+-- TOC entry 4045 (class 2606 OID 17102)
 -- Name: revision revision_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8782,7 +9693,7 @@ ALTER TABLE ONLY public.revision
 
 
 --
--- TOC entry 4482 (class 2606 OID 27677)
+-- TOC entry 4048 (class 2606 OID 17104)
 -- Name: secret secret_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8791,7 +9702,7 @@ ALTER TABLE ONLY public.secret
 
 
 --
--- TOC entry 4314 (class 2606 OID 27870)
+-- TOC entry 4053 (class 2606 OID 17106)
 -- Name: segment segment_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8800,7 +9711,7 @@ ALTER TABLE ONLY public.segment
 
 
 --
--- TOC entry 4316 (class 2606 OID 26755)
+-- TOC entry 4055 (class 2606 OID 17108)
 -- Name: segment segment_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8809,7 +9720,7 @@ ALTER TABLE ONLY public.segment
 
 
 --
--- TOC entry 4274 (class 2606 OID 26618)
+-- TOC entry 4057 (class 2606 OID 17110)
 -- Name: setting setting_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8818,7 +9729,7 @@ ALTER TABLE ONLY public.setting
 
 
 --
--- TOC entry 4462 (class 2606 OID 27333)
+-- TOC entry 4064 (class 2606 OID 17112)
 -- Name: task_history task_history_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8827,7 +9738,7 @@ ALTER TABLE ONLY public.task_history
 
 
 --
--- TOC entry 4485 (class 2606 OID 27884)
+-- TOC entry 4068 (class 2606 OID 17114)
 -- Name: timeline timeline_entity_id_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8836,7 +9747,7 @@ ALTER TABLE ONLY public.timeline
 
 
 --
--- TOC entry 4491 (class 2606 OID 27728)
+-- TOC entry 4075 (class 2606 OID 17116)
 -- Name: timeline_event timeline_event_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8845,7 +9756,7 @@ ALTER TABLE ONLY public.timeline_event
 
 
 --
--- TOC entry 4487 (class 2606 OID 27707)
+-- TOC entry 4070 (class 2606 OID 17118)
 -- Name: timeline timeline_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8854,7 +9765,7 @@ ALTER TABLE ONLY public.timeline
 
 
 --
--- TOC entry 4516 (class 2606 OID 27834)
+-- TOC entry 3720 (class 2606 OID 17120)
 -- Name: bookmark_ordering unique_bookmark_user_id_ordering; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8863,7 +9774,7 @@ ALTER TABLE ONLY public.bookmark_ordering
 
 
 --
--- TOC entry 4518 (class 2606 OID 27832)
+-- TOC entry 3722 (class 2606 OID 17122)
 -- Name: bookmark_ordering unique_bookmark_user_id_type_item_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8872,7 +9783,7 @@ ALTER TABLE ONLY public.bookmark_ordering
 
 
 --
--- TOC entry 4503 (class 2606 OID 27781)
+-- TOC entry 3728 (class 2606 OID 17124)
 -- Name: card_bookmark unique_card_bookmark_user_id_card_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8881,7 +9792,7 @@ ALTER TABLE ONLY public.card_bookmark
 
 
 --
--- TOC entry 4344 (class 2606 OID 26854)
+-- TOC entry 3734 (class 2606 OID 17126)
 -- Name: card_label unique_card_label_card_id_label_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8890,7 +9801,7 @@ ALTER TABLE ONLY public.card_label
 
 
 --
--- TOC entry 4509 (class 2606 OID 27802)
+-- TOC entry 3748 (class 2606 OID 17128)
 -- Name: collection_bookmark unique_collection_bookmark_user_id_collection_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8899,7 +9810,7 @@ ALTER TABLE ONLY public.collection_bookmark
 
 
 --
--- TOC entry 4379 (class 2606 OID 27202)
+-- TOC entry 3742 (class 2606 OID 17130)
 -- Name: collection unique_collection_personal_owner_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8908,7 +9819,7 @@ ALTER TABLE ONLY public.collection
 
 
 --
--- TOC entry 4497 (class 2606 OID 27760)
+-- TOC entry 3773 (class 2606 OID 17132)
 -- Name: dashboard_bookmark unique_dashboard_bookmark_user_id_dashboard_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8917,7 +9828,7 @@ ALTER TABLE ONLY public.dashboard_bookmark
 
 
 --
--- TOC entry 4400 (class 2606 OID 27096)
+-- TOC entry 3779 (class 2606 OID 17134)
 -- Name: dashboard_favorite unique_dashboard_favorite_user_id_dashboard_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8926,7 +9837,7 @@ ALTER TABLE ONLY public.dashboard_favorite
 
 
 --
--- TOC entry 4407 (class 2606 OID 28041)
+-- TOC entry 3806 (class 2606 OID 17136)
 -- Name: dimension unique_dimension_field_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8935,7 +9846,7 @@ ALTER TABLE ONLY public.dimension
 
 
 --
--- TOC entry 4416 (class 2606 OID 27180)
+-- TOC entry 3813 (class 2606 OID 17138)
 -- Name: sandboxes unique_gtap_table_id_group_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8944,7 +9855,7 @@ ALTER TABLE ONLY public.sandboxes
 
 
 --
--- TOC entry 4350 (class 2606 OID 26925)
+-- TOC entry 3864 (class 2606 OID 17140)
 -- Name: metric_important_field unique_metric_important_field_metric_id_field_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8953,7 +9864,7 @@ ALTER TABLE ONLY public.metric_important_field
 
 
 --
--- TOC entry 4551 (class 2606 OID 28135)
+-- TOC entry 3870 (class 2606 OID 17142)
 -- Name: model_index_value unique_model_index_value_model_index_id_model_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8962,7 +9873,7 @@ ALTER TABLE ONLY public.model_index_value
 
 
 --
--- TOC entry 4542 (class 2606 OID 28061)
+-- TOC entry 3888 (class 2606 OID 17144)
 -- Name: parameter_card unique_parameterized_object_card_parameter; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8971,7 +9882,7 @@ ALTER TABLE ONLY public.parameter_card
 
 
 --
--- TOC entry 4362 (class 2606 OID 26955)
+-- TOC entry 3907 (class 2606 OID 17146)
 -- Name: permissions_group_membership unique_permissions_group_membership_user_id_group_id; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8980,7 +9891,7 @@ ALTER TABLE ONLY public.permissions_group_membership
 
 
 --
--- TOC entry 4355 (class 2606 OID 26936)
+-- TOC entry 3900 (class 2606 OID 17148)
 -- Name: permissions_group unique_permissions_group_name; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8989,7 +9900,7 @@ ALTER TABLE ONLY public.permissions_group
 
 
 --
--- TOC entry 4286 (class 2606 OID 26670)
+-- TOC entry 4081 (class 2606 OID 17150)
 -- Name: view_log view_log_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -8998,7 +9909,7 @@ ALTER TABLE ONLY public.view_log
 
 
 --
--- TOC entry 4529 (class 1259 OID 28067)
+-- TOC entry 3700 (class 1259 OID 17151)
 -- Name: idx_action_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9006,7 +9917,23 @@ CREATE INDEX idx_action_creator_id ON public.action USING btree (creator_id);
 
 
 --
--- TOC entry 4530 (class 1259 OID 28059)
+-- TOC entry 3701 (class 1259 OID 17152)
+-- Name: idx_action_made_public_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_action_made_public_by_id ON public.action USING btree (made_public_by_id);
+
+
+--
+-- TOC entry 3702 (class 1259 OID 17153)
+-- Name: idx_action_model_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_action_model_id ON public.action USING btree (model_id);
+
+
+--
+-- TOC entry 3703 (class 1259 OID 17154)
 -- Name: idx_action_public_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9014,7 +9941,7 @@ CREATE INDEX idx_action_public_uuid ON public.action USING btree (public_uuid);
 
 
 --
--- TOC entry 4280 (class 1259 OID 26664)
+-- TOC entry 3706 (class 1259 OID 17155)
 -- Name: idx_activity_custom_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9022,7 +9949,20 @@ CREATE INDEX idx_activity_custom_id ON public.activity USING btree (custom_id);
 
 
 --
--- TOC entry 4281 (class 1259 OID 26662)
+-- TOC entry 3707 (class 1259 OID 17156)
+-- Name: idx_activity_entity_qualified_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_activity_entity_qualified_id ON public.activity USING btree ((
+CASE
+    WHEN ((model)::text = 'Dataset'::text) THEN ('card_'::text || model_id)
+    WHEN (model_id IS NULL) THEN NULL::text
+    ELSE ((lower((model)::text) || '_'::text) || model_id)
+END));
+
+
+--
+-- TOC entry 3708 (class 1259 OID 17157)
 -- Name: idx_activity_timestamp; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9030,7 +9970,7 @@ CREATE INDEX idx_activity_timestamp ON public.activity USING btree ("timestamp")
 
 
 --
--- TOC entry 4282 (class 1259 OID 26663)
+-- TOC entry 3709 (class 1259 OID 17158)
 -- Name: idx_activity_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9038,7 +9978,28 @@ CREATE INDEX idx_activity_user_id ON public.activity USING btree (user_id);
 
 
 --
--- TOC entry 4514 (class 1259 OID 27835)
+-- TOC entry 3712 (class 1259 OID 17159)
+-- Name: idx_application_permissions_revision_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_application_permissions_revision_user_id ON public.application_permissions_revision USING btree (user_id);
+
+
+--
+-- TOC entry 3715 (class 1259 OID 17160)
+-- Name: idx_audit_log_entity_qualified_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_audit_log_entity_qualified_id ON public.audit_log USING btree ((
+CASE
+    WHEN ((model)::text = 'Dataset'::text) THEN ('card_'::text || model_id)
+    WHEN (model_id IS NULL) THEN NULL::text
+    ELSE ((lower((model)::text) || '_'::text) || model_id)
+END));
+
+
+--
+-- TOC entry 3718 (class 1259 OID 17161)
 -- Name: idx_bookmark_ordering_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9046,7 +10007,7 @@ CREATE INDEX idx_bookmark_ordering_user_id ON public.bookmark_ordering USING btr
 
 
 --
--- TOC entry 4500 (class 1259 OID 27783)
+-- TOC entry 3725 (class 1259 OID 17162)
 -- Name: idx_card_bookmark_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9054,7 +10015,7 @@ CREATE INDEX idx_card_bookmark_card_id ON public.card_bookmark USING btree (card
 
 
 --
--- TOC entry 4501 (class 1259 OID 27782)
+-- TOC entry 3726 (class 1259 OID 17163)
 -- Name: idx_card_bookmark_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9062,7 +10023,7 @@ CREATE INDEX idx_card_bookmark_user_id ON public.card_bookmark USING btree (user
 
 
 --
--- TOC entry 4240 (class 1259 OID 27020)
+-- TOC entry 4004 (class 1259 OID 17164)
 -- Name: idx_card_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9070,7 +10031,7 @@ CREATE INDEX idx_card_collection_id ON public.report_card USING btree (collectio
 
 
 --
--- TOC entry 4241 (class 1259 OID 26440)
+-- TOC entry 4005 (class 1259 OID 17165)
 -- Name: idx_card_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9078,7 +10039,7 @@ CREATE INDEX idx_card_creator_id ON public.report_card USING btree (creator_id);
 
 
 --
--- TOC entry 4341 (class 1259 OID 26855)
+-- TOC entry 3731 (class 1259 OID 17166)
 -- Name: idx_card_label_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9086,7 +10047,7 @@ CREATE INDEX idx_card_label_card_id ON public.card_label USING btree (card_id);
 
 
 --
--- TOC entry 4342 (class 1259 OID 26856)
+-- TOC entry 3732 (class 1259 OID 17167)
 -- Name: idx_card_label_label_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9094,7 +10055,7 @@ CREATE INDEX idx_card_label_label_id ON public.card_label USING btree (label_id)
 
 
 --
--- TOC entry 4242 (class 1259 OID 27041)
+-- TOC entry 4006 (class 1259 OID 17168)
 -- Name: idx_card_public_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9102,7 +10063,7 @@ CREATE INDEX idx_card_public_uuid ON public.report_card USING btree (public_uuid
 
 
 --
--- TOC entry 4249 (class 1259 OID 26460)
+-- TOC entry 4016 (class 1259 OID 17169)
 -- Name: idx_cardfavorite_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9110,7 +10071,7 @@ CREATE INDEX idx_cardfavorite_card_id ON public.report_cardfavorite USING btree 
 
 
 --
--- TOC entry 4250 (class 1259 OID 26461)
+-- TOC entry 4017 (class 1259 OID 17170)
 -- Name: idx_cardfavorite_owner_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9118,7 +10079,7 @@ CREATE INDEX idx_cardfavorite_owner_id ON public.report_cardfavorite USING btree
 
 
 --
--- TOC entry 4506 (class 1259 OID 27804)
+-- TOC entry 3745 (class 1259 OID 17171)
 -- Name: idx_collection_bookmark_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9126,7 +10087,7 @@ CREATE INDEX idx_collection_bookmark_collection_id ON public.collection_bookmark
 
 
 --
--- TOC entry 4507 (class 1259 OID 27803)
+-- TOC entry 3746 (class 1259 OID 17172)
 -- Name: idx_collection_bookmark_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9134,7 +10095,7 @@ CREATE INDEX idx_collection_bookmark_user_id ON public.collection_bookmark USING
 
 
 --
--- TOC entry 4376 (class 1259 OID 27197)
+-- TOC entry 3739 (class 1259 OID 17173)
 -- Name: idx_collection_location; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9142,7 +10103,15 @@ CREATE INDEX idx_collection_location ON public.collection USING btree (location)
 
 
 --
--- TOC entry 4377 (class 1259 OID 27208)
+-- TOC entry 3751 (class 1259 OID 17174)
+-- Name: idx_collection_permission_graph_revision_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_collection_permission_graph_revision_user_id ON public.collection_permission_graph_revision USING btree (user_id);
+
+
+--
+-- TOC entry 3740 (class 1259 OID 17175)
 -- Name: idx_collection_personal_owner_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9150,7 +10119,7 @@ CREATE INDEX idx_collection_personal_owner_id ON public.collection USING btree (
 
 
 --
--- TOC entry 4556 (class 1259 OID 28173)
+-- TOC entry 3756 (class 1259 OID 17176)
 -- Name: idx_conn_impersonations_db_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9158,7 +10127,7 @@ CREATE INDEX idx_conn_impersonations_db_id ON public.connection_impersonations U
 
 
 --
--- TOC entry 4557 (class 1259 OID 28174)
+-- TOC entry 3757 (class 1259 OID 17177)
 -- Name: idx_conn_impersonations_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9166,7 +10135,15 @@ CREATE INDEX idx_conn_impersonations_group_id ON public.connection_impersonation
 
 
 --
--- TOC entry 4494 (class 1259 OID 27762)
+-- TOC entry 3760 (class 1259 OID 17178)
+-- Name: idx_core_session_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_core_session_user_id ON public.core_session USING btree (user_id);
+
+
+--
+-- TOC entry 3770 (class 1259 OID 17179)
 -- Name: idx_dashboard_bookmark_dashboard_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9174,7 +10151,7 @@ CREATE INDEX idx_dashboard_bookmark_dashboard_id ON public.dashboard_bookmark US
 
 
 --
--- TOC entry 4495 (class 1259 OID 27761)
+-- TOC entry 3771 (class 1259 OID 17180)
 -- Name: idx_dashboard_bookmark_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9182,7 +10159,7 @@ CREATE INDEX idx_dashboard_bookmark_user_id ON public.dashboard_bookmark USING b
 
 
 --
--- TOC entry 4255 (class 1259 OID 27189)
+-- TOC entry 4022 (class 1259 OID 17181)
 -- Name: idx_dashboard_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9190,7 +10167,7 @@ CREATE INDEX idx_dashboard_collection_id ON public.report_dashboard USING btree 
 
 
 --
--- TOC entry 4256 (class 1259 OID 26480)
+-- TOC entry 4023 (class 1259 OID 17182)
 -- Name: idx_dashboard_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9198,7 +10175,7 @@ CREATE INDEX idx_dashboard_creator_id ON public.report_dashboard USING btree (cr
 
 
 --
--- TOC entry 4397 (class 1259 OID 27098)
+-- TOC entry 3776 (class 1259 OID 17183)
 -- Name: idx_dashboard_favorite_dashboard_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9206,7 +10183,7 @@ CREATE INDEX idx_dashboard_favorite_dashboard_id ON public.dashboard_favorite US
 
 
 --
--- TOC entry 4398 (class 1259 OID 27097)
+-- TOC entry 3777 (class 1259 OID 17184)
 -- Name: idx_dashboard_favorite_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9214,7 +10191,7 @@ CREATE INDEX idx_dashboard_favorite_user_id ON public.dashboard_favorite USING b
 
 
 --
--- TOC entry 4257 (class 1259 OID 27049)
+-- TOC entry 4024 (class 1259 OID 17185)
 -- Name: idx_dashboard_public_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9222,7 +10199,15 @@ CREATE INDEX idx_dashboard_public_uuid ON public.report_dashboard USING btree (p
 
 
 --
--- TOC entry 4265 (class 1259 OID 26498)
+-- TOC entry 3784 (class 1259 OID 17186)
+-- Name: idx_dashboard_tab_dashboard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dashboard_tab_dashboard_id ON public.dashboard_tab USING btree (dashboard_id);
+
+
+--
+-- TOC entry 4033 (class 1259 OID 17187)
 -- Name: idx_dashboardcard_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9230,7 +10215,7 @@ CREATE INDEX idx_dashboardcard_card_id ON public.report_dashboardcard USING btre
 
 
 --
--- TOC entry 4266 (class 1259 OID 26499)
+-- TOC entry 4034 (class 1259 OID 17188)
 -- Name: idx_dashboardcard_dashboard_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9238,7 +10223,7 @@ CREATE INDEX idx_dashboardcard_dashboard_id ON public.report_dashboardcard USING
 
 
 --
--- TOC entry 4332 (class 1259 OID 26824)
+-- TOC entry 3787 (class 1259 OID 17189)
 -- Name: idx_dashboardcard_series_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9246,7 +10231,7 @@ CREATE INDEX idx_dashboardcard_series_card_id ON public.dashboardcard_series USI
 
 
 --
--- TOC entry 4333 (class 1259 OID 26823)
+-- TOC entry 3788 (class 1259 OID 17190)
 -- Name: idx_dashboardcard_series_dashboardcard_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9254,15 +10239,7 @@ CREATE INDEX idx_dashboardcard_series_dashboardcard_id ON public.dashboardcard_s
 
 
 --
--- TOC entry 4289 (class 1259 OID 26685)
--- Name: idx_data_migrations_id; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX idx_data_migrations_id ON public.data_migrations USING btree (id);
-
-
---
--- TOC entry 4319 (class 1259 OID 26784)
+-- TOC entry 3795 (class 1259 OID 17191)
 -- Name: idx_dependency_dependent_on_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9270,7 +10247,7 @@ CREATE INDEX idx_dependency_dependent_on_id ON public.dependency USING btree (de
 
 
 --
--- TOC entry 4320 (class 1259 OID 26783)
+-- TOC entry 3796 (class 1259 OID 17192)
 -- Name: idx_dependency_dependent_on_model; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9278,7 +10255,7 @@ CREATE INDEX idx_dependency_dependent_on_model ON public.dependency USING btree 
 
 
 --
--- TOC entry 4321 (class 1259 OID 26781)
+-- TOC entry 3797 (class 1259 OID 17193)
 -- Name: idx_dependency_model; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9286,7 +10263,7 @@ CREATE INDEX idx_dependency_model ON public.dependency USING btree (model);
 
 
 --
--- TOC entry 4322 (class 1259 OID 26782)
+-- TOC entry 3798 (class 1259 OID 17194)
 -- Name: idx_dependency_model_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9294,7 +10271,7 @@ CREATE INDEX idx_dependency_model_id ON public.dependency USING btree (model_id)
 
 
 --
--- TOC entry 4405 (class 1259 OID 27120)
+-- TOC entry 3803 (class 1259 OID 17195)
 -- Name: idx_dimension_field_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9302,7 +10279,23 @@ CREATE INDEX idx_dimension_field_id ON public.dimension USING btree (field_id);
 
 
 --
--- TOC entry 4230 (class 1259 OID 27344)
+-- TOC entry 3804 (class 1259 OID 17196)
+-- Name: idx_dimension_human_readable_field_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_dimension_human_readable_field_id ON public.dimension USING btree (human_readable_field_id);
+
+
+--
+-- TOC entry 3833 (class 1259 OID 17197)
+-- Name: idx_field_entity_qualified_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_field_entity_qualified_id ON public.metabase_field USING btree ((('field_'::text || id)));
+
+
+--
+-- TOC entry 3834 (class 1259 OID 17198)
 -- Name: idx_field_parent_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9310,7 +10303,7 @@ CREATE INDEX idx_field_parent_id ON public.metabase_field USING btree (parent_id
 
 
 --
--- TOC entry 4231 (class 1259 OID 26333)
+-- TOC entry 3835 (class 1259 OID 17199)
 -- Name: idx_field_table_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9318,7 +10311,7 @@ CREATE INDEX idx_field_table_id ON public.metabase_field USING btree (table_id);
 
 
 --
--- TOC entry 4237 (class 1259 OID 26365)
+-- TOC entry 3841 (class 1259 OID 17200)
 -- Name: idx_fieldvalues_field_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9326,7 +10319,7 @@ CREATE INDEX idx_fieldvalues_field_id ON public.metabase_fieldvalues USING btree
 
 
 --
--- TOC entry 4414 (class 1259 OID 27178)
+-- TOC entry 3809 (class 1259 OID 17201)
 -- Name: idx_gtap_table_id_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9334,7 +10327,7 @@ CREATE INDEX idx_gtap_table_id_group_id ON public.sandboxes USING btree (table_i
 
 
 --
--- TOC entry 4334 (class 1259 OID 26836)
+-- TOC entry 3818 (class 1259 OID 17202)
 -- Name: idx_label_slug; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9342,7 +10335,7 @@ CREATE INDEX idx_label_slug ON public.label USING btree (slug);
 
 
 --
--- TOC entry 4219 (class 1259 OID 27614)
+-- TOC entry 3765 (class 1259 OID 17203)
 -- Name: idx_lower_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9350,7 +10343,15 @@ CREATE INDEX idx_lower_email ON public.core_user USING btree (lower((email)::tex
 
 
 --
--- TOC entry 4222 (class 1259 OID 26983)
+-- TOC entry 3830 (class 1259 OID 17204)
+-- Name: idx_metabase_database_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_metabase_database_creator_id ON public.metabase_database USING btree (creator_id);
+
+
+--
+-- TOC entry 3844 (class 1259 OID 17205)
 -- Name: idx_metabase_table_db_id_schema; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9358,7 +10359,7 @@ CREATE INDEX idx_metabase_table_db_id_schema ON public.metabase_table USING btre
 
 
 --
--- TOC entry 4223 (class 1259 OID 26905)
+-- TOC entry 3845 (class 1259 OID 17206)
 -- Name: idx_metabase_table_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9366,7 +10367,7 @@ CREATE INDEX idx_metabase_table_show_in_getting_started ON public.metabase_table
 
 
 --
--- TOC entry 4323 (class 1259 OID 26804)
+-- TOC entry 3852 (class 1259 OID 17207)
 -- Name: idx_metric_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9374,7 +10375,7 @@ CREATE INDEX idx_metric_creator_id ON public.metric USING btree (creator_id);
 
 
 --
--- TOC entry 4345 (class 1259 OID 26927)
+-- TOC entry 3859 (class 1259 OID 17208)
 -- Name: idx_metric_important_field_field_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9382,7 +10383,7 @@ CREATE INDEX idx_metric_important_field_field_id ON public.metric_important_fiel
 
 
 --
--- TOC entry 4346 (class 1259 OID 26926)
+-- TOC entry 3860 (class 1259 OID 17209)
 -- Name: idx_metric_important_field_metric_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9390,7 +10391,7 @@ CREATE INDEX idx_metric_important_field_metric_id ON public.metric_important_fie
 
 
 --
--- TOC entry 4324 (class 1259 OID 26903)
+-- TOC entry 3853 (class 1259 OID 17210)
 -- Name: idx_metric_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9398,7 +10399,7 @@ CREATE INDEX idx_metric_show_in_getting_started ON public.metric USING btree (sh
 
 
 --
--- TOC entry 4325 (class 1259 OID 26805)
+-- TOC entry 3854 (class 1259 OID 17211)
 -- Name: idx_metric_table_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9406,7 +10407,15 @@ CREATE INDEX idx_metric_table_id ON public.metric USING btree (table_id);
 
 
 --
--- TOC entry 4547 (class 1259 OID 28136)
+-- TOC entry 3865 (class 1259 OID 17212)
+-- Name: idx_model_index_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_model_index_creator_id ON public.model_index USING btree (creator_id);
+
+
+--
+-- TOC entry 3866 (class 1259 OID 17213)
 -- Name: idx_model_index_model_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9414,7 +10423,7 @@ CREATE INDEX idx_model_index_model_id ON public.model_index USING btree (model_i
 
 
 --
--- TOC entry 4478 (class 1259 OID 27686)
+-- TOC entry 3871 (class 1259 OID 17214)
 -- Name: idx_moderation_review_item_type_item_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9422,7 +10431,15 @@ CREATE INDEX idx_moderation_review_item_type_item_id ON public.moderation_review
 
 
 --
--- TOC entry 4537 (class 1259 OID 28045)
+-- TOC entry 3874 (class 1259 OID 17215)
+-- Name: idx_native_query_snippet_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_native_query_snippet_creator_id ON public.native_query_snippet USING btree (creator_id);
+
+
+--
+-- TOC entry 3883 (class 1259 OID 17216)
 -- Name: idx_parameter_card_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9430,7 +10447,7 @@ CREATE INDEX idx_parameter_card_card_id ON public.parameter_card USING btree (ca
 
 
 --
--- TOC entry 4538 (class 1259 OID 28044)
+-- TOC entry 3884 (class 1259 OID 17217)
 -- Name: idx_parameter_card_parameterized_object_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9438,7 +10455,7 @@ CREATE INDEX idx_parameter_card_parameterized_object_id ON public.parameter_card
 
 
 --
--- TOC entry 4363 (class 1259 OID 26970)
+-- TOC entry 3889 (class 1259 OID 17218)
 -- Name: idx_permissions_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9446,7 +10463,7 @@ CREATE INDEX idx_permissions_group_id ON public.permissions USING btree (group_i
 
 
 --
--- TOC entry 4364 (class 1259 OID 26972)
+-- TOC entry 3890 (class 1259 OID 17219)
 -- Name: idx_permissions_group_id_object; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9454,7 +10471,7 @@ CREATE INDEX idx_permissions_group_id_object ON public.permissions USING btree (
 
 
 --
--- TOC entry 4356 (class 1259 OID 26956)
+-- TOC entry 3901 (class 1259 OID 17220)
 -- Name: idx_permissions_group_membership_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9462,7 +10479,7 @@ CREATE INDEX idx_permissions_group_membership_group_id ON public.permissions_gro
 
 
 --
--- TOC entry 4357 (class 1259 OID 26958)
+-- TOC entry 3902 (class 1259 OID 17221)
 -- Name: idx_permissions_group_membership_group_id_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9470,7 +10487,7 @@ CREATE INDEX idx_permissions_group_membership_group_id_user_id ON public.permiss
 
 
 --
--- TOC entry 4358 (class 1259 OID 26957)
+-- TOC entry 3903 (class 1259 OID 17222)
 -- Name: idx_permissions_group_membership_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9478,7 +10495,7 @@ CREATE INDEX idx_permissions_group_membership_user_id ON public.permissions_grou
 
 
 --
--- TOC entry 4351 (class 1259 OID 26937)
+-- TOC entry 3896 (class 1259 OID 17223)
 -- Name: idx_permissions_group_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9486,7 +10503,7 @@ CREATE INDEX idx_permissions_group_name ON public.permissions_group USING btree 
 
 
 --
--- TOC entry 4365 (class 1259 OID 26971)
+-- TOC entry 3891 (class 1259 OID 17224)
 -- Name: idx_permissions_object; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9494,7 +10511,31 @@ CREATE INDEX idx_permissions_object ON public.permissions USING btree (object);
 
 
 --
--- TOC entry 4296 (class 1259 OID 26715)
+-- TOC entry 3908 (class 1259 OID 17225)
+-- Name: idx_permissions_revision_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_permissions_revision_user_id ON public.permissions_revision USING btree (user_id);
+
+
+--
+-- TOC entry 3911 (class 1259 OID 17226)
+-- Name: idx_persisted_info_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_persisted_info_creator_id ON public.persisted_info USING btree (creator_id);
+
+
+--
+-- TOC entry 3912 (class 1259 OID 17227)
+-- Name: idx_persisted_info_database_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_persisted_info_database_id ON public.persisted_info USING btree (database_id);
+
+
+--
+-- TOC entry 3924 (class 1259 OID 17228)
 -- Name: idx_pulse_card_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9502,7 +10543,15 @@ CREATE INDEX idx_pulse_card_card_id ON public.pulse_card USING btree (card_id);
 
 
 --
--- TOC entry 4297 (class 1259 OID 26714)
+-- TOC entry 3925 (class 1259 OID 17229)
+-- Name: idx_pulse_card_dashboard_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_card_dashboard_card_id ON public.pulse_card USING btree (dashboard_card_id);
+
+
+--
+-- TOC entry 3926 (class 1259 OID 17230)
 -- Name: idx_pulse_card_pulse_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9510,7 +10559,7 @@ CREATE INDEX idx_pulse_card_pulse_id ON public.pulse_card USING btree (pulse_id)
 
 
 --
--- TOC entry 4302 (class 1259 OID 26729)
+-- TOC entry 3931 (class 1259 OID 17231)
 -- Name: idx_pulse_channel_pulse_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9518,7 +10567,23 @@ CREATE INDEX idx_pulse_channel_pulse_id ON public.pulse_channel USING btree (pul
 
 
 --
--- TOC entry 4303 (class 1259 OID 26730)
+-- TOC entry 3937 (class 1259 OID 17232)
+-- Name: idx_pulse_channel_recipient_pulse_channel_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_channel_recipient_pulse_channel_id ON public.pulse_channel_recipient USING btree (pulse_channel_id);
+
+
+--
+-- TOC entry 3938 (class 1259 OID 17233)
+-- Name: idx_pulse_channel_recipient_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_channel_recipient_user_id ON public.pulse_channel_recipient USING btree (user_id);
+
+
+--
+-- TOC entry 3932 (class 1259 OID 17234)
 -- Name: idx_pulse_channel_schedule_type; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9526,7 +10591,7 @@ CREATE INDEX idx_pulse_channel_schedule_type ON public.pulse_channel USING btree
 
 
 --
--- TOC entry 4290 (class 1259 OID 27195)
+-- TOC entry 3917 (class 1259 OID 17235)
 -- Name: idx_pulse_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9534,7 +10599,7 @@ CREATE INDEX idx_pulse_collection_id ON public.pulse USING btree (collection_id)
 
 
 --
--- TOC entry 4291 (class 1259 OID 26697)
+-- TOC entry 3918 (class 1259 OID 17236)
 -- Name: idx_pulse_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9542,7 +10607,15 @@ CREATE INDEX idx_pulse_creator_id ON public.pulse USING btree (creator_id);
 
 
 --
--- TOC entry 4447 (class 1259 OID 27321)
+-- TOC entry 3919 (class 1259 OID 17237)
+-- Name: idx_pulse_dashboard_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_pulse_dashboard_id ON public.pulse USING btree (dashboard_id);
+
+
+--
+-- TOC entry 3947 (class 1259 OID 17238)
 -- Name: idx_qrtz_ft_inst_job_req_rcvry; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9550,7 +10623,7 @@ CREATE INDEX idx_qrtz_ft_inst_job_req_rcvry ON public.qrtz_fired_triggers USING 
 
 
 --
--- TOC entry 4448 (class 1259 OID 27322)
+-- TOC entry 3948 (class 1259 OID 17239)
 -- Name: idx_qrtz_ft_j_g; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9558,7 +10631,7 @@ CREATE INDEX idx_qrtz_ft_j_g ON public.qrtz_fired_triggers USING btree (sched_na
 
 
 --
--- TOC entry 4449 (class 1259 OID 27323)
+-- TOC entry 3949 (class 1259 OID 17240)
 -- Name: idx_qrtz_ft_jg; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9566,7 +10639,7 @@ CREATE INDEX idx_qrtz_ft_jg ON public.qrtz_fired_triggers USING btree (sched_nam
 
 
 --
--- TOC entry 4450 (class 1259 OID 27324)
+-- TOC entry 3950 (class 1259 OID 17241)
 -- Name: idx_qrtz_ft_t_g; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9574,7 +10647,7 @@ CREATE INDEX idx_qrtz_ft_t_g ON public.qrtz_fired_triggers USING btree (sched_na
 
 
 --
--- TOC entry 4451 (class 1259 OID 27325)
+-- TOC entry 3951 (class 1259 OID 17242)
 -- Name: idx_qrtz_ft_tg; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9582,7 +10655,7 @@ CREATE INDEX idx_qrtz_ft_tg ON public.qrtz_fired_triggers USING btree (sched_nam
 
 
 --
--- TOC entry 4452 (class 1259 OID 27320)
+-- TOC entry 3952 (class 1259 OID 17243)
 -- Name: idx_qrtz_ft_trig_inst_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9590,7 +10663,7 @@ CREATE INDEX idx_qrtz_ft_trig_inst_name ON public.qrtz_fired_triggers USING btre
 
 
 --
--- TOC entry 4417 (class 1259 OID 27307)
+-- TOC entry 3955 (class 1259 OID 17244)
 -- Name: idx_qrtz_j_grp; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9598,7 +10671,7 @@ CREATE INDEX idx_qrtz_j_grp ON public.qrtz_job_details USING btree (sched_name, 
 
 
 --
--- TOC entry 4418 (class 1259 OID 27306)
+-- TOC entry 3956 (class 1259 OID 17245)
 -- Name: idx_qrtz_j_req_recovery; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9606,7 +10679,7 @@ CREATE INDEX idx_qrtz_j_req_recovery ON public.qrtz_job_details USING btree (sch
 
 
 --
--- TOC entry 4421 (class 1259 OID 27310)
+-- TOC entry 3969 (class 1259 OID 17246)
 -- Name: idx_qrtz_t_c; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9614,7 +10687,7 @@ CREATE INDEX idx_qrtz_t_c ON public.qrtz_triggers USING btree (sched_name, calen
 
 
 --
--- TOC entry 4422 (class 1259 OID 27311)
+-- TOC entry 3970 (class 1259 OID 17247)
 -- Name: idx_qrtz_t_g; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9622,7 +10695,7 @@ CREATE INDEX idx_qrtz_t_g ON public.qrtz_triggers USING btree (sched_name, trigg
 
 
 --
--- TOC entry 4423 (class 1259 OID 27308)
+-- TOC entry 3971 (class 1259 OID 17248)
 -- Name: idx_qrtz_t_j; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9630,7 +10703,7 @@ CREATE INDEX idx_qrtz_t_j ON public.qrtz_triggers USING btree (sched_name, job_n
 
 
 --
--- TOC entry 4424 (class 1259 OID 27309)
+-- TOC entry 3972 (class 1259 OID 17249)
 -- Name: idx_qrtz_t_jg; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9638,7 +10711,7 @@ CREATE INDEX idx_qrtz_t_jg ON public.qrtz_triggers USING btree (sched_name, job_
 
 
 --
--- TOC entry 4425 (class 1259 OID 27314)
+-- TOC entry 3973 (class 1259 OID 17250)
 -- Name: idx_qrtz_t_n_g_state; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9646,7 +10719,7 @@ CREATE INDEX idx_qrtz_t_n_g_state ON public.qrtz_triggers USING btree (sched_nam
 
 
 --
--- TOC entry 4426 (class 1259 OID 27313)
+-- TOC entry 3974 (class 1259 OID 17251)
 -- Name: idx_qrtz_t_n_state; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9654,7 +10727,7 @@ CREATE INDEX idx_qrtz_t_n_state ON public.qrtz_triggers USING btree (sched_name,
 
 
 --
--- TOC entry 4427 (class 1259 OID 27315)
+-- TOC entry 3975 (class 1259 OID 17252)
 -- Name: idx_qrtz_t_next_fire_time; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9662,7 +10735,7 @@ CREATE INDEX idx_qrtz_t_next_fire_time ON public.qrtz_triggers USING btree (sche
 
 
 --
--- TOC entry 4428 (class 1259 OID 27317)
+-- TOC entry 3976 (class 1259 OID 17253)
 -- Name: idx_qrtz_t_nft_misfire; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9670,7 +10743,7 @@ CREATE INDEX idx_qrtz_t_nft_misfire ON public.qrtz_triggers USING btree (sched_n
 
 
 --
--- TOC entry 4429 (class 1259 OID 27316)
+-- TOC entry 3977 (class 1259 OID 17254)
 -- Name: idx_qrtz_t_nft_st; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9678,7 +10751,7 @@ CREATE INDEX idx_qrtz_t_nft_st ON public.qrtz_triggers USING btree (sched_name, 
 
 
 --
--- TOC entry 4430 (class 1259 OID 27318)
+-- TOC entry 3978 (class 1259 OID 17255)
 -- Name: idx_qrtz_t_nft_st_misfire; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9686,7 +10759,7 @@ CREATE INDEX idx_qrtz_t_nft_st_misfire ON public.qrtz_triggers USING btree (sche
 
 
 --
--- TOC entry 4431 (class 1259 OID 27319)
+-- TOC entry 3979 (class 1259 OID 17256)
 -- Name: idx_qrtz_t_nft_st_misfire_grp; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9694,7 +10767,7 @@ CREATE INDEX idx_qrtz_t_nft_st_misfire_grp ON public.qrtz_triggers USING btree (
 
 
 --
--- TOC entry 4432 (class 1259 OID 27312)
+-- TOC entry 3980 (class 1259 OID 17257)
 -- Name: idx_qrtz_t_state; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9702,7 +10775,15 @@ CREATE INDEX idx_qrtz_t_state ON public.qrtz_triggers USING btree (sched_name, t
 
 
 --
--- TOC entry 4390 (class 1259 OID 27351)
+-- TOC entry 3985 (class 1259 OID 17258)
+-- Name: idx_query_action_database_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_action_database_id ON public.query_action USING btree (database_id);
+
+
+--
+-- TOC entry 3988 (class 1259 OID 17259)
 -- Name: idx_query_cache_updated_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9710,7 +10791,15 @@ CREATE INDEX idx_query_cache_updated_at ON public.query_cache USING btree (updat
 
 
 --
--- TOC entry 4382 (class 1259 OID 27685)
+-- TOC entry 3991 (class 1259 OID 17260)
+-- Name: idx_query_execution_action_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_action_id ON public.query_execution USING btree (action_id);
+
+
+--
+-- TOC entry 3992 (class 1259 OID 17261)
 -- Name: idx_query_execution_card_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9718,7 +10807,7 @@ CREATE INDEX idx_query_execution_card_id ON public.query_execution USING btree (
 
 
 --
--- TOC entry 4383 (class 1259 OID 27687)
+-- TOC entry 3993 (class 1259 OID 17262)
 -- Name: idx_query_execution_card_id_started_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9726,7 +10815,15 @@ CREATE INDEX idx_query_execution_card_id_started_at ON public.query_execution US
 
 
 --
--- TOC entry 4384 (class 1259 OID 28056)
+-- TOC entry 3994 (class 1259 OID 17263)
+-- Name: idx_query_execution_card_qualified_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_query_execution_card_qualified_id ON public.query_execution USING btree ((('card_'::text || card_id)));
+
+
+--
+-- TOC entry 3995 (class 1259 OID 17264)
 -- Name: idx_query_execution_context; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9734,7 +10831,7 @@ CREATE INDEX idx_query_execution_context ON public.query_execution USING btree (
 
 
 --
--- TOC entry 4385 (class 1259 OID 28055)
+-- TOC entry 3996 (class 1259 OID 17265)
 -- Name: idx_query_execution_executor_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9742,7 +10839,7 @@ CREATE INDEX idx_query_execution_executor_id ON public.query_execution USING btr
 
 
 --
--- TOC entry 4386 (class 1259 OID 27372)
+-- TOC entry 3997 (class 1259 OID 17266)
 -- Name: idx_query_execution_query_hash_started_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9750,7 +10847,7 @@ CREATE INDEX idx_query_execution_query_hash_started_at ON public.query_execution
 
 
 --
--- TOC entry 4387 (class 1259 OID 27371)
+-- TOC entry 3998 (class 1259 OID 17267)
 -- Name: idx_query_execution_started_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9758,7 +10855,47 @@ CREATE INDEX idx_query_execution_started_at ON public.query_execution USING btre
 
 
 --
--- TOC entry 4258 (class 1259 OID 26901)
+-- TOC entry 4001 (class 1259 OID 17268)
+-- Name: idx_recent_views_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_recent_views_user_id ON public.recent_views USING btree (user_id);
+
+
+--
+-- TOC entry 4007 (class 1259 OID 17269)
+-- Name: idx_report_card_database_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_card_database_id ON public.report_card USING btree (database_id);
+
+
+--
+-- TOC entry 4008 (class 1259 OID 17270)
+-- Name: idx_report_card_made_public_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_card_made_public_by_id ON public.report_card USING btree (made_public_by_id);
+
+
+--
+-- TOC entry 4009 (class 1259 OID 17271)
+-- Name: idx_report_card_table_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_card_table_id ON public.report_card USING btree (table_id);
+
+
+--
+-- TOC entry 4025 (class 1259 OID 17272)
+-- Name: idx_report_dashboard_made_public_by_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_dashboard_made_public_by_id ON public.report_dashboard USING btree (made_public_by_id);
+
+
+--
+-- TOC entry 4026 (class 1259 OID 17273)
 -- Name: idx_report_dashboard_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9766,7 +10903,23 @@ CREATE INDEX idx_report_dashboard_show_in_getting_started ON public.report_dashb
 
 
 --
--- TOC entry 4275 (class 1259 OID 26638)
+-- TOC entry 4035 (class 1259 OID 17274)
+-- Name: idx_report_dashboardcard_action_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_dashboardcard_action_id ON public.report_dashboardcard USING btree (action_id);
+
+
+--
+-- TOC entry 4036 (class 1259 OID 17275)
+-- Name: idx_report_dashboardcard_dashboard_tab_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_report_dashboardcard_dashboard_tab_id ON public.report_dashboardcard USING btree (dashboard_tab_id);
+
+
+--
+-- TOC entry 4041 (class 1259 OID 17276)
 -- Name: idx_revision_model_model_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9774,7 +10927,47 @@ CREATE INDEX idx_revision_model_model_id ON public.revision USING btree (model, 
 
 
 --
--- TOC entry 4310 (class 1259 OID 26766)
+-- TOC entry 4042 (class 1259 OID 17277)
+-- Name: idx_revision_most_recent; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_revision_most_recent ON public.revision USING btree (most_recent);
+
+
+--
+-- TOC entry 4043 (class 1259 OID 17278)
+-- Name: idx_revision_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_revision_user_id ON public.revision USING btree (user_id);
+
+
+--
+-- TOC entry 3810 (class 1259 OID 17279)
+-- Name: idx_sandboxes_card_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_sandboxes_card_id ON public.sandboxes USING btree (card_id);
+
+
+--
+-- TOC entry 3811 (class 1259 OID 17280)
+-- Name: idx_sandboxes_permission_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_sandboxes_permission_id ON public.sandboxes USING btree (permission_id);
+
+
+--
+-- TOC entry 4046 (class 1259 OID 17281)
+-- Name: idx_secret_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_secret_creator_id ON public.secret USING btree (creator_id);
+
+
+--
+-- TOC entry 4049 (class 1259 OID 17282)
 -- Name: idx_segment_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9782,7 +10975,7 @@ CREATE INDEX idx_segment_creator_id ON public.segment USING btree (creator_id);
 
 
 --
--- TOC entry 4311 (class 1259 OID 26907)
+-- TOC entry 4050 (class 1259 OID 17283)
 -- Name: idx_segment_show_in_getting_started; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9790,7 +10983,7 @@ CREATE INDEX idx_segment_show_in_getting_started ON public.segment USING btree (
 
 
 --
--- TOC entry 4312 (class 1259 OID 26767)
+-- TOC entry 4051 (class 1259 OID 17284)
 -- Name: idx_segment_table_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9798,7 +10991,7 @@ CREATE INDEX idx_segment_table_id ON public.segment USING btree (table_id);
 
 
 --
--- TOC entry 4471 (class 1259 OID 27655)
+-- TOC entry 3823 (class 1259 OID 17285)
 -- Name: idx_session_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9806,7 +10999,7 @@ CREATE INDEX idx_session_id ON public.login_history USING btree (session_id);
 
 
 --
--- TOC entry 4463 (class 1259 OID 27378)
+-- TOC entry 3875 (class 1259 OID 17286)
 -- Name: idx_snippet_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9814,7 +11007,7 @@ CREATE INDEX idx_snippet_collection_id ON public.native_query_snippet USING btre
 
 
 --
--- TOC entry 4464 (class 1259 OID 27370)
+-- TOC entry 3876 (class 1259 OID 17287)
 -- Name: idx_snippet_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9822,7 +11015,7 @@ CREATE INDEX idx_snippet_name ON public.native_query_snippet USING btree (name);
 
 
 --
--- TOC entry 4224 (class 1259 OID 26319)
+-- TOC entry 3846 (class 1259 OID 17288)
 -- Name: idx_table_db_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9830,7 +11023,23 @@ CREATE INDEX idx_table_db_id ON public.metabase_table USING btree (db_id);
 
 
 --
--- TOC entry 4459 (class 1259 OID 27335)
+-- TOC entry 4058 (class 1259 OID 17289)
+-- Name: idx_table_privileges_role; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_table_privileges_role ON public.table_privileges USING btree (role);
+
+
+--
+-- TOC entry 4059 (class 1259 OID 17290)
+-- Name: idx_table_privileges_table_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_table_privileges_table_id ON public.table_privileges USING btree (table_id);
+
+
+--
+-- TOC entry 4060 (class 1259 OID 17291)
 -- Name: idx_task_history_db_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9838,7 +11047,7 @@ CREATE INDEX idx_task_history_db_id ON public.task_history USING btree (db_id);
 
 
 --
--- TOC entry 4460 (class 1259 OID 27633)
+-- TOC entry 4061 (class 1259 OID 17292)
 -- Name: idx_task_history_end_time; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9846,7 +11055,15 @@ CREATE INDEX idx_task_history_end_time ON public.task_history USING btree (ended
 
 
 --
--- TOC entry 4483 (class 1259 OID 27739)
+-- TOC entry 4062 (class 1259 OID 17293)
+-- Name: idx_task_history_started_at; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_task_history_started_at ON public.task_history USING btree (started_at);
+
+
+--
+-- TOC entry 4065 (class 1259 OID 17294)
 -- Name: idx_timeline_collection_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9854,7 +11071,23 @@ CREATE INDEX idx_timeline_collection_id ON public.timeline USING btree (collecti
 
 
 --
--- TOC entry 4488 (class 1259 OID 27740)
+-- TOC entry 4066 (class 1259 OID 17295)
+-- Name: idx_timeline_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_timeline_creator_id ON public.timeline USING btree (creator_id);
+
+
+--
+-- TOC entry 4071 (class 1259 OID 17296)
+-- Name: idx_timeline_event_creator_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_timeline_event_creator_id ON public.timeline_event USING btree (creator_id);
+
+
+--
+-- TOC entry 4072 (class 1259 OID 17297)
 -- Name: idx_timeline_event_timeline_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9862,7 +11095,7 @@ CREATE INDEX idx_timeline_event_timeline_id ON public.timeline_event USING btree
 
 
 --
--- TOC entry 4489 (class 1259 OID 27741)
+-- TOC entry 4073 (class 1259 OID 17298)
 -- Name: idx_timeline_event_timeline_id_timestamp; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9870,7 +11103,7 @@ CREATE INDEX idx_timeline_event_timeline_id_timestamp ON public.timeline_event U
 
 
 --
--- TOC entry 4472 (class 1259 OID 27656)
+-- TOC entry 3824 (class 1259 OID 17299)
 -- Name: idx_timestamp; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9878,7 +11111,7 @@ CREATE INDEX idx_timestamp ON public.login_history USING btree ("timestamp");
 
 
 --
--- TOC entry 4234 (class 1259 OID 27343)
+-- TOC entry 3838 (class 1259 OID 17300)
 -- Name: idx_uniq_field_table_id_parent_id_name_2col; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9886,7 +11119,7 @@ CREATE UNIQUE INDEX idx_uniq_field_table_id_parent_id_name_2col ON public.metaba
 
 
 --
--- TOC entry 4227 (class 1259 OID 28113)
+-- TOC entry 3849 (class 1259 OID 17301)
 -- Name: idx_uniq_table_db_id_schema_name_2col; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9894,7 +11127,15 @@ CREATE UNIQUE INDEX idx_uniq_table_db_id_schema_name_2col ON public.metabase_tab
 
 
 --
--- TOC entry 4473 (class 1259 OID 27649)
+-- TOC entry 3766 (class 1259 OID 17302)
+-- Name: idx_user_full_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_full_name ON public.core_user USING btree (((((first_name)::text || ' '::text) || (last_name)::text)));
+
+
+--
+-- TOC entry 3825 (class 1259 OID 17303)
 -- Name: idx_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9902,7 +11143,7 @@ CREATE INDEX idx_user_id ON public.login_history USING btree (user_id);
 
 
 --
--- TOC entry 4474 (class 1259 OID 27657)
+-- TOC entry 3826 (class 1259 OID 17304)
 -- Name: idx_user_id_device_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9910,7 +11151,7 @@ CREATE INDEX idx_user_id_device_id ON public.login_history USING btree (session_
 
 
 --
--- TOC entry 4475 (class 1259 OID 27658)
+-- TOC entry 3827 (class 1259 OID 17305)
 -- Name: idx_user_id_timestamp; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9918,15 +11159,39 @@ CREATE INDEX idx_user_id_timestamp ON public.login_history USING btree (user_id,
 
 
 --
--- TOC entry 4283 (class 1259 OID 26677)
+-- TOC entry 3767 (class 1259 OID 17306)
+-- Name: idx_user_qualified_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_user_qualified_id ON public.core_user USING btree ((('user_'::text || id)));
+
+
+--
+-- TOC entry 4076 (class 1259 OID 17307)
+-- Name: idx_view_log_entity_qualified_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_view_log_entity_qualified_id ON public.view_log USING btree (((((model)::text || '_'::text) || model_id)));
+
+
+--
+-- TOC entry 4077 (class 1259 OID 17308)
+-- Name: idx_view_log_model_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX idx_view_log_model_id ON public.view_log USING btree (model_id);
+
+
+--
+-- TOC entry 4078 (class 1259 OID 17309)
 -- Name: idx_view_log_timestamp; Type: INDEX; Schema: public; Owner: -
 --
 
-CREATE INDEX idx_view_log_timestamp ON public.view_log USING btree (model_id);
+CREATE INDEX idx_view_log_timestamp ON public.view_log USING btree ("timestamp");
 
 
 --
--- TOC entry 4284 (class 1259 OID 26676)
+-- TOC entry 4079 (class 1259 OID 17310)
 -- Name: idx_view_log_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -9934,7 +11199,7 @@ CREATE INDEX idx_view_log_user_id ON public.view_log USING btree (user_id);
 
 
 --
--- TOC entry 4641 (class 2606 OID 28068)
+-- TOC entry 4082 (class 2606 OID 17311)
 -- Name: action fk_action_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9943,7 +11208,7 @@ ALTER TABLE ONLY public.action
 
 
 --
--- TOC entry 4642 (class 2606 OID 28062)
+-- TOC entry 4083 (class 2606 OID 17316)
 -- Name: action fk_action_made_public_by_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9952,7 +11217,7 @@ ALTER TABLE ONLY public.action
 
 
 --
--- TOC entry 4643 (class 2606 OID 28076)
+-- TOC entry 4084 (class 2606 OID 17321)
 -- Name: action fk_action_model_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9961,7 +11226,7 @@ ALTER TABLE ONLY public.action
 
 
 --
--- TOC entry 4579 (class 2606 OID 27379)
+-- TOC entry 4085 (class 2606 OID 17326)
 -- Name: activity fk_activity_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9970,7 +11235,7 @@ ALTER TABLE ONLY public.activity
 
 
 --
--- TOC entry 4637 (class 2606 OID 27826)
+-- TOC entry 4087 (class 2606 OID 17331)
 -- Name: bookmark_ordering fk_bookmark_ordering_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9979,7 +11244,7 @@ ALTER TABLE ONLY public.bookmark_ordering
 
 
 --
--- TOC entry 4632 (class 2606 OID 27775)
+-- TOC entry 4088 (class 2606 OID 17336)
 -- Name: card_bookmark fk_card_bookmark_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9988,7 +11253,7 @@ ALTER TABLE ONLY public.card_bookmark
 
 
 --
--- TOC entry 4633 (class 2606 OID 27770)
+-- TOC entry 4089 (class 2606 OID 17341)
 -- Name: card_bookmark fk_card_bookmark_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -9997,7 +11262,7 @@ ALTER TABLE ONLY public.card_bookmark
 
 
 --
--- TOC entry 4563 (class 2606 OID 27534)
+-- TOC entry 4155 (class 2606 OID 17346)
 -- Name: report_card fk_card_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10006,7 +11271,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4596 (class 2606 OID 27384)
+-- TOC entry 4090 (class 2606 OID 17351)
 -- Name: card_label fk_card_label_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10015,7 +11280,7 @@ ALTER TABLE ONLY public.card_label
 
 
 --
--- TOC entry 4597 (class 2606 OID 27389)
+-- TOC entry 4091 (class 2606 OID 17356)
 -- Name: card_label fk_card_label_ref_label_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10024,7 +11289,7 @@ ALTER TABLE ONLY public.card_label
 
 
 --
--- TOC entry 4564 (class 2606 OID 27539)
+-- TOC entry 4156 (class 2606 OID 17361)
 -- Name: report_card fk_card_made_public_by_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10033,7 +11298,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4565 (class 2606 OID 27544)
+-- TOC entry 4157 (class 2606 OID 17366)
 -- Name: report_card fk_card_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10042,7 +11307,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4568 (class 2606 OID 27559)
+-- TOC entry 4160 (class 2606 OID 17371)
 -- Name: report_cardfavorite fk_cardfavorite_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10051,7 +11316,7 @@ ALTER TABLE ONLY public.report_cardfavorite
 
 
 --
--- TOC entry 4569 (class 2606 OID 27564)
+-- TOC entry 4161 (class 2606 OID 17376)
 -- Name: report_cardfavorite fk_cardfavorite_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10060,7 +11325,7 @@ ALTER TABLE ONLY public.report_cardfavorite
 
 
 --
--- TOC entry 4634 (class 2606 OID 27796)
+-- TOC entry 4093 (class 2606 OID 17381)
 -- Name: collection_bookmark fk_collection_bookmark_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10069,7 +11334,7 @@ ALTER TABLE ONLY public.collection_bookmark
 
 
 --
--- TOC entry 4635 (class 2606 OID 27791)
+-- TOC entry 4094 (class 2606 OID 17386)
 -- Name: collection_bookmark fk_collection_bookmark_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10078,7 +11343,7 @@ ALTER TABLE ONLY public.collection_bookmark
 
 
 --
--- TOC entry 4604 (class 2606 OID 27394)
+-- TOC entry 4092 (class 2606 OID 17391)
 -- Name: collection fk_collection_personal_owner_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10087,7 +11352,7 @@ ALTER TABLE ONLY public.collection
 
 
 --
--- TOC entry 4605 (class 2606 OID 27399)
+-- TOC entry 4095 (class 2606 OID 17396)
 -- Name: collection_permission_graph_revision fk_collection_revision_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10096,25 +11361,7 @@ ALTER TABLE ONLY public.collection_permission_graph_revision
 
 
 --
--- TOC entry 4610 (class 2606 OID 27404)
--- Name: computation_job fk_computation_job_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.computation_job
-    ADD CONSTRAINT fk_computation_job_ref_user_id FOREIGN KEY (creator_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4611 (class 2606 OID 27409)
--- Name: computation_job_result fk_computation_result_ref_job_id; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.computation_job_result
-    ADD CONSTRAINT fk_computation_result_ref_job_id FOREIGN KEY (job_id) REFERENCES public.computation_job(id) ON DELETE CASCADE;
-
-
---
--- TOC entry 4653 (class 2606 OID 28177)
+-- TOC entry 4096 (class 2606 OID 17401)
 -- Name: connection_impersonations fk_conn_impersonation_db_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10123,7 +11370,7 @@ ALTER TABLE ONLY public.connection_impersonations
 
 
 --
--- TOC entry 4654 (class 2606 OID 28182)
+-- TOC entry 4097 (class 2606 OID 17406)
 -- Name: connection_impersonations fk_conn_impersonation_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10132,7 +11379,7 @@ ALTER TABLE ONLY public.connection_impersonations
 
 
 --
--- TOC entry 4630 (class 2606 OID 27754)
+-- TOC entry 4099 (class 2606 OID 17411)
 -- Name: dashboard_bookmark fk_dashboard_bookmark_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10141,7 +11388,7 @@ ALTER TABLE ONLY public.dashboard_bookmark
 
 
 --
--- TOC entry 4631 (class 2606 OID 27749)
+-- TOC entry 4100 (class 2606 OID 17416)
 -- Name: dashboard_bookmark fk_dashboard_bookmark_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10150,7 +11397,7 @@ ALTER TABLE ONLY public.dashboard_bookmark
 
 
 --
--- TOC entry 4570 (class 2606 OID 27569)
+-- TOC entry 4162 (class 2606 OID 17421)
 -- Name: report_dashboard fk_dashboard_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10159,7 +11406,7 @@ ALTER TABLE ONLY public.report_dashboard
 
 
 --
--- TOC entry 4606 (class 2606 OID 27085)
+-- TOC entry 4101 (class 2606 OID 17426)
 -- Name: dashboard_favorite fk_dashboard_favorite_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10168,7 +11415,7 @@ ALTER TABLE ONLY public.dashboard_favorite
 
 
 --
--- TOC entry 4607 (class 2606 OID 27090)
+-- TOC entry 4102 (class 2606 OID 17431)
 -- Name: dashboard_favorite fk_dashboard_favorite_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10177,7 +11424,7 @@ ALTER TABLE ONLY public.dashboard_favorite
 
 
 --
--- TOC entry 4571 (class 2606 OID 27574)
+-- TOC entry 4163 (class 2606 OID 17436)
 -- Name: report_dashboard fk_dashboard_made_public_by_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10186,7 +11433,7 @@ ALTER TABLE ONLY public.report_dashboard
 
 
 --
--- TOC entry 4572 (class 2606 OID 27579)
+-- TOC entry 4164 (class 2606 OID 17441)
 -- Name: report_dashboard fk_dashboard_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10195,7 +11442,7 @@ ALTER TABLE ONLY public.report_dashboard
 
 
 --
--- TOC entry 4649 (class 2606 OID 28101)
+-- TOC entry 4103 (class 2606 OID 17446)
 -- Name: dashboard_tab fk_dashboard_tab_ref_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10204,7 +11451,7 @@ ALTER TABLE ONLY public.dashboard_tab
 
 
 --
--- TOC entry 4573 (class 2606 OID 27584)
+-- TOC entry 4165 (class 2606 OID 17451)
 -- Name: report_dashboardcard fk_dashboardcard_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10213,7 +11460,7 @@ ALTER TABLE ONLY public.report_dashboardcard
 
 
 --
--- TOC entry 4574 (class 2606 OID 27589)
+-- TOC entry 4166 (class 2606 OID 17456)
 -- Name: report_dashboardcard fk_dashboardcard_ref_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10222,7 +11469,7 @@ ALTER TABLE ONLY public.report_dashboardcard
 
 
 --
--- TOC entry 4594 (class 2606 OID 27419)
+-- TOC entry 4104 (class 2606 OID 17461)
 -- Name: dashboardcard_series fk_dashboardcard_series_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10231,7 +11478,7 @@ ALTER TABLE ONLY public.dashboardcard_series
 
 
 --
--- TOC entry 4595 (class 2606 OID 27424)
+-- TOC entry 4105 (class 2606 OID 17466)
 -- Name: dashboardcard_series fk_dashboardcard_series_ref_dashboardcard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10240,7 +11487,7 @@ ALTER TABLE ONLY public.dashboardcard_series
 
 
 --
--- TOC entry 4558 (class 2606 OID 27692)
+-- TOC entry 4116 (class 2606 OID 17471)
 -- Name: metabase_database fk_database_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10249,7 +11496,7 @@ ALTER TABLE ONLY public.metabase_database
 
 
 --
--- TOC entry 4608 (class 2606 OID 27113)
+-- TOC entry 4106 (class 2606 OID 17476)
 -- Name: dimension fk_dimension_displayfk_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10258,7 +11505,7 @@ ALTER TABLE ONLY public.dimension
 
 
 --
--- TOC entry 4609 (class 2606 OID 27108)
+-- TOC entry 4107 (class 2606 OID 17481)
 -- Name: dimension fk_dimension_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10267,7 +11514,7 @@ ALTER TABLE ONLY public.dimension
 
 
 --
--- TOC entry 4628 (class 2606 OID 27729)
+-- TOC entry 4176 (class 2606 OID 17486)
 -- Name: timeline_event fk_event_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10276,7 +11523,7 @@ ALTER TABLE ONLY public.timeline_event
 
 
 --
--- TOC entry 4629 (class 2606 OID 27734)
+-- TOC entry 4177 (class 2606 OID 17491)
 -- Name: timeline_event fk_events_timeline_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10285,7 +11532,7 @@ ALTER TABLE ONLY public.timeline_event
 
 
 --
--- TOC entry 4560 (class 2606 OID 27434)
+-- TOC entry 4117 (class 2606 OID 17496)
 -- Name: metabase_field fk_field_parent_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10294,7 +11541,7 @@ ALTER TABLE ONLY public.metabase_field
 
 
 --
--- TOC entry 4561 (class 2606 OID 27439)
+-- TOC entry 4118 (class 2606 OID 17501)
 -- Name: metabase_field fk_field_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10303,7 +11550,7 @@ ALTER TABLE ONLY public.metabase_field
 
 
 --
--- TOC entry 4562 (class 2606 OID 27444)
+-- TOC entry 4119 (class 2606 OID 17506)
 -- Name: metabase_fieldvalues fk_fieldvalues_ref_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10312,7 +11559,7 @@ ALTER TABLE ONLY public.metabase_fieldvalues
 
 
 --
--- TOC entry 4636 (class 2606 OID 27813)
+-- TOC entry 4086 (class 2606 OID 17511)
 -- Name: application_permissions_revision fk_general_permissions_revision_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10321,7 +11568,7 @@ ALTER TABLE ONLY public.application_permissions_revision
 
 
 --
--- TOC entry 4612 (class 2606 OID 27429)
+-- TOC entry 4108 (class 2606 OID 17516)
 -- Name: sandboxes fk_gtap_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10330,7 +11577,7 @@ ALTER TABLE ONLY public.sandboxes
 
 
 --
--- TOC entry 4613 (class 2606 OID 27173)
+-- TOC entry 4109 (class 2606 OID 17521)
 -- Name: sandboxes fk_gtap_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10339,7 +11586,7 @@ ALTER TABLE ONLY public.sandboxes
 
 
 --
--- TOC entry 4614 (class 2606 OID 27168)
+-- TOC entry 4110 (class 2606 OID 17526)
 -- Name: sandboxes fk_gtap_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10348,7 +11595,7 @@ ALTER TABLE ONLY public.sandboxes
 
 
 --
--- TOC entry 4646 (class 2606 OID 27926)
+-- TOC entry 4112 (class 2606 OID 17531)
 -- Name: http_action fk_http_action_ref_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10357,7 +11604,7 @@ ALTER TABLE ONLY public.http_action
 
 
 --
--- TOC entry 4647 (class 2606 OID 28167)
+-- TOC entry 4113 (class 2606 OID 17536)
 -- Name: implicit_action fk_implicit_action_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10366,7 +11613,7 @@ ALTER TABLE ONLY public.implicit_action
 
 
 --
--- TOC entry 4623 (class 2606 OID 27650)
+-- TOC entry 4114 (class 2606 OID 17541)
 -- Name: login_history fk_login_history_session_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10375,7 +11622,7 @@ ALTER TABLE ONLY public.login_history
 
 
 --
--- TOC entry 4624 (class 2606 OID 27644)
+-- TOC entry 4115 (class 2606 OID 17546)
 -- Name: login_history fk_login_history_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10384,7 +11631,7 @@ ALTER TABLE ONLY public.login_history
 
 
 --
--- TOC entry 4598 (class 2606 OID 27464)
+-- TOC entry 4123 (class 2606 OID 17551)
 -- Name: metric_important_field fk_metric_important_field_metabase_field_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10393,7 +11640,7 @@ ALTER TABLE ONLY public.metric_important_field
 
 
 --
--- TOC entry 4599 (class 2606 OID 27469)
+-- TOC entry 4124 (class 2606 OID 17556)
 -- Name: metric_important_field fk_metric_important_field_metric_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10402,7 +11649,7 @@ ALTER TABLE ONLY public.metric_important_field
 
 
 --
--- TOC entry 4592 (class 2606 OID 27454)
+-- TOC entry 4121 (class 2606 OID 17561)
 -- Name: metric fk_metric_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10411,7 +11658,7 @@ ALTER TABLE ONLY public.metric
 
 
 --
--- TOC entry 4593 (class 2606 OID 27459)
+-- TOC entry 4122 (class 2606 OID 17566)
 -- Name: metric fk_metric_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10420,7 +11667,7 @@ ALTER TABLE ONLY public.metric
 
 
 --
--- TOC entry 4650 (class 2606 OID 28124)
+-- TOC entry 4125 (class 2606 OID 17571)
 -- Name: model_index fk_model_index_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10429,7 +11676,7 @@ ALTER TABLE ONLY public.model_index
 
 
 --
--- TOC entry 4651 (class 2606 OID 28137)
+-- TOC entry 4126 (class 2606 OID 17576)
 -- Name: model_index fk_model_index_model_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10438,7 +11685,7 @@ ALTER TABLE ONLY public.model_index
 
 
 --
--- TOC entry 4652 (class 2606 OID 28142)
+-- TOC entry 4127 (class 2606 OID 17581)
 -- Name: model_index_value fk_model_index_value_model_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10447,7 +11694,7 @@ ALTER TABLE ONLY public.model_index_value
 
 
 --
--- TOC entry 4648 (class 2606 OID 28046)
+-- TOC entry 4130 (class 2606 OID 17586)
 -- Name: parameter_card fk_parameter_card_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10456,7 +11703,7 @@ ALTER TABLE ONLY public.parameter_card
 
 
 --
--- TOC entry 4600 (class 2606 OID 27484)
+-- TOC entry 4132 (class 2606 OID 17591)
 -- Name: permissions_group_membership fk_permissions_group_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10465,7 +11712,7 @@ ALTER TABLE ONLY public.permissions_group_membership
 
 
 --
--- TOC entry 4602 (class 2606 OID 27479)
+-- TOC entry 4131 (class 2606 OID 17596)
 -- Name: permissions fk_permissions_group_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10474,7 +11721,7 @@ ALTER TABLE ONLY public.permissions
 
 
 --
--- TOC entry 4601 (class 2606 OID 27489)
+-- TOC entry 4133 (class 2606 OID 17601)
 -- Name: permissions_group_membership fk_permissions_group_membership_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10483,7 +11730,7 @@ ALTER TABLE ONLY public.permissions_group_membership
 
 
 --
--- TOC entry 4603 (class 2606 OID 27494)
+-- TOC entry 4134 (class 2606 OID 17606)
 -- Name: permissions_revision fk_permissions_revision_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10492,7 +11739,7 @@ ALTER TABLE ONLY public.permissions_revision
 
 
 --
--- TOC entry 4638 (class 2606 OID 27852)
+-- TOC entry 4135 (class 2606 OID 17611)
 -- Name: persisted_info fk_persisted_info_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10501,7 +11748,7 @@ ALTER TABLE ONLY public.persisted_info
 
 
 --
--- TOC entry 4639 (class 2606 OID 27862)
+-- TOC entry 4136 (class 2606 OID 17616)
 -- Name: persisted_info fk_persisted_info_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10510,7 +11757,7 @@ ALTER TABLE ONLY public.persisted_info
 
 
 --
--- TOC entry 4640 (class 2606 OID 27857)
+-- TOC entry 4137 (class 2606 OID 17621)
 -- Name: persisted_info fk_persisted_info_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10519,7 +11766,7 @@ ALTER TABLE ONLY public.persisted_info
 
 
 --
--- TOC entry 4584 (class 2606 OID 27509)
+-- TOC entry 4141 (class 2606 OID 17626)
 -- Name: pulse_card fk_pulse_card_ref_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10528,7 +11775,7 @@ ALTER TABLE ONLY public.pulse_card
 
 
 --
--- TOC entry 4585 (class 2606 OID 27622)
+-- TOC entry 4142 (class 2606 OID 17631)
 -- Name: pulse_card fk_pulse_card_ref_pulse_card_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10537,7 +11784,7 @@ ALTER TABLE ONLY public.pulse_card
 
 
 --
--- TOC entry 4586 (class 2606 OID 27514)
+-- TOC entry 4143 (class 2606 OID 17636)
 -- Name: pulse_card fk_pulse_card_ref_pulse_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10546,7 +11793,7 @@ ALTER TABLE ONLY public.pulse_card
 
 
 --
--- TOC entry 4588 (class 2606 OID 27524)
+-- TOC entry 4145 (class 2606 OID 17641)
 -- Name: pulse_channel_recipient fk_pulse_channel_recipient_ref_pulse_channel_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10555,7 +11802,7 @@ ALTER TABLE ONLY public.pulse_channel_recipient
 
 
 --
--- TOC entry 4589 (class 2606 OID 27529)
+-- TOC entry 4146 (class 2606 OID 17646)
 -- Name: pulse_channel_recipient fk_pulse_channel_recipient_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10564,7 +11811,7 @@ ALTER TABLE ONLY public.pulse_channel_recipient
 
 
 --
--- TOC entry 4587 (class 2606 OID 27519)
+-- TOC entry 4144 (class 2606 OID 17651)
 -- Name: pulse_channel fk_pulse_channel_ref_pulse_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10573,7 +11820,7 @@ ALTER TABLE ONLY public.pulse_channel
 
 
 --
--- TOC entry 4581 (class 2606 OID 27499)
+-- TOC entry 4138 (class 2606 OID 17656)
 -- Name: pulse fk_pulse_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10582,7 +11829,7 @@ ALTER TABLE ONLY public.pulse
 
 
 --
--- TOC entry 4582 (class 2606 OID 27504)
+-- TOC entry 4139 (class 2606 OID 17661)
 -- Name: pulse fk_pulse_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10591,7 +11838,7 @@ ALTER TABLE ONLY public.pulse
 
 
 --
--- TOC entry 4583 (class 2606 OID 27627)
+-- TOC entry 4140 (class 2606 OID 17666)
 -- Name: pulse fk_pulse_ref_dashboard_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10600,7 +11847,7 @@ ALTER TABLE ONLY public.pulse
 
 
 --
--- TOC entry 4620 (class 2606 OID 27272)
+-- TOC entry 4147 (class 2606 OID 17671)
 -- Name: qrtz_blob_triggers fk_qrtz_blob_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10609,7 +11856,7 @@ ALTER TABLE ONLY public.qrtz_blob_triggers
 
 
 --
--- TOC entry 4618 (class 2606 OID 27248)
+-- TOC entry 4148 (class 2606 OID 17676)
 -- Name: qrtz_cron_triggers fk_qrtz_cron_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10618,7 +11865,7 @@ ALTER TABLE ONLY public.qrtz_cron_triggers
 
 
 --
--- TOC entry 4617 (class 2606 OID 27236)
+-- TOC entry 4149 (class 2606 OID 17681)
 -- Name: qrtz_simple_triggers fk_qrtz_simple_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10627,7 +11874,7 @@ ALTER TABLE ONLY public.qrtz_simple_triggers
 
 
 --
--- TOC entry 4619 (class 2606 OID 27260)
+-- TOC entry 4150 (class 2606 OID 17686)
 -- Name: qrtz_simprop_triggers fk_qrtz_simprop_triggers_triggers; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10636,7 +11883,7 @@ ALTER TABLE ONLY public.qrtz_simprop_triggers
 
 
 --
--- TOC entry 4616 (class 2606 OID 27224)
+-- TOC entry 4151 (class 2606 OID 17691)
 -- Name: qrtz_triggers fk_qrtz_triggers_job_details; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10645,7 +11892,7 @@ ALTER TABLE ONLY public.qrtz_triggers
 
 
 --
--- TOC entry 4644 (class 2606 OID 28024)
+-- TOC entry 4152 (class 2606 OID 17696)
 -- Name: query_action fk_query_action_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10654,7 +11901,7 @@ ALTER TABLE ONLY public.query_action
 
 
 --
--- TOC entry 4645 (class 2606 OID 27908)
+-- TOC entry 4153 (class 2606 OID 17701)
 -- Name: query_action fk_query_action_ref_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10663,7 +11910,16 @@ ALTER TABLE ONLY public.query_action
 
 
 --
--- TOC entry 4566 (class 2606 OID 27549)
+-- TOC entry 4154 (class 2606 OID 17706)
+-- Name: recent_views fk_recent_views_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.recent_views
+    ADD CONSTRAINT fk_recent_views_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4158 (class 2606 OID 17711)
 -- Name: report_card fk_report_card_ref_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10672,7 +11928,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4567 (class 2606 OID 27554)
+-- TOC entry 4159 (class 2606 OID 17716)
 -- Name: report_card fk_report_card_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10681,7 +11937,7 @@ ALTER TABLE ONLY public.report_card
 
 
 --
--- TOC entry 4575 (class 2606 OID 27958)
+-- TOC entry 4167 (class 2606 OID 17721)
 -- Name: report_dashboardcard fk_report_dashboardcard_ref_action_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10690,7 +11946,7 @@ ALTER TABLE ONLY public.report_dashboardcard
 
 
 --
--- TOC entry 4576 (class 2606 OID 28106)
+-- TOC entry 4168 (class 2606 OID 17726)
 -- Name: report_dashboardcard fk_report_dashboardcard_ref_dashboard_tab_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10699,7 +11955,7 @@ ALTER TABLE ONLY public.report_dashboardcard
 
 
 --
--- TOC entry 4578 (class 2606 OID 27594)
+-- TOC entry 4169 (class 2606 OID 17731)
 -- Name: revision fk_revision_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10708,7 +11964,7 @@ ALTER TABLE ONLY public.revision
 
 
 --
--- TOC entry 4615 (class 2606 OID 28081)
+-- TOC entry 4111 (class 2606 OID 17736)
 -- Name: sandboxes fk_sandboxes_ref_permissions; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10717,7 +11973,7 @@ ALTER TABLE ONLY public.sandboxes
 
 
 --
--- TOC entry 4625 (class 2606 OID 27678)
+-- TOC entry 4170 (class 2606 OID 17741)
 -- Name: secret fk_secret_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10726,7 +11982,7 @@ ALTER TABLE ONLY public.secret
 
 
 --
--- TOC entry 4590 (class 2606 OID 27599)
+-- TOC entry 4171 (class 2606 OID 17746)
 -- Name: segment fk_segment_ref_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10735,7 +11991,7 @@ ALTER TABLE ONLY public.segment
 
 
 --
--- TOC entry 4591 (class 2606 OID 27604)
+-- TOC entry 4172 (class 2606 OID 17751)
 -- Name: segment fk_segment_ref_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10744,7 +12000,7 @@ ALTER TABLE ONLY public.segment
 
 
 --
--- TOC entry 4577 (class 2606 OID 27414)
+-- TOC entry 4098 (class 2606 OID 17756)
 -- Name: core_session fk_session_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10753,7 +12009,7 @@ ALTER TABLE ONLY public.core_session
 
 
 --
--- TOC entry 4621 (class 2606 OID 27474)
+-- TOC entry 4128 (class 2606 OID 17761)
 -- Name: native_query_snippet fk_snippet_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10762,7 +12018,7 @@ ALTER TABLE ONLY public.native_query_snippet
 
 
 --
--- TOC entry 4622 (class 2606 OID 27365)
+-- TOC entry 4129 (class 2606 OID 17766)
 -- Name: native_query_snippet fk_snippet_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10771,7 +12027,16 @@ ALTER TABLE ONLY public.native_query_snippet
 
 
 --
--- TOC entry 4559 (class 2606 OID 27449)
+-- TOC entry 4173 (class 2606 OID 17771)
+-- Name: table_privileges fk_table_privileges_table_id; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.table_privileges
+    ADD CONSTRAINT fk_table_privileges_table_id FOREIGN KEY (table_id) REFERENCES public.metabase_table(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4120 (class 2606 OID 17776)
 -- Name: metabase_table fk_table_ref_database_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10780,7 +12045,7 @@ ALTER TABLE ONLY public.metabase_table
 
 
 --
--- TOC entry 4626 (class 2606 OID 27708)
+-- TOC entry 4174 (class 2606 OID 17781)
 -- Name: timeline fk_timeline_collection_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10789,7 +12054,7 @@ ALTER TABLE ONLY public.timeline
 
 
 --
--- TOC entry 4627 (class 2606 OID 27713)
+-- TOC entry 4175 (class 2606 OID 17786)
 -- Name: timeline fk_timeline_creator_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10798,7 +12063,7 @@ ALTER TABLE ONLY public.timeline
 
 
 --
--- TOC entry 4580 (class 2606 OID 27609)
+-- TOC entry 4178 (class 2606 OID 17791)
 -- Name: view_log fk_view_log_ref_user_id; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -10806,7 +12071,7 @@ ALTER TABLE ONLY public.view_log
     ADD CONSTRAINT fk_view_log_ref_user_id FOREIGN KEY (user_id) REFERENCES public.core_user(id) ON DELETE CASCADE;
 
 
--- Completed on 2024-01-17 21:13:57
+-- Completed on 2024-02-12 21:10:08
 
 --
 -- PostgreSQL database dump complete

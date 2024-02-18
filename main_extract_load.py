@@ -3,6 +3,7 @@ from datetime import datetime
 from src.utils.logs import logger
 from src.jobs import retrieve_jobs, convert_jobs_to_df, test_jobs_df
 from src.praw_extract import get_reddit_submissions_with_comments
+from src.utils.check_jobs import data_jobs_in_db
 
 
 def main():
@@ -16,7 +17,7 @@ def main():
     storage.save_df(comments_df, "raw", "comments")
     logger.info("Submissions with comments are successfully saved...")
 
-    if weekday == 6:
+    if weekday == 6 or not data_jobs_in_db():
         logger.info("Getting number of jobs...")
         jobs = retrieve_jobs()
         jobs_df = convert_jobs_to_df(jobs)

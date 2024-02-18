@@ -18,7 +18,24 @@ The pipeline collects comments and submitions from each city's subreddit, using 
 ## Architecture
 
 ## Setup
+<<<<<<< HEAD
 ## Improvements
 
 - Use multiprocessing: the main bottleneck is running the RoBERTa model for each comment. According to the PyTorch documentation, using multiprocessing can improve this process.
 - 
+=======
+
+Copy and paste the following command in the terminal:
+openssl rand -base64 32
+Set the MB_ENCRYPTION_SECRET_KEY env variable in .env_example with the result.
+
+MB_ENCRYPTION_SECRET_KEY="IYqrSi5QDthvFWe4/WdAxhnra5DZC3RKx3ZSrOJDKsM="
+
+### Current state
+
+- [x] ETL
+- [x] NLP
+- [x] Data Visualization
+- [x] Dockerize app
+- [ ] Write README.md
+>>>>>>> d7d1ee6baacaacb06a200a4a321e0dfed3549119
