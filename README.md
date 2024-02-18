@@ -31,6 +31,14 @@ Set the MB_ENCRYPTION_SECRET_KEY env variable in .env_example with the result.
 
 MB_ENCRYPTION_SECRET_KEY="IYqrSi5QDthvFWe4/WdAxhnra5DZC3RKx3ZSrOJDKsM="
 
+## Setup
+
+Copy and paste the following command in the terminal:
+openssl rand -base64 32
+Set the MB_ENCRYPTION_SECRET_KEY env variable in .env_example with the result.
+
+MB_ENCRYPTION_SECRET_KEY="IYqrSi5QDthvFWe4/WdAxhnra5DZC3RKx3ZSrOJDKsM="
+
 ### Current state
 
 - [x] ETL
@@ -38,4 +46,7 @@ MB_ENCRYPTION_SECRET_KEY="IYqrSi5QDthvFWe4/WdAxhnra5DZC3RKx3ZSrOJDKsM="
 - [x] Data Visualization
 - [x] Dockerize app
 - [ ] Write README.md
+<<<<<<< HEAD
+>>>>>>> d7d1ee6baacaacb06a200a4a321e0dfed3549119
+=======
 >>>>>>> d7d1ee6baacaacb06a200a4a321e0dfed3549119
