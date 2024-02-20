@@ -3,12 +3,10 @@ import praw
 import sys
 import polars as pl
 from typing import Literal
-from dotenv import load_dotenv
 from dataclasses import asdict
 from datetime import datetime, timezone
 from src.classes import SubmissionsData, CommentsData
 
-load_dotenv()
 
 # TODO Add logger and change prints for logs. Make sure that the logs persist on azure file share with a volume.
 # Add tests

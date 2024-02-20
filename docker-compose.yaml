@@ -9,7 +9,7 @@ services:
     working_dir: /opt/app
     tty: true
     env_file:
-      - .env_demo
+      - .env_example
     depends_on:
       - db
   db:
@@ -36,7 +36,7 @@ services:
 
   metabase:
     env_file:
-      - .env_demo
+      - .env_example
     image: metabase/metabase:v0.48.3
     container_name: metabase-app
     hostname: metabase-app

@@ -5,7 +5,6 @@ import polars as pl
 from tqdm import tqdm
 from typing import Union
 from typing import Literal
-from dotenv import load_dotenv
 from scipy.special import softmax
 from src.bad_words_detector import detect_bad_words
 from transformers import (
@@ -14,8 +13,6 @@ from transformers import (
     PreTrainedTokenizerFast,
     RobertaForSequenceClassification,
 )
-
-load_dotenv()
 
 
 def read_from_database():

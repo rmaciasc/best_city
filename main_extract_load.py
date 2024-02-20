@@ -4,6 +4,9 @@ from src.utils.logs import logger
 from src.jobs import retrieve_jobs, convert_jobs_to_df, test_jobs_df
 from src.praw_extract import get_reddit_submissions_with_comments
 from src.utils.check_jobs import data_jobs_in_db
+from dotenv import load_dotenv
+
+load_dotenv(".env_example")
 
 
 def main():

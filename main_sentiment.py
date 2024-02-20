@@ -7,6 +7,9 @@ from src.sentiment import (
 )
 from src.utils.df_saver import postgres_db
 from src.utils.logs import logger
+from dotenv import load_dotenv
+
+load_dotenv(".env_example")
 
 
 def main():

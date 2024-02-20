@@ -4,12 +4,9 @@ import psycopg2
 from typing import Literal
 from polars import DataFrame
 from datetime import datetime
-from dotenv import load_dotenv
 from dataclasses import dataclass
 from azure.storage.blob import ContainerClient
 from azure.identity import DefaultAzureCredential
-
-load_dotenv()
 
 
 @dataclass

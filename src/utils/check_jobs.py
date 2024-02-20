@@ -1,9 +1,6 @@
 import os
 import psycopg2
 import polars as pl
-from dotenv import load_dotenv
-
-load_dotenv()
 
 
 def data_jobs_in_db() -> bool:

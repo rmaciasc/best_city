@@ -17,22 +17,36 @@ The pipeline collects comments and submitions from each city's subreddit, using 
 ## Table of Contents
 ## Architecture
 
+## Requirements
+- Docker (tested on v24.0.6)
+- Reddit credentials
 ## Setup
+To get the data pipeline running, first populate the `.env_example` file with your Reddit credentials:
+
+```
+REDDIT_CLIENT_ID=<dev_application_client_id>
+REDDIT_CLIENT_SECRET=<dev_application_client_secret>
+REDDIT_USER_AGENT=<dev_application_name>
+REDDIT_USERNAME=<reddit username>
+REDDIT_PASSWORD=<reddit password>
+```
+
+To get your credentials, create a Reddit account and then create a reddit developer application in the following link:
+[Reddit Developer App](https://www.reddit.com/prefs/apps/).
+
+Now just run the data pipeline along with Metabase:
+```bash
+# Start the postgres, python and metabase containers
+$ docker compose up
+```
+
+The first run takes a couple of minutes. After the python container exits successfuly, 
+visit the Metabase dashboard at http://localhost:3000/.
+Use `john.doe@hotmail.com` for the username and `example1` for the password.
+
+
 ## Improvements
 
 - Use multiprocessing: the main bottleneck is running the RoBERTa model for each comment. According to the PyTorch documentation, using multiprocessing can improve this process.
-- 
-
-Copy and paste the following command in the terminal:
-openssl rand -base64 32
-Set the MB_ENCRYPTION_SECRET_KEY env variable in .env_example with the result.
-
-MB_ENCRYPTION_SECRET_KEY="IYqrSi5QDthvFWe4/WdAxhnra5DZC3RKx3ZSrOJDKsM="
-
-### Current state
-
-- [x] ETL
-- [x] NLP
-- [x] Data Visualization
-- [x] Dockerize app
-- [ ] Write README.md
+- Azure integration: The code is designed to either use cloud solutions or local containers so adding the option of using Azure, AWS or GCP should result in a seamless integration.
+- Unit & Integration testing.
