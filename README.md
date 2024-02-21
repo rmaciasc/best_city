@@ -44,6 +44,8 @@ The first run takes a couple of minutes. After the python container exits succes
 visit the Metabase dashboard at http://localhost:3000/.
 Use `john.doe@hotmail.com` for the username and `example1` for the password.
 
+![bad_words](https://raw.githubusercontent.com/rmaciasc/best_city/main/images/bad_words.png)
+![jobs](https://raw.githubusercontent.com/rmaciasc/best_city/main/images/jobs.png)
 
 ## Improvements
 
